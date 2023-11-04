@@ -6,11 +6,12 @@ class Event:
     """Essentially creating a humanitarian plan. An 'event' is where
     we add a description etc of where the disaster has happened."""
 
-    def __init__(self, ongoing=True):
+    def __init__(self, location, description, start_date, end_date, ongoing=True):
         self.location = location
         self.description = description
         self.start_date = start_date
         self.end_date = end_date
+        self.ongoing = ongoing
 
     def add_start_date(self):
         """Idea: When the user creates a new "Event" (e.g. instantiates
@@ -39,20 +40,18 @@ class Event:
         in case they made a mistake or the situation escalates etc"""
         pass
 
-
     def change_start_date(self):
         """Should this be an option? What would be the implications of this?"""
         pass
-
 
     def display_humanitarian_plan_summary(self):
         """At any time of the humanitarian plan life cycle, the
         administrator can display summary of all related details; including,
         number of refugees, their camp identification, and number of humanitarian
         volunteers working at each camp."""
-#        Again, like the 'end date' option, we could include in a manual a command
-#        line command which prompts the system to display the required overview
-#       Ideas on where this method should sit? it can be called attached to admin, but
-#       relates to everything tracked in event NOT just camp as it refugees from the same
-#       disaster can be in many different camps...
+        #        Again, like the 'end date' option, we could include in a manual a command
+        #        line command which prompts the system to display the required overview
+        #       Ideas on where this method should sit? it can be called attached to admin, but
+        #       relates to everything tracked in event NOT just camp as it refugees from the same
+        #       disaster can be in many different camps...
         pass

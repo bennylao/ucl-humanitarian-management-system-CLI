@@ -5,7 +5,9 @@
 
 class Refugee:
 
-    def __init__(self, is_vaccinated = False):
+    total_number = 0
+
+    def __init__(self, family_name, medical_condition, associated_camp, is_vaccinated=False):
         """Need to prompt user to fill in camp ID, medical condition, family name.
         Refugee is instantiated as not_vaccinated unless they are specified as True
         (something to add in User Manual??)"""
@@ -13,7 +15,7 @@ class Refugee:
         self.medical_condition = medical_condition
         self.associated_camp = associated_camp
         self.is_vaccinated = is_vaccinated
-
+        Refugee.total_number += 1
 
     def vaccinate_refugee(self):
         # How do we add logic here? Do we need to subtract one from the vaccines available
@@ -22,4 +24,3 @@ class Refugee:
         # vaccinations to vaccinate a refugee. We should probably include logic to
         # subtract one vaccine from those available to the camp which this refugee belongs to
         pass
-
