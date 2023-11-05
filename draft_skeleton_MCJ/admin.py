@@ -30,4 +30,9 @@ class Admin:
         # and use a for loop here to print info of all plans
         # alternatively, we can create a static method in the event class,
         # by calling that method, we read the csv file and print out the info (maybe
+        
+        #martha: Yeah, i think that would work, from what i can understand anyway! It's the func
+        #that is the requirement where admin can display summary of all related details; including, 
+        #number of refugees, their campidentification, and number of humanitarian volunteers working 
+        #at each camp
         pass
