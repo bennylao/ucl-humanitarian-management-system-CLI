@@ -7,7 +7,7 @@ This application is created by Group 11.
 The application can be run without installation. However, it is recommended to install it.
 After installation, the application can be accessed in any directory at anytime with the command:
 ```shell
-humanitarian_management_system
+hmsGroup11
 ```
 
 ## Installation Guide
