@@ -5,3 +5,7 @@ def main():
                      "========================================\n")
     print(start_up_logo)
     print("Welcome to the Humanitarian Management System!")
+
+
+if __name__ == "__main__":
+    main()
