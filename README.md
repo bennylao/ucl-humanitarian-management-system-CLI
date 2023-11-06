@@ -18,7 +18,9 @@ humanitarian_management_system
 Windows users can install the application via double-click on ```Installation_Win.bat```.
 
 - Mac
-Mac users can install the application via double-click on ```Installation_Mac.app```
+
+Mac users can install the application via double-click on ```Installation_Mac.applescript```,
+and Press ```▶ (Run the Script)```.
 
 If the installation could not work properly, you can install it manually through Terminal/CMD/PowerShell:
 
@@ -42,13 +44,14 @@ open ```Terminal``` on Mac, or ```PowerShell```/```Command Prompt``` on Windows,
 pip install {local/path/to/package}
 ```
 
-### To launch the application
+## To launch the application
 
 Once the application is installed, the application can be run at anytime by 
 executing the following command on Terminal or Command Prompt:
 ```shell
-humanitarian_management_system
+hmsGroup11
 ```
+
 
 ## Notes for Developers
 

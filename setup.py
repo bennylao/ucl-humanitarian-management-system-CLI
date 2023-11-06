@@ -14,7 +14,7 @@ setup(
     # A command is created for users to run the application
     entry_points={
         'console_scripts': [
-            f'humanitarian_management_system={find_packages()[0]}.main:main',
+            f'hmsGroup11={find_packages()[0]}.main:main',
         ],
     }
 )
