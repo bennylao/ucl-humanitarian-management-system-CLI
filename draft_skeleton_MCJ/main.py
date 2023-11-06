@@ -16,17 +16,20 @@ def main():
                      "[ 2 ] Volunteer\n"
                      "[ 3 ] Return to main menu\n"
                      "[ x ] Exit the system")
+    # For each plan, perhaps volunteers can choose which camp to work for, but need to send request and await admin's approval?
     admin_menu = ("[ 1 ] Create humanitarian plan\n"
-                  "[ 2 ] Edit volunteer account\n"
-                  "[ 3 ] Edit humanitarian plan\n"
-                  "[ 4 ] Activate/deactivate user account\n"
-                  "[ 5 ] Return to previous page\n"
+                  "[ 2 ] Volunteer request(s)\n"
+                  "[ 3 ] Edit volunteer account\n"
+                  "[ 4 ] Edit humanitarian plan\n"
+                  "[ 5 ] Activate/deactivate user account\n"
+                  "[ 6 ] Return to previous page\n"
                   "[ x ] Exit the system")
     vol_menu = ("[ 1 ] Create refugee profile\n"
-                "[ 2 ] Edit personal account\n"
-                "[ 3 ] Edit camp profile\n"
-                "[ 4 ] Edit refugee profile\n"
-                "[ 5 ] Return to previous page\n"
+                "[ 2 ] Join camp\n"
+                "[ 3 ] Edit personal account\n"
+                "[ 4 ] Edit camp profile\n"
+                "[ 5 ] Edit refugee profile\n"
+                "[ 6 ] Return to previous page\n"
                 "[ x ] Exit the system")
 
     print(start_up_logo)
