@@ -40,22 +40,6 @@ class Volunteer:
 
         Volunteer.total_number += 1
 
-    # @staticmethod
-    # def read_data(self):
-    #     # Extract data info from .csv file, ie. extract all usernames from the data and return them to helper
-    #     # function for validation
-    #     try:
-    #         result_df = pd.read_csv('data/userTesting.csv')
-    #         data_username = result_df['userName']
-    #         data_password = result_df['password']
-    #         data_active = result_df['active']
-    #         data_uid = result_df['uid']
-    #         return data_username, data_password, data_active, data_uid
-    #     except:
-    #         data_username = ''
-    #         data_password = ''
-    #         return data_username, data_password
-
     def edit_personal_info(self):
         pass
 

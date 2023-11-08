@@ -92,16 +92,6 @@ class Event:
         with open('data/eventTesting.csv', 'a') as f:
             event_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
-    # @staticmethod
-    # def read_data(self):
-    #     try:
-    #         result_df = pd.read_csv('data/eventTesting.csv')
-    #         data_eid = result_df['eid']
-    #         return data_eid
-    #     except:
-    #         data_eid = '0'
-    #         return data_eid
-
     def end_event(self):
         """How do we prompt a user to be able to input that
         an event has ended? Should we have a small manual for
