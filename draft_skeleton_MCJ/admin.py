@@ -15,10 +15,10 @@ class Admin:
 
     def default_account(self):
         # Create a default account for admin - only one admin
-        Admin.user_data = [[0, 'Admin', 'None', 'None', 'None', self.username,
-                            'None', self.phone, self.password]]
+        Admin.user_data = [[0, 'Admin', 'N/A', 'N/A', 'N/A', 'N/A', self.username,
+                            'N/A', 'N/A', self.password]]
         admin_df = pd.DataFrame(Admin.user_data,
-                                columns=['uid', 'userType', 'active', 'firstName', 'lastName', 'userName',
+                                columns=['uid', 'userType', 'active', 'camp', 'firstName', 'lastName', 'userName',
                                          'occupation', 'phone', 'password'])
         if not Admin.p:
             admin_df.to_csv('data/userTesting.csv', index=False)

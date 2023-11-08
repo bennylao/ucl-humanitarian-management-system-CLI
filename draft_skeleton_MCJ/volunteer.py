@@ -1,4 +1,5 @@
 import pandas as pd
+import helper
 
 
 # Unsure whether to have volunteer and admin as subclasses of a "User". Do we think admin is allowed to do
@@ -20,16 +21,18 @@ class Volunteer:
     def pass_data(self):
         # Access user enter values from helper function and assign them to Volunteer class
 
-        I = Volunteer.read_data(Volunteer)  # keep track of uid and increment it by 1
-        for i in I[3]:
+        # keep track of uid and increment it by 1
+        I = helper.extract_data('data/userTesting.csv')['uid']
+
+        for i in I:
             Volunteer.id_arr.append(i)
         uid = Volunteer.id_arr.pop()
         uid += 1
 
-        Volunteer.user_data = [[uid, 'Volunteer', self.active, self.first_name, self.last_name, self.username,
+        Volunteer.user_data = [[uid, 'Volunteer', self.active, 'None', self.first_name, self.last_name, self.username,
                                 self.occupation, self.phone, self.password]]
         user_df = pd.DataFrame(Volunteer.user_data,
-                               columns=['uid', 'userType', 'active', 'firstName', 'lastName', 'userName',
+                               columns=['uid', 'userType', 'active', 'camp', 'firstName', 'lastName', 'userName',
                                         'occupation', 'phone', 'password'])
         # Pass assign values into .csv file
         with open('data/userTesting.csv', 'a') as f:
@@ -37,21 +40,21 @@ class Volunteer:
 
         Volunteer.total_number += 1
 
-    @staticmethod
-    def read_data(self):
-        # Extract data info from .csv file, ie. extract all usernames from the data and return them to helper
-        # function for validation
-        try:
-            result_df = pd.read_csv('data/userTesting.csv')
-            data_username = result_df['userName']
-            data_password = result_df['password']
-            data_active = result_df['active']
-            data_uid = result_df['uid']
-            return data_username, data_password, data_active, data_uid
-        except:
-            data_username = ''
-            data_password = ''
-            return data_username, data_password
+    # @staticmethod
+    # def read_data(self):
+    #     # Extract data info from .csv file, ie. extract all usernames from the data and return them to helper
+    #     # function for validation
+    #     try:
+    #         result_df = pd.read_csv('data/userTesting.csv')
+    #         data_username = result_df['userName']
+    #         data_password = result_df['password']
+    #         data_active = result_df['active']
+    #         data_uid = result_df['uid']
+    #         return data_username, data_password, data_active, data_uid
+    #     except:
+    #         data_username = ''
+    #         data_password = ''
+    #         return data_username, data_password
 
     def edit_personal_info(self):
         pass

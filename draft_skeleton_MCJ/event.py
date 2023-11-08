@@ -35,12 +35,17 @@ class Event:
     # Access user input info from helper function and pass them into .csv file(s)
     def pass_event_info(self):
         country = []
-        country_data = helper.extract_countries()
+        country_data = helper.extract_data("data/countries.csv")['name']
         for ele in country_data:
             country.append(ele)
         date_format = '%d-%m-%Y'  # Use for validating user entered date format
 
-        I = Event.read_data(Event)  # keep track of uid and increment it by 1
+        # keep track of uid and increment it by 1
+        try:
+            I = helper.extract_data("data/countries.csv")['eid']
+        except:
+            I = '0'
+
         for i in I:
             Event.id_arr.append(i)
         eid = Event.id_arr.pop()
@@ -87,16 +92,15 @@ class Event:
         with open('data/eventTesting.csv', 'a') as f:
             event_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
-    @staticmethod
-    def read_data(self):
-        try:
-            result_df = pd.read_csv('data/eventTesting.csv')
-            data_eid = result_df['eid']
-            return data_eid
-        except:
-            data_eid = '0'
-            return data_eid
-
+    # @staticmethod
+    # def read_data(self):
+    #     try:
+    #         result_df = pd.read_csv('data/eventTesting.csv')
+    #         data_eid = result_df['eid']
+    #         return data_eid
+    #     except:
+    #         data_eid = '0'
+    #         return data_eid
 
     def end_event(self):
         """How do we prompt a user to be able to input that
@@ -108,6 +112,9 @@ class Event:
         # which asks 'are you sure' and says that they won't be able to reopen the event
         # after they have ended it, as the requirement says "the
         # humanitarian plan must be closed in the system."
+        pass
+
+    def edit_event_info(selfs):
         pass
 
     def change_description(self):

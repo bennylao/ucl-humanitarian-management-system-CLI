@@ -18,8 +18,10 @@ def reg_validate(firstName, lastName, userName, occupation, phone, password, con
             main.main()
 
     # Check if username already exists
-    V = Volunteer(firstName, lastName, userName, phone, password, occupation)
-    U = V.read_data(V)
+    try:
+        U = extract_data("data/userTesting.csv")['userName']
+    except:
+        U = ''
 
     # By entering the keyword 'RETURN' user can exit the current session and return to the previous page
     while len(userName) == 0:
@@ -78,12 +80,16 @@ def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
     login = False  # keep track of if user has login successfully
 
     # fetch username and password values from .csv file and assign them here
-    U = V.read_data(V)
+
+    try:
+        U1 = extract_data("data/userTesting.csv")['userName']
+        U2 = extract_data("data/userTesting.csv")['password']
+    except:
+        U1, U2 = '', ''
+
     tmpA, tmpB = [], []
-    for i in U[0]:
-        tmpA.append(i)
-    for j in U[1]:
-        tmpB.append(j)
+    tmpA.extend(U1)
+    tmpB.extend(U2)
 
     print(menu_optionsB + "\n")
     user_enter = '-1'
@@ -115,6 +121,7 @@ def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
                        password, occupation, arr)
 
     elif user_enter == '2':
+
         while len(user) == 0 or len(pwd) == 0:
             # check if volunteer login info match the data that was fetched from the .csv file
             user = input("--> Username: ")
@@ -122,6 +129,20 @@ def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
             if user == 'RETURN':
                 login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                            password, occupation)
+
+            # extract user active status from .csv by entered userName
+            pos = ''
+            cnt = -1
+            df = pd.read_csv('data/userTesting.csv')
+            for ele in tmpA:
+                cnt += 1
+                if user == ele:
+                    pos = cnt
+                    status = df.at[df.index[pos], 'active']
+                    if not status:
+                        print("Sorry, your account has been disabled.")
+                        login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName,
+                                   phone, password, occupation)
 
             pwd = input("--> Password: ")
             # By entering the keyword 'RETURN' user can exit the current session and return to the previous page
@@ -133,6 +154,7 @@ def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
                 print("Incorrect username/password, or account does not exist.")
                 user, pwd = '', ''
                 continue
+
             login = True
         if login:
             print("You have login successfully!")
@@ -147,8 +169,9 @@ def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
 
 def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                password, occupation, arr):
-    for i in arr:
-        option_arr.append(i)
+    option_arr.extend(arr)
+    option_arr.append('7')
+
     user_enter = -1
     print(admin_menu)
     user_enter = option_valid(user_enter, option_arr)
@@ -169,6 +192,8 @@ def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
     elif user_enter == '5':
         pass
     elif user_enter == '6':
+        pass
+    elif user_enter == '7':
         login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                    password, occupation)
     else:
@@ -177,8 +202,8 @@ def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
 
 def vol_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
              password, occupation, arr):
-    for i in arr:
-        option_arr.append(i)
+    option_arr.extend(arr)
+
     user_enter = -1
     print(vol_menu)
     user_enter = option_valid(user_enter, option_arr)
@@ -209,7 +234,6 @@ def option_valid(user_enter, option_arr):
     return user_enter
 
 
-def extract_countries():
-    df = pd.read_csv("data/countries.csv")
-    country = df['name']
-    return country
+def extract_data(file_path):
+    df = pd.read_csv(file_path)
+    return df

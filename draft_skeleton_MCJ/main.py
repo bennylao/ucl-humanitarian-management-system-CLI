@@ -22,7 +22,8 @@ def main():
                   "[ 3 ] Edit volunteer account\n"
                   "[ 4 ] Edit humanitarian plan\n"
                   "[ 5 ] Activate/deactivate user account\n"
-                  "[ 6 ] Return to previous page\n"
+                  "[ 6 ] Display plan info\n"
+                  "[ 7 ] Return to previous page\n"
                   "[ x ] Exit the system")
     vol_menu = ("[ 1 ] Create refugee profile\n"
                 "[ 2 ] Join camp\n"
