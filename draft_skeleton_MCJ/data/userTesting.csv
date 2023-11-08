@@ -1,0 +1,5 @@
+uid,userType,active,firstName,lastName,userName,occupation,phone,password
+0,Admin,None,None,None,admin,None,xxxxxxxxxxx,111
+1,Volunteer,True,Doggy1,Teddy1,Volunteer1,Student,07786471235,111
+2,Volunteer,True,Doggy2,Teddy2,Volunteer2,Teacher,07786471235,111
+3,Volunteer,True,Doggy3,Teddy3,Volunteer3,Nurse,07786471235,111
