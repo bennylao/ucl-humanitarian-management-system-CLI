@@ -16,9 +16,9 @@ def main():
                      "[ 2 ] Volunteer\n"
                      "[ 3 ] Return to main menu\n"
                      "[ x ] Exit the system")
-    # For each plan, perhaps volunteers can choose which camp to work for, but need to send request and await admin's approval?
+
     admin_menu = ("[ 1 ] Create humanitarian plan\n"
-                  "[ 2 ] Volunteer request(s)\n"
+                  "[ 2 ] Add camp\n"
                   "[ 3 ] Edit volunteer account\n"
                   "[ 4 ] Edit humanitarian plan\n"
                   "[ 5 ] Activate/deactivate user account\n"
@@ -46,13 +46,11 @@ def main():
     confirmPassword = '-2'
 
     # Give error if inappropriate option keyword is entered
-    while user_enter not in option_arr:
-        user_enter = input("--> ")
-        if user_enter not in option_arr:
-            print("Invalid option entered.")
+    user_enter = helper.option_valid(user_enter, option_arr)
 
     if user_enter == '1':
-        helper.login_page(menu_optionsB, option_arr, firstName, lastName, userName, phone, password, occupation)
+        helper.login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
+                          password, occupation)
 
     elif user_enter == '2':
 
@@ -65,7 +63,7 @@ def main():
 
 if __name__ == "__main__":
     # Initialise the creation of the default admin account upon starting the app
-    A = Admin('admin', '111', '07786471235')
+    A = Admin('admin', '111', 'xxxxxxxxxxx')
     A.default_account()
     main()
 

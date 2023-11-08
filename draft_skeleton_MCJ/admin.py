@@ -3,9 +3,10 @@ import os
 
 
 class Admin:
+    # Path need to be changed depend on the local path for each machine, anyone know how to define a global path that
+    # works on every machines
 
-    p1 = os.path.isfile(r'C:\Users\jason\PycharmProjects\COMP0066_Humanitarian_Management_System\datauserTesting.csv')
-    p2 = r'C:\Users\jason\PycharmProjects\COMP0066_Humanitarian_Management_System\data'
+    p = os.path.isfile(r'data\userTesting.csv')
 
     def __init__(self, username, password, phone):
         self.username = username
@@ -14,14 +15,13 @@ class Admin:
 
     def default_account(self):
         # Create a default account for admin - only one admin
-        Admin.user_data = [['Admin', 'None', 'None', 'None', self.username,
+        Admin.user_data = [[0, 'Admin', 'None', 'None', 'None', self.username,
                             'None', self.phone, self.password]]
         admin_df = pd.DataFrame(Admin.user_data,
-                                columns=['userType', 'status', 'firstName', 'lastName', 'userName',
+                                columns=['uid', 'userType', 'active', 'firstName', 'lastName', 'userName',
                                          'occupation', 'phone', 'password'])
-        admin_df.index.name = 'uid'
-        if not Admin.p1:
-            admin_df.to_csv(Admin.p2 + 'userTesting.csv')
+        if not Admin.p:
+            admin_df.to_csv('data/userTesting.csv', index=False)
         else:
             pass
 
@@ -42,7 +42,6 @@ class Admin:
         # where should this sit? In event class or here?
         # ben: think we can hv a func to end in event class,
         # and we call the func here
-        # I think the plan is supposed to end itself automatically based on the end date, similar to the auction project
         pass
 
     # should we've an edit method here? i.e: say admin want to change some details on an already created plan
