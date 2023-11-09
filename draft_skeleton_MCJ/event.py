@@ -6,7 +6,8 @@
 import helper
 import datetime
 import pandas as pd
-
+import tkinter as tk
+import tkinter.messagebox
 
 class Event:
     """Essentially creating a humanitarian plan. An 'event' is where
@@ -73,6 +74,8 @@ class Event:
                 self.start_date = ''
                 continue
 
+        # Maybe not every event has an known end date when it is created,
+        # that's why we need an end_event() function to end it or modify its end date.
         while self.end_date == '':
             try:
                 self.end_date = input("--> End date: ")
@@ -102,7 +105,41 @@ class Event:
         # which asks 'are you sure' and says that they won't be able to reopen the event
         # after they have ended it, as the requirement says "the
         # humanitarian plan must be closed in the system."
-        pass
+        df = pd.read_csv('data/eventTesting.csv')
+        row = -1
+        while self.title == '':
+            try:
+                self.title = input("--> The title of the event you want to close:")
+                row, col = df.where(df == self.title).stack().index[0]
+            except IndexError:
+                print("Invalid event title entered.")
+                self.title = ''
+                continue
+        date_format1 = '%d-%m-%Y'
+        date_format2 = '%Y-%m-%d'
+        while self.end_date == '':
+            try:
+                self.end_date = input("--> End date: ")
+                self.end_date = datetime.datetime.strptime(self.end_date, date_format1)
+            except ValueError:
+                print("Invalid date format entered.")
+                self.end_date = ''
+                continue
+            if self.end_date <= datetime.datetime.strptime(df['startDate'].loc[row], date_format2):
+                print("End date has to be later than start date.")
+                self.end_date = ''
+                continue
+        root = tk.Tk()
+        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
+        if result == "yes":
+            formatted_end_date = self.end_date.strftime('%Y-%m-%d')
+            helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
+            tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+
+        else:
+            tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+
+        root.mainloop()
 
     def edit_event_info(selfs):
         pass

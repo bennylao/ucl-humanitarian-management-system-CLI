@@ -4,7 +4,7 @@ from volunteer import Volunteer
 from event import Event
 import pandas as pd
 import main
-
+import csv
 
 def reg_validate(firstName, lastName, userName, occupation, phone, password, confirmPassword):
     """ A very basic validation of user entered values """
@@ -170,7 +170,7 @@ def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
 def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                password, occupation, arr):
     option_arr.extend(arr)
-    option_arr.append('7')
+    option_arr.append('8')
 
     user_enter = -1
     print(admin_menu)
@@ -184,7 +184,9 @@ def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
         admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                    password, occupation, arr)
     elif user_enter == '2':
-        pass
+        E.end_event()
+        admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
+                   password, occupation, arr)
     elif user_enter == '3':
         pass
     elif user_enter == '4':
@@ -194,6 +196,8 @@ def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
     elif user_enter == '6':
         pass
     elif user_enter == '7':
+        pass
+    elif user_enter == '8':
         login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                    password, occupation)
     else:
@@ -237,3 +241,15 @@ def option_valid(user_enter, option_arr):
 def extract_data(file_path):
     df = pd.read_csv(file_path)
     return df
+
+
+def modify_csv_value(file_path, row_index, column_name, new_value):
+    with open(file_path, 'r', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        rows = list(reader)
+    rows[row_index][column_name] = new_value
+    with open(file_path, 'w', newline='') as csvfile:
+        fieldnames = reader.fieldnames
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)

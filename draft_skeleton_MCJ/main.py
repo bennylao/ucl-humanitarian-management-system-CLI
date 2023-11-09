@@ -18,12 +18,13 @@ def main():
                      "[ x ] Exit the system")
 
     admin_menu = ("[ 1 ] Create humanitarian plan\n"
-                  "[ 2 ] Add camp\n"
-                  "[ 3 ] Edit volunteer account\n"
-                  "[ 4 ] Edit humanitarian plan\n"
-                  "[ 5 ] Activate/deactivate user account\n"
-                  "[ 6 ] Display plan info\n"
-                  "[ 7 ] Return to previous page\n"
+                  "[ 2 ] End an event\n"
+                  "[ 3 ] Add camp\n"
+                  "[ 4 ] Edit volunteer account\n"
+                  "[ 5 ] Edit humanitarian plan\n"
+                  "[ 6 ] Activate/deactivate user account\n"
+                  "[ 7 ] Display plan info\n"
+                  "[ 8 ] Return to previous page\n"
                   "[ x ] Exit the system")
     vol_menu = ("[ 1 ] Create refugee profile\n"
                 "[ 2 ] Join camp\n"
