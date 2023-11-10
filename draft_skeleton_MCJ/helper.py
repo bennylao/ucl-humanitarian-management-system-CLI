@@ -170,6 +170,7 @@ def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
 def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                password, occupation, arr):
     option_arr.extend(arr)
+    option_arr.append('7')
     option_arr.append('8')
 
     user_enter = -1

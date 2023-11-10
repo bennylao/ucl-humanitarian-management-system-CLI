@@ -1,3 +1,6 @@
-eid,title,location,description,no_camp,startDate,endDate
-1,Kyiv foods aid,Ukraine,blabalbal1,0,2023-11-08,2024-11-09
-2,Avdiivka civilians rescue,Ukraine,blabalbal2,0,2023-12-08,2024-02-08
+eid,ongoing,title,location,description,no_camp,startDate,endDate
+,,,,,,,
+1,TRUE,Kyiv foods aid,Ukraine,blabalbal1,0,08/11/2023,09/11/2024
+,,,,,,,
+2,TRUE,Avdiivka civilians rescue,Ukraine,blabalbal2,0,08/12/2023,08/02/2024
+1,True,Gaza Strip Civilians Evac,Israel,blablabla3,0,2023-11-11,2024-07-05

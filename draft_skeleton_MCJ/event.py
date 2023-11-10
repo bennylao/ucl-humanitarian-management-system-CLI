@@ -54,9 +54,13 @@ class Event:
 
         while len(self.title) == 0:
             self.title = input("--> Plan title: ")
+            if self.title == 'RETURN':
+                return
 
         while len(self.location) == 0 and self.location not in country:
             self.location = input("--> Location(country): ")
+            if self.location == 'RETURN':
+                return
             if self.location not in country:
                 print("Invalid country name entered")
                 self.location = ''
@@ -64,10 +68,14 @@ class Event:
 
         while len(self.description) == 0:
             self.description = input("--> Description: ")
+            if self.description == 'RETURN':
+                return
 
         while self.start_date == '':
             try:
                 self.start_date = input("--> Start date: ")
+                if self.start_date == 'RETURN':
+                    return
                 self.start_date = datetime.datetime.strptime(self.start_date, date_format)
             except ValueError:
                 print("Invalid date format entered.")
@@ -79,6 +87,8 @@ class Event:
         while self.end_date == '':
             try:
                 self.end_date = input("--> End date: ")
+                if self.end_date == 'RETURN':
+                    return
                 self.end_date = datetime.datetime.strptime(self.end_date, date_format)
             except ValueError:
                 print("Invalid date format entered.")
@@ -89,11 +99,12 @@ class Event:
                 self.end_date = ''
                 continue
 
-        Event.event_data = [[eid, self.title, self.location, self.description, 0, self.start_date, self.end_date]]
+        Event.event_data = [[eid, self.ongoing, self.title, self.location, self.description, 0, self.start_date, self.end_date]]
         event_df = pd.DataFrame(Event.event_data,
-                                columns=['eid', 'title', 'location', 'description', 'no_camp', 'startDate', 'endDate'])
+                                columns=['eid', 'ongoing', 'title', 'location', 'description', 'no_camp', 'startDate', 'endDate'])
         with open('data/eventTesting.csv', 'a') as f:
             event_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+        print("A plan has created successfully!")
 
     def end_event(self):
         """How do we prompt a user to be able to input that
@@ -132,8 +143,10 @@ class Event:
         root = tk.Tk()
         result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
         if result == "yes":
+            self.ongoing = False # set ongoing as false as the plan is no longer active
             formatted_end_date = self.end_date.strftime('%Y-%m-%d')
             helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
+            helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', self.ongoing)
             tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
 
         else:
