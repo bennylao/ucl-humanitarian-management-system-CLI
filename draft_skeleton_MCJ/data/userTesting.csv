@@ -1,7 +1,2 @@
 uid,userType,active,camp,firstName,lastName,userName,occupation,phone,password
 0,Admin,N/A,N/A,N/A,N/A,admin,N/A,N/A,111
-1,Volunteer,TRUE,None,Doggy1,Teddy1,Volunteer1,Student,7786471235,111
-,,,,,,,,,
-2,Volunteer,FALSE,None,Doggy2,Teddy2,Volunteer2,Teacher,7786471235,111
-,,,,,,,,,
-3,Volunteer,TRUE,None,Doggy3,Teddy3,Volunteer3,Nurse,7786471235,111
