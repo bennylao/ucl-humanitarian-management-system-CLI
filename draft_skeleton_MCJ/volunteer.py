@@ -1,4 +1,5 @@
 import pandas as pd
+import helper
 
 
 # Unsure whether to have volunteer and admin as subclasses of a "User". Do we think admin is allowed to do
@@ -6,45 +7,38 @@ import pandas as pd
 class Volunteer:
     total_number = 0
     user_data = []
-    path = r'C:\Users\jason\PycharmProjects\COMP0066_Humanitarian_Management_System\data'
+    id_arr = []
 
-    def __init__(self, first_name, last_name, username, phone, password, occupation):
+    def __init__(self, first_name, last_name, username, phone, password, occupation, active=True):
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
         self.phone = phone
         self.password = password
         self.occupation = occupation
+        self.active = active
 
     def pass_data(self):
         # Access user enter values from helper function and assign them to Volunteer class
-        Volunteer.user_data = [['Volunteer', 'Active', self.first_name, self.last_name, self.username,
+
+        # keep track of uid and increment it by 1
+        I = helper.extract_data('data/userTesting.csv')['uid']
+
+        for i in I:
+            Volunteer.id_arr.append(i)
+        uid = Volunteer.id_arr.pop()
+        uid += 1
+
+        Volunteer.user_data = [[uid, 'Volunteer', self.active, 'None', self.first_name, self.last_name, self.username,
                                 self.occupation, self.phone, self.password]]
         user_df = pd.DataFrame(Volunteer.user_data,
-                               columns=['userType', 'status', 'firstName', 'lastName', 'userName',
+                               columns=['uid', 'userType', 'active', 'camp', 'firstName', 'lastName', 'userName',
                                         'occupation', 'phone', 'password'])
-        user_df.index.name = 'uid'
         # Pass assign values into .csv file
-        with open(Volunteer.path + 'userTesting.csv', 'a') as f:
-            user_df.to_csv(f, mode='a', header=f.tell() == 0, index=True)
+        with open('data/userTesting.csv', 'a') as f:
+            user_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
         Volunteer.total_number += 1
-
-
-    @staticmethod
-    def read_data(self):
-        # Extract data info from .csv file, ie. extract all usernames from the data and return them to helper
-        # function for validation
-        try:
-            result_df = pd.read_csv(Volunteer.path + 'userTesting.csv')
-            data_username = result_df['userName']
-            data_password = result_df['password']
-            data_status = result_df['status']
-            return data_username, data_password, data_status
-        except:
-            data_username = ''
-            data_password = ''
-            return data_username, data_password
 
     def edit_personal_info(self):
         pass

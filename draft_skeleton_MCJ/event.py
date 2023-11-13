@@ -2,26 +2,109 @@
 # How do we then get this into an instance of the Event?
 # Can we have a CSV with all the countries of the world and then check
 # location input against this and get user to ONLY input valid COUNTRY
+
+import helper
+import datetime
+import pandas as pd
+import tkinter as tk
+import tkinter.messagebox
+
 class Event:
     """Essentially creating a humanitarian plan. An 'event' is where
     we add a description etc of where the disaster has happened."""
+    id_arr = []
+    event_data = []
 
-    def __init__(self, location, description, start_date, end_date, ongoing=True):
+    def __init__(self, title, location, description, start_date, end_date, ongoing=True):
+        self.title = title
         self.location = location
         self.description = description
         self.start_date = start_date
         self.end_date = end_date
         self.ongoing = ongoing
 
-    def add_start_date(self):
-        """Idea: When the user creates a new "Event" (e.g. instantiates
-        a new instance of this class, they are then prompted automatically
-        to fill in info about start date (among other attributes), and cannot
-        add an event if ay of these are invalid or empty (data integrity)."""
+    # def add_start_date(self):
+    #     """Idea: When the user creates a new "Event" (e.g. instantiates
+    #     a new instance of this class, they are then prompted automatically
+    #     to fill in info about start date (among other attributes), and cannot
+    #     add an event if ay of these are invalid or empty (data integrity)."""
+    #
+    # def add_description(self):
+    #     """Should we limit characters here?"""
+    #     pass
 
-    def add_description(self):
-        """Should we limit characters here?"""
-        pass
+    # Access user input info from helper function and pass them into .csv file(s)
+    def pass_event_info(self):
+        country = []
+        country_data = helper.extract_data("data/countries.csv")['name']
+        for ele in country_data:
+            country.append(ele)
+        date_format = '%d-%m-%Y'  # Use for validating user entered date format
+
+        # keep track of uid and increment it by 1
+        try:
+            I = helper.extract_data("data/countries.csv")['eid']
+        except:
+            I = '0'
+
+        for i in I:
+            Event.id_arr.append(i)
+        eid = Event.id_arr.pop()
+        eid = int(eid) + 1
+
+        while len(self.title) == 0:
+            self.title = input("--> Plan title: ")
+            if self.title == 'RETURN':
+                return
+
+        while len(self.location) == 0 and self.location not in country:
+            self.location = input("--> Location(country): ")
+            if self.location == 'RETURN':
+                return
+            if self.location not in country:
+                print("Invalid country name entered")
+                self.location = ''
+                continue
+
+        while len(self.description) == 0:
+            self.description = input("--> Description: ")
+            if self.description == 'RETURN':
+                return
+
+        while self.start_date == '':
+            try:
+                self.start_date = input("--> Start date: ")
+                if self.start_date == 'RETURN':
+                    return
+                self.start_date = datetime.datetime.strptime(self.start_date, date_format)
+            except ValueError:
+                print("Invalid date format entered.")
+                self.start_date = ''
+                continue
+
+        # Maybe not every event has an known end date when it is created,
+        # that's why we need an end_event() function to end it or modify its end date.
+        while self.end_date == '':
+            try:
+                self.end_date = input("--> End date: ")
+                if self.end_date == 'RETURN':
+                    return
+                self.end_date = datetime.datetime.strptime(self.end_date, date_format)
+            except ValueError:
+                print("Invalid date format entered.")
+                self.end_date = ''
+                continue
+            if self.end_date <= self.start_date:
+                print("End date has to be later than start date.")
+                self.end_date = ''
+                continue
+
+        Event.event_data = [[eid, self.ongoing, self.title, self.location, self.description, 0, self.start_date, self.end_date]]
+        event_df = pd.DataFrame(Event.event_data,
+                                columns=['eid', 'ongoing', 'title', 'location', 'description', 'no_camp', 'startDate', 'endDate'])
+        with open('data/eventTesting.csv', 'a') as f:
+            event_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+        print("A plan has created successfully!")
 
     def end_event(self):
         """How do we prompt a user to be able to input that
@@ -33,6 +116,45 @@ class Event:
         # which asks 'are you sure' and says that they won't be able to reopen the event
         # after they have ended it, as the requirement says "the
         # humanitarian plan must be closed in the system."
+        df = pd.read_csv('data/eventTesting.csv')
+        row = -1
+        while self.title == '':
+            try:
+                self.title = input("--> The title of the event you want to close:")
+                row, col = df.where(df == self.title).stack().index[0]
+            except IndexError:
+                print("Invalid event title entered.")
+                self.title = ''
+                continue
+        date_format1 = '%d-%m-%Y'
+        date_format2 = '%Y-%m-%d'
+        while self.end_date == '':
+            try:
+                self.end_date = input("--> End date: ")
+                self.end_date = datetime.datetime.strptime(self.end_date, date_format1)
+            except ValueError:
+                print("Invalid date format entered.")
+                self.end_date = ''
+                continue
+            if self.end_date <= datetime.datetime.strptime(df['startDate'].loc[row], date_format2):
+                print("End date has to be later than start date.")
+                self.end_date = ''
+                continue
+        root = tk.Tk()
+        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
+        if result == "yes":
+            self.ongoing = False # set ongoing as false as the plan is no longer active
+            formatted_end_date = self.end_date.strftime('%Y-%m-%d')
+            helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
+            helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', self.ongoing)
+            tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+
+        else:
+            tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+
+        root.mainloop()
+
+    def edit_event_info(selfs):
         pass
 
     def change_description(self):
