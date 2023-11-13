@@ -17,4 +17,13 @@ class Camp:
         # Need to think about other methods which might be needed in this class?
 
     def __str__(self):
+        """
+
+        Returns
+        -------
+
+        """
         return "description of camp"
+
+    def location(self):
+        pass
