@@ -38,7 +38,7 @@ class Event:
         country = []
         country_data = helper.extract_data("data/countries.csv")['name']
         for ele in country_data:
-            country.append(ele)
+            country.append(ele.lower())
         date_format = '%d-%m-%Y'  # Use for validating user entered date format
 
         # keep track of uid and increment it by 1
@@ -58,7 +58,7 @@ class Event:
                 return
 
         while len(self.location) == 0 and self.location not in country:
-            self.location = input("--> Location(country): ")
+            self.location = input("--> Location(country): ").lower()
             if self.location == 'RETURN':
                 return
             if self.location not in country:
@@ -73,7 +73,7 @@ class Event:
 
         while self.start_date == '':
             try:
-                self.start_date = input("--> Start date: ")
+                self.start_date = input("--> Start date (format dd/mm/yy): ")
                 if self.start_date == 'RETURN':
                     return
                 self.start_date = datetime.datetime.strptime(self.start_date, date_format)
@@ -86,7 +86,7 @@ class Event:
         # that's why we need an end_event() function to end it or modify its end date.
         while self.end_date == '':
             try:
-                self.end_date = input("--> End date: ")
+                self.end_date = input("--> Estimated end date (format dd/mm/yy): ")
                 if self.end_date == 'RETURN':
                     return
                 self.end_date = datetime.datetime.strptime(self.end_date, date_format)
@@ -118,9 +118,12 @@ class Event:
         # humanitarian plan must be closed in the system."
         df = pd.read_csv('data/eventTesting.csv')
         row = -1
+        ongoing_df = df[df['ongoing'] == True]  
+        ########### Jess: OR MAYBE HAVE THIS AS ENDDATE LOWER THAN TODAY'S DATE? or some way to make sure we cannot reopen it, as per above...
         while self.title == '':
             try:
-                self.title = input("--> The title of the event you want to close:")
+                self.display_events(ongoing_df)
+                self.title = input("--> Enter the event title for end date update:")
                 row, col = df.where(df == self.title).stack().index[0]
             except IndexError:
                 print("Invalid event title entered.")
@@ -130,7 +133,7 @@ class Event:
         date_format2 = '%Y-%m-%d'
         while self.end_date == '':
             try:
-                self.end_date = input("--> End date: ")
+                self.end_date = input("--> End date (format dd/mm/yy): ")
                 self.end_date = datetime.datetime.strptime(self.end_date, date_format1)
             except ValueError:
                 print("Invalid date format entered.")
@@ -140,17 +143,25 @@ class Event:
                 print("End date has to be later than start date.")
                 self.end_date = ''
                 continue
-        root = tk.Tk()
-        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
-        if result == "yes":
-            self.ongoing = False # set ongoing as false as the plan is no longer active
+        if self.end_date > datetime.date.today(): 
+        ### if the updated end date is still in the future, then it is still just an update, not an actual closing of... 
+        ### can probably make the below a bit cleaner but will deal w later 
             formatted_end_date = self.end_date.strftime('%Y-%m-%d')
             helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
-            helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', self.ongoing)
-            tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
-
+            print("End date updated.")
         else:
-            tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+
+            root = tk.Tk()
+            result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
+            if result == "yes":
+                self.ongoing = False # set ongoing as false as the plan is no longer active
+                formatted_end_date = self.end_date.strftime('%Y-%m-%d')
+                helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
+                helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', self.ongoing)
+                tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+
+            else:
+                tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
 
         root.mainloop()
 
@@ -177,3 +188,28 @@ class Event:
         #       relates to everything tracked in event NOT just camp as it refugees from the same
         #       disaster can be in many different camps...
         pass
+
+    def display_events(self, df):
+        # a nice to have to help users navigate... maybe this can be useful later / for other purposes later ? 
+        # Iterating over each row of the event table, and getting the value from each column 
+        for i in range(len(df)):
+            print(f'''
+            +--------------+-------------------+
+            | Event ID     | {df.iloc[i]['eid']}
+            +--------------+-------------------+
+            | Ongoing?     | {df.iloc[i]['ongoing']}
+            +--------------+-------------------+
+            | Title        | {df.iloc[i]['title']}
+            +--------------+-------------------+
+            | Location     | {df.iloc[i]['location']}
+            +--------------+-------------------+
+            | Description  | {df.iloc[i]['description']}
+            +--------------+-------------------+
+            | # of Camps   | {df.iloc[i]['no_camp']}
+            +--------------+-------------------+
+            | Start Date   | {df.iloc[i]['startDate']}
+            +--------------+-------------------+
+            | End Date     | {df.iloc[i]['endDate']}
+            +--------------+-------------------+
+            ************************************
+            ''')
