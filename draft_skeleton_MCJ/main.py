@@ -1,5 +1,5 @@
 import helper
-import volunteer
+import event
 from admin import Admin
 
 
@@ -8,6 +8,7 @@ def main():
     start_up_logo = ("========================================\n"
                      "Group 11 Humanitarian Management System\n"
                      "========================================\n")
+    event.Event.update_ongoing()  # update 'ongoing' in event csv file
     # Possible menu options for the interface
     menu_optionsA = ("[ 1 ] Login\n"
                      "[ 2 ] Register as a volunteer\n"

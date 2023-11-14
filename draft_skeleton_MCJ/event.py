@@ -39,17 +39,19 @@ class Event:
         country_data = helper.extract_data("data/countries.csv")['name']
         for ele in country_data:
             country.append(ele.lower())
-        date_format = '%d-%m-%Y'  # Use for validating user entered date format
+        date_format = '%d/%m/%Y'  # Use for validating user entered date format
 
         # keep track of uid and increment it by 1
         try:
-            I = helper.extract_data("data/countries.csv")['eid']
+            I = helper.extract_data("data/eventTesting.csv")['eid']
         except:
             I = '0'
 
         for i in I:
             Event.id_arr.append(i)
-        eid = Event.id_arr.pop()
+        eid = 0
+        if Event.id_arr != []:
+            eid = Event.id_arr.pop()
         eid = int(eid) + 1
 
         while len(self.title) == 0:
@@ -74,6 +76,7 @@ class Event:
         while self.start_date == '':
             try:
                 self.start_date = input("--> Start date (format dd/mm/yy): ")
+                ### can the start date be empty when create the event?
                 if self.start_date == 'RETURN':
                     return
                 self.start_date = datetime.datetime.strptime(self.start_date, date_format)
@@ -88,7 +91,8 @@ class Event:
             try:
                 self.end_date = input("--> Estimated end date (format dd/mm/yy): ")
                 if self.end_date == 'RETURN':
-                    return
+                    self.end_date = 'NULL'
+                    break
                 self.end_date = datetime.datetime.strptime(self.end_date, date_format)
             except ValueError:
                 print("Invalid date format entered.")
@@ -98,6 +102,12 @@ class Event:
                 print("End date has to be later than start date.")
                 self.end_date = ''
                 continue
+
+        if ((self.end_date == 'NULL' and self.start_date.date() <= datetime.date.today())
+                or (self.start_date.date() <= datetime.date.today() and self.end_date.date() >= datetime.date.today())):
+            self.ongoing = True
+        else:
+            self.ongoing = False
 
         Event.event_data = [[eid, self.ongoing, self.title, self.location, self.description, 0, self.start_date, self.end_date]]
         event_df = pd.DataFrame(Event.event_data,
@@ -121,6 +131,9 @@ class Event:
         ongoing_df = df[df['ongoing'] == True]  
         ########### Jess: OR MAYBE HAVE THIS AS ENDDATE LOWER THAN TODAY'S DATE? or some way to make sure we cannot reopen it, as per above...
         while self.title == '':
+            if ongoing_df.empty:
+                print("***** All the events are closed. *****")
+                break
             try:
                 self.display_events(ongoing_df)
                 self.title = input("--> Enter the event title for end date update:")
@@ -129,43 +142,39 @@ class Event:
                 print("Invalid event title entered.")
                 self.title = ''
                 continue
-        date_format1 = '%d-%m-%Y'
-        date_format2 = '%Y-%m-%d'
-        while self.end_date == '':
-            try:
-                self.end_date = input("--> End date (format dd/mm/yy): ")
-                self.end_date = datetime.datetime.strptime(self.end_date, date_format1)
-            except ValueError:
-                print("Invalid date format entered.")
-                self.end_date = ''
-                continue
-            if self.end_date <= datetime.datetime.strptime(df['startDate'].loc[row], date_format2):
-                print("End date has to be later than start date.")
-                self.end_date = ''
-                continue
-        if self.end_date > datetime.date.today(): 
-        ### if the updated end date is still in the future, then it is still just an update, not an actual closing of... 
-        ### can probably make the below a bit cleaner but will deal w later 
-            formatted_end_date = self.end_date.strftime('%Y-%m-%d')
-            helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
-            print("End date updated.")
-        else:
-
-            root = tk.Tk()
-            result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
-            if result == "yes":
-                self.ongoing = False # set ongoing as false as the plan is no longer active
+            date_format = '%d/%m/%Y'
+            while self.end_date == '':
+                try:
+                    self.end_date = input("--> End date (format dd/mm/yy): ")
+                    self.end_date = datetime.datetime.strptime(self.end_date, date_format)
+                except ValueError:
+                    print("Invalid date format entered.")
+                    self.end_date = ''
+                    continue
+                if self.end_date <= datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d'):
+                    print("End date has to be later than start date.")
+                    self.end_date = ''
+                    continue
+            if self.end_date.date() > datetime.date.today():
+            ### if the updated end date is still in the future, then it is still just an update, not an actual closing of...
+            ### can probably make the below a bit cleaner but will deal w later
                 formatted_end_date = self.end_date.strftime('%Y-%m-%d')
                 helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
-                helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', self.ongoing)
-                tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
-
+                print("End date updated.")
             else:
-                tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+                root = tk.Tk()
+                result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
+                if result == "yes":
+                    self.ongoing = False # set ongoing as false as the plan is no longer active
+                    formatted_end_date = self.end_date.strftime('%Y-%m-%d')
+                    helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
+                    helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', self.ongoing)
+                    tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+                else:
+                    tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+                root.mainloop()
 
-        root.mainloop()
-
-    def edit_event_info(selfs):
+    def edit_event_info(self):
         pass
 
     def change_description(self):
@@ -213,3 +222,23 @@ class Event:
             +--------------+-------------------+
             ************************************
             ''')
+
+    ## I'm not sure whether the ongoing status will change with the time going
+    ## maybe we can update the 'ongoing' in csv file for each time we run this app
+    ## by comparing the start and end date with the current date
+    @staticmethod
+    def update_ongoing():
+        df = pd.read_csv('data/eventTesting.csv')
+        ongoing_list = df[df['ongoing'] == True]
+        print(ongoing_list)
+        for index, series in ongoing_list.iterrows():
+            try:
+                endDate = datetime.datetime.strptime(str(series['endDate']), '%Y-%m-%d')
+                startDate = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
+            except ValueError:
+                continue
+            if ((endDate.date() == 'NULL' and startDate.date() <= datetime.date.today()) or
+                (startDate.date() <= datetime.date.today() and endDate.date() >= datetime.date.today())):
+                return
+            else:
+                helper.modify_csv_value('data/eventTesting.csv', series['eid']-1, 'ongoing', False)
