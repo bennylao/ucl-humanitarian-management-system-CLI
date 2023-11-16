@@ -31,7 +31,28 @@ class Resource:
         resourceLibrary_df = pd.read_csv('data/resourceType.csv')
         resourceAllocs_df = pd.read_csv('data/resourceAllocation.csv')
 
-        resource_menu = int(input('Please select the type of resource report: [1] view stock levels of all resources; [2] view resources by assigned camp; [3] view individual resource \n'))
+        resource_menu = int(input('Please select the type of resource report: [1] view total stock levels of all resources; [2] view resource levels by assigned camp'))
+
+        if resource_menu == 1:
+            
+            joined_df = pd.merge(resourceLibrary_df, resourceAllocs_df, on = 'resourceID', how = 'inner')
+            # now need to sum the quantity column by the resourceID
+            resourceSum_df = joined_df.groupby('resourceID').agg({
+                'name': 'first',  # Keeps the first name for each group
+                'priorityLvl': 'first',  # Keeps the first priorityLvl for each group
+                'qty': 'sum'  # Sums the allocatedQuantity for each group
+            }).reset_index()
+
+            print(resourceSum_df)
+
+        elif resource_menu == 2:
+            pivot_df = joined_df.pivot_table(index=['name', 'priorityLvl'], columns='campID', values='qty', aggfunc='sum')
+            print(pivot_df)
+            ### JESS: maybe add conditional alerts in here later... as an extra 
+            ### later, can also create a global view with resources compared to capacity in camps or something 
+        else:
+            ####
+            pass
 
 
 
