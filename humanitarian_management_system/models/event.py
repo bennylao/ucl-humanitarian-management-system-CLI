@@ -3,7 +3,7 @@
 # Can we have a CSV with all the countries of the world and then check
 # location input against this and get user to ONLY input valid COUNTRY
 
-import helper
+from humanitarian_management_system import helper
 import datetime
 import pandas as pd
 import tkinter as tk

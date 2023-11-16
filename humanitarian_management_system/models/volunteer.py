@@ -1,5 +1,5 @@
 import pandas as pd
-import helper
+from humanitarian_management_system import helper
 
 
 # Unsure whether to have volunteer and admin as subclasses of a "User". Do we think admin is allowed to do
