@@ -76,7 +76,6 @@ class Event:
         while self.start_date == '':
             try:
                 self.start_date = input("--> Start date (format dd/mm/yy): ")
-                ### can the start date be empty when create the event?
                 if self.start_date == 'RETURN':
                     return
                 self.start_date = datetime.datetime.strptime(self.start_date, date_format)
@@ -91,8 +90,10 @@ class Event:
             try:
                 self.end_date = input("--> Estimated end date (format dd/mm/yy): ")
                 if self.end_date == 'RETURN':
-                    self.end_date = 'NULL'
-                    break
+                    return
+                if self.end_date == 'None':
+                   self.end_date = None
+                   break
                 self.end_date = datetime.datetime.strptime(self.end_date, date_format)
             except ValueError:
                 print("Invalid date format entered.")
@@ -103,7 +104,7 @@ class Event:
                 self.end_date = ''
                 continue
 
-        if ((self.end_date == 'NULL' and self.start_date.date() <= datetime.date.today())
+        if ((self.end_date == None and self.start_date.date() <= datetime.date.today())
                 or (self.start_date.date() <= datetime.date.today() and self.end_date.date() >= datetime.date.today())):
             self.ongoing = True
         else:
@@ -116,7 +117,55 @@ class Event:
             event_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
         print("A plan has created successfully!")
 
-    def end_event(self):
+    def edit_event_info(self):
+        """
+        To edit event information except eid.
+        Recognize which event and which column need to be edited,
+        then edit by calling each corresponding private function.
+        """
+        #### In this case, we can 'end an event' by edit this endDate
+        df = pd.read_csv('data/eventTesting.csv')
+        eid_to_edit = ''
+        row = -1
+        while eid_to_edit == '':
+            try:
+                self.display_events(df)
+                eid_to_edit = input('--> Enter the event ID to update:')
+                if eid_to_edit == 'RETURN':
+                    return
+                row = df[df['eid'] == int(eid_to_edit)].index[0]
+            except IndexError:
+                print("Invalid event ID entered.")
+                eid_to_edit = ''
+                continue
+
+        what_to_edit = ''
+        while what_to_edit == '':
+            try:
+                #### Maybe this could be changed into a menu
+                what_to_edit = input('--> Choose one to edit (title/ location/ description/ no_camp/ startDate/ endDate):')
+                if what_to_edit == 'RETURN':
+                    return
+                df[what_to_edit]
+            except KeyError:
+                print("Invalid option name entered.")
+                what_to_edit = ''
+                continue
+
+        if what_to_edit == 'title':
+            self.__change_title(row)
+        elif what_to_edit == 'location':
+            self.__change_location(row)
+        elif what_to_edit == 'description':
+            self.__change_description(row)
+        elif what_to_edit == 'no_camp':
+            self.__change_no_camp(row)
+        elif what_to_edit == 'startDate':
+            self.__change_start_date(row)
+        else:
+            self.__end_event(row)
+
+    def __end_event(self, row):
         """How do we prompt a user to be able to input that
         an event has ended? Should we have a small manual for
         the user which says the commands to enter to the command line
@@ -127,25 +176,19 @@ class Event:
         # after they have ended it, as the requirement says "the
         # humanitarian plan must be closed in the system."
         df = pd.read_csv('data/eventTesting.csv')
-        row = -1
-        ongoing_df = df[df['ongoing'] == True]  
         ########### Jess: OR MAYBE HAVE THIS AS ENDDATE LOWER THAN TODAY'S DATE? or some way to make sure we cannot reopen it, as per above...
-        while self.title == '':
-            if ongoing_df.empty:
-                print("***** All the events are closed. *****")
-                break
-            try:
-                self.display_events(ongoing_df)
-                self.title = input("--> Enter the event title for end date update:")
-                row, col = df.where(df == self.title).stack().index[0]
-            except IndexError:
-                print("Invalid event title entered.")
-                self.title = ''
-                continue
+
+        #### cannot edit the end date of a closed event
+        if (bool(df.loc[row]['ongoing']) == False
+                and datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d').date() <= datetime.date.today()):
+            print("This event has been closed.")
+        else:
             date_format = '%d/%m/%Y'
             while self.end_date == '':
                 try:
                     self.end_date = input("--> End date (format dd/mm/yy): ")
+                    if self.end_date == 'RETURN':
+                        return
                     self.end_date = datetime.datetime.strptime(self.end_date, date_format)
                 except ValueError:
                     print("Invalid date format entered.")
@@ -155,7 +198,7 @@ class Event:
                     print("End date has to be later than start date.")
                     self.end_date = ''
                     continue
-            if self.end_date.date() > datetime.date.today():
+            if self.end_date.date() >= datetime.date.today():
             ### if the updated end date is still in the future, then it is still just an update, not an actual closing of...
             ### can probably make the below a bit cleaner but will deal w later
                 formatted_end_date = self.end_date.strftime('%Y-%m-%d')
@@ -174,17 +217,72 @@ class Event:
                     tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
                 root.mainloop()
 
-    def edit_event_info(self):
-        pass
+    def __change_title(self,row):
+        self.title = input("--> Plan title: ")
+        if self.title == 'RETURN':
+            return
+        helper.modify_csv_value('data/eventTesting.csv', row, 'title', self.title)
+        print("Plan title updated.")
 
-    def change_description(self):
+    def __change_location(self, row):
+        country = []
+        country_data = helper.extract_data("data/countries.csv")['name']
+        for ele in country_data:
+            country.append(ele.lower())
+        while len(self.location) == 0 and self.location not in country:
+            self.location = input("--> Location(country): ").lower()
+            if self.location == 'RETURN':
+                return
+            if self.location not in country:
+                print("Invalid country name entered")
+                self.location = ''
+                continue
+        helper.modify_csv_value('data/eventTesting.csv', row, 'location', self.location)
+        print("Location updated.")
+
+    def __change_description(self, row):
         """Option for users to change the description of the event
         in case they made a mistake or the situation escalates etc"""
+        self.description = input("--> Description: ")
+        if self.description == 'RETURN':
+            return
+        helper.modify_csv_value('data/eventTesting.csv', row, 'description', self.description)
+        print("Description updated.")
+
+    def __change_no_camp(self, row):
+        #### what's the relationship between camp and event?
         pass
 
-    def change_start_date(self):
+    def __change_start_date(self, row):
         """Should this be an option? What would be the implications of this?"""
-        pass
+        #### maybe when the start date is a day in the future, and the user wants to adjust the schedule
+        #### Can the start date of an event that has already been started be changed?
+        date_format = '%d/%m/%Y'
+        df = pd.read_csv('data/eventTesting.csv')
+        self.start_date = datetime.datetime.strptime(df.loc[row]['startDate'], '%Y-%m-%d')
+        if self.start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == True:
+            print("This event has started, the start date cannot be changed.")
+            return
+        elif self.start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == False:
+            print("This event has been closed.")
+            return
+        else:
+            self.start_date = ''
+
+        while self.start_date == '':
+            try:
+                self.start_date = input("--> Start date (format dd/mm/yy): ")
+                if self.start_date == 'RETURN':
+                    return
+                self.start_date = datetime.datetime.strptime(self.start_date, date_format)
+            except ValueError:
+                print("Invalid date format entered.")
+                self.start_date = ''
+                continue
+        formatted_start_date = self.start_date.strftime('%Y-%m-%d')
+        helper.modify_csv_value('data/eventTesting.csv', row, 'startDate', formatted_start_date)
+        self.update_ongoing()
+        print("Start date updated.")
 
     def display_humanitarian_plan_summary(self):
         """At any time of the humanitarian plan life cycle, the
@@ -229,16 +327,18 @@ class Event:
     @staticmethod
     def update_ongoing():
         df = pd.read_csv('data/eventTesting.csv')
-        ongoing_list = df[df['ongoing'] == True]
-        print(ongoing_list)
-        for index, series in ongoing_list.iterrows():
+        for index, series in df.iterrows():
+            try:
+                startDate = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
+            except ValueError: # startDate may exist this error only when entering None in creating an event
+                startDate = None
             try:
                 endDate = datetime.datetime.strptime(str(series['endDate']), '%Y-%m-%d')
-                startDate = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
             except ValueError:
-                continue
-            if ((endDate.date() == 'NULL' and startDate.date() <= datetime.date.today()) or
+                endDate = None
+
+            if ((endDate == None and startDate.date() <= datetime.date.today()) or
                 (startDate.date() <= datetime.date.today() and endDate.date() >= datetime.date.today())):
-                return
+                helper.modify_csv_value('data/eventTesting.csv', series['eid']-1, 'ongoing', True)
             else:
                 helper.modify_csv_value('data/eventTesting.csv', series['eid']-1, 'ongoing', False)

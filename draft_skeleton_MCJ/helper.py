@@ -171,7 +171,6 @@ def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
                password, occupation, arr):
     option_arr.extend(arr)
     option_arr.append('7')
-    option_arr.append('8')
 
     user_enter = -1
     print(admin_menu)
@@ -185,20 +184,18 @@ def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
         admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                    password, occupation, arr)
     elif user_enter == '2':
-        E.end_event()
-        admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
-                   password, occupation, arr)
+        pass
     elif user_enter == '3':
         pass
     elif user_enter == '4':
-        pass
+        E.edit_event_info()
+        admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
+                   password, occupation, arr)
     elif user_enter == '5':
         pass
     elif user_enter == '6':
         pass
     elif user_enter == '7':
-        pass
-    elif user_enter == '8':
         login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
                    password, occupation)
     else:
