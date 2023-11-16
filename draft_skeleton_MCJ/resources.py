@@ -1,3 +1,5 @@
+import pandas as pd
+
 class Resource:
     """A class which tracks all generic attribues of any resource, e.g.:
     total number initially available, total number handed out, total number left. Could have a method
@@ -20,9 +22,18 @@ class Resource:
         self.amount_distributed = amount_distributed
         self.amount_left = amount_left
 
-    def track_all_available_resources(self):
+    def resource_report(self):
         """"Requirement is that you can display all resources currently available to the camp. So this method
         allows us to keep track of all available resources and their amounts (even if that is now 0."""
+
+        # JESS: 
+        # Reading the first CSV file
+        resourceLibrary_df = pd.read_csv('data/resourceType.csv')
+        resourceAllocs_df = pd.read_csv('data/resourceAllocation.csv')
+
+        resource_menu = int(input('Please select the type of resource report: [1] view stock levels of all resources; [2] view resources by assigned camp; [3] view individual resource \n'))
+
+
 
         if dictionary_of_available_resources_and_amounts[self.resource_name]:
             dictionary_of_available_resources_and_amounts[self.resource_name] = self.amount_left
@@ -47,7 +58,7 @@ class Resource:
         camps = input("Please enter the names of the camps that you want this resource distributed across: ")
         #     Much more logic to add here
         #     update the dictionary with overview of resources available
-        self.track_all_available_resources()
+        self.resource_report()
         #    Display resource running out warning if applicable by calling below method
         self.resource_running_out()
 
@@ -60,7 +71,7 @@ class Resource:
         if self.amount_left > self.initial_amount_available:
             self.initial_amount_available = self.amount_left
         #     update the dictionary with overview of resources available
-        self.track_all_available_resources()
+        self.resource_report()
 
     def resource_running_out(self):
         if self.amount_left < (self.initial_amount_available * 0.1):
