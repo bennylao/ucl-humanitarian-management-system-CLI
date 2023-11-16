@@ -1,6 +1,3 @@
-# A place for possible helper functions?
-# I think it's better and easier to manage to have one csv file for each table for our database
-import pandas as pd
 import re
 import csv
 
@@ -17,7 +14,7 @@ def validate_user_selection(options):
 
 def validate_registration(usernames):
     # specify allowed characters for username
-    allowed_chars = "[!@#$%^&*\w]"
+    allowed_chars = r"[!@#$%^&*\w]"
     # specify allowed email format
     email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 

@@ -1,6 +1,5 @@
 from humanitarian_management_system.controller import Controller
 from humanitarian_management_system.models import event
-from humanitarian_management_system.models.admin import Admin
 
 
 def main():
