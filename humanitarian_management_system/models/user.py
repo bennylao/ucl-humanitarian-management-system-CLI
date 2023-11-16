@@ -21,10 +21,11 @@ class User:
 
     @staticmethod
     def validate_user(username, password):
-        if username in usernames:
-            if password == usernames[username]:
-                return True
-            else:
-                return False
+        user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path)
+        row = df.loc[df['username'] == username, 'password']
+
+        if not row.empty and str(row.iloc[0]) == password:
+            return True
         else:
             return False

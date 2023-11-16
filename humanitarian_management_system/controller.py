@@ -26,6 +26,11 @@ class Controller:
     def login(self):
         self.session = "login"
         LoginView.display_login_message()
+        username = input("--> Username: ")
+        password = input("--> Password: ")
+        is_login_valid = User.validate_user(username, password)
+        print(is_login_valid)
+        # redirect based on validation
 
     def register(self):
         self.session = "register"
