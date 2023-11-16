@@ -1,74 +1,98 @@
 # A place for possible helper functions?
 # I think it's better and easier to manage to have one csv file for each table for our database
-from volunteer import Volunteer
-from event import Event
 import pandas as pd
-import main
+import re
 import csv
 
-def reg_validate(firstName, lastName, userName, occupation, phone, password, confirmPassword):
-    """ A very basic validation of user entered values """
-    while len(firstName) == 0:
-        firstName = input("First name: ")
-        if firstName == 'RETURN':
-            main.main()
-    while len(lastName) == 0:
-        lastName = input("Last name: ")
-        if lastName == 'RETURN':
-            main.main()
 
-    # Check if username already exists
-    try:
-        U = extract_data("data/userTesting.csv")['userName']
-    except:
-        U = ''
+def validate_user_selection(options):
+    while True:
+        selection = input("--> ")
+        if selection in options:
+            break
+        else:
+            print("Invalid option entered.")
+    return selection
 
-    # By entering the keyword 'RETURN' user can exit the current session and return to the previous page
-    while len(userName) == 0:
-        userName = input("User name: ")
-        if userName == 'RETURN':
-            main.main()
 
-        for ele in U[0]:
-            if userName == ele:
-                print("Sorry, username already exists.")
-                userName = ''
-                continue
+def validate_registration(usernames):
+    # specify allowed characters for username
+    allowed_chars = "[!@#$%^&*\w]"
+    # specify allowed email format
+    email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
-    while len(occupation) == 0:
-        occupation = input("User occupation: ")
-        if occupation == 'RETURN':
-            main.main()
-
-    while len(phone) != 11:
-        phone = input("Phone number: ")
-        if phone == 'RETURN':
-            main.main()
-
-        if len(phone) != 11:
-            print("Phone number must be of length 11.")
-        if not phone.isnumeric():
-            print("Must be numeric.")
-            phone = '-1'
-            continue
-
-    while len(password) == 0:
-        password = input("Password: ")
+    # check for username
+    while True:
+        username = input("\nEnter username: ")
+        if username == 'RETURN':
+            return
+        elif username in usernames:
+            print("Sorry, username already exists.")
+        elif username.isalnum():
+            break
+        else:
+            print("Invalid username entered.")
+    # check for password
+    while True:
+        password = input("\nEnter password: ")
         if password == 'RETURN':
-            main.main()
+            return
+        elif re.match(allowed_chars, password):
+            break
+        else:
+            print("Invalid password entered.\n"
+                  "Only alphabet, numbers and !@#$%^&* are allowed.")
+    # check for first name
+    while True:
+        first_name = input("\nEnter first name: ")
+        if first_name == 'RETURN':
+            return
+        elif first_name.replace(" ", "").isalpha():
+            break
+        else:
+            print("Invalid first name entered.\n"
+                  "Only alphabet are allowed.")
+    # check for last name
+    while True:
+        last_name = input("\nEnter last name: ")
+        if last_name == 'RETURN':
+            return
+        elif last_name.replace(" ", "").isalpha():
+            break
+        else:
+            print("Invalid last name entered.\n"
+                  "Only alphabet are allowed.")
+    # check for email
+    while True:
+        email = input("\nEnter email: ")
+        if email == 'RETURN':
+            return
+        elif re.fullmatch(email_format, email):
+            break
+        else:
+            print("Invalid email entered.")
+    # check for phone
+    while True:
+        phone = input("\nEnter phone number: ")
+        if phone == 'RETURN':
+            return
+        elif phone.isnumeric():
+            break
+        else:
+            print("Invalid phone number entered.\n"
+                  "Only numbers are allowed.")
+    # check for occupation
+    while True:
+        occupation = input("\nEnter occupation: ")
+        if occupation == 'RETURN':
+            return
+        elif occupation.replace(" ", "").isalpha():
+            break
+        else:
+            print("Invalid occupation entered.\n"
+                  "Only alphabet are allowed.")
 
-    while len(password) != len(confirmPassword):
-        confirmPassword = input("Confirm password: ")
-        if confirmPassword == 'RETURN':
-            main.main()
-
-        if len(password) != len(confirmPassword):
-            print("Password does not match!")
-
-    # Pass user enter values to Volunteer class as they're ready to be stored into .csv file
-    V = Volunteer(firstName, lastName, userName, phone, password, occupation)
-    V.pass_data()
-    print("An account has been successfully created!")
+    return [username, password, first_name, last_name, email, phone, occupation]
 
 
 def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
@@ -165,80 +189,6 @@ def login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastN
         main.main()
     else:
         exit()
-
-
-def admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
-               password, occupation, arr):
-    option_arr.extend(arr)
-    option_arr.append('7')
-
-    user_enter = -1
-    print(admin_menu)
-    user_enter = option_valid(user_enter, option_arr)
-
-    title, location, description, start_date, end_date = '', '', '', '', ''
-    E = Event(title, location, description, start_date, end_date)
-
-    if user_enter == '1':
-        E.pass_event_info()
-        admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
-                   password, occupation, arr)
-    elif user_enter == '2':
-        pass
-    elif user_enter == '3':
-        pass
-    elif user_enter == '4':
-        E.edit_event_info()
-        admin_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
-                   password, occupation, arr)
-    elif user_enter == '5':
-        pass
-    elif user_enter == '6':
-        pass
-    elif user_enter == '7':
-        login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
-                   password, occupation)
-    else:
-        exit()
-
-
-def vol_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
-             password, occupation, arr):
-    option_arr.extend(arr)
-
-    user_enter = -1
-    print(vol_menu)
-    user_enter = option_valid(user_enter, option_arr)
-
-    if user_enter == '1':
-        pass
-    elif user_enter == '2':
-        pass
-    elif user_enter == '3':
-        pass
-    elif user_enter == '4':
-        pass
-    elif user_enter == '5':
-        pass
-    elif user_enter == '6':
-        login_page(menu_optionsB, admin_menu, vol_menu, option_arr, firstName, lastName, userName, phone,
-                   password, occupation)
-    else:
-        exit()
-
-
-# Validating user entered option keyword
-def option_valid(user_enter, option_arr):
-    while user_enter not in option_arr:
-        user_enter = input("--> ")
-        if user_enter not in option_arr:
-            print("Invalid option entered.")
-    return user_enter
-
-
-def extract_data(file_path):
-    df = pd.read_csv(file_path)
-    return df
 
 
 def modify_csv_value(file_path, row_index, column_name, new_value):

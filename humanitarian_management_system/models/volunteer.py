@@ -22,7 +22,7 @@ class Volunteer:
         # Access user enter values from helper function and assign them to Volunteer class
 
         # keep track of uid and increment it by 1
-        I = helper.extract_data('data/userTesting.csv')['uid']
+        I = helper.extract_data('data/user.csv')['uid']
 
         for i in I:
             Volunteer.id_arr.append(i)
@@ -35,7 +35,7 @@ class Volunteer:
                                columns=['uid', 'userType', 'active', 'camp', 'firstName', 'lastName', 'userName',
                                         'occupation', 'phone', 'password'])
         # Pass assign values into .csv file
-        with open('data/userTesting.csv', 'a') as f:
+        with open('data/user.csv', 'a') as f:
             user_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
         Volunteer.total_number += 1

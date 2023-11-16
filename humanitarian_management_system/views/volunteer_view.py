@@ -1,7 +1,10 @@
-vol_menu = ("[ 1 ] Create refugee profile\n"
-            "[ 2 ] Join camp\n"
-            "[ 3 ] Edit personal account\n"
-            "[ 4 ] Edit camp profile\n"
-            "[ 5 ] Edit refugee profile\n"
-            "[ 6 ] Return to previous page\n"
-            "[ x ] Exit the system")
+class VolunteerView:
+    vol_menu = {
+        "1": "Create refugee profile",
+        "2": "Join camp",
+        "3": "Edit personal account",
+        "4": "Edit camp profile",
+        "5": "Edit refugee profile",
+        "6": "Return to previous page",
+        "x": "Exit the system"
+    }

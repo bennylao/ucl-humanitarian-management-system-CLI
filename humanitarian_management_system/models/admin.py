@@ -13,17 +13,6 @@ class Admin:
         self.password = password
         self.phone = phone
 
-    def default_account(self):
-        # Create a default account for admin - only one admin
-        Admin.user_data = [[0, 'Admin', 'N/A', 'N/A', 'N/A', 'N/A', self.username,
-                            'N/A', 'N/A', self.password]]
-        admin_df = pd.DataFrame(Admin.user_data,
-                                columns=['uid', 'userType', 'active', 'camp', 'firstName', 'lastName', 'userName',
-                                         'occupation', 'phone', 'password'])
-        if not Admin.p:
-            admin_df.to_csv('data/userTesting.csv', index=False)
-        else:
-            pass
 
     def edit_volunteer_account(self, volunteer_name):
         pass
