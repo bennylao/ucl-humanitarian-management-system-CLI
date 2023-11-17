@@ -5,8 +5,6 @@ class Resource:
     total number initially available, total number handed out, total number left. Could have a method
     which alerts volunteer/admin when resource is running out (e.g last 10%)"""
 
-    # Should each resource have a category associated so even if someone entered "shoes" we know that is
-    # Clothing that can be distributed.
     # OR alternative: have volunteer select from a dropdown list of categories which their resource fits in to?
     # How can we keep track of a dictionary of all resources we currently have available? Below line as an option?
     # We need this as a requirement is: user can display all resources currently available to the camp. So this method
@@ -15,9 +13,10 @@ class Resource:
     dictionary_of_available_resources_and_amounts = {}
 
     def __init__(self, resource_name, resource_category, amount_distributed, amount_left, initial_amount_available):
+        # Do we need both resource category and resource name? probably not
         self.resource_name = resource_name
+        # category so all similar items get bundled together into same distribution category e.g. shoes ->clothing
         self.resource_category = resource_category
-        # Do we need both resource category and resource name?
         self.initial_amount_available = initial_amount_available
         self.amount_distributed = amount_distributed
         self.amount_left = amount_left
@@ -61,6 +60,13 @@ class Resource:
         else:
             dictionary_of_available_resources_and_amounts[self.resource_name] = self.initial_amount_available
 
+    def distribute_resource_automatically(self, amount):
+        #User wants the resource to be distributed across camps fairly by us
+        pass
+    def distribute_resource_specific_camps(self, amount, camps):
+        #distirbute resources across the camps based on the names that the user gives us
+        pass
+
     def distribute_resource(self, amount):
         """Method to take into account the number of refugees in a camp and the total amount of the resource
         left now to distribute amongst the camps to divide the resource evenly.
@@ -76,12 +82,21 @@ class Resource:
             print("Sorry, not enough left of this resource to distribute that quantity."
                   f"you have {self.amount_left} left to distribute.")
         amount = input(f"Please enter an amount that is the same as or lower than {self.amount_left}.")
-        camps = input("Please enter the names of the camps that you want this resource distributed across: ")
+        camps = input("Please enter the names of the camps that you want this resource distributed across."
+                      "Or type * for us to distribute the resource fairly across the camps: ")
         #     Much more logic to add here
         #     update the dictionary with overview of resources available
+        if camps == "*":
+            self.distribute_resource_automatically(self, amount)
+        else:
+            self.distribute_resource_specific_camps(self, amount, camps)
+
+
+
         self.resource_report()
         #    Display resource running out warning if applicable by calling below method
         self.resource_running_out()
+
 
     def add_more_resource(self, amount):
         """Method to add more to the total amount of the resource left currently, therefore we can distribute
