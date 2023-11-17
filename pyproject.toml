@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "humanitarian_management_system"
+version = "1.0.0"
+dependencies = [
+    "pandas",
+    "numpy",
+    "folium",
+    "branca",
+    "requests",
+]
+
+[project.scripts]
+hmsGroup11 = "humanitarian_management_system.main:main"
+
+[tool.setuptools.packages.find]
+exclude = ["data_analysis"] # temporary configuration during development
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"humanitarian_management_system.data" = ["*.csv"]

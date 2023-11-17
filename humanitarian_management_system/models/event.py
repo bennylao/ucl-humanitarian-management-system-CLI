@@ -2,6 +2,7 @@
 # How do we then get this into an instance of the Event?
 # Can we have a CSV with all the countries of the world and then check
 # location input against this and get user to ONLY input valid COUNTRY
+from pathlib import Path
 
 from humanitarian_management_system import helper
 import datetime
@@ -326,7 +327,8 @@ class Event:
     ## by comparing the start and end date with the current date
     @staticmethod
     def update_ongoing():
-        df = pd.read_csv('data/eventTesting.csv')
+        event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+        df = pd.read_csv(event_csv_path)
         for index, series in df.iterrows():
             try:
                 startDate = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
@@ -339,6 +341,6 @@ class Event:
 
             if ((endDate == None and startDate.date() <= datetime.date.today()) or
                 (startDate.date() <= datetime.date.today() and endDate.date() >= datetime.date.today())):
-                helper.modify_csv_value('data/eventTesting.csv', series['eid']-1, 'ongoing', True)
+                helper.modify_csv_value(event_csv_path, series['eid']-1, 'ongoing', True)
             else:
-                helper.modify_csv_value('data/eventTesting.csv', series['eid']-1, 'ongoing', False)
+                helper.modify_csv_value(event_csv_path, series['eid']-1, 'ongoing', False)

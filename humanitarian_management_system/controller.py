@@ -1,6 +1,6 @@
-from .models import User
-from .views import StartupView, RegistrationView, LoginView, AdminView, VolunteerView
-from . import helper
+from humanitarian_management_system.models import User
+from humanitarian_management_system.views import StartupView, RegistrationView, LoginView, AdminView, VolunteerView
+from humanitarian_management_system import helper
 
 
 class Controller:
