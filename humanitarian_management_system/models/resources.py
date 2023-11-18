@@ -4,8 +4,8 @@
 #This influences the logic of distribution quite a lot.
 #E.g. amount left will only be amount left per camp.
 
-from refugee import Refugee
-from camp import Camp
+from humanitarian_management_system.models.refugee import Refugee
+from humanitarian_management_system.models.camp import Camp
 import pandas as pd
 
 class Resource:
