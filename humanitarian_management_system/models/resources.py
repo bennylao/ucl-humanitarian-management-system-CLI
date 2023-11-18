@@ -1,7 +1,17 @@
+#Martha: Question: are we to assume that if someone adds a resource, it will be
+# immediately distributed across camps, on the assumption
+#that we probably won't want volunteers to just be storing resources ?
+#This influences the logic of distribution quite a lot.
+#E.g. amount left will only be amount left per camp.
+
+from refugee import Refugee
+from camp import Camp
 import pandas as pd
 
 class Resource:
-    """A class which tracks all generic attribues of any resource, e.g.:
+    list_of_resource_categories = []
+
+    """A class which tracks all generic attributes of any resource, e.g.:
     total number initially available, total number handed out, total number left. Could have a method
     which alerts volunteer/admin when resource is running out (e.g last 10%)"""
 
@@ -10,16 +20,16 @@ class Resource:
     # We need this as a requirement is: user can display all resources currently available to the camp. So this method
     #         allows us to keep track of all available resources. Does this mean once a resource has already
     # been distributed though? Or before ..... unclear?
-    dictionary_of_available_resources_and_amounts = {}
+    # dictionary_of_available_resources_and_amounts = {}
 
-    def __init__(self, resource_name, resource_category, amount_distributed, amount_left, initial_amount_available):
-        # Do we need both resource category and resource name? probably not
-        self.resource_name = resource_name
-        # category so all similar items get bundled together into same distribution category e.g. shoes ->clothing
-        self.resource_category = resource_category
-        self.initial_amount_available = initial_amount_available
-        self.amount_distributed = amount_distributed
-        self.amount_left = amount_left
+
+    def __init__(self, resource_category):
+       # Should resource category be here or should there be a seperate method? confused...
+       self.resource_category = resource_category
+       if self.resource_category.lower() not in Resource.list_of_resource_categories:
+            Resource.list_of_resource_categories.append(self.resource_category.lower())
+
+
 
     def resource_report(self):
         """"Requirement is that you can display all resources currently available to the camp. So this method
@@ -53,43 +63,66 @@ class Resource:
             ####
             pass
 
+        # Do we need this dictionary if we're using pd?
+        # if dictionary_of_available_resources_and_amounts[self.resource_category]:
+        #     dictionary_of_available_resources_and_amounts[self.resource_category] = self.amount_left
+        # else:
+        #     dictionary_of_available_resources_and_amounts[self.resource_name] = self.initial_amount_available
 
 
-        if dictionary_of_available_resources_and_amounts[self.resource_name]:
-            dictionary_of_available_resources_and_amounts[self.resource_name] = self.amount_left
-        else:
-            dictionary_of_available_resources_and_amounts[self.resource_name] = self.initial_amount_available
 
-    def distribute_resource_automatically(self, amount):
-        #User wants the resource to be distributed across camps fairly by us
-        pass
-    def distribute_resource_specific_camps(self, amount, camps):
-        #distirbute resources across the camps based on the names that the user gives us
-        pass
-
-    def distribute_resource(self, amount):
+    def distribute_resource(self):
         """Method to take into account the number of refugees in a camp and the total amount of the resource
         left now to distribute amongst the camps to divide the resource evenly.
         Should we also keep track of and account for the amount a camp has received
         of that resource already? Is that too complicated? Or even necessary? """
-        # Do we allow the user to put in the names of the camps they want to distribute across?
-        # Or should it all just be equal.
-        # Should we do checks by category, so if the resource is a vaccination and 1 camp has lots of
-        # refugees who aren't vaccinated, that camp should automatically get more even though they camp
-        # may have less refugees actually in it
-        # Remember to subtract the amount distributed from amount_left
-        if amount > self.amount_left:
-            print("Sorry, not enough left of this resource to distribute that quantity."
-                  f"you have {self.amount_left} left to distribute.")
-        amount = input(f"Please enter an amount that is the same as or lower than {self.amount_left}.")
-        camps = input("Please enter the names of the camps that you want this resource distributed across."
-                      "Or type * for us to distribute the resource fairly across the camps: ")
+        self.resource_category = input("Please select the category of resource you want to distribute: ")
+        distribution_method = int(input("Please enter 1 to specify the name of the camps that you want this resource distributed across."
+                            "Or enter 2 for us to distribute the resource fairly across the camps for you: "))
         #     Much more logic to add here
         #     update the dictionary with overview of resources available
-        if camps == "*":
-            self.distribute_resource_automatically(self, amount)
+        if distribution_method == 1:
+            self.distribute_resource_specific_camps()
+        elif distribution_method == 2:
+            self.distribute_resource_automatically()
         else:
-            self.distribute_resource_specific_camps(self, amount, camps)
+            "Sorry! that's not an option. Let's go again"
+            self.distribute_resource()
+
+    def distribute_resource_automatically(self):
+        amount = float(input("Please enter the amount of this resource you have to distribute: "))
+        #Need to iterate through camps to get the number of refugees, and how much of this category of resource is there in each
+        #Below is a potential algoriothm to distribute the amounts fairly. We could top up camps whose current level of resource is less than the average %?
+        # total_refugees = sum(camp.num_refugees for camp in camps)
+        total_refugees = Refugee.total_number
+        average_per_refugee = amount / total_refugees if total_refugees > 0 else 0
+        total_current_resources = sum(camp.current_resource_amount for camp in camps)
+
+        for camp in Camp.list_of_camp_names:
+            # Calculate how much to distribute to this camp
+            difference = max(0, average_per_refugee - camp.current_resource_amount)
+
+            # Calculate the proportional share based on the difference
+            proportional_share = (difference / total_current_resources) * amount
+
+            # Update the camp's resource amount
+            camp.current_resource_amount += proportional_share
+
+            # Output distribution information (optional)
+            print(f"Distributed {proportional_share} to {camp.name}")
+
+        # Output total distribution information (optional)
+        print(f"Total distributed: {amount}")
+
+
+def distribute_resource_specific_camps(self, resource_category, amount):
+        # user want to distribute this specific resource and this specific amount across the camps that they specify
+        resource_category = self.resource_category
+        camps = input("Enter camp names (comma-separated): ").split(',')
+        for camp in camps:
+            amount = float(input("Enter amount for {}: ".format(camp)))
+        pass
+
 
 
 
