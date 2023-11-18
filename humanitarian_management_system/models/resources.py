@@ -115,12 +115,22 @@ class Resource:
         print(f"Total distributed: {amount}")
 
 
-def distribute_resource_specific_camps(self, resource_category, amount):
-        # user want to distribute this specific resource and this specific amount across the camps that they specify
+    def distribute_resource_specific_camps(self):
         resource_category = self.resource_category
-        camps = input("Enter camp names (comma-separated): ").split(',')
+        # user want to distribute this specific resource and this specific amount across the camps that they specify
+        # camp_list = []
+        # number_of_camps = int(input("Please enter the number of camps you want to distribute this resource to now: "))
+        # for i in range(number_of_camps):
+        #     amount = float(input("Please enter the amount of this resource you have to distribute to the first camp: "))
+        #     camp = input("Now please enter the name of the camp you wish to distribute this to: ")
+        #     camp_list.append(camp)
+        # for camp in camp_list:
+            #SOme logic to update teh amount of this resource in the camps!
+        camps = input("Enter the names of the camps that you will be allocating this resource to (comma-separated): ").split(',')
+        # Need some logic to make sure non comma separated list doesn't break the code. Or use above method? Maybe better
         for camp in camps:
-            amount = float(input("Enter amount for {}: ".format(camp)))
+             amount = float(input("Enter amount for {}: ".format(camp)))
+            # SOme logic to update teh amount of this resource in the camps!
         pass
 
 
