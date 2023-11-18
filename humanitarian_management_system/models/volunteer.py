@@ -9,11 +9,12 @@ class Volunteer:
     user_data = []
     id_arr = []
 
-    def __init__(self, first_name, last_name, username, phone, password, occupation, active=True):
+    def __init__(self, username, password, first_name, last_name, email, phone, occupation, active=True):
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
         self.phone = phone
+        self.email = email
         self.password = password
         self.occupation = occupation
         self.active = active
@@ -22,18 +23,18 @@ class Volunteer:
         # Access user enter values from helper function and assign them to Volunteer class
 
         # keep track of uid and increment it by 1
-        I = helper.extract_data('data/user.csv')['uid']
+        I = helper.extract_data("data/user.csv","userID")
 
         for i in I:
             Volunteer.id_arr.append(i)
         uid = Volunteer.id_arr.pop()
         uid += 1
 
-        Volunteer.user_data = [[uid, 'Volunteer', self.active, 'None', self.first_name, self.last_name, self.username,
-                                self.occupation, self.phone, self.password]]
+        Volunteer.user_data = [[uid, 'Volunteer', self.active, self.username, self.password, self.first_name, self.last_name,
+                                self.email, self.phone, self.occupation, 'None', 'None']]
         user_df = pd.DataFrame(Volunteer.user_data,
-                               columns=['uid', 'userType', 'active', 'camp', 'firstName', 'lastName', 'userName',
-                                        'occupation', 'phone', 'password'])
+                               columns=['userID', 'userType', 'isActive', 'username', 'password', 'firstName', 'lastName',
+                                        'email', 'phone', 'occupation', 'roleID', 'campID'])
         # Pass assign values into .csv file
         with open('data/user.csv', 'a') as f:
             user_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)

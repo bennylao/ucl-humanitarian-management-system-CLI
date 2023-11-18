@@ -9,3 +9,13 @@ class AdminView:
         "7": "Return to previous page",
         "x": "Exit the system"
     }
+
+    @classmethod
+    def display_admin_menu(cls):
+        print("")
+        for key, value in cls.admin_menu.items():
+            print(f"[ {key} ] {value}")
+
+    @classmethod
+    def get_admin_options(cls):
+        return cls.admin_menu.keys()
