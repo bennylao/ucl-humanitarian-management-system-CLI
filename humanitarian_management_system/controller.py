@@ -1,7 +1,10 @@
 from humanitarian_management_system.helper import (extract_data, validate_event_input, validate_registration,
                                                    validate_user_selection, validate_camp_input)
 from humanitarian_management_system.models import User, Volunteer, Event, Camp
-from humanitarian_management_system.views import StartupView, InstructionView, LoginView, AdminView, VolunteerView
+from humanitarian_management_system.views import (StartupView, InstructionView, LoginView, AdminView, CampView,
+                                                  VolunteerView)
+from pathlib import Path
+import pandas as pd
 
 
 class Controller:
@@ -21,38 +24,65 @@ class Controller:
         if user_selection == "2":
             self.register()
         if user_selection == "x":
-            # exit()
-            pass
+            exit()
 
     def login(self):
         self.session = "login"
         LoginView.display_login_message()
         username = input("\nUsername: ")
+        if username == 'RETURN':
+            self.startup()
         password = input("\nPassword: ")
+        if username == 'RETURN':
+            self.startup()
         is_login_valid = User.validate_user(username, password)
+
+        # checking usertype
+        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path)
+        i = df.index[df['username'] == username].tolist()
+        t = df.iloc[i]['userType'].tolist()
         # redirect based on validation
-        self.login_success(is_login_valid)
-
-    def login_success(self, is_login_valid):
         if is_login_valid:
-            AdminView.display_admin_menu()
-            user_selection = validate_user_selection(AdminView.get_admin_options())
+            if t[0] == 'admin':
+                AdminView.display_admin_menu()
+                user_selection = validate_user_selection(AdminView.get_admin_options())
 
-            if user_selection == "1":
-                self.create_event()
-            if user_selection == "2":
-                self.create_camp()
-            if user_selection == "3":
-                pass
-            if user_selection == "4":
-                pass
-            if user_selection == "5":
-                pass
-            if user_selection == "6":
-                pass
-            if user_selection == "x":
-                # exit()
-                pass
+                if user_selection == "1":
+                    self.create_event()
+                if user_selection == "2":
+                    self.camp_main()
+                if user_selection == "3":
+                    pass
+                if user_selection == "4":
+                    pass
+                if user_selection == "5":
+                    pass
+                if user_selection == "6":
+                    pass
+                if user_selection == "7":
+                    self.startup()
+                if user_selection == "x":
+                    exit()
+
+            else:
+                VolunteerView.display_vol_menu()
+                user_selection = validate_user_selection(VolunteerView.get_vol_options())
+                if user_selection == "1":
+                    pass
+                if user_selection == "2":
+                    pass
+                if user_selection == "3":
+                    pass
+                if user_selection == "4":
+                    pass
+                if user_selection == "5":
+                    pass
+                if user_selection == "6":
+                    self.startup()
+                if user_selection == "x":
+                    exit()
+
         else:
             print("Invalid username or password!\n"
                   "Or the account has been disabled!")
@@ -82,9 +112,25 @@ class Controller:
         else:
             self.startup()
 
+    def camp_main(self):
+        InstructionView.camp_main_message()
+        CampView.display_camp_menu()
+        user_selection = validate_user_selection(CampView.get_camp_options())
+        if user_selection == "1":
+            self.create_camp()
+        if user_selection == "2":
+            pass
+        if user_selection == "3":
+            pass
+        if user_selection == "4":
+            pass
+        if user_selection == "x":
+            exit()
+
     def create_camp(self):
         InstructionView.camp_init_message()
         # print out selection list, perhaps someone could improve its presentation, coz i'm really bad at this :P
+        # only display active event(s) to user
         data_arr = extract_data("data/eventTesting.csv", "ongoing")
         active_index = []
 

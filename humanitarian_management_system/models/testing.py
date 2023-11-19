@@ -8,8 +8,12 @@ from humanitarian_management_system.helper import extract_data
 
 def pass_data():
 
-    s = extract_data("data/eventTesting.csv", "eid").iloc[2]
-    return s
+    user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+    df = pd.read_csv(user_csv_path)
+    i = df.index[df['username'] == 'volunteer2'].tolist()
+    t = df.iloc[i]['userType'].tolist()
+
+    return t[0]
 
 print(pass_data())
 

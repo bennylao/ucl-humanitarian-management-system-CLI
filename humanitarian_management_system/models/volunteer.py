@@ -28,10 +28,10 @@ class Volunteer:
         uid += 1
 
         Volunteer.user_data = [[uid, 'Volunteer', self.active, self.username, self.password, self.first_name, self.last_name,
-                                self.email, self.phone, self.occupation, 'None', 'None']]
+                                self.email, self.phone, self.occupation, 'None', 'None', 'None']]
         user_df = pd.DataFrame(Volunteer.user_data,
                                columns=['userID', 'userType', 'isActive', 'username', 'password', 'firstName', 'lastName',
-                                        'email', 'phone', 'occupation', 'roleID', 'campID'])
+                                        'email', 'phone', 'occupation', 'roleID', 'eventID', 'campID'])
         # Pass assign values into .csv file
         with open('data/user.csv', 'a') as f:
             user_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)

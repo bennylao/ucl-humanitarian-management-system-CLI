@@ -1,1 +1,12 @@
-resourceTypeID,name,description
+resourceTypeID,name,description,total
+1,Blankets,,150
+2,Clothing,,150
+3,Toys,,150
+4,Medicine,,150
+5,Vitamins,,150
+6,Food,,150
+7,Snacks,,150
+8,Toiletries,,150
+9,Water,,150
+10,Baby Supplies,,150
+11,General Tools & Supplies,,150

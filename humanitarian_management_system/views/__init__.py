@@ -3,4 +3,5 @@ from .instruction_view import InstructionView
 from .login_view import LoginView
 from .admin_view import AdminView
 from .volunteer_view import VolunteerView
+from .admin_view import CampView
 
