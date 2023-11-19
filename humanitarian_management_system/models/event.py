@@ -17,14 +17,13 @@ class Event:
     # id_arr = []
     event_data = []
 
-    def __init__(self, title, location, description, start_date, end_date, eid, ongoing=True):
+    def __init__(self, title, location, description, start_date, end_date, ongoing=True):
         self.title = title
         self.location = location
         self.description = description
         self.start_date = start_date
         self.end_date = end_date
         self.ongoing = ongoing
-        self.eid = eid
 
     # def add_start_date(self):
     #     """Idea: When the user creates a new "Event" (e.g. instantiates
@@ -38,7 +37,7 @@ class Event:
 
     # Access user input info from helper function and pass them into .csv file(s)
 
-    def pass_event_info(self):
+    def pass_event_info(self, eid):
         # country = []
         # country_data = helper.extract_data("data/countries.csv", "name")
         # for ele in country_data:
@@ -115,13 +114,12 @@ class Event:
             self.ongoing = False
 
         Event.event_data = [
-            [self.eid, self.ongoing, self.title, self.location, self.description, 0, self.start_date, self.end_date]]
+            [eid, self.ongoing, self.title, self.location, self.description, 0, self.start_date, self.end_date]]
         event_df = pd.DataFrame(Event.event_data,
                                 columns=['eid', 'ongoing', 'title', 'location', 'description', 'no_camp', 'startDate',
                                          'endDate'])
         with open('data/eventTesting.csv', 'a') as f:
             event_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
-        print("create plan.")
 
     def edit_event_info(self):
         """

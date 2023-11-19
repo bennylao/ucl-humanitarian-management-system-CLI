@@ -105,7 +105,6 @@ def validate_registration(usernames):
 
 def validate_event_input():
     country = []
-    id_arr = []
     country_data = extract_data("data/countries.csv", "name")
     date_format = '%d/%m/%Y'  # Use for validating user entered date format
 
@@ -113,26 +112,24 @@ def validate_event_input():
         country.append(ele.lower())
     # keep track of uid and increment it by 1
     try:
-        I = extract_data("data/eventTesting.csv", "eid")
+        id_arr = extract_data("data/eventTesting.csv", "eid").tolist()
     except:
-        I = '0'
+        id_arr = '0'
 
-    for i in I:
-        id_arr.append(i)
     eid = 0
     if id_arr:
         eid = id_arr.pop()
     eid = int(eid) + 1
 
     while True:
-        title = input("--> Plan title: ")
+        title = input("\nPlan title: ")
         if title == 'RETURN':
             return
         else:
             break
 
     while True:
-        location = input("--> Location(country): ").lower()
+        location = input("\nLocation(country): ").lower()
         if location == 'RETURN':
             return
         elif location not in country:
@@ -142,7 +139,7 @@ def validate_event_input():
             break
 
     while True:
-        description = input("--> Description: ")
+        description = input("\nDescription: ")
         if description == 'RETURN':
             return
         else:
@@ -150,7 +147,7 @@ def validate_event_input():
 
     while True:
         try:
-            start_date = input("--> Start date (format dd/mm/yy): ")
+            start_date = input("\nStart date (format dd/mm/yy): ")
             if start_date == 'RETURN':
                 return
             start_date = datetime.datetime.strptime(start_date, date_format)
@@ -163,7 +160,7 @@ def validate_event_input():
     # that's why we need an end_event() function to end it or modify its end date.
     while True:
         try:
-            end_date = input("--> Estimated end date (format dd/mm/yy): ")
+            end_date = input("\nEstimated end date (format dd/mm/yy): ")
             if end_date == 'RETURN':
                 return
             if end_date == 'None':
@@ -181,6 +178,30 @@ def validate_event_input():
     return [title, location, description, start_date, end_date, eid]
 
 
+def validate_camp_input():
+    try:
+        id_arr = extract_data("data/camp.csv", "campID").tolist()
+    except:
+        id_arr = '0'
+
+    campID = 0
+    if id_arr:
+        campID = id_arr.pop()
+    campID = int(campID) + 1
+
+    while True:
+        capacity = input("\nCapacity: ")
+        if capacity == 'RETURN':
+            return
+        elif not capacity.isnumeric():
+            print("Must be a numerical input!")
+            continue
+        else:
+            break
+
+    return capacity, campID
+
+
 def modify_csv_value(file_path, row_index, column_name, new_value):
     with open(file_path, 'r', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -196,4 +217,4 @@ def modify_csv_value(file_path, row_index, column_name, new_value):
 def extract_data(csv, col):
     user_csv_path = Path(__file__).parents[0].joinpath(csv)
     df = pd.read_csv(user_csv_path)
-    return df[col].tolist()
+    return df[col]

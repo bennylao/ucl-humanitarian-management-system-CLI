@@ -4,3 +4,4 @@ userID,userType,isActive,username,password,firstName,lastName,email,phone,occupa
 2,volunteer,TRUE,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,2,2
 3,volunteer,FALSE,volunteer3,111,volunteer3FirstName,volunteer3LastName,volunteer3Email,7701230987,volunteer3Occupation,3,3
 4,Volunteer,True,volunteer4,111,firstfour,lastfour,example@testing.com,07786471235,jobfour,None,None
+5,Volunteer,True,volunteer5,111,testfiveFirst,testfiveLast,example2@testing.com,07786471235,fiveJob,None,None

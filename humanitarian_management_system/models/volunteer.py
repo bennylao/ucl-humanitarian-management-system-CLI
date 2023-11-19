@@ -1,5 +1,5 @@
 import pandas as pd
-from humanitarian_management_system import helper
+from humanitarian_management_system.helper import extract_data
 
 
 # Unsure whether to have volunteer and admin as subclasses of a "User". Do we think admin is allowed to do
@@ -7,7 +7,6 @@ from humanitarian_management_system import helper
 class Volunteer:
     total_number = 0
     user_data = []
-    id_arr = []
 
     def __init__(self, username, password, first_name, last_name, email, phone, occupation, active=True):
         self.first_name = first_name
@@ -23,11 +22,9 @@ class Volunteer:
         # Access user enter values from helper function and assign them to Volunteer class
 
         # keep track of uid and increment it by 1
-        I = helper.extract_data("data/user.csv","userID")
+        id_arr = extract_data("data/user.csv","userID").tolist()
 
-        for i in I:
-            Volunteer.id_arr.append(i)
-        uid = Volunteer.id_arr.pop()
+        uid = id_arr.pop()
         uid += 1
 
         Volunteer.user_data = [[uid, 'Volunteer', self.active, self.username, self.password, self.first_name, self.last_name,
