@@ -16,6 +16,14 @@ class InstructionView:
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod
+    def event_edit_message():
+        print("\n========================================\n"
+              "               Event EDIT\n"
+              "========================================\n"
+              "Please fill in all the following information below.\n"
+              "Or enter 'RETURN' to go back to admin menu page.")
+
+    @staticmethod
     def camp_main_message():
         print("\n========================================\n"
               "           Camp MANAGEMENT\n"

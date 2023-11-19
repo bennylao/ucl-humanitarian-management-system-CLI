@@ -43,7 +43,7 @@ class Controller:
         i = df.index[df['username'] == username].tolist()
         t = df.iloc[i]['userType'].tolist()
         # redirect based on validation
-        if is_login_valid:
+        while is_login_valid:
             if t[0] == 'admin':
                 AdminView.display_admin_menu()
                 user_selection = validate_user_selection(AdminView.get_admin_options())
@@ -55,7 +55,7 @@ class Controller:
                 if user_selection == "3":
                     pass
                 if user_selection == "4":
-                    pass
+                    self.edit_event()
                 if user_selection == "5":
                     pass
                 if user_selection == "6":
@@ -111,6 +111,16 @@ class Controller:
             print("Event created.")
         else:
             self.startup()
+
+    @staticmethod
+    def edit_event():
+        InstructionView.event_edit_message()
+        df = pd.read_csv('data/eventTesting.csv')
+        if df.empty:
+            print("\nNo events to edit.")
+        else:
+            e = Event('','','','','')
+            e.edit_event_info()
 
     def camp_main(self):
         InstructionView.camp_main_message()

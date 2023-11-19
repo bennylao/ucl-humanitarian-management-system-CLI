@@ -134,12 +134,12 @@ class Event:
         while eid_to_edit == '':
             try:
                 self.display_events(df)
-                eid_to_edit = input('--> Enter the event ID to update:')
+                eid_to_edit = input('\n--> Enter the event ID to update:')
                 if eid_to_edit == 'RETURN':
                     return
                 row = df[df['eid'] == int(eid_to_edit)].index[0]
             except IndexError:
-                print("Invalid event ID entered.")
+                print("\nInvalid event ID entered.")
                 eid_to_edit = ''
                 continue
 
@@ -148,12 +148,12 @@ class Event:
             try:
                 #### Maybe this could be changed into a menu
                 what_to_edit = input(
-                    '--> Choose one to edit (title/ location/ description/ no_camp/ startDate/ endDate):')
+                    '\n--> Choose one to edit (title/ location/ description/ no_camp/ startDate/ endDate):')
                 if what_to_edit == 'RETURN':
                     return
                 df[what_to_edit]
             except KeyError:
-                print("Invalid option name entered.")
+                print("\nInvalid option name entered.")
                 what_to_edit = ''
                 continue
 
@@ -169,6 +169,73 @@ class Event:
             self.__change_start_date(row)
         else:
             self.__end_event(row)
+
+    def __change_title(self, row):
+        self.title = input("\n--> Plan title: ")
+        if self.title == 'RETURN':
+            return
+        helper.modify_csv_value('data/eventTesting.csv', row, 'title', self.title)
+        print("\nPlan title updated.")
+
+    def __change_location(self, row):
+        country = []
+        country_data = helper.extract_data("data/countries.csv")['name']
+        for ele in country_data:
+            country.append(ele.lower())
+        while len(self.location) == 0 and self.location not in country:
+            self.location = input("\n--> Location(country): ").lower()
+            if self.location == 'RETURN':
+                return
+            if self.location not in country:
+                print("\nInvalid country name entered")
+                self.location = ''
+                continue
+        helper.modify_csv_value('data/eventTesting.csv', row, 'location', self.location)
+        print("\nLocation updated.")
+
+    def __change_description(self, row):
+        """Option for users to change the description of the event
+        in case they made a mistake or the situation escalates etc"""
+        self.description = input("\n--> Description: ")
+        if self.description == 'RETURN':
+            return
+        helper.modify_csv_value('data/eventTesting.csv', row, 'description', self.description)
+        print("\nDescription updated.")
+
+    def __change_no_camp(self, row):
+        #### what's the relationship between camp and event?
+        pass
+
+    def __change_start_date(self, row):
+        """Should this be an option? What would be the implications of this?"""
+        #### maybe when the start date is a day in the future, and the user wants to adjust the schedule
+        #### Can the start date of an event that has already been started be changed?
+        date_format = '%d/%m/%Y'
+        df = pd.read_csv('data/eventTesting.csv')
+        self.start_date = datetime.datetime.strptime(df.loc[row]['startDate'], '%Y-%m-%d')
+        if self.start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == True:
+            print("\nThis event has started, the start date cannot be changed.")
+            return
+        elif self.start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == False:
+            print("\nThis event has been closed.")
+            return
+        else:
+            self.start_date = ''
+
+        while self.start_date == '':
+            try:
+                self.start_date = input("\n--> Start date (format dd/mm/yy): ")
+                if self.start_date == 'RETURN':
+                    return
+                self.start_date = datetime.datetime.strptime(self.start_date, date_format)
+            except ValueError:
+                print("\nInvalid date format entered.")
+                self.start_date = ''
+                continue
+        formatted_start_date = self.start_date.strftime('%Y-%m-%d')
+        helper.modify_csv_value('data/eventTesting.csv', row, 'startDate', formatted_start_date)
+        self.update_ongoing()
+        print("\nStart date updated.")
 
     def __end_event(self, row):
         """How do we prompt a user to be able to input that
@@ -186,21 +253,21 @@ class Event:
         #### cannot edit the end date of a closed event
         if (bool(df.loc[row]['ongoing']) == False
                 and datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d').date() <= datetime.date.today()):
-            print("This event has been closed.")
+            print("\nThis event has been closed.")
         else:
             date_format = '%d/%m/%Y'
             while self.end_date == '':
                 try:
-                    self.end_date = input("--> End date (format dd/mm/yy): ")
+                    self.end_date = input("\n--> End date (format dd/mm/yy): ")
                     if self.end_date == 'RETURN':
                         return
                     self.end_date = datetime.datetime.strptime(self.end_date, date_format)
                 except ValueError:
-                    print("Invalid date format entered.")
+                    print("\nInvalid date format entered.")
                     self.end_date = ''
                     continue
                 if self.end_date <= datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d'):
-                    print("End date has to be later than start date.")
+                    print("\nEnd date has to be later than start date.")
                     self.end_date = ''
                     continue
             if self.end_date.date() >= datetime.date.today():
@@ -208,7 +275,7 @@ class Event:
                 ### can probably make the below a bit cleaner but will deal w later
                 formatted_end_date = self.end_date.strftime('%Y-%m-%d')
                 helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
-                print("End date updated.")
+                print("\nEnd date updated.")
             else:
                 root = tk.Tk()
                 result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
@@ -221,73 +288,6 @@ class Event:
                 else:
                     tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
                 root.mainloop()
-
-    def __change_title(self, row):
-        self.title = input("--> Plan title: ")
-        if self.title == 'RETURN':
-            return
-        helper.modify_csv_value('data/eventTesting.csv', row, 'title', self.title)
-        print("Plan title updated.")
-
-    def __change_location(self, row):
-        country = []
-        country_data = helper.extract_data("data/countries.csv")['name']
-        for ele in country_data:
-            country.append(ele.lower())
-        while len(self.location) == 0 and self.location not in country:
-            self.location = input("--> Location(country): ").lower()
-            if self.location == 'RETURN':
-                return
-            if self.location not in country:
-                print("Invalid country name entered")
-                self.location = ''
-                continue
-        helper.modify_csv_value('data/eventTesting.csv', row, 'location', self.location)
-        print("Location updated.")
-
-    def __change_description(self, row):
-        """Option for users to change the description of the event
-        in case they made a mistake or the situation escalates etc"""
-        self.description = input("--> Description: ")
-        if self.description == 'RETURN':
-            return
-        helper.modify_csv_value('data/eventTesting.csv', row, 'description', self.description)
-        print("Description updated.")
-
-    def __change_no_camp(self, row):
-        #### what's the relationship between camp and event?
-        pass
-
-    def __change_start_date(self, row):
-        """Should this be an option? What would be the implications of this?"""
-        #### maybe when the start date is a day in the future, and the user wants to adjust the schedule
-        #### Can the start date of an event that has already been started be changed?
-        date_format = '%d/%m/%Y'
-        df = pd.read_csv('data/eventTesting.csv')
-        self.start_date = datetime.datetime.strptime(df.loc[row]['startDate'], '%Y-%m-%d')
-        if self.start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == True:
-            print("This event has started, the start date cannot be changed.")
-            return
-        elif self.start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == False:
-            print("This event has been closed.")
-            return
-        else:
-            self.start_date = ''
-
-        while self.start_date == '':
-            try:
-                self.start_date = input("--> Start date (format dd/mm/yy): ")
-                if self.start_date == 'RETURN':
-                    return
-                self.start_date = datetime.datetime.strptime(self.start_date, date_format)
-            except ValueError:
-                print("Invalid date format entered.")
-                self.start_date = ''
-                continue
-        formatted_start_date = self.start_date.strftime('%Y-%m-%d')
-        helper.modify_csv_value('data/eventTesting.csv', row, 'startDate', formatted_start_date)
-        self.update_ongoing()
-        print("Start date updated.")
 
     def display_humanitarian_plan_summary(self):
         """At any time of the humanitarian plan life cycle, the
@@ -304,31 +304,35 @@ class Event:
     def display_events(self, df):
         # a nice to have to help users navigate... maybe this can be useful later / for other purposes later ?
         # Iterating over each row of the event table, and getting the value from each column
-        for i in range(len(df)):
-            print(f'''
-            +--------------+-------------------+
-            | Event ID     | {df.iloc[i]['eid']}
-            +--------------+-------------------+
-            | Ongoing?     | {df.iloc[i]['ongoing']}
-            +--------------+-------------------+
-            | Title        | {df.iloc[i]['title']}
-            +--------------+-------------------+
-            | Location     | {df.iloc[i]['location']}
-            +--------------+-------------------+
-            | Description  | {df.iloc[i]['description']}
-            +--------------+-------------------+
-            | # of Camps   | {df.iloc[i]['no_camp']}
-            +--------------+-------------------+
-            | Start Date   | {df.iloc[i]['startDate']}
-            +--------------+-------------------+
-            | End Date     | {df.iloc[i]['endDate']}
-            +--------------+-------------------+
-            ************************************
-            ''')
+        # for i in range(len(df)):
+        #     print(f'''
+        #     +--------------+-------------------+
+        #     | Event ID     | {df.iloc[i]['eid']}
+        #     +--------------+-------------------+
+        #     | Ongoing?     | {df.iloc[i]['ongoing']}
+        #     +--------------+-------------------+
+        #     | Title        | {df.iloc[i]['title']}
+        #     +--------------+-------------------+
+        #     | Location     | {df.iloc[i]['location']}
+        #     +--------------+-------------------+
+        #     | Description  | {df.iloc[i]['description']}
+        #     +--------------+-------------------+
+        #     | # of Camps   | {df.iloc[i]['no_camp']}
+        #     +--------------+-------------------+
+        #     | Start Date   | {df.iloc[i]['startDate']}
+        #     +--------------+-------------------+
+        #     | End Date     | {df.iloc[i]['endDate']}
+        #     +--------------+-------------------+
+        #     ************************************
+        #     ''')
 
-    # I'm not sure whether the ongoing status will change with the time going
+        ### A more concise representation
+        table_str = df.to_markdown(index=False)
+        print("\n" + table_str)
+
     # maybe we can update the 'ongoing' in csv file for each time we run this app
     # by comparing the start and end date with the current date
+    # so that the ongoing status will change with the time going
     @staticmethod
     def update_ongoing():
         event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
