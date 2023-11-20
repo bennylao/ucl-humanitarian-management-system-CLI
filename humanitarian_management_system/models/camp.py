@@ -10,7 +10,7 @@ class Camp:
       how many are vaccinated, how many need extra medical attention (ie doctors) etc."""
     total_number = 0
     camp_data = []
-
+    # Is  camp data the same as list of camp names? Need for resources
     # list_of_camp_names = []
 
     def __init__(self, location, population, capacity, is_camp_available=True):
@@ -19,6 +19,7 @@ class Camp:
         # option to make the camp unavailable for whatever reason (e.g. it's flooded or infected)
         # by disease and so other refugees shouldn't be added to that camp
         # Location should be a COUNTRY only - for simplicity ?
+        self.current_resource_amount = current_resource_amount
         self.location = location
         self.capacity = capacity
         self.population = population
@@ -29,6 +30,7 @@ class Camp:
         # Camp.list_of_camp_names.append(name)
 
         # Need to think about other methods which might be needed in this class?
+
 
     def pass_camp_info(self, select_index, campID):
         country = extract_data("data/eventTesting.csv", "location")

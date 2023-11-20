@@ -12,7 +12,7 @@ class Resource:
     list_of_resource_categories = []
 
     """A class which tracks all generic attributes of any resource, e.g.:
-    total number initially available, total number handed out, total number left. Could have a method
+    total number available, total number handed out, total number left. Could have a method
     which alerts volunteer/admin when resource is running out (e.g last 10%)"""
 
     # OR alternative: have volunteer select from a dropdown list of categories which their resource fits in to?
@@ -70,6 +70,11 @@ class Resource:
         #     dictionary_of_available_resources_and_amounts[self.resource_name] = self.initial_amount_available
 
 
+    def add_resource(self):
+        """Method to call when we are distributing a resource so that we update the camp figures"""
+        # Shouold this be in camp file?
+        pass
+
 
     def distribute_resource(self):
         """Method to take into account the number of refugees in a camp and the total amount of the resource
@@ -98,7 +103,7 @@ class Resource:
         average_per_refugee = amount / total_refugees if total_refugees > 0 else 0
         total_current_resources = sum(camp.current_resource_amount for camp in camps)
 
-        for camp in Camp.list_of_camp_names:
+        for camp in Camp.camp_data:
             # Calculate how much to distribute to this camp
             difference = max(0, average_per_refugee - camp.current_resource_amount)
 
@@ -131,6 +136,8 @@ class Resource:
         for camp in camps:
              amount = float(input("Enter amount for {}: ".format(camp)))
             # SOme logic to update teh amount of this resource in the camps!
+
+            camp.add_resource()
         pass
 
 
@@ -138,20 +145,21 @@ class Resource:
 
         self.resource_report()
         #    Display resource running out warning if applicable by calling below method
-        self.resource_running_out()
+        # self.resource_running_out()
 
 
-    def add_more_resource(self, amount):
-        """Method to add more to the total amount of the resource left currently, therefore we can distribute
-        more."""
-        #     If the amount that is added is large enough that it is greater than the initial amount available,
-        #     then we should update the inital amount available so that our resource running out flag is accurate
-        self.amount_left += amount
-        if self.amount_left > self.initial_amount_available:
-            self.initial_amount_available = self.amount_left
-        #     update the dictionary with overview of resources available
-        self.resource_report()
+    # def add_more_resource(self, amount):
+    # Is this needed if we distribute resources immediately?
+    #     """Method to add more to the total amount of the resource left currently, therefore we can distribute
+    #     more."""
+    #     #     If the amount that is added is large enough that it is greater than the initial amount available,
+    #     #     then we should update the inital amount available so that our resource running out flag is accurate
+    #     self.amount_left += amount
+    #     if self.amount_left > self.initial_amount_available:
+    #         self.initial_amount_available = self.amount_left
+    #     #     update the dictionary with overview of resources available
+    #     self.resource_report()
 
-    def resource_running_out(self):
-        if self.amount_left < (self.initial_amount_available * 0.1):
-            print("Warning: This resource is running low. You only have 10% left.")
+    # def resource_running_out(self):
+    #     if self.amount_left < (self.initial_amount_available * 0.1):
+    #         print("Warning: This resource is running low. You only have 10% left.")
