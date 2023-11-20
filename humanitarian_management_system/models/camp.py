@@ -42,10 +42,8 @@ class Camp:
         no_camp = int(extract_data("data/eventTesting.csv", "no_camp").iloc[select_index-1])
         no_camp += 1
 
-        Camp.camp_data = [
-            [campID, eventID, result[0], self.capacity, 0]]
-        camp_df = pd.DataFrame(Camp.camp_data,
-                               columns=['campID', 'eventID', 'countryID', 'capacity', 'currentPopulation'])
+        Camp.camp_data = [[campID, eventID, result[0], self.capacity, 0]]
+        camp_df = pd.DataFrame(Camp.camp_data, columns=['campID', 'eventID', 'countryID', 'capacity', 'currentPopulation'])
         with open('data/camp.csv', 'a') as f:
             camp_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 

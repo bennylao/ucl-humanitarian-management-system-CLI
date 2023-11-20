@@ -1,8 +1,8 @@
 from humanitarian_management_system.helper import (extract_data, validate_event_input, validate_registration,
                                                    validate_user_selection, validate_camp_input)
-from humanitarian_management_system.models import User, Volunteer, Event, Camp
+from humanitarian_management_system.models import User, Volunteer, Event, Camp, ResourceTest
 from humanitarian_management_system.views import (StartupView, InstructionView, LoginView, AdminView, CampView,
-                                                  VolunteerView)
+                                                  VolunteerView, VolView)
 from pathlib import Path
 import pandas as pd
 
@@ -129,11 +129,11 @@ class Controller:
         if user_selection == "1":
             self.create_camp()
         if user_selection == "2":
-            pass
+            self.resource_main()
         if user_selection == "3":
             pass
         if user_selection == "4":
-            pass
+            return
         if user_selection == "x":
             exit()
 
@@ -156,14 +156,20 @@ class Controller:
             endDate = extract_data("data/eventTesting.csv", 'endDate').iloc[i]
 
             print(f'''
-            | {id}  | {title}| {location} | {description} | {endDate} |
+            | index: {id}  | title: {title}| country: {location} | description: {description} | end date: {endDate} |
             ''')
         # validate input for user select index
         while True:
-            select_index = int(input("\nindex: "))
-            if (select_index - 1) not in active_index:
-                print("Invalid index entered!")
-                continue
+            select_index = input("\nindex: ")
+            try:
+                if (int(select_index) - 1) not in active_index:
+                    print("Invalid index entered!")
+                    continue
+            except:
+                return
+
+            if select_index == 'RETURN':
+                return
             else:
                 break
         InstructionView.camp_creation_message()
@@ -171,7 +177,82 @@ class Controller:
         camp_info = validate_camp_input()
         if camp_info is not None:
             c = Camp('', '', camp_info[0])
-            c.pass_camp_info(select_index, camp_info[1])
+            c.pass_camp_info(int(select_index), camp_info[1])
             print("Camp created.")
         else:
             self.startup()
+
+    def resource_main(self):
+        InstructionView.resource_main_message()
+        while True:
+            user_selection = input("\nAllocation mode: ")
+
+            if user_selection == '1':
+                self.man_resource()
+            if user_selection == '2':
+                self.auto_resource()
+                return
+            if user_selection == 'RETURN':
+                return
+            else:
+                print("Invalid mode option entered!")
+                continue
+
+
+
+    def man_resource(self):
+        pass
+
+    def auto_resource(self):
+        InstructionView.auto_resource_message()
+        csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+        df = pd.read_csv(csv_path)
+        # ensure we only display camp(s) that are part of an active plan
+        data = extract_data("data/eventTesting.csv", ['ongoing', 'eid'])
+        active_id = []
+        index = []
+
+        for i in range(len(data)):
+            if data['ongoing'].iloc[i]:
+                active_id.append(data['eid'].iloc[i])
+
+        for i in active_id:
+            camp_id = int(df.loc[df['eventID'] == i]['campID'].tolist()[0])
+            capacity = int(df.loc[df['eventID'] == i]['capacity'].tolist()[0])
+            pop = int(df.loc[df['eventID'] == i]['currentPopulation'].tolist()[0])
+            index.append(camp_id)
+
+            print(f'''
+                | index: {camp_id}  | capacity: {capacity}| Current population: {pop} |
+                ''')
+
+        while True:
+            select_index = int(input("\nindex: "))
+            if select_index not in index:
+                print("invalid index option entered!")
+                continue
+
+            if select_index == 'RETURN':
+                return
+            else:
+                break
+        select_pop = df.loc[df['eventID'] == select_index]['currentPopulation'].tolist()[0]
+
+        r = ResourceTest(select_index, select_pop, 0)
+        r.calculate_resource()
+        print("Auto resource allocation completed")
+
+    def vol_main(self):
+        InstructionView.vol_main_message()
+        VolView.display_vol_menu()
+        user_selection = validate_user_selection(VolView.get_vol_options())
+        if user_selection == "1":
+            pass
+        if user_selection == "2":
+            pass
+        if user_selection == "3":
+            pass
+        if user_selection == "4":
+            return
+        if user_selection == "x":
+            exit()
