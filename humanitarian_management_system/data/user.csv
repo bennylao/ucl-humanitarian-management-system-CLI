@@ -5,3 +5,4 @@ userID,userType,isActive,username,password,firstName,lastName,email,phone,occupa
 3,volunteer,FALSE,volunteer3,111,volunteer3FirstName,volunteer3LastName,volunteer3Email,7701230987,volunteer3Occupation,3,7,3
 4,Volunteer,TRUE,volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,None,None,None
 4,Volunteer,TRUE,volunteer4,110,testfiveFirst,testfiveLast,example2@testing.com,7786471234,fiveJob,None,None,None
+5,Volunteer,True,yuan,123,yuan,Hu,ucab202@ucl.ac.uk,123,student,None,None,None
