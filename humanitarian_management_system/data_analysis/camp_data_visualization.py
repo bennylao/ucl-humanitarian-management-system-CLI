@@ -4,8 +4,10 @@ import pandas as pd
 import webbrowser
 import random
 import plotly.graph_objs as go
+from pathlib import Path
 
-camp_loc = pd.read_csv("../../../../PycharmProjects/data_analysis/location_data.csv")
+user_csv_path = Path(__file__).parents[1].joinpath("data/location_data.csv")
+camp_loc = pd.read_csv(user_csv_path)
 
 app = Dash(__name__)
 # Create a scatter map showing locations of camps
