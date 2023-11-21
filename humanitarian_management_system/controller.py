@@ -112,16 +112,12 @@ class Controller:
             e.pass_event_info(event_info[6])
             print("Event created.")
         else:
-            self.startup()
+            return
 
     @staticmethod
     def edit_event():
         InstructionView.event_edit_message()
-        df = pd.read_csv('data/eventTesting.csv')
-        if df.empty:
-            print("\nNo events to edit.")
-        else:
-            Event.edit_event_info()
+        Event.edit_event_info()
 
     def camp_main(self):
         InstructionView.camp_main_message()
@@ -287,14 +283,3 @@ class Controller:
             return
         if user_selection == 'x':
             exit()
-
-
-
-
-
-
-
-
-
-
-

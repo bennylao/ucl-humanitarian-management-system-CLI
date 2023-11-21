@@ -63,9 +63,12 @@ class Event:
         """
         #### In this case, we can 'end an event' by edit this endDate
         df = pd.read_csv('data/eventTesting.csv')
-        filtered_df = df[df['ongoing'] == True]
+        if df.empty:
+            print("\nNo events to edit.")
+            return
+        filtered_df = df[(df['ongoing'] == True) | (pd.to_datetime(df['startDate']).dt.date > datetime.date.today())]
         if filtered_df.empty:
-            print("\nThere are no ongoing events to edit.")
+            print("\nAll the events are closed and cannot be edited.")
             return
 
         eid_to_edit = ''
@@ -151,22 +154,26 @@ class Event:
     def __change_no_camp(row):
         while True:
             try:
-                no_camp = input("\nCamp Number (positive integers separated by commas): ")
+                no_camp = input("\n--> Camp Number (positive integers separated by commas): ")
                 if no_camp == 'RETURN':
                     return
-                if no_camp == 'None':
-                    no_camp = None
-                    break
-                num_list = [int(num) for num in no_camp.split(',')]
-                if not all(num > 0 for num in num_list):
-                    ## Also no_camp cannot exceed the total number of camps
-                    ## Add it after camp.py finished.
-                    helper.modify_csv_value('data/eventTesting.csv', row, 'no_camp', no_camp)
+                elif no_camp == 'NONE':
+                    helper.modify_csv_value('data/eventTesting.csv', row, 'no_camp', None)
                     print("\nCamp number updated.")
                     break
                 else:
-                    print("\nInvalid camp number entered.")
-                    continue
+                    num_list = [int(num) for num in no_camp.split(',')]
+                    if all(num > 0 for num in num_list):
+                        ## Also no_camp cannot exceed the total number of camps
+                        ## Add it after camp.py finished.
+                        num_list = sorted(set(num_list))
+                        no_camp = ','.join(map(str, num_list))
+                        helper.modify_csv_value('data/eventTesting.csv', row, 'no_camp', no_camp)
+                        print("\nCamp number updated.")
+                        break
+                    else:
+                        print("\nInvalid camp number entered.")
+                        continue
             except ValueError:
                 print("\nInvalid camp number entered.")
                 continue
@@ -181,9 +188,6 @@ class Event:
         start_date = datetime.datetime.strptime(df.loc[row]['startDate'], '%Y-%m-%d')
         if start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == True:
             print("\nThis event has started, the start date cannot be changed.")
-            return
-        elif start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == False:
-            print("\nThis event has been closed.")
             return
         else:
             start_date = ''
@@ -200,7 +204,7 @@ class Event:
                 continue
         formatted_start_date = start_date.strftime('%Y-%m-%d')
         helper.modify_csv_value('data/eventTesting.csv', row, 'startDate', formatted_start_date)
-        update_ongoing()
+        Event.update_ongoing()
         print("\nStart date updated.")
 
     @staticmethod
@@ -216,46 +220,44 @@ class Event:
         # humanitarian plan must be closed in the system."
         df = pd.read_csv('data/eventTesting.csv')
         ########### Jess: OR MAYBE HAVE THIS AS ENDDATE LOWER THAN TODAY'S DATE? or some way to make sure we cannot reopen it, as per above...
-
-        #### cannot edit the end date of a closed event
-        if (bool(df.loc[row]['ongoing']) == False
-                and datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d').date() <= datetime.date.today()):
-            print("\nThis event has been closed.")
+        date_format = '%d/%m/%Y'
+        end_date = ''
+        while end_date == '':
+            try:
+                end_date = input("\n--> End date (format dd/mm/yy): ")
+                if end_date == 'RETURN':
+                    return
+                if end_date == 'NONE':
+                    helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', None)
+                    print("\nEnd date updated.")
+                    break
+                end_date = datetime.datetime.strptime(end_date, date_format)
+            except ValueError:
+                print("\nInvalid date format entered.")
+                end_date = ''
+                continue
+            if end_date <= datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d'):
+                print("\nEnd date has to be later than start date.")
+                end_date = ''
+                continue
+        if end_date.date() >= datetime.date.today():
+            ### if the updated end date is still in the future, then it is still just an update, not an actual closing of...
+            ### can probably make the below a bit cleaner but will deal w later
+            formatted_end_date = end_date.strftime('%Y-%m-%d')
+            helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
+            print("\nEnd date updated.")
         else:
-            date_format = '%d/%m/%Y'
-            end_date = ''
-            while end_date == '':
-                try:
-                    end_date = input("\n--> End date (format dd/mm/yy): ")
-                    if end_date == 'RETURN':
-                        return
-                    end_date = datetime.datetime.strptime(end_date, date_format)
-                except ValueError:
-                    print("\nInvalid date format entered.")
-                    end_date = ''
-                    continue
-                if end_date <= datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d'):
-                    print("\nEnd date has to be later than start date.")
-                    end_date = ''
-                    continue
-            if end_date.date() >= datetime.date.today():
-                ### if the updated end date is still in the future, then it is still just an update, not an actual closing of...
-                ### can probably make the below a bit cleaner but will deal w later
+            root = tk.Tk()
+            result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
+            if result == "yes":
+                ongoing = False  # set ongoing as false as the plan is no longer active
                 formatted_end_date = end_date.strftime('%Y-%m-%d')
                 helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
-                print("\nEnd date updated.")
+                helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', ongoing)
+                tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
             else:
-                root = tk.Tk()
-                result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
-                if result == "yes":
-                    ongoing = False  # set ongoing as false as the plan is no longer active
-                    formatted_end_date = end_date.strftime('%Y-%m-%d')
-                    helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
-                    helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', ongoing)
-                    tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
-                else:
-                    tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-                root.mainloop()
+                tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+            root.mainloop()
 
     def display_humanitarian_plan_summary(self):
         """At any time of the humanitarian plan life cycle, the
@@ -296,4 +298,3 @@ class Event:
                 helper.modify_csv_value(event_csv_path, series['eid']-1, 'ongoing', True)
             else:
                 helper.modify_csv_value(event_csv_path, series['eid']-1, 'ongoing', False)
-
