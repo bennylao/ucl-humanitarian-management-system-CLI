@@ -1,6 +1,7 @@
 import pandas as pd
+# from helper. import extract_data, modify_csv_value, modify_csv_pandas
 from pathlib import Path
-from humanitarian_management_system.helper import extract_data, modify_csv_value, modify_csv_pandas
+
 
 class Refugee:
     refugee_data = []
@@ -21,16 +22,41 @@ class Refugee:
         self.is_vaccinated = is_vaccinated
         # Refugee.total_number += 1
 
-    def pass_refugee_info(self, refugeeID, campID, firstName, lastName, dob, gender, familyID):
-        Refugee.refugee_data = [[refugeeID, campID, firstName, lastName, dob, gender, familyID]]
-        # ref_df = pd.DataFrame(Refugee.refugee_data, columns=['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'])
+    @classmethod
+    def add_refugee_from_user_input(cls):
+        """Method to add the information of a newly added refugee in our system to the csv file"""
+        refugeeID = input("Enter Refugee ID: ")
+        campID = input("Enterr Camp ID: ")
+        firstName = input("Enter First Name: ")
+        lastName = input("Enter Last Name: ")
+        dob = input("Enter Date of Birth (YYYY-MM-DD): ")
+        gender = input("Enter Gender: ")
+        familyID = input("EEnter Family ID: ")
+        medical_condition = input("Entere Medical Condition(Optional): ")
+        is_vaccinated = input("Is the refugee vaccinated? (True/False): ").lower
+        new_refugee = cls(refugeeID, campID, firstName, lastName, dob, gender, familyID, medical_condition, is_vaccinated)
+        cls.refugee_data.append(
+            [new_refugee.refugeeID, new_refugee.campID, new_refugee.firstName, new_refugee.lastName, new_refugee.dob,
+             new_refugee.gender, new_refugee.familyID])
         csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(csv_path)
-        # with open(csv_path, 'a') as f:
-        #     ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+        new_refugee_df = pd.DataFrame(cls.refugee_data, columns=['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'])
+        ref_df = pd.concat([ref_df, new_refugee_df], ignore_index=True)
+        ref_df.to_csv(csv_path, index=False)
 
-        modify_csv_pandas("data/refugee.csv", 'resourceID', int(resourceID),
-                          'total', new_stock )
+        print(ref_df)
+
+    # def pass_refugee_info(self, refugeeID, campID, firstName, lastName, dob, gender, familyID):
+    #     Refugee.refugee_data = [[refugeeID, campID, firstName, lastName, dob, gender, familyID]]
+    #     # ref_df = pd.DataFrame(Refugee.refugee_data, columns=['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'])
+    #     csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+    #     ref_df = pd.read_csv(csv_path)
+    #     # with open(csv_path, 'a') as f:
+    #     #     ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+    #     # print(ref_df)
+    #
+    #     # modify_csv_pandas("data/refugee.csv", 'resourceID', int(resourceID),
+    #     #                   'total', new_stock )
 
     def vaccinate_refugee(self):
         # How do we add logic here? Do we need to subtract one from the vaccines available
@@ -48,3 +74,6 @@ class Refugee:
         else:
             print("Sorry. That campID doesn't exist.")
             self.move_refugee()
+
+
+Refugee.add_refugee_from_user_input()
