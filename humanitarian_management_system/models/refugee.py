@@ -70,7 +70,14 @@ class Refugee:
         new_camp = input("Please enter the campID for the camp you wish to move this refugee to: ")
         df = pd.read_csv('camp.csv')
         if df['campID'].eq(new_camp).any():
-            self.associated_camp = new_camp
+
+            with open(csv_path, 'a') as f:
+                ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+        #Sorry. Couldn't work out how to use the helper method to actually update these bits for the campID of the refugee in CSV/pandas
+        #modify_csv_pandas(file_path, select_col, row_value, final_col, new_value)
+        # modify_csv_pandas("data/refugee.csv", 'campID', int(campID),
+        #     #                   'total', new_stock )
+        # modify_csv_value(file_path, row_index, column_name, new_value)
         else:
             print("Sorry. That campID doesn't exist.")
             self.move_refugee()
