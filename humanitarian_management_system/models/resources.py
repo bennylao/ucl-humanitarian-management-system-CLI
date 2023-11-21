@@ -23,7 +23,7 @@ class Resource:
     # dictionary_of_available_resources_and_amounts = {}
 
 
-    def __init__(self, resource_category):
+    def __init__(self):
        # Should resource category be here or should there be a seperate method? confused...
        self.resource_category = resource_category
        if self.resource_category.lower() not in Resource.list_of_resource_categories:
