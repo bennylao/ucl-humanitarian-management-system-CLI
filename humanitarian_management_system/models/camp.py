@@ -30,22 +30,27 @@ class Camp:
 
         # Need to think about other methods which might be needed in this class?
 
+    def pass_camp_info(self, select_index, camp_id):
+        """if user choose to add a """
 
-    def pass_camp_info(self, select_index, campID):
+
+
+
         country = extract_data("data/eventTesting.csv", "location")
+        # geo_data = extract_data("data/eventTesting.csv","")
         csv_path = Path(__file__).parents[1].joinpath("data/countries.csv")
         df = pd.read_csv(csv_path)
         # find country id and event id by index
         result = df.loc[df["name"] == capitalize(country.iloc[select_index-1])]['country'].tolist()
-        eventID = int(extract_data("data/eventTesting.csv", "eid").iloc[select_index-1])
+        event_id = int(extract_data("data/eventTesting.csv", "eid").iloc[select_index-1])
 
         # keep track of existing camp num of a particular event
         no_camp = int(extract_data("data/eventTesting.csv", "no_camp").iloc[select_index-1])
         no_camp += 1
 
-        Camp.camp_data = [[campID, eventID, result[0], self.capacity, self.health_risk, 0, 0]]
+        Camp.camp_data = [[camp_id, event_id, result[0], self.capacity, self.health_risk, 0, 0, 0, self.is_camp_available]]
         camp_df = pd.DataFrame(Camp.camp_data, columns=['campID', 'eventID', 'countryID', 'capacity', 'healthRisk',
-                                                        'volunteerPop', 'refugeePop', 'currentPopulation'])
+                                                        'volunteerPop', 'refugeePop', 'currentPopulation', 'status'])
         with open('data/camp.csv', 'a') as f:
             camp_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
