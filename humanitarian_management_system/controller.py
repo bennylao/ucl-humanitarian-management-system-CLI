@@ -129,11 +129,18 @@ class Controller:
         user_selection = validate_user_selection(CampView.get_camp_options())
         if user_selection == "1":
             self.create_camp()
+
         if user_selection == "2":
-            self.resource_main()
+            self.delete_camp()
+
         if user_selection == "3":
             pass
+            #self.edit_camp()
+
         if user_selection == "4":
+            self.resource_main()
+
+        if user_selection == "5":
             return
         if user_selection == "x":
             exit()
@@ -181,6 +188,16 @@ class Controller:
             print("Camp created.")
         else:
             self.startup()
+
+
+    def delete_camp(self):
+        pass
+
+
+
+
+
+
 
     def resource_main(self):
         InstructionView.resource_main_message()
