@@ -1,1 +1,1 @@
-medicalInfoID,refugeeID,type,description,date
+medicalInfoID,refugeeID,description,isVaccinated,date

@@ -1,12 +1,12 @@
-resourceID,name,description,total
-1,Blankets,,146
-2,Clothing,,145
-3,Toys,,147
-4,Medicine,,145
-5,Vitamins,,146
-6,Food,,145
-7,Snacks,,147
-8,Toiletries,,146
-9,Water,,145
-10,Baby Supplies,,145
-11,General Tools & Supplies,,147
+resourceID,name,total
+1,Blankets,162
+2,Clothing,157
+3,Toys,168
+4,Medicine,157
+5,Vitamins,162
+6,Food,157
+7,Snacks,168
+8,Toiletries,162
+9,Water,157
+10,Baby Supplies,157
+11,General Tools & Supplies,168

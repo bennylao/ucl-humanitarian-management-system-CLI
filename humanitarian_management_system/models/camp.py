@@ -1,5 +1,5 @@
 from numpy.core.defchararray import capitalize
-from humanitarian_management_system.helper import extract_data, modify_csv_value
+from humanitarian_management_system.helper import extract_data, modify_csv_value, modify_csv_pandas
 import pandas as pd
 from pathlib import Path
 
@@ -13,16 +13,15 @@ class Camp:
     # Is  camp data the same as list of camp names? Need for resources
     # list_of_camp_names = []
 
-    def __init__(self, location, population, capacity, is_camp_available=True):
+    def __init__(self, capacity, health_risk, current_resource_amount, is_camp_available=True):
         # location should be simply a country for simplicity
         self.is_camp_available = is_camp_available
         # option to make the camp unavailable for whatever reason (e.g. it's flooded or infected)
         # by disease and so other refugees shouldn't be added to that camp
         # Location should be a COUNTRY only - for simplicity ?
         self.current_resource_amount = current_resource_amount
-        self.location = location
         self.capacity = capacity
-        self.population = population
+        self.health_risk = health_risk
 
         Camp.total_number += 1
         # since we have camp id perhaps name is not necessary? ie. first we refer to an event, from which we can refer
@@ -44,13 +43,14 @@ class Camp:
         no_camp = int(extract_data("data/eventTesting.csv", "no_camp").iloc[select_index-1])
         no_camp += 1
 
-        Camp.camp_data = [[campID, eventID, result[0], self.capacity, 0]]
-        camp_df = pd.DataFrame(Camp.camp_data, columns=['campID', 'eventID', 'countryID', 'capacity', 'currentPopulation'])
+        Camp.camp_data = [[campID, eventID, result[0], self.capacity, self.health_risk, 0, 0]]
+        camp_df = pd.DataFrame(Camp.camp_data, columns=['campID', 'eventID', 'countryID', 'capacity', 'healthRisk',
+                                                        'volunteerPop', 'refugeePop', 'currentPopulation'])
         with open('data/camp.csv', 'a') as f:
             camp_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
-        # update camp num of a particular event via linqing's helper function
-        modify_csv_value("data/eventTesting.csv", select_index-1, "no_camp", no_camp)
+        # update camp num for a particular event
+        modify_csv_pandas("data/eventTesting.csv", 'eid', select_index, 'no_camp', int(no_camp))
 
     def __str__(self):
         """

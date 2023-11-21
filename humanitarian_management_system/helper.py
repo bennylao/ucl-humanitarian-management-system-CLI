@@ -199,7 +199,43 @@ def validate_camp_input():
         else:
             break
 
-    return capacity, campID
+    while True:
+        risk = input("\nHealth risk level(low or high): ")
+        if capacity == 'RETURN':
+            return
+        elif risk != 'low' or risk != 'high':
+            print("Must enter low or high")
+            continue
+        else:
+            break
+
+    return capacity, campID, risk
+
+
+def validate_join():
+    index = extract_data("data/roleType.csv", "roleID").tolist()
+    role = extract_data("data/roleType.csv", "name")
+
+    print("Please select a camp role by its index.")
+    for i in index[1:]:
+        print(f''' index: {i} | {role.iloc[i]} ''')
+    while True:
+        user_input = input("\nIndex: ")
+        if int(user_input) not in index[1:]:
+            print("Invalid index option entered!")
+            continue
+        if user_input == "RETURN":
+            return
+        else:
+            break
+    return user_input
+
+
+def modify_csv_pandas(file_path, select_col, row_value, final_col, new_value):
+    csv_path = Path(__file__).parents[0].joinpath(file_path)
+    df = pd.read_csv(csv_path)
+    i = df.index[df[select_col] == row_value].tolist()[0]
+    modify_csv_value(csv_path, i, final_col, new_value)
 
 
 def modify_csv_value(file_path, row_index, column_name, new_value):
@@ -218,3 +254,48 @@ def extract_data(csv, col):
     user_csv_path = Path(__file__).parents[0].joinpath(csv)
     df = pd.read_csv(user_csv_path)
     return df[col]
+
+
+def extract_active_event():
+    csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    df = pd.read_csv(csv_path)
+    # ensure we only display camp(s) that are part of an active plan
+    data = extract_data("data/eventTesting.csv", ['ongoing', 'eid'])
+    active_id = []
+
+    for i in range(len(data)):
+        if data['ongoing'].iloc[i]:
+            active_id.append(data['eid'].iloc[i])
+
+    return active_id, df
+
+
+def display_camp_list():
+    index = []
+
+    active_id = extract_active_event()[0]
+    df = extract_active_event()[1]
+    csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+    df_e = pd.read_csv(csv_path)
+
+    if len(active_id) == 0:
+        print("No relevant camps to select from")
+        return
+
+    for i in active_id:
+        camp_id = df.loc[df['eventID'] == i]['campID'].tolist()
+        for j in camp_id:
+            capacity = df.loc[df['campID'] == j]['capacity'].tolist()[0]
+            r_pop = df.loc[df['campID'] == j]['refugeePop'].tolist()[0]
+            health_risk = df.loc[df['campID'] == j]['healthRisk'].tolist()[0]
+            plan_title = df_e.loc[df_e['eid'] == i]['title'].tolist()[0]
+            description = df_e.loc[df_e['eid'] == i]['description'].tolist()[0]
+            location = df_e.loc[df_e['eid'] == i]['location'].tolist()[0]
+            end_date = df_e.loc[df_e['eid'] == i]['endDate'].tolist()[0]
+            index.append(j)
+
+            print(f'''
+                        * Index: {j}  | Health risk level: {health_risk} | Plan title: {plan_title} | description: {description} 
+                        | location: {location} | Capacity: {capacity} | Refugee population: {r_pop} | End date: {end_date} * ''')
+
+    return index

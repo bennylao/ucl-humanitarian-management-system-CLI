@@ -25,8 +25,9 @@ class CampView:
     camp_menu = {
         "1": "Add camp",
         "2": "Resources allocation",
-        "3": "Edit camp",
-        "4": "Return to previous page",
+        "3": "Edit camp profile",
+        "4": "Remove refugee(s)",
+        "5": "Return to previous page",
         "x": "Exit the system"
     }
 

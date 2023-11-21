@@ -1,10 +1,9 @@
 class VolunteerView:
+
     vol_menu = {
-        "1": "Create refugee profile",
-        "2": "Join camp",
-        "3": "Edit personal account",
-        "4": "Edit camp profile",
-        "5": "Edit refugee profile",
+        "1": "Join/change camp",
+        "2": "Edit personal account",
+        "3": "Camp management",
         "6": "Return to previous page",
         "x": "Exit the system"
     }
@@ -18,3 +17,25 @@ class VolunteerView:
     @classmethod
     def get_vol_options(cls):
         return cls.vol_menu.keys()
+
+class CampViewV:
+    camp_menu = {
+        "1": "Add refugee",
+        "2": "Resources allocation",
+        "3": "Edit camp profile",
+        "4": "Return to previous page",
+        "x": "Exit the system"
+    }
+
+    @classmethod
+    def display_camp_menu(cls):
+        print("")
+        for key, value in cls.camp_menu.items():
+            print(f"[ {key} ] {value}")
+
+    @classmethod
+    def get_camp_options(cls):
+        return cls.camp_menu.keys()
+
+
+

@@ -1,1 +1,2 @@
-medicalInfoTypeID,description
+medicalInfoTypeID,condition,criticalLvl
+1,Heathy ,0

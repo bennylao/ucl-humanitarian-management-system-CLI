@@ -1,5 +1,6 @@
 #Martha: Question: are we to assume that if someone adds a resource, it will be
-# immediately distributed across camps?
+# immediately distributed across camps, on the assumption
+#that we probably won't want volunteers to just be storing resources ?
 #This influences the logic of distribution quite a lot.
 #E.g. amount left will only be amount left per camp.
 
@@ -71,7 +72,7 @@ class Resource:
 
     def add_resource(self):
         """Method to call when we are distributing a resource so that we update the camp figures"""
-        # Should this be in camp file?
+        # Shouold this be in camp file?
         pass
 
 
@@ -105,6 +106,7 @@ class Resource:
         for camp in Camp.camp_data:
             # Calculate how much to distribute to this camp
             difference = max(0, average_per_refugee - camp.current_resource_amount)
+
             # Calculate the proportional share based on the difference
             proportional_share = (difference / total_current_resources) * amount
 
@@ -132,18 +134,15 @@ class Resource:
         camps = input("Enter the names of the camps that you will be allocating this resource to (comma-separated): ").split(',')
         # Need some logic to make sure non comma separated list doesn't break the code. Or use above method? Maybe better
         for camp in camps:
-            if camp in Camp.camp_data:
-                amount = float(input("Enter amount for {}: ".format(camp)))
+             amount = float(input("Enter amount for {}: ".format(camp)))
             # SOme logic to update teh amount of this resource in the camps!
-            camp.current_resource_amount += amount
-            else:
-                print("Sorry, that camp doesn't exist in this plan. ")
-                try_again = input(("Do you want to add another camp instead? Type Y for yes or N for no: "))
-                if try_again == 'Y' or try_again == 'y':
-                    self.distribute_resource_specific_camps()
-                elif try_again == 'N' or try_again == 'n':
-                    print("Okay! Let's continue on with the other camps.")
-                    continue
+
+            # camp.add_resource()
+        pass
+
+
+
+
         self.resource_report()
         #    Display resource running out warning if applicable by calling below method
         # self.resource_running_out()

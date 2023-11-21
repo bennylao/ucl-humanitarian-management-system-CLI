@@ -31,7 +31,6 @@ class InstructionView:
               "Please select an option from the following.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
 
-
     @staticmethod
     def camp_init_message():
         print("\n========================================\n"
@@ -82,3 +81,13 @@ class InstructionView:
               "========================================\n"
               "Please select a camp by its index.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
+
+    @staticmethod
+    def join_camp_message():
+        print("\n========================================\n"
+              "            Join/change camp\n"
+              "========================================\n"
+              "Please select a camp by its index to join\n"
+              "Or to change your current camp to that instead.\n"
+              "Or enter 'RETURN' to go back to admin menu page.")
+

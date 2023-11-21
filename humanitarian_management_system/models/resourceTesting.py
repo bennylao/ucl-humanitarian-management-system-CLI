@@ -1,5 +1,5 @@
 import pandas as pd
-from humanitarian_management_system.helper import extract_data, modify_csv_value
+from humanitarian_management_system.helper import extract_data, modify_csv_value, modify_csv_pandas
 from pathlib import Path
 
 
@@ -27,7 +27,7 @@ class ResourceTest():
                 active_id.append(data['eid'].iloc[i])
 
         for i in active_id:
-            self.total_pop += int(df.loc[df['eventID'] == i]['currentPopulation'].tolist()[0])
+            self.total_pop += int(df.loc[df['eventID'] == i]['refugeePop'].tolist()[0])
 
         # extract info related to resource item and its current allocation to camp
         csv_path1 = Path(__file__).parents[1].joinpath("data/resourceType.csv")
@@ -47,31 +47,31 @@ class ResourceTest():
 
             if priority == 1:
                 try:
-                    set_amount = (0.5 * stock) // ((self.total_pop - self.pop) + (0.1 * current_amount))
+                    set_amount = (0.8 * stock + 0.6 * self.pop) // ((0.3 * self.total_pop) + (0.2 * current_amount))
                     new_stock = int(stock) - int(set_amount)
                     self.pass_resource_info(set_amount, self.campID, i, new_stock)
                 except:
-                    set_amount = (0.5 * stock)
+                    set_amount = (0.8 * stock + 0.6 * self.pop)
                     new_stock = int(stock) - int(set_amount)
                     self.pass_resource_info(set_amount, self.campID, i, new_stock)
 
             if priority == 2:
                 try:
-                    set_amount = (0.4 * stock) // ((self.total_pop - self.pop) + (0.1 * current_amount))
+                    set_amount = (0.7 * stock + 0.6 * self.pop) // ((0.3 * self.total_pop) + (0.2 * current_amount))
                     new_stock = int(stock) - int(set_amount)
                     self.pass_resource_info(set_amount, self.campID, i, new_stock)
                 except:
-                    set_amount = (0.4 * stock)
+                    set_amount = (0.7 * stock + 0.6 * self.pop)
                     new_stock = int(stock) - int(set_amount)
                     self.pass_resource_info(set_amount, self.campID, i, new_stock)
 
             if priority == 3:
                 try:
-                    set_amount = (0.3 * stock) // ((self.total_pop - self.pop) + (0.1 * current_amount))
+                    set_amount = (0.6 * stock + 0.6 * self.pop) // ((0.3 * self.total_pop) + (0.2 * current_amount))
                     new_stock = int(stock) - int(set_amount)
                     self.pass_resource_info(set_amount, self.campID, i, new_stock)
                 except:
-                    set_amount = (0.3 * stock)
+                    set_amount = (0.6 * stock + 0.6 * self.pop)
                     new_stock = int(stock) - int(set_amount)
                     self.pass_resource_info(set_amount, self.campID, i, new_stock)
 
@@ -85,4 +85,5 @@ class ResourceTest():
         with open(p1, 'a') as f:
             res_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
-        modify_csv_value(p2, int(resourceID) - 1, "total", new_stock)
+        modify_csv_pandas("data/resourceStock.csv", 'resourceID', int(resourceID),
+                          'total', new_stock )

@@ -1,10 +1,12 @@
 from humanitarian_management_system.helper import (extract_data, validate_event_input, validate_registration,
-                                                   validate_user_selection, validate_camp_input)
+                                                   validate_user_selection, validate_camp_input, extract_active_event,
+                                                   display_camp_list, validate_join)
 from humanitarian_management_system.models import User, Volunteer, Event, Camp, ResourceTest
 from humanitarian_management_system.views import (StartupView, InstructionView, LoginView, AdminView, CampView,
-                                                  VolunteerView, VolView)
+                                                  VolunteerView, VolView, CampViewV)
 from pathlib import Path
 import pandas as pd
+import math
 
 
 class Controller:
@@ -42,7 +44,7 @@ class Controller:
         df = pd.read_csv(user_csv_path)
         i = df.index[df['username'] == username].tolist()
         t = df.iloc[i]['userType'].tolist()
-        # redirect based on validation
+        # redirect based on validation and usertype - admin or volunteer
         while is_login_valid:
             if t[0] == 'admin':
                 AdminView.display_admin_menu()
@@ -69,11 +71,11 @@ class Controller:
                 VolunteerView.display_vol_menu()
                 user_selection = validate_user_selection(VolunteerView.get_vol_options())
                 if user_selection == "1":
-                    pass
+                    self.join_camp(username)
                 if user_selection == "2":
                     pass
                 if user_selection == "3":
-                    pass
+                    self.camp_man()
                 if user_selection == "4":
                     pass
                 if user_selection == "5":
@@ -119,7 +121,7 @@ class Controller:
         if df.empty:
             print("\nNo events to edit.")
         else:
-            e = Event('','','','','')
+            e = Event('', '', '', '', '')
             e.edit_event_info()
 
     def camp_main(self):
@@ -141,23 +143,22 @@ class Controller:
         InstructionView.camp_init_message()
         # print out selection list, perhaps someone could improve its presentation, coz i'm really bad at this :P
         # only display active event(s) to user
-        data_arr = extract_data("data/eventTesting.csv", "ongoing")
-        active_index = []
+        active_index = extract_active_event()[0]
 
-        for i in range(len(data_arr)):
-            if data_arr[i]:
-                active_index.append(i)
+        if len(active_index) == 0:
+            print("No relevant events to select from")
+            return
 
         for i in active_index:
-            id = extract_data("data/eventTesting.csv", 'eid').iloc[i]
-            title = extract_data("data/eventTesting.csv", 'title').iloc[i]
-            location = extract_data("data/eventTesting.csv", 'location').iloc[i]
-            description = extract_data("data/eventTesting.csv", 'description').iloc[i]
-            endDate = extract_data("data/eventTesting.csv", 'endDate').iloc[i]
+            id = extract_data("data/eventTesting.csv", 'eid').iloc[i - 1]
+            title = extract_data("data/eventTesting.csv", 'title').iloc[i - 1]
+            location = extract_data("data/eventTesting.csv", 'location').iloc[i - 1]
+            description = extract_data("data/eventTesting.csv", 'description').iloc[i - 1]
+            endDate = extract_data("data/eventTesting.csv", 'endDate').iloc[i - 1]
 
             print(f'''
-            | index: {id}  | title: {title}| country: {location} | description: {description} | end date: {endDate} |
-            ''')
+            * index: {id}  | title: {title}| country: {location} | description: {description} | end date: {endDate} *
+            ''', end='')
         # validate input for user select index
         while True:
             select_index = input("\nindex: ")
@@ -176,7 +177,7 @@ class Controller:
         # prompt for user capacity input
         camp_info = validate_camp_input()
         if camp_info is not None:
-            c = Camp('', '', camp_info[0])
+            c = Camp(camp_info[0], camp_info[2], '')
             c.pass_camp_info(int(select_index), camp_info[1])
             print("Camp created.")
         else:
@@ -189,70 +190,95 @@ class Controller:
 
             if user_selection == '1':
                 self.man_resource()
-            if user_selection == '2':
+            elif user_selection == '2':
                 self.auto_resource()
-                return
-            if user_selection == 'RETURN':
-                return
             else:
                 print("Invalid mode option entered!")
                 continue
 
-
+            if user_selection == 'RETURN':
+                return
+            else:
+                break
 
     def man_resource(self):
         pass
 
     def auto_resource(self):
         InstructionView.auto_resource_message()
-        csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-        df = pd.read_csv(csv_path)
-        # ensure we only display camp(s) that are part of an active plan
-        data = extract_data("data/eventTesting.csv", ['ongoing', 'eid'])
-        active_id = []
-        index = []
-
-        for i in range(len(data)):
-            if data['ongoing'].iloc[i]:
-                active_id.append(data['eid'].iloc[i])
-
-        for i in active_id:
-            camp_id = int(df.loc[df['eventID'] == i]['campID'].tolist()[0])
-            capacity = int(df.loc[df['eventID'] == i]['capacity'].tolist()[0])
-            pop = int(df.loc[df['eventID'] == i]['currentPopulation'].tolist()[0])
-            index.append(camp_id)
-
-            print(f'''
-                | index: {camp_id}  | capacity: {capacity}| Current population: {pop} |
-                ''')
+        index = display_camp_list()
 
         while True:
             select_index = int(input("\nindex: "))
+
             if select_index not in index:
                 print("invalid index option entered!")
                 continue
-
-            if select_index == 'RETURN':
+            try:
+                if select_index == 'RETURN':
+                    return
+            except:
                 return
-            else:
-                break
-        select_pop = df.loc[df['eventID'] == select_index]['currentPopulation'].tolist()[0]
+            break
+
+        df = extract_active_event()[1]
+        select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
 
         r = ResourceTest(select_index, select_pop, 0)
         r.calculate_resource()
         print("Auto resource allocation completed")
 
-    def vol_main(self):
-        InstructionView.vol_main_message()
-        VolView.display_vol_menu()
-        user_selection = validate_user_selection(VolView.get_vol_options())
-        if user_selection == "1":
+    def join_camp(self, username):
+        csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+        df = pd.read_csv(csv_path)
+
+        InstructionView.join_camp_message()
+        index = display_camp_list()
+
+        while True:
+            select_index = int(input("\nindex: "))
+
+            if select_index not in index:
+                print("invalid index option entered!")
+                continue
+            try:
+                if select_index == 'RETURN':
+                    return
+            except:
+                return
+            break
+
+        event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
+        join_info = validate_join()
+        if join_info is not None:
+            v = Volunteer(username, '','','', '', '', '', join_info)
+            v.join_camp(event_id, select_index)
+        return
+
+
+    def camp_man(self):
+        InstructionView.camp_main_message()
+        CampViewV.display_camp_menu()
+
+        user_selection = validate_user_selection(CampViewV.get_camp_options())
+        if user_selection == '1':
             pass
-        if user_selection == "2":
+        if user_selection == '2':
+            self.resource_main()
+        if user_selection == '3':
             pass
-        if user_selection == "3":
-            pass
-        if user_selection == "4":
+        if user_selection == '4':
             return
-        if user_selection == "x":
+        if user_selection == 'x':
             exit()
+
+
+
+
+
+
+
+
+
+
+
