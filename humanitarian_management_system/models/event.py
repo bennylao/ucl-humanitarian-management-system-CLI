@@ -200,7 +200,7 @@ class Event:
                 continue
         formatted_start_date = start_date.strftime('%Y-%m-%d')
         helper.modify_csv_value('data/eventTesting.csv', row, 'startDate', formatted_start_date)
-        update_ongoing()
+        Event.update_ongoing()
         print("\nStart date updated.")
 
     @staticmethod
