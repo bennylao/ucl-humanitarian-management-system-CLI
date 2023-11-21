@@ -117,7 +117,6 @@ class Controller:
     @staticmethod
     def edit_event():
         InstructionView.event_edit_message()
-        df = pd.read_csv('data/eventTesting.csv')
         Event.edit_event_info()
 
     def camp_main(self):

@@ -298,4 +298,3 @@ class Event:
                 helper.modify_csv_value(event_csv_path, series['eid']-1, 'ongoing', True)
             else:
                 helper.modify_csv_value(event_csv_path, series['eid']-1, 'ongoing', False)
-

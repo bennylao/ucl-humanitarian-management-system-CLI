@@ -133,7 +133,7 @@ def validate_event_input():
         if location == 'RETURN':
             return
         elif location not in country:
-            print("Invalid country name entered")
+            print("Invalid country name entered.")
             continue
         else:
             break
