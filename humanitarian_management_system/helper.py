@@ -150,17 +150,20 @@ def validate_event_input():
             no_camp = input("\nCamp Number (positive integers separated by commas): ")
             if no_camp == 'RETURN':
                 return
-            if not no_camp:
+            elif no_camp == 'NONE':
                 no_camp = None
                 break
-            num_list = [int(num) for num in no_camp.split(',')]
-            if all(num > 0 for num in num_list):
-                ## Also no_camp cannot exceed the total number of camps
-                ## Add it after camp.py finished.
-                break
             else:
-                print("\nInvalid camp number entered.")
-                continue
+                num_list = [int(num) for num in no_camp.split(',')]
+                if all(num > 0 for num in num_list):
+                    ## Also no_camp cannot exceed the total number of camps
+                    ## Add it after camp.py finished.
+                    num_list = sorted(set(num_list))
+                    no_camp = ','.join(map(str, num_list))
+                    break
+                else:
+                    print("\nInvalid camp number entered.")
+                    continue
         except ValueError:
             print("\nInvalid camp number entered.")
             continue
@@ -173,26 +176,24 @@ def validate_event_input():
             start_date = datetime.datetime.strptime(start_date, date_format)
             break
         except ValueError:
-            print("Invalid date format entered.")
+            print("\nInvalid date format entered.")
             continue
 
-    # Maybe not every event has an known end date when it is created,
-    # that's why we need an end_event() function to end it or modify its end date.
     while True:
         try:
             end_date = input("\nEstimated end date (format dd/mm/yy): ")
             if end_date == 'RETURN':
                 return
-            if end_date == 'None':
+            if end_date == 'NONE':
                 end_date = None
                 break
             end_date = datetime.datetime.strptime(end_date, date_format)
             if end_date <= start_date:
-                print("End date has to be later than start date.")
+                print("\nEnd date has to be later than start date.")
                 continue
             break
         except ValueError:
-            print("Invalid date format entered.")
+            print("\nInvalid date format entered.")
             continue
 
     return [title, location, description, no_camp, start_date, end_date, eid]
