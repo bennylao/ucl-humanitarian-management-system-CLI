@@ -1,7 +1,3 @@
-# Create refugee profile for each refugee including their family. Each
-# refugee must be logged with: their camp identification, medical
-# condition, etc. Keep it simple, you can assume a family is a singular
-# entity, rather than their constituent members. <-- what does this mean?
 import pandas as pd
 from pathlib import Path
 from humanitarian_management_system.helper import extract_data, modify_csv_value, modify_csv_pandas
@@ -30,9 +26,8 @@ class Refugee:
         # ref_df = pd.DataFrame(Refugee.refugee_data, columns=['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'])
         csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(csv_path)
-        data = extract_data()
-        with open(csv_path, 'a') as f:
-            ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+        # with open(csv_path, 'a') as f:
+        #     ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
         modify_csv_pandas("data/refugee.csv", 'resourceID', int(resourceID),
                           'total', new_stock )
