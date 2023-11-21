@@ -147,6 +147,26 @@ def validate_event_input():
 
     while True:
         try:
+            no_camp = input("\nCamp Number (positive integers separated by commas): ")
+            if no_camp == 'RETURN':
+                return
+            if not no_camp:
+                no_camp = None
+                break
+            num_list = [int(num) for num in no_camp.split(',')]
+            if all(num > 0 for num in num_list):
+                ## Also no_camp cannot exceed the total number of camps
+                ## Add it after camp.py finished.
+                break
+            else:
+                print("\nInvalid camp number entered.")
+                continue
+        except ValueError:
+            print("\nInvalid camp number entered.")
+            continue
+
+    while True:
+        try:
             start_date = input("\nStart date (format dd/mm/yy): ")
             if start_date == 'RETURN':
                 return
@@ -175,7 +195,7 @@ def validate_event_input():
             print("Invalid date format entered.")
             continue
 
-    return [title, location, description, start_date, end_date, eid]
+    return [title, location, description, no_camp, start_date, end_date, eid]
 
 
 def validate_camp_input():

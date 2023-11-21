@@ -17,10 +17,11 @@ class Event:
     # id_arr = []
     event_data = []
 
-    def __init__(self, title, location, description, start_date, end_date, ongoing=True):
+    def __init__(self, title, location, description, no_camp, start_date, end_date, ongoing=True):
         self.title = title
         self.location = location
         self.description = description
+        self.no_camp = no_camp
         self.start_date = start_date
         self.end_date = end_date
         self.ongoing = ongoing
@@ -46,14 +47,15 @@ class Event:
             self.ongoing = False
 
         Event.event_data = [
-            [eid, self.ongoing, self.title, self.location, self.description, 0, self.start_date, self.end_date]]
+            [eid, self.ongoing, self.title, self.location, self.description, self.no_camp, self.start_date, self.end_date]]
         event_df = pd.DataFrame(Event.event_data,
                                 columns=['eid', 'ongoing', 'title', 'location', 'description', 'no_camp', 'startDate',
                                          'endDate'])
         with open('data/eventTesting.csv', 'a') as f:
             event_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
-    def edit_event_info(self):
+    @staticmethod
+    def edit_event_info():
         """
         To edit event information except eid.
         Recognize which event and which column need to be edited,
@@ -61,11 +63,16 @@ class Event:
         """
         #### In this case, we can 'end an event' by edit this endDate
         df = pd.read_csv('data/eventTesting.csv')
+        filtered_df = df[df['ongoing'] == True]
+        if filtered_df.empty:
+            print("\nThere are no ongoing events to edit.")
+            return
+
         eid_to_edit = ''
         row = -1
         while eid_to_edit == '':
             try:
-                self.display_events(df)
+                Event.display_events(filtered_df)
                 eid_to_edit = input('\n--> Enter the event ID to update:')
                 if eid_to_edit == 'RETURN':
                     return
@@ -90,86 +97,114 @@ class Event:
                 continue
 
         if what_to_edit == 'title':
-            self.__change_title(row)
+            Event.__change_title(row)
         elif what_to_edit == 'location':
-            self.__change_location(row)
+            Event.__change_location(row)
         elif what_to_edit == 'description':
-            self.__change_description(row)
+            Event.__change_description(row)
         elif what_to_edit == 'no_camp':
-            self.__change_no_camp(row)
+            Event.__change_no_camp(row)
         elif what_to_edit == 'startDate':
-            self.__change_start_date(row)
+            Event.__change_start_date(row)
         else:
-            self.__end_event(row)
+            Event.__end_event(row)
 
-    def __change_title(self, row):
-        self.title = input("\n--> Plan title: ")
-        if self.title == 'RETURN':
+    @staticmethod
+    def __change_title(row):
+        title = input("\n--> Plan title: ")
+        if title == 'RETURN':
             return
-        helper.modify_csv_value('data/eventTesting.csv', row, 'title', self.title)
+        helper.modify_csv_value('data/eventTesting.csv', row, 'title', title)
         print("\nPlan title updated.")
 
-    def __change_location(self, row):
+    @staticmethod
+    def __change_location(row):
         country = []
-        country_data = helper.extract_data("data/countries.csv")['name']
+        country_data = pd.read_csv("data/countries.csv")['name']
         for ele in country_data:
             country.append(ele.lower())
-        while len(self.location) == 0 and self.location not in country:
-            self.location = input("\n--> Location(country): ").lower()
-            if self.location == 'RETURN':
+        location = ''
+        for ele in country_data:
+            country.append(ele.lower())
+        while len(location) == 0 and location not in country:
+            location = input("\n--> Location(country): ").lower()
+            if location == 'RETURN':
                 return
-            if self.location not in country:
+            if location not in country:
                 print("\nInvalid country name entered")
-                self.location = ''
+                location = ''
                 continue
-        helper.modify_csv_value('data/eventTesting.csv', row, 'location', self.location)
+        helper.modify_csv_value('data/eventTesting.csv', row, 'location', location)
         print("\nLocation updated.")
 
-    def __change_description(self, row):
+    @staticmethod
+    def __change_description(row):
         """Option for users to change the description of the event
         in case they made a mistake or the situation escalates etc"""
-        self.description = input("\n--> Description: ")
-        if self.description == 'RETURN':
+        description = input("\n--> Description: ")
+        if description == 'RETURN':
             return
-        helper.modify_csv_value('data/eventTesting.csv', row, 'description', self.description)
+        helper.modify_csv_value('data/eventTesting.csv', row, 'description', description)
         print("\nDescription updated.")
 
-    def __change_no_camp(self, row):
-        #### what's the relationship between camp and event?
-        pass
+    @staticmethod
+    def __change_no_camp(row):
+        while True:
+            try:
+                no_camp = input("\nCamp Number (positive integers separated by commas): ")
+                if no_camp == 'RETURN':
+                    return
+                if no_camp == 'None':
+                    no_camp = None
+                    break
+                num_list = [int(num) for num in no_camp.split(',')]
+                if not all(num > 0 for num in num_list):
+                    ## Also no_camp cannot exceed the total number of camps
+                    ## Add it after camp.py finished.
+                    helper.modify_csv_value('data/eventTesting.csv', row, 'no_camp', no_camp)
+                    print("\nCamp number updated.")
+                    break
+                else:
+                    print("\nInvalid camp number entered.")
+                    continue
+            except ValueError:
+                print("\nInvalid camp number entered.")
+                continue
 
-    def __change_start_date(self, row):
+    @staticmethod
+    def __change_start_date(row):
         """Should this be an option? What would be the implications of this?"""
         #### maybe when the start date is a day in the future, and the user wants to adjust the schedule
         #### Can the start date of an event that has already been started be changed?
         date_format = '%d/%m/%Y'
         df = pd.read_csv('data/eventTesting.csv')
-        self.start_date = datetime.datetime.strptime(df.loc[row]['startDate'], '%Y-%m-%d')
-        if self.start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == True:
+        start_date = datetime.datetime.strptime(df.loc[row]['startDate'], '%Y-%m-%d')
+        if start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == True:
             print("\nThis event has started, the start date cannot be changed.")
             return
-        elif self.start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == False:
+        elif start_date.date() <= datetime.date.today() and bool(df.loc[row]['ongoing']) == False:
             print("\nThis event has been closed.")
             return
         else:
-            self.start_date = ''
+            start_date = ''
 
-        while self.start_date == '':
+        while start_date == '':
             try:
-                self.start_date = input("\n--> Start date (format dd/mm/yy): ")
-                if self.start_date == 'RETURN':
+                start_date = input("\n--> Start date (format dd/mm/yy): ")
+                if start_date == 'RETURN':
                     return
-                self.start_date = datetime.datetime.strptime(self.start_date, date_format)
+                start_date = datetime.datetime.strptime(start_date, date_format)
             except ValueError:
                 print("\nInvalid date format entered.")
-                self.start_date = ''
+                start_date = ''
                 continue
-        formatted_start_date = self.start_date.strftime('%Y-%m-%d')
+        formatted_start_date = start_date.strftime('%Y-%m-%d')
         helper.modify_csv_value('data/eventTesting.csv', row, 'startDate', formatted_start_date)
-        self.update_ongoing()
+        update_ongoing()
         print("\nStart date updated.")
 
-    def __end_event(self, row):
+    @staticmethod
+    def __end_event(row):
         """How do we prompt a user to be able to input that
         an event has ended? Should we have a small manual for
         the user which says the commands to enter to the command line
@@ -188,34 +223,35 @@ class Event:
             print("\nThis event has been closed.")
         else:
             date_format = '%d/%m/%Y'
-            while self.end_date == '':
+            end_date = ''
+            while end_date == '':
                 try:
-                    self.end_date = input("\n--> End date (format dd/mm/yy): ")
-                    if self.end_date == 'RETURN':
+                    end_date = input("\n--> End date (format dd/mm/yy): ")
+                    if end_date == 'RETURN':
                         return
-                    self.end_date = datetime.datetime.strptime(self.end_date, date_format)
+                    end_date = datetime.datetime.strptime(end_date, date_format)
                 except ValueError:
                     print("\nInvalid date format entered.")
-                    self.end_date = ''
+                    end_date = ''
                     continue
-                if self.end_date <= datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d'):
+                if end_date <= datetime.datetime.strptime(df['startDate'].loc[row], '%Y-%m-%d'):
                     print("\nEnd date has to be later than start date.")
-                    self.end_date = ''
+                    end_date = ''
                     continue
-            if self.end_date.date() >= datetime.date.today():
+            if end_date.date() >= datetime.date.today():
                 ### if the updated end date is still in the future, then it is still just an update, not an actual closing of...
                 ### can probably make the below a bit cleaner but will deal w later
-                formatted_end_date = self.end_date.strftime('%Y-%m-%d')
+                formatted_end_date = end_date.strftime('%Y-%m-%d')
                 helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
                 print("\nEnd date updated.")
             else:
                 root = tk.Tk()
                 result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
                 if result == "yes":
-                    self.ongoing = False  # set ongoing as false as the plan is no longer active
-                    formatted_end_date = self.end_date.strftime('%Y-%m-%d')
+                    ongoing = False  # set ongoing as false as the plan is no longer active
+                    formatted_end_date = end_date.strftime('%Y-%m-%d')
                     helper.modify_csv_value('data/eventTesting.csv', row, 'endDate', formatted_end_date)
-                    helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', self.ongoing)
+                    helper.modify_csv_value('data/eventTesting.csv', row, 'ongoing', ongoing)
                     tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
                 else:
                     tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
@@ -233,32 +269,8 @@ class Event:
         #       disaster can be in many different camps...
         pass
 
-    def display_events(self, df):
-        # a nice to have to help users navigate... maybe this can be useful later / for other purposes later ?
-        # Iterating over each row of the event table, and getting the value from each column
-        # for i in range(len(df)):
-        #     print(f'''
-        #     +--------------+-------------------+
-        #     | Event ID     | {df.iloc[i]['eid']}
-        #     +--------------+-------------------+
-        #     | Ongoing?     | {df.iloc[i]['ongoing']}
-        #     +--------------+-------------------+
-        #     | Title        | {df.iloc[i]['title']}
-        #     +--------------+-------------------+
-        #     | Location     | {df.iloc[i]['location']}
-        #     +--------------+-------------------+
-        #     | Description  | {df.iloc[i]['description']}
-        #     +--------------+-------------------+
-        #     | # of Camps   | {df.iloc[i]['no_camp']}
-        #     +--------------+-------------------+
-        #     | Start Date   | {df.iloc[i]['startDate']}
-        #     +--------------+-------------------+
-        #     | End Date     | {df.iloc[i]['endDate']}
-        #     +--------------+-------------------+
-        #     ************************************
-        #     ''')
-
-        ### A more concise representation
+    @staticmethod
+    def display_events(df):
         table_str = df.to_markdown(index=False)
         print("\n" + table_str)
 

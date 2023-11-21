@@ -108,8 +108,8 @@ class Controller:
         InstructionView.event_creation_message()
         event_info = validate_event_input()
         if event_info is not None:
-            e = Event(event_info[0], event_info[1], event_info[2], event_info[3], event_info[4])
-            e.pass_event_info(event_info[5])
+            e = Event(event_info[0], event_info[1], event_info[2], event_info[3], event_info[4], event_info[5])
+            e.pass_event_info(event_info[6])
             print("Event created.")
         else:
             self.startup()
@@ -121,8 +121,7 @@ class Controller:
         if df.empty:
             print("\nNo events to edit.")
         else:
-            e = Event('', '', '', '', '')
-            e.edit_event_info()
+            Event.edit_event_info()
 
     def camp_main(self):
         InstructionView.camp_main_message()
