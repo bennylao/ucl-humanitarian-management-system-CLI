@@ -271,6 +271,20 @@ def modify_csv_value(file_path, row_index, column_name, new_value):
         writer.writerows(rows)
 
 
+def matched_rows_csv(file, desired_column, desired_value, index):
+    """used to extract rows with specific value in a specific column"""
+    df = pd.read_csv(file)
+    if desired_column in df.columns.tolist():
+        if desired_value in df[desired_column].tolist():
+            dff = df[df[desired_column] == desired_value].set_index(index)
+            dff_sorted = dff.sort_index()
+            return dff_sorted, dff_sorted[index].tolist()
+        else:
+            return f"Value '{desired_value}' not found in the {desired_column}."
+    else:
+        return f"Column '{desired_column}' not found in the CSV file."
+
+
 def extract_data(csv, col):
     user_csv_path = Path(__file__).parents[0].joinpath(csv)
     df = pd.read_csv(user_csv_path)

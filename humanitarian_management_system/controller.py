@@ -1,6 +1,6 @@
 from humanitarian_management_system.helper import (extract_data, validate_event_input, validate_registration,
                                                    validate_user_selection, validate_camp_input, extract_active_event,
-                                                   display_camp_list, validate_join)
+                                                   display_camp_list, validate_join, matched_rows_csv)
 from humanitarian_management_system.models import User, Volunteer, Event, Camp, ResourceTest
 from humanitarian_management_system.views import (StartupView, InstructionView, LoginView, AdminView, CampView,
                                                   VolunteerView, VolView, CampViewV)
@@ -126,12 +126,12 @@ class Controller:
         if user_selection == "1":
             self.create_camp()
 
-        if user_selection == "2":
+        elif user_selection == "2":
             self.delete_camp()
 
         if user_selection == "3":
             pass
-            #self.edit_camp()
+            # self.edit_camp()
 
         if user_selection == "4":
             self.resource_main()
@@ -185,13 +185,43 @@ class Controller:
         else:
             self.startup()
 
-
     def delete_camp(self):
-        pass
+        """This part of the code is to delete the camp from the camp.csv"""
+        InstructionView.camp_init_message()
+        # print out selection list, perhaps someone could improve its presentation, coz i'm really bad at this :P
+        # only display active event(s) to user
+        active_index = extract_active_event()[0]
 
+        if len(active_index) == 0:
+            print("No relevant events to select from")
+            return
+        else:
+            df1 = matched_rows_csv("data/eventTesting.csv", "ongoing", True, "eid")
+            print(df1[0])
+            while True:
+                eventID = int(input("Enter Event ID"))
+                if eventID not in df1[1]:
+                    print("Invalid index entered!")
+                    continue
+                else:
+                    break
 
-
-
+            df2 = matched_rows_csv("data/camp.csv", "eventID", eventID, "campID")
+            delete_camp = input("Please Enter campID of the camp you want to delete")
+            while True:
+                if delete_camp not in df2[1]:
+                    delete_camp = input("Please Enter campID of the camp you want to delete")
+                    print("Invalid index entered!")
+                    continue
+                else:
+                    aa = input(f"Are you sure to delete camp with camp{delete_camp}?(yes/no)")
+                    if aa == "yes":
+                        print("Deletion Successful")
+                        break
+                    elif aa == "no":
+                        break
+                    else:
+                        continue
 
 
 
@@ -263,10 +293,9 @@ class Controller:
         event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
         join_info = validate_join()
         if join_info is not None:
-            v = Volunteer(username, '','','', '', '', '', join_info)
+            v = Volunteer(username, '', '', '', '', '', '', join_info)
             v.join_camp(event_id, select_index)
         return
-
 
     def camp_man(self):
         InstructionView.camp_main_message()
@@ -283,3 +312,14 @@ class Controller:
             return
         if user_selection == 'x':
             exit()
+
+
+
+
+
+
+
+
+
+
+

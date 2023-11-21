@@ -33,9 +33,6 @@ class Camp:
     def pass_camp_info(self, select_index, camp_id):
         """if user choose to add a """
 
-
-
-
         country = extract_data("data/eventTesting.csv", "location")
         # geo_data = extract_data("data/eventTesting.csv","")
         csv_path = Path(__file__).parents[1].joinpath("data/countries.csv")
