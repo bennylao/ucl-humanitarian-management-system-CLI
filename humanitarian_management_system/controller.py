@@ -130,8 +130,8 @@ class Controller:
             self.delete_camp()
 
         if user_selection == "3":
+            #self.edit_camp()
             pass
-            # self.edit_camp()
 
         if user_selection == "4":
             self.resource_main()

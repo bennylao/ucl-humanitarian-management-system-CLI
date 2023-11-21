@@ -24,10 +24,11 @@ class AdminView:
 class CampView:
     camp_menu = {
         "1": "Add camp",
-        "2": "Resources allocation",
+        "2": "Delete camp",
         "3": "Edit camp profile",
-        "4": "Remove refugee(s)",
-        "5": "Return to previous page",
+        "4": "Resources allocation",
+        "5": "Remove refugee(s)",
+        "6": "Return to previous page",
         "x": "Exit the system"
     }
 
