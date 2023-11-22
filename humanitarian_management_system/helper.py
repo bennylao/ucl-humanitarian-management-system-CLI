@@ -278,7 +278,7 @@ def matched_rows_csv(file, desired_column, desired_value, index):
         if desired_value in df[desired_column].tolist():
             dff = df[df[desired_column] == desired_value].set_index(index)
             dff_sorted = dff.sort_index()
-            return dff_sorted, dff_sorted[index].tolist()
+            return dff_sorted, dff_sorted.index.tolist()
         else:
             return f"Value '{desired_value}' not found in the {desired_column}."
     else:
