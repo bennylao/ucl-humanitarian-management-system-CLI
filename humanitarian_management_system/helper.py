@@ -221,12 +221,12 @@ def validate_camp_input():
             break
 
     while True:
-        risk = input("\nHealth risk level(low or high): ")
-        if capacity == 'RETURN':
-            return
-        elif risk != 'low' or risk != 'high':
+        risk = input("\nEnter health risk level (low or high): ")
+        if (risk != 'low') and (risk != 'high'):
             print("Must enter low or high")
             continue
+        if capacity == 'RETURN':
+            return
         else:
             break
 
