@@ -4,7 +4,7 @@ class VolunteerView:
         "1": "Join/change camp",
         "2": "Edit personal account",
         "3": "Camp management",
-        "6": "Return to previous page",
+        "4": "Return to previous page",
         "x": "Exit the system"
     }
 
@@ -21,9 +21,8 @@ class VolunteerView:
 class CampViewV:
     camp_menu = {
         "1": "Add refugee",
-        "2": "Resources allocation",
-        "3": "Edit camp profile",
-        "4": "Return to previous page",
+        "2": "Edit camp profile",
+        "3": "Return to previous page",
         "x": "Exit the system"
     }
 

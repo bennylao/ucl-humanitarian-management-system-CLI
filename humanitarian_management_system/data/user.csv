@@ -1,9 +1,8 @@
 userID,userType,isActive,username,password,firstName,lastName,email,phone,occupation,roleID,eventID,campID
 0,admin,TRUE,admin,111,adminFirstName,adminLastName,adminEmail,2012345678,adminOccupation,N/A,N/A,N/A
-1,volunteer,TRUE,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,7701234567,volunteer1Occupation,1,3,1
-2,volunteer,TRUE,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,2,7,2
+1,volunteer,TRUE,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,7701234567,volunteer1Occupation,4,3,5
+2,volunteer,TRUE,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,6,7,6
 3,volunteer,FALSE,volunteer3,111,volunteer3FirstName,volunteer3LastName,volunteer3Email,7701230987,volunteer3Occupation,3,7,3
-4,Volunteer,TRUE,volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,None,None,None
-4,Volunteer,TRUE,volunteer4,110,testfiveFirst,testfiveLast,example2@testing.com,7786471234,fiveJob,None,None,None
-5,Volunteer,True,yuan,123,yuan,Hu,ucab202@ucl.ac.uk,123,student,None,None,None
-
+4,Volunteer,TRUE,volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,9,7,6
+5,Volunteer,TRUE,yuan,123,yuan,Hu,ucab202@ucl.ac.uk,123,student,None,None,None
+6,Volunteer,TRUE,tang,111,chang,an,hanfu@testing.com,7786471235,dancer,None,None,None

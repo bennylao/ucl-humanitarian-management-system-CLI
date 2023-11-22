@@ -1,12 +1,12 @@
-resourceID,name,total
-1,Blankets,162
-2,Clothing,157
-3,Toys,168
-4,Medicine,157
-5,Vitamins,162
-6,Food,157
-7,Snacks,168
-8,Toiletries,162
-9,Water,157
-10,Baby Supplies,157
-11,General Tools & Supplies,168
+resourceID,name,total,priorityLvl
+1,Blankets,116,2
+2,Clothing,99,1
+3,Toys,135,3
+4,Medicine,99,1
+5,Vitamins,116,2
+6,Food,99,1
+7,Snacks,134,3
+8,Toiletries,116,2
+9,Water,87,1
+10,Baby Supplies,99,1
+11,General Tools & Supplies,104,3

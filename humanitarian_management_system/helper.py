@@ -156,8 +156,8 @@ def validate_event_input():
             else:
                 num_list = [int(num) for num in no_camp.split(',')]
                 if all(num > 0 for num in num_list):
-                    ## Also no_camp cannot exceed the total number of camps
-                    ## Add it after camp.py finished.
+                    # Also no_camp cannot exceed the total number of camps
+                    # Add it after camp.py finished.
                     num_list = sorted(set(num_list))
                     no_camp = ','.join(map(str, num_list))
                     break
@@ -211,7 +211,7 @@ def validate_camp_input():
     campID = int(campID) + 1
 
     while True:
-        capacity = input("\nCapacity: ")
+        capacity = input("\nEnter refugee Capacity: ")
         if capacity == 'RETURN':
             return
         elif not capacity.isnumeric():
@@ -241,7 +241,7 @@ def validate_join():
     for i in index[1:]:
         print(f''' index: {i} | {role.iloc[i]} ''')
     while True:
-        user_input = input("\nIndex: ")
+        user_input = input("\nEnter index: ")
         if int(user_input) not in index[1:]:
             print("Invalid index option entered!")
             continue
@@ -291,6 +291,12 @@ def extract_data(csv, col):
     return df[col]
 
 
+def extract_data_df(csv):
+    csv_path = Path(__file__).parents[0].joinpath(csv)
+    df = pd.read_csv(csv_path)
+    return df
+
+
 def extract_active_event():
     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
     df = pd.read_csv(csv_path)
@@ -320,7 +326,7 @@ def display_camp_list():
     for i in active_id:
         camp_id = df.loc[df['eventID'] == i]['campID'].tolist()
         for j in camp_id:
-            capacity = df.loc[df['campID'] == j]['capacity'].tolist()[0]
+            capacity = df.loc[df['campID'] == j]['refugeeCapacity'].tolist()[0]
             r_pop = df.loc[df['campID'] == j]['refugeePop'].tolist()[0]
             health_risk = df.loc[df['campID'] == j]['healthRisk'].tolist()[0]
             plan_title = df_e.loc[df_e['eid'] == i]['title'].tolist()[0]
@@ -330,7 +336,161 @@ def display_camp_list():
             index.append(j)
 
             print(f'''
-                        * Index: {j}  | Health risk level: {health_risk} | Plan title: {plan_title} | description: {description} 
-                        | location: {location} | Capacity: {capacity} | Refugee population: {r_pop} | End date: {end_date} * ''')
+                * Index: {j}  | Health risk level: {health_risk} | Plan title: {plan_title} | description: {description} 
+                | location: {location} | Capacity: {capacity} | Refugee population: {r_pop} | End date: {end_date} * ''')
 
     return index
+
+def validate_man_resource(index):
+    df = extract_data_df("data/resourceStock.csv")
+    while True:
+        select_index = int(input("\nEnter camp index: "))
+
+        if select_index not in index:
+            print("invalid index option entered!")
+            continue
+        try:
+            if select_index == 'RETURN':
+                return
+        except:
+            return
+        break
+
+    res_id = extract_data("data/resourceStock.csv", "resourceID").tolist()
+    # display medical condition option list
+    for i in res_id:
+        name = df.loc[df['resourceID'] == i]['name'].tolist()[0]
+        stock = df.loc[df['resourceID'] == i]['total'].tolist()[0]
+        print("\n"f''' Index: {i} | Item name: {name} | Stock: {stock} ''')
+
+    while True:
+        select_item = int(input("\nEnter item index: "))
+
+        if select_item not in res_id:
+            print("invalid index option entered!")
+            continue
+        try:
+            if select_index == 'RETURN':
+                return
+        except:
+            return
+        break
+
+    while True:
+        select_amount = input("\nEnter amount: ")
+
+        if int(select_amount) > int(df.loc[df['resourceID'] == select_item]['total'].tolist()[0]):
+            print("Cannot exceed the stock amount!")
+            continue
+        if not select_amount.isnumeric():
+            print("Must be a numerical value!")
+            continue
+
+        if select_index == 'RETURN':
+            return
+        else:
+            break
+
+    return select_index, select_item, select_amount
+
+
+def validate_refugee(lvl):
+    date_format = '%d/%m/%Y'
+
+    while True:
+        f_name = input("\nEnter first name: ")
+        if not f_name.isalpha():
+            print("Must be alphabetic values!")
+            continue
+        if f_name == 'RETURN':
+            return
+        else:
+            break
+
+    while True:
+        l_name = input("\nEnter last name: ")
+        if not l_name.isalpha():
+            print("Must be alphabetic values!")
+            continue
+        if l_name == 'RETURN':
+            return
+        else:
+            break
+
+    while True:
+        try:
+            dob = input("\nEnter date of birth (format: dd/mm/yy): ")
+            if dob == 'RETURN':
+                return
+            dob = datetime.datetime.strptime(dob, date_format)
+            break
+        except ValueError:
+            print("\nInvalid date format entered.")
+            continue
+
+    while True:
+        gender = input("\nEnter gender (male, female, other): ")
+
+        if (gender != 'male') and (gender != 'female') and (gender != 'other'):
+            print("Please enter only male, female or other!")
+            continue
+        if gender == 'RETURN':
+            return
+        else:
+            break
+
+    while True:
+        family_id = input("\nEnter family identification: ")
+        if not family_id.isnumeric():
+            print("Must be a numerical value!")
+            continue
+        if family_id == 'RETURN':
+            return
+        else:
+            break
+
+    while True:
+        vacc = input("\nIs vaccinated? (True or False): ")
+        if (vacc != 'True') and (vacc != 'False'):
+            print("Please enter True or False only!")
+            continue
+        if vacc == 'False' and lvl == 'high':
+            print("This camp only accept vaccinated refugee due to health risk concerns!")
+            continue
+        if vacc == "RETURN":
+            return
+        else:
+            break
+
+    med_id = extract_data("data/medicalInfoType.csv", "medicalInfoTypeID").tolist()
+    df = extract_data_df("data/medicalInfoType.csv")
+    # display medical condition option list
+    for i in med_id:
+        cond = df.loc[df['medicalInfoTypeID'] == i]['condition'].tolist()[0]
+        lvl = df.loc[df['medicalInfoTypeID'] == i]['criticalLvl'].tolist()[0]
+        print("\n"f''' Index: {i} | Condition: {cond} | Critical level: {lvl} ''')
+
+    while True:
+        try:
+            med = input("\nEnter medical condition (optional): ")
+            if int(med) not in med_id:
+                print("Invalid index option entered!")
+            # if user decided to enter nothing, we just assume the refugee is healthy aka index = 1
+            elif med == '':
+                med = 1
+            if med == "RETURN":
+                return
+        except:
+            return
+        break
+
+    while True:
+        med_des = input("\nEnter medical description (optional): ")
+        if len(str(med_des)) == 0:
+            med_des = None
+        if med_des == "RETURN":
+            return
+        else:
+            break
+
+    return family_id, f_name, l_name, dob, gender, int(med), med_des, vacc

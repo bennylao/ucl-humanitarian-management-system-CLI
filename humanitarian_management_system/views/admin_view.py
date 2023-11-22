@@ -27,7 +27,7 @@ class CampView:
         "2": "Delete camp",
         "3": "Edit camp profile",
         "4": "Resources allocation",
-        "5": "Remove refugee(s)",
+        "5": "Move/remove refugee(s)",
         "6": "Return to previous page",
         "x": "Exit the system"
     }

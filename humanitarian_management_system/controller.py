@@ -1,7 +1,8 @@
 from humanitarian_management_system.helper import (extract_data, validate_event_input, validate_registration,
                                                    validate_user_selection, validate_camp_input, extract_active_event,
-                                                   display_camp_list, validate_join, matched_rows_csv)
-from humanitarian_management_system.models import User, Volunteer, Event, Camp, ResourceTest
+                                                   display_camp_list, validate_join, extract_data_df, validate_refugee,
+                                                   validate_man_resource)
+from humanitarian_management_system.models import User, Volunteer, Event, Camp, ResourceTest, Refugee
 from humanitarian_management_system.views import (StartupView, InstructionView, LoginView, AdminView, CampView,
                                                   VolunteerView, VolView, CampViewV)
 from pathlib import Path
@@ -55,7 +56,7 @@ class Controller:
                 if user_selection == "2":
                     self.camp_main()
                 if user_selection == "3":
-                    pass
+                    self.vol_man()
                 if user_selection == "4":
                     self.edit_event()
                 if user_selection == "5":
@@ -75,7 +76,7 @@ class Controller:
                 if user_selection == "2":
                     pass
                 if user_selection == "3":
-                    self.camp_man()
+                    self.camp_man(username)
                 if user_selection == "4":
                     pass
                 if user_selection == "5":
@@ -126,12 +127,12 @@ class Controller:
         if user_selection == "1":
             self.create_camp()
 
-        elif user_selection == "2":
+        if user_selection == "2":
             self.delete_camp()
 
         if user_selection == "3":
-            #self.edit_camp()
             pass
+            # self.edit_camp()
 
         if user_selection == "4":
             self.resource_main()
@@ -141,94 +142,53 @@ class Controller:
         if user_selection == "x":
             exit()
 
+    # camp management for admin
     def create_camp(self):
-        InstructionView.camp_creation_message()
+        InstructionView.camp_init_message()
+        # print out selection list, perhaps someone could improve its presentation, coz i'm really bad at this :P
+        # only display active event(s) to user
         active_index = extract_active_event()[0]
 
-        # check if active event is 0
         if len(active_index) == 0:
             print("No relevant events to select from")
             return
-        else:
-            # read the event csv file and extract all available events
-            csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
-            df1 = matched_rows_csv(csv_path, "ongoing", True, "eid")
-            print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
 
+        for i in active_index:
+            id = extract_data("data/eventTesting.csv", 'eid').iloc[i - 1]
+            title = extract_data("data/eventTesting.csv", 'title').iloc[i - 1]
+            location = extract_data("data/eventTesting.csv", 'location').iloc[i - 1]
+            description = extract_data("data/eventTesting.csv", 'description').iloc[i - 1]
+            endDate = extract_data("data/eventTesting.csv", 'endDate').iloc[i - 1]
+
+            print(f'''
+            * index: {id}  | title: {title}| country: {location} | description: {description} | end date: {endDate} *
+            ''', end='')
         # validate input for user select index
-            while True:
-                try:
-                    eventID = int(input("\nEnter Event ID: "))
-                    if eventID not in df1[1]:
-                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
-                        continue
-                    else:
-                        break
-                except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+        while True:
+            select_index = input("\nindex: ")
+            try:
+                if (int(select_index) - 1) not in active_index:
+                    print("Invalid index entered!")
+                    continue
+            except:
+                return
 
+            if select_index == 'RETURN':
+                return
+            else:
+                break
         InstructionView.camp_creation_message()
         # prompt for user capacity input
         camp_info = validate_camp_input()
         if camp_info is not None:
             c = Camp(camp_info[0], camp_info[2], '')
-            c.pass_camp_info(eventID, camp_info[1])
+            c.pass_camp_info(int(select_index), camp_info[1])
             print("Camp created.")
         else:
             self.startup()
 
     def delete_camp(self):
-        """This part of the code is to delete the camp from the camp.csv"""
-        InstructionView.camp_deletion_message()
-        active_index = extract_active_event()[0]
-
-        if len(active_index) == 0:
-            print("No relevant events to select from")
-            return
-        else:
-            csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
-            df1 = matched_rows_csv(csv_path, "ongoing", True, "eid")
-            print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
-            while True:
-                try:
-                    eventID = int(input("\nEnter Event ID: "))
-                    if eventID not in df1[1]:
-                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
-                        continue
-                    else:
-                        break
-                except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
-            csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
-            df2 = matched_rows_csv(csv_path2, "eventID", eventID, "campID")
-            print("\n**The following shows the info of related camps*\n")
-            print(df2[0])
-            while True:
-                try:
-                    delete_camp = int(input("\nWhich camp do you want to delete? Please enter campID: "))
-                    if delete_camp not in df2[1]:
-                        print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
-                        continue
-                    else:
-                        while True:
-                            aa = input(f"\nAre you sure to delete camp {delete_camp}? (yes/no): ")
-                            if aa == "yes":
-                                print("Deletion Successful")
-                                break
-                            elif aa == "no":
-                                break
-                            else:
-                                print("Invalid input! Please enter 'yes' or 'no'")
-                                continue
-                        break
-                except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
-
-
-
-
+        pass
 
     def resource_main(self):
         InstructionView.resource_main_message()
@@ -249,14 +209,23 @@ class Controller:
                 break
 
     def man_resource(self):
-        pass
+        InstructionView.man_resource_message()
+        index = display_camp_list()
+        res_man_info = validate_man_resource(index)
+
+        if res_man_info is not None:
+            r = ResourceTest(res_man_info[0], '', '')
+            r.manual_resource(res_man_info[2], res_man_info[1])
+            print("Resource allocated as request.")
+        else:
+            return
 
     def auto_resource(self):
         InstructionView.auto_resource_message()
         index = display_camp_list()
 
         while True:
-            select_index = int(input("\nindex: "))
+            select_index = int(input("\nEnter index: "))
 
             if select_index not in index:
                 print("invalid index option entered!")
@@ -302,29 +271,45 @@ class Controller:
             v.join_camp(event_id, select_index)
         return
 
-    def camp_man(self):
+    # camp management for volunteer
+    def camp_man(self, username):
         InstructionView.camp_main_message()
         CampViewV.display_camp_menu()
 
         user_selection = validate_user_selection(CampViewV.get_camp_options())
         if user_selection == '1':
-            pass
+            self.add_refugee(username)
         if user_selection == '2':
-            self.resource_main()
-        if user_selection == '3':
             pass
-        if user_selection == '4':
+        if user_selection == '3':
             return
         if user_selection == 'x':
             exit()
 
+    def add_refugee(self, username):
+        df = extract_data_df("data/user.csv")
+        cid = df.loc[df['username'] == username]['campID'].tolist()[0]
+        # check if volunteer user already join a camp
+        if math.isnan(cid):
+            print("You must first join a camp!")
+            return
+        print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
+        InstructionView.create_refugee_message()
+        df_c = extract_data_df("data/camp.csv")
+        # health risk level of volunteer's camp
+        lvl = df_c.loc[df_c['campID'] == cid]['healthRisk'].tolist()[0]
 
+        refugee_info = validate_refugee(lvl)
+        if refugee_info is not None:
+            r = Refugee(refugee_info[0], refugee_info[1], refugee_info[2], refugee_info[3], refugee_info[4],
+                        refugee_info[5], refugee_info[6], refugee_info[7])
+            r.add_refugee_from_user_input(cid)
+        else:
+            return
+        print("Refugee created.")
 
-
-
-
-
-
-
-
+    def vol_man(self):
+        InstructionView.vol_main_message()
+        VolView.display_vol_menu()
+        return
 

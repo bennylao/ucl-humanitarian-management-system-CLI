@@ -8,6 +8,20 @@ class InstructionView:
               "Or enter 'RETURN' to go back to main page.")
 
     @staticmethod
+    def admin_logged_message():
+        print("\n========================================\n"
+              "           Welcome back ADMIN\n"
+              "========================================\n"
+              "Please select an option from the following.")
+
+    @staticmethod
+    def vol_logged_message():
+        print("\n========================================\n"
+              "         Welcome back VOLUNTEER\n"
+              "========================================\n"
+              "Please select an option from the following.")
+
+    @staticmethod
     def event_creation_message():
         print("\n========================================\n"
               "            Event CREATION\n"
@@ -28,8 +42,7 @@ class InstructionView:
         print("\n========================================\n"
               "           Camp MANAGEMENT\n"
               "========================================\n"
-              "Please select an option from the following.\n"
-              "Or enter 'RETURN' to go back to admin menu page.")
+              "Please select an option from the following.")
 
     @staticmethod
     def camp_init_message():
@@ -66,7 +79,7 @@ class InstructionView:
     @staticmethod
     def resource_main_message():
         print("\n========================================\n"
-              "         Resources allocation\n"
+              "         Resources ALLOCATION\n"
               "========================================\n"
               "Please select 1 for manual allocation.\n"
               "Or 2 for auto allocation.\n"
@@ -75,7 +88,7 @@ class InstructionView:
     @staticmethod
     def man_resource_message():
         print("\n========================================\n"
-              "       Allocating resources(manual)\n"
+              "         Allocating manually\n"
               "========================================\n"
               "Please select a camp by its index.\n"
               "Follow by the index of the resource type.\n"
@@ -85,7 +98,7 @@ class InstructionView:
     @staticmethod
     def auto_resource_message():
         print("\n========================================\n"
-              "       Allocating resources(auto)\n"
+              "       Allocating automatically\n"
               "========================================\n"
               "Please select a camp by its index.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
@@ -93,9 +106,18 @@ class InstructionView:
     @staticmethod
     def join_camp_message():
         print("\n========================================\n"
-              "            Join/change camp\n"
+              "            Join/change CAMP\n"
               "========================================\n"
               "Please select a camp by its index to join\n"
+              "Or to change your current camp to that instead.\n"
+              "Or enter 'RETURN' to go back to admin menu page.")
+
+    @staticmethod
+    def create_refugee_message():
+        print("\n========================================\n"
+              "            Refugee CREATION\n"
+              "========================================\n"
+              "Please fill in all the following information below.\n"
               "Or to change your current camp to that instead.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
 

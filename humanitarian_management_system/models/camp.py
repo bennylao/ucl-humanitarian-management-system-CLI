@@ -46,7 +46,7 @@ class Camp:
         no_camp += 1
 
         Camp.camp_data = [[camp_id, event_id, result[0], self.capacity, self.health_risk, 0, 0, 0, self.is_camp_available]]
-        camp_df = pd.DataFrame(Camp.camp_data, columns=['campID', 'eventID', 'countryID', 'capacity', 'healthRisk',
+        camp_df = pd.DataFrame(Camp.camp_data, columns=['campID', 'eventID', 'countryID', 'refugeeCapacity', 'healthRisk',
                                                         'volunteerPop', 'refugeePop', 'currentPopulation', 'status'])
         with open('data/camp.csv', 'a') as f:
             camp_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
