@@ -180,6 +180,66 @@ class Controller:
         else:
             self.startup()
 
+    def delete_camp(self):
+        """This part of the code is to delete the camp from the camp.csv"""
+        InstructionView.camp_deletion_message()
+        active_index = extract_active_event()[0]
+
+        # if there is no active events, return
+        if len(active_index) == 0:
+            print("No relevant events to select from")
+            return
+        else:
+            # print the events info for users to choose
+            csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+            df1 = matched_rows_csv(csv_path, "ongoing", True, "eid")
+            print("\n*The following shows the info of all available events*\n")
+            print(df1[0])
+            while True:
+                try:
+                    eventID = int(input("\nEnter Event ID: "))
+                    if eventID not in df1[1]:
+                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+
+            # print camps info for users to choose
+            csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
+            df2 = matched_rows_csv(csv_path2, "eventID", eventID, "campID")
+            print("\n**The following shows the info of related camps*\n")
+            print(df2[0])
+            while True:
+                try:
+                    delete_camp = int(input("\nWhich camp do you want to delete? Please enter campID: "))
+                    if delete_camp not in df2[1]:
+                        print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
+                        continue
+                    else:
+                        while True:
+                            aa = input(f"\nAre you sure to delete camp {delete_camp}? (yes/no): ")
+                            if aa == "yes":
+                                # implement the deletion in csv file
+                                print("Deletion Successful")
+                                break
+                            elif aa == "no":
+                                break
+                            else:
+                                print("Invalid input! Please enter 'yes' or 'no'")
+                                continue
+                        break
+                except ValueError:
+                    print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
+
+
+    def modify_camp(self):
+        """This function is to modify camp info"""
+
+
+
+
 
     def resource_main(self):
         InstructionView.resource_main_message()
