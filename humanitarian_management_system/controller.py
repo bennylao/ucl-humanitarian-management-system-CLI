@@ -142,39 +142,32 @@ class Controller:
             exit()
 
     def create_camp(self):
-        InstructionView.camp_init_message()
-        # print out selection list, perhaps someone could improve its presentation, coz i'm really bad at this :P
-        # only display active event(s) to user
+        InstructionView.camp_creation_message()
         active_index = extract_active_event()[0]
 
+        # check if active event is 0
         if len(active_index) == 0:
             print("No relevant events to select from")
             return
+        else:
+            # read the event csv file and extract all available events
+            csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+            df1 = matched_rows_csv(csv_path, "ongoing", True, "eid")
+            print("\n*The following shows the info of all available events*\n")
+            print(df1[0])
 
-        for i in active_index:
-            id = extract_data("data/eventTesting.csv", 'eid').iloc[i - 1]
-            title = extract_data("data/eventTesting.csv", 'title').iloc[i - 1]
-            location = extract_data("data/eventTesting.csv", 'location').iloc[i - 1]
-            description = extract_data("data/eventTesting.csv", 'description').iloc[i - 1]
-            endDate = extract_data("data/eventTesting.csv", 'endDate').iloc[i - 1]
-
-            print(f'''
-            * index: {id}  | title: {title}| country: {location} | description: {description} | end date: {endDate} *
-            ''', end='')
         # validate input for user select index
-        while True:
-            select_index = input("\nindex: ")
-            try:
-                if (int(select_index) - 1) not in active_index:
-                    print("Invalid index entered!")
-                    continue
-            except:
-                return
+            while True:
+                try:
+                    eventID = int(input("\nEnter Event ID: "))
+                    if eventID not in df1[1]:
+                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
 
-            if select_index == 'RETURN':
-                return
-            else:
-                break
         InstructionView.camp_creation_message()
         # prompt for user capacity input
         camp_info = validate_camp_input()
@@ -187,7 +180,7 @@ class Controller:
 
     def delete_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
-        InstructionView.camp_init_message()
+        InstructionView.camp_deletion_message()
         active_index = extract_active_event()[0]
 
         if len(active_index) == 0:
@@ -196,10 +189,11 @@ class Controller:
         else:
             csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
             df1 = matched_rows_csv(csv_path, "ongoing", True, "eid")
+            print("\n*The following shows the info of all available events*\n")
             print(df1[0])
             while True:
                 try:
-                    eventID = int(input("Enter Event ID: "))
+                    eventID = int(input("\nEnter Event ID: "))
                     if eventID not in df1[1]:
                         print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
                         continue
@@ -208,17 +202,18 @@ class Controller:
                 except ValueError:
                     print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
             csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
-            df2 = matched_rows_csv(csv_path2, "eventID", eventID, "campID")
+            df2 = matched_rows_csv(csv_path2, "eventID", eventID, "refugeePop")
+            print("\n**The following shows the info of related camps*\n")
             print(df2[0])
             while True:
                 try:
-                    delete_camp = int(input("Which camp do you want to delete? Please enter campID: "))
+                    delete_camp = int(input("\nWhich camp do you want to delete? Please enter campID: "))
                     if delete_camp not in df2[1]:
                         print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
                         continue
                     else:
                         while True:
-                            aa = input(f"Are you sure to delete camp {delete_camp}? (yes/no): ")
+                            aa = input(f"\nAre you sure to delete camp {delete_camp}? (yes/no): ")
                             if aa == "yes":
                                 print("Deletion Successful")
                                 break

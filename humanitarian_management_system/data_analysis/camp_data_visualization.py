@@ -69,8 +69,8 @@ def update_pie_chart(hoverData,chart_type):
         default_pie_chart.update_layout(title='Default Pie Chart')
 
         return default_pie_chart
-    # Extract the city name from hoverData
-    city_name = hoverData['points'][0]['hovertext']
+
+    camp_name = hoverData['points'][0]['hovertext']
 
     labels = ['Category A', 'Category B', 'Category C']
     values = [random.randint(1, 10) for _ in range(3)]
@@ -78,12 +78,12 @@ def update_pie_chart(hoverData,chart_type):
     if chart_type == 'pie':
         chart_fig = {
             'data': [go.Pie(labels=labels, values=values)],
-            'layout': {'title': f'Pie Chart for {city_name}'}
+            'layout': {'title': f'Pie Chart for {camp_name}'}
         }
     else:
         chart_fig = {
             'data': [go.Bar(x=labels, y=values)],
-            'layout': {'title': f'Bar Chart for {city_name}'}
+            'layout': {'title': f'Bar Chart for {camp_name}'}
         }
 
     return chart_fig

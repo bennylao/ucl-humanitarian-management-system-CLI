@@ -48,6 +48,14 @@ class InstructionView:
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod
+    def camp_deletion_message():
+        print("\n========================================\n"
+              "             Camp DELETION\n"
+              "========================================\n"
+              "Please fill in all the following information below.\n"
+              "Or enter 'RETURN' to go back to admin menu page.")
+
+    @staticmethod
     def vol_main_message():
         print("\n========================================\n"
               "      Volunteer account MANAGEMENT\n"
