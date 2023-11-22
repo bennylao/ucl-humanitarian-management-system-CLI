@@ -173,7 +173,7 @@ class Controller:
         camp_info = validate_camp_input()
         if camp_info is not None:
             c = Camp(camp_info[0], camp_info[2], '')
-            c.pass_camp_info(int(select_index), camp_info[1])
+            c.pass_camp_info(eventID, camp_info[1])
             print("Camp created.")
         else:
             self.startup()
@@ -202,7 +202,7 @@ class Controller:
                 except ValueError:
                     print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
             csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
-            df2 = matched_rows_csv(csv_path2, "eventID", eventID, "refugeePop")
+            df2 = matched_rows_csv(csv_path2, "eventID", eventID, "campID")
             print("\n**The following shows the info of related camps*\n")
             print(df2[0])
             while True:
