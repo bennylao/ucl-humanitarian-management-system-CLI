@@ -203,7 +203,7 @@ def validate_camp_input():
     try:
         id_arr = extract_data("data/camp.csv", "campID").tolist()
     except:
-        id_arr = '0'
+        id_arr = ['0']
 
     campID = 0
     if id_arr:

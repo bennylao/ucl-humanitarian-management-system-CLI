@@ -1,7 +1,7 @@
 from humanitarian_management_system.helper import (extract_data, validate_event_input, validate_registration,
                                                    validate_user_selection, validate_camp_input, extract_active_event,
                                                    display_camp_list, validate_join, extract_data_df, validate_refugee,
-                                                   validate_man_resource, matched_rows_csv)
+                                                   validate_man_resource, matched_rows_csv, modify_csv_value)
 from humanitarian_management_system.models import User, Volunteer, Event, Camp, ResourceTest, Refugee
 from humanitarian_management_system.views import (StartupView, InstructionView, LoginView, AdminView, CampView,
                                                   VolunteerView, VolView, CampViewV)
@@ -222,6 +222,16 @@ class Controller:
                             aa = input(f"\nAre you sure to delete camp {delete_camp}? (yes/no): ")
                             if aa == "yes":
                                 # implement the deletion in csv file
+                                df3 = pd.read_csv(csv_path2)
+                                df3 = df3[df3["campID"] != delete_camp]
+                                df3.to_csv(csv_path2, index=False)
+
+                                # keep track of existing camp num of a particular event
+                                no_camp = df1[0].loc[eventID, "no_camp"]
+                                no_camp -= 1
+                                df4 = pd.read_csv(csv_path)
+                                index = df4[df4["eid"] == eventID].index.tolist()
+                                modify_csv_value(csv_path, index[0], "no_camp", no_camp)
                                 print("Deletion Successful")
                                 break
                             elif aa == "no":
