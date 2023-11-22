@@ -6,7 +6,8 @@ import random
 import plotly.graph_objs as go
 from pathlib import Path
 
-user_csv_path = Path(__file__).parents[1].joinpath("data/location_data.csv")
+csv_path = Path(__file__).parents[1].joinpath("data/location_data.csv")
+csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
 camp_loc = pd.read_csv(user_csv_path)
 
 app = Dash(__name__)

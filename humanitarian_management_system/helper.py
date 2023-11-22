@@ -210,23 +210,29 @@ def validate_camp_input():
         campID = id_arr.pop()
     campID = int(campID) + 1
 
+    # capacity input
     while True:
-        capacity = input("\nEnter refugee Capacity: ")
-        if capacity == 'RETURN':
-            return
-        elif not capacity.isnumeric():
-            print("Must be a numerical input!")
-            continue
-        else:
-            break
+        try:
+            capacity = input("\nCapacity: ")
+            if capacity == "RETURN":
+                print("good")
+                break
+            elif int(capacity) > 0:
+                break
+            else:
+                print("Must be a positive integer!")
+                continue
+        except ValueError:
+            print("Must be a positive integer!!")
 
+    # risk input
     while True:
         risk = input("\nEnter health risk level (low or high): ")
-        if (risk != 'low') and (risk != 'high'):
+        if risk == 'RETURN':
+            return
+        elif (risk != 'low') and (risk != 'high'):
             print("Must enter low or high")
             continue
-        if capacity == 'RETURN':
-            return
         else:
             break
 
