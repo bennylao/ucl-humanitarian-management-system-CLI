@@ -3,6 +3,7 @@ import csv
 from pathlib import Path
 import pandas as pd
 import datetime
+import numpy as np
 
 
 def validate_user_selection(options):
@@ -100,7 +101,7 @@ def validate_registration(usernames):
                   "Only alphabet are allowed.")
             continue
 
-    return [username, password, first_name, last_name, email, phone, occupation]
+    return ["volunteer", "TRUE", username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
 
 
 def validate_event_input():
