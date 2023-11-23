@@ -5,8 +5,8 @@ This application is created by Group 11.
 %description% blablabla
 
 The core features of this application can be run without installation. 
-**However, without installation, external library will not be installed automatically, 
-and the data visualisation feature will not work and could lead to unexpected error.**
+***However, without installation, external library will not be installed automatically, 
+and the data visualisation feature will not work and could lead to unexpected error.***
 Although you can install those third-parties libraries manually, 
 it is recommended to install our application through pip install, and run our app through the command shown below.
 
