@@ -4,7 +4,18 @@ This application is created by Group 11.
 
 %description% blablabla
 
-The application can be run without installation. However, it is recommended to install it.
+The core features of this application can be run without installation. 
+**However, without installation, the data visualisation feature will not work and could lead to unexpected error.**
+Hence, it is recommended to install our application through pip install, and run our app through the command shown below.
+
+Note that user **should not** run the app via ```python main.py``` since this will lead to data inconsistency.
+(The command ```hmsGroup11``` will use the data stored in python site-package as data source while 
+the command ```Python main.py``` will use the data stored in the local package). 
+Only use ```python main.py``` when your machine do not have ```pip``` and cannot run ```pip install .```. 
+If ```pip: command not found``` error occurs, most of the time it is because of the missing environment variables. 
+i.e. python and pip are not in ```PATH```. This can be solved by either reinstall Python and tick the option 
+```Add Python to PATH```, or manually add Python and pip to ```PATH```.
+
 After installation, the application can be accessed in any directory at anytime with the command:
 ```shell
 hmsGroup11
@@ -61,4 +72,8 @@ install dependencies only in the virtual environment.
 To install dependencies, run the command below in terminal with activated venv:
 ```shell
 pip install -r requirements.txt
+```
+Developers can also pip-install the package into their virtual environment by:
+```shell
+pip install -e.
 ```
