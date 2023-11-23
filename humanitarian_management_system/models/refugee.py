@@ -20,6 +20,7 @@ class Refugee:
         self.medical_condition_id = medical_condition_id
         self.medical_description = medical_description
         self.is_vaccinated = is_vaccinated
+        self.rid = rid
         # Refugee.total_number += 1
 
     def add_refugee_from_user_input(self, cid):
@@ -103,18 +104,19 @@ class Refugee:
     #     pass
 
     def move_refugee(self):
-        new_camp = input("Please enter the campID for the camp you wish to move this refugee to: ")
-        df = pd.read_csv('camp.csv')
-        if df['campID'].eq(new_camp).any():
+        new_camp = int(input("Please enter the campID for the camp you wish to move this refugee to: "))
+        ref_df = pd.read_csv("data/refugee.csv")
+        camp_df = pd.read_csv('data/camp.csv')
+        if camp_df['campID'].eq(new_camp).any():
+            row_index = ref_df[ref_df['refugeeID'] == self.rid].index[0]
 
-            with open(csv_path, 'a') as f:
+            with open("data/refugee.csv", 'a') as f:
                 ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
-        #Sorry. Couldn't work out how to use the helper method to actually update these bits for the campID of the refugee in CSV/pandas
-        #modify_csv_pandas(file_path, select_col, row_value, final_col, new_value)
-        # modify_csv_pandas("data/refugee.csv", 'campID', int(campID),
-        #     #                   'total', new_stock )
+                row_index =
         # modify_csv_value(file_path, row_index, column_name, new_value)
+        modify_csv_value("data/refugee.csv", self.rid+1, "campID", new_camp)
         else:
             print("Sorry. That campID doesn't exist.")
             self.move_refugee()
+
 
