@@ -109,12 +109,10 @@ class Refugee:
         camp_df = pd.read_csv('data/camp.csv')
         if camp_df['campID'].eq(new_camp).any():
             row_index = ref_df[ref_df['refugeeID'] == self.rid].index[0]
-
             with open("data/refugee.csv", 'a') as f:
                 ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
-                row_index =
         # modify_csv_value(file_path, row_index, column_name, new_value)
-        modify_csv_value("data/refugee.csv", self.rid+1, "campID", new_camp)
+                modify_csv_value("data/refugee.csv", self.rid+1, "campID", new_camp)
         else:
             print("Sorry. That campID doesn't exist.")
             self.move_refugee()
