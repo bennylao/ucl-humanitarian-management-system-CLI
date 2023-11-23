@@ -31,7 +31,7 @@ Windows users can install the application via double-click on ```Installation_Wi
 - Mac
 
 Mac users can install the application via double-click on ```Installation_Mac.applescript```,
-and Press ```▶ (Run the Script)```.
+and then press the button ```▶ (Run the Script)```.
 
 If the installation could not work properly, you can install it manually through Terminal/CMD/PowerShell:
 
