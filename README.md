@@ -1,20 +1,14 @@
 # COMP0066_Humanitarian_Management_System
-<div align="justify">
+
 This application is created by Group 11.
 
 %description% blablabla
 
 The core features of this application can be run without installation. 
-**However, without installation, the data visualisation feature will not work and could lead to unexpected error.**
-Hence, it is recommended to install our application through pip install, and run our app through the command shown below.
-
-Note that user **should not** run the app via ```python main.py``` since this will lead to data inconsistency.
-(The command ```hmsGroup11``` will use the data stored in python site-package as data source while 
-the command ```Python main.py``` will use the data stored in the local package). 
-Only use ```python main.py``` when your machine do not have ```pip``` and cannot run ```pip install .```. 
-If ```pip: command not found``` error occurs, most of the time it is because of the missing environment variables. 
-i.e. python and pip are not in ```PATH```. This can be solved by either reinstall Python and tick the option 
-```Add Python to PATH```, or manually add Python and pip to ```PATH```.
+**However, without installation, external library will not be installed automatically, 
+and the data visualisation feature will not work and could lead to unexpected error.**
+Although you can install those third-parties libraries manually, 
+it is recommended to install our application through pip install, and run our app through the command shown below.
 
 After installation, the application can be accessed in any directory at anytime with the command:
 ```shell
@@ -33,12 +27,13 @@ Windows users can install the application via double-click on ```Installation_Wi
 Mac users can install the application via double-click on ```Installation_Mac.applescript```,
 and then press the button ```▶ (Run the Script)```.
 
-If the installation could not work properly, you can install it manually through Terminal/CMD/PowerShell:
+If the installation could not work properly, you can install it manually through Terminal/CMD/PowerShell.
+See next section.
 
 ### Manual Installation
 
 Before manual installation, user has to copy the absolute path to the project directory 
-***COMP0066_Humanitarian_Management_System***:
+***Humanitarian_Management_System***:
 
 - On windows:
 Open File Explorer and navigate to the directory contains the application package, 
@@ -55,13 +50,32 @@ open ```Terminal``` on Mac, or ```PowerShell```/```Command Prompt``` on Windows,
 pip install {local/path/to/package}
 ```
 
-## To launch the application
+### To launch the application
 
 Once the application is installed, the application can be run at anytime by 
 executing the following command on Terminal or Command Prompt:
 ```shell
 hmsGroup11
 ```
+
+### To launch the application without pip installation
+
+If the installation is somehow failed, the application can still be run by the following steps:
+1. Open Terminal/CMD/PowerShell.
+2. Enter to the project directory using ```cd```.
+3. Enter ```pip install -r requirements.txt```
+4. Enter ```python -m humanitarian_management_system.main.py``` on Windows 
+or ```python3 -m humanitarian_management_system.main.py``` on Mac.
+
+Note that once you run the application thought command ```hmsGroup11```, you should not run the application again by
+```python -m humanitarian_management_system.main.py``` and vice-versa. 
+(The command ```hmsGroup11``` will use the data stored in python site-package as data source while 
+the command ```python -m humanitarian_management_system.main.py``` will use the data stored in the local package).
+
+### Common Issues
+If ```pip: command not found``` error occurs, most of the time it is because of the missing environment variables. 
+i.e. python and pip are not in ```PATH```. This can be solved by either reinstall Python and tick the option 
+```Add Python to PATH```, or manually add Python and pip to ```PATH```.
 
 
 ## Notes for Developers
@@ -77,4 +91,3 @@ Developers can also pip-install the package into their virtual environment by:
 ```shell
 pip install -e.
 ```
-</div>
