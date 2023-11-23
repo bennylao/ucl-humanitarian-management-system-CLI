@@ -1,5 +1,5 @@
 # COMP0066_Humanitarian_Management_System
-
+<div align="justify">
 This application is created by Group 11.
 
 %description% blablabla
@@ -77,3 +77,4 @@ Developers can also pip-install the package into their virtual environment by:
 ```shell
 pip install -e.
 ```
+</div>
