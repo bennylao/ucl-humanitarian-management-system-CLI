@@ -6,8 +6,7 @@ import math
 
 from humanitarian_management_system import helper
 from humanitarian_management_system.models import User, Admin, Volunteer, Event, Camp, ResourceTest, Refugee
-from humanitarian_management_system.views import (GeneralView, InstructionView, AdminView, CampView,
-                                                  VolunteerView, VolView, CampViewV)
+from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
 
 
 class Controller:
@@ -47,12 +46,16 @@ class Controller:
     def login(self):
         self.session = "login"
         user_info = pd.Series()
-
+        all_usernames = User.get_all_usernames()
         GeneralView.display_login_message()
+
         while user_info.empty:
             username = input("\nUsername: ")
             if username == 'RETURN':
                 break
+            if username not in all_usernames:
+                print("Account doesn't exist!")
+                continue
             password = input("\nPassword: ")
             if username == 'RETURN':
                 break
@@ -62,60 +65,78 @@ class Controller:
                 print("\nUsername or password is incorrect. Please try again.")
             elif user_info['isActive'] == "FALSE":
                 user_info = pd.Series()
-                print("\nYour account is not active. Please contact admin.")
+                print("\nYour account has been deactivated, contact the administrator.")
 
         if not user_info.empty:
-            print("\nLogin Successful!")
+            print("\n***   Login Successful!   ***")
             if user_info['userType'] == "admin":
                 self.user = Admin(*user_info[2:9])
+                print("You are now logged in as Admin.")
                 self.admin_main()
             else:
                 self.user = Volunteer(*user_info[2:])
+                print("You are now logged in as Volunteer.")
                 self.volunteer_main()
         else:
             self.startup()
 
     def admin_main(self):
-        AdminView.display_admin_menu()
-        user_selection = helper.validate_user_selection(AdminView.get_admin_options())
+        AdminView.display_menu()
+        user_selection = helper.validate_user_selection(AdminView.get_main_options())
 
         if user_selection == "1":
-            self.create_event()
+            self.admin_manage_event()
         if user_selection == "2":
-            self.camp_main()
+            self.admin_manage_camp()
         if user_selection == "3":
-            self.vol_man()
+            self.admin_manage_volunteer()
         if user_selection == "4":
-            self.edit_event()
+            self.admin_manage_resource()
         if user_selection == "5":
-            pass
+            self.admin_display_summary()
         if user_selection == "6":
-            pass
-        if user_selection == "7":
+            self.admin_edit_account()
+        if user_selection == "L":
+            self.user = None
             self.startup()
-        if user_selection == "x":
-            exit()
 
-    def volunteer_main(self):
-        VolunteerView.display_vol_menu()
-        user_selection = helper.validate_user_selection(VolunteerView.get_vol_options())
+    def admin_manage_event(self):
+        AdminView.display_event_menu()
+        user_selection = helper.validate_user_selection(AdminView.get_event_options())
         if user_selection == "1":
-            pass
+            self.admin_create_event()
         if user_selection == "2":
-            pass
+            self.admin_edit_event()
         if user_selection == "3":
+            # remove event
             pass
         if user_selection == "4":
+            # display all events
             pass
-        if user_selection == "5":
-            pass
-        if user_selection == "6":
+        if user_selection == "R":
+            self.admin_main()
+        if user_selection == "L":
+            self.user = None
             self.startup()
-        if user_selection == "x":
-            exit()
 
-    def create_event(self):
-        InstructionView.event_creation_message()
+    def admin_manage_camp(self):
+        pass
+
+    def admin_manage_volunteer(self):
+        pass
+
+    def admin_manage_resource(self):
+        pass
+
+    def admin_display_summary(self):
+        pass
+
+    def admin_edit_account(self):
+        pass
+
+    @staticmethod
+    def admin_create_event():
+        ManagementView.event_creation_message()
         event_info = helper.validate_event_input()
         if event_info is not None:
             e = Event(event_info[0], event_info[1], event_info[2], event_info[3], event_info[4], event_info[5])
@@ -125,14 +146,14 @@ class Controller:
             return
 
     @staticmethod
-    def edit_event():
-        InstructionView.event_edit_message()
+    def admin_edit_event():
+        ManagementView.event_edit_message()
         Event.edit_event_info()
 
     def camp_main(self):
-        InstructionView.camp_main_message()
-        CampView.display_camp_menu()
-        user_selection = helper.validate_user_selection(CampView.get_camp_options())
+        ManagementView.camp_main_message()
+        AdminView.display_camp_menu()
+        user_selection = helper.validate_user_selection(AdminView.get_camp_options())
         if user_selection == "1":
             self.create_camp()
 
@@ -153,7 +174,7 @@ class Controller:
 
     # camp management for admin
     def create_camp(self):
-        InstructionView.camp_creation_message()
+        ManagementView.camp_creation_message()
         active_index = helper.extract_active_event()[0]
 
         # check if active event is 0
@@ -179,7 +200,7 @@ class Controller:
                 except ValueError:
                     print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
 
-        InstructionView.camp_creation_message()
+        ManagementView.camp_creation_message()
         # prompt for user capacity input
         camp_info = helper.validate_camp_input()
         if camp_info is not None:
@@ -191,7 +212,7 @@ class Controller:
 
     def delete_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
-        InstructionView.camp_deletion_message()
+        ManagementView.camp_deletion_message()
         active_index = helper.extract_active_event()[0]
 
         # if there is no active events, return
@@ -256,7 +277,7 @@ class Controller:
         """This function is to modify camp info"""
 
     def resource_main(self):
-        InstructionView.resource_main_message()
+        ManagementView.resource_main_message()
         while True:
             user_selection = input("\nAllocation mode: ")
 
@@ -274,7 +295,7 @@ class Controller:
                 break
 
     def man_resource(self):
-        InstructionView.man_resource_message()
+        ManagementView.man_resource_message()
         index = helper.display_camp_list()
         res_man_info = helper.validate_man_resource(index)
 
@@ -286,7 +307,7 @@ class Controller:
             return
 
     def auto_resource(self):
-        InstructionView.auto_resource_message()
+        ManagementView.auto_resource_message()
         index = helper.display_camp_list()
 
         while True:
@@ -313,7 +334,7 @@ class Controller:
         csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
         df = pd.read_csv(csv_path)
 
-        InstructionView.join_camp_message()
+        ManagementView.join_camp_message()
         index = helper.display_camp_list()
 
         while True:
@@ -338,10 +359,10 @@ class Controller:
 
     # camp management for volunteer
     def camp_man(self, username):
-        InstructionView.camp_main_message()
-        CampViewV.display_camp_menu()
+        ManagementView.camp_main_message()
+        VolunteerView.display_camp_menu()
 
-        user_selection = helper.validate_user_selection(CampViewV.get_camp_options())
+        user_selection = helper.validate_user_selection(VolunteerView.get_camp_options())
         if user_selection == '1':
             self.add_refugee(username)
         if user_selection == '2':
@@ -359,7 +380,7 @@ class Controller:
             print("You must first join a camp!")
             return
         print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
-        InstructionView.create_refugee_message()
+        ManagementView.create_refugee_message()
         df_c = helper.extract_data_df("data/camp.csv")
         # health risk level of volunteer's camp
         lvl = df_c.loc[df_c['campID'] == cid]['healthRisk'].tolist()[0]
@@ -373,7 +394,78 @@ class Controller:
             return
         print("Refugee created.")
 
-    def vol_man(self):
-        InstructionView.vol_main_message()
-        VolView.display_vol_menu()
-        return
+    def volunteer_main(self):
+        VolunteerView.login_message()
+        VolunteerView.display_main_menu()
+        user_selection = helper.validate_user_selection(VolunteerView.get_main_options())
+        if user_selection == "1":
+            pass
+        if user_selection == "2":
+            pass
+        if user_selection == "3":
+            pass
+        if user_selection == "L":
+            self.user = None
+            self.startup()
+
+    def volunteer_join_change_camp(self):
+        pass
+
+    def volunteer_manage_camp(self):
+        VolunteerView.display_camp_menu()
+        user_selection = helper.validate_user_selection(VolunteerView.get_camp_options())
+        if user_selection == "1":
+            # add refugee
+            pass
+        if user_selection == "2":
+            # edit refugee
+            pass
+        if user_selection == "3":
+            # remove refugee
+            pass
+        if user_selection == "4":
+            # edit camp info
+            pass
+        if user_selection == "5":
+            # display all refugees
+            pass
+        if user_selection == "6":
+            # display camp info
+            pass
+        if user_selection == "7":
+            # display all resource
+            pass
+        if user_selection == "R":
+            # return
+            pass
+        if user_selection == "L":
+            # logout
+            pass
+
+    def volunteer_edit_account(self):
+        VolunteerView.display_account_menu()
+        user_selection = helper.validate_user_selection(VolunteerView.get_account_options())
+        if user_selection == "1":
+            # change username
+            pass
+        if user_selection == "2":
+            # change password
+            pass
+        if user_selection == "3":
+            # change name
+            pass
+        if user_selection == "4":
+            # change email
+            pass
+        if user_selection == "5":
+            # change phone
+            pass
+        if user_selection == "6":
+            # change occupation
+            pass
+        if user_selection == "R":
+            # return
+            pass
+        if user_selection == "L":
+            # logout
+            pass

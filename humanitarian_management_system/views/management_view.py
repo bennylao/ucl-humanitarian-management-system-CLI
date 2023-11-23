@@ -1,18 +1,7 @@
-class InstructionView:
-
-    @staticmethod
-    def admin_logged_message():
-        print("\n========================================\n"
-              "           Welcome back ADMIN\n"
-              "========================================\n"
-              "Please select an option from the following.")
-
-    @staticmethod
-    def vol_logged_message():
-        print("\n========================================\n"
-              "         Welcome back VOLUNTEER\n"
-              "========================================\n"
-              "Please select an option from the following.")
+class ManagementView:
+    """
+    This class contains all the messages that user might see during management.
+    """
 
     @staticmethod
     def event_creation_message():
@@ -113,4 +102,3 @@ class InstructionView:
               "Please fill in all the following information below.\n"
               "Or to change your current camp to that instead.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
-
