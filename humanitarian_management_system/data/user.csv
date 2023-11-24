@@ -3,4 +3,4 @@ admin,TRUE,admin,111,adminFirstName,adminLastName,adminEmail,2012345678,adminOcc
 volunteer,TRUE,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,7701234567,volunteer1Occupation,4,3,5
 volunteer,TRUE,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,6,7,6
 volunteer,FALSE,volunteer3,111,volunteer3FirstName,volunteer3LastName,volunteer3Email,7701230987,volunteer3Occupation,3,7,3
-volunteer,TRUE,volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,9,7,6
+volunteer,TRUE,volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,6,8,9

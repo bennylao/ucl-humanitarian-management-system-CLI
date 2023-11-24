@@ -20,7 +20,7 @@ class Refugee:
         self.medical_condition_id = medical_condition_id
         self.medical_description = medical_description
         self.is_vaccinated = is_vaccinated
-        self.rid = rid
+        # self.rid = rid
         # Refugee.total_number += 1
 
     def add_refugee_from_user_input(self, cid):
