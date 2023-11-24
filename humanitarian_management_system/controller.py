@@ -394,6 +394,10 @@ class Controller:
             return
         print("Refugee created.")
 
+    def move_refugee(self):
+        helper.move_refugee_helper_method(rid)
+
+
     def volunteer_main(self):
         VolunteerView.login_message()
         VolunteerView.display_main_menu()

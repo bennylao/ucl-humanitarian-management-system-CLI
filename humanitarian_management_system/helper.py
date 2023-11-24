@@ -501,3 +501,18 @@ def validate_refugee(lvl):
             break
 
     return family_id, f_name, l_name, dob, gender, int(med), med_des, vacc
+
+
+def move_refugee_helper_method(rid):
+    new_camp = int(input("Please enter the campID for the camp you wish to move this refugee to: "))
+    ref_df = pd.read_csv("data/refugee.csv")
+    camp_df = pd.read_csv('data/camp.csv')
+
+    if camp_df['campID'].eq(new_camp).any():
+        # row_index = ref_df[ref_df['refugeeID'] == rid].index[0]
+        with open("data/refugee.csv", 'a') as f:
+            ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+        modify_csv_value("data/refugee.csv", rid + 1, "campID", new_camp)
+    else:
+        print("Sorry. That campID doesn't exist.")
+        move_refugee_helper_method(rid)
