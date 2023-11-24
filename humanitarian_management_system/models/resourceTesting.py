@@ -121,7 +121,7 @@ class ResourceTest():
             # print(c_refugee_amt / totalRefugees * r_stock_amt)
 
             # Calculate what the ideal amount should be...
-            ideal_qty_value = (c_refugee_amt / totalRefugees) * r_stock_amt
+            ideal_qty_value = round((c_refugee_amt / totalRefugees) * r_stock_amt)
 
             # Printing out the details in a readable format
             print(f"Row Index: {index}")
@@ -130,15 +130,58 @@ class ResourceTest():
             print(f"Ideal Quantity Value: {ideal_qty_value}")
             print("-" * 50)  # Separator for readability
 
-
             # Assign the calculated value to the specific row in 'ideal_qty' column
             alloc_ideal.at[index, 'ideal_qty'] = ideal_qty_value
         
+        return alloc_ideal # this is the ideal allocation which we will reference to. 
+
+    #########
+    def determine_above_below(self, threshold = 0.10):
+
+        alloc_ideal = self.calculate_resource_jess()
+
+        # this is the current allocation. not the gold standard one.. 
+        # can probably refactor this code later on...
+        alloc_current = extract_data_df("data/resourceAllocation.csv")
+
+        alloc_ideal['upper'] = round(alloc_ideal['ideal_qty'] * (1 + threshold))
+        alloc_ideal['lower'] = round(alloc_ideal['ideal_qty'] * (1 - threshold))
+        alloc_ideal['current'] = alloc_current['qty']
+
+        # create new column to indicate if resources greater or less than..
+        # Function to determine the new column value
+        def condititon_resource(row):
+            if row['current'] > row['upper']:
+                return 'above'
+            elif row['current'] < row['lower']:
+                return 'below'
+            else:
+                return 'balanced'
+
+        # Applying the function to create the new column
+        alloc_ideal['status'] = alloc_ideal.apply(condititon_resource, axis=1)
+
         return alloc_ideal
+    
+    def redistribute(self):
 
+        alloc_ideal = self.determine_above_below()
+        alloc_ideal['updated'] = alloc_ideal['current']
 
+        for index, row in alloc_ideal.iterrows():
+            if row['status'] != 'balanced':
+                row['updated'] = row['ideal_qty']
+        
+        # Now need to check, how the sum compares to the total amounts and make small tweaks... 
+        redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
 
+        # if redistribute_sum_checker == alloc_ideal.groupby('resourceID')['current'].sum():
+            #print("all good")
+            # otherwise, take 1 or 2 off the top ... 
 
+        return redistribute_sum_checker
+
+    # writes in the allocations - i think the allocations are just overwritten basically... 
     def pass_resource_info(self, set_amount, campID, resourceID, new_stock):
 
         ResourceTest.resource_data = [[resourceID, campID, int(set_amount)]]
