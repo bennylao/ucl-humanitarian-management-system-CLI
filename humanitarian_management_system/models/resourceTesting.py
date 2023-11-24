@@ -1,6 +1,5 @@
 import pandas as pd
-from humanitarian_management_system.helper import (extract_data, modify_csv_value, modify_csv_pandas, extract_data_df,
-                                                   extract_active_event)
+from humanitarian_management_system.helper import (extract_data, modify_csv_value, modify_csv_pandas, extract_data_df)
 from pathlib import Path
 
 

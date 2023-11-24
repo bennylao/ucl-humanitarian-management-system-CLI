@@ -105,23 +105,11 @@ def validate_registration(usernames):
 
 
 def validate_event_input():
-    country = []
-    country_data = extract_data("data/countries.csv", "name")
+    countries_csv_path = Path(__file__).parent.joinpath("data/country.csv")
+    all_countries = pd.read_csv(countries_csv_path)['name'].tolist()
+    print(all_countries)
+
     date_format = '%d/%m/%Y'  # Use for validating user entered date format
-
-    for ele in country_data:
-        country.append(ele.lower())
-    # keep track of uid and increment it by 1
-    try:
-        id_arr = extract_data("data/eventTesting.csv", "eid").tolist()
-    except:
-        id_arr = '0'
-
-    eid = 0
-    if id_arr:
-        eid = id_arr.pop()
-    eid = int(eid) + 1
-
     while True:
         title = input("\nPlan title: ")
         if title == 'RETURN':
@@ -130,10 +118,10 @@ def validate_event_input():
             break
 
     while True:
-        location = input("\nLocation(country): ").lower()
+        location = input("\nLocation(country): ").title()
         if location == 'RETURN':
             return
-        elif location not in country:
+        elif location not in all_countries:
             print("Invalid country name entered.")
             continue
         else:
@@ -170,10 +158,10 @@ def validate_event_input():
     #         continue
 
     while True:
+        start_date = input("\nStart date (format dd/mm/yyyy): ")
+        if start_date == 'RETURN':
+            return
         try:
-            start_date = input("\nStart date (format dd/mm/yy): ")
-            if start_date == 'RETURN':
-                return
             start_date = datetime.datetime.strptime(start_date, date_format)
             break
         except ValueError:
@@ -181,23 +169,26 @@ def validate_event_input():
             continue
 
     while True:
+        end_date = input("\nEstimated end date (format dd/mm/yyyy): ")
+        if end_date == 'RETURN':
+            return
+        elif end_date == 'NONE':
+            end_date = None
+            break
         try:
-            end_date = input("\nEstimated end date (format dd/mm/yy): ")
-            if end_date == 'RETURN':
-                return
-            if end_date == 'NONE':
-                end_date = None
-                break
             end_date = datetime.datetime.strptime(end_date, date_format)
             if end_date <= start_date:
                 print("\nEnd date has to be later than start date.")
+                continue
+            elif end_date <= datetime.datetime.today():
+                print("\nEnd date has to be later than today.")
                 continue
             break
         except ValueError:
             print("\nInvalid date format entered.")
             continue
 
-    return [title, location, description, 0, start_date, end_date, eid]
+    return [True, title, location, description, 0, start_date, end_date]
 
 
 def validate_camp_input():
@@ -303,7 +294,6 @@ def extract_data_df(csv):
     df = pd.read_csv(csv_path)
     return df
 
-
 def extract_active_event():
     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
     df = pd.read_csv(csv_path)
@@ -316,7 +306,6 @@ def extract_active_event():
             active_id.append(data['eid'].iloc[i])
 
     return active_id, df
-
 
 def display_camp_list():
     index = []

@@ -32,7 +32,7 @@ class User:
         # row will be empty series if no record is found
         row = df.loc[df['username'] == username]
         # if record is found and password is correct
-        if not row.empty and str(row.iat[0, 3]) == password:
+        if not row.empty and str(row.iloc[0]['password']) == password:
             # return user information as pandas series
             return row.squeeze()
         else:

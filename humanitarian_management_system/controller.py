@@ -13,7 +13,6 @@ class Controller:
     def __init__(self):
         self.session = "startup"
         self.user = None
-        self.username = ''
 
     def initialise(self):
         GeneralView.display_startup_logo()
@@ -51,16 +50,16 @@ class Controller:
         GeneralView.display_login_message()
 
         while user_info.empty:
-            self.username = input("\nUsername: ")
-            if self.username == 'RETURN':
+            username = input("\nUsername: ")
+            if username == 'RETURN':
                 break
-            if self.username not in all_usernames:
+            if username not in all_usernames:
                 print("Account doesn't exist!")
                 continue
             password = input("\nPassword: ")
-            if self.username == 'RETURN':
+            if username == 'RETURN':
                 break
-            user_info = User.validate_user(self.username, password)
+            user_info = User.validate_user(username, password)
             # check if account is active
             if user_info.empty:
                 print("\nUsername or password is incorrect. Please try again.")
@@ -73,22 +72,22 @@ class Controller:
             if user_info['userType'] == "admin":
                 self.user = Admin(*user_info[2:9])
                 print("You are now logged in as Admin.")
-                self.admin_main(self.username)
+                self.admin_main()
             else:
                 self.user = Volunteer(*user_info[2:])
                 print("You are now logged in as Volunteer.")
-                self.volunteer_main(self.username)
+                self.volunteer_main()
         else:
             self.startup()
 
-    def admin_main(self, username):
+    def admin_main(self):
         AdminView.display_menu()
         user_selection = helper.validate_user_selection(AdminView.get_main_options())
 
         if user_selection == "1":
-            self.admin_manage_event(username)
+            self.admin_manage_event()
         if user_selection == "2":
-            self.admin_manage_camp(username)
+            self.admin_manage_camp()
         if user_selection == "3":
             self.admin_manage_volunteer()
         if user_selection == "4":
@@ -101,11 +100,11 @@ class Controller:
             self.user = None
             self.startup()
 
-    def admin_manage_event(self, username):
+    def admin_manage_event(self):
         AdminView.display_event_menu()
         user_selection = helper.validate_user_selection(AdminView.get_event_options())
         if user_selection == "1":
-            self.admin_create_event(username)
+            self.admin_create_event()
         if user_selection == "2":
             self.admin_edit_event()
         if user_selection == "3":
@@ -115,54 +114,18 @@ class Controller:
             # display all events
             pass
         if user_selection == "R":
-            self.admin_main(username)
+            self.admin_main()
         if user_selection == "L":
             self.user = None
             self.startup()
 
-    def admin_manage_camp(self, username):
-        ManagementView.camp_main_message()
-        AdminView.display_camp_menu()
-        user_selection = helper.validate_user_selection(AdminView.get_camp_options())
-        if user_selection == "1":
-            self.create_camp(username)
-        if user_selection == "2":
-            pass  # edit camp
-        if user_selection == "3":
-            self.delete_camp()
-        if user_selection == "4":
-            self.resource_main(username)
-        if user_selection == "5":
-            self.add_refugee(username)
-        if user_selection == "6":
-            self.move_refugee()
-        if user_selection == "7":
-            pass  # display all camps
-        if user_selection == "R":
-            pass
-        if user_selection == "x":
-            exit()
-
-    def admin_manage_volunteer(self):
-        pass
-
-    def admin_manage_resource(self):
-        pass
-
-    def admin_display_summary(self):
-        pass
-
-    def admin_edit_account(self):
-        pass
-
-    def admin_create_event(self, username):
+    def admin_create_event(self):
         ManagementView.event_creation_message()
         event_info = helper.validate_event_input()
         if event_info is not None:
-            e = Event(event_info[0], event_info[1], event_info[2], event_info[3], event_info[4], event_info[5])
-            e.pass_event_info(event_info[6])
+            Event.create_new_record(event_info)
             print("Event created.")
-            self.admin_manage_event(username)
+            self.admin_manage_event()
         else:
             return
 
@@ -170,67 +133,68 @@ class Controller:
     def admin_edit_event():
         ManagementView.event_edit_message()
         Event.edit_event_info()
-        # missing Linqing's previous codes :(
 
-    # def camp_main(self):
-    #     ManagementView.camp_main_message()
-    #     AdminView.display_camp_menu()
-    #     user_selection = helper.validate_user_selection(AdminView.get_camp_options())
-    #     if user_selection == "1":
-    #         self.create_camp()
-    #
-    #     if user_selection == "2":
-    #         self.delete_camp()
-    #
-    #     if user_selection == "3":
-    #         pass
-    #         # self.edit_camp()
-    #
-    #     if user_selection == "4":
-    #         self.resource_main()
-    #
-    #     if user_selection == "5":
-    #         return
-    #     if user_selection == "x":
-    #         exit()
-
-    def create_camp(self, username):
-        ManagementView.camp_creation_message()
-        active_index = helper.extract_active_event()[0]
-
-        # check if active event is 0
-        if len(active_index) == 0:
-            print("No relevant events to select from.")
-            return
-        else:
-            # read the event csv file and extract all available events
-            csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", True, "eid")
-            print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
-
-            # validate input for user select index
-            while True:
-                try:
-                    eventID = int(input("\nEnter Event ID: "))
-                    if eventID not in df1[1]:
-                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
-                        continue
-                    else:
-                        break
-                except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
-
-        ManagementView.camp_creation_message()
-        # prompt for user capacity input
-        camp_info = helper.validate_camp_input()
-        if camp_info is not None:
-            c = Camp(camp_info[0], camp_info[2], '')
-            c.pass_camp_info(eventID, camp_info[1])
-            print("Camp created.")
-            self.admin_manage_camp(username)
-        else:
+    def admin_manage_camp(self):
+        ManagementView.camp_main_message()
+        AdminView.display_camp_menu()
+        user_selection = helper.validate_user_selection(AdminView.get_camp_options())
+        if user_selection == "1":
+            self.create_camp()
+        if user_selection == "2":
+            pass  # edit camp
+        if user_selection == "3":
+            self.delete_camp()
+        if user_selection == "4":
+            self.resource_main()
+        if user_selection == "5":
+            self.add_refugee()
+        if user_selection == "6":
+            self.move_refugee()
+        if user_selection == "7":
+            pass  # display all camps
+        if user_selection == "R":
+            pass
+        if user_selection == "L":
+            self.user = None
             self.startup()
+
+    def create_camp(self):
+        ManagementView.camp_creation_message()
+        active_event_df = Event.get_all_active_events()
+        Event.display_events(active_event_df)
+        # check if active event is 0
+        # if len(active_index) == 0:
+        #     print("No relevant events to select from.")
+        #     return
+        # else:
+        #     # read the event csv file and extract all available events
+        #     csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+        #     df1 = helper.matched_rows_csv(csv_path, "ongoing", True, "eid")
+        #     print("\n*The following shows the info of all available events*\n")
+        #     print(df1[0])
+        #
+        #     # validate input for user select index
+        #     while True:
+        #         try:
+        #             eventID = int(input("\nEnter Event ID: "))
+        #             if eventID not in df1[1]:
+        #                 print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+        #                 continue
+        #             else:
+        #                 break
+        #         except ValueError:
+        #             print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+        #
+        # ManagementView.camp_creation_message()
+        # # prompt for user capacity input
+        # camp_info = helper.validate_camp_input()
+        # if camp_info is not None:
+        #     c = Camp(camp_info[0], camp_info[2], '')
+        #     c.pass_camp_info(eventID, camp_info[1])
+        #     print("Camp created.")
+        #     self.admin_manage_camp()
+        # else:
+        #     self.startup()
 
     def delete_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
@@ -298,15 +262,27 @@ class Controller:
     def modify_camp(self):
         """This function is to modify camp info"""
 
-    def resource_main(self, username):
+    def admin_manage_volunteer(self):
+        pass
+
+    def admin_manage_resource(self):
+        pass
+
+    def admin_display_summary(self):
+        pass
+
+    def admin_edit_account(self):
+        pass
+
+    def resource_main(self):
         ManagementView.resource_main_message()
         while True:
             user_selection = input("\nAllocation mode: ")
 
             if user_selection == '1':
-                self.man_resource(username)
+                self.man_resource()
             elif user_selection == '2':
-                self.auto_resource(username)
+                self.auto_resource()
             else:
                 print("Invalid mode option entered!")
                 continue
@@ -316,7 +292,7 @@ class Controller:
             else:
                 break
 
-    def man_resource(self, username):
+    def man_resource(self):
         ManagementView.man_resource_message()
         index = helper.display_camp_list()
         res_man_info = helper.validate_man_resource(index)
@@ -325,11 +301,11 @@ class Controller:
             r = ResourceTest(res_man_info[0], '', '')
             r.manual_resource(res_man_info[2], res_man_info[1])
             print("Resource allocated as request.")
-            self.admin_manage_camp(username)
+            self.admin_manage_camp()
         else:
             return
 
-    def auto_resource(self, username):
+    def auto_resource(self):
         ManagementView.auto_resource_message()
         index = helper.display_camp_list()
 
@@ -352,127 +328,28 @@ class Controller:
         r = ResourceTest(select_index, select_pop, 0)
         r.calculate_resource()
         print("Auto resource allocation completed")
-        self.admin_manage_camp(username)
+        self.admin_manage_camp()
 
-    # def join_camp(self, username):
-    #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-    #     df = pd.read_csv(csv_path)
-    #
-    #     ManagementView.join_camp_message()
-    #     index = helper.display_camp_list()
-    #
-    #     while True:
-    #         select_index = int(input("\nindex: "))
-    #
-    #         if select_index not in index:
-    #             print("invalid index option entered!")
-    #             continue
-    #         try:
-    #             if select_index == 'RETURN':
-    #                 return
-    #         except:
-    #             return
-    #         break
-    #
-    #     event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
-    #     join_info = helper.validate_join()
-    #     if join_info is not None:
-    #         v = Volunteer(username, '', '', '', '', '', '', join_info)
-    #         v.join_camp(event_id, select_index)
-    #     return
-
-    def add_refugee(self, username):
-        df = helper.extract_data_df("data/user.csv")
-        user_type = df.loc[df['username'] == username]['userType'].tolist()[0]
-        df_c = helper.extract_data_df("data/camp.csv")
-        active_camp = df_c.loc[df_c['status'] == 'open']['campID'].tolist()
-        if user_type == 'admin':
-            csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-            df1 = helper.matched_rows_csv(csv_path, "status", 'open', "campID")
-            print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
-
-            cid = int(input("Enter a camp ID: "))
-            while True:
-                if cid not in active_camp:
-                    print("Invalid camp ID entered!")
-                    continue
-                break
-        else:
-            cid = df.loc[df['username'] == username]['campID'].tolist()[0]
-            # check if volunteer user already join a camp
-            if math.isnan(cid):
-                print("You must first join a camp!")
-                return
-            print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
-
-        ManagementView.create_refugee_message()
-        df_c = helper.extract_data_df("data/camp.csv")
-        # health risk level of volunteer's camp
-        lvl = df_c.loc[df_c['campID'] == cid]['healthRisk'].tolist()[0]
-
-        refugee_info = helper.validate_refugee(lvl)
-        if refugee_info is not None:
-            r = Refugee(refugee_info[0], refugee_info[1], refugee_info[2], refugee_info[3], refugee_info[4],
-                        refugee_info[5], refugee_info[6], refugee_info[7])
-            r.add_refugee_from_user_input(cid)
-        else:
-            return
-        print("Refugee created.")
-        self.admin_manage_camp(username)
-
-    def move_refugee(self):
-        rid = 0
-        helper.move_refugee_helper_method(rid)
-
-    def volunteer_main(self, username):
+    def volunteer_main(self):
         VolunteerView.login_message()
         VolunteerView.display_main_menu()
         user_selection = helper.validate_user_selection(VolunteerView.get_main_options())
         if user_selection == "1":
-            self.volunteer_join_change_camp(username)
+            self.volunteer_join_change_camp()
         if user_selection == "2":
-            self.volunteer_manage_camp(username)
+            self.volunteer_manage_camp()
         if user_selection == "3":
             pass
         if user_selection == "L":
             self.user = None
             self.startup()
 
-    def volunteer_join_change_camp(self, username):
-        csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-        df = pd.read_csv(csv_path)
-
-        ManagementView.join_camp_message()
-        index = helper.display_camp_list()
-
-        while True:
-            select_index = int(input("\nindex: "))
-
-            if select_index not in index:
-                print("invalid index option entered!")
-                continue
-            try:
-                if select_index == 'RETURN':
-                    return
-            except:
-                return
-            break
-
-        event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
-        join_info = helper.validate_join()
-        if join_info is not None:
-            v = Volunteer(username, '', '', '', '', '', '', join_info,
-                          event_id, select_index)
-            v.join_camp(event_id, select_index)
-        self.volunteer_main(username)
-
-    def volunteer_manage_camp(self, username):
+    def volunteer_manage_camp(self):
         VolunteerView.display_camp_menu()
         user_selection = helper.validate_user_selection(VolunteerView.get_camp_options())
         if user_selection == "1":
             # add refugee
-            self.add_refugee(username)
+            self.add_refugee()
         if user_selection == "2":
             # edit refugee
             pass
@@ -493,7 +370,7 @@ class Controller:
             pass
         if user_selection == "R":
             # return
-            self.volunteer_main(username)
+            self.volunteer_main()
         if user_selection == "L":
             self.user = None
             self.startup()
@@ -525,3 +402,104 @@ class Controller:
         if user_selection == "L":
             # logout
             pass
+
+    # def join_camp(self, username):
+    #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    #     df = pd.read_csv(csv_path)
+    #
+    #     ManagementView.join_camp_message()
+    #     index = helper.display_camp_list()
+    #
+    #     while True:
+    #         select_index = int(input("\nindex: "))
+    #
+    #         if select_index not in index:
+    #             print("invalid index option entered!")
+    #             continue
+    #         try:
+    #             if select_index == 'RETURN':
+    #                 return
+    #         except:
+    #             return
+    #         break
+    #
+    #     event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
+    #     join_info = helper.validate_join()
+    #     if join_info is not None:
+    #         v = Volunteer(username, '', '', '', '', '', '', join_info)
+    #         v.join_camp(event_id, select_index)
+    #     return
+
+    # def add_refugee(self):
+    #     df = helper.extract_data_df("data/user.csv")
+    #     user_type = df.loc[df['username'] == username]['userType'].tolist()[0]
+    #     df_c = helper.extract_data_df("data/camp.csv")
+    #     active_camp = df_c.loc[df_c['status'] == 'open']['campID'].tolist()
+    #     if user_type == 'admin':
+    #         csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    #         df1 = helper.matched_rows_csv(csv_path, "status", 'open', "campID")
+    #         print("\n*The following shows the info of all available events*\n")
+    #         print(df1[0])
+    #
+    #         cid = int(input("Enter a camp ID: "))
+    #         while True:
+    #             if cid not in active_camp:
+    #                 print("Invalid camp ID entered!")
+    #                 continue
+    #             break
+    #     else:
+    #         cid = df.loc[df['username'] == username]['campID'].tolist()[0]
+    #         # check if volunteer user already join a camp
+    #         if math.isnan(cid):
+    #             print("You must first join a camp!")
+    #             return
+    #         print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
+    #
+    #     ManagementView.create_refugee_message()
+    #     df_c = helper.extract_data_df("data/camp.csv")
+    #     # health risk level of volunteer's camp
+    #     lvl = df_c.loc[df_c['campID'] == cid]['healthRisk'].tolist()[0]
+    #
+    #     refugee_info = helper.validate_refugee(lvl)
+    #     if refugee_info is not None:
+    #         r = Refugee(refugee_info[0], refugee_info[1], refugee_info[2], refugee_info[3], refugee_info[4],
+    #                     refugee_info[5], refugee_info[6], refugee_info[7])
+    #         r.add_refugee_from_user_input(cid)
+    #     else:
+    #         return
+    #     print("Refugee created.")
+    #     self.admin_manage_camp()
+    #
+    # def move_refugee(self):
+    #     rid = 0
+    #     helper.move_refugee_helper_method(rid)
+    #
+
+    #
+    # def volunteer_join_change_camp(self):
+    #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    #     df = pd.read_csv(csv_path)
+    #
+    #     ManagementView.join_camp_message()
+    #     index = helper.display_camp_list()
+    #
+    #     while True:
+    #         select_index = int(input("\nindex: "))
+    #
+    #         if select_index not in index:
+    #             print("invalid index option entered!")
+    #             continue
+    #         try:
+    #             if select_index == 'RETURN':
+    #                 return
+    #         except:
+    #             return
+    #         break
+    #
+    #     event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
+    #     join_info = helper.validate_join()
+    #     if join_info is not None:
+    #         v = Volunteer(username, '', '', '', '', '', '', join_info,
+    #                       event_id, select_index)
+    #         v.join_camp(event_id, select_index)
+    #     self.volunteer_main()

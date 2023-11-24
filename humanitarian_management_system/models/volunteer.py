@@ -19,10 +19,11 @@ class Volunteer(User):
 
     @staticmethod
     def create_new_record(registration_info):
-        user_df = pd.DataFrame(data=[registration_info],
-                               columns=['userType', 'isActive', 'username', 'password', 'firstName',
-                                        'lastName', 'email', 'phone', 'occupation', 'roleID', 'eventID', 'campID'])
         csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        user_id = pd.read_csv(csv_path)['userID'].max() + 1
+        # insert user id into registration_info
+        registration_info.insert(0, user_id)
+        user_df = pd.DataFrame(data=[registration_info])
         # Pass assign values into .csv file
         user_df.to_csv(csv_path, mode='a', index=False, header=False)
 

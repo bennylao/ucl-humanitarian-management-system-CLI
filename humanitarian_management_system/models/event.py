@@ -37,22 +37,26 @@ class Event:
     #     pass
 
     # Access user input info from helper function and pass them into .csv file(s)
+    @staticmethod
+    def create_new_record(event_info):
+        """
+        This is the function to create a new event and write new record into csv file.
+        """
+        event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+        event_id = pd.read_csv(event_csv_path)['eid'].max() + 1
+        # insert user id into registration_info
+        event_info.insert(0, event_id)
+        event_df = pd.DataFrame(data=[event_info],
+                                columns=['eid', 'ongoing', 'title', 'location', 'description', 'no_camp',
+                                         'startDate', 'endDate'])
+        event_df.to_csv(event_csv_path, mode='a', index=False, header=False)
 
-    def pass_event_info(self, eid):
-
-        if ((self.end_date == None and self.start_date.date() <= datetime.date.today())
-                or (self.start_date.date() <= datetime.date.today() and self.end_date.date() >= datetime.date.today())):
-            self.ongoing = True
-        else:
-            self.ongoing = False
-
-        Event.event_data = [
-            [eid, self.ongoing, self.title, self.location, self.description, self.no_camp, self.start_date, self.end_date]]
-        event_df = pd.DataFrame(Event.event_data,
-                                columns=['eid', 'ongoing', 'title', 'location', 'description', 'no_camp', 'startDate',
-                                         'endDate'])
-        with open('data/eventTesting.csv', 'a') as f:
-            event_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+    @staticmethod
+    def get_all_active_events():
+        event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+        df = pd.read_csv(event_csv_path)
+        active_events_df = df[(df['ongoing'] == True) & (pd.to_datetime(df['endDate']).dt.date > datetime.date.today())]
+        return active_events_df
 
     @staticmethod
     def edit_event_info():
@@ -286,7 +290,7 @@ class Event:
         for index, series in df.iterrows():
             try:
                 startDate = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
-            except ValueError: # startDate may exist this error only when entering None in creating an event
+            except ValueError:  # startDate may exist this error only when entering None in creating an event
                 startDate = None
             try:
                 endDate = datetime.datetime.strptime(str(series['endDate']), '%Y-%m-%d')
@@ -294,7 +298,7 @@ class Event:
                 endDate = None
 
             if ((endDate == None and startDate.date() <= datetime.date.today()) or
-                (startDate.date() <= datetime.date.today() and endDate.date() >= datetime.date.today())):
-                helper.modify_csv_value(event_csv_path, series['eid']-1, 'ongoing', True)
+                    (startDate.date() <= datetime.date.today() and endDate.date() >= datetime.date.today())):
+                helper.modify_csv_value(event_csv_path, series['eid'] - 1, 'ongoing', True)
             else:
-                helper.modify_csv_value(event_csv_path, series['eid']-1, 'ongoing', False)
+                helper.modify_csv_value(event_csv_path, series['eid'] - 1, 'ongoing', False)
