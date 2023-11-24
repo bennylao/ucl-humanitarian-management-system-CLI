@@ -10,3 +10,4 @@ refugeeID,campID,firstName,lastName,dob,gender,familyID
 9,5,vf,vl,1995-08-05,male,2
 10,6,hf,hl,2000-05-02,female,5
 11,6,vf,vl,1994-08-07,female,3
+12,9,newFirst,newLast,1997-09-15,male,5

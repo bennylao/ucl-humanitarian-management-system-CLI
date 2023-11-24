@@ -146,28 +146,28 @@ def validate_event_input():
         else:
             break
 
-    while True:
-        try:
-            no_camp = input("\nCamp Number (positive integers separated by commas): ")
-            if no_camp == 'RETURN':
-                return
-            elif no_camp == 'NONE':
-                no_camp = None
-                break
-            else:
-                num_list = [int(num) for num in no_camp.split(',')]
-                if all(num > 0 for num in num_list):
-                    # Also no_camp cannot exceed the total number of camps
-                    # Add it after camp.py finished.
-                    num_list = sorted(set(num_list))
-                    no_camp = ','.join(map(str, num_list))
-                    break
-                else:
-                    print("\nInvalid camp number entered.")
-                    continue
-        except ValueError:
-            print("\nInvalid camp number entered.")
-            continue
+    # while True:
+    #     try:
+    #         no_camp = input("\nCamp Number (positive integers separated by commas): ")
+    #         if no_camp == 'RETURN':
+    #             return
+    #         elif no_camp == 'NONE':
+    #             no_camp = None
+    #             break
+    #         else:
+    #             num_list = [int(num) for num in no_camp.split(',')]
+    #             if all(num > 0 for num in num_list):
+    #                 # Also no_camp cannot exceed the total number of camps
+    #                 # Add it after camp.py finished.
+    #                 num_list = sorted(set(num_list))
+    #                 no_camp = ','.join(map(str, num_list))
+    #                 break
+    #             else:
+    #                 print("\nInvalid camp number entered.")
+    #                 continue
+    #     except ValueError:
+    #         print("\nInvalid camp number entered.")
+    #         continue
 
     while True:
         try:
@@ -197,7 +197,7 @@ def validate_event_input():
             print("\nInvalid date format entered.")
             continue
 
-    return [title, location, description, no_camp, start_date, end_date, eid]
+    return [title, location, description, 0, start_date, end_date, eid]
 
 
 def validate_camp_input():
@@ -240,13 +240,13 @@ def validate_camp_input():
     return capacity, campID, risk
 
 
-def validate_join():
+def validate_join():  # volunteer joining a camp
     index = extract_data("data/roleType.csv", "roleID").tolist()
     role = extract_data("data/roleType.csv", "name")
 
     print("Please select a camp role by its index.")
-    for i in index[1:]:
-        print(f''' index: {i} | {role.iloc[i]} ''')
+    for i in index:
+        print(f''' index: {i} | {role.iloc[i-1]} ''')
     while True:
         user_input = input("\nEnter index: ")
         if int(user_input) not in index[1:]:
@@ -501,3 +501,18 @@ def validate_refugee(lvl):
             break
 
     return family_id, f_name, l_name, dob, gender, int(med), med_des, vacc
+
+
+def move_refugee_helper_method(rid):
+    new_camp = int(input("Please enter the campID for the camp you wish to move this refugee to: "))
+    ref_df = pd.read_csv("data/refugee.csv")
+    camp_df = pd.read_csv('data/camp.csv')
+
+    if camp_df['campID'].eq(new_camp).any():
+        # row_index = ref_df[ref_df['refugeeID'] == rid].index[0]
+        with open("data/refugee.csv", 'a') as f:
+            ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+        modify_csv_value("data/refugee.csv", rid + 1, "campID", new_camp)
+    else:
+        print("Sorry. That campID doesn't exist.")
+        move_refugee_helper_method(rid)
