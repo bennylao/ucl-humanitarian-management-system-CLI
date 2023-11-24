@@ -15,6 +15,7 @@ class ResourceTest():
         self.total_pop = total_pop
 
     def calculate_resource(self):
+        # get id of resources 
         item_id = extract_data("data/resourceStock.csv", "resourceID").tolist()
 
         # extract total refugee pop for all active plans
@@ -89,6 +90,54 @@ class ResourceTest():
                     if set_amount == 0:
                         self.pass_resource_info(int(stock), self.campID, i, 0)
                     self.pass_resource_info(set_amount, self.campID, i, new_stock)
+
+    # Setting the gold standard for what should be the 'equilibrium' level
+    def calculate_resource_jess(self):
+
+        # resource stock total...
+        totalResources = extract_data_df("data/resourceStock.csv")
+
+        # resource stock total...
+        camp = extract_data_df("data/camp.csv")
+
+        # extract total refugee population
+        pop_arr = extract_data("data/camp.csv", "refugeePop").tolist() # per camp
+        totalRefugees = sum(pop_arr)
+
+        # this is the current allocation. not the gold standard one.. 
+        alloc_current = extract_data_df("data/resourceAllocation.csv")
+
+        # but we can overwrite ... 
+        alloc_ideal = alloc_current
+        alloc_ideal.columns.values[2] = 'ideal_qty'
+
+        for index, row in alloc_ideal.iterrows():
+            # going through each row of the dataframe...
+            r_id = row['resourceID'] # use this to get the corresponding total in resourceStock
+            r_stock_amt = totalResources.loc[totalResources['resourceID'] == r_id, 'total'].iloc[0]
+
+            c_id = row['campID'] # use this to get the corresponding total in camp
+            c_refugee_amt = camp.loc[camp['campID'] == c_id, 'refugeePop'].iloc[0]
+            # print(c_refugee_amt / totalRefugees * r_stock_amt)
+
+            # Calculate what the ideal amount should be...
+            ideal_qty_value = (c_refugee_amt / totalRefugees) * r_stock_amt
+
+            # Printing out the details in a readable format
+            print(f"Row Index: {index}")
+            print(f"Resource ID: {r_id}, Stock Amount: {r_stock_amt}")
+            print(f"Camp ID: {c_id}, Refugee Amount: {c_refugee_amt}")
+            print(f"Ideal Quantity Value: {ideal_qty_value}")
+            print("-" * 50)  # Separator for readability
+
+
+            # Assign the calculated value to the specific row in 'ideal_qty' column
+            alloc_ideal.at[index, 'ideal_qty'] = ideal_qty_value
+        
+        return alloc_ideal
+
+
+
 
     def pass_resource_info(self, set_amount, campID, resourceID, new_stock):
 
