@@ -4,6 +4,8 @@
 # location input against this and get user to ONLY input valid COUNTRY
 from pathlib import Path
 
+import numpy as np
+
 from humanitarian_management_system import helper
 import datetime
 import pandas as pd
@@ -55,7 +57,8 @@ class Event:
     def get_all_active_events():
         event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
         df = pd.read_csv(event_csv_path)
-        active_events_df = df[(df['ongoing'] == True) & (pd.to_datetime(df['endDate']).dt.date > datetime.date.today())]
+        print(df)
+        active_events_df = df[(df['ongoing'] == True) & ((pd.to_datetime(df['endDate']).dt.date > datetime.date.today()) | (pd.isna(df['endDate'])))]
         return active_events_df
 
     @staticmethod

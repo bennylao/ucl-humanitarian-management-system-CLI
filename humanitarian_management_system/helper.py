@@ -107,7 +107,6 @@ def validate_registration(usernames):
 def validate_event_input():
     countries_csv_path = Path(__file__).parent.joinpath("data/country.csv")
     all_countries = pd.read_csv(countries_csv_path)['name'].tolist()
-    print(all_countries)
 
     date_format = '%d/%m/%Y'  # Use for validating user entered date format
     while True:

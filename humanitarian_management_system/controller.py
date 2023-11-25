@@ -1,4 +1,3 @@
-import sys
 import time
 from pathlib import Path
 import pandas as pd
@@ -188,23 +187,30 @@ class Controller:
         ManagementView.camp_creation_message()
         active_event_df = Event.get_all_active_events()
         Event.display_events(active_event_df)
-        allowed_event_id = active_event_df['eid'].tolist()
-        while True:
-            selected_event_id = input("\nPlease Enter the Event ID of which you want to create new camp in: ")
-            if selected_event_id == "RETURN":
-                break
-            elif selected_event_id in allowed_event_id:
-                break
-            else:
-                print(f"Invalid input! Please enter an integer from {allowed_event_id} for Event ID.")
-        while True:
-            refugee_capacity = input("\nPlease Enter the camp capacity: ")
-            if refugee_capacity == "RETURN":
-                break
-            elif int(refugee_capacity) > 0:
-                break
-            else:
-                print("Please enter a positive integer")
+        active_index = helper.extract_active_event()[0]
+
+        # check if active event is 0
+        if len(active_index) == 0:
+            print("No relevant events to select from.")
+            return
+        else:
+            # read the event csv file and extract all available events
+            csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+            df1 = helper.matched_rows_csv(csv_path, "ongoing", True, "eid")
+            print("\n*The following shows the info of all available events*\n")
+            print(df1[0])
+
+            # validate input for user select index
+            while True:
+                try:
+                    eventID = int(input("\nEnter Event ID: "))
+                    if eventID not in df1[1]:
+                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
 
     def delete_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
