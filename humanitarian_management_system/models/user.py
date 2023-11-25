@@ -32,11 +32,35 @@ class User:
         df.loc[df['userID'] == str(self.user_id), 'lastName'] = self.last_name
         df.to_csv(user_csv_path, index=False)
 
+    def update_email(self):
+        user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path, dtype="string")
+        df.loc[df['userID'] == str(self.user_id), 'email'] = self.email
+        df.to_csv(user_csv_path, index=False)
+
+    def update_phone(self):
+        user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path, dtype="string")
+        df.loc[df['userID'] == str(self.user_id), 'phone'] = self.phone
+        df.to_csv(user_csv_path, index=False)
+
+    def update_occupation(self):
+        user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path, dtype="string")
+        df.loc[df['userID'] == str(self.user_id), 'occupation'] = self.occupation
+        df.to_csv(user_csv_path, index=False)
+
     @staticmethod
     def get_all_usernames():
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path)
         return df["username"].tolist()
+
+    @staticmethod
+    def get_all_emails():
+        user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path)
+        return df["email"].tolist()
 
     @staticmethod
     def get_all_login_info():

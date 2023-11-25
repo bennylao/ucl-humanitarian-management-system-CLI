@@ -5,4 +5,4 @@ userID,userType,isActive,username,password,firstName,lastName,email,phone,occupa
 3,volunteer,False,volunteer3,111,volunteer3FirstName,volunteer3LastName,volunteer3Email,7701230987,volunteer3Occupation,3,7,3
 4,volunteer,True,volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,6,8,9
 5,admin,True,a,111,admin2FirstName,admin2LastName,admin2Email,2012345678,admin2Occupation,0,0,0
-6,volunteer,True,v,111,benny,lao,volunteer4Email,7707654321,volunteer4Occupation,1,1,1
+6,volunteer,True,v,111,benny,lao,bennylao@gmail.com,77081231241234,teacher,1,1,1

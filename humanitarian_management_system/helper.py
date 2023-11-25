@@ -29,12 +29,10 @@ def validate_registration(usernames):
             return
         elif username in usernames:
             print("Sorry, username already exists.")
-            continue
         elif username.isalnum():
             break
         else:
             print("Invalid username entered. Only alphabet letter (a-z) and numbers (0-9) are allowed.")
-            continue
     # check for password
     while True:
         password = input("\nEnter password: ")
@@ -45,7 +43,6 @@ def validate_registration(usernames):
         else:
             print("Invalid password entered.\n"
                   "Only alphabet, numbers and !@#$%^&* are allowed.")
-            continue
     # check for first name
     while True:
         first_name = input("\nEnter first name: ")
@@ -59,7 +56,6 @@ def validate_registration(usernames):
         else:
             print("Invalid first name entered.\n"
                   "Only alphabet are allowed.")
-            continue
     # check for last name
     while True:
         last_name = input("\nEnter last name: ")
@@ -72,7 +68,6 @@ def validate_registration(usernames):
         else:
             print("Invalid last name entered.\n"
                   "Only alphabet are allowed.")
-            continue
     # check for email
     while True:
         email = input("\nEnter email: ")
@@ -82,7 +77,6 @@ def validate_registration(usernames):
             break
         else:
             print("Invalid email entered.")
-            continue
     # check for phone
     while True:
         phone = input("\nEnter phone number: ")
@@ -93,7 +87,6 @@ def validate_registration(usernames):
         else:
             print("Invalid phone number entered.\n"
                   "Only numbers are allowed.")
-            continue
     # check for occupation
     while True:
         occupation = input("\nEnter occupation: ")
@@ -104,7 +97,6 @@ def validate_registration(usernames):
         else:
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
-            continue
 
     return ["volunteer", "TRUE", username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
 

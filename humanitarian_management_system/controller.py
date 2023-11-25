@@ -369,13 +369,13 @@ class Controller:
                 self.user_change_name()
             if user_selection == "4":
                 # change email
-                pass
+                self.user_change_email()
             if user_selection == "5":
                 # change phone
-                pass
+                self.user_change_phone()
             if user_selection == "6":
                 # change occupation
-                pass
+                self.user_change_occupation()
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -385,7 +385,7 @@ class Controller:
 
     def user_change_username(self):
         existing_usernames = User.get_all_usernames()
-        print(f"\nCurrent Username: {self.user.username}")
+        print(f"\nCurrent Username: '{self.user.username}'")
         while True:
             new_username = input("\nPlease enter your new username: ")
             if new_username == "RETURN":
@@ -394,7 +394,8 @@ class Controller:
                 self.user.username = new_username
                 # update csv file
                 self.user.update_username()
-                print("\nUsername changed successfully.")
+                print("\nUsername changed successfully."
+                      f"\nYour new username is '{self.user.username}'.")
                 break
             elif new_username in existing_usernames:
                 print("\nSorry, username already exists.")
@@ -464,6 +465,66 @@ class Controller:
                 print("\nName changed successfully."
                       f"\nYour new name is '{self.user.first_name} {self.user.last_name}'.")
                 break
+
+    def user_change_email(self):
+        # specify allowed characters for email
+        email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+        all_emails = User.get_all_emails()
+        print(f"\nCurrent Email: {self.user.email}")
+
+        while True:
+            new_email = input("Please enter new email: ")
+            if new_email == "RETURN":
+                return
+            elif new_email == self.user.email:
+                print("\n The new email is the same as current email!"
+                      "Please enter a new one.")
+                continue
+            elif re.fullmatch(email_format, new_email) and new_email not in all_emails:
+                self.user.email = new_email
+                # update csv file
+                self.user.update_email()
+                print("\nEmail changed successfully."
+                      f"\nYour new username is '{self.user.email}'.")
+                break
+            elif new_email in all_emails:
+                print("\nSorry, email is already linked to other account.")
+            else:
+                print("Invalid password entered.\n"
+                      "Only alphabet, numbers and !@#$%^&* are allowed.")
+                continue
+
+    def user_change_phone(self):
+        print(f"\nCurrent Phone Number: {self.user.phone}")
+        while True:
+            new_phone = input("\nPlease enter new phone number: ")
+            if new_phone == 'RETURN':
+                return
+            elif new_phone.isnumeric():
+                break
+            else:
+                print("Invalid phone number entered. Only numbers are allowed.")
+        self.user.phone = new_phone
+        # update the csv file
+        self.user.update_phone()
+        print("\nPhone changed successfully."
+              f"\nYour new phone is '{self.user.phone}")
+
+    def user_change_occupation(self):
+        print(f"\nCurrent Occupation: {self.user.occupation}")
+        while True:
+            new_occupation = input("\nPlease enter your new occupation: ")
+            if new_occupation == "RETURN":
+                return
+            elif new_occupation.isalpha():
+                self.user.occupation = new_occupation
+                # update the csv file
+                self.user.update_occupation()
+                print("\nName changed successfully."
+                      f"\nYour new occupation is '{self.user.occupation}'.")
+                break
+            else:
+                print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
 
     def admin_display_summary(self):
         pass
