@@ -17,7 +17,7 @@ def validate_user_selection(options):
 
 
 def validate_registration(usernames):
-    # specify allowed characters for username
+    # specify allowed characters for passwords
     allowed_chars = r"[!@#$%^&*\w]"
     # specify allowed email format
     email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
@@ -33,7 +33,7 @@ def validate_registration(usernames):
         elif username.isalnum():
             break
         else:
-            print("Invalid username entered.")
+            print("Invalid username entered. Only alphabet letter (a-z) and numbers (0-9) are allowed.")
             continue
     # check for password
     while True:
@@ -52,6 +52,9 @@ def validate_registration(usernames):
         if first_name == 'RETURN':
             return
         elif first_name.replace(" ", "").isalpha():
+            # remove extra whitespaces between words in first name
+            # for example: "  Chon   Hou  " -> "Chon Hou"
+            first_name = ' '.join(first_name.split())
             break
         else:
             print("Invalid first name entered.\n"
@@ -63,6 +66,8 @@ def validate_registration(usernames):
         if last_name == 'RETURN':
             return
         elif last_name.replace(" ", "").isalpha():
+            # remove extra whitespaces between words in last name
+            last_name = ' '.join(last_name.split())
             break
         else:
             print("Invalid last name entered.\n"

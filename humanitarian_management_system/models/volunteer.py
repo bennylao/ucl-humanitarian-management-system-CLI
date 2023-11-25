@@ -1,21 +1,25 @@
 import pandas as pd
-from humanitarian_management_system.helper import extract_data, modify_csv_pandas
+from humanitarian_management_system import helper
 from pathlib import Path
 from .user import User
 
 
 class Volunteer(User):
 
-    def __init__(self, username, password, first_name, last_name, email, phone, occupation, role_id, event_id, camp_id):
-        super().__init__(username, password)
-        self.first_name = first_name
-        self.last_name = last_name
-        self.phone = phone
-        self.email = email
-        self.occupation = occupation
+    def __init__(self, user_id, username, password, first_name, last_name, email, phone, occupation,
+                 role_id, event_id, camp_id):
+        super().__init__(user_id, username, password, first_name, last_name, email, phone, occupation)
         self.role_id = role_id
         self.event_id = event_id
         self.camp_id = camp_id
+
+    def show_account_info(self):
+        user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path)
+        sub_df = df.loc[df['userID'] == int(self.user_id), ['username', 'firstName', 'lastName', 'email',
+                                                            'phone', 'occupation', 'roleID', 'eventID', 'campID']]
+        table_str = sub_df.to_markdown(index=False)
+        print("\n" + table_str)
 
     @staticmethod
     def create_new_record(registration_info):
@@ -31,19 +35,16 @@ class Volunteer(User):
         csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
         df = pd.read_csv(csv_path)
 
-        modify_csv_pandas("data/user.csv", "username", self.username, "campID", camp_id)
-        modify_csv_pandas("data/user.csv", "username", self.username, "eventID", event_id)
-        modify_csv_pandas("data/user.csv", "username", self.username, "roleID", self.role_id)
+        helper.modify_csv_pandas("data/user.csv", "username", self.username, "campID", camp_id)
+        helper.modify_csv_pandas("data/user.csv", "username", self.username, "eventID", event_id)
+        helper.modify_csv_pandas("data/user.csv", "username", self.username, "roleID", self.role_id)
 
         # update volunteer population for camp
         Volunteer.total_number = int(df.loc[df['campID'] == camp_id]['volunteerPop'].tolist()[0])
         Volunteer.total_number += 1
-        modify_csv_pandas("data/camp.csv", "campID", camp_id, "volunteerPop",
+        helper.modify_csv_pandas("data/camp.csv", "campID", camp_id, "volunteerPop",
                           Volunteer.total_number)
         print("Join/change camp completed.")
-
-    def edit_personal_info(self):
-        pass
 
     def edit_camp_info(self):
         # Should this sit in the camp class & be called by volunteer?

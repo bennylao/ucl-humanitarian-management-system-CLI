@@ -1,6 +1,7 @@
 import time
 from pathlib import Path
 import pandas as pd
+import re
 import math
 
 from humanitarian_management_system import helper
@@ -34,8 +35,7 @@ class Controller:
             if user_selection == "2":
                 # register
                 is_register_successful = self.register()
-                # if registration is successful, direct user to login page
-                # otherwise, return to startup menu
+                # if registration is successful, direct user to login page. Otherwise, return to startup menu
                 if is_register_successful:
                     self.login()
             if user_selection == "x":
@@ -90,16 +90,17 @@ class Controller:
             print("\n***   Login Successful!   ***")
             if user_info['userType'] == "admin":
                 # self.user is now an object of admin
-                self.user = Admin(*user_info[3:10])
+                self.user = Admin(user_info['userID'], *user_info[3:10])
                 print("You are now logged in as Admin.")
                 self.admin_main()
             else:
                 # self.user is not an object of volunteer
-                self.user = Volunteer(*user_info[3:])
+                self.user = Volunteer(user_info['userID'], *user_info[3:])
                 print("You are now logged in as Volunteer.")
                 self.volunteer_main()
 
     def admin_main(self):
+        AdminView.display_login_message(self.user.username)
         while True:
             AdminView.display_menu()
             user_selection = helper.validate_user_selection(AdminView.get_main_options())
@@ -115,7 +116,9 @@ class Controller:
             elif user_selection == "5":
                 self.admin_display_summary()
             elif user_selection == "6":
-                self.admin_edit_account()
+                self.user_edit_account()
+            elif user_selection == "7":
+                self.user.show_account_info()
             # log out if user has selected "L" or self.logout_request is True
             if user_selection == "L" or self.logout_request is True:
                 self.user = None
@@ -134,7 +137,7 @@ class Controller:
             if user_selection == "4":
                 self.admin_delete_event()
             if user_selection == "5":
-                # display events
+                # display all events
                 pass
             if user_selection == "R":
                 break
@@ -143,30 +146,30 @@ class Controller:
                 self.logout_request = True
                 break
 
-    def admin_create_event(self):
+    @staticmethod
+    def admin_create_event():
         ManagementView.event_creation_message()
         event_info = helper.validate_event_input()
         if event_info is not None:
             Event.create_new_record(event_info)
             print("Event created.")
-            self.admin_manage_event()
         else:
             return
 
-    def admin_edit_event(self):
+    @staticmethod
+    def admin_edit_event():
         ManagementView.event_edit_message()
         Event.edit_event_info()
-        self.admin_manage_event()
 
-    def admin_delete_event(self):
+    @staticmethod
+    def admin_delete_event():
         ManagementView.event_delete_message()
         Event.delete_event()
-        self.admin_manage_event()
 
-    def admin_close_event(self):
+    @staticmethod
+    def admin_close_event():
         ManagementView.event_close_message()
         Event.disable_ongoing_event()
-        self.admin_manage_event()
 
     def admin_manage_camp(self):
         while True:
@@ -180,13 +183,12 @@ class Controller:
             if user_selection == "3":
                 self.delete_camp()
             if user_selection == "4":
-                self.resource_main()
-            if user_selection == "5":
                 self.add_refugee()
-            if user_selection == "6":
+            if user_selection == "5":
                 self.move_refugee()
-            if user_selection == "7":
-                pass  # display all camps
+            if user_selection == "6":
+                # display all camps
+                pass
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -222,6 +224,10 @@ class Controller:
                         break
                 except ValueError:
                     print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+
+    def admin_modify_camp(self):
+        """This function is to modify camp info"""
+        pass
 
     def delete_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
@@ -286,21 +292,6 @@ class Controller:
                 except ValueError:
                     print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
 
-    def modify_camp(self):
-        """This function is to modify camp info"""
-
-    def admin_manage_volunteer(self):
-        pass
-
-    def admin_manage_resource(self):
-        pass
-
-    def admin_display_summary(self):
-        pass
-
-    def admin_edit_account(self):
-        pass
-
     def resource_main(self):
         ManagementView.resource_main_message()
         while True:
@@ -357,17 +348,143 @@ class Controller:
         print("Auto resource allocation completed")
         self.admin_manage_camp()
 
-    def volunteer_main(self):
+    def admin_manage_volunteer(self):
+        pass
+
+    def admin_manage_resource(self):
+        pass
+
+    def user_edit_account(self):
         while True:
-            VolunteerView.login_message()
+            VolunteerView.display_account_menu()
+            user_selection = helper.validate_user_selection(VolunteerView.get_account_options())
+            if user_selection == "1":
+                # change username
+                self.user_change_username()
+            if user_selection == "2":
+                # change password
+                self.user_change_password()
+            if user_selection == "3":
+                # change name
+                self.user_change_name()
+            if user_selection == "4":
+                # change email
+                pass
+            if user_selection == "5":
+                # change phone
+                pass
+            if user_selection == "6":
+                # change occupation
+                pass
+            if user_selection == "R":
+                break
+            if user_selection == "L":
+                self.user = None
+                self.logout_request = True
+                break
+
+    def user_change_username(self):
+        existing_usernames = User.get_all_usernames()
+        print(f"\nCurrent Username: {self.user.username}")
+        while True:
+            new_username = input("\nPlease enter your new username: ")
+            if new_username == "RETURN":
+                return
+            elif new_username not in existing_usernames and new_username.isalnum():
+                self.user.username = new_username
+                # update csv file
+                self.user.update_username()
+                print("\nUsername changed successfully.")
+                break
+            elif new_username in existing_usernames:
+                print("\nSorry, username already exists.")
+                continue
+            else:
+                print("\nInvalid username entered. Only alphabet letter (Aa-Zz) and numbers (0-9) are allowed.")
+                continue
+
+    def user_change_password(self):
+        # specify allowed characters for passwords
+        allowed_chars = r"[!@#$%^&*\w]"
+        while True:
+            new_password = input("Please enter new password: ")
+            if new_password == "RETURN":
+                return
+            elif new_password == self.user.password:
+                print("\n The new password is the same as current password!"
+                      "Please enter a new one.")
+                continue
+            elif re.match(allowed_chars, new_password):
+                confirm_password = input("Please enter the new password again: ")
+                if confirm_password == "RETURN":
+                    return
+                elif confirm_password == new_password:
+                    self.user.password = new_password
+                    # update csv file
+                    self.user.update_password()
+                    print("\nPassword changed successfully.")
+                    break
+                else:
+                    print("The two passwords are not the same!")
+            else:
+                print("Invalid password entered.\n"
+                      "Only alphabet, numbers and !@#$%^&* are allowed.")
+                continue
+
+    def user_change_name(self):
+        print(f"\nCurrent Name: {self.user.first_name} {self.user.last_name}")
+        while True:
+            while True:
+                new_first_name = input("\nPlease enter your new first name: ")
+                if new_first_name == "RETURN":
+                    return
+                elif new_first_name.replace(" ", "").isalpha():
+                    break
+                else:
+                    print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
+            while True:
+                new_last_name = input("\nPlease enter your new last name: ")
+                if new_last_name == "RETURN":
+                    return
+                elif new_last_name.replace(" ", "").isalpha():
+                    break
+                else:
+                    print("\nInvalid last name entered. Only alphabet letter (a-z) are allowed.")
+
+            if new_first_name == self.user.first_name and new_last_name == self.user.last_name:
+                print("\nYour new name is the same as your current name!"
+                      "Please enter a new name, or enter 'RETURN' to discard the changes and go back")
+            else:
+                # remove extra whitespaces between words in first name
+                self.user.first_name = ' '.join(new_first_name.split())
+                # remove extra whitespaces between words in last name
+                self.user.last_name = ' '.join(new_last_name.split())
+                # update the csv file
+                self.user.update_name()
+                print("\nName changed successfully."
+                      f"\nYour new name is '{self.user.first_name} {self.user.last_name}'.")
+                break
+
+    def admin_display_summary(self):
+        pass
+
+    def volunteer_main(self):
+        VolunteerView.display_login_message(self.user.username)
+        while True:
             VolunteerView.display_main_menu()
             user_selection = helper.validate_user_selection(VolunteerView.get_main_options())
             if user_selection == "1":
+                # join/change camp
                 self.volunteer_join_change_camp()
             if user_selection == "2":
+                # manage camp
                 self.volunteer_manage_camp()
             if user_selection == "3":
-                pass
+                # edit personal account
+                self.user_edit_account()
+            if user_selection == "4":
+                # show personal information
+                self.volunteer_show_account_info()
             # log out if user has selected "L" or self.logout_request is True
             if user_selection == "L" or self.logout_request is True:
                 self.user = None
@@ -405,34 +522,8 @@ class Controller:
                 self.logout_request = True
                 break
 
-    def volunteer_edit_account(self):
-        while True:
-            VolunteerView.display_account_menu()
-            user_selection = helper.validate_user_selection(VolunteerView.get_account_options())
-            if user_selection == "1":
-                # change username
-                pass
-            if user_selection == "2":
-                # change password
-                pass
-            if user_selection == "3":
-                # change name
-                pass
-            if user_selection == "4":
-                # change email
-                pass
-            if user_selection == "5":
-                # change phone
-                pass
-            if user_selection == "6":
-                # change occupation
-                pass
-            if user_selection == "R":
-                break
-            if user_selection == "L":
-                self.user = None
-                self.logout_request = True
-                break
+    def volunteer_show_account_info(self):
+        self.user.show_account_info()
 
     # def join_camp(self):
     #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
