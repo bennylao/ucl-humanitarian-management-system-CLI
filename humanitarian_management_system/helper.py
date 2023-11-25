@@ -237,7 +237,7 @@ def validate_join():  # volunteer joining a camp
 
     print("Please select a camp role by its index.")
     for i in index:
-        print(f''' index: {i} | {role.iloc[i-1]} ''')
+        print(f''' index: {i} | {role.iloc[i - 1]} ''')
     while True:
         user_input = input("\nEnter index: ")
         if int(user_input) not in index[1:]:
@@ -294,6 +294,7 @@ def extract_data_df(csv):
     df = pd.read_csv(csv_path)
     return df
 
+
 def extract_active_event():
     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
     df = pd.read_csv(csv_path)
@@ -306,6 +307,7 @@ def extract_active_event():
             active_id.append(data['eid'].iloc[i])
 
     return active_id, df
+
 
 def display_camp_list():
     index = []
@@ -336,6 +338,7 @@ def display_camp_list():
                 | location: {location} | Capacity: {capacity} | Refugee population: {r_pop} | End date: {end_date} * ''')
 
     return index
+
 
 def validate_man_resource(index):
     df = extract_data_df("data/resourceStock.csv")

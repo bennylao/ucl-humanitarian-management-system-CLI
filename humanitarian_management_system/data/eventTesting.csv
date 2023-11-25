@@ -7,5 +7,5 @@ eid,ongoing,title,location,description,no_camp,startDate,endDate
 6,False,jasontest1,hong kong,jasondes1,0,2023-12-12,2024-04-12
 7,True,cutiepietest,china,cutieDes,2,2023-11-19,2024-04-20
 8,True,jasontest2,egypt,random2,2,2023-11-21,2023-12-01
-9,False,newtest,ukraine,newblabla,0,2023-11-25,2024-06-04
+9,True,newtest,ukraine,newblabla,0,2023-11-25,2024-06-04
 10,False,sldkajf,Macau,sldkajs,0,2023-12-10,2024-12-10
