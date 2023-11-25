@@ -130,10 +130,11 @@ class Controller:
             if user_selection == "2":
                 self.admin_edit_event()
             if user_selection == "3":
-                # remove event
-                pass
+                self.admin_close_event()
             if user_selection == "4":
-                # display all events
+                self.admin_delete_event()
+            if user_selection == "5":
+                # display events
                 pass
             if user_selection == "R":
                 break
@@ -152,10 +153,20 @@ class Controller:
         else:
             return
 
-    @staticmethod
-    def admin_edit_event():
+    def admin_edit_event(self):
         ManagementView.event_edit_message()
         Event.edit_event_info()
+        self.admin_manage_event()
+
+    def admin_delete_event(self):
+        ManagementView.event_delete_message()
+        Event.delete_event()
+        self.admin_manage_event()
+
+    def admin_close_event(self):
+        ManagementView.event_close_message()
+        Event.disable_ongoing_event()
+        self.admin_manage_event()
 
     def admin_manage_camp(self):
         while True:

@@ -20,6 +20,22 @@ class ManagementView:
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod
+    def event_close_message():
+        print("\n========================================\n"
+              "               Event CLOSE\n"
+              "========================================\n"
+              "Please fill in all the following information below.\n"
+              "Or enter 'RETURN' to go back to admin menu page.")
+
+    @staticmethod
+    def event_delete_message():
+        print("\n========================================\n"
+              "               Event DELETION\n"
+              "========================================\n"
+              "Please fill in all the following information below.\n"
+              "Or enter 'RETURN' to go back to admin menu page.")
+
+    @staticmethod
     def camp_main_message():
         print("\n========================================\n"
               "           Camp MANAGEMENT\n"

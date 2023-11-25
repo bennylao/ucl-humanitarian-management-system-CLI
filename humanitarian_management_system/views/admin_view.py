@@ -16,8 +16,9 @@ class AdminView:
     manage_event_menu = (
         ("1", "Create new event"),
         ("2", "Edit event"),
-        ("3", "Remove event"),
-        ("4", "Display all events"),
+        ("3", "Close event"),
+        ("4", "Delete event"),
+        ("5", "Display all events"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )

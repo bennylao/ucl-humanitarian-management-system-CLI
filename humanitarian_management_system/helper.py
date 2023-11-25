@@ -187,7 +187,15 @@ def validate_event_input():
             print("\nInvalid date format entered.")
             continue
 
-    return [True, title, location, description, 0, start_date, end_date]
+    if ((end_date == None and start_date.date() <= datetime.date.today())
+            or (start_date.date() <= datetime.date.today() and end_date.date() >= datetime.date.today())):
+        ongoing = True
+    elif start_date.date() > datetime.date.today():
+        ongoing = 'Yet'
+    else:
+        ongoing = False
+
+    return [ongoing, title, location, description, 0, start_date, end_date]
 
 
 def validate_camp_input():
