@@ -43,7 +43,7 @@ class Volunteer(User):
         Volunteer.total_number = int(df.loc[df['campID'] == camp_id]['volunteerPop'].tolist()[0])
         Volunteer.total_number += 1
         helper.modify_csv_pandas("data/camp.csv", "campID", camp_id, "volunteerPop",
-                          Volunteer.total_number)
+                                 Volunteer.total_number)
         print("Join/change camp completed.")
 
     def edit_camp_info(self):
