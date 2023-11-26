@@ -290,9 +290,6 @@ class Controller:
         ManagementView.camp_deletion_message()
         active_index = helper.extract_active_event()[0]
 
-        csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
-        df0 = pd.read_csv(csv_path0)
-
         # if there is no active events, return
         if len(active_index) == 0:
             print("No relevant events to select from")
@@ -366,10 +363,7 @@ class Controller:
                                                 except ValueError:
                                                     print("Invalid input! Please enter a non-negative integer ")
 
-                                        index_in_csv = df0[df0["campID"] == modify_camp_id].index.tolist()[0]
-                                        helper.modify_csv_value(csv_path2, index_in_csv, target_column_name, new_value)
-                                        print(f"\u2714 Changes have been saved!")
-                                        return
+                                        helper.modify_csv_value(csv_path2, target_column_index, target_column_name, new_value)
                                 except ValueError:
                                     print("Invalid input! Please enter an integer between 1 to 9")
 
