@@ -181,7 +181,7 @@ class Controller:
             if user_selection == "2":
                 pass  # edit camp
             if user_selection == "3":
-                self.delete_camp()
+                self.remove_camp()
             if user_selection == "4":
                 self.add_refugee()
             if user_selection == "5":
@@ -198,8 +198,8 @@ class Controller:
 
     def create_camp(self):
         ManagementView.camp_creation_message()
-        active_event_df = Event.get_all_active_events()
-        Event.display_events(active_event_df)
+        #active_event_df = Event.get_all_active_events()
+        #Event.display_events(active_event_df)
         active_index = helper.extract_active_event()[0]
 
         # check if active event is 0
@@ -209,7 +209,7 @@ class Controller:
         else:
             # read the event csv file and extract all available events
             csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", True, "eid")
+            df1 = helper.matched_rows_csv(csv_path, "ongoing", "True", "eid")
             print("\n*The following shows the info of all available events*\n")
             print(df1[0])
 
@@ -221,6 +221,10 @@ class Controller:
                         print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
                         continue
                     else:
+                        camp_info = helper.validate_camp_input()
+                        c = Camp(camp_info[1], camp_info[2], camp_info[3], True)
+                        c.pass_camp_info(eventID, camp_info[0])
+                        print("Camp created.")
                         break
                 except ValueError:
                     print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
@@ -229,7 +233,7 @@ class Controller:
         """This function is to modify camp info"""
         pass
 
-    def delete_camp(self):
+    def remove_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
         ManagementView.camp_deletion_message()
         active_index = helper.extract_active_event()[0]
@@ -241,7 +245,7 @@ class Controller:
         else:
             # print the events info for users to choose
             csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", True, "eid")
+            df1 = helper.matched_rows_csv(csv_path, "ongoing", "True", "eid")
             print("\n*The following shows the info of all available events*\n")
             print(df1[0])
             while True:
