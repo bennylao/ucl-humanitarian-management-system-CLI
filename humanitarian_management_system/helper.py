@@ -17,7 +17,7 @@ def validate_user_selection(options):
 
 
 def validate_registration(usernames):
-    # specify allowed characters for username
+    # specify allowed characters for passwords
     allowed_chars = r"[!@#$%^&*\w]"
     # specify allowed email format
     email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
@@ -29,12 +29,10 @@ def validate_registration(usernames):
             return
         elif username in usernames:
             print("Sorry, username already exists.")
-            continue
         elif username.isalnum():
             break
         else:
-            print("Invalid username entered.")
-            continue
+            print("Invalid username entered. Only alphabet letter (a-z) and numbers (0-9) are allowed.")
     # check for password
     while True:
         password = input("\nEnter password: ")
@@ -45,29 +43,31 @@ def validate_registration(usernames):
         else:
             print("Invalid password entered.\n"
                   "Only alphabet, numbers and !@#$%^&* are allowed.")
-            continue
     # check for first name
     while True:
         first_name = input("\nEnter first name: ")
         if first_name == 'RETURN':
             return
         elif first_name.replace(" ", "").isalpha():
+            # remove extra whitespaces between words in first name
+            # for example: "  Chon   Hou  " -> "Chon Hou"
+            first_name = ' '.join(first_name.split())
             break
         else:
             print("Invalid first name entered.\n"
                   "Only alphabet are allowed.")
-            continue
     # check for last name
     while True:
         last_name = input("\nEnter last name: ")
         if last_name == 'RETURN':
             return
         elif last_name.replace(" ", "").isalpha():
+            # remove extra whitespaces between words in last name
+            last_name = ' '.join(last_name.split())
             break
         else:
             print("Invalid last name entered.\n"
                   "Only alphabet are allowed.")
-            continue
     # check for email
     while True:
         email = input("\nEnter email: ")
@@ -77,7 +77,6 @@ def validate_registration(usernames):
             break
         else:
             print("Invalid email entered.")
-            continue
     # check for phone
     while True:
         phone = input("\nEnter phone number: ")
@@ -88,7 +87,6 @@ def validate_registration(usernames):
         else:
             print("Invalid phone number entered.\n"
                   "Only numbers are allowed.")
-            continue
     # check for occupation
     while True:
         occupation = input("\nEnter occupation: ")
@@ -99,29 +97,15 @@ def validate_registration(usernames):
         else:
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
-            continue
 
     return ["volunteer", "TRUE", username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
 
 
 def validate_event_input():
-    country = []
-    country_data = extract_data("data/countries.csv", "name")
+    countries_csv_path = Path(__file__).parent.joinpath("data/country.csv")
+    all_countries = pd.read_csv(countries_csv_path)['name'].tolist()
+
     date_format = '%d/%m/%Y'  # Use for validating user entered date format
-
-    for ele in country_data:
-        country.append(ele.lower())
-    # keep track of uid and increment it by 1
-    try:
-        id_arr = extract_data("data/eventTesting.csv", "eid").tolist()
-    except:
-        id_arr = '0'
-
-    eid = 0
-    if id_arr:
-        eid = id_arr.pop()
-    eid = int(eid) + 1
-
     while True:
         title = input("\nPlan title: ")
         if title == 'RETURN':
@@ -130,10 +114,10 @@ def validate_event_input():
             break
 
     while True:
-        location = input("\nLocation(country): ").lower()
+        location = input("\nLocation(country): ").title()
         if location == 'RETURN':
             return
-        elif location not in country:
+        elif location not in all_countries:
             print("Invalid country name entered.")
             continue
         else:
@@ -170,10 +154,10 @@ def validate_event_input():
     #         continue
 
     while True:
+        start_date = input("\nStart date (format dd/mm/yyyy): ")
+        if start_date == 'RETURN':
+            return
         try:
-            start_date = input("\nStart date (format dd/mm/yy): ")
-            if start_date == 'RETURN':
-                return
             start_date = datetime.datetime.strptime(start_date, date_format)
             break
         except ValueError:
@@ -181,23 +165,34 @@ def validate_event_input():
             continue
 
     while True:
+        end_date = input("\nEstimated end date (format dd/mm/yyyy): ")
+        if end_date == 'RETURN':
+            return
+        elif end_date == 'NONE':
+            end_date = None
+            break
         try:
-            end_date = input("\nEstimated end date (format dd/mm/yy): ")
-            if end_date == 'RETURN':
-                return
-            if end_date == 'NONE':
-                end_date = None
-                break
             end_date = datetime.datetime.strptime(end_date, date_format)
             if end_date <= start_date:
                 print("\nEnd date has to be later than start date.")
+                continue
+            elif end_date <= datetime.datetime.today():
+                print("\nEnd date has to be later than today.")
                 continue
             break
         except ValueError:
             print("\nInvalid date format entered.")
             continue
 
-    return [title, location, description, 0, start_date, end_date, eid]
+    if ((end_date == None and start_date.date() <= datetime.date.today())
+            or (start_date.date() <= datetime.date.today() and end_date.date() >= datetime.date.today())):
+        ongoing = True
+    elif start_date.date() > datetime.date.today():
+        ongoing = 'Yet'
+    else:
+        ongoing = False
+
+    return [ongoing, title, location, description, 0, start_date, end_date]
 
 
 def validate_camp_input():
@@ -216,7 +211,6 @@ def validate_camp_input():
         try:
             capacity = input("\nCapacity: ")
             if capacity == "RETURN":
-                print("good")
                 break
             elif int(capacity) > 0:
                 break
@@ -225,6 +219,20 @@ def validate_camp_input():
                 continue
         except ValueError:
             print("Must be a positive integer!!")
+
+    while True:
+        try:
+            resource = input("\nEnter Resources Amount: ")
+            if capacity == "RETURN":
+                break
+            elif int(resource) > 0:
+                break
+            else:
+                print("Must be a positive integer!")
+                continue
+        except ValueError:
+            print("Must be a positive integer!!")
+
 
     # risk input
     while True:
@@ -237,7 +245,7 @@ def validate_camp_input():
         else:
             break
 
-    return capacity, campID, risk
+    return campID, capacity, risk, resource
 
 
 def validate_join():  # volunteer joining a camp
@@ -246,7 +254,7 @@ def validate_join():  # volunteer joining a camp
 
     print("Please select a camp role by its index.")
     for i in index:
-        print(f''' index: {i} | {role.iloc[i-1]} ''')
+        print(f''' index: {i} | {role.iloc[i - 1]} ''')
     while True:
         user_input = input("\nEnter index: ")
         if int(user_input) not in index[1:]:
@@ -285,7 +293,7 @@ def matched_rows_csv(file, desired_column, desired_value, index):
         if desired_value in df[desired_column].tolist():
             dff = df[df[desired_column] == desired_value].set_index(index)
             dff_sorted = dff.sort_index()
-            return dff_sorted, dff_sorted.index.tolist()
+            return [dff_sorted, dff_sorted.index.tolist()]
         else:
             return f"Value '{desired_value}' not found in the {desired_column}."
     else:
@@ -347,6 +355,7 @@ def display_camp_list():
                 | location: {location} | Capacity: {capacity} | Refugee population: {r_pop} | End date: {end_date} * ''')
 
     return index
+
 
 def validate_man_resource(index):
     df = extract_data_df("data/resourceStock.csv")

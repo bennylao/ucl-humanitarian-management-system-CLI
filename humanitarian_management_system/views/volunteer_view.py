@@ -6,7 +6,8 @@ class VolunteerView:
     main_menu = (
         ("1", "Join/Change Camp"),
         ("2", "Camp Management"),
-        ("3", "Edit Account Settings and Personal Information"),
+        ("3", "Edit Account Information"),
+        ("4", "View Account Information"),
         ("L", "Logout")
     )
 
@@ -34,15 +35,15 @@ class VolunteerView:
     )
 
     @staticmethod
-    def login_message():
+    def display_login_message(username):
         print("\n========================================\n"
-              "         Welcome back VOLUNTEER\n"
+              f"         Welcome back {username}\n"
               "========================================\n"
               "Please select an option from the following.")
 
     @classmethod
     def display_main_menu(cls):
-        print("")
+        print("\n===== Volunteer Main Menu =====")
         for key, value in cls.main_menu:
             print(f"[ {key} ] {value}")
 
@@ -62,7 +63,7 @@ class VolunteerView:
 
     @classmethod
     def display_account_menu(cls):
-        print("")
+        print("\n===== Volunteer Account Management Menu =====")
         for key, value in cls.manage_account_menu:
             print(f"[ {key} ] {value}")
 

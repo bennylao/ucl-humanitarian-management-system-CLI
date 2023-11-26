@@ -1,21 +1,19 @@
+from pathlib import Path
 import pandas as pd
-import os
 from .user import User
 
 
 class Admin(User):
-    # Path need to be changed depend on the local path for each machine, anyone know how to define a global path that
-    # works on every machines
+    def __init__(self, user_id, username, password, first_name, last_name, email, phone, occupation):
+        super().__init__(user_id, username, password, first_name, last_name, email, phone, occupation)
 
-    p = os.path.isfile(r'data\userTesting.csv')
-
-    def __init__(self, username, password, first_name, last_name, email, phone, occupation):
-        super().__init__(username, password)
-        self.first_name = first_name
-        self.last_name = last_name
-        self.phone = phone
-        self.email = email
-        self.occupation = occupation
+    def show_account_info(self):
+        user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path)
+        sub_df = df.loc[df['userID'] == int(self.user_id), ['username', 'firstName', 'lastName', 'email',
+                                                            'phone', 'occupation']]
+        table_str = sub_df.to_markdown(index=False)
+        print("\n" + table_str)
 
     def edit_volunteer_account(self, volunteer_name):
         pass

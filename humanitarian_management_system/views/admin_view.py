@@ -10,14 +10,16 @@ class AdminView:
         ("4", "Resource Management"),
         ("5", "Display Summary/Statistics"), # ben: idk what exactly this will be, it depends on what Yuan can do
         ("6", "Edit Account Settings and Personal Information"),
+        ("7", "View Account Information"),
         ("L", "Logout")
     )
 
     manage_event_menu = (
         ("1", "Create new event"),
         ("2", "Edit event"),
-        ("3", "Remove event"),
-        ("4", "Display all events"),
+        ("3", "Close event"),
+        ("4", "Delete event"),
+        ("5", "Display all events"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
@@ -26,10 +28,9 @@ class AdminView:
         ("1", "Add new camp"),
         ("2", "Edit camp"),
         ("3", "Remove camp"),
-        ("4", "Resources allocation"),
-        ("5", "Add refugees"),
-        ("6", "Move/remove refugee(s)"),
-        ("7", "Display all camps"),
+        ("4", "Add refugees"),
+        ("5", "Move/remove refugee(s)"),
+        ("6", "Display all camps"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
@@ -63,11 +64,10 @@ class AdminView:
     )
 
     @staticmethod
-    def admin_login_message():
+    def display_login_message(username):
         print("\n========================================\n"
-              "           Welcome back ADMIN\n"
-              "========================================\n"
-              "Please select an option from the following.")
+              f"           Welcome back {username}\n"
+              "========================================\n")
 
     @classmethod
     def display_menu(cls):
