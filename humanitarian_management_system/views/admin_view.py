@@ -43,7 +43,9 @@ class AdminView:
     )
 
     manage_resource_menu = (
-        ("1", "Add resource"),
+        ("1", "Allocate resources"),
+        ("2", "View resource statistics"),
+        ("3", "Add resource / purchase from shop"),
         # ben: idk what else we can have. jessica please add this
         ("R", "Return to previous page"),
         ("L", "Logout")

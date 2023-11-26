@@ -59,7 +59,7 @@ class ManagementView:
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod
-    def resource_main_message():
+    def resource_alloc_main_message():
         print("\n========================================\n"
               "         Resources ALLOCATION\n"
               "========================================\n"
@@ -84,6 +84,15 @@ class ManagementView:
               "========================================\n"
               "Please select a camp by its index.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
+        
+    @staticmethod
+    def resource_report_message():
+        print("\n========================================\n"
+              "       RESOURCE REPORTING \n"
+              "========================================\n"
+              "Please select the type of resource report: \n"
+              "[1] view total stock levels of all resources; \n"
+              "[2] view resource levels by assigned camp")
 
     @staticmethod
     def join_camp_message():

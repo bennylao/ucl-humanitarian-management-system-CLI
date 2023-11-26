@@ -8,3 +8,6 @@ from .volunteer import Volunteer
 
 # for testing purpose
 from .resourceTesting import ResourceTest
+
+
+from .resourceReport import ResourceReport

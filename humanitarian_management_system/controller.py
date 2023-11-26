@@ -5,7 +5,7 @@ import pandas as pd
 import math
 
 from humanitarian_management_system import helper
-from humanitarian_management_system.models import User, Admin, Volunteer, Event, Camp, ResourceTest, Refugee
+from humanitarian_management_system.models import User, Admin, Volunteer, Event, Camp, ResourceTest, Refugee, ResourceReport
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
 
 
@@ -92,7 +92,7 @@ class Controller:
         if user_selection == "3":
             self.admin_manage_volunteer()
         if user_selection == "4":
-            self.admin_manage_resource()
+            self.admin_manage_resource(username)
         if user_selection == "5":
             self.admin_display_summary()
         if user_selection == "6":
@@ -131,7 +131,7 @@ class Controller:
         if user_selection == "3":
             self.delete_camp()
         if user_selection == "4":
-            self.resource_main(username)
+            self.resource_alloc_main(username)
         if user_selection == "5":
             self.add_refugee(username)
         if user_selection == "6":
@@ -146,7 +146,22 @@ class Controller:
     def admin_manage_volunteer(self):
         pass
 
-    def admin_manage_resource(self):
+    def admin_manage_resource(self, username):
+        ####################
+        ## ManagementView.resource_main_message() ########## this is not the right one, prob need to make a new menu but do later 
+        AdminView.display_resource_menu()
+        user_selection = helper.validate_user_selection(AdminView.get_resource_options())
+        if user_selection == "1":
+            self.resource_alloc_main(username)
+        if user_selection == "2":
+            self.resource_reporting_menu(username) 
+        if user_selection == "3":
+            # Add resource / purchase from shop
+            pass  
+        if user_selection == "R":
+            pass
+        if user_selection == "x":
+            exit()
         pass
 
     def admin_display_summary(self):
@@ -298,15 +313,18 @@ class Controller:
     def modify_camp(self):
         """This function is to modify camp info"""
 
-    def resource_main(self, username):
-        ManagementView.resource_main_message()
+########################### RESOURCE SUB MENUS ##########################################
+
+    def resource_alloc_main(self, username):
+        ManagementView.resource_alloc_main_message()
+        ####### Jess: need to modify this a little bit and figure out, wheree to send the variable of this to? 
         while True:
             user_selection = input("\nAllocation mode: ")
 
             if user_selection == '1':
                 self.man_resource(username)
             elif user_selection == '2':
-                self.auto_resource(username)
+                self.auto_resource(username) ####### 26/11 working on this part
             else:
                 print("Invalid mode option entered!")
                 continue
@@ -331,28 +349,60 @@ class Controller:
 
     def auto_resource(self, username):
         ManagementView.auto_resource_message()
-        index = helper.display_camp_list()
+        test_instance = ResourceTest(campID=1, pop=100, total_pop=1000)
 
+        print(test_instance.calculate_resource_jess())
+
+        alloc_ideal = test_instance.calculate_resource_jess()
+        alloc_ideal = test_instance.determine_above_below(threshold = 0.10)
+        redistribute_sum_checker = test_instance.redistribute()
+        print(alloc_ideal.groupby('resourceID')['current'].sum())
+        print(redistribute_sum_checker)
+
+    def resource_reporting_menu(self, username):
+        ManagementView.resource_report_message()
+        resource_report = ResourceReport()
         while True:
-            select_index = int(input("\nEnter index: "))
+            user_selection = input("\n: ")
 
-            if select_index not in index:
-                print("invalid index option entered!")
+            if user_selection == '1':
+                print(resource_report.resource_report_total())
+            elif user_selection == '2':
+                print(resource_report.resource_report_camp())
+            else:
+                print("Invalid mode option entered!")
                 continue
-            try:
-                if select_index == 'RETURN':
-                    return
-            except:
+
+            if user_selection == 'RETURN':
                 return
-            break
+            else:
+                break
 
-        df = helper.extract_active_event()[1]
-        select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
 
-        r = ResourceTest(select_index, select_pop, 0)
-        r.calculate_resource()
-        print("Auto resource allocation completed")
-        self.admin_manage_camp(username)
+    ########################### END OF RESOURCE SUB MENUS ##########################################
+        
+        # index = helper.display_camp_list()
+
+        # while True:
+            # select_index = int(input("\nEnter index: "))
+
+            # if select_index not in index:
+                # print("invalid index option entered!")
+                # continue
+            # try:
+                # if select_index == 'RETURN':
+                    # return
+            # except:
+                # return
+            #break
+
+        # df = helper.extract_active_event()[1]
+        # select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
+
+        # r = ResourceTest(select_index, select_pop, 0)
+        # r.calculate_resource()
+        # print("Auto resource allocation completed")
+        # self.admin_manage_camp(username)
 
     # def join_camp(self, username):
     #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")

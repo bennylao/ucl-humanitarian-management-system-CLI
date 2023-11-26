@@ -165,6 +165,9 @@ class ResourceTest():
     
     def redistribute(self):
 
+        # resource stock total... >> can probably remove the need for this later 
+        totalResources = extract_data_df("data/resourceStock.csv")
+
         alloc_ideal = self.determine_above_below()
         alloc_ideal['updated'] = alloc_ideal['current']
 
@@ -179,7 +182,21 @@ class ResourceTest():
             #print("all good")
             # otherwise, take 1 or 2 off the top ... 
 
-        return redistribute_sum_checker
+        ###### validate the redistributed totals, against the actual totals.
+        ###### this is just incase there is any discrepancies from rounding.
+        totalResources.set_index('resourceID', inplace=True)
+        comparison_result = redistribute_sum_checker == totalResources['total']
+        # Assuming comparison_result is the Series obtained from the comparison
+
+        for resource_id, is_equal in comparison_result.items():
+            if is_equal:
+                pass
+            else:
+                print(f"The sum for resourceID {resource_id} is different post distribution.")
+                ########### need to add logic for what to do, basically just adjust it from the camps with the most of that item, but this is an edge case, don't need to worry about it for now
+
+
+        return redistribute_sum_checker, comparison_result
 
     # writes in the allocations - i think the allocations are just overwritten basically... 
     def pass_resource_info(self, set_amount, campID, resourceID, new_stock):
