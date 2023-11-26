@@ -56,7 +56,7 @@ class Camp:
                                                         'volunteerPop', 'refugeePop', 'avgCriticalLvl', 'status'])
 
         csv_path2 = Path(__file__).parents[1].joinpath("data/camp.csv")
-        with open(csv_path2, 'a') as f:
+        with open(csv_path2, 'a', newline='') as f:
             camp_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
         # update camp num for a particular event
