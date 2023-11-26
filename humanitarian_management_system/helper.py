@@ -209,7 +209,7 @@ def validate_camp_input():
     # capacity input
     while True:
         try:
-            capacity = input("\nCapacity: ")
+            capacity = input("\nEnter capacity: ")
             if capacity == "RETURN":
                 break
             elif int(capacity) > 0:
@@ -222,7 +222,7 @@ def validate_camp_input():
 
     while True:
         try:
-            resource = input("\nEnter Resources Amount: ")
+            resource = input("\nEnter resources amount: ")
             if capacity == "RETURN":
                 break
             elif int(resource) > 0:

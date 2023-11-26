@@ -59,6 +59,15 @@ class ManagementView:
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod
+    def camp_modification_message():
+        print("\n========================================\n"
+              "             Camp MODIFICATION\n"
+              "========================================\n"
+              "Please fill in all the following information below.\n"
+              "Or enter 'RETURN' to go back to admin menu page.")
+
+
+    @staticmethod
     def camp_deletion_message():
         print("\n========================================\n"
               "             Camp DELETION\n"
