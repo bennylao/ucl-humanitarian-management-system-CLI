@@ -94,7 +94,7 @@ class ResourceTest():
     def calculate_resource_jess(self):
 
         # resource stock total...
-        totalResources = extract_data_df("data/resourceStock.csv")
+        totalResources = extract_data_df("data/resourceStock.csv")#
 
         # resource stock total...
         camp = extract_data_df("data/camp.csv")
@@ -227,3 +227,56 @@ class ResourceTest():
                           'total', new_stock)
 
 
+    def resource_adder(self):
+        ## admin only but deal with later
+        ## adds to the total amount of resources available
+
+        # welcome to the resource store! please enter how many of each object you would like to add
+        totalResources = extract_data_df("data/resourceStock.csv")
+        unallocResources = extract_data_df("data/resourceUnallocatedStock.csv")
+        ################ might need to change this to unallocated...
+        
+
+        ### menu bit
+        print(f"""==========================================================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ Hi Admin! Welcome to the Resource Shop ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+==========================================================================\n
+        Below is your current inventory:\n
+{totalResources} \n"""
+        )
+        basket = pd.DataFrame(columns=['resourceID','buyUnits'])
+        basket_id_list = []
+        basket_units_list = []
+        ### can give user an option to leave the shop rn. come back to this 
+        while True:
+            # add error handling in the last stage / later ... 
+            r_id_select = int(input("Please enter the resourceID of the item you would like to purchase: --> "))
+            r_name_select = totalResources.loc[totalResources['resourceID'] == r_id_select, 'name'].iloc[0]
+            r_id_units = int(input(f"Please enter the number of units of *** Resource ID {r_id_select}: {r_name_select} *** which you would like to buy: --> "))
+
+            basket_id_list.append(r_id_select)
+            basket_units_list.append(r_id_units)
+
+            # Ask if the user is done
+            done = input("Type 'DONE' if you are done shopping; otherwise type anything else to carry on: ").strip().upper()
+            if done == 'DONE':
+                break
+
+        # insert the two lists into the basket dataframe
+        basket['resourceID'] = basket_id_list
+        basket['buyUnits'] = basket_units_list
+        # could add in edit basket option but come back to this 
+        print(f"""Below is your shopping basket: \n {basket} \n"""
+        )
+        confirm_shop = input("Proceed to checkout? [y] Yes; [x] Abandon cart")
+        if confirm_shop == 'y':
+            ## logic to loop thru this and add to the unallocated dataframe
+            ## actually esier to do join
+            result_df = pd.merge(unallocResources, basket, on='resourceID', how='left').fillna(0)
+            result_df['unallocTotal'] = result_df['unallocTotal'].astype(int) + result_df['buyUnits'].astype(int)
+            result_df.drop('buyUnits', axis=1, inplace=True)
+        #result_df.to_csv('resourceUnallocatedStock.csv', index=False)
+            print(result_df)
+ ## what after this? new unallocated resources
+
+ ## 
