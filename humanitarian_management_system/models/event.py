@@ -80,7 +80,7 @@ class Event:
         if df.empty:
             print("\nNo events to edit.")
             return
-        filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
+        filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
         if filtered_df.empty:
             print("\nAll the events are closed and cannot be edited.")
             return
@@ -323,7 +323,7 @@ class Event:
     def disable_ongoing_event():
         event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
         df = pd.read_csv(event_csv_path)
-        filtered_df = df[(df['ongoing'] == True)]
+        filtered_df = df[(df['ongoing'] == 'True')]
 
         print("\n*The following shows the info of all available events*")
         Event.display_events(filtered_df)
