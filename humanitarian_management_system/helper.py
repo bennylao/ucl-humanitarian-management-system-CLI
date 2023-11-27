@@ -503,12 +503,7 @@ def move_refugee_helper_method():
             break
         else:
             print("\nSorry - that refugee ID doesn't exist. Pick again.")
-    # old_camp_id = ref_df[ref_df['refugeeID'] == int(rid), 'campID'].index[0]
     old_camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
-    print(old_camp_id)
-    # print(old_camp_id)
-    # old_camp_id = ref_df.loc[ref_df['refugeeID'] == rid, 'campID'].iloc[0]
-    # camp_id_value = df.loc[df['refugeeID'] == refugee_id_value, 'campID'].values[0]
     # Displaying list of all ACTIVE camps to user
     camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
     camp_df = pd.read_csv(camp_csv_path)
@@ -529,13 +524,9 @@ def move_refugee_helper_method():
     row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
     # print(row_index_camp)
     # print(row_index_old_camp)
-    # refugee_pop = row_index_camp['refugeePop'].iloc[0]
-    # row_index_camp = camp_df[ref_df['campID'] == old_camp_id].index[0]
     camp_df.at[row_index_old_camp[0], 'refugeePop'] -= 1
     # Update the campID for the refugee in refugee CSV
     row_index_ref = ref_df[ref_df['refugeeID'] == int(rid)].index[0]
-    # print(row_index_ref)
-    # ref_df.to_csv(refugee_csv_path, mode='a', index=False, header=False)
     modify_csv_value(refugee_csv_path, row_index_ref, "campID", camp_id)
     # Add one to the population of the camp which the refugee is now in
     row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
