@@ -39,7 +39,8 @@ class Camp:
         df = pd.read_csv(csv_path_c)
         # find country id and event id by index
         result = df.loc[df["name"] == capitalize(country.iloc[select_index-1])]['countryID'].tolist()
-        event_id = int(extract_data("data/eventTesting.csv", "eid").iloc[select_index-1])
+        #event_id = int(extract_data("data/eventTesting.csv", "eid").iloc[select_index-1])
+        event_id = int(extract_data(csv_path_e, "eid").iloc[select_index - 1])
 
         # keep track of existing camp num of a particular event
         df_c = extract_data_df(csv_path_e)

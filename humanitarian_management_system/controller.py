@@ -230,6 +230,8 @@ class Controller:
         ManagementView.camp_creation_message()
         # active_event_df = Event.get_all_active_events()
         # Event.display_events(active_event_df)
+        #event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+       # df = pd.read_csv(event_csv_path)
         csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
         active_index = helper.extract_active_event(csv_path)[0]
 
@@ -360,7 +362,9 @@ class Controller:
     def admin_remove_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
         ManagementView.camp_deletion_message()
-        active_index = helper.extract_active_event()[0]
+
+        event_csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+        active_index = helper.extract_active_event(event_csv_path)[0]
 
         # if there is no active events, return
         if len(active_index) == 0:
