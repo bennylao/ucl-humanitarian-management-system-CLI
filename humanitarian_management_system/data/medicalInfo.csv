@@ -11,3 +11,4 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 10,10,14,low,False
 11,11,1,great,True
 12,12,8,none atm,True
+13,13,13,careful!,True
