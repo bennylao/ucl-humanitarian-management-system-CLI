@@ -500,13 +500,13 @@ class Controller:
                 break
 
 
-"""     df = helper.extract_active_event()[1]
-        select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
-
-        r = ResourceTest(select_index, select_pop, 0)
-        r.calculate_resource()
-        print("Auto resource allocation completed")
-        self.admin_manage_camp(username)
+        # df = helper.extract_active_event()[1]
+        # select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
+        #
+        # r = ResourceTest(select_index, select_pop, 0)
+        # r.calculate_resource()
+        # print("Auto resource allocation completed")
+        # self.admin_manage_camp(username)
 
     ###################### RESOURCE MENU LEVEL 2 ###############################################
 
@@ -814,30 +814,30 @@ class Controller:
             else:
                 print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
 
-    def volunteer_join_change_camp(self):
-        csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-        df = pd.read_csv(csv_path)
-
-        ManagementView.join_camp_message()
-        index = helper.display_camp_list()
-
-        while True:
-            select_index = int(input("\nindex: "))
-
-            if select_index not in index:
-                print("invalid index option entered!")
-                continue
-            try:
-                if select_index == 'RETURN':
-                    return
-            except:
-                return
-            break
-
-        event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
-        join_info = helper.validate_join()
-        if join_info is not None:
-            v = Volunteer(username, '', '', '', '', '', '', join_info,
-                          event_id, select_index)
-            v.join_camp(event_id, select_index)
-            self.volunteer_main()"""
+    # def volunteer_join_change_camp(self):
+    #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    #     df = pd.read_csv(csv_path)
+    #
+    #     ManagementView.join_camp_message()
+    #     index = helper.display_camp_list()
+    #
+    #     while True:
+    #         select_index = int(input("\nindex: "))
+    #
+    #         if select_index not in index:
+    #             print("invalid index option entered!")
+    #             continue
+    #         try:
+    #             if select_index == 'RETURN':
+    #                 return
+    #         except:
+    #             return
+    #         break
+    #
+    #     event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
+    #     join_info = helper.validate_join()
+    #     if join_info is not None:
+    #         v = Volunteer(username, '', '', '', '', '', '', join_info,
+    #                       event_id, select_index)
+    #         v.join_camp(event_id, select_index)
+    #         self.volunteer_main()

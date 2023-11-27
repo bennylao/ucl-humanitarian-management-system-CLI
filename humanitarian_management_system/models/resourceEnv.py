@@ -9,13 +9,4 @@ import pandas as pd
 test_instance = ResourceTest(campID=1, pop=100, total_pop=1000)
 
 
-allocator_instance = ResourceAllocator()
-
-#print(allocator_instance.add_unalloc_resource())
-alloc_ideal, redistribute_sum_checker, comparison_result = allocator_instance.redistribute()
-
-print(redistribute_sum_checker)
-print(comparison_result)
-
-
 test_instance.resource_adder()

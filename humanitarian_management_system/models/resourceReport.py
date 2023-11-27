@@ -6,9 +6,12 @@ from pathlib import Path
 
 class ResourceReport():
     def __init__(self):
-        self.totalResources_df = extract_data_df("data/resourceStock.csv")
-        self.resourceAllocs_df = extract_data_df("data/resourceAllocation.csv")
-        self.unallocResources = extract_data_df("data/resourceUnallocatedStock.csv")
+        resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        resource_allocaation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        resource__nallocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
+        self.totalResources_df = pd.read_csv(resource_stock_csv_path)
+        self.resourceAllocs_df = pd.read_csv(resource_allocaation_csv_path)
+        self.unallocResources_df = pd.read_csv(resource__nallocated_stock_csv_path)
         self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
     
     def unalloc_resource_checker(self):
@@ -118,7 +121,8 @@ class ResourceReport():
 
         # this is the current allocation. not the gold standard one.. 
         # can probably refactor this code later on...
-        alloc_current = extract_data_df("data/resourceAllocation.csv")
+        resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        alloc_current = pd.read_csv(resource_stock_csv_path)
 
         alloc_ideal['upper'] = round(alloc_ideal['ideal_qty'] * (1 + threshold))
         alloc_ideal['lower'] = round(alloc_ideal['ideal_qty'] * (1 - threshold))

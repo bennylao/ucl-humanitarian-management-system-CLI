@@ -9,10 +9,12 @@ from resourceReport import ResourceReport
 # looping through them when necessary
 class ResourceAllocator():
     def __init__(self):
-        
-        self.totalResources_df = extract_data_df("data/resourceStock.csv")
-        self.resourceAllocs_df = extract_data_df("data/resourceAllocation.csv")
-        self.unallocResources_df = extract_data_df("data/resourceUnallocatedStock.csv")
+        resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        resource_allocaation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        resource__nallocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
+        self.totalResources_df = pd.read_csv(resource_stock_csv_path)
+        self.resourceAllocs_df = pd.read_csv(resource_allocaation_csv_path)
+        self.unallocResources_df = pd.read_csv(resource__nallocated_stock_csv_path)
         self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
 
     def add_unalloc_resource(self):
@@ -42,8 +44,9 @@ class ResourceAllocator():
 
     def redistribute(self):
         resource_stats_instance = ResourceReport()
-        # resource stock total... >> can probably remove the need for this later 
-        totalResources = extract_data_df("data/resourceStock.csv")
+        # resource stock total... >> can probably remove the need for this later
+        resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        totalResources = pd.read_csv(resource_stock_csv_path)
 
         alloc_ideal = resource_stats_instance.determine_above_below() # how to get this ? 
         alloc_ideal['updated'] = alloc_ideal['current']

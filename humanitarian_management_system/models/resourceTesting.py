@@ -14,8 +14,10 @@ class ResourceTest():
         self.total_pop = total_pop
 
     def calculate_resource(self):
-        # get id of resources 
-        item_id = extract_data("data/resourceStock.csv", "resourceID").tolist()
+        # get id of resources
+        resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        df = pd.read_csv(resource_csv_path)
+        item_id = df['resourceID'].tolist()
 
         # extract total refugee pop for all active plans
         df = extract_data_df("data/camp.csv")
@@ -233,10 +235,14 @@ class ResourceTest():
         ## adds to the total amount of resources available
 
         # welcome to the resource store! please enter how many of each object you would like to add
-        totalResources = extract_data_df("data/resourceStock.csv")
-        unallocResources = extract_data_df("data/resourceUnallocatedStock.csv")
+        # totalResources = extract_data_df("data/resourceStock.csv")
+        # unallocResources = extract_data_df("data/resourceUnallocatedStock.csv")
         ################ might need to change this to unallocated...
-        
+        resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        totalResources = pd.read_csv(resource_stock_csv_path)
+
+        unresource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
+        unallocResources = pd.read_csv(unresource_stock_csv_path)
 
         ### menu bit
         print(f"""==========================================================================\n
