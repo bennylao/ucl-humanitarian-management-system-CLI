@@ -491,7 +491,7 @@ def validate_refugee(lvl):
 def move_refugee_helper_method():
     """Moves refugee from one camp to another"""
     # displaying list of all refugees to user
-    refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+    refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
     ref_df = pd.read_csv(refugee_csv_path)
     print(ref_df)
     # checking input is vaild according to refugee IDs in database
@@ -505,7 +505,7 @@ def move_refugee_helper_method():
             print("\nSorry - that refugee ID doesn't exist. Pick again.")
     old_camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
     # Displaying list of all ACTIVE camps to user
-    camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+    camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
     camp_df = pd.read_csv(camp_csv_path)
     active_camp_df = camp_df[camp_df['status'] == 'open']
     print("\n", active_camp_df)

@@ -2,9 +2,9 @@ refugeeID,campID,firstName,lastName,dob,gender,familyID
 1,5,ff,ll,1968-08-12,male,25
 2,5,fff,lll,1988-04-22,female,12
 3,3,tf,tl,2001-07-16,other,2
-4,3,ftf,flf,1997-08-03,male,2
+4,9,ftf,flf,1997-08-03,male,2
 5,3,bbf,bbl,1994-05-01,female,5
-6,5,fone,lone,1996-05-12,male,7
+6,8,fone,lone,1996-05-12,male,7
 7,5,fg,lg,2001-09-18,other,5
 8,5,bbf,bbl,1989-09-09,female,7
 9,5,vf,vl,1995-08-05,male,2
