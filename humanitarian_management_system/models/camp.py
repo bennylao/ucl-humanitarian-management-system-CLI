@@ -13,13 +13,13 @@ class Camp:
     # Is  camp data the same as list of camp names? Need for resources
     # list_of_camp_names = []
 
-    def __init__(self, capacity, health_risk, current_resource_amount, is_camp_available=True):
+    def __init__(self, capacity, health_risk, is_camp_available=True):
         # location should be simply a country for simplicity
         self.is_camp_available = is_camp_available
         # option to make the camp unavailable for whatever reason (e.g. it's flooded or infected)
         # by disease and so other refugees shouldn't be added to that camp
         # Location should be a COUNTRY only - for simplicity ?
-        self.current_resource_amount = current_resource_amount
+        # self.current_resource_amount = current_resource_amount
         self.capacity = capacity
         self.health_risk = health_risk
 
@@ -32,17 +32,17 @@ class Camp:
 
     def pass_camp_info(self, select_index, camp_id):
         """if user choose to add a """
-
-        country = extract_data("data/eventTesting.csv", "location")
+        csv_path_e = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+        country = extract_data(csv_path_e, "location")
         # geo_data = extract_data("data/eventTesting.csv","")
-        csv_path = Path(__file__).parents[1].joinpath("data/country.csv")
-        df = pd.read_csv(csv_path)
+        csv_path_c = Path(__file__).parents[1].joinpath("data/country.csv")
+        df = pd.read_csv(csv_path_c)
         # find country id and event id by index
         result = df.loc[df["name"] == capitalize(country.iloc[select_index-1])]['countryID'].tolist()
         event_id = int(extract_data("data/eventTesting.csv", "eid").iloc[select_index-1])
 
         # keep track of existing camp num of a particular event
-        df_c = extract_data_df("data/eventTesting.csv")
+        df_c = extract_data_df(csv_path_e)
         no_camp = int(df_c.loc[df_c["eid"] == select_index]['no_camp'].tolist()[0])
         no_camp += 1
 

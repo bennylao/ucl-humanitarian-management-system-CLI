@@ -211,7 +211,8 @@ class ResourceTest():
                           'total', new_stock)
 
     def manual_resource(self, set_amount, resourceID):
-        df = extract_data_df("data/resourceStock.csv")
+        csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        df = extract_data_df(csv_path)
         stock = df.loc[df['resourceID'] == resourceID]['total'].tolist()[0]
 
         ResourceTest.resource_data = [[resourceID, self.campID, int(set_amount)]]

@@ -35,7 +35,8 @@ class Refugee:
         rid += 1
 
         # keep track of refugee population of a camp
-        df = extract_data_df("data/camp.csv")
+        csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        df = extract_data_df(csv_path)
         ref_pop = df.loc[df['campID'] == cid]['refugeePop'].tolist()[0]
 
         # pass data to refugee csv
@@ -75,9 +76,16 @@ class Refugee:
         lvl_arr = []
         mid_arr = []
         avg_lvl = 0
-        df_r = extract_data_df("data/refugee.csv")
-        df_m = extract_data_df("data/medicalInfo.csv")
-        df_l = extract_data_df("data/medicalInfoType.csv")
+
+        csv_path_r = Path(__file__).parents[1].joinpath("data/refugee.csv")
+        df_r = extract_data_df(csv_path_r)
+
+        csv_path_m = Path(__file__).parents[1].joinpath("data/medicalInfo.csv")
+        df_m = extract_data_df(csv_path_m)
+
+        csv_path_l = Path(__file__).parents[1].joinpath("data/medicalInfoType.csv")
+        df_l = extract_data_df(csv_path_l)
+
         rid_arr = df_r.loc[df_r['campID'] == int(cid)]['refugeeID'].tolist()
 
         for i in rid_arr:

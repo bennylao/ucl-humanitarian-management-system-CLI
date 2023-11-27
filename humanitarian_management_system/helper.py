@@ -130,29 +130,6 @@ def validate_event_input():
         else:
             break
 
-    # while True:
-    #     try:
-    #         no_camp = input("\nCamp Number (positive integers separated by commas): ")
-    #         if no_camp == 'RETURN':
-    #             return
-    #         elif no_camp == 'NONE':
-    #             no_camp = None
-    #             break
-    #         else:
-    #             num_list = [int(num) for num in no_camp.split(',')]
-    #             if all(num > 0 for num in num_list):
-    #                 # Also no_camp cannot exceed the total number of camps
-    #                 # Add it after camp.py finished.
-    #                 num_list = sorted(set(num_list))
-    #                 no_camp = ','.join(map(str, num_list))
-    #                 break
-    #             else:
-    #                 print("\nInvalid camp number entered.")
-    #                 continue
-    #     except ValueError:
-    #         print("\nInvalid camp number entered.")
-    #         continue
-
     while True:
         start_date = input("\nStart date (format dd/mm/yyyy): ")
         if start_date == 'RETURN':
@@ -197,7 +174,8 @@ def validate_event_input():
 
 def validate_camp_input():
     try:
-        id_arr = extract_data("data/camp.csv", "campID").tolist()
+        csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+        id_arr = extract_data(csv_path, "campID").tolist()
     except:
         id_arr = ['0']
 
@@ -220,18 +198,18 @@ def validate_camp_input():
         except ValueError:
             print("Must be a positive integer!!")
 
-    while True:
-        try:
-            resource = input("\nEnter resources amount: ")
-            if capacity == "RETURN":
-                break
-            elif int(resource) > 0:
-                break
-            else:
-                print("Must be a positive integer!")
-                continue
-        except ValueError:
-            print("Must be a positive integer!!")
+    # while True:
+    #     try:
+    #         resource = input("\nEnter resources amount: ")
+    #         if capacity == "RETURN":
+    #             break
+    #         elif int(resource) > 0:
+    #             break
+    #         else:
+    #             print("Must be a positive integer!")
+    #             continue
+    #     except ValueError:
+    #         print("Must be a positive integer!!")
 
 
     # risk input
@@ -245,7 +223,7 @@ def validate_camp_input():
         else:
             break
 
-    return campID, capacity, risk, resource
+    return campID, capacity, risk
 
 
 def validate_join():  # volunteer joining a camp
@@ -300,27 +278,24 @@ def matched_rows_csv(file, desired_column, desired_value, index):
         return f"Column '{desired_column}' not found in the CSV file."
 
 
-def extract_data(csv, col):
-    user_csv_path = Path(__file__).parents[0].joinpath(csv)
-    df = pd.read_csv(user_csv_path)
+def extract_data(csv_path, col):
+    df = pd.read_csv(csv_path)
     return df[col]
 
 
-def extract_data_df(csv):
-    csv_path = Path(__file__).parents[0].joinpath(csv)
+def extract_data_df(csv_path):
     df = pd.read_csv(csv_path)
     return df
 
 
-def extract_active_event():
-    csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+def extract_active_event(csv_path):
     df = pd.read_csv(csv_path)
     # ensure we only display camp(s) that are part of an active plan
-    data = extract_data("data/eventTesting.csv", ['ongoing', 'eid'])
+    data = extract_data(csv_path, ['ongoing', 'eid'])
     active_id = []
 
     for i in range(len(data)):
-        if data['ongoing'].iloc[i]:
+        if data['ongoing'].iloc[i] == 'True' or data['ongoing'].iloc[i] == 'Yet':
             active_id.append(data['eid'].iloc[i])
 
     return active_id, df
@@ -329,21 +304,23 @@ def extract_active_event():
 def display_camp_list():
     index = []
 
-    active_id = extract_active_event()[0]
-    df = extract_active_event()[1]
     csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+    active_id = extract_active_event(csv_path)[0]
     df_e = pd.read_csv(csv_path)
+
+    csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
+    df_c = extract_data_df(csv_path_c)
 
     if len(active_id) == 0:
         print("No relevant camps to select from")
         return
 
     for i in active_id:
-        camp_id = df.loc[df['eventID'] == i]['campID'].tolist()
+        camp_id = df_c.loc[df_c['eventID'] == i]['campID'].tolist()
         for j in camp_id:
-            capacity = df.loc[df['campID'] == j]['refugeeCapacity'].tolist()[0]
-            r_pop = df.loc[df['campID'] == j]['refugeePop'].tolist()[0]
-            health_risk = df.loc[df['campID'] == j]['healthRisk'].tolist()[0]
+            capacity = df_c.loc[df_c['campID'] == j]['refugeeCapacity'].tolist()[0]
+            r_pop = df_c.loc[df_c['campID'] == j]['refugeePop'].tolist()[0]
+            health_risk = df_c.loc[df_c['campID'] == j]['healthRisk'].tolist()[0]
             plan_title = df_e.loc[df_e['eid'] == i]['title'].tolist()[0]
             description = df_e.loc[df_e['eid'] == i]['description'].tolist()[0]
             location = df_e.loc[df_e['eid'] == i]['location'].tolist()[0]
