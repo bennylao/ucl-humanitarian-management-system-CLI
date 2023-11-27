@@ -587,32 +587,5 @@ def delete_refugee():
     else:
         tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
     root.mainloop()
-
-# # Removing 1 from the population of the associated camp
-#     camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-#     camp_df = pd.read_csv(camp_csv_path)
-#     camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
-#     row_index_camp = camp_df[camp_df['campID'] == camp_id].index
-#     camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
-#     #     Deleting the refugee from the database
-#     ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
-#     ref_df.to_csv(refugee_csv_path, index=False)
-#     tk.messagebox.showinfo(f"Okay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population has "
-#           f"also been adjusted accordingly.")
-
-
 # Also add a method to edit info for a refugee?
-# Borrow functions
-#     Use while loop instead of calling function again  - break if valid and continue if not valid
-#
 # Also put a try and except
-#     Display list of refugees in camps
-# get user to input refugee id
-# Display list of camps to move refugee to
-# Update both populations
-#       user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
-#         df = pd.read_csv(user_csv_path)
-#         sub_df = df.loc[df['userID'] == int(self.user_id), ['username', 'firstName', 'lastName', 'email',
-#                                                             'phone', 'occupation', 'roleID', 'eventID', 'campID']]
-#         table_str = sub_df.to_markdown(index=False)
-#         print("\n" + table_str)
