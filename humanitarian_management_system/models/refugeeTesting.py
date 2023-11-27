@@ -60,6 +60,7 @@ def move_refugee_helper_method():
     # print("row_index_new_camp:", row_index_new_camp)
     # print(row_index_new_camp)
     camp_df.at[row_index_new_camp[0], 'refugeePop'] += 1
+    camp_df.to_csv(camp_csv_path, index=False)
     # camp_df.to_csv(camp_csv_path, mode='a', index=False, header=False)
     # modify_csv_value(camp_df, row, "refugeePop", camp_id)
     print(f"Transfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
@@ -131,9 +132,11 @@ def delete_refugee():
         #     Deleting the refugee from the database
         ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
         ref_df.to_csv(refugee_csv_path, index=False)
-        tk.messagebox.showinfo(
+        print(
             f"Okay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
             f"has also been adjusted accordingly.")
+        print("\nRefugee DataFrame after deletion:")
+        print(ref_df)
     else:
         tk.messagebox.showinfo("Cancel", "The operation to delete the refugee was canceled.")
     root.mainloop()
