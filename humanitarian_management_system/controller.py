@@ -642,8 +642,8 @@ class Controller:
         self.admin_manage_camp()
 
     def move_refugee(self):
-        rid = 0
-        helper.move_refugee_helper_method(rid)
+        # rid = 0
+        helper.move_refugee_helper_method()
 
     def user_edit_account(self):
         while True:
