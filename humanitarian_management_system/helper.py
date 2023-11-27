@@ -548,7 +548,6 @@ def move_refugee_helper_method():
           f"Additionally, the population of both camps has been adjusted accordingly.")
     return
 
-move_refugee_helper_method()
 
 # Also add method to delete a refugee
 # Also add a method to edit info for a refugee?
