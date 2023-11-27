@@ -1,6 +1,4 @@
 import pandas as pd
-from humanitarian_management_system.helper import (extract_data, modify_csv_value, modify_csv_pandas, extract_data_df,
-                                                   extract_active_event)
 from pathlib import Path
 
 
@@ -53,17 +51,22 @@ class ResourceReport():
     def calculate_resource_jess(self):
 
         # resource stock total...
-        totalResources = extract_data_df("data/resourceStock.csv")
+        resource__allocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
+        totalResources = pd.read_csv(resource__allocated_stock_csv_path)
 
         # resource stock total...
-        camp = extract_data_df("data/camp.csv")
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        camp = pd.read_csv(camp_csv_path)
 
         # extract total refugee population
-        pop_arr = extract_data("data/camp.csv", "refugeePop").tolist() # per camp
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        df = pd.read_csv(camp_csv_path)
+        pop_arr = df['refugeePop'].tolist()
         totalRefugees = sum(pop_arr)
 
-        # this is the current allocation. not the gold standard one.. 
-        alloc_current = extract_data_df("data/resourceAllocation.csv")
+        # this is the current allocation. not the gold standard one..
+        resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        alloc_current = pd.read_csv(resource_csv_path)
 
         # but we can overwrite ... 
         alloc_ideal = alloc_current

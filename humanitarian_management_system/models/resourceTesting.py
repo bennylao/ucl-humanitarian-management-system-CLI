@@ -1,6 +1,7 @@
 import pandas as pd
-from humanitarian_management_system.helper import (extract_data, modify_csv_value, modify_csv_pandas, extract_data_df)
 from pathlib import Path
+
+from humanitarian_management_system.helper import modify_csv_pandas
 
 
 # A very basic attempt at resource allocation to camp, it's basically just a manipulation of database/csv files by
@@ -16,22 +17,23 @@ class ResourceTest():
     def calculate_resource(self):
         # get id of resources
         resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
-        df = pd.read_csv(resource_csv_path)
-        item_id = df['resourceID'].tolist()
+        df2 = pd.read_csv(resource_csv_path)
+        item_id = df2['resourceID'].tolist()
 
         # extract total refugee pop for all active plans
-        df = extract_data_df("data/camp.csv")
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        df = pd.read_csv(camp_csv_path)
         # extract average medical critical level for a camp
         avg_lvl = df.loc[df['campID'] == int(self.campID)]['avgCriticalLvl'].tolist()[0]
 
         # extract total refugee population
-        pop_arr = extract_data("data/camp.csv", "refugeePop").tolist()
+        pop_arr = df['refugeePop'].tolist()
         for i in pop_arr:
             self.total_pop += i
 
         # extract info related to resource item and its current allocation to camp
-        df2 = extract_data_df("data/resourceStock.csv")
-        df3 = extract_data_df("data/resourceAllocation.csv")
+        resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        df3 = pd.read_csv(resource_csv_path)
 
         for i in item_id:
             priority = df2.loc[df2['resourceID'] == i]['priorityLvl'].tolist()[0]
@@ -96,17 +98,22 @@ class ResourceTest():
     def calculate_resource_jess(self):
 
         # resource stock total...
-        totalResources = extract_data_df("data/resourceStock.csv")#
+        resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        totalResources = pd.read_csv(resource_csv_path)
 
         # resource stock total...
-        camp = extract_data_df("data/camp.csv")
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        camp = pd.read_csv(camp_csv_path)
 
         # extract total refugee population
-        pop_arr = extract_data("data/camp.csv", "refugeePop").tolist() # per camp
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        df = pd.read_csv(camp_csv_path)
+        pop_arr = df['refugeePop'].tolist()
         totalRefugees = sum(pop_arr)
 
-        # this is the current allocation. not the gold standard one.. 
-        alloc_current = extract_data_df("data/resourceAllocation.csv")
+        # this is the current allocation. not the gold standard one..
+        resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        alloc_current = pd.read_csv(resource_csv_path)
 
         # but we can overwrite ... 
         alloc_ideal = alloc_current
@@ -143,7 +150,8 @@ class ResourceTest():
 
         # this is the current allocation. not the gold standard one.. 
         # can probably refactor this code later on...
-        alloc_current = extract_data_df("data/resourceAllocation.csv")
+        resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        alloc_current = pd.read_csv(resource_csv_path)
 
         alloc_ideal['upper'] = round(alloc_ideal['ideal_qty'] * (1 + threshold))
         alloc_ideal['lower'] = round(alloc_ideal['ideal_qty'] * (1 - threshold))
@@ -167,7 +175,8 @@ class ResourceTest():
     def redistribute(self):
 
         # resource stock total... >> can probably remove the need for this later 
-        totalResources = extract_data_df("data/resourceStock.csv")
+        resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        totalResources = pd.read_csv(resource_csv_path)
 
         alloc_ideal = self.determine_above_below()
         alloc_ideal['updated'] = alloc_ideal['current']
@@ -214,7 +223,7 @@ class ResourceTest():
 
     def manual_resource(self, set_amount, resourceID):
         csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
-        df = extract_data_df(csv_path)
+        df = pd.read_csv(csv_path)
         stock = df.loc[df['resourceID'] == resourceID]['total'].tolist()[0]
 
         ResourceTest.resource_data = [[resourceID, self.campID, int(set_amount)]]

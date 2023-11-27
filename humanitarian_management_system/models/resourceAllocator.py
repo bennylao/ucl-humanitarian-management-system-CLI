@@ -1,6 +1,4 @@
 import pandas as pd
-from humanitarian_management_system.helper import (extract_data, modify_csv_value, modify_csv_pandas, extract_data_df,
-                                                   extract_active_event)
 from pathlib import Path
 from resourceReport import ResourceReport
 
@@ -10,11 +8,11 @@ from resourceReport import ResourceReport
 class ResourceAllocator():
     def __init__(self):
         resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
-        resource_allocaation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
-        resource__nallocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
         self.totalResources_df = pd.read_csv(resource_stock_csv_path)
-        self.resourceAllocs_df = pd.read_csv(resource_allocaation_csv_path)
-        self.unallocResources_df = pd.read_csv(resource__nallocated_stock_csv_path)
+        resource_allocation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        self.resourceAllocs_df = pd.read_csv(resource_allocation_csv_path)
+        resource__allocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
+        self.unallocResources_df = pd.read_csv(resource__allocated_stock_csv_path)
         self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
 
     def add_unalloc_resource(self):
