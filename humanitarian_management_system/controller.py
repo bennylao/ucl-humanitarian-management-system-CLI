@@ -224,6 +224,8 @@ class Controller:
                 self.logout_request = True
                 break
 
+    #################  CREATE / MODIFY / REMOVE CAMPS###############
+
     def admin_create_camp(self):
         ManagementView.camp_creation_message()
         # active_event_df = Event.get_all_active_events()
@@ -291,7 +293,7 @@ class Controller:
                             print("No relevant camps to select from")
                             continue
                         break
-                    except:
+                    except ValueError:
                         if df2[0].loc[eventID, "no_camp"] == 0:
                             print("No relevant camps to select from")
                             continue
@@ -353,32 +355,7 @@ class Controller:
                                 print("Invalid input! Please enter an integer between 1 to 9")
 
                 except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df3[1]} for Camp ID.")
-
-                        # modify_csv_value(file_path, row_index, column_name, new_value):
-
-                #                 if aa == "yes":
-                #                 # implement the deletion in csv file
-                #                 df3 = pd.read_csv(csv_path2)
-                #                 df3 = df3[df3["campID"] != delete_camp]
-                #                 df3.to_csv(csv_path2, index=False)
-                #
-                #                 # keep track of existing camp num of a particular event
-                #                 no_camp = df1[0].loc[eventID, "no_camp"]
-                #                 no_camp -= 1
-                #                 df4 = pd.read_csv(csv_path)
-                #                 index = df4[df4["eid"] == eventID].index.tolist()
-                #                 helper.modify_csv_value(csv_path, index[0], "no_camp", no_camp)
-                #                 print("\n\u2714 You have Successfully removed the camp!")
-                #                 return
-                #             elif aa == "no":
-                #                 return
-                #             else:
-                #                 print("Invalid input! Please enter 'yes' or 'no'")
-                #                 continue
-                #         return
-                # except ValueError:
-                #     print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
+                    print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
 
     def admin_remove_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
@@ -430,22 +407,22 @@ class Controller:
                                     df3 = df3[df3["campID"] != delete_camp]
                                     df3.to_csv(csv_path2, index=False)
 
-                                        # keep track of existing camp num of a particular event
-                                        no_camp = df1[0].loc[eventID, "no_camp"]
-                                        no_camp -= 1
-                                        df4 = pd.read_csv(csv_path)
-                                        index = df4[df4["eid"] == eventID].index.tolist()
-                                        helper.modify_csv_value(csv_path, index[0], "no_camp", no_camp)
-                                        print("\n\u2714 You have Successfully removed the camp!")
-                                        return
-                                    elif aa == "no":
-                                        return
-                                    else:
-                                        print("Invalid input! Please enter 'yes' or 'no'")
-                                        continue
+                                    # keep track of existing camp num of a particular event
+                                    no_camp = df1[0].loc[eventID, "no_camp"]
+                                    no_camp -= 1
+                                    df4 = pd.read_csv(csv_path)
+                                    index = df4[df4["eid"] == eventID].index.tolist()
+                                    helper.modify_csv_value(csv_path, index[0], "no_camp", no_camp)
+                                    print("\n\u2714 You have Successfully removed the camp!")
+                                    return
+                                elif aa == "no":
+                                    return
+                                else:
+                                    print("Invalid input! Please enter 'yes' or 'no'")
+                                    continue
                                 return
-                            except ValueError:
-                                print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
+                    except ValueError:
+                        print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
 
     ###################### RESOURCE MENU LEVEL 2 ###############################################
 
@@ -522,7 +499,8 @@ class Controller:
             else:
                 break
 
-"""         df = helper.extract_active_event()[1]
+
+"""     df = helper.extract_active_event()[1]
         select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
 
         r = ResourceTest(select_index, select_pop, 0)
@@ -836,30 +814,30 @@ class Controller:
             else:
                 print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
 
-    # def volunteer_join_change_camp(self):
-    #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-    #     df = pd.read_csv(csv_path)
-    #
-    #     ManagementView.join_camp_message()
-    #     index = helper.display_camp_list()
-    #
-    #     while True:
-    #         select_index = int(input("\nindex: "))
-    #
-    #         if select_index not in index:
-    #             print("invalid index option entered!")
-    #             continue
-    #         try:
-    #             if select_index == 'RETURN':
-    #                 return
-    #         except:
-    #             return
-    #         break
-    #
-    #     event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
-    #     join_info = helper.validate_join()
-    #     if join_info is not None:
-    #         v = Volunteer(username, '', '', '', '', '', '', join_info,
-    #                       event_id, select_index)
-    #         v.join_camp(event_id, select_index)
-    #     self.volunteer_main()
+    def volunteer_join_change_camp(self):
+        csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+        df = pd.read_csv(csv_path)
+
+        ManagementView.join_camp_message()
+        index = helper.display_camp_list()
+
+        while True:
+            select_index = int(input("\nindex: "))
+
+            if select_index not in index:
+                print("invalid index option entered!")
+                continue
+            try:
+                if select_index == 'RETURN':
+                    return
+            except:
+                return
+            break
+
+        event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
+        join_info = helper.validate_join()
+        if join_info is not None:
+            v = Volunteer(username, '', '', '', '', '', '', join_info,
+                          event_id, select_index)
+            v.join_camp(event_id, select_index)
+            self.volunteer_main()"""
