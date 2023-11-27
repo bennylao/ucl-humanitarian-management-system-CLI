@@ -543,7 +543,7 @@ def move_refugee_helper_method():
     print(f"Transfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
           f"Additionally, the population of both camps has been adjusted accordingly.")
     return
-# Just need to add some extra logic to the above in case the event also changes....
+# Just need to add some extra logic to the above in case the event also changes.... Need to think about this.
 
 
 def delete_refugee():
@@ -565,7 +565,6 @@ def delete_refugee():
     specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
     print(specific_refugee_row)
 #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
-
     root = tk.Tk()
     result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete this refugee?")
     if result == "yes":
