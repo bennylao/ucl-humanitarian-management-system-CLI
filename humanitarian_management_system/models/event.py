@@ -43,12 +43,9 @@ class Event:
         else:
             last_event_id = pd.read_csv(event_csv_path)['eid'].max()
 
-        # maxEid_csv_path = Path(__file__).parents[1].joinpath("data/maxUsedEid.csv")
-        # max_used_eid = pd.read_csv(maxEid_csv_path)['max_used_eid'].max()
-        try:
-            event_id = pd.read_csv(event_csv_path)['eid'].max() + 1
-        except:
-            event_id = 1
+        maxEid_csv_path = Path(__file__).parents[1].joinpath("data/maxUsedEid.csv")
+        max_used_eid = pd.read_csv(maxEid_csv_path)['max_used_eid'].max()
+        event_id = max(last_event_id, max_used_eid) + 1
         # insert user id into registration_info
         event_info.insert(0, event_id)
         event_df = pd.DataFrame(data=[event_info],
@@ -58,8 +55,8 @@ class Event:
 
         # To prevent confusion caused by directly modifying the eventTesting file
         # use event_id, instead of max_used_eid, add 1 to update max_used_eid
-        # max_used_eid = event_id
-        # helper.modify_csv_value(maxEid_csv_path, 0, 'max_used_eid', max_used_eid)
+        max_used_eid = event_id
+        helper.modify_csv_value(maxEid_csv_path, 0, 'max_used_eid', max_used_eid)
 
     @staticmethod
     def get_all_active_events():
