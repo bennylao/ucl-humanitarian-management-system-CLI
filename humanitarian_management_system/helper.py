@@ -499,7 +499,7 @@ def move_refugee_helper_method():
         rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to move another camp: ")
         if rid == "RETURN":
             return
-        elif ref_df['refugeeID'].eq(int(rid)).any():
+        elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
             break
         else:
             print("\nSorry - that refugee ID doesn't exist. Pick again.")
@@ -515,7 +515,7 @@ def move_refugee_helper_method():
                         "the camp you want to move this refugee to: ")
         if camp_id == "RETURN":
             return
-        elif active_camp_df['campID'].eq(int(camp_id)).any():
+        elif camp_id.strip() and camp_id.strip().isdigit() and active_camp_df['campID'].eq(int(camp_id)).any():
             break
         else:
             print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
