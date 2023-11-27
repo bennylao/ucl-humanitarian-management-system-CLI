@@ -377,30 +377,31 @@ class Controller:
                         print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
                         continue
                     else:
-                        while True:
-                            aa = input(f"\nAre you sure to delete camp {delete_camp}? (yes/no): ")
-                            if aa == "yes":
-                                # implement the deletion in csv file
-                                df3 = pd.read_csv(csv_path2)
-                                df3 = df3[df3["campID"] != delete_camp]
-                                df3.to_csv(csv_path2, index=False)
+                        try:
+                            while True:
+                                aa = input(f"\nAre you sure to delete camp {delete_camp}? (yes/no): ")
+                                if aa == "yes":
+                                    # implement the deletion in csv file
+                                    df3 = pd.read_csv(csv_path2)
+                                    df3 = df3[df3["campID"] != delete_camp]
+                                    df3.to_csv(csv_path2, index=False)
 
-                                # keep track of existing camp num of a particular event
-                                no_camp = df1[0].loc[eventID, "no_camp"]
-                                no_camp -= 1
-                                df4 = pd.read_csv(csv_path)
-                                index = df4[df4["eid"] == eventID].index.tolist()
-                                helper.modify_csv_value(csv_path, index[0], "no_camp", no_camp)
-                                print("Deletion Successful")
-                                break
-                            elif aa == "no":
-                                break
-                            else:
-                                print("Invalid input! Please enter 'yes' or 'no'")
-                                continue
-                        break
-                except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
+                                    # keep track of existing camp num of a particular event
+                                    no_camp = df1[0].loc[eventID, "no_camp"]
+                                    no_camp -= 1
+                                    df4 = pd.read_csv(csv_path)
+                                    index = df4[df4["eid"] == eventID].index.tolist()
+                                    helper.modify_csv_value(csv_path, index[0], "no_camp", no_camp)
+                                    print("Deletion Successful")
+                                    break
+                                elif aa == "no":
+                                    break
+                                else:
+                                    print("Invalid input! Please enter 'yes' or 'no'")
+                                    continue
+                            break
+                        except ValueError:
+                            print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
 
     def modify_camp(self):
         """This function is to modify camp info"""
@@ -408,22 +409,33 @@ class Controller:
 ###################### RESOURCE MENU LEVEL 2 ###############################################
 
     def resource_alloc_menu(self):
+        resource_report = ResourceReport()
+        status, prompt = resource_report.unalloc_resource_checker()
         ManagementView.resource_alloc_main_message()
-        while True:
-            user_selection = input("\nAllocation mode: ")
+        #### need to add in some way of checking for unallocated resources
+        print(prompt)
+        if status == False:
+            ## if no unallocated resources), then go to the below?? go through usula auto vs. manual
+            while True:
+                user_selection = input("\nAllocation mode: --> ")
 
-            if user_selection == '1':
-                self.man_resource()
-            elif user_selection == '2':
-                self.auto_resource()
-            else:
-                print("Invalid mode option entered!")
-                continue
+                if user_selection == '1':
+                    self.man_resource()
+                elif user_selection == '2':
+                    self.auto_resource()
+                else:
+                    print("Invalid mode option entered!")
+                    continue
 
-            if user_selection == 'RETURN':
-                return
-            else:
-                break
+                if user_selection == 'RETURN':
+                    return
+                else:
+                    break
+        else:
+            ## if there are unallocated resources, ask if the user wants to allocate them 
+            user_select = input('Do you want to distribute the unallocated resources?')
+            #### user can choose if they want to do this manually or automatically, same as above actually
+            #### is there a way we can reuse the same code ?? <- if we merge it into the same files....
 
     def man_resource(self):
         ManagementView.man_resource_message()
@@ -471,13 +483,13 @@ class Controller:
             else:
                 break
 
-        df = helper.extract_active_event()[1]
+"""         df = helper.extract_active_event()[1]
         select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
 
         r = ResourceTest(select_index, select_pop, 0)
         r.calculate_resource()
         print("Auto resource allocation completed")
-        self.admin_manage_camp(username)
+        self.admin_manage_camp(username) """
 ###################### RESOURCE MENU LEVEL 2 ###############################################
     # def join_camp(self):
     #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")

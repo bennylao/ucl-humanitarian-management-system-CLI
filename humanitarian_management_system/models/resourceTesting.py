@@ -266,9 +266,12 @@ class ResourceTest():
         basket['resourceID'] = basket_id_list
         basket['buyUnits'] = basket_units_list
         # could add in edit basket option but come back to this 
-        print(f"""Below is your shopping basket: \n {basket} \n"""
+        print(f"""==========================================================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ Below is your shopping basket: ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+==========================================================================\n
+{basket} \n"""
         )
-        confirm_shop = input("Proceed to checkout? [y] Yes; [x] Abandon cart")
+        confirm_shop = input("Proceed to checkout? \n [y] Yes; \n [x] Abandon cart \n --> ")
         if confirm_shop == 'y':
             ## logic to loop thru this and add to the unallocated dataframe
             ## actually esier to do join

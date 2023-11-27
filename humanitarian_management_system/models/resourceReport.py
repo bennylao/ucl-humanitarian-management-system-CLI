@@ -4,13 +4,27 @@ from humanitarian_management_system.helper import (extract_data, modify_csv_valu
 from pathlib import Path
 
 
-# A very basic attempt at resource allocation to camp, it's basically just a manipulation of database/csv files by
-# looping through them when necessary
 class ResourceReport():
     def __init__(self):
-        self.resourceLibrary_df = extract_data_df("data/resourceStock.csv")
+        self.totalResources_df = extract_data_df("data/resourceStock.csv")
         self.resourceAllocs_df = extract_data_df("data/resourceAllocation.csv")
-        self.joined_df = pd.merge(self.resourceLibrary_df, self.resourceAllocs_df, on='resourceID', how='inner')
+        self.unallocResources = extract_data_df("data/resourceUnallocatedStock.csv")
+        self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
+    
+    def unalloc_resource_checker(self):
+        #### just a checker to see if we have any unallocated resources. Should return just binary outcome
+        #### will be useful for other resource functions 
+        unalloc = sum(self.unallocResources['unallocTotal'])
+        if unalloc == 0:
+            unalloc_status = False
+            unalloc_prompt = "======= ＼(^o^)／ There are no unallocated resources ~ All good! ＼(^o^)／ ===== \n"
+        else:
+            unalloc_items = self.unallocResources[self.unallocResources['unallocTotal'] > 0]
+            unalloc_status = True
+            unalloc_prompt = f"=======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items} \n"
+
+        return unalloc_status, unalloc_prompt
+
 
     def resource_report_total(self):
         ################ there seems to have been some divergence on the data here since i last worked on reporting
@@ -31,7 +45,7 @@ class ResourceReport():
         return resource_camp
     
     ############## comparing our current resource levels to a caculated equilibirum level
-    
+
     # Setting the gold standard for what should be the 'equilibrium' level
     def calculate_resource_jess(self):
 
@@ -52,6 +66,28 @@ class ResourceReport():
         alloc_ideal = alloc_current
         alloc_ideal.columns.values[2] = 'ideal_qty'
 
+        ### creating the base for the alloc_ideal dataframe
+
+        # Define the range for the first column (numbers 1 to 11)
+        numbers = list(range(1, 12))
+        resourceID = totalResources['resourceID'].tolist()
+
+        # Find the non-zero camps... aka the camps with refugees
+        second_column = camp.loc[camp['refugeePop'] > 0, 'campID'].tolist()
+        resourceID_repeated = resourceID * len(second_column)
+
+        # Repeat each number 11 times to match the length of each block in the first column
+        second_column_repeated = [num for num in second_column for _ in range(len(resourceID))]
+
+        # Creating the DataFrame
+        alloc_ideal = pd.DataFrame({
+            'resourceID': resourceID_repeated,
+            'campID': second_column_repeated,
+            'ideal_qty': [0] * len(second_column_repeated)
+        })
+        print(alloc_ideal)
+
+
         for index, row in alloc_ideal.iterrows():
             # going through each row of the dataframe...
             r_id = row['resourceID'] # use this to get the corresponding total in resourceStock
@@ -59,17 +95,16 @@ class ResourceReport():
 
             c_id = row['campID'] # use this to get the corresponding total in camp
             c_refugee_amt = camp.loc[camp['campID'] == c_id, 'refugeePop'].iloc[0]
-            # print(c_refugee_amt / totalRefugees * r_stock_amt)
 
             # Calculate what the ideal amount should be...
             ideal_qty_value = round((c_refugee_amt / totalRefugees) * r_stock_amt)
 
-            # Printing out the details in a readable format
+            """ # Printing out the details in a readable format
             print(f"Row Index: {index}")
             print(f"Resource ID: {r_id}, Stock Amount: {r_stock_amt}")
             print(f"Camp ID: {c_id}, Refugee Amount: {c_refugee_amt}")
             print(f"Ideal Quantity Value: {ideal_qty_value}")
-            print("-" * 50)  # Separator for readability
+            print("-" * 50)  # Separator for readability """
 
             # Assign the calculated value to the specific row in 'ideal_qty' column
             alloc_ideal.at[index, 'ideal_qty'] = ideal_qty_value
@@ -87,7 +122,22 @@ class ResourceReport():
 
         alloc_ideal['upper'] = round(alloc_ideal['ideal_qty'] * (1 + threshold))
         alloc_ideal['lower'] = round(alloc_ideal['ideal_qty'] * (1 - threshold))
-        alloc_ideal['current'] = alloc_current['qty']
+
+        ## need to index the below, as right now just resting on good faith that the resourceIDs are in the same order
+        # alloc_ideal['current'] = alloc_current['qty']
+        for index, row in alloc_ideal.iterrows():
+            # going through each row of the dataframe... creating a pair search key each row
+            r_id_ideal = row['resourceID'] 
+            c_id_ideal = row['campID']
+            pairmatch_condition = (alloc_current['resourceID'] == r_id_ideal) & (alloc_current['campID'] == c_id_ideal)
+
+            # finding the qty where the two cols of alloc_current match that of the current alloc_ideal
+            if not alloc_current.loc[pairmatch_condition, 'qty'].empty:
+                matched_current_qty = alloc_current.loc[pairmatch_condition, 'qty'].iloc[0]
+            else:
+                matched_current_qty = 0  
+
+            alloc_ideal.at[index, 'current'] = matched_current_qty ## creatung the current column here for alloc_ideal
 
         # create new column to indicate if resources greater or less than..
         # Function to determine the new column value

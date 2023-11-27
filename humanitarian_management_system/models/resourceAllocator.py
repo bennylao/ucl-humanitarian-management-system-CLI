@@ -10,9 +10,35 @@ from resourceReport import ResourceReport
 class ResourceAllocator():
     def __init__(self):
         
-        self.resourceLibrary_df = extract_data_df("data/resourceStock.csv")
+        self.totalResources_df = extract_data_df("data/resourceStock.csv")
         self.resourceAllocs_df = extract_data_df("data/resourceAllocation.csv")
-        self.joined_df = pd.merge(self.resourceLibrary_df, self.resourceAllocs_df, on='resourceID', how='inner')
+        self.unallocResources_df = extract_data_df("data/resourceUnallocatedStock.csv")
+        self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
+
+    def add_unalloc_resource(self):
+        # adding unallocated resources to the total resources dataframe, preparing it for the (auto) distribution... 
+        # note that i think this is only relevant to automatic reallocation only... 
+
+        ## THIS IS AN INTERMEDIATE FUNCTION: AFTER WE DO THIS, THE TOTAL WILL NO LONGER MATCH THE TOTAL
+        ## OF RESOURCEALLOCATION.CSV !!!!!!! AKA IT IS IMPORTANT WE RE RUN THE DISTRIBUTOR IMMEDIATELY AFTER
+
+        self.totalResources_df['total'] = self.totalResources_df['total'] + self.unallocResources_df['unallocTotal']
+        # overwrite total resource amounts
+        self.totalResources_df.to_csv("humanitarian_management_system/data/resourceStock.csv", index=False)
+        # overwrite unallocated resources to all zeros
+        self.unallocResources_df['unallocTotal'] = 0
+        self.unallocResources_df.to_csv("humanitarian_management_system/data/resourceUnallocatedStock.csv", index=False)
+
+        ## to be robust, can call ResourceReport.unalloc_resource_checker(self) to check? 
+        resource_stats_instance = ResourceReport()
+        status, prompt = resource_stats_instance.unalloc_resource_checker() # how to get this ? 
+        if status == False:
+            #print(prompt)
+            pass
+        else:
+            print("Error: adding unallocated resources unsuccessful...")
+        return self.totalResources_df
+
 
     def redistribute(self):
         resource_stats_instance = ResourceReport()
@@ -24,7 +50,9 @@ class ResourceAllocator():
 
         for index, row in alloc_ideal.iterrows():
             if row['status'] != 'balanced':
-                row['updated'] = row['ideal_qty']
+                alloc_ideal.at[index, 'updated'] = row['ideal_qty'] ### if the status is not balanced, then update the quantity column with the ideal amount 
+        
+        print(alloc_ideal)
         
         # Now need to check, how the sum compares to the total amounts and make small tweaks... 
         redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
@@ -44,4 +72,4 @@ class ResourceAllocator():
 
 
                 ###### need to write the redistributed amount into the actual CSV
-        return redistribute_sum_checker, comparison_result
+        return alloc_ideal, redistribute_sum_checker, comparison_result
