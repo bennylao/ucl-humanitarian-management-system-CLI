@@ -3,6 +3,8 @@ import csv
 from pathlib import Path
 import pandas as pd
 from humanitarian_management_system import helper
+import tkinter as tk
+import tkinter.messagebox
 
 def move_refugee_helper_method():
     """Moves refugee from one camp to another"""
@@ -64,4 +66,77 @@ def move_refugee_helper_method():
           f"Additionally, the population of both camps has been adjusted accordingly.")
     return
 
-move_refugee_helper_method()
+# move_refugee_helper_method()
+
+
+# def delete_refugee():
+#     print("YOU ARE REQUESTING TO DELETE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
+#           "as instructed.")
+#     refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+#     ref_df = pd.read_csv(refugee_csv_path)
+#     print(ref_df)
+#     # checking input is vaild according to refugee IDs in database
+#     while True:
+#         rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
+#         if rid == "RETURN":
+#             return
+#         elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+#             break
+#         else:
+#             print("\nSorry - that refugee ID doesn't exist. Pick again.")
+#     print("Below is the information about this refugee.")
+#     specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
+#     print(specific_refugee_row)
+#     #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
+#     # Removing 1 from the population of the associated camp
+#     camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+#     camp_df = pd.read_csv(camp_csv_path)
+#     camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
+#     row_index_camp = camp_df[camp_df['campID'] == camp_id].index
+#     camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
+#     #     Deleting the refugee from the database
+#     ref_df = ref_df.drop(ref_df[ref_df['refugeeID'] == rid].index)
+#     print(f"Okay. You have permanently deleted refugee #{rid} from the system. Their old associated camp pop has "
+#           f"also been adjusted accordingly.")
+
+def delete_refugee():
+    print("YOU ARE REQUESTING TO DELETE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
+          "as instructed.")
+    refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+    ref_df = pd.read_csv(refugee_csv_path)
+    print(ref_df)
+    # checking input is vaild according to refugee IDs in database
+    while True:
+        rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
+        if rid == "RETURN":
+            return
+        elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+            break
+        else:
+            print("\nSorry - that refugee ID doesn't exist. Pick again.")
+    print("Below is the information about this refugee.")
+    specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
+    print(specific_refugee_row)
+    #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
+
+    root = tk.Tk()
+    result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete this refugee?")
+    if result == "yes":
+        # Removing 1 from the population of the associated camp
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        camp_df = pd.read_csv(camp_csv_path)
+        camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
+        row_index_camp = camp_df[camp_df['campID'] == camp_id].index
+        camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
+        #     Deleting the refugee from the database
+        ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
+        ref_df.to_csv(refugee_csv_path, index=False)
+        tk.messagebox.showinfo(
+            f"Okay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
+            f"has also been adjusted accordingly.")
+    else:
+        tk.messagebox.showinfo("Cancel", "The operation to delete the refugee was canceled.")
+    root.mainloop()
+
+
+delete_refugee()

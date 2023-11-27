@@ -642,8 +642,18 @@ class Controller:
         self.admin_manage_camp()
 
     def move_refugee(self):
-        # rid = 0
-        helper.move_refugee_helper_method()
+        while True:
+            move_or_delete = input("Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE: ")
+            if move_or_delete == "RETURN":
+                return
+            elif move_or_delete == "M":
+                helper.move_refugee_helper_method()
+            elif move_or_delete == "D":
+                helper.delete_refugee()
+            else:
+                print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
+
+
 
     def user_edit_account(self):
         while True:
