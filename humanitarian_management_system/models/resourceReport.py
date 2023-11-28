@@ -40,9 +40,10 @@ class ResourceReport():
         return resource_sum
 
     def resource_report_camp(self):
-        resource_camp = self.joined_df.pivot_table(index=['name', 'priorityLvl'], columns='campID', values='qty', aggfunc='sum').sort_index(level=1)
+        resource_camp = self.joined_df.pivot_table(index=['resourceID', 'name', 'priorityLvl'], columns='campID', values='qty', aggfunc='sum').sort_index(level=1)
 
         ## is this helpful? maybe add in population as well ? 
+        ## add something into allow view of selected resources only... ?? or not... idm 
         return resource_camp
     
     ############## comparing our current resource levels to a caculated equilibirum level

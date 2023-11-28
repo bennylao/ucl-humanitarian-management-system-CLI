@@ -127,3 +127,44 @@ class ResourceAllocator():
 
 
         return alloc_ideal, redistribute_sum_checker, comparison_result
+    
+    def manual_alloc(self):
+        # add stuff to deal with unallocated items later bc i think its a bit different. right now i think is just about getting a function that works 
+        resource_stats_instance = ResourceReport()
+        print("Below is how each resource is currently distributed across the camps: ")
+        all_resource_camp_df = resource_stats_instance.resource_report_camp()
+        print(all_resource_camp_df)
+
+        move = pd.DataFrame(columns=['resourceID','origin_campID', 'destination_campID', 'moveUnits'])
+        move_id_list = []
+        move_name_list = []
+        move_origin_camp_list = []
+        nove_dest_camp_list = []
+        move_units_list = []
+
+        while True: 
+            ###################################################################
+            # select single resource
+            r_id_select = int(input("\nPlease enter the resourceID of the item you would like to manually redistribute: --> "))
+            r_name_select = self.totalResources_df.loc[self.totalResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
+
+            # how much of this resource is allocated in each camp currently (does not yet include unallocated)
+            all_resource_camp_df = resource_stats_instance.resource_report_camp().reset_index()
+            single_resource_camp_df = all_resource_camp_df[all_resource_camp_df['resourceID'] == r_id_select]
+            print(f"\n*** Resource ID {r_id_select}: {r_name_select} *** is currently distributed in the following camps: \n")
+            print(single_resource_camp_df.to_string(index=False))
+
+            # get the user to select the origin & destination camp:
+            origin_c_id = int(input(f"\nPlease enter the ORIGIN campID (from the above) where you would like to REMOVE *** Resource ID {r_id_select}: {r_name_select} *** from: "))
+            destination_c_id = int(input(f"\nPlease enter the DESTINATION campID (from any campID) where you would like to ADD *** Resource ID {r_id_select}: {r_name_select} *** to: "))
+            
+            # get unit number. ######## Note to self / team!!!! PROBABLY NEED TO ADD VALIDATION LATER!!!! #########
+            moveUnits = int(input(f"\n Please enter the amount of *** Resource ID {r_id_select}: {r_name_select} *** to manually re-allocate: "))
+
+            # Ask if the user is done
+            done = input("\n Are there any more resources you want to manually allocate? y / n -->  ").strip().lo
+            if done == 'n':
+                break
+            return
+        
+        ####
