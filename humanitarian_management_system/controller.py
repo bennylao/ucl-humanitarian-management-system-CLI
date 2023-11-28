@@ -104,8 +104,6 @@ class Controller:
         while True:
             AdminView.display_menu()
             user_selection = helper.validate_user_selection(AdminView.get_main_options())
-            print(user_selection)
-            print(type(user_selection))
 
             if user_selection == "1":
                 self.admin_manage_event()
@@ -119,9 +117,10 @@ class Controller:
                 self.admin_display_summary()
             if user_selection == "6":
                 self.user_edit_account()
-            if user_selection == "L":
+            if user_selection == "7":
+                self.user.show_account_info()
+            if user_selection == "L" or self.logout_request:
                 self.user = None
-                self.startup()
                 break
 
     def admin_manage_event(self):
@@ -152,20 +151,25 @@ class Controller:
     ####################### MAIN RESOURCE MENU ############################# 
 
     def admin_manage_resource(self):
-        user_selection = input(AdminView.display_resource_menu())
-        # user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
-        if user_selection == "1":
-            # ("1", "Allocate resources")
-            self.resource_alloc_main_menu()
-        if user_selection == "2":
-            # ("2", "View resource statistics")
-            self.resource_reporting_menu()
-        if user_selection == "3":
-            # ("3", "Add resource / purchase from shop")
-            resource_adder_instance = ResourceAdder()
-            resource_adder_instance.resource_adder()
-        if user_selection == "x":
-            exit()
+        while True:
+            user_selection = input(AdminView.display_resource_menu())
+            # user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
+            if user_selection == "1":
+                # ("1", "Allocate resources")
+                self.resource_alloc_main_menu()
+            if user_selection == "2":
+                # ("2", "View resource statistics")
+                self.resource_reporting_menu()
+            if user_selection == "3":
+                # ("3", "Add resource / purchase from shop")
+                resource_adder_instance = ResourceAdder()
+                resource_adder_instance.resource_adder()
+            if user_selection == "R":
+                break
+            if user_selection == "L":
+                self.logout_request = True
+                self.user = None
+                break
 
     ####################### MAIN RESOURCE MENU ############################# 
 
@@ -739,11 +743,10 @@ class Controller:
             helper.legal_advice_support()
             self.volunteer_manage_camp()
 
-
     def user_edit_account(self):
         while True:
-            VolunteerView.display_account_menu()
-            user_selection = helper.validate_user_selection(VolunteerView.get_account_options())
+            ManagementView.display_account_menu()
+            user_selection = helper.validate_user_selection(ManagementView.get_account_options())
             if user_selection == "1":
                 # change username
                 self.user_change_username()

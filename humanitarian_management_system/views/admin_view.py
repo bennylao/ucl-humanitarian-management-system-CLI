@@ -53,17 +53,6 @@ class AdminView:
         ("L", "Logout")
     )
 
-    manage_account_menu = (
-        ("1", "Change Username"),
-        ("2", "Change Password"),
-        ("3", "Change Name"),
-        ("4", "Change Email"),
-        ("5", "Change Phone Number"),
-        ("6", "Change Occupation"),
-        ("R", "Return to previous page"),
-        ("L", "Logout")
-    )
-
     @staticmethod
     def display_login_message(username):
         print("\n========================================\n"
@@ -119,13 +108,3 @@ class AdminView:
     @classmethod
     def get_resource_options(cls):
         return [options[0] for options in cls.manage_resource_menu]
-
-    @classmethod
-    def display_account_menu(cls):
-        print("")
-        for key, value in cls.manage_account_menu:
-            print(f"[ {key} ] {value}")
-
-    @classmethod
-    def get_account_options(cls):
-        return [options[0] for options in cls.manage_account_menu]

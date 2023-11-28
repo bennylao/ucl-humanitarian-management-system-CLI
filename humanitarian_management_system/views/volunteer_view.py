@@ -24,17 +24,6 @@ class VolunteerView:
         ("L", "Logout")
     )
 
-    manage_account_menu = (
-        ("1", "Change Username"),
-        ("2", "Change Password"),
-        ("3", "Change Name"),
-        ("4", "Change Email"),
-        ("5", "Change Phone Number"),
-        ("6", "Change Occupation"),
-        ("R", "Return to previous page"),
-        ("L", "Logout")
-    )
-
     change_refugee_menu = (
         ("1", "Change refugee ID"),
         ("2", "Change First name"),
@@ -71,16 +60,6 @@ class VolunteerView:
     @classmethod
     def get_camp_options(cls):
         return [options[0] for options in cls.manage_camp_menu]
-
-    @classmethod
-    def display_account_menu(cls):
-        print("\n===== Volunteer Account Management Menu =====")
-        for key, value in cls.manage_account_menu:
-            print(f"[ {key} ] {value}")
-
-    @classmethod
-    def get_account_options(cls):
-        return [options[0] for options in cls.manage_account_menu]
 
     @classmethod
     def display_edit_refugee_menu(cls):
