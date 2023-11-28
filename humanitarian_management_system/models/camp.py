@@ -1,5 +1,5 @@
 from numpy.core.defchararray import capitalize
-from humanitarian_management_system.helper import extract_data, modify_csv_value, modify_csv_pandas, extract_data_df
+from humanitarian_management_system.helper import modify_csv_value, modify_csv_pandas
 import pandas as pd
 from pathlib import Path
 
@@ -33,17 +33,17 @@ class Camp:
     def pass_camp_info(self, select_index, camp_id):
         """if user choose to add a """
         csv_path_e = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
-        country = extract_data(csv_path_e, "location")
+        df_e = pd.read_csv(csv_path_e)
+        country = df_e['location']
         # geo_data = extract_data("data/eventTesting.csv","")
         csv_path_c = Path(__file__).parents[1].joinpath("data/country.csv")
         df = pd.read_csv(csv_path_c)
         # find country id and event id by index
         result = df.loc[df["name"] == capitalize(country.iloc[select_index-1])]['countryID'].tolist()
-        #event_id = int(extract_data("data/eventTesting.csv", "eid").iloc[select_index-1])
-        event_id = int(extract_data(csv_path_e, "eid").iloc[select_index - 1])
+        event_id = int(df_e['eid'].iloc[select_index - 1])
 
         # keep track of existing camp num of a particular event
-        df_c = extract_data_df(csv_path_e)
+        df_c = df_e
         no_camp = int(df_c.loc[df_c["eid"] == select_index]['no_camp'].tolist()[0])
         no_camp += 1
 

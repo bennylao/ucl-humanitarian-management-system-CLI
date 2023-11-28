@@ -228,8 +228,9 @@ def validate_camp_input():
 
 
 def validate_join():  # volunteer joining a camp
-    index = extract_data("data/roleType.csv", "roleID").tolist()
-    role = extract_data("data/roleType.csv", "name")
+    csv_path = Path(__file__).parents[0].joinpath("data/roleType.csv")
+    index = pd.read_csv(csv_path)["roleID"].tolist()
+    role = pd.read_csv(csv_path)["name"]
 
     print("Please select a camp role by its index.")
     for i in index:
@@ -279,20 +280,11 @@ def matched_rows_csv(file, desired_column, desired_value, index):
         return f"Column '{desired_column}' not found in the CSV file."
 
 
-def extract_data(csv_path, col):
-    df = pd.read_csv(csv_path)
-    return df[col]
-
-
-def extract_data_df(csv_path):
-    df = pd.read_csv(csv_path)
-    return df
-
-
 def extract_active_event(csv_path):
+    '''used to extract event id for active/yet ongoing events'''
     df = pd.read_csv(csv_path)
     # ensure we only display camp(s) that are part of an active plan
-    data = extract_data(csv_path, ['ongoing', 'eid'])
+    data = df[['ongoing', 'eid']]
     active_id = []
 
     for i in range(len(data)):
@@ -310,7 +302,7 @@ def display_camp_list():
     df_e = pd.read_csv(csv_path)
 
     csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
-    df_c = extract_data_df(csv_path_c)
+    df_c = pd.read_csv(csv_path_c)
 
     if len(active_id) == 0:
         print("No relevant camps to select from")
@@ -336,7 +328,10 @@ def display_camp_list():
 
 
 def validate_man_resource(index):
-    df = extract_data_df("data/resourceStock.csv")
+
+    csv_path = Path(__file__).parents[0].joinpath("data/resourceStock.csv")
+    df = pd.read_csv(csv_path)
+
     while True:
         select_index = int(input("\nEnter camp index: "))
 
@@ -350,7 +345,8 @@ def validate_man_resource(index):
             return
         break
 
-    res_id = extract_data("data/resourceStock.csv", "resourceID").tolist()
+    res_id = pd.read_csv(csv_path)['resourceID'].tolist()
+
     # display medical condition option list
     for i in res_id:
         name = df.loc[df['resourceID'] == i]['name'].tolist()[0]
@@ -456,8 +452,10 @@ def validate_refugee(lvl):
         else:
             break
 
-    med_id = extract_data("data/medicalInfoType.csv", "medicalInfoTypeID").tolist()
-    df = extract_data_df("data/medicalInfoType.csv")
+    csv_path = Path(__file__).parents[0].joinpath("data/medicalInfoType.csv")
+
+    med_id = pd.read_csv(csv_path)["medicalInfoTypeID"].tolist()
+    df = pd.read_csv(csv_path)
     # display medical condition option list
     for i in med_id:
         cond = df.loc[df['medicalInfoTypeID'] == i]['condition'].tolist()[0]

@@ -34,6 +34,16 @@ class VolunteerView:
         ("L", "Logout")
     )
 
+    change_refugee_menu = (
+        ("1", "Change refugee ID"),
+        ("2", "Change First name"),
+        ("3", "Change Last name"),
+        ("4", "Change DOB"),
+        ("5", "Change Gender"),
+        ("6", "Change Family ID"),
+        ("R", "Return to previous page"),
+    )
+
     @staticmethod
     def display_login_message(username):
         print("\n========================================\n"
@@ -70,3 +80,13 @@ class VolunteerView:
     @classmethod
     def get_account_options(cls):
         return [options[0] for options in cls.manage_account_menu]
+
+    @classmethod
+    def display_edit_refugee_menu(cls):
+        print("")
+        for key, value in cls.change_refugee_menu:
+            print(f"[ {key} ] {value}")
+
+    @classmethod
+    def get_edit_refugee_options(cls):
+        return [options[0] for options in cls.change_refugee_menu]

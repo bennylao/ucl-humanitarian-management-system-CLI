@@ -29,8 +29,9 @@ class AdminView:
         ("2", "Edit camp"),
         ("3", "Remove camp"),
         ("4", "Add refugees"),
-        ("5", "Move/remove refugee(s)"),
-        ("6", "Display all camps"),
+        ("5", "Edit refugees"),
+        ("6", "Move/remove refugee(s)"),
+        ("7", "Display all camps"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )

@@ -6,8 +6,8 @@ campID,eventID,countryID,refugeeCapacity,healthRisk,volunteerPop,refugeePop,avgC
 5,3,IN,12,low,0,4,2.75,open
 6,7,CN,13,low,2,2,1.5,closed
 7,4,IN,15,high,0,0,1,open
-8,8,EG,15,low,0,0,1,open
-9,8,EG,7,high,1,1,3,open
+8,8,EG,15,high,1,0,1,open
+9,8,EG,7,high,1,2,3.0,open
 11,4,IN,10,high,0,1,2.0,open
 12,3,IN,111,low,0,0,1,open
 13,5,IN,12,high,0,0,1,closed

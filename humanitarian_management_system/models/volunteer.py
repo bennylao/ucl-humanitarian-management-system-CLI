@@ -34,15 +34,14 @@ class Volunteer(User):
     def join_camp(self):
         csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
         df = pd.read_csv(csv_path)
-        event_title = df.loc[df['eid'] == self.event_id]['title'].tolist()[0]
 
         helper.modify_csv_pandas("data/user.csv", "username", self.username, "campID", self.camp_id)
         helper.modify_csv_pandas("data/user.csv", "username", self.username, "eventID", self.event_id)
         helper.modify_csv_pandas("data/user.csv", "username", self.username, "roleID", self.role_id)
 
         # update volunteer population for camp
-        Volunteer.total_number = int(df.loc[df['campID'] == camp_id]['volunteerPop'].tolist()[0])
+        Volunteer.total_number = int(df.loc[df['campID'] == self.camp_id]['volunteerPop'].tolist()[0])
         Volunteer.total_number += 1
         helper.modify_csv_pandas("data/camp.csv", "campID", self.camp_id, "volunteerPop",
                                  Volunteer.total_number)
-        print(f'''You've joined camp ID {self.camp_id} from event '{event_title}' ''')
+        print(f'''You've joined camp ID {self.camp_id}.''')

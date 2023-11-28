@@ -186,8 +186,9 @@ class Controller:
 
     @staticmethod
     def admin_edit_event():
+        user = 'admin'
         ManagementView.event_edit_message()
-        Event.edit_event_info()
+        Event.edit_event_info(user, 0)
 
     @staticmethod
     def admin_delete_event():
@@ -213,8 +214,10 @@ class Controller:
             if user_selection == "4":
                 self.create_refugee()
             if user_selection == "5":
-                self.move_refugee()
+                self.admin_edit_refugee()
             if user_selection == "6":
+                self.move_refugee()
+            if user_selection == "7":
                 # display all camps
                 pass
             if user_selection == "R":
@@ -224,14 +227,20 @@ class Controller:
                 self.logout_request = True
                 break
 
+    ##### Edit Refugee for all camps #####
+    @staticmethod
+    def admin_edit_refugee():
+        ManagementView.refugee_edit_message()
+        Refugee.edit_refugee_info()
+
     #################  CREATE / MODIFY / REMOVE CAMPS###############
 
     def admin_create_camp(self):
         ManagementView.camp_creation_message()
         # active_event_df = Event.get_all_active_events()
         # Event.display_events(active_event_df)
-        #event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
-       # df = pd.read_csv(event_csv_path)
+        # event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+        # df = pd.read_csv(event_csv_path)
         csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
         active_index = helper.extract_active_event(csv_path)[0]
 
@@ -267,6 +276,8 @@ class Controller:
         """This function is for admin modify camp info"""
         ManagementView.camp_modification_message()
         csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+        df = pd.read_csv(csv_path)
+
         active_index = helper.extract_active_event(csv_path)[0]
 
         csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
@@ -281,8 +292,14 @@ class Controller:
             df1 = helper.matched_rows_csv(csv_path, "ongoing", "True", "eid")
             df2 = helper.matched_rows_csv(csv_path, "ongoing", "Yet", "eid")
             print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
-            print(df2[0])
+            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+            if filtered_df.empty:
+                print("\nAll the events are closed and there's none to choose from.")
+                return
+            else:
+                Event.display_events(filtered_df)
+            # print(df1[0])
+            # print(df2[0])
             while True:
                 try:
                     eventID = int(input("\nEnter Event ID: "))
@@ -294,13 +311,14 @@ class Controller:
                         if df1[0].loc[eventID, "no_camp"] == 0:
                             print("No relevant camps to select from")
                             continue
-                        break
-                    except ValueError:
+                    except:
                         if df2[0].loc[eventID, "no_camp"] == 0:
                             print("No relevant camps to select from")
                             continue
-                        break
-                except ValueError:
+                    if eventID == 'RETURN':
+                        return
+                    break
+                except:
                     print(f"Invalid input! Please enter an integer from {df1[1]} or {df2[1]} for Event ID.")
 
             # print camps info for users to choose
@@ -435,7 +453,7 @@ class Controller:
         status, prompt = resource_report.unalloc_resource_checker()
         print(prompt)
         #### need to add in some way of checking for unallocated resources
-        
+
         if status == False:
             print(" \n Proceed to redistributing allocated resources... \n ")
             ManagementView.resource_alloc_main_message()
@@ -468,7 +486,7 @@ class Controller:
                 ### we first add the unallocated resources into the main 
                 ### there may be conflicts with how they get auto allocated vs manual. but deal with this later\
 
-                self.resource_alloc_main_menu() ## call self again - recursive to check for unallocated resources (there shouldnt be so this is for robustness)
+                self.resource_alloc_main_menu()  ## call self again - recursive to check for unallocated resources (there shouldnt be so this is for robustness)
 
             elif user_select == 'n':
                 print("Ignorning unallocated resources... \n")
@@ -492,7 +510,6 @@ class Controller:
             else:
                 print("Please enter y or n.")
                 self.resource_alloc_main_menu()
-                
 
     def man_resource(self):
         ManagementView.man_resource_message()
@@ -539,7 +556,6 @@ class Controller:
             else:
                 break
 
-
         # df = helper.extract_active_event()[1]
         # select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
         #
@@ -580,14 +596,14 @@ class Controller:
                 # add refugee
                 self.create_refugee()
             if user_selection == "2":
-                # edit refugee
-                pass
+                self.vol_edit_refugee()
+
             if user_selection == "3":
                 self.move_refugee()
 
             if user_selection == "4":
-                # edit camp info
-                pass
+                self.admin_modify_camp()
+
             if user_selection == "5":
                 # display all refugees
                 pass
@@ -632,29 +648,40 @@ class Controller:
         event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
         join_info = helper.validate_join()
         if join_info is not None:
-            v = Volunteer(self.user.username, '', '', '', '', '', '',
-                          join_info, select_index, event_id)
+            v = Volunteer(0, self.user.username, '', '', '', '', '', '',
+                          join_info, event_id, select_index)
             v.join_camp()
         return
 
     def create_refugee(self):
-        df = helper.extract_data_df("data/user.csv")
+        csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+        csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
+        df = pd.read_csv(csv_path)
+
         user_type = df.loc[df['username'] == self.user.username]['userType'].tolist()[0]
-        df_c = helper.extract_data_df("data/camp.csv")
+        df_c = pd.read_csv(csv_path_c)
         active_camp = df_c.loc[df_c['status'] == 'open']['campID'].tolist()
+
+        # check user type, for admin - can create new refugee for any camp, and for vol - camp dependent
         if user_type == 'admin':
             csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
             df1 = helper.matched_rows_csv(csv_path, "status", 'open', "campID")
             print("\n*The following shows the info of all available events*\n")
             print(df1[0])
 
-            cid = int(input("Enter a camp ID: "))
             while True:
-                if cid not in active_camp:
-                    print("Invalid camp ID entered!")
-                    continue
-                break
+                try:
+                    cid = int(input("Enter a camp ID: "))
+                    if cid not in active_camp:
+                        print("Invalid camp ID entered!")
+                        continue
+                    if cid == 'RETURN':
+                        return
+                    break
+                except:
+                    return
         else:
+            # check if volunteer is already assigned to a camp, if no exit to menu
             cid = df.loc[df['username'] == self.user.username]['campID'].tolist()[0]
             # check if volunteer user already join a camp
             if math.isnan(cid):
@@ -663,7 +690,6 @@ class Controller:
             print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
 
         ManagementView.create_refugee_message()
-        df_c = helper.extract_data_df("data/camp.csv")
         # health risk level of volunteer's camp
         lvl = df_c.loc[df_c['campID'] == cid]['healthRisk'].tolist()[0]
 
@@ -679,7 +705,8 @@ class Controller:
 
     def move_refugee(self):
         while True:
-            move_or_delete = input("Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE: ")
+            move_or_delete = input(
+                "Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE: ")
             if move_or_delete == "RETURN":
                 return
             elif move_or_delete == "M":
@@ -688,8 +715,6 @@ class Controller:
                 helper.delete_refugee()
             else:
                 print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
-
-
 
     def user_edit_account(self):
         while True:
@@ -719,7 +744,6 @@ class Controller:
                 self.user = None
                 self.logout_request = True
                 break
-
 
     def user_change_username(self):
         existing_usernames = User.get_all_usernames()
@@ -863,6 +887,22 @@ class Controller:
                 break
             else:
                 print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
+
+    #### edit refugee for volunteer, volunteer camp dependent ####
+    def vol_edit_refugee(self):
+        csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+        df = pd.read_csv(csv_path)
+        # check if volunteer is already assigned to a camp, if no exit to menu
+        cid = df.loc[df['username'] == self.user.username]['campID'].tolist()[0]
+        # check if volunteer user already join a camp
+        if math.isnan(cid):
+            print("You must first join a camp!")
+            return
+        print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
+
+        user = 'volunteer'
+        ManagementView.refugee_edit_message()
+        Refugee.edit_refugee_info(user, cid)
 
     # def volunteer_join_change_camp(self):
     #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
