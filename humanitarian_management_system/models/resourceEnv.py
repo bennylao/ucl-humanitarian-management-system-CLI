@@ -10,10 +10,5 @@ import pandas as pd
 
 # print(camp_df)
 
-report_instance = ResourceReport()
-
-all_resource_camp_df = report_instance.resource_report_camp().reset_index()
-
-single_resource_camp_df = all_resource_camp_df[all_resource_camp_df['name'] == 'Food']
-
-print(single_resource_camp_df.to_string(index=False))
+test_instance = ResourceAllocator()
+test_instance.manual_alloc()
