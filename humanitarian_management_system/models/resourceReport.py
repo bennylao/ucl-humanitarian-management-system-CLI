@@ -15,14 +15,14 @@ class ResourceReport():
     def unalloc_resource_checker(self):
         #### just a checker to see if we have any unallocated resources. Should return just binary outcome
         #### will be useful for other resource functions 
-        unalloc = sum(self.unallocResources['unallocTotal'])
+        unalloc = sum(self.unallocResources_df['unallocTotal'])
         if unalloc == 0:
             unalloc_status = False
-            unalloc_prompt = "======= ＼(^o^)／ There are no unallocated resources ~ All good! ＼(^o^)／ ===== \n"
+            unalloc_prompt = "\n ======= ＼(^o^)／ There are no unallocated resources ~ All good! ＼(^o^)／ ===== \n"
         else:
-            unalloc_items = self.unallocResources[self.unallocResources['unallocTotal'] > 0]
+            unalloc_items = self.unallocResources_df[self.unallocResources_df['unallocTotal'] > 0]
             unalloc_status = True
-            unalloc_prompt = f"=======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items} \n"
+            unalloc_prompt = f"\n =======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items} \n"
 
         return unalloc_status, unalloc_prompt
 
@@ -51,8 +51,8 @@ class ResourceReport():
     def calculate_resource_jess(self):
 
         # resource stock total...
-        resource__allocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
-        totalResources = pd.read_csv(resource__allocated_stock_csv_path)
+        
+        totalResources = self.totalResources_df
 
         # resource stock total...
         camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
@@ -91,7 +91,7 @@ class ResourceReport():
             'campID': second_column_repeated,
             'ideal_qty': [0] * len(second_column_repeated)
         })
-        print(alloc_ideal)
+        # print(alloc_ideal)
 
 
         for index, row in alloc_ideal.iterrows():
@@ -124,8 +124,7 @@ class ResourceReport():
 
         # this is the current allocation. not the gold standard one.. 
         # can probably refactor this code later on...
-        resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
-        alloc_current = pd.read_csv(resource_stock_csv_path)
+        alloc_current = self.resourceAllocs_df
 
         alloc_ideal['upper'] = round(alloc_ideal['ideal_qty'] * (1 + threshold))
         alloc_ideal['lower'] = round(alloc_ideal['ideal_qty'] * (1 - threshold))

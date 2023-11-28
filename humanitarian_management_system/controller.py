@@ -5,8 +5,8 @@ import re
 import math
 
 from humanitarian_management_system import helper
-from humanitarian_management_system.models import User, Admin, Volunteer, Event, Camp, ResourceTest, Refugee, \
-    ResourceReport
+from humanitarian_management_system.models import User, Admin, Volunteer, Event, Camp, Refugee, \
+    ResourceReport, ResourceAllocator, ResourceAdder
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
 
 
@@ -114,7 +114,6 @@ class Controller:
             if user_selection == "3":
                 self.admin_manage_volunteer()
             if user_selection == "4":
-                print("we are here at resources")
                 self.admin_manage_resource()
             if user_selection == "5":
                 self.admin_display_summary()
@@ -157,13 +156,14 @@ class Controller:
         # user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
         if user_selection == "1":
             # ("1", "Allocate resources")
-            self.resource_main()
+            self.resource_alloc_main_menu()
         if user_selection == "2":
             # ("2", "View resource statistics")
             self.resource_reporting_menu()
         if user_selection == "3":
             # ("3", "Add resource / purchase from shop")
-            pass
+            resource_adder_instance = ResourceAdder()
+            resource_adder_instance.resource_adder()
         if user_selection == "x":
             exit()
 
@@ -430,13 +430,15 @@ class Controller:
 
     ###################### RESOURCE MENU LEVEL 2 ###############################################
 
-    def resource_main(self):
+    def resource_alloc_main_menu(self):
         resource_report = ResourceReport()
         status, prompt = resource_report.unalloc_resource_checker()
-        ManagementView.resource_alloc_main_message()
-        #### need to add in some way of checking for unallocated resources
         print(prompt)
+        #### need to add in some way of checking for unallocated resources
+        
         if status == False:
+            print(" \n Proceed to redistributing allocated resources... \n ")
+            ManagementView.resource_alloc_main_message()
             ## if no unallocated resources), then go to the below?? go through usula auto vs. manual
             while True:
                 user_selection = input("\nAllocation mode: --> ")
@@ -455,9 +457,42 @@ class Controller:
                     break
         else:
             ## if there are unallocated resources, ask if the user wants to allocate them 
-            user_select = input('Do you want to distribute the unallocated resources?')
+            user_select = input('Do you want to distribute the unallocated resources? y / n --> ')
             #### user can choose if they want to do this manually or automatically, same as above actually
             #### is there a way we can reuse the same code ?? <- if we merge it into the same files....
+            if user_select == 'y':
+                print("\n ================ LOADING ==============\n")
+                resource_alloc = ResourceAllocator()
+                resource_alloc.add_unalloc_resource()
+                ### note that this doesnt do the distribution yet. it's a two step processs...
+                ### we first add the unallocated resources into the main 
+                ### there may be conflicts with how they get auto allocated vs manual. but deal with this later\
+
+                self.resource_alloc_main_menu() ## call self again - recursive to check for unallocated resources (there shouldnt be so this is for robustness)
+
+            elif user_select == 'n':
+                print("Ignorning unallocated resources... \n")
+                ## if the user selects no, we should also allow them to continue as above...
+                ManagementView.resource_alloc_main_message()
+                while True:
+                    user_selection = input("\nAllocation mode: --> ")
+
+                    if user_selection == '1':
+                        self.man_resource()
+                    elif user_selection == '2':
+                        self.auto_resource()
+                    else:
+                        print("Invalid mode option entered!")
+                        continue
+
+                    if user_selection == 'RETURN':
+                        return
+                    else:
+                        break
+            else:
+                print("Please enter y or n.")
+                self.resource_alloc_main_menu()
+                
 
     def man_resource(self):
         ManagementView.man_resource_message()
@@ -465,24 +500,25 @@ class Controller:
         res_man_info = helper.validate_man_resource(index)
 
         if res_man_info is not None:
-            r = ResourceTest(res_man_info[0], '', '')
-            r.manual_resource(res_man_info[2], res_man_info[1])
-            print("Resource allocated as request.")
-            self.admin_manage_camp()
+            # r = ResourceTest(res_man_info[0], '', '')
+            # r.manual_resource(res_man_info[2], res_man_info[1])
+            # print("Resource allocated as request.")
+            # self.admin_manage_camp()
+            pass
         else:
             return
 
     def auto_resource(self):
         ManagementView.auto_resource_message()
-        test_instance = ResourceTest(campID=1, pop=100, total_pop=1000)
+        alloc_instance = ResourceAllocator()
 
-        print(test_instance.calculate_resource_jess())
+        # print(report_instance.calculate_resource_jess())
 
-        alloc_ideal = test_instance.calculate_resource_jess()
-        alloc_ideal = test_instance.determine_above_below(threshold=0.10)
-        redistribute_sum_checker = test_instance.redistribute()
-        print(alloc_ideal.groupby('resourceID')['current'].sum())
-        print(redistribute_sum_checker)
+        # alloc_ideal = report_instance.calculate_resource_jess()
+        # alloc_ideal = report_instance.determine_above_below(threshold=0.10)
+        alloc_instance.redistribute()
+        # print(alloc_ideal.groupby('resourceID')['current'].sum())
+        # print(alloc_instance.redistribute())
 
     def resource_reporting_menu(self):
         ManagementView.resource_report_message()

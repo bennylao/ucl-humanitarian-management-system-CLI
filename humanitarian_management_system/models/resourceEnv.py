@@ -1,11 +1,11 @@
-from resourceTesting import ResourceTest
-from resourceReport import ResourceReport
-from resourceAllocator import ResourceAllocator
+from humanitarian_management_system.models.resourceAllocator import ResourceAllocator
+from humanitarian_management_system.models.resourceAdder import ResourceAdder
 
 from pathlib import Path
 import pandas as pd
 
-test_instance = ResourceTest(campID=1, pop=100, total_pop=1000)
 
+camp_df = pd.read_csv("humanitarian_management_system/data/camp.csv")
 
-test_instance.resource_adder()
+print(camp_df)
+
