@@ -142,4 +142,5 @@ def delete_refugee():
     root.mainloop()
 
 
-delete_refugee()
+# delete_refugee()
+

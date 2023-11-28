@@ -216,7 +216,7 @@ class Controller:
             if user_selection == "5":
                 self.admin_edit_refugee()
             if user_selection == "6":
-                self.move_refugee()
+                self.move_refugee_admin()
             if user_selection == "7":
                 # display all camps
                 pass
@@ -599,7 +599,7 @@ class Controller:
                 self.vol_edit_refugee()
 
             if user_selection == "3":
-                self.move_refugee()
+                self.move_refugee_volunteer()
 
             if user_selection == "4":
                 self.admin_modify_camp()
@@ -613,6 +613,9 @@ class Controller:
             if user_selection == "7":
                 # display all resource
                 pass
+            if user_selection == "8":
+                self.legal_advice_support()
+
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -703,18 +706,39 @@ class Controller:
         print("Refugee created.")
         self.admin_manage_camp()
 
-    def move_refugee(self):
+    def move_refugee_volunteer(self):
         while True:
             move_or_delete = input(
-                "Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE: ")
+                "Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
+                "\nor RETURN to exit back: ")
             if move_or_delete == "RETURN":
-                return
+                self.volunteer_manage_camp()
             elif move_or_delete == "M":
                 helper.move_refugee_helper_method()
             elif move_or_delete == "D":
                 helper.delete_refugee()
             else:
                 print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
+
+    def move_refugee_admin(self):
+        while True:
+            move_or_delete = input(
+                "Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
+                "\nor RETURN to exit back: ")
+            if move_or_delete == "RETURN":
+                self.admin_manage_camp()
+            elif move_or_delete == "M":
+                helper.move_refugee_helper_method()
+            elif move_or_delete == "D":
+                helper.delete_refugee()
+            else:
+                print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
+
+    def legal_advice_support(self):
+        while True:
+            helper.legal_advice_support()
+            self.volunteer_manage_camp()
+
 
     def user_edit_account(self):
         while True:
