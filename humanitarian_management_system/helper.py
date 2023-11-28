@@ -540,7 +540,7 @@ def move_refugee_helper_method():
     # modify_csv_value(camp_df, row, "refugeePop", camp_id)
     print(f"Transfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
           f"Additionally, the population of both camps has been adjusted accordingly.")
-    return
+
 # Just need to add some extra logic to the above in case the event also changes.... Need to think about this.
 
 
@@ -563,26 +563,62 @@ def delete_refugee():
     specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
     print(specific_refugee_row)
 #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
-    root = tk.Tk()
-    result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete this refugee?")
-    if result == "yes":
-        # Removing 1 from the population of the associated camp
-        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-        camp_df = pd.read_csv(camp_csv_path)
-        camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
-        row_index_camp = camp_df[camp_df['campID'] == camp_id].index
-        camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
-        #     Deleting the refugee from the database
-        ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
-        ref_df.to_csv(refugee_csv_path, index=False)
-        print(
-            f"Okay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
-            f"has also been adjusted accordingly.")
-        print("\nRefugee DataFrame after deletion:")
-        print(ref_df)
+#     root = tk.Tk()
+    while True:
+        result = input("Are you sure you want to delete this refugee? Enter 'yes' or 'no': ")
+        # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete this refugee?")
+        if result == "yes":
+            # Removing 1 from the population of the associated camp
+            camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+            camp_df = pd.read_csv(camp_csv_path)
+            camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
+            row_index_camp = camp_df[camp_df['campID'] == camp_id].index
+            camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
+            #     Deleting the refugee from the database
+            ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
+            ref_df.to_csv(refugee_csv_path, index=False)
+            print(
+                f"Okay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
+                f"has also been adjusted accordingly.")
+            print("\nRefugee DataFrame after deletion:")
+            print(ref_df)
+        elif result == "no":
+            print("Returning back to previous menu.")
+            return
+        else:
+            print("Invalid input. Please enter 'yes' or 'no': ")
+        #     tk.messagebox.showinfo("Cancel", "The operation to delete the refugee was canceled.")
+        #     break
 
-    else:
-        tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
-    root.mainloop()
+    # root.mainloop()
+    # while True:
+    #     user_input = input("Enter RETURN to exit back.")
+    #     if user_input.lower() == "RETURN":
+    #         return
+    #     else:
+    #         print("Invalid user entry. Please enter RETURN.")
+
+
 # Also add a method to edit info for a refugee?
 # Also put a try and except
+
+def legal_advice_support():
+    print("Below are links to our partner legal charities to offer legal support to refugees whilst we work on "
+          "\nbuilding our own team."
+          "\nClicking on these links will direct you to a web page. \nYou will have to return back "
+          "to the application manually.")
+
+    links = [
+        ("Refugee Council Legal Advice Site", "https://www.refugeecouncil.org.uk/"),
+        ("Red Cross Legal Support", "https://www.redcross.org.uk/"),
+        ("Refugee Legal Centre", "https://www.refugee-legal-centre.org.uk/"),
+        ('RETURN', '')
+    ]
+    while True:
+        for i, (name, url) in enumerate(links, 1):
+            print(f"{i}. {name}: {url}")
+        user_input = input("Click on one of the above links or enter RETURN to leave this menu: ")
+        if user_input.lower() == "RETURN":
+            return
+        break
+

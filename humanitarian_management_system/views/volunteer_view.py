@@ -19,6 +19,7 @@ class VolunteerView:
         ("5", "Display all refugees"),
         ("6", "Display camp information"),
         ("7", "Display all available resources"),
+        ("8", "Legal Advice Services"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
