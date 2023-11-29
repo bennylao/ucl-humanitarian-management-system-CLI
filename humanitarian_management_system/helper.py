@@ -7,6 +7,7 @@ import math
 import tkinter as tk
 import tkinter.messagebox
 import numpy as np
+from datetime import datetime
 
 
 def validate_user_selection(options):
@@ -623,6 +624,26 @@ def iterate_through_list(lst1, lst2):
         lst2.append(element)
 
 
+def display_training_session():
+    training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
+    session_df = pd.read_csv(training_session_path)
+    length_session_df = pd.read_csv(training_session_path)["sessionID"].tolist()
+    print("These training / skills sessions give refugees the opportunity to pick up new skills.")
+    while True:
+        print(session_df.to_string(index=False))
+        if len(length_session_df) == 0:
+            user_input = input("Oh no! No sessions created yet! WHy don't you add one now? "
+                               "\n Enter 1 to create a session or 2 to go back: ")
+            if user_input == '1':
+                create_training_session()
+            elif user_input == '2':
+                return
+            else:
+                print("\nSorry! Invalid input.")
+        else:
+            user_input = input("Enter anything to go back when you're ready.")
+            return
+
 def create_training_session():
     training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
     session_df = pd.read_csv(training_session_path)
@@ -716,11 +737,12 @@ def delete_session():
             break
         else:
             print("\n\nSorry - that's not a valid session ID. Pick again. ")
-    session_date = session_df.at[sessionID, 'date']
+    sessionID_int = int(sessionID)
+    session_date = session_df.loc[sessionID_int]['date']
     session_datetime = datetime.strptime(session_date, '%Y-%m-%d').date()
     if session_datetime < datetime.now().date():
         while True:
-            confirm = input("\nYou're about to delete a previously given skills session. "
+            confirm = input("\nYou're about to delete a previously held skills session. "
                        "\nEnter YES to confirm or RETURN to cancel: ")
             if confirm.lower == 'return':
                 return
@@ -730,7 +752,7 @@ def delete_session():
                 print("Invalid option. Try again.")
     else:
         while True:
-            confirm = input("\nYou're about to cancel an skills session that hasn't yet been given. "
+            confirm = input(f"\nYou're about to cancel skills session {sessionID_int} that hasn't yet been given. "
                             "\nAre you sure? Enter YES to confirm or RETURN to cancel: ")
             if confirm.lower == 'return':
                 return
@@ -739,8 +761,10 @@ def delete_session():
             else:
                 print("\nInvalid option. Try again.")
     #Update CSV files accordingly
-    session_df.drop(session_df[session_df['refugeeID'] == int(sessionID)].index, inplace=True)
+    session_df.drop(session_df[session_df['sessionID'] == int(sessionID)].index, inplace=True)
     session_df.to_csv(training_session_path, index=False)
+    print(f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.")
+    print(session_df.to_string(index=False))
 
 
 def add_refugee_to_session():

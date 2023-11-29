@@ -4,6 +4,7 @@ import pandas as pd
 import re
 import math
 
+
 from humanitarian_management_system import helper
 from humanitarian_management_system.models import User, Admin, Volunteer, Event, Camp, Refugee, \
     ResourceReport, ResourceAllocator, ResourceAdder
@@ -753,8 +754,9 @@ class Controller:
     def refugee_training_sessions(self):
         while True:
             create_add_delete = input("\nAre you looking to CREATE or DELETE a skills session, or add "
-                                      "\n more refugees to a session?"
-                                      "\n Enter CREATE, DELETE, ADD or RETURN to exit")
+                                      "more refugees to a session?"
+                                      "\nEnter CREATE,\nDELETE,\nADD,\nDISPLAY (to"
+                                      " view all sessions in the system),\nor RETURN (to exit): ")
             if create_add_delete.lower() == 'return':
                 self.volunteer_manage_camp()
             elif create_add_delete.lower() == 'create':
@@ -763,8 +765,10 @@ class Controller:
                 helper.delete_session()
             elif create_add_delete.lower() == 'add':
                 helper.add_refugee_to_session()
+            elif create_add_delete.lower() == 'display':
+                helper.display_training_session()
             else:
-                print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
+                print("\nSorry! Didn't catch that. Please try again or enter RETURN to exit.")
 
     def user_edit_account(self):
         while True:
