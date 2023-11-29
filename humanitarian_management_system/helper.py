@@ -3,6 +3,7 @@ import csv
 from pathlib import Path
 import pandas as pd
 import datetime
+import math
 import tkinter as tk
 import tkinter.messagebox
 import numpy as np
@@ -326,7 +327,6 @@ def display_camp_list():
 
 
 def validate_man_resource(index):
-
     csv_path = Path(__file__).parents[0].joinpath("data/resourceStock.csv")
     df = pd.read_csv(csv_path)
 
@@ -539,6 +539,7 @@ def move_refugee_helper_method():
     print(f"Transfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
           f"Additionally, the population of both camps has been adjusted accordingly.")
 
+
 # Just need to add some extra logic to the above in case the event also changes.... Need to think about this.
 
 
@@ -560,8 +561,8 @@ def delete_refugee():
     print("Below is the information about this refugee.")
     specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
     print(specific_refugee_row)
-#     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
-#     root = tk.Tk()
+    #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
+    #     root = tk.Tk()
     while True:
         result = input("Are you sure you want to delete this refugee? Enter 'yes' or 'no': ")
         # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete this refugee?")
@@ -620,3 +621,15 @@ def legal_advice_support():
             return
         break
 
+
+def check_vol_assigned_camp(username):
+    csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+    df = pd.read_csv(csv_path)
+    # check if volunteer is already assigned to a camp, if no exit to menu
+    cid = df.loc[df['username'] == username]['campID'].tolist()[0]
+    # check if volunteer user already join a camp
+    if math.isnan(cid):
+        print("You must first join a camp!")
+        return
+    print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
+    return cid

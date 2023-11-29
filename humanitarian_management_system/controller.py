@@ -222,6 +222,8 @@ class Controller:
             if user_selection == "6":
                 self.move_refugee_admin()
             if user_selection == "7":
+                self.admin_display_refugee()
+            if user_selection == "8":
                 # display all camps
                 pass
             if user_selection == "R":
@@ -234,8 +236,12 @@ class Controller:
     ##### Edit Refugee for all camps #####
     @staticmethod
     def admin_edit_refugee():
+        user = 'admin'
         ManagementView.refugee_edit_message()
-        Refugee.edit_refugee_info()
+
+        r = Refugee('', '', '', '', '', '', '',
+                    '')
+        r.edit_refugee_info(user, 0)
 
     #################  CREATE / MODIFY / REMOVE CAMPS###############
 
@@ -442,6 +448,13 @@ class Controller:
                 continue
 
 
+    def admin_display_refugee(self):
+        user = 'admin'
+        ManagementView.display_admin_refugee()
+        r = Refugee('', '', '', '', '', '', '',
+                    '')
+        r.display_info(user, 0)
+
     ###################### RESOURCE MENU LEVEL 2 ###############################################
 
     def resource_alloc_main_menu(self):
@@ -601,8 +614,7 @@ class Controller:
                 self.admin_modify_camp()
 
             if user_selection == "5":
-                # display all refugees
-                pass
+                self.vol_display_refugee()
             if user_selection == "6":
                 # display camp info
                 pass
@@ -909,19 +921,22 @@ class Controller:
 
     #### edit refugee for volunteer, volunteer camp dependent ####
     def vol_edit_refugee(self):
-        csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
-        df = pd.read_csv(csv_path)
-        # check if volunteer is already assigned to a camp, if no exit to menu
-        cid = df.loc[df['username'] == self.user.username]['campID'].tolist()[0]
-        # check if volunteer user already join a camp
-        if math.isnan(cid):
-            print("You must first join a camp!")
-            return
-        print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
+        cid = helper.check_vol_assigned_camp(self.user.username)
 
         user = 'volunteer'
         ManagementView.refugee_edit_message()
-        Refugee.edit_refugee_info(user, cid)
+
+        r = Refugee('', '', '', '', '', '', '',
+                    '')
+        r.edit_refugee_info(user, cid)
+
+    def vol_display_refugee(self):
+        user = 'volunteer'
+        cid = helper.check_vol_assigned_camp(self.user.username)
+        ManagementView.display_vol_refugee(cid)
+        r = Refugee('', '', '', '', '', '', '',
+                    '')
+        r.display_info(user, cid)
 
     # def volunteer_join_change_camp(self):
     #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
