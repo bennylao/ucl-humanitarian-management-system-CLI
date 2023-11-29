@@ -87,7 +87,6 @@ class ManagementView:
               "Please fill in all the following information below.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
 
-
     @staticmethod
     def camp_deletion_message():
         print("\n========================================\n"
@@ -130,7 +129,7 @@ class ManagementView:
               "========================================\n"
               "Please select a camp by its index.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
-        
+
     @staticmethod
     def resource_report_message():
         print("\n========================================\n"
@@ -165,3 +164,15 @@ class ManagementView:
               "========================================\n"
               "Please fill in all the following information below.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
+
+    @staticmethod
+    def display_admin_refugee():
+        print("\n========================================\n"
+              "       All refugees information \n"
+              "==========================================")
+
+    @staticmethod
+    def display_vol_refugee(cid):
+        print("\n========================================\n"
+              f"    Refugee information in camp {cid} \n"
+              "==========================================")

@@ -24,14 +24,15 @@ class Refugee:
         self.medical_condition_id = medical_condition_id
         self.medical_description = medical_description
         self.is_vaccinated = is_vaccinated
-        # self.rid = rid
-        # Refugee.total_number += 1
+
+        self.ref_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+        self.medinfo_csv_path = Path(__file__).parents[1].joinpath("data/medicalInfo.csv")
+        self.medtype_csv_path = Path(__file__).parents[1].joinpath("data/medicalInfoType.csv")
 
     def add_refugee_from_user_input(self, cid):
         """Method to add the information of a newly added refugee in our system to the csv file"""
         # keep track of refugee id
-        csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
-        id_arr = pd.read_csv(csv_path)["refugeeID"].tolist()
+        id_arr = pd.read_csv(self.ref_csv_path)["refugeeID"].tolist()
 
         if len(id_arr) == 0:
             rid = 0
@@ -41,16 +42,15 @@ class Refugee:
         rid += 1
 
         # keep track of refugee population of a camp
-        csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-        df = pd.read_csv(csv_path)
+        df = pd.read_csv(self.camp_csv_path)
         ref_pop = df.loc[df['campID'] == cid]['refugeePop'].tolist()[0]
 
         # pass data to refugee csv
         Refugee.refugee_data = [[rid, int(cid), self.firstName, self.lastName, self.dob, self.gender, self.family_id]]
         ref_df = pd.DataFrame(Refugee.refugee_data,
                               columns=['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'])
-        csv_path_a = Path(__file__).parents[1].joinpath("data/refugee.csv")
-        with open(csv_path_a, 'a') as f:
+
+        with open(self.ref_csv_path, 'a') as f:
             ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
         # update refugee population of a camp by 1
@@ -60,8 +60,8 @@ class Refugee:
         self.pass_refugee_medical_info(rid, cid)
 
     def pass_refugee_medical_info(self, rid, cid):
-        csv_path = Path(__file__).parents[0].joinpath("data/medicalInfo.csv")
-        df = pd.read_csv(csv_path)
+
+        df = pd.read_csv(self.medinfo_csv_path)
 
         id_arr = df["medicalInfoID"].tolist()
         if len(id_arr) == 0:
@@ -75,8 +75,8 @@ class Refugee:
         med_df = pd.DataFrame(Refugee.med_data,
                               columns=['medicalInfoID', 'refugeeID', 'medicalInfoTypeID', 'description',
                                        'isVaccinated'])
-        csv_path_a = Path(__file__).parents[1].joinpath("data/medicalInfo.csv")
-        with open(csv_path_a, 'a') as f:
+
+        with open(self.medinfo_csv_path, 'a') as f:
             med_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
         self.calculate_avg_critical_lvl(cid)
@@ -87,14 +87,9 @@ class Refugee:
         mid_arr = []
         avg_lvl = 0
 
-        csv_path_r = Path(__file__).parents[1].joinpath("data/refugee.csv")
-        df_r = pd.read_csv(csv_path_r)
-
-        csv_path_m = Path(__file__).parents[1].joinpath("data/medicalInfo.csv")
-        df_m = pd.read_csv(csv_path_m)
-
-        csv_path_l = Path(__file__).parents[1].joinpath("data/medicalInfoType.csv")
-        df_l = pd.read_csv(csv_path_l)
+        df_r = pd.read_csv(self.ref_csv_path)
+        df_m = pd.read_csv(self.medinfo_csv_path)
+        df_l = pd.read_csv(self.medtype_csv_path)
 
         rid_arr = df_r.loc[df_r['campID'] == int(cid)]['refugeeID'].tolist()
 
@@ -111,17 +106,21 @@ class Refugee:
         avg_lvl = avg_lvl / len(lvl_arr)
         modify_csv_pandas("data/camp.csv", 'campID', int(cid), 'avgCriticalLvl', avg_lvl)
 
-    @staticmethod
-    def edit_refugee_info(user, cid):
+    def edit_refugee_info(self, user, cid):
         """
         To edit refugee profile except campID as that belongs to Martha's move refugee method.
         """
         id_arr = []
+        # use this when comparing user newly input refugee id against existing refugee id
+        id_arr_temp = []
         date_format = '%d/%m/%Y'
 
-        csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
-        df_i = pd.read_csv(csv_path)['refugeeID'].tolist()
-        df = pd.read_csv(csv_path)
+        df_i = pd.read_csv(self.ref_csv_path)['refugeeID'].tolist()
+        df = pd.read_csv(self.ref_csv_path)
+
+        for i in df_i:
+            id_arr.append(i)
+            id_arr_temp.append(i)
 
         # if no refugees, exit to menu
         if len(df_i) == 0:
@@ -130,8 +129,6 @@ class Refugee:
 
         if user == 'admin':
             # get all existing active refugees
-            for i in df_i:
-                id_arr.append(i)
             print("Here it displays a list of info for all existing refugees")
             Event.display_events(df)
         else:
@@ -168,7 +165,7 @@ class Refugee:
             while True:
                 try:
                     new_value = int(input("\nEnter new refugee ID "))
-                    if new_value in id_arr:
+                    if new_value in id_arr_temp:
                         print("Can't use an existing refugee ID!")
                         continue
                     if new_value == 'RETURN':
@@ -177,7 +174,7 @@ class Refugee:
                         break
                 except:
                     return
-            modify_csv_pandas("data/refugee.csv", 'refugeeID', ref_id, 'refugeeID', new_value)
+            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'refugeeID', new_value, user, cid)
 
         if user_selection == '2':
             while True:
@@ -189,7 +186,7 @@ class Refugee:
                     return
                 else:
                     break
-            modify_csv_pandas("data/refugee.csv", 'refugeeID', ref_id, 'firstName', new_value)
+            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'firstName', new_value, user, cid)
 
         if user_selection == '3':
             while True:
@@ -202,7 +199,7 @@ class Refugee:
                     return
                 else:
                     break
-            modify_csv_pandas("data/refugee.csv", 'refugeeID', ref_id, 'lastName', new_value)
+            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'lastName', new_value, user, cid)
 
         if user_selection == '4':
             while True:
@@ -215,19 +212,19 @@ class Refugee:
                 except ValueError:
                     print("\nInvalid date format entered.")
                     continue
-            modify_csv_pandas("data/refugee.csv", 'refugeeID', ref_id, 'dob', new_value)
+            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'dob', new_value, user, cid)
 
         if user_selection == '5':
             while True:
                 new_value = input("\nEnter new gender (male, female or other) ")
-                if new_value != 'male' or new_value != 'female' or new_value != 'other':
+                if new_value != 'male' and new_value != 'female' and new_value != 'other':
                     print("Must enter male, female or other!")
                     continue
                 if new_value == 'RETURN':
                     return
                 else:
                     break
-            modify_csv_pandas("data/refugee.csv", 'refugeeID', ref_id, 'gender', new_value)
+            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'gender', new_value, user, cid)
 
         if user_selection == '6':
             while True:
@@ -242,15 +239,55 @@ class Refugee:
                         break
                 except:
                     return
-            modify_csv_pandas("data/refugee.csv", 'refugeeID', ref_id, 'familyID', new_value)
+            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'familyID', new_value, user, cid)
 
         if user_selection == 'R':
             return
 
-    @staticmethod
-    def modify_csv(csv_path, col, col_val, new, new_val):
+    def modify_csv(self, csv_path, col, col_val, new, new_val, user, cid):
         print("Change has been made successfully!")
         modify_csv_pandas(csv_path, col, col_val, new, new_val)
-        return
+        print("Is there any other changes you would like to make?")
 
+        while True:
+            user_input = input("Yes or No? ")
+            if user_input != 'Yes' and user_input != 'No':
+                print("Must enter Yes or No!")
+                continue
+            if user_input == 'Yes':
+                self.edit_refugee_info(user, cid)
+            else:
+                return
+            break
+
+    def display_info(self, user, cid):
+
+        ref_df = pd.read_csv(self.ref_csv_path)
+        medinfo_df = pd.read_csv(self.medinfo_csv_path)
+        medtype_df = pd.read_csv(self.medtype_csv_path)
+
+        if user == 'volunteer':
+            ref_df = ref_df.loc[ref_df['campID'] == cid]
+
+        joined_df_ref = pd.merge(ref_df, medinfo_df, on='refugeeID', how='inner')
+        joined_df_med = pd.merge(medinfo_df, medtype_df, on='medicalInfoTypeID', how='inner')
+
+        joined_df_total = pd.merge(joined_df_ref, joined_df_med, on='refugeeID', how='inner')
+        joined_df_total.columns = ['Refugee ID', 'Camp ID', 'First name', 'Last name', 'DOB', 'Gender', 'Family ID',
+                                   'medicalInfoID_x', 'medicalInfoTypeID_x', 'Description', 'Is vaccinated?',
+                                   'medicalInfoID_y', 'medicalInfoTypeID_y', 'description_y', 'isVaccinated_y',
+                                   'Condition', 'Critical level']
+
+        Event.display_events(joined_df_total[['Refugee ID', 'Camp ID', 'First name', 'Last name', 'DOB', 'Gender',
+                                              'Condition', 'Description', 'Is vaccinated?', 'Family ID',
+                                              'Critical level']])
+
+        while True:
+            user_input = input("Exit display session (Yes)? ")
+            if user_input != 'Yes':
+                print("Must enter Yes or leave it alone.")
+                continue
+            if user_input == 'Yes':
+                return
+            break
 
