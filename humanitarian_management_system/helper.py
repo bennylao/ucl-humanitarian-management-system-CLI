@@ -576,17 +576,19 @@ def delete_refugee():
             camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
             #     Deleting the refugee from the database
             ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
+            ref_df.reset_index(drop=True, inplace=True)
             ref_df.to_csv(refugee_csv_path, index=False)
             print(
-                f"Okay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
+                f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
                 f"has also been adjusted accordingly.")
             print("\nRefugee DataFrame after deletion:")
             print(ref_df)
+            break
         elif result == "no":
-            print("Returning back to previous menu.")
+            print("\nReturning back to previous menu.")
             return
         else:
-            print("Invalid input. Please enter 'yes' or 'no': ")
+            print("\nInvalid input. Please enter 'yes' or 'no': ")
         #     tk.messagebox.showinfo("Cancel", "The operation to delete the refugee was canceled.")
         #     break
     # root.mainloop()
@@ -771,9 +773,6 @@ def delete_session():
     #Update CSV files accordingly
     session_df.drop(session_df[session_df['sessionID'] == sessionID_int].index, inplace=True)
     session_df.reset_index(drop=True, inplace=True)
-    # Set 'sessionID' back as the index
-    # session_df.set_index('sessionID', inplace=True)
-    # session_df.drop(sessionID_int, inplace=True)
     session_df.to_csv(training_session_path, index=False)
     print(f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.\n")
     print(session_df.to_string(index=False))
