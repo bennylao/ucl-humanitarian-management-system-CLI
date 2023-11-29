@@ -3,9 +3,11 @@ import csv
 from pathlib import Path
 import pandas as pd
 import datetime
+import math
 import tkinter as tk
 import tkinter.messagebox
 import numpy as np
+from datetime import datetime
 
 
 def validate_user_selection(options):
@@ -175,16 +177,14 @@ def validate_event_input():
 
 
 def validate_camp_input():
-    try:
-        csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-        id_arr = extract_data(csv_path, "campID").tolist()
-    except:
-        id_arr = ['0']
+    csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    df = pd.read_csv(csv_path)
+    id_arr = df['campID'].tolist()
 
-    campID = 0
     if id_arr:
-        campID = id_arr.pop()
-    campID = int(campID) + 1
+        campID = id_arr.pop() + 1
+    else:
+        campID = 1
 
     # capacity input
     while True:
@@ -266,16 +266,16 @@ def modify_csv_value(file_path, row_index, column_name, new_value):
         writer.writerows(rows)
 
 
-def matched_rows_csv(file, desired_column, desired_value, index):
+def matched_rows_csv(file, desired_column, except_value, index):
     """used to extract rows with specific value in a specific column"""
     df = pd.read_csv(file)
     if desired_column in df.columns.tolist():
-        if desired_value in df[desired_column].tolist():
-            dff = df[df[desired_column] == desired_value].set_index(index)
+        if except_value in df[desired_column].tolist():
+            dff = df[df[desired_column] != except_value].set_index(index)
             dff_sorted = dff.sort_index()
             return [dff_sorted, dff_sorted.index.tolist()]
         else:
-            return f"Value '{desired_value}' not found in the {desired_column}."
+            return f"Value '{except_value}' not found in the {desired_column}."
     else:
         return f"Column '{desired_column}' not found in the CSV file."
 
@@ -328,7 +328,6 @@ def display_camp_list():
 
 
 def validate_man_resource(index):
-
     csv_path = Path(__file__).parents[0].joinpath("data/resourceStock.csv")
     df = pd.read_csv(csv_path)
 
@@ -495,7 +494,7 @@ def move_refugee_helper_method():
           "as instructed.")
     refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
     ref_df = pd.read_csv(refugee_csv_path)
-    print(ref_df)
+    print(ref_df.to_string(index=False))
     # checking input is vaild according to refugee IDs in database
     while True:
         rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to move another camp: ")
@@ -510,7 +509,7 @@ def move_refugee_helper_method():
     camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
     camp_df = pd.read_csv(camp_csv_path)
     active_camp_df = camp_df[camp_df['status'] == 'open']
-    print("\n", active_camp_df)
+    print("\n", active_camp_df.to_string(index=False))
     # checking input is vaild according to refugee IDs in database
     while True:
         camp_id = input("\nGreat! Now, from the above list, enter the campID of "
@@ -521,6 +520,8 @@ def move_refugee_helper_method():
             break
         else:
             print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
+    print("\nThanks - bear with us whilst we make that transfer."
+          "\n\n-------------------------------------------------------")
     # Minus one from the population of the camp originally associated with the refugee
     # print(camp_id)
     row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
@@ -538,8 +539,11 @@ def move_refugee_helper_method():
     camp_df.to_csv(camp_csv_path, index=False)
     # camp_df.to_csv(camp_csv_path, mode='a', index=False, header=False)
     # modify_csv_value(camp_df, row, "refugeePop", camp_id)
-    print(f"Transfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
-          f"Additionally, the population of both camps has been adjusted accordingly.")
+    print(f"\nTransfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
+          f"Additionally, the population of both camps has been adjusted accordingly. See below.")
+    print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_string(index=False))
+    print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_string(index=False))
+
 
 # Just need to add some extra logic to the above in case the event also changes.... Need to think about this.
 
@@ -562,8 +566,8 @@ def delete_refugee():
     print("Below is the information about this refugee.")
     specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
     print(specific_refugee_row)
-#     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
-#     root = tk.Tk()
+    #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
+    #     root = tk.Tk()
     while True:
         result = input("Are you sure you want to delete this refugee? Enter 'yes' or 'no': ")
         # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete this refugee?")
@@ -576,20 +580,21 @@ def delete_refugee():
             camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
             #     Deleting the refugee from the database
             ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
+            ref_df.reset_index(drop=True, inplace=True)
             ref_df.to_csv(refugee_csv_path, index=False)
             print(
-                f"Okay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
+                f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
                 f"has also been adjusted accordingly.")
             print("\nRefugee DataFrame after deletion:")
             print(ref_df)
+            break
         elif result == "no":
-            print("Returning back to previous menu.")
+            print("\nReturning back to previous menu.")
             return
         else:
-            print("Invalid input. Please enter 'yes' or 'no': ")
+            print("\nInvalid input. Please enter 'yes' or 'no': ")
         #     tk.messagebox.showinfo("Cancel", "The operation to delete the refugee was canceled.")
         #     break
-
     # root.mainloop()
     # while True:
     #     user_input = input("Enter RETURN to exit back.")
@@ -598,9 +603,6 @@ def delete_refugee():
     #     else:
     #         print("Invalid user entry. Please enter RETURN.")
 
-
-# Also add a method to edit info for a refugee?
-# Also put a try and except
 
 def legal_advice_support():
     print("Below are links to our partner legal charities to offer legal support to refugees whilst we work on "
@@ -622,3 +624,216 @@ def legal_advice_support():
             return
         break
 
+
+def iterate_through_list(lst1, lst2):
+    for element in lst1:
+        lst2.append(element)
+
+
+def display_training_session():
+    training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
+    session_df = pd.read_csv(training_session_path)
+    length_session_df = pd.read_csv(training_session_path)["sessionID"].tolist()
+    print("These training / skills sessions give refugees the opportunity to pick up new skills.")
+    while True:
+        print(session_df.to_string(index=False))
+        if len(length_session_df) == 0:
+            user_input = input("Oh no! No sessions created yet! WHy don't you add one now? "
+                               "\n Enter 1 to create a session or 2 to go back: ")
+            if user_input == '1':
+                create_training_session()
+            elif user_input == '2':
+                return
+            else:
+                print("\nSorry! Invalid input.")
+        else:
+            input("Enter anything to go back when you're ready. ")
+            return
+
+def create_training_session():
+    training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
+    session_df = pd.read_csv(training_session_path)
+    role_type_path = Path(__file__).parents[0].joinpath("data/roleType.csv")
+    role_df = pd.read_csv(role_type_path)
+    camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    camp_df = pd.read_csv(camp_csv_path)
+    refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+    ref_df = pd.read_csv(refugee_csv_path)
+    print(role_df.to_string(index=False))
+    while True:
+        occupation = input("\nFrom the list above enter the role which is closest to your own"
+                           "\n or enter RETURN to exit: ")
+        if occupation.lower() == "return":
+            return
+        elif role_df['name'].eq(occupation.lower()).any():
+            break
+        else:
+            print("\nSorry - that role doesn't exist in our system. Pick again or enter RETURN: ")
+    while True:
+        topic = input("\nEnter the type of topic you will be discussing in your skills session: ")
+        if topic.lower() == "return":
+            return
+        else:
+            break
+    while True:
+        date_input = input("\nEnter the date of the session (e.g., YYYY-MM-DD): ")
+        if date_input.lower() == "return":
+            return
+        else:
+            try:
+                date = datetime.strptime(date_input, '%Y-%m-%d').date()
+                if date > datetime.now().date():
+                    break
+                else:
+                    print("Can't select a date in the past! Try again.")
+            except ValueError:
+                print("\nInvalid date format. Please use the format YYYY-MM-DD. Or enter RETURN to quit.")
+    while True:
+        camp = input("\nEnter the campID of the camp you will be holding the session at: ")
+        if camp.lower() == "return":
+            return
+        elif camp_df['campID'].eq(int(camp)).any():
+            break
+        else:
+            print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
+    print(ref_df)
+
+    participants = []
+    while True:
+        rid = input(
+            "\nFrom the list above, one at a time enter a refugee ID for who shall be joining the skills session"
+            "\n or enter RETURN to stop: ")
+        if rid.lower() == 'return':
+            break
+        elif rid in participants:
+            print("You've already added that refugee!")
+        elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+            participants.append(rid)
+        else:
+            print("\nSorry - that refugee ID doesn't exist. Pick again.")
+
+        #  Now we have all the info we need to create a training session
+        # Need to also increment sessionID by 1.
+    print(f"Here is a confirmed list of the refugees you have selected to attend. You can add more later: ")
+    for participant in participants:
+        print(participant)
+    print("\n\nGreat! That's all the info we need to create a session. Here are the details: ")
+    session_arr = pd.read_csv(training_session_path)["sessionID"].tolist()
+    if len(session_arr) == 0:
+        sessionID = 0
+    else:
+        sessionID = int(session_arr.pop())
+    sessionID += 1
+
+    training_session_data = [int(sessionID), occupation, topic, date, camp, participants]
+    session_df.loc[len(session_df)] = training_session_data
+    session_df.to_csv(training_session_path, index=False)
+    added_session = session_df[session_df['sessionID'] == sessionID]
+    print(added_session)
+
+
+
+def delete_session():
+    training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
+    session_df = pd.read_csv(training_session_path)
+    print("\nLooks like you want to cancel or delete a session. That's a shame! See current sessions in the system.")
+    print("\n", session_df.to_string(index=False))
+    # session_df.set_index('sessionID', inplace=True)
+    while True:
+        sessionID = input("Enter RETURN now if you have changed your mind, or enter the sessionID you want to cancel: ")
+        if sessionID.lower() == 'return':
+            return
+        elif sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
+            break
+        else:
+            print("\n\nSorry - that's not a valid session ID. Pick again. ")
+    sessionID_int = int(sessionID)
+    session_date = session_df.loc[session_df['sessionID'] == sessionID_int, 'date'].values[0]
+    session_datetime = datetime.strptime(session_date, '%Y-%m-%d').date()
+    if session_datetime < datetime.now().date():
+        while True:
+            confirm = input("\nYou're about to delete a previously held skills session. "
+                       "\nEnter YES to confirm or RETURN to cancel: ")
+            if confirm.lower == 'return':
+                return
+            elif confirm.lower() == 'yes':
+                break
+            else:
+                print("Invalid option. Try again.")
+    else:
+        while True:
+            print(session_df[session_df['sessionID'] == sessionID_int])
+            confirm = input(f"\nYou're about to cancel skills session {sessionID_int} (displayed"
+                            f" above), which HAS NOT yet been given. "
+                            "\nAre you sure? Enter YES to confirm or RETURN to cancel: ")
+            if confirm.lower() == 'return':
+                break
+            elif confirm.lower() == 'yes':
+                break
+            else:
+               print("\nInvalid option. Try again.\n")
+    if confirm.lower() == 'return':
+        return
+    #Update CSV files accordingly
+    session_df.drop(session_df[session_df['sessionID'] == sessionID_int].index, inplace=True)
+    session_df.reset_index(drop=True, inplace=True)
+    session_df.to_csv(training_session_path, index=False)
+    print(f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.\n")
+    print(session_df.to_string(index=False))
+
+
+def add_refugee_to_session():
+    refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+    ref_df = pd.read_csv(refugee_csv_path)
+    training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
+    session_df = pd.read_csv(training_session_path)
+    print("It's great another refugee wants to join a skills session!")
+    print(session_df.to_string(index=False))
+    while True:
+        sessionID = input("\n\nFrom the list above, enter the session ID for the "
+                          "skills session you want to add more participants to. Or enter RETURN to go back: ")
+        if sessionID.lower() == 'return':
+            return
+        elif sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
+            break
+        else:
+            print("\n\nSorry - that's not a valid session ID. Pick again. ")
+    print(ref_df.to_string(index=False))
+    row_index_sessionID = session_df[session_df['sessionID'] == int(sessionID)].index[0]
+    already_registered = session_df.at[row_index_sessionID, 'participants']
+    participants = []
+    while True:
+        rid = input(f"\n\nFrom the above list, enter the Refugee ID for who you want to add to session {sessionID}"
+                    "\nEnter STOP when you are finished, or return to go back: ")
+        if rid.lower() == "return":
+            return
+        if rid.lower() == 'stop':
+            break
+        elif rid in already_registered:
+            print(f"\nDon't worry. That refugee is already down to attend this session.")
+        elif rid in participants:
+            print("\nYou've already just added that refugee.")
+        elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+            print(f"\n\nAdding refugee with id {rid} to skills session {sessionID}. ")
+            participants.append(rid)
+        else:
+            print("\n\nSorry - that refugee ID doesn't exist. Pick again.")
+
+    # Now we need to add the new "participants" list to the participants list in the csv for the right session
+    combined_attendees = [already_registered] + participants
+    session_df.at[row_index_sessionID, 'participants'] = combined_attendees
+    session_df.to_csv(training_session_path, index=False)
+    print(f"\nExcellent! We have added refugees {participants} to session {sessionID}. See below. ")
+    print(session_df.to_string(index=False))
+
+def check_vol_assigned_camp(username):
+    csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+    df = pd.read_csv(csv_path)
+    # check if volunteer is already assigned to a camp, if no exit to menu
+    cid = df.loc[df['username'] == username]['campID'].tolist()[0]
+    # check if volunteer user already join a camp
+    if math.isnan(cid):
+        print("You must first join a camp!")
+        return
+    print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
+    return cid

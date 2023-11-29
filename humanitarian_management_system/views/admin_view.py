@@ -27,11 +27,12 @@ class AdminView:
     manage_camp_menu = (
         ("1", "Add new camp"),
         ("2", "Edit camp"),
-        ("3", "Remove camp"),
+        ("3", "Remove/close camp"),
         ("4", "Add refugees"),
         ("5", "Edit refugees"),
         ("6", "Move/remove refugee(s)"),
-        ("7", "Display all camps"),
+        ("7", "Display all refugees information"),
+        ("8", "Display all camps information"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )

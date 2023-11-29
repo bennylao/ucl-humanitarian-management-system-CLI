@@ -16,10 +16,11 @@ class VolunteerView:
         ("2", "Edit refugee"),
         ("3", "move/remove refugee"),
         ("4", "Edit camp profile"),
-        ("5", "Display all refugees"),
+        ("5", "Display refugees information"),
         ("6", "Display camp information"),
         ("7", "Display all available resources"),
         ("8", "Legal Advice Services"),
+        ("9", "Refugee Skills Sessions Management"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
