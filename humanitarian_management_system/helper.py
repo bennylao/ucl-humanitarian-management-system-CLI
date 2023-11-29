@@ -494,7 +494,7 @@ def move_refugee_helper_method():
           "as instructed.")
     refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
     ref_df = pd.read_csv(refugee_csv_path)
-    print(ref_df)
+    print(ref_df.to_string(index=False))
     # checking input is vaild according to refugee IDs in database
     while True:
         rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to move another camp: ")
@@ -509,7 +509,7 @@ def move_refugee_helper_method():
     camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
     camp_df = pd.read_csv(camp_csv_path)
     active_camp_df = camp_df[camp_df['status'] == 'open']
-    print("\n", active_camp_df)
+    print("\n", active_camp_df.to_string(index=False))
     # checking input is vaild according to refugee IDs in database
     while True:
         camp_id = input("\nGreat! Now, from the above list, enter the campID of "
@@ -520,6 +520,8 @@ def move_refugee_helper_method():
             break
         else:
             print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
+    print("\nThanks - bear with us whilst we make that transfer."
+          "\n\n-------------------------------------------------------")
     # Minus one from the population of the camp originally associated with the refugee
     # print(camp_id)
     row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
@@ -537,8 +539,10 @@ def move_refugee_helper_method():
     camp_df.to_csv(camp_csv_path, index=False)
     # camp_df.to_csv(camp_csv_path, mode='a', index=False, header=False)
     # modify_csv_value(camp_df, row, "refugeePop", camp_id)
-    print(f"Transfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
-          f"Additionally, the population of both camps has been adjusted accordingly.")
+    print(f"\nTransfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
+          f"Additionally, the population of both camps has been adjusted accordingly. See below.")
+    print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_string(index=False))
+    print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_string(index=False))
 
 
 # Just need to add some extra logic to the above in case the event also changes.... Need to think about this.

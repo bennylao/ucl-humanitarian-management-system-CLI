@@ -735,7 +735,7 @@ class Controller:
     def move_refugee_admin(self):
         while True:
             move_or_delete = input(
-                "\nDo you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
+                "\n\nDo you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
                 "\nor RETURN to exit back: ")
             if move_or_delete.lower() == "return":
                 self.admin_manage_camp()
