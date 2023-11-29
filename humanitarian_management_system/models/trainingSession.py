@@ -134,7 +134,7 @@ def add_refugee_to_session():
     session_df.to_csv(training_session_path, index=False)
     print(f"\nExcellent! We have added refugees {participants} to session {sessionID}. See below. ")
     print(session_df.to_string(index=False))
-add_refugee_to_session()
+# add_refugee_to_session()
 
 
 def delete_session():
@@ -179,6 +179,99 @@ def delete_session():
 
 
 
+def delete_session1():
+    training_session_path = Path(__file__).parents[1].joinpath("data/trainingSessions.csv")
+    session_df = pd.read_csv(training_session_path)
+    print("\nLooks like you want to cancel or delete a session. That's a shame! ")
+    while True:
+        sessionID = input("Enter RETURN now if you have changed your mind, or enter the sessionID you"
+                          "\n want to cancel: ")
+        if sessionID.lower() == 'return':
+            return
+        elif sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
+            break
+        else:
+            print("\n\nSorry - that's not a valid session ID. Pick again. ")
+    sessionID_int = int(sessionID)
+    session_date = session_df.loc[session_df['sessionID'] == sessionID_int, 'date'].values[0]
+    session_datetime = datetime.strptime(session_date, '%Y-%m-%d').date()
+    if session_datetime < datetime.now().date():
+        while True:
+            confirm = input("\nYou're about to delete a previously held skills session. "
+                       "\nEnter YES to confirm or RETURN to cancel: ")
+            if confirm.lower == 'return':
+                return
+            elif confirm.lower() == 'yes':
+                break
+            else:
+                print("Invalid option. Try again.")
+    else:
+        while True:
+            confirm = input(f"\nYou're about to cancel skills session {sessionID_int} that hasn't yet been given. "
+                            "\nAre you sure? Enter YES to confirm or RETURN to cancel: ")
+            if confirm.lower == 'return':
+                return
+            elif confirm.lower() == 'yes':
+                break
+            else:
+                print("\nInvalid option. Try again.")
+    #Update CSV files accordingly
+    session_df.drop(session_df[session_df['sessionID'] == int(sessionID)].index, inplace=True)
+    session_df.to_csv(training_session_path, index=False)
+    print(f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.")
+    print(session_df.to_string(index=False))
+
+delete_session1()
+
+# try:
+#     sessionID_int = int(sessionID)
+#     if sessionID_int in session_df.index:
+#         selected_session = session_df.loc[sessionID_int]
+#         print("\n", selected_session.to_string(index=False))
+#         break
+#     else:
+#         print("\n\nSorry - that's not a valid session ID. Pick again. ")
+# except ValueError:
+#     print("\n\nError: Please enter a valid integer for the session ID.")
 
 
+def delete_session3():
+    training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
+    session_df = pd.read_csv(training_session_path)
+    print("\nLooks like you want to cancel or delete a session. See current sessions in the system.")
+    print("\n", session_df.to_string(index=False))
 
+    while True:
+        sessionID = input("Enter RETURN now if you have changed your mind, or enter the sessionID you want to cancel: ")
+        if sessionID.lower() == 'return':
+            return
+        elif sessionID.strip() and sessionID.strip().isdigit() and int(sessionID) in session_df['sessionID'].values:
+            break
+        else:
+            print("\n\nSorry - that's not a valid session ID. Pick again. ")
+
+    sessionID_int = int(sessionID)
+    session_date = session_df.loc[session_df['sessionID'] == sessionID_int, 'date'].values[0]
+    session_datetime = datetime.strptime(session_date, '%Y-%m-%d').date()
+
+    if session_datetime < datetime.now().date():
+        confirm = input("\nYou're about to delete a previously held skills session. "
+                        "\nEnter YES to confirm or RETURN to cancel: ")
+    else:
+        confirm = input(f"\nYou're about to cancel skills session {sessionID_int} (displayed"
+                        f" above), which HAS NOT yet been given. "
+                        "\nAre you sure? Enter YES to confirm or RETURN to cancel: ")
+
+    if confirm.lower() == 'yes':
+        # Drop the row based on 'sessionID'
+        session_df = session_df[session_df['sessionID'] != sessionID_int]
+
+        # Save the DataFrame to CSV file
+        session_df.to_csv(training_session_path, index=False)
+
+        print(
+            f"\n Okay! We've deleted session number {sessionID} from our system. See below for the updated list of sessions.")
+        print(session_df.to_string(index=False))
+
+
+delete_session3()

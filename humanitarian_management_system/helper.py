@@ -641,7 +641,7 @@ def display_training_session():
             else:
                 print("\nSorry! Invalid input.")
         else:
-            user_input = input("Enter anything to go back when you're ready.")
+            input("Enter anything to go back when you're ready. ")
             return
 
 def create_training_session():
@@ -689,7 +689,7 @@ def create_training_session():
         elif camp_df['campID'].eq(int(camp)).any():
             break
         else:
-            print("\nSorry - that role doesn't exist in our system. Pick again or enter RETURN.")
+            print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
     print(ref_df)
 
     participants = []
@@ -711,7 +711,7 @@ def create_training_session():
     print(f"Here is a confirmed list of the refugees you have selected to attend. You can add more later: ")
     for participant in participants:
         print(participant)
-    print("Great! That's all the info we need to create a session. ")
+    print("\n\nGreat! That's all the info we need to create a session. Here are the details: ")
     session_arr = pd.read_csv(training_session_path)["sessionID"].tolist()
     if len(session_arr) == 0:
         sessionID = 0
@@ -722,15 +722,19 @@ def create_training_session():
     training_session_data = [int(sessionID), occupation, topic, date, camp, participants]
     session_df.loc[len(session_df)] = training_session_data
     session_df.to_csv(training_session_path, index=False)
+    added_session = session_df[session_df['sessionID'] == sessionID]
+    print(added_session)
+
 
 
 def delete_session():
     training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
     session_df = pd.read_csv(training_session_path)
-    print("\nLooks like you want to cancel or delete a session. That's a shame! ")
+    print("\nLooks like you want to cancel or delete a session. That's a shame! See current sessions in the system.")
+    print("\n", session_df.to_string(index=False))
+    # session_df.set_index('sessionID', inplace=True)
     while True:
-        sessionID = input("Enter RETURN now if you have changed your mind, or enter the sessionID you"
-                          "\n want to cancel: ")
+        sessionID = input("Enter RETURN now if you have changed your mind, or enter the sessionID you want to cancel: ")
         if sessionID.lower() == 'return':
             return
         elif sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
@@ -738,7 +742,7 @@ def delete_session():
         else:
             print("\n\nSorry - that's not a valid session ID. Pick again. ")
     sessionID_int = int(sessionID)
-    session_date = session_df.loc[sessionID_int]['date']
+    session_date = session_df.loc[session_df['sessionID'] == sessionID_int, 'date'].values[0]
     session_datetime = datetime.strptime(session_date, '%Y-%m-%d').date()
     if session_datetime < datetime.now().date():
         while True:
@@ -752,18 +756,26 @@ def delete_session():
                 print("Invalid option. Try again.")
     else:
         while True:
-            confirm = input(f"\nYou're about to cancel skills session {sessionID_int} that hasn't yet been given. "
+            print(session_df[session_df['sessionID'] == sessionID_int])
+            confirm = input(f"\nYou're about to cancel skills session {sessionID_int} (displayed"
+                            f" above), which HAS NOT yet been given. "
                             "\nAre you sure? Enter YES to confirm or RETURN to cancel: ")
-            if confirm.lower == 'return':
-                return
+            if confirm.lower() == 'return':
+                break
             elif confirm.lower() == 'yes':
                 break
             else:
-                print("\nInvalid option. Try again.")
+               print("\nInvalid option. Try again.\n")
+    if confirm.lower() == 'return':
+        return
     #Update CSV files accordingly
-    session_df.drop(session_df[session_df['sessionID'] == int(sessionID)].index, inplace=True)
+    session_df.drop(session_df[session_df['sessionID'] == sessionID_int].index, inplace=True)
+    session_df.reset_index(drop=True, inplace=True)
+    # Set 'sessionID' back as the index
+    # session_df.set_index('sessionID', inplace=True)
+    # session_df.drop(sessionID_int, inplace=True)
     session_df.to_csv(training_session_path, index=False)
-    print(f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.")
+    print(f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.\n")
     print(session_df.to_string(index=False))
 
 
