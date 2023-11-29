@@ -624,6 +624,9 @@ class Controller:
             if user_selection == "8":
                 self.legal_advice_support()
 
+            if user_selection == '9':
+                self.refugee_training_sessions()
+
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -731,13 +734,13 @@ class Controller:
     def move_refugee_admin(self):
         while True:
             move_or_delete = input(
-                "Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
+                "\nDo you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
                 "\nor RETURN to exit back: ")
-            if move_or_delete == "RETURN":
+            if move_or_delete.lower() == "return":
                 self.admin_manage_camp()
-            elif move_or_delete == "M":
+            elif move_or_delete.lower() == "m":
                 helper.move_refugee_helper_method()
-            elif move_or_delete == "D":
+            elif move_or_delete.lower() == "d":
                 helper.delete_refugee()
             else:
                 print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
@@ -746,6 +749,22 @@ class Controller:
         while True:
             helper.legal_advice_support()
             self.volunteer_manage_camp()
+
+    def refugee_training_sessions(self):
+        while True:
+            create_add_delete = input("\nAre you looking to CREATE or DELETE a skills session, or add "
+                                      "\n more refugees to a session?"
+                                      "\n Enter CREATE, DELETE, ADD or RETURN to exit")
+            if create_add_delete.lower() == 'return':
+                self.volunteer_manage_camp()
+            elif create_add_delete.lower() == 'create':
+                helper.create_training_session()
+            elif create_add_delete.lower() == 'delete':
+                helper.delete_session()
+            elif create_add_delete.lower() == 'add':
+                helper.add_refugee_to_session()
+            else:
+                print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
 
     def user_edit_account(self):
         while True:
