@@ -28,23 +28,28 @@ class ResourceReport():
 
 
     def resource_report_total(self):
-        ################ there seems to have been some divergence on the data here since i last worked on reporting
-        ################ previously, i just had resourcedType, where the total was calculated by the aggregation below
-        ##### now the total is printed out in resourceStock seperately. What are the implications?
-        # My first thoughts are that this might be less robust (incase we need to update the totals.)... but happy to keep going and see whats going on
         resource_sum = self.joined_df.groupby('resourceID').agg({
             'name': 'first',  # Keeps the first name for each group
+            'qty': 'sum',  # Sums the allocatedQuantity for each group
             'priorityLvl': 'first',  # Keeps the first priorityLvl for each group
-            'qty': 'sum'  # Sums the allocatedQuantity for each group
         }).reset_index()
         return resource_sum
 
     def resource_report_camp(self):
-        resource_camp = self.joined_df.pivot_table(index=['resourceID', 'name', 'priorityLvl'], columns='campID', values='qty', aggfunc='sum').sort_index(level=1)
+        resource_camp = self.joined_df.pivot_table(index=['resourceID', 'name', 'priorityLvl'], columns='campID', values='qty', aggfunc='sum').sort_index(level=0)
 
         ## is this helpful? maybe add in population as well ? 
         ## add something into allow view of selected resources only... ?? or not... idm 
         return resource_camp
+    
+    def resource_report_camp_vs_unallocated(self):
+        resource_camp = self.joined_df.pivot_table(index=['resourceID', 'name', 'priorityLvl'], columns='campID', values='qty', aggfunc='sum').sort_index(level=0)
+        joined_df_unalloc_camp = pd.merge(self.unallocResources_df, resource_camp, on='resourceID', how='inner')
+        joined_df_unalloc_camp['unallocTotal'],  joined_df_unalloc_camp['priorityLvl'] = joined_df_unalloc_camp['priorityLvl'], joined_df_unalloc_camp['unallocTotal']
+
+        ## is this helpful? maybe add in population as well ? 
+        ## add something into allow view of selected resources only... ?? or not... idm 
+        return joined_df_unalloc_camp
     
     ############## comparing our current resource levels to a caculated equilibirum level
 

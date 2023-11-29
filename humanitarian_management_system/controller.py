@@ -548,7 +548,8 @@ class Controller:
             user_selection = input("--> \n: ")
 
             if user_selection == '1':
-                print(resource_report.resource_report_total())
+                # print(resource_report.resource_report_total())
+                pass
             elif user_selection == '2':
                 print(resource_report.resource_report_camp())
             else:

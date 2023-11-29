@@ -11,4 +11,9 @@ import pandas as pd
 # print(camp_df)
 
 test_instance = ResourceAllocator()
-test_instance.manual_alloc()
+# test_instance.manual_alloc()
+
+
+test_instance = ResourceReport()
+df = test_instance.resource_report_total()
+print(df)

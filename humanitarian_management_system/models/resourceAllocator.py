@@ -226,5 +226,129 @@ Below are the before vs. current resource allocations by camp: \n"""
 
 
         return resourceManualAllocs
+    
+
+    def manual_unallocated_only(self):
+        # add stuff to deal with unallocated items later bc i think its a bit different. right now i think is just about getting a function that works 
+        resource_stats_instance = ResourceReport()
+        print("Below is how each resource is currently unallocated vs. how many is distributed across the camps: ")
+        all_resource_camp_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated()
+        print(all_resource_camp_camp_vs_unallocated)
+
+        print("Below is how each resource is currently distributed across the camps: ")
+
+        move = pd.DataFrame(columns=['resourceID', 'name', 'action', 'campID', 'moveUnits'])
+        move_id_list = []
+        move_name_list = []
+        move_action_list = []
+        nove_camp_list = []
+        move_units_list = []
+
+        while True: 
+            ###################################################################
+            # select single resource
+            r_id_select = int(input("\nPlease enter the resourceID of the UNALLOCATED item you would like to manually redistribute: --> "))
+            r_name_select = self.unallocResources_df.loc[self.unallocResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
+
+            # get the user to select the origin & destination camp:
+            c_id = int(input(f"\nPlease enter the relevant campID for the *** Resource ID {r_id_select}: {r_name_select} *** : --> "))
+
+            action = input(f"Would you like to assign the unallocated resource to campID {c_id}; or unassign the resource from campID {c_id} back into unallocated ? \nassign / unassign -->")
+            
+            # get unit number. ######## Note to self / team!!!! PROBABLY NEED TO ADD VALIDATION LATER!!!! #########
+            move_units = int(input(f"\n Please enter the amount of *** Resource ID {r_id_select}: {r_name_select} *** to manually re-allocate: "))
+
+            move_id_list.append(r_id_select)
+            move_name_list.append(r_name_select)
+            nove_camp_list.append(c_id)
+            move_action_list.append(action)
+            move_units_list.append(move_units)
+
+            # Ask if the user is done
+            done = input("\n Are there any more resources you want to manually allocate? y / n -->  ").strip()
+            if done == 'n':
+                break
+            
+        
+        move['resourceID'] = move_id_list
+        move['name'] = move_name_list
+        move['action'] = move_action_list
+        move['campID'] = nove_camp_list
+        move['moveUnits'] = move_units_list
+        
+        
+        print(f"""==========================================================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ Below are your selected manual re-allocations between unallocated resources: ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+==========================================================================\n
+        {move.to_string(index=False)} \n"""
+        )
+        confirm_move = input("Proceed to re-allocate? \n [y] Yes; \n [x] Abandon manual allocation \n --> ")
+        if confirm_move == 'y':
+            ### here, we will need to print to two or multiple csvs, as opposed to just one - as the net amount is changing
+            resourceManualAllocs = self.resourceAllocs_df
+            unallocManualResources = self.unallocResources_df
+            for index, row in move.iterrows():
+                # to make the manual moves, we need to identify (resource_id, campID) pairs for origin & destination
+                condition = (resourceManualAllocs['resourceID'] == row['resourceID']) & (resourceManualAllocs['campID'] == row['campID'])
+
+                if row['action'] == 'assign':
+                    # assigning unallocated resources to camps 
+                    # the camp can either already have some of that resource - in which case the (resourceID, campID) pair should already exist in 'resourceAllocation'
+                    # or it may not have that resource at all, in which case we need to insert a new row 
+                    ############ FOR JESS TO COME BACK TO: NEED TO ADD CHECKER FOR IF CAMP OPENED / CLOSED
+                    # 1) add qty to resourceAllocation
+                    if condition.any():
+                        ###
+                        resourceManualAllocs.loc[condition, 'qty'] += row['moveUnits'] 
+                    else:
+                        ###
+                        new_row_resourceAllocs = {'resourceID': row['resourceID'], 'campID': row['destination_campID'], 'qty': row['moveUnits']}
+                        resourceManualAllocs = resourceManualAllocs.append(new_row_resourceAllocs, ignore_index=True)
+                    # 2) subtract qty from resourceUballocatedStock
+                    unallocManualResources.loc[unallocManualResources['resourceID'] == row['resourceID'], 'unallocTotal'] -= row['moveUnits']
+                    ############ ERROR HANDLING: CHECK FOR LEGAL VALUES TO TAKE AWAY AND SUBTRACT
+                    
+                elif row['action'] == 'remove':
+                    ### removing items from a camp and putting it into unallocated stock
+                    ### the (resourceID, campID) pair should always already exist in 'resourceAllocation'
+                    resourceManualAllocs.loc[condition, 'qty'] -= row['moveUnits'] ### 1) subtract from allocated
+                    unallocManualResources.loc[unallocManualResources['resourceID'] == row['resourceID'], 'unallocTotal'] += row['moveUnits'] ### 2) add to unallocated
+                else:
+                    print("Erorr: unidentified allocation action")
+
+                ###### error handling ---> assumess there is only 1 unique pairwwise combo. does not consider if the pair is in the table twice 
+                    
+            ### We will need to update all 3 files:
+            # 1) resourceAllocs - changes in camp inventory resource assignment as above
+            resourceManualAllocs.to_csv(self.resource_allocaation_csv_path, index=False)
+            # 2) unallocResources - changes in unallocated inventory as above
+            unallocManualResources.to_csv(self.resource_allocaation_csv_path, index=False)
+            # 3) since the net total amount has now changed... we also need to recalculate the totals in resourceStock:
+            totalManualResources = self.totalResources_df ### the total numbers in this are out of date and we need to update them using resourceManualAllocs
+            ## use resourceID as the match key 
+            joined_df = pd.merge(totalManualResources, resourceManualAllocs, on='resourceID', how='inner')
+            resource_sum = joined_df.groupby('resourceID').agg({
+                'name': 'first',  # Keeps the first name for each group
+                'qty': 'sum',  # Sums the qty for each camp >> we ignore the 'total' column in totalManualResources
+                'priorityLvl': 'first',  
+            }).reset_index()
+            resource_sum.to_csv(self.resource_stock_csv_path, index=False)
+            
+
+            #### write it in; and then run the report generator again to create an after table grouped by campID 
+            resource_stats_instance_AFTER = ResourceReport()
+            post_manual_alloc_camp_df = resource_stats_instance_AFTER.resource_report_camp_vs_unallocated()
+
+            print(f"""\n ======= ＼(^o^)／ Manual Re-allocation of Unallocated Resources Successful! ＼(^o^)／ ===== \n
+Below are the before vs. current resource allocations by camp & unllocated resources: \n"""
+        )
+            print("BEFORE: \n")
+            print(all_resource_camp_camp_vs_unallocated.to_string(index=False))
+            print("\nAFTER: \n")
+            print(post_manual_alloc_camp_df)
+
+
+
+        return resourceManualAllocs
         
         ####
