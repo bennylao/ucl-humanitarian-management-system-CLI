@@ -103,6 +103,10 @@ class AdminView:
     @classmethod
     def display_resource_menu(cls):
         print("")
+        print(f"""===============================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ RESOURCE MGMT MENU ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+===============================================\n"""
+        )
         for key, value in cls.manage_resource_menu:
             print(f"[ {key} ] {value}")
 

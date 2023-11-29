@@ -468,13 +468,14 @@ class Controller:
             print(" \n Proceed to redistributing allocated resources... \n ")
             ManagementView.resource_alloc_main_message()
             ## if no unallocated resources), then go to the below?? go through usula auto vs. manual
+            alloc_instance = ResourceAllocator()
             while True:
                 user_selection = input("\nAllocation mode: --> ")
 
                 if user_selection == '1':
-                    self.man_resource()
+                    alloc_instance.manual_alloc()
                 elif user_selection == '2':
-                    self.auto_resource()
+                    alloc_instance.auto_alloc()
                 else:
                     print("Invalid mode option entered!")
                     continue
@@ -488,10 +489,10 @@ class Controller:
             user_select = input('Do you want to distribute the unallocated resources? y / n --> ')
             #### user can choose if they want to do this manually or automatically, same as above actually
             #### is there a way we can reuse the same code ?? <- if we merge it into the same files....
+            alloc_instance = ResourceAllocator()
             if user_select == 'y':
                 print("\n ================ LOADING ==============\n")
-                resource_alloc = ResourceAllocator()
-                resource_alloc.add_unalloc_resource()
+                alloc_instance.add_unalloc_resource()
                 ### note that this doesnt do the distribution yet. it's a two step processs...
                 ### we first add the unallocated resources into the main 
                 ### there may be conflicts with how they get auto allocated vs manual. but deal with this later\
@@ -506,9 +507,9 @@ class Controller:
                     user_selection = input("\nAllocation mode: --> ")
 
                     if user_selection == '1':
-                        self.man_resource()
+                        alloc_instance.manual_alloc()
                     elif user_selection == '2':
-                        self.auto_resource()
+                        alloc_instance.auto_alloc()
                     else:
                         print("Invalid mode option entered!")
                         continue
@@ -538,15 +539,8 @@ class Controller:
     def auto_resource(self):
         ManagementView.auto_resource_message()
         alloc_instance = ResourceAllocator()
-
-        # print(report_instance.calculate_resource_jess())
-
-        # alloc_ideal = report_instance.calculate_resource_jess()
-        # alloc_ideal = report_instance.determine_above_below(threshold=0.10)
-        alloc_instance.redistribute()
-        # print(alloc_ideal.groupby('resourceID')['current'].sum())
-        # print(alloc_instance.redistribute())
-
+        alloc_instance.auto_alloc()
+        
     def resource_reporting_menu(self):
         ManagementView.resource_report_message()
         resource_report = ResourceReport()

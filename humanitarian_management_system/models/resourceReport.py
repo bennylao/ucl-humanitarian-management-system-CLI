@@ -6,10 +6,10 @@ class ResourceReport():
     def __init__(self):
         resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
         resource_allocaation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
-        resource__nallocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
+        self.resource__nallocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
         self.totalResources_df = pd.read_csv(resource_stock_csv_path)
         self.resourceAllocs_df = pd.read_csv(resource_allocaation_csv_path)
-        self.unallocResources_df = pd.read_csv(resource__nallocated_stock_csv_path)
+        self.unallocResources_df = pd.read_csv(self.resource__nallocated_stock_csv_path)
         self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
     
     def unalloc_resource_checker(self):
@@ -43,9 +43,13 @@ class ResourceReport():
         return resource_camp
     
     def resource_report_camp_vs_unallocated(self):
+        unallocResources_df = pd.read_csv(self.resource__nallocated_stock_csv_path)
         resource_camp = self.joined_df.pivot_table(index=['resourceID', 'name', 'priorityLvl'], columns='campID', values='qty', aggfunc='sum').sort_index(level=0)
-        joined_df_unalloc_camp = pd.merge(self.unallocResources_df, resource_camp, on='resourceID', how='inner')
-        joined_df_unalloc_camp['unallocTotal'],  joined_df_unalloc_camp['priorityLvl'] = joined_df_unalloc_camp['priorityLvl'], joined_df_unalloc_camp['unallocTotal']
+        joined_df_unalloc_camp = pd.merge(unallocResources_df, resource_camp, on='resourceID', how='inner')
+        temp = joined_df_unalloc_camp['unallocTotal'].copy()
+
+        joined_df_unalloc_camp['unallocTotal'],  joined_df_unalloc_camp['priorityLvl'] = joined_df_unalloc_camp['priorityLvl'], temp
+        joined_df_unalloc_camp.rename(columns={'unallocTotal': 'priorityLvl', 'priorityLvl': 'unallocTotal'}, inplace=True)
 
         ## is this helpful? maybe add in population as well ? 
         ## add something into allow view of selected resources only... ?? or not... idm 
