@@ -243,8 +243,6 @@ class Controller:
         ManagementView.camp_creation_message()
         # active_event_df = Event.get_all_active_events()
         # Event.display_events(active_event_df)
-        # event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
-        # df = pd.read_csv(event_csv_path)
         csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
         active_index = helper.extract_active_event(csv_path)[0]
 
@@ -254,18 +252,16 @@ class Controller:
             return
         else:
             # read the event csv file and extract all available events
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", "True", "eid")
-            df2 = helper.matched_rows_csv(csv_path, "ongoing", "Yet", "eid")
+            df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eid")
             print("\n*The following shows the info of all available events*\n")
             print(df1[0])
-            print(df2[0])
 
             # validate input for user select index
             while True:
                 try:
                     eventID = int(input("\nEnter Event ID: "))
                     if eventID not in active_index:
-                        print(f"Invalid input! Please enter an integer from {df1[1]} or {df2[1]} for Event ID.")
+                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
                         continue
                     else:
                         camp_info = helper.validate_camp_input()
@@ -274,118 +270,107 @@ class Controller:
                         print("\n\u2714 New camp created!")
                         return
                 except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df1[1]} or {df2[1]} for Event ID.")
+                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
 
     def admin_modify_camp(self):
         """This function is for admin modify camp info"""
         ManagementView.camp_modification_message()
         csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
         df = pd.read_csv(csv_path)
-
-        active_index = helper.extract_active_event(csv_path)[0]
-
         csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
         df0 = pd.read_csv(csv_path0)
+        active_index = helper.extract_active_event(csv_path)[0]
 
         # if there is no active events, return
-        if len(active_index) == 0:
-            print("No relevant events to select from")
+        filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+        if filtered_df.empty:
+            print("\nAll the events are closed and there's none to choose from.")
             return
         else:
-            # print the events info for users to choose
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", "True", "eid")
-            df2 = helper.matched_rows_csv(csv_path, "ongoing", "Yet", "eid")
-            print("\n*The following shows the info of all available events*\n")
-            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
-            if filtered_df.empty:
-                print("\nAll the events are closed and there's none to choose from.")
-                return
-            else:
-                Event.display_events(filtered_df)
-            # print(df1[0])
-            # print(df2[0])
-            while True:
-                try:
-                    eventID = int(input("\nEnter Event ID: "))
+            Event.display_events(filtered_df)
 
-                    if eventID not in active_index:
-                        print(f"Invalid input! Please enter an integer from {df1[1]} or {df2[1]} for Event ID.")
-                        continue
-                    try:
-                        if df1[0].loc[eventID, "no_camp"] == 0:
-                            print("No relevant camps to select from")
-                            continue
-                    except:
-                        if df2[0].loc[eventID, "no_camp"] == 0:
-                            print("No relevant camps to select from")
-                            continue
-                    if eventID == 'RETURN':
-                        return
+        while True:
+            try:
+                eventID = int(input("\nEnter Event ID: "))
+                if eventID not in active_index:
+                    print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                    continue
+                elif df0[df0['eventID'] == eventID].empty:
+                    print("No relevant camps to select from")
+                    continue
+                elif eventID == 'RETURN':
+                    return
+                break
+            except ValueError:
+                print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+
+        # print camps info for users to choose
+        # df3 = helper.matched_rows_csv(csv_path0, "eventID", eventID, "campID")
+        print("\n**The following shows the info of related camps*")
+        filtered_df1 = df0[df0['eventID'] == eventID]
+        filtered_campID = filtered_df1['campID'].tolist()
+        Event.display_events(filtered_df1)
+
+        while True:
+            try:
+                modify_camp_id = int(input("\nWhich camp do you want to modify? Please enter campID: "))
+                if modify_camp_id not in filtered_campID:
+                    print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
+                    continue
+                else:
                     break
-                except:
-                    print(f"Invalid input! Please enter an integer from {df1[1]} or {df2[1]} for Event ID.")
+            except ValueError:
+                print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
 
-            # print camps info for users to choose
-            df3 = helper.matched_rows_csv(csv_path0, "eventID", eventID, "campID")
-            print("\n**The following shows the info of related camps*\n")
-            print(df3[0])
-            while True:
+        while True:
+            Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
+            for i, column_name in enumerate(filtered_df1.columns[3:], start=1):
+                print(f"[{i}] {column_name}")
+            try:
+                target_column_index = int(input(f"Which column do you want to modify(1~5)?: "))
+                if target_column_index not in range(1, 7):
+                    print("Please enter a valid integer from 1 to 6")
+                    continue
+                else:
+                    target_column_name = filtered_df1.columns[target_column_index + 2]
+                    break
+            except ValueError:
+                print("Invalid input! Please enter an integer between 1 to 6")
+
+        while True:
+            new_value = input(f"Enter the new value for {target_column_name}: ")
+            if target_column_index == 2:
+                if new_value == "low" or new_value == "high":
+                    break
+                else:
+                    print("Invalid input! Please enter 'low' or 'high'")
+            elif target_column_index == 6:
+                if new_value == "open" or new_value == "closed":
+                    break
+                else:
+                    print("Invalid input! Please enter 'open' or 'closed'")
+            else:
                 try:
-                    modify_camp_id = int(input("\nWhich camp do you want to modify? Please enter campID: "))
-                    if modify_camp_id not in df3[1]:
-                        print(f"Invalid input! Please enter an integer from {df3[1]} for Camp ID.")
-                        continue
+                    new_value = int(new_value)
+                    if new_value >= 0:
+                        break
                     else:
-                        while True:
-                            print()
-                            print(df3[0].loc[df3[0].index == modify_camp_id])
-                            for i, column_name in enumerate(df3[0].columns[3:], start=1):
-                                print(f"[{i}] {column_name}")
-                            try:
-                                target_column_index = int(input(f"Which column do you want to modify(1~5)?: "))
-                                if target_column_index not in range(1, 6):
-                                    print("Please enter a valid integer from 1 to 5")
-                                    continue
-                                else:
-                                    target_column_name = df3[0].columns[target_column_index + 2]
-                                    print(target_column_name)
-                                    while True:
-                                        new_value = input(f"Enter the new value for {target_column_name}: ")
-                                        if target_column_index == 1:
-                                            if new_value == "low" or new_value == "high":
-                                                break
-                                            else:
-                                                print("Invalid input! Please enter 'low' or 'high'")
-                                        elif target_column_index == 5:
-                                            if new_value == "open" or new_value == "closed":
-                                                break
-                                            else:
-                                                print("Invalid input! Please enter 'open' or 'closed'")
-                                        else:
-                                            try:
-                                                new_value = int(new_value)
-                                                if new_value >= 0:
-                                                    break
-                                                else:
-                                                    print("Invalid input! Please enter a non-negative integer ")
-                                            except ValueError:
-                                                print("Invalid input! Please enter a non-negative integer ")
-
-                                    index_in_csv = df0[df0["campID"] == modify_camp_id].index.tolist()[0]
-                                    helper.modify_csv_value(csv_path0, index_in_csv, target_column_name, new_value)
-                                    print(f"\u2714 Changes have been saved!")
-                                    return
-                            except ValueError:
-                                print("Invalid input! Please enter an integer between 1 to 9")
-
+                        print("Invalid input! Please enter a non-negative integer ")
                 except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
+                    print("Invalid input! Please enter a non-negative integer ")
+
+        index_in_csv = df0[df0["campID"] == modify_camp_id].index.tolist()[0]
+        helper.modify_csv_value(csv_path0, index_in_csv, target_column_name, new_value)
+        print(f"\u2714 Changes have been saved!")
+        return
+
 
     def admin_remove_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
         ManagementView.camp_deletion_message()
 
         event_csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
         active_index = helper.extract_active_event(event_csv_path)[0]
 
         # if there is no active events, return
@@ -394,61 +379,68 @@ class Controller:
             return
         else:
             # print the events info for users to choose
-            csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", "True", "eid")
-            print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
-            while True:
-                try:
-                    eventID = int(input("\nEnter Event ID: "))
-                    if eventID not in df1[1]:
-                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
-                        continue
-                    else:
-                        return
-                except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
-
-            # print camps info for users to choose
-            csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
-            df2 = helper.matched_rows_csv(csv_path2, "eventID", eventID, "campID")
-            if df1[0].loc[eventID, "no_camp"] == 0:
-                print("No relevant camps to select from")
+            df = pd.read_csv(event_csv_path)
+            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+            if filtered_df.empty:
+                print("\nAll the events are closed and there's none to choose from.")
                 return
             else:
-                print("\n**The following shows the info of related camps*\n")
-                print(df2[0])
-                while True:
-                    try:
-                        delete_camp = int(input("\nWhich camp do you want to remove? Please enter campID: "))
-                        if delete_camp not in df2[1]:
-                            print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
-                            continue
-                        else:
-                            while True:
-                                aa = input(f"\nAre you sure to remove the camp {delete_camp}? (yes/no): ")
-                                if aa == "yes":
-                                    # implement the deletion in csv file
-                                    df3 = pd.read_csv(csv_path2)
-                                    df3 = df3[df3["campID"] != delete_camp]
-                                    df3.to_csv(csv_path2, index=False)
+                print("\n*The following shows the info of all available events*")
+                Event.display_events(filtered_df)
 
-                                    # keep track of existing camp num of a particular event
-                                    no_camp = df1[0].loc[eventID, "no_camp"]
-                                    no_camp -= 1
-                                    df4 = pd.read_csv(csv_path)
-                                    index = df4[df4["eid"] == eventID].index.tolist()
-                                    helper.modify_csv_value(csv_path, index[0], "no_camp", no_camp)
-                                    print("\n\u2714 You have Successfully removed the camp!")
-                                    return
-                                elif aa == "no":
-                                    return
-                                else:
-                                    print("Invalid input! Please enter 'yes' or 'no'")
-                                    continue
-                                return
-                    except ValueError:
-                        print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
+        # read camp csv file
+        df1 = pd.read_csv(camp_csv_path)
+        while True:
+            try:
+                eventID = int(input("\nEnter Event ID: "))
+                if eventID not in active_index:
+                    print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                    continue
+                elif df1[df1['eventID'] == eventID].empty:
+                    print("No relevant camps to select from")
+                    return
+                elif eventID == 'RETURN':
+                    return
+                break
+            except ValueError:
+                print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+
+        filtered_campID = df1[df1['eventID'] == eventID]['campID'].tolist()
+        print('The following shows the info of all camps from the event')
+        Event.display_events(df1[df1['eventID'] == eventID])
+        while True:
+            try:
+                delete_camp = int(input("\nWhich camp do you want to remove? Please enter campID: "))
+                if delete_camp not in filtered_campID:
+                    print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
+                    continue
+                else:
+                    print("\n*The following shows the info of the camp you have chosen*")
+                    Event.display_events(df1[df1['campID'] == delete_camp])
+                    break
+            except ValueError:
+                print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
+
+        while True:
+            aa = input(f"\nAre you sure to remove the camp {delete_camp}? (yes/no): ")
+            if aa == "yes":
+                # implement the deletion in csv file
+                df2 = df1[df1["campID"] != delete_camp]
+                df2.to_csv(camp_csv_path, index=False)
+
+                # keep track of existing camp num of a particular event
+                no_camp = df.loc[eventID, "no_camp"]
+                no_camp -= 1
+                index = df[df["eid"] == eventID].index.tolist()
+                helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
+                print("\n\u2714 You have Successfully removed the camp!")
+                return
+            elif aa == "no":
+                return
+            else:
+                print("Invalid input! Please enter 'yes' or 'no'")
+                continue
+
 
     ###################### RESOURCE MENU LEVEL 2 ###############################################
 
