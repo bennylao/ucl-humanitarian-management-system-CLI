@@ -1,4 +1,4 @@
-eid,ongoing,title,location,description,no_camp,startDate,endDate
+eventID,ongoing,title,location,description,no_camp,startDate,endDate
 1,False,Linqing's test of change info,india,change info,0,2023-05-23,2023-11-14
 2,False,linqing's test 2,india,xxxxx,0,2023-02-01,2023-11-11
 3,True,Linqing's test 3,india,xxx,2,2023-02-01,
