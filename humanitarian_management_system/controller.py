@@ -205,6 +205,7 @@ class Controller:
         ManagementView.event_close_message()
         Event.disable_ongoing_event()
 
+    ######   main camp menu #####
     def admin_manage_camp(self):
         while True:
             ManagementView.camp_main_message()
@@ -225,7 +226,7 @@ class Controller:
             if user_selection == "7":
                 self.admin_display_refugee()
             if user_selection == "8":
-                # display all camps
+                self.admin_display_camp()
                 pass
             if user_selection == "R":
                 break
@@ -371,7 +372,6 @@ class Controller:
         print(f"\u2714 Changes have been saved!")
         return
 
-
     def admin_remove_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
         ManagementView.camp_deletion_message()
@@ -455,6 +455,13 @@ class Controller:
         r = Refugee('', '', '', '', '', '', '',
                     '')
         r.display_info(user, 0)
+
+
+    def admin_display_camp(self):
+        user = 'admin'
+        ManagementView.display_admin_camp()
+        c = Camp('', '')
+        c.display_info(user, 0)
 
     ###################### RESOURCE MENU LEVEL 2 ###############################################
 
@@ -612,11 +619,9 @@ class Controller:
             if user_selection == "5":
                 self.vol_display_refugee()
             if user_selection == "6":
-                # display camp info
-                pass
+                self.vol_display_camp()
             if user_selection == "7":
-                # display all resource
-                pass
+                self.display_camp_resource()
             if user_selection == "8":
                 self.legal_advice_support()
 
@@ -940,10 +945,8 @@ class Controller:
     #### edit refugee for volunteer, volunteer camp dependent ####
     def vol_edit_refugee(self):
         cid = helper.check_vol_assigned_camp(self.user.username)
-
         user = 'volunteer'
         ManagementView.refugee_edit_message()
-
         r = Refugee('', '', '', '', '', '', '',
                     '')
         r.edit_refugee_info(user, cid)
@@ -955,6 +958,19 @@ class Controller:
         r = Refugee('', '', '', '', '', '', '',
                     '')
         r.display_info(user, cid)
+
+    def vol_display_camp(self):
+        user = 'volunteer'
+        cid = helper.check_vol_assigned_camp(self.user.username)
+        ManagementView.display_vol_camp(cid)
+        c = Camp('', '')
+        c.display_info(user, cid)
+
+    def display_camp_resource(self):
+        cid = helper.check_vol_assigned_camp(self.user.username)
+        ManagementView.display_camp_resource(cid)
+        c = Camp('', '')
+        c.display_resinfo(cid)
 
     # def volunteer_join_change_camp(self):
     #     csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")

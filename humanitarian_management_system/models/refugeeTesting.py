@@ -106,7 +106,7 @@ def delete_refugee():
     refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
     ref_df = pd.read_csv(refugee_csv_path)
     print(ref_df)
-    # checking input is vaild according to refugee IDs in database
+    # checking if input is valid according to refugee IDs in database
     while True:
         rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
         if rid == "RETURN":

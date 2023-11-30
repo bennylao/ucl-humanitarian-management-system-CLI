@@ -10,6 +10,7 @@ class Camp:
       how many are vaccinated, how many need extra medical attention (ie doctors) etc."""
     total_number = 0
     camp_data = []
+
     # Is  camp data the same as list of camp names? Need for resources
     # list_of_camp_names = []
 
@@ -23,7 +24,13 @@ class Camp:
         self.capacity = capacity
         self.health_risk = health_risk
 
-        Camp.total_number += 1
+        self.camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        self.cty_csv_path = Path(__file__).parents[1].joinpath("data/country.csv")
+        self.event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+        self.res_alloc_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        self.res_type_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+
+        # Camp.total_number += 1
         # since we have camp id perhaps name is not necessary? ie. first we refer to an event, from which we can refer
         # to the camp id of that particular event
         # Camp.list_of_camp_names.append(name)
@@ -32,19 +39,18 @@ class Camp:
 
     def pass_camp_info(self, select_index, camp_id):
         """if user choose to add a """
-        csv_path_e = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
-        df_e = pd.read_csv(csv_path_e)
+        df_e = pd.read_csv(self.event_csv_path)
         country = df_e['location']
         # geo_data = extract_data("data/eventTesting.csv","")
         csv_path_c = Path(__file__).parents[1].joinpath("data/country.csv")
         df = pd.read_csv(csv_path_c)
         # find country id and event id by index
-        result = df.loc[df["name"] == capitalize(country.iloc[select_index-1])]['countryID'].tolist()
-        event_id = int(df_e['eid'].iloc[select_index - 1])
+        result = df.loc[df["name"] == capitalize(country.iloc[select_index - 1])]['countryID'].tolist()
+        event_id = int(df_e['eventID'].iloc[select_index - 1])
 
         # keep track of existing camp num of a particular event
         df_c = df_e
-        no_camp = int(df_c.loc[df_c["eid"] == select_index]['no_camp'].tolist()[0])
+        no_camp = int(df_c.loc[df_c["eventID"] == select_index]['no_camp'].tolist()[0])
         no_camp += 1
 
         if self.is_camp_available:
@@ -53,8 +59,9 @@ class Camp:
             status = 'closed'
 
         Camp.camp_data = [[camp_id, event_id, result[0], self.capacity, self.health_risk, 0, 0, 1, status]]
-        camp_df = pd.DataFrame(Camp.camp_data, columns=['campID', 'eventID', 'countryID', 'refugeeCapacity', 'healthRisk',
-                                                        'volunteerPop', 'refugeePop', 'avgCriticalLvl', 'status'])
+        camp_df = pd.DataFrame(Camp.camp_data,
+                               columns=['campID', 'eventID', 'countryID', 'refugeeCapacity', 'healthRisk',
+                                        'volunteerPop', 'refugeePop', 'avgCriticalLvl', 'status'])
 
         csv_path2 = Path(__file__).parents[1].joinpath("data/camp.csv")
         with open(csv_path2, 'a', newline='') as f:
@@ -63,6 +70,96 @@ class Camp:
         # update camp num for a particular event
         csv_path3 = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
         modify_csv_pandas(csv_path3, 'eid', select_index, 'no_camp', no_camp)
+
+    def display_info(self, user, cid):
+
+        camp_df = pd.read_csv(self.camp_csv_path)
+        event_df = pd.read_csv(self.event_csv_path)
+        cid_arr = []
+
+        if user == 'admin':
+            for i in camp_df['campID'].tolist():
+                cid_arr.append(str(i))
+
+        joined_df = pd.merge(camp_df, event_df, on='eventID', how='inner')
+        joined_df.columns = ['Camp ID', 'Event ID', 'countryID', 'Refugee capacity', 'Health risk',
+                             'Volunteer population', 'Refugee population', 'Average critical level', 'Status',
+                             'Ongoing', 'Title', 'Location', 'Description', 'no_camp', 'Start date', 'End date']
+        if user == 'volunteer':
+            joined_df = joined_df.loc[joined_df['Camp ID'] == int(cid)]
+
+        table_str = joined_df[['Camp ID', 'Refugee capacity', 'Health risk', 'Volunteer population',
+                               'Refugee population', 'Average critical level', 'Status']].to_markdown(index=False)
+        print("\n" + table_str)
+
+        while True:
+            user_input = input("Would you like to access the event profile for a particular camp (yes or no)? ")
+
+            if user_input.lower() == 'yes':
+                self.display_eventinfo(user, cid, joined_df, cid_arr)
+
+            if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                print("Must enter yes or no!")
+                continue
+            if user_input.lower() == 'no':
+                return
+            break
+
+    def display_eventinfo(self, user, cid, joined_df, cid_arr):
+
+        if user == 'admin':
+            while True:
+                id_input = input("Please enter the refugee id whose medical profile you would like to see: ")
+                if id_input not in cid_arr:
+                    print("Invalid refugee ID entered!")
+                    continue
+                joined_df = joined_df.loc[joined_df['Camp ID'] == int(id_input)]
+                table_str = joined_df[['Camp ID', 'Event ID', 'Title', 'Description', 'Location', 'Ongoing',
+                                       'Start date', 'End date']].to_markdown(
+                    index=False)
+                print("\n" + table_str)
+                self.display_end(user, cid)
+                return
+            return
+        else:
+            joined_df = joined_df.loc[joined_df['Camp ID'] == int(cid)]
+            table_str = joined_df[['Camp ID', 'Event ID', 'Title', 'Description', 'Location', 'Ongoing',
+                                   'Start date', 'End date']].to_markdown(
+                index=False)
+            print("\n" + table_str)
+            self.display_end(user, cid)
+            return
+
+    def display_resinfo(self, cid):
+        camp_df = pd.read_csv(self.camp_csv_path)
+        camp_df = camp_df.loc[camp_df['campID'] == cid]
+        res_alloc_df = pd.read_csv(self.res_alloc_path)
+        res_type_df = pd.read_csv(self.res_type_path)
+        # thanks to Jess codes :)
+        joined_df = pd.merge(camp_df, res_alloc_df, on='campID', how='inner')
+        joined_df = pd.merge(joined_df, res_type_df, on='resourceID', how='inner')
+        resource_camp = joined_df.pivot_table(index=['campID'], columns='name',
+                                                   values='qty', aggfunc='sum').sort_index(level=0)
+
+        table_str = resource_camp.to_markdown(index=False)
+        print("\n" + table_str)
+        while True:
+            user_input = input("Would you like to exit (yes)? ")
+            if user_input.lower() != 'yes':
+                print("Must enter yes or leave it alone!")
+                continue
+            return
+
+    def display_end(self,user, cid):
+        while True:
+            user_input = input("Would you like to exit (yes or no)? ")
+            if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                print("Must enter yes or no!")
+                continue
+            if user_input.lower() == 'no':
+                self.display_info(user, cid)
+            return
+        return
 
     # def delete_camp(self):
     #     """This part of the code is to delete the camp from the camp.csv"""
@@ -126,6 +223,3 @@ class Camp:
     #                     break
     #             except ValueError:
     #                 print(f"Invalid input! Please enter an integer from {df2[1]} for Camp ID.")
-
-
-

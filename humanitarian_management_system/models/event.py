@@ -41,7 +41,7 @@ class Event:
         if pd.read_csv(event_csv_path).empty:
             last_event_id = 0
         else:
-            last_event_id = pd.read_csv(event_csv_path)['eid'].max()
+            last_event_id = pd.read_csv(event_csv_path)['eventID'].max()
 
         maxEid_csv_path = Path(__file__).parents[1].joinpath("data/maxUsedEid.csv")
         max_used_eid = pd.read_csv(maxEid_csv_path)['max_used_eid'].max()
@@ -49,7 +49,7 @@ class Event:
         # insert user id into registration_info
         event_info.insert(0, event_id)
         event_df = pd.DataFrame(data=[event_info],
-                                columns=['eid', 'ongoing', 'title', 'location', 'description', 'no_camp',
+                                columns=['eventID', 'ongoing', 'title', 'location', 'description', 'no_camp',
                                          'startDate', 'endDate'])
         event_df.to_csv(event_csv_path, mode='a', index=False, header=False)
 
@@ -93,10 +93,10 @@ class Event:
                 if eid_to_edit == 'RETURN':
                     return
                 elif int(eid_to_edit) not in filtered_df['eid'].values:
-                    print(f"\nInvalid input! Please enter an integer from {filtered_df['eid'].values} for Event ID.")
+                    print(f"\nInvalid input! Please enter an integer from {filtered_df['eventID'].values} for Event ID.")
                     continue
                 else:
-                    row = df[df['eid'] == int(eid_to_edit)].index[0]
+                    row = df[df['eventID'] == int(eid_to_edit)].index[0]
                     break
             except IndexError:
                 print("\nInvalid event ID entered.")
@@ -342,7 +342,7 @@ class Event:
             except ValueError:
                 print("\nInvalid event ID entered.")
                 continue
-        row = df[df['eid'] == int(eid_to_close)].index[0]
+        row = df[df['eventID'] == int(eid_to_close)].index[0]
         root = tk.Tk()
         result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
         if result == "yes":
@@ -369,7 +369,7 @@ class Event:
                 if eid_to_delete == 'RETURN':
                     return
                 elif int(eid_to_delete) not in df['eid'].values:
-                    print(f"\nInvalid input! Please enter an integer from {df['eid'].values} for Event ID.")
+                    print(f"\nInvalid input! Please enter an integer from {df['eventID'].values} for Event ID.")
                     continue
                 else:
                     break

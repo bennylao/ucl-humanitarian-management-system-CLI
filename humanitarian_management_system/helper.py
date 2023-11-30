@@ -661,6 +661,7 @@ def display_training_session():
             input("Enter anything to go back when you're ready. ")
             return
 
+
 def create_training_session():
     training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
     session_df = pd.read_csv(training_session_path)
@@ -751,7 +752,6 @@ def create_training_session():
     print(added_session)
 
 
-
 def delete_session():
     training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
     session_df = pd.read_csv(training_session_path)
@@ -772,7 +772,7 @@ def delete_session():
     if session_datetime < datetime.now().date():
         while True:
             confirm = input("\nYou're about to delete a previously held skills session. "
-                       "\nEnter YES to confirm or RETURN to cancel: ")
+                            "\nEnter YES to confirm or RETURN to cancel: ")
             if confirm.lower == 'return':
                 return
             elif confirm.lower() == 'yes':
@@ -790,14 +790,15 @@ def delete_session():
             elif confirm.lower() == 'yes':
                 break
             else:
-               print("\nInvalid option. Try again.\n")
+                print("\nInvalid option. Try again.\n")
     if confirm.lower() == 'return':
         return
-    #Update CSV files accordingly
+    # Update CSV files accordingly
     session_df.drop(session_df[session_df['sessionID'] == sessionID_int].index, inplace=True)
     session_df.reset_index(drop=True, inplace=True)
     session_df.to_csv(training_session_path, index=False)
-    print(f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.\n")
+    print(
+        f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.\n")
     print(session_df.to_string(index=False))
 
 
@@ -844,6 +845,7 @@ def add_refugee_to_session():
     session_df.to_csv(training_session_path, index=False)
     print(f"\nExcellent! We have added refugees {participants} to session {sessionID}. See below. ")
     print(session_df.to_string(index=False))
+
 
 def check_vol_assigned_camp(username):
     csv_path = Path(__file__).parents[0].joinpath("data/user.csv")

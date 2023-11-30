@@ -266,8 +266,15 @@ class Refugee:
         medinfo_df = pd.read_csv(self.medinfo_csv_path)
         medtype_df = pd.read_csv(self.medtype_csv_path)
 
+        ref_id_arr = []
+        for i in ref_df['refugeeID'].tolist():
+            ref_id_arr.append(str(i))
+
         if user == 'volunteer':
+            ref_id_arr = []
             ref_df = ref_df.loc[ref_df['campID'] == cid]
+            for i in ref_df['refugeeID'].tolist():
+                ref_id_arr.append(str(i))
 
         joined_df_ref = pd.merge(ref_df, medinfo_df, on='refugeeID', how='inner')
         joined_df_med = pd.merge(medinfo_df, medtype_df, on='medicalInfoTypeID', how='inner')
@@ -279,15 +286,41 @@ class Refugee:
                                    'Condition', 'Critical level']
 
         Event.display_events(joined_df_total[['Refugee ID', 'Camp ID', 'First name', 'Last name', 'DOB', 'Gender',
-                                              'Condition', 'Description', 'Is vaccinated?', 'Family ID',
-                                              'Critical level']])
+                                              'Family ID']])
 
         while True:
-            user_input = input("Exit display session (Yes)? ")
-            if user_input != 'Yes':
-                print("Must enter Yes or leave it alone.")
+            user_input = input("Would you like to access the medical profile for a particular refugee (yes or no)? ")
+
+            if user_input.lower() == 'yes':
+                self.display_medinfo(user, cid, joined_df_total, ref_id_arr)
+
+            if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                print("Must enter yes or no!")
                 continue
-            if user_input == 'Yes':
+            if user_input.lower() == 'no':
                 return
             break
+
+    def display_medinfo(self, user, cid, joined_df_total, ref_id_arr):
+        while True:
+            id_input = input("Please enter the refugee id whose medical profile you would like to see: ")
+            if id_input not in ref_id_arr:
+                print("Invalid refugee ID entered!")
+                continue
+            df_med = joined_df_total.loc[joined_df_total['Refugee ID'] == int(id_input)]
+            Event.display_events(
+                df_med[['Refugee ID', 'First name', 'Last name', 'Description', 'Condition',
+                        'Is vaccinated?', 'Critical level']])
+
+            while True:
+                user_input = input("Would you like to exit (yes or no)? ")
+                if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                    print("Must enter yes or no!")
+                    continue
+                if user_input.lower() == 'no':
+                    self.display_info(cid, user)
+                return
+            return
+
+
 
