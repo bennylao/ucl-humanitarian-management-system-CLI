@@ -228,11 +228,6 @@ class Event:
 
     @staticmethod
     def __change_end_date(row):
-        """How do we prompt a user to be able to input that
-        an event has ended? Should we have a small manual for
-        the user which says the commands to enter to the command line
-        e.g. "end date: dd/mm/yy" will trigger the system to terminate
-        the event"""
         # when a user goes to 'end event', we have a pop up
         # which asks 'are you sure' and says that they won't be able to reopen the event
         # after they have ended it, as the requirement says "the
@@ -280,17 +275,6 @@ class Event:
                 tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
             root.mainloop()
 
-    def display_humanitarian_plan_summary(self):
-        """At any time of the humanitarian plan life cycle, the
-        administrator can display summary of all related details; including,
-        number of refugees, their camp identification, and number of humanitarian
-        volunteers working at each camp."""
-        #        Again, like the 'end date' option, we could include in a manual a command
-        #        line command which prompts the system to display the required overview
-        #       Ideas on where this method should sit? it can be called attached to admin, but
-        #       relates to everything tracked in event NOT just camp as it refugees from the same
-        #       disaster can be in many different camps...
-        pass
 
     @staticmethod
     def display_events(df):
@@ -368,7 +352,7 @@ class Event:
                 eid_to_delete = input('\n--> Enter the event ID to delete:')
                 if eid_to_delete == 'RETURN':
                     return
-                elif int(eid_to_delete) not in df['eid'].values:
+                elif int(eid_to_delete) not in df['eventID'].values:
                     print(f"\nInvalid input! Please enter an integer from {df['eventID'].values} for Event ID.")
                     continue
                 else:
@@ -378,10 +362,23 @@ class Event:
                 continue
 
         root = tk.Tk()
-        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?")
+        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
+                                                       "You'll also lose all the information about the refugees in that"
+                                                       " event.")
         if result == "yes":
             df.drop(df[df['eid'] == int(eid_to_delete)].index, inplace=True)
             df.to_csv(event_csv_path, index=False)
+            # --------- added logic to delete refugees in this event -----------------
+            refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+            ref_df = pd.read_csv(refugee_csv_path)
+            camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+            camp_df = pd.read_csv(camp_csv_path)
+            camps_in_event = camp_df.loc[camp_df['eventID'] == eid_to_delete, 'campID'].tolist()
+            refugees_in_camps_in_event = ref_df[(ref_df['campID'].isin(camps_in_event))]
+            ref_df.drop(refugees_in_camps_in_event.index, inplace=True)
+            ref_df.reset_index(drop=True, inplace=True)
+            ref_df.to_csv(refugee_csv_path, index=False)
+
             tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
         else:
             tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")

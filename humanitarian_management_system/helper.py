@@ -512,7 +512,7 @@ def move_refugee_helper_method():
     camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
     active_and_in_event = camp_df[(camp_df['status'] == 'open') & (camp_df['campID'].isin(camps_in_event))]
     print("\n", active_and_in_event.to_string(index=False))
-    # checking input is vaild according to refugee IDs in database
+    # checking input is valid according to refugee IDs in database
     while True:
         camp_id = input("\nFrom the above list, which is a list of ACTIVE camps\n"
                         "which are part of the same event as this refugee's original camp,\n"
