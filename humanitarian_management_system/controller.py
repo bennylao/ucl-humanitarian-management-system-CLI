@@ -720,9 +720,9 @@ class Controller:
                 "\nor RETURN to exit back: ")
             if move_or_delete.lower() == "return":
                 self.volunteer_manage_camp()
-            elif move_or_delete == "M":
+            elif move_or_delete.lower() == "m":
                 helper.move_refugee_helper_method()
-            elif move_or_delete == "D":
+            elif move_or_delete.lower() == "d":
                 helper.delete_refugee()
             else:
                 print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
