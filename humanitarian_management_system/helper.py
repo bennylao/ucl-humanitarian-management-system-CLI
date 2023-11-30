@@ -514,7 +514,7 @@ def move_refugee_helper_method():
     print("\n", active_and_in_event.to_string(index=False))
     # checking input is vaild according to refugee IDs in database
     while True:
-        camp_id = input("\nGreat! Now, from the above list, which is a list of ACTIVE camps\n"
+        camp_id = input("\nFrom the above list, which is a list of ACTIVE camps\n"
                         "which are part of the same event as this refugee's original camp,\n"
                         "enter the campID of the camp you want to move this refugee to: ")
         if camp_id.lower() == "return":
@@ -522,7 +522,7 @@ def move_refugee_helper_method():
         try:
             camp_id = int(camp_id)
             if camp_id == old_camp_id:
-                print("\nLooks like that's the same campp this refugee is already in. Try again "
+                print("\nLooks like that's the same camp this refugee is already in. Try again "
                       "or if there are no other camps\n"
                       "available, enter RETURN to go back.")
             elif (camp_id in active_camp_df['campID'].values) and (camp_id in camps_in_event):
