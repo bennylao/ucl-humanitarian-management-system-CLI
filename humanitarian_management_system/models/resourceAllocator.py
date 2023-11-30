@@ -32,6 +32,7 @@ class ResourceAllocator():
         ## to be robust, can call ResourceReport.unalloc_resource_checker(self) to check? 
         resource_stats_instance = ResourceReport()
         status, prompt = resource_stats_instance.unalloc_resource_checker() # how to get this ? 
+        
         if status == False:
             print("\n ======= ＼(^o^)／ Unallocated Resources Ready for Allocation! ＼(^o^)／ ===== \n")
             pass
@@ -42,18 +43,23 @@ class ResourceAllocator():
 
     def auto_alloc(self):
         resource_stats_instance = ResourceReport()
+        all_resource_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated()
 
         # resource stock total... >> can probably remove the need for this later 
         totalResources = self.totalResources_df
 
-        alloc_ideal = resource_stats_instance.determine_above_below() # how to get this ? 
+        try:
+            alloc_ideal = resource_stats_instance.determine_above_below()
+            print("\n...successfully calculated equilibium allocation levels...\n")
+        except Exception as e:
+            print(f"An error occurred : {e}")
         alloc_ideal['updated'] = alloc_ideal['current']
 
         for index, row in alloc_ideal.iterrows():
             if row['status'] != 'balanced':
                 alloc_ideal.at[index, 'updated'] = row['ideal_qty'] 
                 ### if the status is not balanced, then update the quantity column with the ideal amount 
-        
+        print("\n...successfully updated qty of unbalanced resource allocations...\n")
         # print(alloc_ideal) ###### intermediary checks 
         
         # Now need to check, how the sum compares to the total amounts and make small tweaks... 
@@ -102,6 +108,7 @@ class ResourceAllocator():
                 # print(alloc_ideal.loc[row_index, 'updated'])
 
         # recheck the balanced...
+        print("\n...successfully checked that totals match...\n")
 
         ###### need to write the redistributed amount into the actual CSV
         redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
@@ -111,20 +118,27 @@ class ResourceAllocator():
         if 'resourceID' in totalResources.columns:
             totalResources.set_index('resourceID', inplace=True)
         comparison_result = redistribute_sum_checker == totalResources['total']
-        print(alloc_ideal)
+        # print(alloc_ideal)
         
         #### write to csv
         alloc_updated = alloc_ideal.iloc[:, :3]
         alloc_updated = alloc_updated.rename(columns={alloc_updated.columns[2]: 'qty'})
-        print(alloc_updated)
+        # print(alloc_updated)
         alloc_updated.to_csv(self.resource_allocaation_csv_path, index=False)
 
+        resource_stats_instance_AFTER = ResourceReport()
+        post_manual_alloc_camp_df = resource_stats_instance_AFTER.resource_report_camp_vs_unallocated()
+
         ### print success msg
-        print("\n ======= ＼(^o^)／ AUTO-REDISTRIBUTION SUCCESSFUL! ＼(^o^)／ ===== \n Check resourceAllocation.csv or [1] View Resource Statistics to see! \n")
+        print("\n ======= ＼(^o^)／ AUTO-REDISTRIBUTION SUCCESSFUL! ＼(^o^)／ ===== \n Below are the before & after auto-allocation: \n")
         ######## maybe redirect the menus
 
 
         ###### note for jess is to do a before and after of the reallocation
+        print("BEFORE: \n")
+        print(all_resource_camp_vs_unallocated)
+        print("\nAFTER: \n")
+        print(post_manual_alloc_camp_df)
 
 
         return alloc_ideal, redistribute_sum_checker, comparison_result
@@ -135,7 +149,7 @@ class ResourceAllocator():
 ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ MANUAL RESOURCE ALLOCATOR ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
 ==========================================================================\n""")
         resource_stats_instance = ResourceReport()
-        print("Below is how each resource is currently unallocated vs. how many is distributed across the camps: ")
+        print("Below is how each resource is currently unallocated vs. how many is distributed across the camps: \n")
         all_resource_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated()
         all_resource_camp_vs_unallocated.reset_index(inplace=True)
         print(all_resource_camp_vs_unallocated)

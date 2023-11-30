@@ -460,67 +460,35 @@ class Controller:
 
     def resource_alloc_main_menu(self):
         resource_report = ResourceReport()
-        status, prompt = resource_report.unalloc_resource_checker()
+        unalloc_status, prompt = resource_report.unalloc_resource_checker()
         print(prompt)
-        #### need to add in some way of checking for unallocated resources
+        ManagementView.resource_alloc_main_message()
 
-        if status == False:
-            print(" \n Proceed to redistributing allocated resources... \n ")
-            ManagementView.resource_alloc_main_message()
-            ## if no unallocated resources), then go to the below?? go through usula auto vs. manual
+        while True:
+            user_selection = input("\nAllocation mode: --> ")
             alloc_instance = ResourceAllocator()
-            while True:
-                user_selection = input("\nAllocation mode: --> ")
 
-                if user_selection == '1':
-                    alloc_instance.manual_alloc()
-                elif user_selection == '2':
-                    alloc_instance.auto_alloc()
-                else:
-                    print("Invalid mode option entered!")
-                    continue
-
-                if user_selection == 'RETURN':
-                    return
-                else:
-                    break
-        else:
-            ## if there are unallocated resources, ask if the user wants to allocate them 
-            user_select = input('Do you want to distribute the unallocated resources? y / n --> ')
-            #### user can choose if they want to do this manually or automatically, same as above actually
-            #### is there a way we can reuse the same code ?? <- if we merge it into the same files....
-            alloc_instance = ResourceAllocator()
-            if user_select == 'y':
-                print("\n ================ LOADING ==============\n")
-                alloc_instance.add_unalloc_resource()
-                ### note that this doesnt do the distribution yet. it's a two step processs...
-                ### we first add the unallocated resources into the main 
-                ### there may be conflicts with how they get auto allocated vs manual. but deal with this later\
-
-                self.resource_alloc_main_menu()  ## call self again - recursive to check for unallocated resources (there shouldnt be so this is for robustness)
-
-            elif user_select == 'n':
-                print("Ignorning unallocated resources... \n")
-                ## if the user selects no, we should also allow them to continue as above...
-                ManagementView.resource_alloc_main_message()
-                while True:
-                    user_selection = input("\nAllocation mode: --> ")
-
-                    if user_selection == '1':
-                        alloc_instance.manual_alloc()
-                    elif user_selection == '2':
-                        alloc_instance.auto_alloc()
-                    else:
-                        print("Invalid mode option entered!")
-                        continue
-
-                    if user_selection == 'RETURN':
-                        return
-                    else:
-                        break
+            if user_selection == '1':
+                alloc_instance.manual_alloc()
+            elif user_selection == '2':
+                ### here, if th4re is unallocated resources... ask if user wants to deal with unassigned resources or not 
+                if unalloc_status == True:
+                    include_unassigned = input('Do you want to distribute the unassigned resources? y / n --> ')
+                    #### user can choose if they want to do this manually or automatically, same as above actually
+                    #### is there a way we can reuse the same code ?? <- if we merge it into the same files....
+                    if include_unassigned == 'y':
+                        print("\n ================ LOADING ==============\n")
+                        alloc_instance.add_unalloc_resource() ### add the unassigned resources to the totalResources, ready for assignment by running auto_alloc immediately after
+                alloc_instance.auto_alloc()
             else:
-                print("Please enter y or n.")
-                self.resource_alloc_main_menu()
+                print("Invalid mode option entered!")
+                continue
+
+            if user_selection == 'RETURN':
+                return
+            else:
+                break
+
 
     def man_resource(self):
         ManagementView.man_resource_message()
