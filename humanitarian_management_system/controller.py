@@ -867,6 +867,7 @@ class Controller:
                 self.user = None
                 self.logout_request = True
                 break
+            return
         return
 
     def user_change_username(self, temp_name, temp_pass):
