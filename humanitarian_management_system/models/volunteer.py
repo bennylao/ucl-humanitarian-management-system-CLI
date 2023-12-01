@@ -20,6 +20,12 @@ class Volunteer(User):
                                                             'phone', 'occupation', 'roleID', 'eventID', 'campID']]
         table_str = sub_df.to_markdown(index=False)
         print("\n" + table_str)
+        while True:
+            user_input = input("Would you like to exit (yes)? ")
+            if user_input.lower() != 'yes':
+                print("Must enter yes or leave it alone!")
+                continue
+            return
 
     @staticmethod
     def create_new_record(registration_info):

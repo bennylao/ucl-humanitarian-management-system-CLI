@@ -200,20 +200,6 @@ def validate_camp_input():
         except ValueError:
             print("Must be a positive integer!!")
 
-    # while True:
-    #     try:
-    #         resource = input("\nEnter resources amount: ")
-    #         if capacity == "RETURN":
-    #             break
-    #         elif int(resource) > 0:
-    #             break
-    #         else:
-    #             print("Must be a positive integer!")
-    #             continue
-    #     except ValueError:
-    #         print("Must be a positive integer!!")
-
-    # risk input
     while True:
         risk = input("\nEnter health risk level (low or high): ")
         if risk == 'RETURN':
@@ -856,5 +842,18 @@ def check_vol_assigned_camp(username):
     if math.isnan(cid):
         print("You must first join a camp!")
         return
-    print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
     return cid
+
+def edit_vol_end():
+    while True:
+        user_input = input("Would you like to change other information (yes or no)? ")
+        if user_input.lower() != 'yes' and user_input.lower() != 'no':
+            print("Must enter yes or no!")
+            continue
+        if user_input.lower() == 'yes':
+            return False
+        else:
+            return True
+
+
+

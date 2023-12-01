@@ -9,7 +9,7 @@ class AdminView:
         ("3", "Volunteer Account Management"),
         ("4", "Resource Management"),
         ("5", "Display Summary/Statistics"), # ben: idk what exactly this will be, it depends on what Yuan can do
-        ("6", "Edit Account Settings and Personal Information"),
+        ("6", "Edit Account Information"),
         ("7", "View Account Information"),
         ("L", "Logout")
     )
@@ -39,8 +39,9 @@ class AdminView:
 
     manage_volunteer_menu = (
         ("1", "Edit volunteer profile"),
-        ("2", "Deactivate/reactivate volunteer"),
-        ("3", "Remove volunteer"),
+        ("2", "Display all volunteer information"),
+        ("3", "Deactivate/reactivate volunteer"),
+        ("4", "Remove volunteer"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )

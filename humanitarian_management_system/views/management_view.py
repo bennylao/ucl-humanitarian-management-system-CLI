@@ -16,7 +16,7 @@ class ManagementView:
 
     @classmethod
     def display_account_menu(cls):
-        print("\n===== Volunteer Account Management Menu =====")
+        print("\n===== Account Edit Menu =====")
         for key, value in cls.manage_account_menu:
             print(f"[ {key} ] {value}")
 
@@ -168,19 +168,19 @@ class ManagementView:
     @staticmethod
     def display_admin_refugee():
         print("\n========================================\n"
-              "       All refugees information \n"
+              "       All refugee information \n"
               "==========================================")
 
     @staticmethod
     def display_vol_refugee(cid):
         print("\n========================================\n"
-              f"    Refugee information in camp {int(cid)} \n"
+              f"     Refugee information in camp {int(cid)} \n"
               "==========================================")
 
     @staticmethod
     def display_admin_camp():
         print("\n==========================================\n"
-              "       All camps information \n"
+              "        All camp information \n"
               "==========================================")
 
     @staticmethod
@@ -193,4 +193,17 @@ class ManagementView:
     def display_camp_resource(cid):
         print("\n==========================================\n"
               f"     Camp {int(cid)} resources information \n"
+              "==========================================")
+
+    @staticmethod
+    def display_admin_vol():
+        print("\n==========================================\n"
+              "         All volunteer information \n"
+              "==========================================")
+
+
+    @staticmethod
+    def display_activate():
+        print("\n==========================================\n"
+              "   Activate/deactivate volunteer accounts \n"
               "==========================================")

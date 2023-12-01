@@ -14,7 +14,7 @@ class VolunteerView:
     manage_camp_menu = (
         ("1", "Add refugee"),
         ("2", "Edit refugee"),
-        ("3", "move/remove refugee"),
+        ("3", "Move/remove refugee(s)"),
         ("4", "Edit camp profile"),
         ("5", "Display refugees information"),
         ("6", "Display camp information"),

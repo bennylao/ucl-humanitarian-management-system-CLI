@@ -379,6 +379,19 @@ class Event:
             ref_df.reset_index(drop=True, inplace=True)
             ref_df.to_csv(refugee_csv_path, index=False)
 
+            # reset volunteer camp, role and event info after event is deleted
+            vol_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+            vol_df = pd.read_csv(vol_csv_path)
+            vol_id_arr = vol_df.loc[vol_df['campID'] == int(eid_to_delete)]['userID'].tolist()
+
+            for i in vol_id_arr:
+                helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'eventID',
+                                         0)
+                helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'campID',
+                                         0)
+                helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'roleID',
+                                         0)
+
             tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
         else:
             tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
