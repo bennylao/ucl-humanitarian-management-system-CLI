@@ -116,7 +116,7 @@ class Controller:
             if user_selection == "5":
                 self.admin_display_summary()
             if user_selection == "6":
-                self.user_edit_account()
+                self.user_edit_account(self.user.username, self.user.password)
             if user_selection == "7":
                 self.user.show_account_info()
             if user_selection == "L" or self.logout_request:
@@ -194,10 +194,14 @@ class Controller:
         # OOP concept - assign user info to Volunteer class attribute by user selected volunteer ID
         df_name = df.loc[df['userID'] == int(select_id)]['username'].tolist()[0]
         df_password = df.loc[df['userID'] == int(select_id)]['password'].tolist()[0]
+        # since we've to change self.user attribute base on user select volunteer id, we need to keep track of the
+        # original admin user info
+        temp_name = self.user.username
+        temp_pass = self.user.password
 
         row = User.validate_user(df_name, str(df_password))
-        Volunteer(row['userID'], *row[3:])
-        self.user_edit_account()
+        self.user = Volunteer(row['userID'], *row[3:])
+        self.user_edit_account(temp_name, temp_pass)
 
     @staticmethod
     def display_volunteer(a):
@@ -654,7 +658,7 @@ class Controller:
                 self.volunteer_manage_camp()
             if user_selection == "3":
                 # edit personal account
-                self.user_edit_account()
+                self.user_edit_account(self.user.username,self.user.password)
             if user_selection == "4":
                 # show personal information
                 self.volunteer_show_account_info()
@@ -835,36 +839,37 @@ class Controller:
             else:
                 print("\nSorry! Didn't catch that. Please try again or enter RETURN to exit.")
 
-    def user_edit_account(self):
+    def user_edit_account(self, temp_name, temp_pass):
         while True:
             ManagementView.display_account_menu()
             user_selection = helper.validate_user_selection(ManagementView.get_account_options())
             if user_selection == "1":
                 # change username
-                self.user_change_username()
+                self.user_change_username(temp_name, temp_pass)
             if user_selection == "2":
                 # change password
-                self.user_change_password()
+                self.user_change_password(temp_name, temp_pass)
             if user_selection == "3":
                 # change name
-                self.user_change_name()
+                self.user_change_name(temp_name, temp_pass)
             if user_selection == "4":
                 # change email
-                self.user_change_email()
+                self.user_change_email(temp_name, temp_pass)
             if user_selection == "5":
                 # change phone
-                self.user_change_phone()
+                self.user_change_phone(temp_name, temp_pass)
             if user_selection == "6":
                 # change occupation
-                self.user_change_occupation()
+                self.user_change_occupation(temp_name, temp_pass)
             if user_selection == "R":
                 break
             if user_selection == "L":
                 self.user = None
                 self.logout_request = True
                 break
+        return
 
-    def user_change_username(self):
+    def user_change_username(self, temp_name, temp_pass):
         existing_usernames = User.get_all_usernames()
         print(f"\nCurrent Username: '{self.user.username}'")
         while True:
@@ -887,11 +892,14 @@ class Controller:
 
         end_info = helper.edit_vol_end()
         if not end_info:
-            self.user_edit_account()
+            self.user_edit_account(temp_name, temp_pass)
         else:
-            self.admin_main()
+            row = User.validate_user(temp_name, temp_pass)
+            self.user = Admin(row['userID'], *row[3:10])
+            return
+        return
 
-    def user_change_password(self):
+    def user_change_password(self, ttemp_name, temp_pass):
         # specify allowed characters for passwords
         allowed_chars = r"[!@#$%^&*\w]"
         while True:
@@ -921,11 +929,14 @@ class Controller:
 
         end_info = helper.edit_vol_end()
         if not end_info:
-            self.user_edit_account()
+            self.user_edit_account(temp_name, temp_pass)
         else:
-            self.admin_main()
+            row = User.validate_user(temp_name, temp_pass)
+            self.user = Admin(row['userID'], *row[3:10])
+            return
+        return
 
-    def user_change_name(self):
+    def user_change_name(self, temp_name, temp_pass):
         print(f"\nCurrent Name: {self.user.first_name} {self.user.last_name}")
         while True:
             while True:
@@ -960,12 +971,15 @@ class Controller:
                 break
 
         end_info = helper.edit_vol_end()
-        if not end_info[0]:
-            self.user_edit_account()
+        if not end_info:
+            self.user_edit_account(temp_name, temp_pass)
         else:
-            self.admin_main()
+            row = User.validate_user(temp_name, temp_pass)
+            self.user = Admin(row['userID'], *row[3:10])
+            return
+        return
 
-    def user_change_email(self):
+    def user_change_email(self, temp_name, temp_pass):
         # specify allowed characters for email
         email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
         all_emails = User.get_all_emails()
@@ -995,11 +1009,14 @@ class Controller:
 
         end_info = helper.edit_vol_end()
         if not end_info:
-            self.user_edit_account()
+            self.user_edit_account(temp_name, temp_pass)
         else:
-            self.admin_main()
+            row = User.validate_user(temp_name, temp_pass)
+            self.user = Admin(row['userID'], *row[3:10])
+            return
+        return
 
-    def user_change_phone(self):
+    def user_change_phone(self, temp_name, temp_pass):
         print(f"\nCurrent Phone Number: {self.user.phone}")
         while True:
             new_phone = input("\nPlease enter new phone number: ")
@@ -1017,11 +1034,14 @@ class Controller:
 
         end_info = helper.edit_vol_end()
         if not end_info:
-            self.user_edit_account()
+            self.user_edit_account(temp_name, temp_pass)
         else:
-            self.admin_main()
+            row = User.validate_user(temp_name, temp_pass)
+            self.user = Admin(row['userID'], *row[3:10])
+            return
+        return
 
-    def user_change_occupation(self):
+    def user_change_occupation(self, temp_name, temp_pass):
         print(f"\nCurrent Occupation: {self.user.occupation}")
         while True:
             new_occupation = input("\nPlease enter your new occupation: ")
@@ -1039,9 +1059,12 @@ class Controller:
 
         end_info = helper.edit_vol_end()
         if not end_info:
-            self.user_edit_account()
+            self.user_edit_account(temp_name, temp_pass)
         else:
-            self.admin_main()
+            row = User.validate_user(temp_name, temp_pass)
+            self.user = Admin(row['userID'], *row[3:10])
+            return
+        return
 
     #### edit refugee for volunteer, volunteer camp dependent ####
     def vol_edit_refugee(self, r):

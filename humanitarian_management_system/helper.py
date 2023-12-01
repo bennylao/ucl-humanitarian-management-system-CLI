@@ -844,6 +844,7 @@ def check_vol_assigned_camp(username):
         return
     return cid
 
+
 def edit_vol_end():
     while True:
         user_input = input("Would you like to change other information (yes or no)? ")
@@ -854,6 +855,3 @@ def edit_vol_end():
             return False
         else:
             return True
-
-
-
