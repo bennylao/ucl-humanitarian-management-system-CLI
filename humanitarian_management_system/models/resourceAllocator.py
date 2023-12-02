@@ -154,6 +154,9 @@ class ResourceAllocator():
         all_resource_camp_vs_unallocated.reset_index(inplace=True)
         print(all_resource_camp_vs_unallocated)
 
+        print("Below are the refugee populations of the camps that are currently open: \n")
+        print(resource_stats_instance.valid_open_camps())
+
         move = pd.DataFrame(columns=['resourceID', 'name', 'origin_campID', 'destination_campID', 'moveUnits', 'action', 'actionInfo'])
         move_id_list = []
         move_name_list = []
@@ -175,7 +178,11 @@ class ResourceAllocator():
             ###################################################################
             # Give user different form prompts depending on choice
             # select single resource
-            r_id_select = int(input("\nPlease enter the resourceID of the item: --> "))
+            
+            # r_id_select = int(input("\nPlease enter the resourceID of the item: --> "))
+            prompt = "\nPlease enter the resourceID of the item: --> "
+            valid_range = resource_stats_instance.valid_resources()
+            r_id_select = resource_stats_instance.input_validator(prompt, valid_range)
             r_name_select = self.unallocResources_df.loc[self.unallocResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
             # how much of this resource is allocated in each camp & uallocated currently 
             

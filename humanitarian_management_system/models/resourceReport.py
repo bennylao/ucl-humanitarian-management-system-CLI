@@ -7,6 +7,8 @@ class ResourceReport():
         resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
         resource_allocaation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
         self.resource__nallocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
+        self.camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        self.camp_df = pd.read_csv(self.camp_csv_path)
         self.totalResources_df = pd.read_csv(resource_stock_csv_path)
         self.resourceAllocs_df = pd.read_csv(resource_allocaation_csv_path)
         self.unallocResources_df = pd.read_csv(self.resource__nallocated_stock_csv_path)
@@ -25,6 +27,41 @@ class ResourceReport():
             unalloc_prompt = f"\n =======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items} \n"
 
         return unalloc_status, unalloc_prompt
+    
+    def valid_open_camps(self):
+        condition = self.camp_df['status']=='open'
+        valid_range = self.camp_df.loc[condition, ['campID', 'refugeePop']]
+        return valid_range
+
+    def valid_open_camps_with_refugees(self):
+        condition = (self.camp_df['refugeePop']>0) & (self.camp_df['status']=='open')
+        valid_range = self.camp_df.loc[condition, ['campID', 'refugeePop']]
+        return valid_range['campID'], valid_range
+    
+
+    def valid_resources(self):
+        valid_range = self.totalResources_df['resourceID'].tolist()
+        return valid_range
+    
+    def input_validator(self, prompt_msg, valid_range, error_msg = 'Invalid selection. Please try again.'):
+        # for usage in resources - validates the form inputs
+        while True:
+            user_input = input(prompt_msg)
+
+            # Check if the input is a digit and convert it to an integer if it is
+            if user_input.isdigit():
+                user_input = int(user_input)
+
+            # Check if the input (either integer or string) is in the valid range
+            if user_input in valid_range:
+                return user_input  # Return if the input is in the valid range
+            else:
+                print(error_msg)  # Print error message for input out of range
+
+    
+    def test(self):
+        return
+
 
 
     def resource_report_total(self):
@@ -65,9 +102,6 @@ class ResourceReport():
         totalResources = self.totalResources_df
 
         # resource stock total...
-        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-        camp = pd.read_csv(camp_csv_path)
-
         # extract total refugee population
         camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
         df = pd.read_csv(camp_csv_path)

@@ -10,8 +10,7 @@ import pandas as pd
 
 # print(camp_df)
 
-test_instance = ResourceAllocator()
-test_instance.manual_alloc()
-
 report_instance = ResourceReport()
-print(report_instance.resource_report_camp_vs_unallocated())
+valid_range = ['y','n']  # or any list of integers, strings, or a mix of both
+prompt_message = "Enter a number between 1 and 9, or a specific string: "
+report_instance.input_validator(prompt_message, valid_range)
