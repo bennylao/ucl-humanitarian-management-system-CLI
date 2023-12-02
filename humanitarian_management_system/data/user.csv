@@ -1,9 +1,8 @@
 userID,userType,isActive,username,password,firstName,lastName,email,phone,occupation,roleID,eventID,campID
-0,admin,True,admin,111,adminFirstName,adminLastName,adminEmail,2012345678,adminOccupation,,,
-1,volunteer,True,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,7701234567,volunteer1Occupation,4,3,5
-2,volunteer,True,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,6,7,6
-3,volunteer,False,volunteer3,111,volunteer3FirstName,volunteer3LastName,volunteer3Email,7701230987,volunteer3Occupation,3,7,3
-4,volunteer,True,volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,8,8,8
-5,admin,True,a11,111,admin2FirstName,admin2LastName,admin2Email,2012345678,admin2Occupation,0,0,0
-6,volunteer,True,v,111,benny,lao,bennylao@gmail.com,77081231241234,teacher,1,1,1
-7,volunteer,TRUE,jtest4,111,newfFour,newlFour,testing4@example.com,07786471235,Teacher,0,0,0
+0,admin,TRUE,admin,111,adminFirstName,adminLastName,adminEmail,2013356756,adminOccupation,,,
+1,volunteer,TRUE,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,07786471235,engineer,4,3,5
+2,volunteer,TRUE,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,6,7,6
+3,volunteer,FALSE,volunteer3,111,HeyFirst,TestLast,volunteer3Email,7786471235,babysitter,3,7,3
+4,volunteer,TRUE,Volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,0,0,0
+5,admin,TRUE,a11,111,admin2FirstName,admin2LastName,admin2Email,2012345678,admin2Occupation,0,0,0
+6,volunteer,TRUE,Benny,111,benny,lao,bennylao@gmail.com,07787571235,Teacher,1,1,1

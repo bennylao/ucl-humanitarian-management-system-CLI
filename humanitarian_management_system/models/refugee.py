@@ -26,6 +26,7 @@ class Refugee:
         self.is_vaccinated = is_vaccinated
 
         self.ref_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+        self.camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
         self.medinfo_csv_path = Path(__file__).parents[1].joinpath("data/medicalInfo.csv")
         self.medtype_csv_path = Path(__file__).parents[1].joinpath("data/medicalInfoType.csv")
 
@@ -162,9 +163,10 @@ class Refugee:
         user_selection = validate_user_selection(VolunteerView.get_edit_refugee_options())
 
         if user_selection == '1':
+            print(f"Current refugee ID is {df.loc[df['refugeeID'] == ref_id]['refugeeID'].tolist()[0]}")
             while True:
                 try:
-                    new_value = int(input("\nEnter new refugee ID "))
+                    new_value = int(input("\nEnter new refugee ID: "))
                     if new_value in id_arr_temp:
                         print("Can't use an existing refugee ID!")
                         continue
@@ -177,8 +179,9 @@ class Refugee:
             self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'refugeeID', new_value, user, cid)
 
         if user_selection == '2':
+            print(f"Current refugee first name is {df.loc[df['refugeeID'] == ref_id]['firstName'].tolist()[0]}")
             while True:
-                new_value = input("\nEnter new first name ")
+                new_value = input("\nEnter new first name: ")
                 if not new_value.isalpha():
                     print("Must be alphabetic values!")
                     continue
@@ -189,8 +192,9 @@ class Refugee:
             self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'firstName', new_value, user, cid)
 
         if user_selection == '3':
+            print(f"Current refugee last name is {df.loc[df['refugeeID'] == ref_id]['lastName'].tolist()[0]}")
             while True:
-                new_value = input("\nEnter new last name ")
+                new_value = input("\nEnter new last name: ")
                 if not new_value.isalpha():
                     print("Must be alphabetic values!")
                     continue
@@ -202,6 +206,7 @@ class Refugee:
             self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'lastName', new_value, user, cid)
 
         if user_selection == '4':
+            print(f"Current refugee first DOB is {df.loc[df['refugeeID'] == ref_id]['dob'].tolist()[0]}")
             while True:
                 try:
                     new_value = input("\nEnter date of birth (format: dd/mm/yy): ")
@@ -215,8 +220,9 @@ class Refugee:
             self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'dob', new_value, user, cid)
 
         if user_selection == '5':
+            print(f"Current refugee gender is {df.loc[df['refugeeID'] == ref_id]['gender'].tolist()[0]}")
             while True:
-                new_value = input("\nEnter new gender (male, female or other) ")
+                new_value = input("\nEnter new gender (male, female or other): ")
                 if new_value != 'male' and new_value != 'female' and new_value != 'other':
                     print("Must enter male, female or other!")
                     continue
@@ -227,9 +233,10 @@ class Refugee:
             self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'gender', new_value, user, cid)
 
         if user_selection == '6':
+            print(f"Current refugee family ID is {df.loc[df['refugeeID'] == ref_id]['familyID'].tolist()[0]}")
             while True:
                 try:
-                    new_value = input("\nEnter new family ID ")
+                    new_value = input("\nEnter new family ID: ")
                     if not new_value.isnumeric():
                         print("Must be a numerical value!")
                         continue
@@ -251,10 +258,10 @@ class Refugee:
 
         while True:
             user_input = input("Yes or No? ")
-            if user_input != 'Yes' and user_input != 'No':
-                print("Must enter Yes or No!")
+            if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                print("Must enter yes or no!")
                 continue
-            if user_input == 'Yes':
+            if user_input == 'yes':
                 self.edit_refugee_info(user, cid)
             else:
                 return
@@ -266,8 +273,15 @@ class Refugee:
         medinfo_df = pd.read_csv(self.medinfo_csv_path)
         medtype_df = pd.read_csv(self.medtype_csv_path)
 
+        ref_id_arr = []
+        for i in ref_df['refugeeID'].tolist():
+            ref_id_arr.append(str(i))
+
         if user == 'volunteer':
+            ref_id_arr = []
             ref_df = ref_df.loc[ref_df['campID'] == cid]
+            for i in ref_df['refugeeID'].tolist():
+                ref_id_arr.append(str(i))
 
         joined_df_ref = pd.merge(ref_df, medinfo_df, on='refugeeID', how='inner')
         joined_df_med = pd.merge(medinfo_df, medtype_df, on='medicalInfoTypeID', how='inner')
@@ -279,15 +293,41 @@ class Refugee:
                                    'Condition', 'Critical level']
 
         Event.display_events(joined_df_total[['Refugee ID', 'Camp ID', 'First name', 'Last name', 'DOB', 'Gender',
-                                              'Condition', 'Description', 'Is vaccinated?', 'Family ID',
-                                              'Critical level']])
+                                              'Family ID']])
 
         while True:
-            user_input = input("Exit display session (Yes)? ")
-            if user_input != 'Yes':
-                print("Must enter Yes or leave it alone.")
+            user_input = input("Would you like to access the medical profile for a particular refugee (yes or no)? ")
+
+            if user_input.lower() == 'yes':
+                self.display_medinfo(user, cid, joined_df_total, ref_id_arr)
+
+            if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                print("Must enter yes or no!")
                 continue
-            if user_input == 'Yes':
+            if user_input.lower() == 'no':
                 return
             break
+
+    def display_medinfo(self, user, cid, joined_df_total, ref_id_arr):
+        while True:
+            id_input = input("Please enter the refugee ID whose medical profile you would like to see: ")
+            if id_input not in ref_id_arr:
+                print("Invalid refugee ID entered!")
+                continue
+            df_med = joined_df_total.loc[joined_df_total['Refugee ID'] == int(id_input)]
+            Event.display_events(
+                df_med[['Refugee ID', 'First name', 'Last name', 'Description', 'Condition',
+                        'Is vaccinated?', 'Critical level']])
+
+            while True:
+                user_input = input("Would you like to exit (yes or no)? ")
+                if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                    print("Must enter yes or no!")
+                    continue
+                if user_input.lower() == 'no':
+                    self.display_info(cid, user)
+                return
+            return
+
+
 

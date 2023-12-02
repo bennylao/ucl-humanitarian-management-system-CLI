@@ -200,20 +200,6 @@ def validate_camp_input():
         except ValueError:
             print("Must be a positive integer!!")
 
-    # while True:
-    #     try:
-    #         resource = input("\nEnter resources amount: ")
-    #         if capacity == "RETURN":
-    #             break
-    #         elif int(resource) > 0:
-    #             break
-    #         else:
-    #             print("Must be a positive integer!")
-    #             continue
-    #     except ValueError:
-    #         print("Must be a positive integer!!")
-
-    # risk input
     while True:
         risk = input("\nEnter health risk level (low or high): ")
         if risk == 'RETURN':
@@ -504,24 +490,35 @@ def move_refugee_helper_method():
             break
         else:
             print("\nSorry - that refugee ID doesn't exist. Pick again.")
-    old_camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
-    # Displaying list of all ACTIVE camps to user
     camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
     camp_df = pd.read_csv(camp_csv_path)
     active_camp_df = camp_df[camp_df['status'] == 'open']
-    print("\n", active_camp_df.to_string(index=False))
-    # checking input is vaild according to refugee IDs in database
+    old_camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
+    eventID = camp_df.loc[camp_df['campID'] == int(old_camp_id), 'eventID'].iloc[0]
+    camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
+    active_and_in_event = camp_df[(camp_df['status'] == 'open') & (camp_df['campID'].isin(camps_in_event))]
+    print("\n", active_and_in_event.to_string(index=False))
+    # checking input is valid according to refugee IDs in database
     while True:
-        camp_id = input("\nGreat! Now, from the above list, enter the campID of "
-                        "the camp you want to move this refugee to: ")
-        if camp_id == "RETURN":
+        camp_id = input("\nFrom the above list, which is a list of ACTIVE camps\n"
+                        "which are part of the same event as this refugee's original camp,\n"
+                        "enter the campID of the camp you want to move this refugee to: ")
+        if camp_id.lower() == "return":
             return
-        elif camp_id.strip() and camp_id.strip().isdigit() and active_camp_df['campID'].eq(int(camp_id)).any():
-            break
-        else:
-            print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
+        try:
+            camp_id = int(camp_id)
+            if camp_id == old_camp_id:
+                print("\nLooks like that's the same camp this refugee is already in. Try again "
+                      "or if there are no other camps\n"
+                      "available, enter RETURN to go back.")
+            elif (camp_id in active_camp_df['campID'].values) and (camp_id in camps_in_event):
+                break
+            else:
+                print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
+        except ValueError:
+            print("\nInvalid input. Please enter a valid campID or type RETURN to go back: ")
     print("\nThanks - bear with us whilst we make that transfer."
-          "\n\n-------------------------------------------------------")
+          "\n\n----------------------------------------------------------------------------------------")
     # Minus one from the population of the camp originally associated with the refugee
     # print(camp_id)
     row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
@@ -650,6 +647,7 @@ def display_training_session():
             input("Enter anything to go back when you're ready. ")
             return
 
+
 def create_training_session():
     training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
     session_df = pd.read_csv(training_session_path)
@@ -692,25 +690,33 @@ def create_training_session():
         camp = input("\nEnter the campID of the camp you will be holding the session at: ")
         if camp.lower() == "return":
             return
-        elif camp_df['campID'].eq(int(camp)).any():
-            break
-        else:
-            print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
-    print(ref_df)
+        try:
+            camp_id = int(camp)
+            if camp_df['campID'].eq(camp_id).any():
+                break
+            else:
+                print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
+        except ValueError:
+            print("\nInvalid input. Please enter a valid integer for campID or type 'RETURN' to go back.")
+    eventID = camp_df.loc[camp_df['campID'] == int(camp), 'eventID'].iloc[0]
+    camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
+    refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
+    print(refugees_in_associated_camps.to_string(index=False))
 
     participants = []
     while True:
         rid = input(
-            "\nFrom the list above, one at a time enter a refugee ID for who shall be joining the skills session"
-            "\n or enter RETURN to stop: ")
+            "\nFrom the list above of all refugees in the camps which are part of the same event as the camp you "
+            "will be holding the session,\none at a time enter a refugee ID for who shall be joining the skills session"
+            "\nor enter RETURN to stop: ")
         if rid.lower() == 'return':
             break
         elif rid in participants:
             print("You've already added that refugee!")
-        elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+        elif rid.strip() and rid.strip().isdigit() and int(rid) in refugees_in_associated_camps['refugeeID'].values:
             participants.append(rid)
         else:
-            print("\nSorry - that refugee ID doesn't exist. Pick again.")
+            print("\nSorry - that refugee isn't in the same 'event' as where this session is hosted. Pick again.")
 
         #  Now we have all the info we need to create a training session
         # Need to also increment sessionID by 1.
@@ -730,7 +736,6 @@ def create_training_session():
     session_df.to_csv(training_session_path, index=False)
     added_session = session_df[session_df['sessionID'] == sessionID]
     print(added_session)
-
 
 
 def delete_session():
@@ -753,7 +758,7 @@ def delete_session():
     if session_datetime < datetime.now().date():
         while True:
             confirm = input("\nYou're about to delete a previously held skills session. "
-                       "\nEnter YES to confirm or RETURN to cancel: ")
+                            "\nEnter YES to confirm or RETURN to cancel: ")
             if confirm.lower == 'return':
                 return
             elif confirm.lower() == 'yes':
@@ -771,14 +776,15 @@ def delete_session():
             elif confirm.lower() == 'yes':
                 break
             else:
-               print("\nInvalid option. Try again.\n")
+                print("\nInvalid option. Try again.\n")
     if confirm.lower() == 'return':
         return
-    #Update CSV files accordingly
+    # Update CSV files accordingly
     session_df.drop(session_df[session_df['sessionID'] == sessionID_int].index, inplace=True)
     session_df.reset_index(drop=True, inplace=True)
     session_df.to_csv(training_session_path, index=False)
-    print(f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.\n")
+    print(
+        f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.\n")
     print(session_df.to_string(index=False))
 
 
@@ -826,6 +832,7 @@ def add_refugee_to_session():
     print(f"\nExcellent! We have added refugees {participants} to session {sessionID}. See below. ")
     print(session_df.to_string(index=False))
 
+
 def check_vol_assigned_camp(username):
     csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
     df = pd.read_csv(csv_path)
@@ -835,5 +842,16 @@ def check_vol_assigned_camp(username):
     if math.isnan(cid):
         print("You must first join a camp!")
         return
-    print(f'''\nYou're currently assigned to camp {int(cid)}.''', end='')
     return cid
+
+
+def edit_vol_end():
+    while True:
+        user_input = input("Would you like to change other information (yes or no)? ")
+        if user_input.lower() != 'yes' and user_input.lower() != 'no':
+            print("Must enter yes or no!")
+            continue
+        if user_input.lower() == 'yes':
+            return False
+        else:
+            return True
