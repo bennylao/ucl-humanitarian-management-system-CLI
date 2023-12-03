@@ -10,7 +10,15 @@ import pandas as pd
 
 # print(camp_df)
 
-report_instance = ResourceReport()
-valid_range = ['y','n']  # or any list of integers, strings, or a mix of both
-prompt_message = "Enter a number between 1 and 9, or a specific string: "
-report_instance.input_validator(prompt_message, valid_range)
+
+
+resource_stats_instance = ResourceReport()
+all_resource_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated()
+
+
+
+
+filtered_df = all_resource_camp_vs_unallocated[all_resource_camp_vs_unallocated['resourceID'] == 1]
+df = filtered_df.iloc[:, 4:]
+
+print(df[5].iloc[0])

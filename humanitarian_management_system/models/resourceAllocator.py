@@ -172,7 +172,9 @@ class ResourceAllocator():
             print("\nWhat type of manual allocation would you like to make?")
             for action_string in action_string_list:
                 print(action_string)
-            action_select = int(input("--> ")) ########### RESOURCES ERROR HANDLING: VALIDATE SELECTION
+
+            prompt = "--> "
+            action_select = resource_stats_instance.input_validator(prompt, [1,2,3])
             print(f"\nYou have selected: {action_string_list[action_select-1]}\n")
 
             ###################################################################
@@ -190,28 +192,66 @@ class ResourceAllocator():
             print(f"\n*** Resource ID {r_id_select}: {r_name_select} *** is currently distributed as below: \n")
             print(single_resource_stats.to_string(index=False))
 
-            # get unit number. ######## RESOURCE FORM VALIDATION: PROBABLY NEED TO ADD VALIDATION LATER!!!! ######### - might need to move these into the loops 
-            move_units = int(input(f"\n Please enter the amount of *** [ Resource ID #{r_id_select}: {r_name_select} ] *** to move: "))
+            print("Below are the refugee populations & the camps that are currently open: \n")
+            print(resource_stats_instance.valid_open_camps_with_refugees()) ### there should not be any camps with zero refugees. 
 
             if action_select == 3: 
                 # [3] RE-ASSIGN: camp <-> camp /// two camps need to be identified - origin & destination
-                origin_c_id = int(input(f"\nPlease enter the ORIGIN campID (from the above) where you would like to REMOVE *** Resource ID {r_id_select}: {r_name_select} *** from: "))
-                destination_c_id = int(input(f"\nPlease enter the DESTINATION campID (from any campID) where you would like to ADD *** Resource ID {r_id_select}: {r_name_select} *** to: "))
+                # origin_c_id = int(input(f"\nPlease enter the ORIGIN campID (from the above) where you would like to REMOVE *** Resource ID {r_id_select}: {r_name_select} *** from: ")
+                
+                columns_with_all_values_above_zero = single_resource_stats.iloc[:, 4:].columns[(single_resource_stats.iloc[:, 4:] > 0).all()]
+                valid_range = columns_with_all_values_above_zero.tolist()
+                prompt = f"\nPlease enter the ORIGIN campID where you would like to REMOVE *** Resource ID {r_id_select}: {r_name_select} *** from: "
+                origin_c_id = resource_stats_instance.input_validator(prompt, valid_range, 'Please select a valid camp where the resource is in stock.') ########### need to change this. is it those with refugees? or with non zero resources? 
+
+                ### ask user what resource id they want to move... maybe just do the quantity checker later. or can do right now... 
+
+
+                # destination_c_id = int(input(f"\nPlease enter the DESTINATION campID (from any open campID) where you would like to ADD *** Resource ID {r_id_select}: {r_name_select} *** to: "))
+                prompt = f"\nPlease enter the DESTINATION campID where you would like to ADD *** Resource ID {r_id_select}: {r_name_select} *** to: "
+                valid_range = resource_stats_instance.valid_open_camps_with_refugees()
+                valid_range = valid_range['campID'].tolist()
+                destination_c_id = resource_stats_instance.input_validator(prompt, valid_range, 'Please select a valid camp that is open and has refugees.') ########### need to change this. is it those with refugees? or with non zero resources? 
             else: 
                 ##################### [1] & [2] movement between inventory
                 # get corresponding camp:
-                c_id = int(input(f"\nPlease enter the relevant campID for the *** [ Resource ID #{r_id_select}: {r_name_select} ] *** : --> "))
+                prompt = f"\nPlease enter the relevant campID for the *** [ Resource ID #{r_id_select}: {r_name_select} ] *** : --> "
                 if action_select == 1:
                     # [1] ASSIGN: inventory -> camp
+                    status, unalloc_prompt = resource_stats_instance.unalloc_resource_checker()
+                    if status == False: 
+                        #### if there are no unallocated resources, then no inventory to move from camp, tell the user this and ask them to select another option
+                        print('\nThere are no unallocated resources here for you to assign to camps, please choose another manual allocation type... ')
+                        break ####### not confident about flow of logic here!! ################### 
                     origin_c_id = np.nan
-                    destination_c_id = c_id
+                    valid_range = resource_stats_instance.valid_open_camps_with_refugees()
+                    valid_range = valid_range['campID'].tolist()
+                    destination_c_id = resource_stats_instance.input_validator(prompt, valid_range, 'Please select a valid camp that is open and has refugees.')
                 elif action_select == 2:
                     # [2] UNASSIGN: camp -> inventory
-                    origin_c_id = c_id
+                    columns_with_all_values_above_zero = single_resource_stats.iloc[:, 4:].columns[(single_resource_stats.iloc[:, 4:] > 0).all()]
+                    valid_range = columns_with_all_values_above_zero.tolist()
+                    origin_c_id = resource_stats_instance.input_validator(prompt, valid_range, 'Please select a valid camp where the resource is in stock.') 
                     destination_c_id = np.nan
                 else:
                     print("Error")
-                
+
+            ### seperate loop for validating entries. Action 2 & 3 are grouped together as they invole taking away a resource from a camp, so the amount must not exced that in stock for the camp
+            ### Action 1's valid range is the unallocated resources levels 
+            # get unit number. ######## RESOURCE FORM VALIDATION: PROBABLY NEED TO ADD VALIDATION LATER!!!! ######### - might need to move these into the loops
+            prompt = f"\n Please enter the amount of *** [ Resource ID #{r_id_select}: {r_name_select} ] *** to move: "
+
+            if action_select == 1:
+                upper_limit = self.unallocResources_df.loc[self.unallocResources_df['resourceID']==r_id_select]
+            else:
+                r_id_qty = single_resource_stats.iloc[:, 4:] # remove first 4 columns (not relevant)
+                upper_limit = r_id_qty[origin_c_id].iloc[0]
+            # building the valid range4 - which is... for that selected camp are moving FROM (origin), the moveUnits must not exceed the resource already there
+            # do this by reusing the single_stats_instance
+            valid_range = range(1, int(upper_limit)+1)
+            error_msg = f"Please enter an amount betwen 0 and {upper_limit} for this resource."
+            move_units = resource_stats_instance.input_validator(prompt, valid_range, error_msg)
+
             move_id_list.append(r_id_select)
             move_name_list.append(r_name_select)
             move_origin_camp_list.append(origin_c_id)

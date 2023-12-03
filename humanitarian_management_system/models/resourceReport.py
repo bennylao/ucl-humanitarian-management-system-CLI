@@ -28,6 +28,11 @@ class ResourceReport():
 
         return unalloc_status, unalloc_prompt
     
+    #### the resource Map in its oiginal state, only displays camps with allocated resources. So there may be camps that have refugees, but no resources...
+    #### how likely is this? ony if we remove all resources... 
+    #### think we can just use the open camps with refugees actually. 
+    #### if the resource is zero; we csn just prompt another selection... (?)
+    
     def valid_open_camps(self):
         condition = self.camp_df['status']=='open'
         valid_range = self.camp_df.loc[condition, ['campID', 'refugeePop']]
@@ -36,13 +41,20 @@ class ResourceReport():
     def valid_open_camps_with_refugees(self):
         condition = (self.camp_df['refugeePop']>0) & (self.camp_df['status']=='open')
         valid_range = self.camp_df.loc[condition, ['campID', 'refugeePop']]
-        return valid_range['campID'], valid_range
+        return valid_range
     
 
     def valid_resources(self):
         valid_range = self.totalResources_df['resourceID'].tolist()
         return valid_range
     
+    def valid_pairwise_camp_resources(self):
+        resourceMap = self.resourceAllocs_df
+        valid_range12_df = resourceMap.loc[resourceMap['qty']>0, ['campID', 'resourceID']]
+        columns = valid_range12_df.columns
+        valid_range12 = set(zip(valid_range12_df[columns[0]], valid_range12_df[columns[1]]))
+        return valid_range12
+            
     def input_validator(self, prompt_msg, valid_range, error_msg = 'Invalid selection. Please try again.'):
         # for usage in resources - validates the form inputs
         while True:
@@ -57,6 +69,22 @@ class ResourceReport():
                 return user_input  # Return if the input is in the valid range
             else:
                 print(error_msg)  # Print error message for input out of range
+    
+    # for campID and resource pairing - resource must be above zero and campID must be an open one with refugees
+    def pairwise_input_validator(self, prompt_msg1, prompt_msg2, valid_range1, valid_range2, valid_range12, error_msg='Invalid combination. Please try again.'):
+        while True:
+            user_input1 = self.input_validator(prompt_msg1, valid_range1)
+
+            # Get the second input using the existing input_validator
+            user_input2 = self.input_validator(prompt_msg2, valid_range2)
+
+            # Check if the combination of user_input_1 and user_input_2 is valid
+            ### note the column order must match / be identical !! 
+            if (user_input1, user_input2) in valid_range12:
+                return user_input1, user_input2
+            else:
+                print(error_msg)
+
 
     
     def test(self):
