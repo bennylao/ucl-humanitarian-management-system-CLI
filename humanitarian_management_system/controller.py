@@ -793,7 +793,7 @@ class Controller:
                                       "\nEnter CREATE,\nDELETE,\nADD,\nREMOVE,\nDISPLAY (to"
                                       " view all sessions in the system),\nor RETURN (to exit): ")
             if create_add_delete.lower() == 'return':
-                self.volunteer_manage_camp()
+                return
             elif create_add_delete.lower() == 'create':
                 helper.create_training_session()
             elif create_add_delete.lower() == 'delete':
@@ -806,6 +806,7 @@ class Controller:
                 helper.display_training_session()
             else:
                 print("\nSorry! Didn't catch that. Please try again or enter RETURN to exit.")
+
 
     def user_edit_account(self):
         while True:
