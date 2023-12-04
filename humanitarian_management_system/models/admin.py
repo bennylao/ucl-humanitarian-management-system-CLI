@@ -8,11 +8,6 @@ class Admin(User):
     def __init__(self, user_id, username, password, first_name, last_name, email, phone, occupation):
         super().__init__(user_id, username, password, first_name, last_name, email, phone, occupation)
 
-        self.vol_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
-        self.role_csv_path = Path(__file__).parents[1].joinpath("data/roleType.csv")
-        self.camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-        self.event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
-
     def show_account_info(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path)
@@ -20,23 +15,14 @@ class Admin(User):
                                                             'phone', 'occupation']]
         table_str = sub_df.to_markdown(index=False)
         print("\n" + table_str)
-        while True:
-            user_input = input("Would you like to exit (yes)? ")
-            if user_input.lower() != 'yes':
-                print("Must enter yes or leave it alone!")
-                continue
-            return
-
-    # def edit_volunteer_account(self, volunteer_name):
-    #     pass
-    #
-    # def allocate_resource(self):
-    #     # should this just call from resources class?
-    #     pass
+        try:
+            input("\nPress Enter to return...")
+        except SyntaxError:
+            pass
 
     def remove_user(self):
         vol_id_arr = []
-        vol_df = pd.read_csv(self.vol_csv_path)
+        vol_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"))
 
         print("A list of all volunteers and their corresponding information.")
         self.vol_table_display()
@@ -55,7 +41,7 @@ class Admin(User):
 
             vol_df = vol_df[vol_df['userID'] != int(user_select)]
             vol_df.reset_index(drop=True, inplace=True)
-            vol_df.to_csv(self.vol_csv_path, index=False)
+            vol_df.to_csv(Path(__file__).parents[1].joinpath("data/user.csv"), index=False)
             print(f"User with ID int{user_select} has been deleted.")
 
             return
@@ -63,7 +49,7 @@ class Admin(User):
 
     def activate_user(self):
         vol_id_arr = []
-        vol_df = pd.read_csv(self.vol_csv_path)
+        vol_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"))
 
         print("A list of all volunteers and their corresponding information.")
         self.vol_table_display()
@@ -114,8 +100,8 @@ class Admin(User):
 
         joined_df = self.vol_table_display()
 
-        camp_df = pd.read_csv(self.camp_csv_path)
-        event_df = pd.read_csv(self.event_csv_path)
+        camp_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/camp.csv"))
+        event_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/eventTesting.csv"))
         joined_camp = pd.merge(camp_df, event_df, on='eventID', how='inner')
 
         joined_camp.columns = ['Camp ID', 'Event ID', 'countryID', 'Refugee capacity', 'Health risk',
@@ -147,7 +133,7 @@ class Admin(User):
             break
 
     def display_camp(self, joined_df_total):
-        df = pd.read_csv(self.vol_csv_path)
+        df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"))
         vol_id_arr = []
 
         for i in df.loc[df['userType'] == 'volunteer']['userID'].tolist():
@@ -174,10 +160,11 @@ class Admin(User):
             return
         return
 
-    def vol_table_display(self):
-        vol_df = pd.read_csv(self.vol_csv_path)
+    @staticmethod
+    def vol_table_display():
+        vol_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"))
         vol_df = vol_df.loc[vol_df['userType'] == 'volunteer']
-        role_df = pd.read_csv(self.role_csv_path)
+        role_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/roleType.csv"))
 
         joined_df = pd.merge(vol_df, role_df, on='roleID', how='inner')
         joined_df = joined_df.loc[:, ~joined_df.columns.isin(['userType', 'roleID'])]

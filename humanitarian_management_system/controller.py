@@ -5,8 +5,8 @@ import re
 import math
 
 from humanitarian_management_system import helper
-from humanitarian_management_system.models import User, Admin, Volunteer, Event, Camp, Refugee, \
-    ResourceReport, ResourceAllocator, ResourceAdder
+from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
+                                                   ResourceReport, ResourceAllocator, ResourceAdder)
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
 
 
@@ -81,6 +81,9 @@ class Controller:
             # check if account is active
             if user_info.empty:
                 print("\nUsername or password is incorrect. Please try again.")
+            elif user_info['isVerified'] == "FALSE":
+                user_info = pd.Series()
+                print("\nSince you are newly registered. Please contact the administrator to verify your account ")
             elif user_info['isActive'] == "FALSE":
                 user_info = pd.Series()
                 print("\nYour account has been deactivated, contact the administrator.")
@@ -90,12 +93,12 @@ class Controller:
             print("\n***   Login Successful!   ***")
             if user_info['userType'] == "admin":
                 # self.user is now an object of admin
-                self.user = Admin(user_info['userID'], *user_info[3:10])
+                self.user = Admin(user_info['userID'], *user_info[4:11])
                 print("You are now logged in as Admin.")
                 self.admin_main()
             else:
                 # self.user is not an object of volunteer
-                self.user = Volunteer(user_info['userID'], *user_info[3:])
+                self.user = Volunteer(user_info['userID'], *user_info[4:])
                 print("You are now logged in as Volunteer.")
                 self.volunteer_main()
 
@@ -116,7 +119,7 @@ class Controller:
             if user_selection == "5":
                 self.admin_display_summary()
             if user_selection == "6":
-                self.user_edit_account(self.user.username, self.user.password)
+                self.user_edit_account()
             if user_selection == "7":
                 self.user.show_account_info()
             if user_selection == "L" or self.logout_request:
@@ -149,17 +152,14 @@ class Controller:
         AdminView.display_volunteer_menu()
         user_selection = helper.validate_user_selection(AdminView.get_volunteer_options())
 
-        a = Admin(self.user.user_id, self.user.username, self.user.password, self.user.first_name, self.user.last_name,
-                  self.user.email, self.user.phone, self.user.occupation)
-
         if user_selection == "1":
             self.edit_volunteer()
         if user_selection == "2":
-            self.display_volunteer(a)
+            self.display_volunteer()
         if user_selection == "3":
-            self.activate_account(a)
+            self.activate_account()
         if user_selection == "4":
-            self.remove_account(a)
+            self.remove_account()
         if user_selection == "R":
             return
         if user_selection == "L":
@@ -201,27 +201,24 @@ class Controller:
 
         row = User.validate_user(df_name, str(df_password))
         self.user = Volunteer(row['userID'], *row[3:])
-        self.user_edit_account(temp_name, temp_pass)
+        self.user_edit_account()
 
-    @staticmethod
-    def display_volunteer(a):
+    def display_volunteer(self):
         ManagementView.display_admin_vol()
-        a.display_vol()
+        self.user.display_vol()
         return
 
-    @staticmethod
-    def activate_account(a):
+    def activate_account(self):
         ManagementView.display_activate()
-        a.activate_user()
+        self.user.activate_user()
         return
 
-    @staticmethod
-    def remove_account(a):
+    def remove_account(self):
         ManagementView.display_activate()
-        a.remove_user()
+        self.user.remove_user()
         return
 
-    ####################### MAIN RESOURCE MENU ############################# 
+    """####################### MAIN RESOURCE MENU #############################"""
 
     def admin_manage_resource(self):
         while True:
@@ -244,7 +241,7 @@ class Controller:
                 self.user = None
                 break
 
-    ####################### MAIN RESOURCE MENU ############################# 
+    """ ####################### MAIN RESOURCE MENU ############################# """
 
     def admin_display_summary(self):
         pass
@@ -260,9 +257,8 @@ class Controller:
 
     @staticmethod
     def admin_edit_event():
-        user = 'admin'
         ManagementView.event_edit_message()
-        Event.edit_event_info(user, 0)
+        Event.edit_event_info()
 
     @staticmethod
     def admin_delete_event():
@@ -274,7 +270,8 @@ class Controller:
         ManagementView.event_close_message()
         Event.disable_ongoing_event()
 
-    ######   main camp menu #####
+    """###### main camp menu #####"""
+
     def admin_manage_camp(self):
         while True:
             ManagementView.camp_main_message()
@@ -304,7 +301,8 @@ class Controller:
                 self.logout_request = True
                 break
 
-    ##### Edit Refugee for all camps #####
+    """ ##### Edit Refugee for all camps ##### """
+
     @staticmethod
     def admin_edit_refugee():
         user = 'admin'
@@ -314,7 +312,7 @@ class Controller:
                     '')
         r.edit_refugee_info(user, 0)
 
-    #################  CREATE / MODIFY / REMOVE CAMPS###############
+    """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
 
     def admin_create_camp(self):
         ManagementView.camp_creation_message()
@@ -530,7 +528,7 @@ class Controller:
         c = Camp('', '')
         c.display_info(user, 0)
 
-    ###################### RESOURCE MENU LEVEL 2 ###############################################
+    """" ###################### RESOURCE MENU LEVEL 2 ############################################### """
 
     def resource_alloc_main_menu(self):
         resource_report = ResourceReport()
@@ -545,14 +543,15 @@ class Controller:
             if user_selection == '1':
                 alloc_instance.manual_alloc()
             elif user_selection == '2':
-                ### here, if th4re is unallocated resources... ask if user wants to deal with unassigned resources or not 
-                if unalloc_status == True:
+                # here, if th4re is unallocated resources... ask if user wants to deal with unassigned resources or not
+                if unalloc_status:
                     include_unassigned = input('Do you want to distribute the unassigned resources? y / n --> ')
-                    #### user can choose if they want to do this manually or automatically, same as above actually
-                    #### is there a way we can reuse the same code ?? <- if we merge it into the same files....
+                    # user can choose if they want to do this manually or automatically, same as above actually
+                    # is there a way we can reuse the same code ?? <- if we merge it into the same files....
                     if include_unassigned == 'y':
                         print("\n ================ LOADING ==============\n")
-                        alloc_instance.add_unalloc_resource() ### add the unassigned resources to the totalResources, ready for assignment by running auto_alloc immediately after
+                        alloc_instance.add_unalloc_resource()  # ## add the unassigned resources to the
+                        # totalResources, ready for assignment by running auto_alloc immediately after
                 alloc_instance.auto_alloc()
             else:
                 print("Invalid mode option entered!")
@@ -562,7 +561,6 @@ class Controller:
                 return
             else:
                 break
-
 
     def man_resource(self):
         ManagementView.man_resource_message()
@@ -578,7 +576,8 @@ class Controller:
         else:
             return
 
-    def auto_resource(self):
+    @staticmethod
+    def auto_resource():
         ManagementView.auto_resource_message()
         alloc_instance = ResourceAllocator()
         alloc_instance.auto_alloc()
@@ -611,7 +610,7 @@ class Controller:
         # print("Auto resource allocation completed")
         # self.admin_manage_camp(username)
 
-    ###################### RESOURCE MENU LEVEL 2 ###############################################
+    """ ###################### RESOURCE MENU LEVEL 2 ############################################### """
 
     def volunteer_main(self):
         VolunteerView.display_login_message(self.user.username)
@@ -626,7 +625,7 @@ class Controller:
                 self.volunteer_manage_camp()
             if user_selection == "3":
                 # edit personal account
-                self.user_edit_account(self.user.username,self.user.password)
+                self.user_edit_account()
             if user_selection == "4":
                 # show personal information
                 self.volunteer_show_account_info()
@@ -807,38 +806,36 @@ class Controller:
             else:
                 print("\nSorry! Didn't catch that. Please try again or enter RETURN to exit.")
 
-    def user_edit_account(self, temp_name, temp_pass):
+    def user_edit_account(self):
         while True:
             ManagementView.display_account_menu()
             user_selection = helper.validate_user_selection(ManagementView.get_account_options())
             if user_selection == "1":
                 # change username
-                self.user_change_username(temp_name, temp_pass)
+                self.user_change_username()
             if user_selection == "2":
                 # change password
-                self.user_change_password(temp_name, temp_pass)
+                self.user_change_password()
             if user_selection == "3":
                 # change name
-                self.user_change_name(temp_name, temp_pass)
+                self.user_change_name()
             if user_selection == "4":
                 # change email
-                self.user_change_email(temp_name, temp_pass)
+                self.user_change_email()
             if user_selection == "5":
                 # change phone
-                self.user_change_phone(temp_name, temp_pass)
+                self.user_change_phone()
             if user_selection == "6":
                 # change occupation
-                self.user_change_occupation(temp_name, temp_pass)
+                self.user_change_occupation()
             if user_selection == "R":
                 break
             if user_selection == "L":
                 self.user = None
                 self.logout_request = True
                 break
-            return
-        return
 
-    def user_change_username(self, temp_name, temp_pass):
+    def user_change_username(self):
         existing_usernames = User.get_all_usernames()
         print(f"\nCurrent Username: '{self.user.username}'")
         while True:
@@ -859,16 +856,7 @@ class Controller:
                 print("\nInvalid username entered. Only alphabet letter (Aa-Zz) and numbers (0-9) are allowed.")
                 continue
 
-        end_info = helper.edit_vol_end()
-        if not end_info:
-            self.user_edit_account(temp_name, temp_pass)
-        else:
-            row = User.validate_user(temp_name, temp_pass)
-            self.user = Admin(row['userID'], *row[3:10])
-            return
-        return
-
-    def user_change_password(self, ttemp_name, temp_pass):
+    def user_change_password(self):
         # specify allowed characters for passwords
         allowed_chars = r"[!@#$%^&*\w]"
         while True:
@@ -896,16 +884,7 @@ class Controller:
                       "Only alphabet, numbers and !@#$%^&* are allowed.")
                 continue
 
-        end_info = helper.edit_vol_end()
-        if not end_info:
-            self.user_edit_account(temp_name, temp_pass)
-        else:
-            row = User.validate_user(temp_name, temp_pass)
-            self.user = Admin(row['userID'], *row[3:10])
-            return
-        return
-
-    def user_change_name(self, temp_name, temp_pass):
+    def user_change_name(self):
         print(f"\nCurrent Name: {self.user.first_name} {self.user.last_name}")
         while True:
             while True:
@@ -939,16 +918,7 @@ class Controller:
                       f"\nYour new name is '{self.user.first_name} {self.user.last_name}'.")
                 break
 
-        end_info = helper.edit_vol_end()
-        if not end_info:
-            self.user_edit_account(temp_name, temp_pass)
-        else:
-            row = User.validate_user(temp_name, temp_pass)
-            self.user = Admin(row['userID'], *row[3:10])
-            return
-        return
-
-    def user_change_email(self, temp_name, temp_pass):
+    def user_change_email(self):
         # specify allowed characters for email
         email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
         all_emails = User.get_all_emails()
@@ -976,16 +946,7 @@ class Controller:
                       "Only alphabet, numbers and !@#$%^&* are allowed.")
                 continue
 
-        end_info = helper.edit_vol_end()
-        if not end_info:
-            self.user_edit_account(temp_name, temp_pass)
-        else:
-            row = User.validate_user(temp_name, temp_pass)
-            self.user = Admin(row['userID'], *row[3:10])
-            return
-        return
-
-    def user_change_phone(self, temp_name, temp_pass):
+    def user_change_phone(self):
         print(f"\nCurrent Phone Number: {self.user.phone}")
         while True:
             new_phone = input("\nPlease enter new phone number: ")
@@ -1001,16 +962,7 @@ class Controller:
         print("\nPhone changed successfully."
               f"\nYour new phone is '{self.user.phone}")
 
-        end_info = helper.edit_vol_end()
-        if not end_info:
-            self.user_edit_account(temp_name, temp_pass)
-        else:
-            row = User.validate_user(temp_name, temp_pass)
-            self.user = Admin(row['userID'], *row[3:10])
-            return
-        return
-
-    def user_change_occupation(self, temp_name, temp_pass):
+    def user_change_occupation(self):
         print(f"\nCurrent Occupation: {self.user.occupation}")
         while True:
             new_occupation = input("\nPlease enter your new occupation: ")
@@ -1026,16 +978,7 @@ class Controller:
             else:
                 print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
 
-        end_info = helper.edit_vol_end()
-        if not end_info:
-            self.user_edit_account(temp_name, temp_pass)
-        else:
-            row = User.validate_user(temp_name, temp_pass)
-            self.user = Admin(row['userID'], *row[3:10])
-            return
-        return
-
-    #### edit refugee for volunteer, volunteer camp dependent ####
+    """ #### edit refugee for volunteer, volunteer camp dependent #### """
     def vol_edit_refugee(self, r):
         cid = helper.check_vol_assigned_camp(self.user.username)
         print(f"You're currently assigned to camp {int(cid)}.")
