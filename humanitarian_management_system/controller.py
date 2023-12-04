@@ -661,7 +661,6 @@ class Controller:
                 self.display_camp_resource(c)
             if user_selection == "8":
                 self.legal_advice_support()
-
             if user_selection == '9':
                 self.refugee_training_sessions()
 
@@ -790,9 +789,9 @@ class Controller:
 
     def refugee_training_sessions(self):
         while True:
-            create_add_delete = input("\nAre you looking to CREATE or DELETE a skills session, or add "
-                                      "more refugees to a session?"
-                                      "\nEnter CREATE,\nDELETE,\nADD,\nDISPLAY (to"
+            create_add_delete = input("\nAre you looking to CREATE or DELETE a skills session, add, or \nremove "
+                                      "refugees to/from a session?"
+                                      "\nEnter CREATE,\nDELETE,\nADD,\nREMOVE,\nDISPLAY (to"
                                       " view all sessions in the system),\nor RETURN (to exit): ")
             if create_add_delete.lower() == 'return':
                 self.volunteer_manage_camp()
@@ -802,6 +801,8 @@ class Controller:
                 helper.delete_session()
             elif create_add_delete.lower() == 'add':
                 helper.add_refugee_to_session()
+            elif create_add_delete.lower() == 'remove':
+                helper.remove_refugee_from_session()
             elif create_add_delete.lower() == 'display':
                 helper.display_training_session()
             else:
