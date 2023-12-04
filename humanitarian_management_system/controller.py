@@ -80,13 +80,16 @@ class Controller:
             user_info = User.validate_user(username, password)
             # check if account is active
             if user_info.empty:
-                print("\nUsername or password is incorrect. Please try again.")
+                print("\nUsername or password is incorrect. Please try again."
+                      "\n Or Enter 'RETURN' to get back to main menu.")
             elif user_info['isVerified'] == "FALSE":
                 user_info = pd.Series()
-                print("\nSince you are newly registered. Please contact the administrator to verify your account ")
+                print("\nSince you are newly registered. Please contact the administrator to verify your account"
+                      "\n Or Enter 'RETURN' to get back to main menu.")
             elif user_info['isActive'] == "FALSE":
                 user_info = pd.Series()
-                print("\nYour account has been deactivated, contact the administrator.")
+                print("\nYour account has been deactivated, contact the administrator."
+                      "\n Or Enter 'RETURN' to get back to main menu.")
 
         # if user record is matched, print login successfully
         if not user_info.empty:
