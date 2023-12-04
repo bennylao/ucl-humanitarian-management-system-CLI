@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 import datetime
 import math
-from datetime import datetime
+
 
 
 def validate_user_selection(options):
@@ -116,7 +116,7 @@ def validate_event_input():
 
     while True:
         location = input("\nLocation(country): ").title()
-        if location == 'RETURN':
+        if location.upper() == 'RETURN':
             return
         elif location not in all_countries:
             print("Invalid country name entered.")
@@ -267,12 +267,12 @@ def extract_active_event(csv_path):
     '''used to extract event id for active/yet ongoing events'''
     df = pd.read_csv(csv_path)
     # ensure we only display camp(s) that are part of an active plan
-    data = df[['ongoing', 'eid']]
+    data = df[['ongoing', 'eventID']]
     active_id = []
 
     for i in range(len(data)):
         if data['ongoing'].iloc[i] == 'True' or data['ongoing'].iloc[i] == 'Yet':
-            active_id.append(data['eid'].iloc[i])
+            active_id.append(data['eventID'].iloc[i])
 
     return active_id, df
 
