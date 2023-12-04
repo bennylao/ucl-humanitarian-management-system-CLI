@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 import datetime
 import math
-from datetime import datetime
+
 
 
 def validate_user_selection(options):
@@ -116,7 +116,7 @@ def validate_event_input():
 
     while True:
         location = input("\nLocation(country): ").title()
-        if location == 'RETURN':
+        if location.upper() == 'RETURN':
             return
         elif location not in all_countries:
             print("Invalid country name entered.")
