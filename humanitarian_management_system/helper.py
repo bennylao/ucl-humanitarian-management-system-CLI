@@ -547,8 +547,8 @@ def delete_refugee():
           " as instructed.")
     refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
     ref_df = pd.read_csv(refugee_csv_path)
-    print(ref_df)
-    # checking input is vaild according to refugee IDs in database
+    print(ref_df.to_string(index=False))
+    # checking input is valid according to refugee IDs in database
     while True:
         rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
         if rid == "RETURN":
@@ -654,7 +654,7 @@ def create_training_session():
     camp_df = pd.read_csv(camp_csv_path)
     refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
     ref_df = pd.read_csv(refugee_csv_path)
-    print(role_df.to_string(index=False))
+    print(role_df['name'].to_string(index=False))
     while True:
         occupation = input("\nFrom the list above enter the role which is closest to your own"
                            "\n or enter RETURN to exit: ")
@@ -705,8 +705,8 @@ def create_training_session():
         rid = input(
             "\nFrom the list above of all refugees in the camps which are part of the same event as the camp you "
             "will be holding the session,\none at a time enter a refugee ID for who shall be joining the skills session"
-            "\nor enter RETURN to stop: ")
-        if rid.lower() == 'return':
+            "\nor enter DONE when finished: ")
+        if rid.lower() == 'done':
             break
         elif rid in participants:
             print("You've already added that refugee!")
@@ -728,7 +728,7 @@ def create_training_session():
         sessionID = int(session_arr.pop())
     sessionID += 1
 
-    training_session_data = [int(sessionID), occupation, topic, date, camp, participants]
+    training_session_data = [int(sessionID), occupation, topic, date, camp, participants, eventID]
     session_df.loc[len(session_df)] = training_session_data
     session_df.to_csv(training_session_path, index=False)
     added_session = session_df[session_df['sessionID'] == sessionID]
@@ -801,23 +801,42 @@ def add_refugee_to_session():
             break
         else:
             print("\n\nSorry - that's not a valid session ID. Pick again. ")
-    print(ref_df.to_string(index=False))
     row_index_sessionID = session_df[session_df['sessionID'] == int(sessionID)].index[0]
     already_registered = session_df.at[row_index_sessionID, 'participants']
+
+    # ----------  Working on adding only refugees in this event! ---------
+    #
+    # camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    # camp_df = pd.read_csv(camp_csv_path)
+    # refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+    # ref_df = pd.read_csv(refugee_csv_path)
+    # eventID_row = session_df.loc[session_df['eventID'] == int(sessionID), 'eventID']
+    # if not eventID_row.empty:
+    #     eventID = eventID_row.iloc[0]
+    #     # Now you can use 'eventID' in your code
+    #     print(eventID)
+    # else:
+    #     print("No matching eventID found for sessionID:", sessionID)
+    # camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
+    # refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
+    # print(refugees_in_associated_camps.to_string(index=False))
+    # # ----------------------------------
+
     participants = []
     while True:
+        print("\n", ref_df.to_string(index=False))
         rid = input(f"\n\nFrom the above list, enter the Refugee ID for who you want to add to session {sessionID}"
-                    "\nEnter STOP when you are finished, or return to go back: ")
+                    "\nEnter DONE when you are finished, or return to cancel and go back: ")
         if rid.lower() == "return":
             return
-        if rid.lower() == 'stop':
+        if rid.lower() == "done":
             break
         elif rid in already_registered:
             print(f"\nDon't worry. That refugee is already down to attend this session.")
         elif rid in participants:
             print("\nYou've already just added that refugee.")
         elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
-            print(f"\n\nAdding refugee with id {rid} to skills session {sessionID}. ")
+            print(f"\n\nAdding refugee with id {rid} to skills session {sessionID}. \n\n")
             participants.append(rid)
         else:
             print("\n\nSorry - that refugee ID doesn't exist. Pick again.")
@@ -828,6 +847,55 @@ def add_refugee_to_session():
     session_df.to_csv(training_session_path, index=False)
     print(f"\nExcellent! We have added refugees {participants} to session {sessionID}. See below. ")
     print(session_df.to_string(index=False))
+
+
+def remove_refugee_from_session():
+    refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+    ref_df = pd.read_csv(refugee_csv_path)
+    training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
+    session_df = pd.read_csv(training_session_path)
+    print("Looks like you're looking to remove a refugee from one of the sessions!")
+    print(session_df.to_string(index=False))
+    while True:
+        sessionID = input("\n\nFrom the list above, enter the session ID for the "
+                          "skills session you want remove a participant from. Or enter RETURN to go back: ")
+        if sessionID.lower() == 'return':
+            return
+        elif sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
+            break
+        else:
+            print("\n\nSorry - that's not a valid session ID. Pick again. ")
+    row_index_sessionID = session_df[session_df['sessionID'] == int(sessionID)].index[0]
+    already_registered = session_df.at[row_index_sessionID, 'participants']
+    participants = []
+    while True:
+        print("\n",already_registered)
+        rid = input(f"\n\nFrom the above list, enter the Refugee ID for the person you want to remove from session "
+                    f"{sessionID}\nEnter DONE when you are finished, or return to cancel and go back: ")
+        if rid.lower() == "return":
+            return
+        if rid.lower() == "done":
+            break
+        elif rid not in already_registered and ref_df['refugeeID'].eq(int(rid)).any():
+            print(f"\nThat refugee isn't registered to attend this session, anyway.")
+        elif rid in participants:
+            print("\nYou've already just removed that refugee from this session.")
+        elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+            print(f"\nRemoving refugee with id {rid} from skills session {sessionID}. \n\n")
+            participants.append(rid)
+        else:
+            print("\n\nSorry - that refugee ID doesn't exist. Pick again.")
+
+    # Now we need to remove the new "participants" from the participants list in the csv for the right session
+    already_registered_list = list(already_registered)
+    combined_string = ''.join(already_registered_list)
+    already_registered_cleaned_list = [int(match.group()) for match in re.finditer(r'\d+', combined_string)]
+    participants_cleaned = [int(participant.strip("'")) for participant in participants]
+    updated_attendees = [num for num in already_registered_cleaned_list if num not in participants_cleaned]
+    session_df.at[row_index_sessionID, 'participants'] = updated_attendees
+    session_df.to_csv(training_session_path, index=False)
+    print(f"\nExcellent! We have removed refugee(s) {participants} from session {sessionID}. See below. ")
+    print("\n", session_df.to_string(index=False))
 
 
 def check_vol_assigned_camp(username):
