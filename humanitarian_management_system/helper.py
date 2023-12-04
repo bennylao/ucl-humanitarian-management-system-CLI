@@ -790,7 +790,7 @@ def add_refugee_to_session():
     ref_df = pd.read_csv(refugee_csv_path)
     training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
     session_df = pd.read_csv(training_session_path)
-    print("It's great another refugee wants to join a skills session!")
+    print("It's great another refugee wants to join a skills session!\n")
     print(session_df.to_string(index=False))
     while True:
         sessionID = input("\n\nFrom the list above, enter the session ID for the "
@@ -816,7 +816,7 @@ def add_refugee_to_session():
     participants = []
     while True:
         print("\n",refugees_in_associated_camps.to_string(index=False))
-        rid = input(f"\n\nFrom the above list, which are refugees in the same event as that which this session is"
+        rid = input(f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
                     f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
                     "\nEnter DONE when you are finished, or return to cancel and go back: ")
         if rid.lower() == "return":
