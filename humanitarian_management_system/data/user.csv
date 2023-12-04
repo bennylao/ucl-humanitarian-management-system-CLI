@@ -1,5 +1,5 @@
 userID,userType,isVerified,isActive,username,password,firstName,lastName,email,phone,occupation,roleID,eventID,campID
-0,admin,TRUE,TRUE,admin111,111,adminFirstName,adminLastName,adminEmail,2013356756,adminOccupation,,,
+0,admin,TRUE,TRUE,admin,111,adminFirstName,adminLastName,adminEmail,2013356756,adminOccupation,,,
 1,volunteer,TRUE,TRUE,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,07786471235,engineer,4,3,5
 2,volunteer,TRUE,TRUE,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,6,7,6
 3,volunteer,FALSE,TRUE,volunteer3,111,HeyFirst,TestLast,volunteer3Email,7786471235,babysitter,3,7,3
