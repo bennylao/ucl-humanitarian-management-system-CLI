@@ -3,10 +3,10 @@ resourceID,name,unallocTotal,priorityLvl
 2,Clothing,0,1
 3,Toys,0,3
 4,Medicine,0,1
-5,Vitamins,30,2
+5,Vitamins,0,2
 6,Food,0,1
 7,Snacks,0,3
 8,Toiletries,0,2
-9,Water,0,1
-10,Baby Supplies,28,1
+9,Water,90,1
+10,Baby Supplies,0,1
 11,General Tools & Supplies,0,3

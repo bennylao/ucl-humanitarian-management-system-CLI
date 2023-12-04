@@ -69,7 +69,7 @@ class Camp:
 
         # update camp num for a particular event
         csv_path3 = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
-        modify_csv_pandas(csv_path3, 'eid', select_index, 'no_camp', no_camp)
+        modify_csv_pandas(csv_path3, 'eventID', select_index, 'no_camp', no_camp)
 
     def display_info(self, user, cid):
 

@@ -224,8 +224,9 @@ class Controller:
     """####################### MAIN RESOURCE MENU #############################"""
 
     def admin_manage_resource(self):
+        
         while True:
-            user_selection = input(AdminView.display_resource_menu())
+            user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
             # user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
             if user_selection == "1":
                 # ("1", "Allocate resources")
@@ -234,7 +235,7 @@ class Controller:
                 # ("2", "View resource statistics")
                 self.resource_reporting_menu()
             if user_selection == "3":
-                # ("3", "Add resource / purchase from shop")
+                # ("3", "Add resource / purchase from shop"xs)
                 resource_adder_instance = ResourceAdder()
                 resource_adder_instance.resource_adder()
             if user_selection == "R":
@@ -330,9 +331,10 @@ class Controller:
             return
         else:
             # read the event csv file and extract all available events
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eid")
+            df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eventID")
             print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
+            #Event.display_events(df1)
+            print(df1)
 
             # validate input for user select index
             while True:
