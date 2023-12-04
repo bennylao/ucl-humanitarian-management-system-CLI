@@ -141,7 +141,7 @@ class Event:
     def __change_location(row):
         event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
         country = []
-        country_data = pd.read_csv(event_csv_path)['name']
+        country_data = pd.read_csv(event_csv_path)['location']
         for ele in country_data:
             country.append(ele.lower())
         location = ''
@@ -149,7 +149,7 @@ class Event:
             country.append(ele.lower())
         while len(location) == 0 and location not in country:
             location = input("\n--> Location(country): ").lower()
-            if location == 'RETURN':
+            if location.upper() == 'RETURN':
                 return
             if location not in country:
                 print("\nInvalid country name entered")
