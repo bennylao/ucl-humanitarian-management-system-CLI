@@ -86,18 +86,8 @@ class ResourceReport():
                 print(error_msg)
 
 
-    
-    def test(self):
-        return
-
-
-
     def resource_report_total(self):
-        resource_sum = self.joined_df.groupby('resourceID').agg({
-            'name': 'first',  # Keeps the first name for each group
-            'qty': 'sum',  # Sums the allocatedQuantity for each group
-            'priorityLvl': 'first',  # Keeps the first priorityLvl for each group
-        }).reset_index()
+        resource_sum = pd.merge(self.totalResources_df, self.unallocResources_df[['resourceID', 'unallocTotal']], on='resourceID', how='outer').fillna(0)
         return resource_sum
 
     def resource_report_camp(self):

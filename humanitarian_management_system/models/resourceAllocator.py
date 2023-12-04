@@ -154,6 +154,8 @@ class ResourceAllocator():
         all_resource_camp_vs_unallocated.reset_index(inplace=True)
         print(all_resource_camp_vs_unallocated)
 
+        status, unalloc_prompt = resource_stats_instance.unalloc_resource_checker()
+
         print("Below are the refugee populations of the camps that are currently open: \n")
         print(resource_stats_instance.valid_open_camps())
 
@@ -165,6 +167,7 @@ class ResourceAllocator():
         move_dest_camp_list = []
         move_units_list = []
         move_action_info_list = []
+        do_not_calc = False
 
         while True: 
             ################ Begin with asking the user what type of manual allocation they want to make:
@@ -180,11 +183,19 @@ class ResourceAllocator():
             ###################################################################
             # Give user different form prompts depending on choice
             # select single resource
+
+            ###### if user chooses 1 then... first check that there are unallocated resources. kick them out if not. 
+            if action_select == 1:
+                if status == False: 
+                    ### if there are no unallocated resources, then no inventory to move from camp, tell the user this and ask them to select another option
+                    print('\nThere are no unallocated resources here for you to assign to camps, taking you back to resources menu... ')
+                    do_not_calc = True
+                    break 
             
             # r_id_select = int(input("\nPlease enter the resourceID of the item: --> "))
-            prompt = "\nPlease enter the resourceID of the item: --> "
+            prompt = "\nPlease enter the resourceID of the item: --> "    
             valid_range = resource_stats_instance.valid_resources()
-            r_id_select = resource_stats_instance.input_validator(prompt, valid_range)
+            r_id_select = resource_stats_instance.input_validator(prompt, valid_range)  ############# validation begins immediately... 
             r_name_select = self.unallocResources_df.loc[self.unallocResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
             # how much of this resource is allocated in each camp & uallocated currently 
             
@@ -192,7 +203,7 @@ class ResourceAllocator():
             print(f"\n*** Resource ID {r_id_select}: {r_name_select} *** is currently distributed as below: \n")
             print(single_resource_stats.to_string(index=False))
 
-            print("Below are the refugee populations & the camps that are currently open: \n")
+            print("\nBelow are the refugee populations & the camps that are currently open: \n")
             print(resource_stats_instance.valid_open_camps_with_refugees()) ### there should not be any camps with zero refugees. 
 
             if action_select == 3: 
@@ -218,11 +229,6 @@ class ResourceAllocator():
                 prompt = f"\nPlease enter the relevant campID for the *** [ Resource ID #{r_id_select}: {r_name_select} ] *** : --> "
                 if action_select == 1:
                     # [1] ASSIGN: inventory -> camp
-                    status, unalloc_prompt = resource_stats_instance.unalloc_resource_checker()
-                    if status == False: 
-                        #### if there are no unallocated resources, then no inventory to move from camp, tell the user this and ask them to select another option
-                        print('\nThere are no unallocated resources here for you to assign to camps, please choose another manual allocation type... ')
-                        break ####### not confident about flow of logic here!! ################### 
                     origin_c_id = np.nan
                     valid_range = resource_stats_instance.valid_open_camps_with_refugees()
                     valid_range = valid_range['campID'].tolist()
@@ -231,7 +237,7 @@ class ResourceAllocator():
                     # [2] UNASSIGN: camp -> inventory
                     columns_with_all_values_above_zero = single_resource_stats.iloc[:, 4:].columns[(single_resource_stats.iloc[:, 4:] > 0).all()]
                     valid_range = columns_with_all_values_above_zero.tolist()
-                    origin_c_id = resource_stats_instance.input_validator(prompt, valid_range, 'Please select a valid camp where the resource is in stock.') 
+                    origin_c_id = resource_stats_instance.input_validator(prompt, valid_range, 'Please select a valid camp where there is at least 1 unit of the resource. ') 
                     destination_c_id = np.nan
                 else:
                     print("Error")
@@ -239,13 +245,14 @@ class ResourceAllocator():
             ### seperate loop for validating entries. Action 2 & 3 are grouped together as they invole taking away a resource from a camp, so the amount must not exced that in stock for the camp
             ### Action 1's valid range is the unallocated resources levels 
             # get unit number. ######## RESOURCE FORM VALIDATION: PROBABLY NEED TO ADD VALIDATION LATER!!!! ######### - might need to move these into the loops
-            prompt = f"\n Please enter the amount of *** [ Resource ID #{r_id_select}: {r_name_select} ] *** to move: "
+            prompt = f"\nPlease enter the amount of *** [ Resource ID #{r_id_select}: {r_name_select} ] *** to move: "
 
             if action_select == 1:
                 upper_limit = self.unallocResources_df.loc[self.unallocResources_df['resourceID']==r_id_select]
             else:
                 r_id_qty = single_resource_stats.iloc[:, 4:] # remove first 4 columns (not relevant)
                 upper_limit = r_id_qty[origin_c_id].iloc[0]
+                
             # building the valid range4 - which is... for that selected camp are moving FROM (origin), the moveUnits must not exceed the resource already there
             # do this by reusing the single_stats_instance
             valid_range = range(1, int(upper_limit)+1)
@@ -275,8 +282,18 @@ class ResourceAllocator():
         for action_num in move_action_list:
             move_action_info_list.append(action_string_list[action_num-1])
         move['actionInfo'] = move_action_info_list
+
+        if do_not_calc == False:
+            self.manual_alloc_calc(move, all_resource_camp_vs_unallocated)
+
+        return move
         
-        
+    def manual_alloc_calc(self, move, all_resource_camp_vs_unallocated):
+        ##### this is more like part 2 of the function. the calculator; vs. previous was the input forms. 
+        ###  dont need to execute this if user selects 1 & from above and there are no unallocated resources 
+
+        ### how to run this conditionally, depending whats in the function in layer above ? 
+
         print(f"""\n==========================================================================\n
 ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ Below are your selected manual re-allocations: ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
 ==========================================================================\n

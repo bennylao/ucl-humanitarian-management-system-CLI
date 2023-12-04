@@ -144,3 +144,11 @@ def delete_refugee():
 
 # delete_refugee()
 
+                prompt_msg1 = f"\n Please enter the amount of *** [ Resource ID #{r_id_select}: {r_name_select} ] *** to move: "
+                prompt_msg2 = f"\nPlease enter the ORIGIN campID where you would like to REMOVE *** Resource ID {r_id_select}: {r_name_select} *** from: "
+                valid_range1 = resource_stats_instance.valid_open_camps_with_refugees()
+                valid_range1 = valid_range1['campID'].tolist()
+                valid_range2 = resource_stats_instance.valid_resources()
+                valid_range12 = resource_stats_instance.valid_pairwise_camp_resources()
+
+                resource_stats_instance.pairwise_input_validator(prompt_msg1, prompt_msg2, valid_range1, valid_range2, valid_range12)
