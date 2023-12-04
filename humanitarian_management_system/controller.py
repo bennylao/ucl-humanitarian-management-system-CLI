@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 import re
 import math
-
+import logging
 from humanitarian_management_system import helper
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder)
@@ -18,6 +18,7 @@ class Controller:
 
     def initialise(self):
         # show welcome messages when the program starts
+        logging.debug("Controller is initialised.")
         GeneralView.display_startup_logo()
         GeneralView.display_welcome_message()
         self.startup()
@@ -63,47 +64,60 @@ class Controller:
     def login(self):
         user_info = pd.Series()
         # get all existing usernames in a list
-        all_usernames = User.get_all_usernames()
-        GeneralView.display_login_message()
+        try:
+            all_usernames = User.get_all_usernames()
+            GeneralView.display_login_message()
 
-        while user_info.empty:
-            username = input("\nUsername: ")
-            if username == 'RETURN':
-                break
-            if username not in all_usernames:
-                print("Account doesn't exist!")
-                continue
-            password = input("\nPassword: ")
+            while user_info.empty:
+                username = input("\nUsername: ")
+                if username == 'RETURN':
+                    break
+                if username not in all_usernames:
+                    print("Account doesn't exist!")
+                    continue
+                password = input("\nPassword: ")
 
-            # user_info contains all the user information if username and password match
-            # otherwise, user_info is an empty series
-            user_info = User.validate_user(username, password)
-            # check if account is active
-            if user_info.empty:
-                print("\nUsername or password is incorrect. Please try again."
-                      "\n Or Enter 'RETURN' to get back to main menu.")
-            elif user_info['isVerified'] == "FALSE":
-                user_info = pd.Series()
-                print("\nSince you are newly registered. Please contact the administrator to verify your account"
-                      "\n Or Enter 'RETURN' to get back to main menu.")
-            elif user_info['isActive'] == "FALSE":
-                user_info = pd.Series()
-                print("\nYour account has been deactivated, contact the administrator."
-                      "\n Or Enter 'RETURN' to get back to main menu.")
+                # user_info contains all the user information if username and password match
+                # otherwise, user_info is an empty series
+                user_info = User.validate_user(username, password)
+                # check if account is active
+                if user_info.empty:
+                    print("\nUsername or password is incorrect. Please try again."
+                          "\n Or Enter 'RETURN' to get back to main menu.")
+                elif user_info['isVerified'] == "FALSE":
+                    user_info = pd.Series()
+                    print("\nSince you are newly registered. Please contact the administrator to verify your account"
+                          "\n Or Enter 'RETURN' to get back to main menu.")
+                elif user_info['isActive'] == "FALSE":
+                    user_info = pd.Series()
+                    print("\nYour account has been deactivated, contact the administrator."
+                          "\n Or Enter 'RETURN' to get back to main menu.")
 
-        # if user record is matched, print login successfully
-        if not user_info.empty:
-            print("\n***   Login Successful!   ***")
-            if user_info['userType'] == "admin":
-                # self.user is now an object of admin
-                self.user = Admin(user_info['userID'], *user_info[4:11])
-                print("You are now logged in as Admin.")
-                self.admin_main()
-            else:
-                # self.user is not an object of volunteer
-                self.user = Volunteer(user_info['userID'], *user_info[4:])
-                print("You are now logged in as Volunteer.")
-                self.volunteer_main()
+            # if user record is matched, print login successfully
+            if not user_info.empty:
+                if user_info['userType'] == "admin":
+                    # self.user is now an object of admin
+                    self.user = Admin(user_info['userID'], *user_info[4:11])
+                    print("\n***   Login Successful!   ***")
+                    print("You are now logged in as Admin.")
+                    self.admin_main()
+                else:
+                    # self.user is not an object of volunteer
+                    self.user = Volunteer(user_info['userID'], *user_info[4:])
+                    print("\n***   Login Successful!   ***")
+                    print("You are now logged in as Volunteer.")
+                    self.volunteer_main()
+        except FileNotFoundError as e:
+            print(f"\nData file is not found or is damaged."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n{e}")
+            logging.critical(f"{e}")
+        except Exception as e:
+            print(f"\nData file seems to be damaged."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
+
 
     def admin_main(self):
         AdminView.display_login_message(self.user.username)

@@ -1,0 +1,55 @@
+2023-12-04 22:49:06,773 - main - DEBUG - Starting Humanitarian Management System
+2023-12-04 22:49:07,194 - controller - CRITICAL - testing
+2023-12-04 22:49:07,597 - controller - CRITICAL - testing
+2023-12-04 22:49:07,880 - controller - CRITICAL - testing
+2023-12-04 22:51:14,284 - main - DEBUG - Starting Humanitarian Management System
+2023-12-04 22:51:14,746 - controller - CRITICAL - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 22:53:14,149 - main - DEBUG - Starting Humanitarian Management System
+2023-12-04 22:53:14,151 - controller - DEBUG - Controller is initialised.
+2023-12-04 22:56:19,063 - root - DEBUG - Starting Humanitarian Management System
+2023-12-04 22:56:19,064 - root - DEBUG - Controller is initialised.
+2023-12-04 22:57:11,559 - main - DEBUG - main - 14 - Starting Humanitarian Management System
+2023-12-04 22:57:11,559 - controller - DEBUG - initialise - 21 - Controller is initialised.
+2023-12-04 22:57:27,874 - main - DEBUG - main - Line14 - Starting Humanitarian Management System
+2023-12-04 22:57:27,874 - controller - DEBUG - initialise - Line21 - Controller is initialised.
+2023-12-04 22:58:10,886 - DEBUG -main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 22:58:10,886 - DEBUG -controller-initialise-Line21 - Controller is initialised.
+2023-12-04 22:58:20,216 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 22:58:20,216 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 22:59:15,206 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 22:59:15,206 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 22:59:20,519 - CRITICAL - controller-login-Line118 - Volunteer.__init__() takes 12 positional arguments but 13 were given
+2023-12-04 22:59:58,185 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 22:59:58,185 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 22:59:58,572 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 22:59:59,014 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 22:59:59,430 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 23:01:15,519 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:01:15,519 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:01:16,142 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 23:01:17,047 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 23:01:17,313 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 23:01:30,071 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:01:30,071 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:01:30,347 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 23:01:43,406 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:01:43,406 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:01:43,786 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 23:02:10,814 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:02:10,814 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:02:22,645 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:02:22,645 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:02:34,223 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:02:34,223 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:02:38,476 - CRITICAL - controller-login-Line119 - Volunteer.__init__() takes 12 positional arguments but 13 were given
+2023-12-04 23:02:55,851 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:02:55,851 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:02:59,300 - CRITICAL - controller-login-Line119 - Volunteer.__init__() takes 12 positional arguments but 13 were given
+2023-12-04 23:03:14,071 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:03:14,071 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:03:23,779 - CRITICAL - controller-login-Line119 - Volunteer.__init__() takes 12 positional arguments but 13 were given
+2023-12-04 23:04:03,356 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:04:03,357 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-04 23:04:04,154 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-04 23:04:26,362 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-04 23:04:26,362 - DEBUG - controller-initialise-Line21 - Controller is initialised.
