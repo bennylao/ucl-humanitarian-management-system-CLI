@@ -4,9 +4,6 @@ from pathlib import Path
 import pandas as pd
 import datetime
 import math
-import tkinter as tk
-import tkinter.messagebox
-import numpy as np
 from datetime import datetime
 
 
@@ -102,7 +99,7 @@ def validate_registration(usernames):
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
 
-    return ["volunteer", "TRUE", username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
+    return ["volunteer", "FALSE", "FALSE", username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
 
 
 def validate_event_input():
