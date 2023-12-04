@@ -327,9 +327,10 @@ class Controller:
             return
         else:
             # read the event csv file and extract all available events
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eid")
+            df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eventID")
             print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
+            #Event.display_events(df1)
+            print(df1)
 
             # validate input for user select index
             while True:

@@ -7,3 +7,4 @@ userID,userType,isVerified,isActive,username,password,firstName,lastName,email,p
 5,admin,TRUE,TRUE,a11,111,admin2FirstName,admin2LastName,admin2Email,2012345678,admin2Occupation,0,0,0
 6,volunteer,TRUE,TRUE,Benny,111,benny,lao,bennylao@gmail.com,07787571235,Teacher,1,1,1
 7,volunteer,TRUE,FALSE,bennylao,111,chon benny,lao lao,bennylll@gmaill.com,12344333,sdkljf,0,0,0
+8,volunteer,FALSE,FALSE,yuan,111,yuan,Hu,huyuanZ@163.com,123,student,0,0,0
