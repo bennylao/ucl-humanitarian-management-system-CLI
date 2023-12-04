@@ -759,7 +759,7 @@ class Controller:
                 "Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
                 "\nor RETURN to exit back: ")
             if move_or_delete.lower() == "return":
-                self.volunteer_manage_camp()
+                return
             elif move_or_delete.lower() == "m":
                 helper.move_refugee_helper_method()
             elif move_or_delete.lower() == "d":
@@ -773,7 +773,7 @@ class Controller:
                 "\n\nDo you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
                 "\nor RETURN to exit back: ")
             if move_or_delete.lower() == "return":
-                self.admin_manage_camp()
+                return
             elif move_or_delete.lower() == "m":
                 helper.move_refugee_helper_method()
             elif move_or_delete.lower() == "d":
