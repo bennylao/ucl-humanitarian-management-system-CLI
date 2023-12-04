@@ -92,7 +92,7 @@ class Event:
                 eid_to_edit = input('\n--> Enter the event ID to update:')
                 if eid_to_edit == 'RETURN':
                     return
-                elif int(eid_to_edit) not in filtered_df['eid'].values:
+                elif int(eid_to_edit) not in filtered_df['eventID'].values:
                     print(f"\nInvalid input! Please enter an integer from {filtered_df['eventID'].values} for Event ID.")
                     continue
                 else:
@@ -141,7 +141,7 @@ class Event:
     def __change_location(row):
         event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
         country = []
-        country_data = pd.read_csv(event_csv_path)['name']
+        country_data = pd.read_csv(event_csv_path)['location']
         for ele in country_data:
             country.append(ele.lower())
         location = ''
@@ -149,7 +149,7 @@ class Event:
             country.append(ele.lower())
         while len(location) == 0 and location not in country:
             location = input("\n--> Location(country): ").lower()
-            if location == 'RETURN':
+            if location.upper() == 'RETURN':
                 return
             if location not in country:
                 print("\nInvalid country name entered")
@@ -318,7 +318,7 @@ class Event:
                 eid_to_close = input('\n--> Enter the event ID to close:')
                 if eid_to_close == 'RETURN':
                     return
-                elif int(eid_to_close) not in filtered_df['eid'].values:
+                elif int(eid_to_close) not in filtered_df['eventID'].values:
                     print(f"\nInvalid input! Please enter an integer from {filtered_df['eid'].values} for Event ID.")
                     continue
                 else:
@@ -366,7 +366,7 @@ class Event:
                                                        "You'll also lose all the information about the refugees in that"
                                                        " event.")
         if result == "yes":
-            df.drop(df[df['eid'] == int(eid_to_delete)].index, inplace=True)
+            df.drop(df[df['eventID'] == int(eid_to_delete)].index, inplace=True)
             df.to_csv(event_csv_path, index=False)
             # --------- added logic to delete refugees in this event -----------------
             refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")

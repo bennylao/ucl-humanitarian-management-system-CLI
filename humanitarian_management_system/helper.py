@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 import datetime
 import math
-from datetime import datetime
+
 
 
 def validate_user_selection(options):
@@ -116,7 +116,7 @@ def validate_event_input():
 
     while True:
         location = input("\nLocation(country): ").title()
-        if location == 'RETURN':
+        if location.upper() == 'RETURN':
             return
         elif location not in all_countries:
             print("Invalid country name entered.")
@@ -628,9 +628,9 @@ def display_training_session():
     training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
     session_df = pd.read_csv(training_session_path)
     length_session_df = pd.read_csv(training_session_path)["sessionID"].tolist()
-    print("These training / skills sessions give refugees the opportunity to pick up new skills.")
+    print("\nThese training / skills sessions give refugees the opportunity to pick up new skills.")
     while True:
-        print(session_df.to_string(index=False))
+        print("\n", session_df.to_string(index=False))
         if len(length_session_df) == 0:
             user_input = input("Oh no! No sessions created yet! WHy don't you add one now? "
                                "\n Enter 1 to create a session or 2 to go back: ")
@@ -641,7 +641,7 @@ def display_training_session():
             else:
                 print("\nSorry! Invalid input.")
         else:
-            input("Enter anything to go back when you're ready. ")
+            input("\nEnter anything to go back when you're ready. ")
             return
 
 
@@ -790,7 +790,7 @@ def add_refugee_to_session():
     ref_df = pd.read_csv(refugee_csv_path)
     training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
     session_df = pd.read_csv(training_session_path)
-    print("It's great another refugee wants to join a skills session!")
+    print("It's great another refugee wants to join a skills session!\n")
     print(session_df.to_string(index=False))
     while True:
         sessionID = input("\n\nFrom the list above, enter the session ID for the "
@@ -803,29 +803,21 @@ def add_refugee_to_session():
             print("\n\nSorry - that's not a valid session ID. Pick again. ")
     row_index_sessionID = session_df[session_df['sessionID'] == int(sessionID)].index[0]
     already_registered = session_df.at[row_index_sessionID, 'participants']
-
+    eventID = session_df.at[row_index_sessionID, 'eventID']
+    camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+    camp_df = pd.read_csv(camp_csv_path)
+    camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
+    refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
     # ----------  Working on adding only refugees in this event! ---------
-    #
-    # camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-    # camp_df = pd.read_csv(camp_csv_path)
-    # refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
-    # ref_df = pd.read_csv(refugee_csv_path)
-    # eventID_row = session_df.loc[session_df['eventID'] == int(sessionID), 'eventID']
-    # if not eventID_row.empty:
-    #     eventID = eventID_row.iloc[0]
-    #     # Now you can use 'eventID' in your code
-    #     print(eventID)
-    # else:
-    #     print("No matching eventID found for sessionID:", sessionID)
-    # camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
-    # refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
-    # print(refugees_in_associated_camps.to_string(index=False))
+
+    print(refugees_in_associated_camps.to_string(index=False))
     # # ----------------------------------
 
     participants = []
     while True:
-        print("\n", ref_df.to_string(index=False))
-        rid = input(f"\n\nFrom the above list, enter the Refugee ID for who you want to add to session {sessionID}"
+        print("\n",refugees_in_associated_camps.to_string(index=False))
+        rid = input(f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
+                    f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
                     "\nEnter DONE when you are finished, or return to cancel and go back: ")
         if rid.lower() == "return":
             return
