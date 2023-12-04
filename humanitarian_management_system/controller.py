@@ -224,8 +224,9 @@ class Controller:
     """####################### MAIN RESOURCE MENU #############################"""
 
     def admin_manage_resource(self):
+        
         while True:
-            user_selection = input(AdminView.display_resource_menu())
+            user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
             # user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
             if user_selection == "1":
                 # ("1", "Allocate resources")
@@ -234,7 +235,7 @@ class Controller:
                 # ("2", "View resource statistics")
                 self.resource_reporting_menu()
             if user_selection == "3":
-                # ("3", "Add resource / purchase from shop")
+                # ("3", "Add resource / purchase from shop"xs)
                 resource_adder_instance = ResourceAdder()
                 resource_adder_instance.resource_adder()
             if user_selection == "R":
