@@ -708,6 +708,8 @@ def create_training_session():
             "\nor enter DONE when finished: ")
         if rid.lower() == 'done':
             break
+        if rid.lower() == 'return':
+            return
         elif rid in participants:
             print("You've already added that refugee!")
         elif rid.strip() and rid.strip().isdigit() and int(rid) in refugees_in_associated_camps['refugeeID'].values:
