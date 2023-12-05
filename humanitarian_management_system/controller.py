@@ -737,6 +737,15 @@ class Controller:
             while True:
                 try:
                     cid = int(input("Enter a camp ID: "))
+                    row_index_new_camp = df_c[df_c['campID'] == int(cid)].index
+                    new_potential_refugee_pop = (df_c.at[row_index_new_camp[0], 'refugeePop'])
+                    new_camp_capacity = df_c.at[row_index_new_camp[0], 'refugeeCapacity']
+                    if (new_potential_refugee_pop + 1) <= new_camp_capacity:
+                        break
+                    else:
+                        print("\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
+                              f"Camp {cid} has a current population of {new_potential_refugee_pop} and a capacity of "
+                              f"{new_camp_capacity}.\nLet's go again.\n")
                     if cid not in active_camp:
                         print("Invalid camp ID entered!")
                         continue
@@ -748,6 +757,14 @@ class Controller:
         else:
             # check if volunteer is already assigned to a camp, if no exit to menu
             cid = df.loc[df['username'] == self.user.username]['campID'].tolist()[0]
+            row_index_new_camp = df_c[df_c['campID'] == int(cid)].index
+            new_potential_refugee_pop = (df_c.at[row_index_new_camp[0], 'refugeePop'])
+            new_camp_capacity = df_c.at[row_index_new_camp[0], 'refugeeCapacity']
+            if (new_potential_refugee_pop + 1) >= new_camp_capacity:
+                print("\n\nOh no! Your camp doesn't have the capacity to handle another refugee. "
+                      f"Camp {cid} has a current population of {new_potential_refugee_pop} and a capacity of "
+                      f"{new_camp_capacity}.\nYou'll have to remove some refugees from your camp first.\n")
+                return
             # check if volunteer user already join a camp
             if math.isnan(cid):
                 print("You must first join a camp!")

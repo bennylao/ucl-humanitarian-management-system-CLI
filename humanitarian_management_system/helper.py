@@ -615,6 +615,7 @@ def move_refugee_helper_method():
               f"\nPlease contact admin for further assistance."
               f"\n{e}")
 
+
 def delete_refugee():
     print("YOU ARE REQUESTING TO DELETE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
           " as instructed.")

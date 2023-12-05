@@ -223,3 +223,17 @@
 2023-12-05 16:35:35,680 - CRITICAL - helper-add_refugee_to_session-Line973 - Unexpected error when adding a refugee to a training session from invalid userinput: invalid literal for int() with base 10: 'asdfgh'
 2023-12-05 16:35:49,197 - INFO - helper-add_refugee_to_session-Line932 - Refugee and training session data files loaded successfully to add a refugee to a session.
 2023-12-05 16:36:06,277 - CRITICAL - helper-add_refugee_to_session-Line973 - Unexpected error when adding a refugee to a training session from invalid userinput: invalid literal for int() with base 10: 'din'
+2023-12-05 16:44:42,451 - INFO - helper-add_refugee_to_session-Line932 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-05 18:16:18,513 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 18:16:18,516 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 18:16:29,309 - CRITICAL - controller-login-Line120 - "None of ['eid'] are in the columns"
+2023-12-05 18:19:52,316 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 18:19:52,316 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 18:20:36,915 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 18:20:36,916 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 18:26:06,952 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 18:26:06,953 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 18:26:40,753 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 18:26:40,753 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 18:27:07,262 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 18:27:07,263 - DEBUG - controller-initialise-Line22 - Controller is initialised.
