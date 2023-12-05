@@ -48,6 +48,131 @@
 2023-12-05 11:32:43,908 - DEBUG - controller-initialise-Line21 - Controller is initialised.
 2023-12-05 11:56:04,038 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-05 11:56:04,039 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-05 11:56:49,351 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 11:56:49,352 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:13:21,600 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:13:21,603 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:13:29,994 - CRITICAL - controller-login-Line120 - "None of ['eid'] are in the columns"
+2023-12-05 12:13:36,443 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:13:36,443 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:15:40,958 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:15:40,959 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:15:49,417 - CRITICAL - controller-login-Line120 - "None of ['eid'] are in the columns"
+2023-12-05 12:17:11,567 - CRITICAL - controller-login-Line120 - "None of ['eid'] are in the columns"
+2023-12-05 12:19:28,443 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:19:28,443 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:19:46,113 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:19:46,113 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:23:59,703 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:23:59,704 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:26:24,142 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:26:24,142 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:26:46,209 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:26:46,209 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:36:42,301 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:36:42,301 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:36:54,927 - CRITICAL - controller-login-Line120 - 'status'
+2023-12-05 12:46:26,410 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:46:26,412 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:48:46,212 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:48:46,212 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 12:53:27,847 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 12:53:27,847 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:04:05,004 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:04:05,005 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:15:47,355 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:15:47,357 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:17:20,981 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:17:20,982 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:19:43,736 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:19:43,736 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:21:34,402 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-05 13:28:43,035 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:28:43,037 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:31:28,909 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:31:28,909 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:31:47,476 - CRITICAL - controller-login-Line120 - name 'i' is not defined
+2023-12-05 13:32:18,764 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:32:18,764 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:33:00,224 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:33:00,224 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:34:13,511 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:34:13,511 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:37:24,322 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:37:24,322 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:38:09,170 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:38:09,170 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:39:07,347 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:39:07,347 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:46:43,401 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:46:43,402 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:55:06,170 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:55:06,172 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 13:55:31,000 - CRITICAL - controller-login-Line120 - module 'datetime' has no attribute 'strptime'
+2023-12-05 13:57:39,422 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 13:57:39,423 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:01:50,350 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:01:50,350 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:03:00,733 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:03:00,733 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:04:07,905 - CRITICAL - controller-login-Line120 - module 'datetime' has no attribute 'strptime'
+2023-12-05 14:04:29,003 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:04:29,003 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:06:11,156 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:06:11,156 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:11:09,798 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:11:09,798 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:13:13,327 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:13:13,328 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:16:28,151 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:16:28,151 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:16:56,460 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:16:56,460 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:17:58,410 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:17:58,410 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:21:16,633 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:21:16,633 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:43:44,745 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:43:44,746 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:44:44,768 - CRITICAL - controller-login-Line120 - invalid literal for int() with base 10: 'donne'
+2023-12-05 14:45:57,178 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:45:57,178 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:52:34,569 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:52:34,569 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:53:18,949 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:53:18,949 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:53:35,452 - CRITICAL - controller-login-Line120 - 'int' object has no attribute 'strip'
+2023-12-05 14:54:45,920 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:54:45,921 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:55:24,966 - CRITICAL - controller-login-Line120 - can only concatenate str (not "list") to str
+2023-12-05 14:56:27,926 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:56:27,926 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:58:31,859 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:58:31,860 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:58:59,777 - CRITICAL - controller-login-Line120 - sequence item 0: expected str instance, int found
+2023-12-05 14:59:57,776 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:59:57,777 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:02:35,589 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:02:35,589 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:03:12,313 - CRITICAL - controller-login-Line120 - invalid literal for int() with base 10: '[6'
+2023-12-05 15:03:50,250 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:03:50,250 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:05:31,024 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:05:31,024 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:06:07,204 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:06:07,205 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:06:45,171 - CRITICAL - controller-login-Line120 - can only concatenate str (not "list") to str
+2023-12-05 15:08:41,251 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:08:41,251 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:09:03,332 - CRITICAL - controller-login-Line120 - invalid literal for int() with base 10: '[7]'
+2023-12-05 15:10:00,556 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:10:00,557 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:10:57,753 - CRITICAL - controller-login-Line120 - invalid literal for int() with base 10: '[6'
+2023-12-05 15:11:32,531 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:11:32,531 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:14:09,152 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:14:09,152 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:14:25,762 - CRITICAL - controller-login-Line120 - 'in <string>' requires string as left operand, not int
 2023-12-05 14:18:44,203 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-05 14:18:44,203 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-05 14:19:23,095 - CRITICAL - controller-login-Line120 - argument of type 'NoneType' is not iterable
@@ -60,3 +185,41 @@
 2023-12-05 14:23:13,093 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-05 14:23:33,736 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-05 14:23:33,736 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:23:27,335 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:23:27,335 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:40:35,474 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:40:35,475 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:40:51,092 - DEBUG - helper-legal_advice_support-Line663 - Legal Advice Page starts up.
+2023-12-05 15:42:09,484 - DEBUG - helper-legal_advice_support-Line663 - Legal Advice Page starts up.
+2023-12-05 15:42:54,294 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 15:42:54,294 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 15:43:02,240 - DEBUG - helper-legal_advice_support-Line663 - Legal Advice Page starts up.
+2023-12-05 16:17:14,342 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 16:17:14,345 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 16:17:29,023 - INFO - helper-delete_session-Line863 - Training session file to delete a session has loaded correctly.
+2023-12-05 16:17:35,178 - INFO - helper-remove_refugee_from_session-Line999 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-05 16:17:44,395 - CRITICAL - helper-remove_refugee_from_session-Line1048 - Unexpected error: invalid literal for int() with base 10: 'dones'
+2023-12-05 16:25:29,345 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 16:25:29,345 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 16:25:41,792 - INFO - helper-remove_refugee_from_session-Line999 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-05 16:25:55,065 - CRITICAL - helper-remove_refugee_from_session-Line1033 - Unexpected error: invalid literal for int() with base 10: 'dones'
+2023-12-05 16:27:07,966 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 16:27:07,966 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 16:27:18,099 - INFO - helper-remove_refugee_from_session-Line999 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-05 16:27:41,979 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 16:27:41,979 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 16:28:07,232 - INFO - helper-remove_refugee_from_session-Line999 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-05 16:32:18,536 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 16:32:18,538 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 16:32:31,563 - INFO - helper-remove_refugee_from_session-Line999 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-05 16:32:36,381 - CRITICAL - helper-remove_refugee_from_session-Line1033 - Unexpected error: invalid literal for int() with base 10: 'dones'
+2023-12-05 16:33:10,759 - CRITICAL - helper-remove_refugee_from_session-Line1033 - Unexpected error: invalid literal for int() with base 10: 'dones'
+2023-12-05 16:33:30,615 - INFO - helper-add_refugee_to_session-Line932 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-05 16:33:36,020 - CRITICAL - helper-add_refugee_to_session-Line987 - Unexpected error: invalid literal for int() with base 10: 'dones'
+2023-12-05 16:35:19,498 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 16:35:19,498 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 16:35:28,686 - INFO - helper-add_refugee_to_session-Line932 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-05 16:35:32,556 - CRITICAL - helper-add_refugee_to_session-Line973 - Unexpected error when adding a refugee to a training session from invalid userinput: invalid literal for int() with base 10: 'dones'
+2023-12-05 16:35:35,680 - CRITICAL - helper-add_refugee_to_session-Line973 - Unexpected error when adding a refugee to a training session from invalid userinput: invalid literal for int() with base 10: 'asdfgh'
+2023-12-05 16:35:49,197 - INFO - helper-add_refugee_to_session-Line932 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-05 16:36:06,277 - CRITICAL - helper-add_refugee_to_session-Line973 - Unexpected error when adding a refugee to a training session from invalid userinput: invalid literal for int() with base 10: 'din'
