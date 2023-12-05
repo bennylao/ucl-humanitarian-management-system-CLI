@@ -494,9 +494,9 @@ def move_refugee_helper_method():
     eventID = camp_df.loc[camp_df['campID'] == int(old_camp_id), 'eventID'].iloc[0]
     camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
     active_and_in_event = camp_df[(camp_df['status'] == 'open') & (camp_df['campID'].isin(camps_in_event))]
-    print("\n", active_and_in_event.to_string(index=False))
     # checking input is valid according to refugee IDs in database
     while True:
+        print("\n", active_and_in_event.to_string(index=False))
         camp_id = input("\nFrom the above list, which is a list of ACTIVE camps\n"
                         "which are part of the same event as this refugee's original camp,\n"
                         "enter the campID of the camp you want to move this refugee to: ")
@@ -509,11 +509,23 @@ def move_refugee_helper_method():
                       "or if there are no other camps\n"
                       "available, enter RETURN to go back.")
             elif (camp_id in active_camp_df['campID'].values) and (camp_id in camps_in_event):
-                break
+                # Need to do a final check to see if new camp's refugeePop + 1 is < new camp's refugeeCapacity
+                row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
+                new_potential_refugee_pop = (camp_df.at[row_index_new_camp[0], 'refugeePop'])
+                new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
+
+                if (new_potential_refugee_pop + 1) <= new_camp_capacity:
+                    break
+                else:
+                    print("\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
+                          f"Camp {camp_id} has a current population of {new_potential_refugee_pop} and a capacity of "
+                          f"{new_camp_capacity}.\nLet's go again.\n")
             else:
                 print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
         except ValueError:
             print("\nInvalid input. Please enter a valid campID or type RETURN to go back: ")
+
+
     print("\nThanks - bear with us whilst we make that transfer."
           "\n\n----------------------------------------------------------------------------------------")
     # Minus one from the population of the camp originally associated with the refugee
@@ -526,7 +538,7 @@ def move_refugee_helper_method():
     row_index_ref = ref_df[ref_df['refugeeID'] == int(rid)].index[0]
     modify_csv_value(refugee_csv_path, row_index_ref, "campID", camp_id)
     # Add one to the population of the camp which the refugee is now in
-    row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
+    # row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
     # print("row_index_new_camp:", row_index_new_camp)
     # print(row_index_new_camp)
     camp_df.at[row_index_new_camp[0], 'refugeePop'] += 1

@@ -36,3 +36,15 @@
 2023-12-04 23:04:04,154 - CRITICAL - controller-login-Line114 - [Errno 2] No such file or directory: 'C:\\Users\\benny\\PycharmProjects\\ucl-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
 2023-12-04 23:04:26,362 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-04 23:04:26,362 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-05 11:22:45,781 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 11:22:45,783 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-05 11:23:54,089 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 11:23:54,089 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-05 11:28:16,455 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 11:28:16,456 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-05 11:29:12,948 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 11:29:12,948 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-05 11:32:43,908 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 11:32:43,908 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-05 11:56:04,038 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 11:56:04,039 - DEBUG - controller-initialise-Line21 - Controller is initialised.
