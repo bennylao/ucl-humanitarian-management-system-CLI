@@ -473,12 +473,12 @@ def validate_refugee(lvl):
 def move_refugee_helper_method():
     """Moves refugee from one camp to another"""
     # displaying list of all refugees to user
-    print("YOU ARE REQUESTING TO MOVE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
-          "as instructed.")
+    print("\nYOU ARE REQUESTING TO MOVE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
+          " as instructed.\n")
     refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
     ref_df = pd.read_csv(refugee_csv_path)
     print(ref_df.to_string(index=False))
-    # checking input is vaild according to refugee IDs in database
+    # checking input is valid according to refugee IDs in database
     while True:
         rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to move another camp: ")
         if rid == "RETURN":
@@ -506,14 +506,12 @@ def move_refugee_helper_method():
             camp_id = int(camp_id)
             if camp_id == old_camp_id:
                 print("\nLooks like that's the same camp this refugee is already in. Try again "
-                      "or if there are no other camps\n"
-                      "available, enter RETURN to go back.")
+                      "or if there are no other camps\navailable, enter RETURN to go back.")
             elif (camp_id in active_camp_df['campID'].values) and (camp_id in camps_in_event):
                 # Need to do a final check to see if new camp's refugeePop + 1 is < new camp's refugeeCapacity
                 row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
                 new_potential_refugee_pop = (camp_df.at[row_index_new_camp[0], 'refugeePop'])
                 new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
-
                 if (new_potential_refugee_pop + 1) <= new_camp_capacity:
                     break
                 else:
@@ -524,9 +522,63 @@ def move_refugee_helper_method():
                 print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
         except ValueError:
             print("\nInvalid input. Please enter a valid campID or type RETURN to go back: ")
-
-
-    print("\nThanks - bear with us whilst we make that transfer."
+    # Need to point out to user if this refugee is part of a family. Do they want to move the entire family?
+    refugee_family_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'familyID'].iloc[0]
+    related_family_members = ref_df[ref_df['familyID'] == int(refugee_family_id)]
+    total_family_members = len(related_family_members)
+    while True:
+        if total_family_members != 0:
+            print("\n----HOLD ON!---- \nThis refugee is part of a family unit (see below).\n")
+            print(related_family_members.to_string(index=False))
+            user_input = input("\nAre you sure you want to move this refugee alone? Enter YES (to move"
+                               " alone), NO (to move as a family unit), or RETURN (to exit): ")
+            if user_input.lower() == 'yes':
+                break
+            elif user_input.lower() == 'no':
+                print("Okay. We're going to move the family as a unit."
+                      "\n****We're going to allow the whole family to move together, regardless of capacity. However,"
+                      "please remember to manually remove some refugees from\nthis camp to a less populated one "
+                      "if capacity is maxed out!****\n")
+                related_family_members_list = related_family_members['refugeeID'].tolist()
+                # print(related_family_members_list)
+                for index, row in related_family_members.iterrows():
+                    rid = row['refugeeID']
+                    old_camp_id = row['campID']
+                    # old_camp_id = ref_df.loc[ref_df['campID'] == int(i), 'campID'].iloc[0]
+                    row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
+                    # print(row_index_camp)
+                    # print(row_index_old_camp)
+                    camp_df.at[row_index_old_camp[0], 'refugeePop'] -= 1
+                    # Update the campID for the refugee in refugee CSV
+                    row_index_ref = ref_df[ref_df['refugeeID'] == int(rid)].index[0]
+                    modify_csv_value(refugee_csv_path, row_index_ref, "campID", camp_id)
+                    # Add one to the population of the camp which the refugee is now in
+                    camp_df.at[row_index_new_camp[0], 'refugeePop'] += 1
+                    camp_df.to_csv(camp_csv_path, index=False)
+                    # camp_df.to_csv(camp_csv_path, mode='a', index=False, header=False)
+                    # modify_csv_value(camp_df, row, "refugeePop", camp_id)
+                    print(
+                        f"\nTransfer for refugee {rid} complete. We have reassigned the refugee from camp {old_camp_id} "
+                        f"to camp {camp_id}."
+                        f"Additionally, the population of both camps has been adjusted accordingly. See below.")
+                    print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_string(index=False), "\n")
+                    print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_string(index=False), "\n")
+                print("\n Great. That's all that family transferred as a unit.")
+                row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
+                new_refugee_pop = (camp_df.at[row_index_new_camp[0], 'refugeePop'])
+                new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
+                if new_refugee_pop > new_camp_capacity:
+                    overflow_amount = (new_refugee_pop - new_camp_capacity)
+                    print(f"Uh oh! Capacity overflow. You need to remove {overflow_amount} refugee(s) from camp {camp_id}")
+                return
+            elif user_input.lower() == 'return':
+                return
+            else:
+                print("Sorry. Invalid input. Let's try again.")
+        else:
+            break
+    print("\nThanks - bear with us whilst we make that transfer. This refugee either has no family members in the"
+          "system, or you have chosen to move them by themselves."
           "\n\n----------------------------------------------------------------------------------------")
     # Minus one from the population of the camp originally associated with the refugee
     # print(camp_id)
@@ -538,20 +590,14 @@ def move_refugee_helper_method():
     row_index_ref = ref_df[ref_df['refugeeID'] == int(rid)].index[0]
     modify_csv_value(refugee_csv_path, row_index_ref, "campID", camp_id)
     # Add one to the population of the camp which the refugee is now in
-    # row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
-    # print("row_index_new_camp:", row_index_new_camp)
-    # print(row_index_new_camp)
     camp_df.at[row_index_new_camp[0], 'refugeePop'] += 1
     camp_df.to_csv(camp_csv_path, index=False)
     # camp_df.to_csv(camp_csv_path, mode='a', index=False, header=False)
     # modify_csv_value(camp_df, row, "refugeePop", camp_id)
     print(f"\nTransfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
           f"Additionally, the population of both camps has been adjusted accordingly. See below.")
-    print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_string(index=False))
-    print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_string(index=False))
-
-
-# Just need to add some extra logic to the above in case the event also changes.... Need to think about this.
+    print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_string(index=False), "\n")
+    print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_string(index=False), "\n")
 
 
 def delete_refugee():
