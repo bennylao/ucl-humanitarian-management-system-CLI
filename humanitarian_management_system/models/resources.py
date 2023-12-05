@@ -141,8 +141,6 @@ class Resource:
         pass
 
 
-
-
         self.resource_report()
         #    Display resource running out warning if applicable by calling below method
         # self.resource_running_out()

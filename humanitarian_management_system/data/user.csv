@@ -1,7 +1,10 @@
 userID,userType,isVerified,isActive,username,password,firstName,lastName,email,phone,occupation,roleID,eventID,campID
 0,admin,TRUE,TRUE,admin,111,adminFirstName,adminLastName,adminEmail,2013356756,adminOccupation,,,
-1,volunteer,TRUE,TRUE,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,7786471235,engineer,4,3,5
+1,volunteer,TRUE,TRUE,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,07786471235,engineer,4,3,5
 2,volunteer,TRUE,TRUE,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,6,7,6
 3,volunteer,FALSE,TRUE,volunteer3,111,HeyFirst,TestLast,volunteer3Email,7786471235,babysitter,3,7,3
 4,volunteer,TRUE,TRUE,Volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,0,0,0
 5,admin,TRUE,TRUE,a11,111,admin2FirstName,admin2LastName,admin2Email,2012345678,admin2Occupation,0,0,0
+6,volunteer,TRUE,TRUE,Benny,111,Benny,Lao,bennylao@gmail.com,07787571235,Teacher,1,1,1
+7,volunteer,TRUE,FALSE,bennylao,111,chon benny,lao lao,bennylll@gmaill.com,12344333,sdkljf,0,0,0
+8,volunteer,FALSE,False,yuan,111,Yuan,Hu,huyuanZ@163.com,123,student,0,0,0

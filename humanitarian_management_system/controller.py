@@ -14,6 +14,7 @@ class Controller:
     def __init__(self):
         # for saving user information
         self.user = None
+        self.change_user = None
         self.logout_request = False
 
     def initialise(self):
@@ -208,17 +209,13 @@ class Controller:
         csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
         df = pd.read_csv(csv_path)
 
-        # OOP concept - assign user info to Volunteer class attribute by user selected volunteer ID
+        # # OOP concept - assign user info to Volunteer class attribute by user selected volunteer ID
         df_name = df.loc[df['userID'] == int(select_id)]['username'].tolist()[0]
         df_password = df.loc[df['userID'] == int(select_id)]['password'].tolist()[0]
-        # since we've to change self.user attribute base on user select volunteer id, we need to keep track of the
-        # original admin user info
-        temp_name = self.user.username
-        temp_pass = self.user.password
 
         row = User.validate_user(df_name, str(df_password))
-        self.user = Volunteer(row['userID'], *row[3:])
-        self.user_edit_account()
+        self.change_user = Volunteer(row['userID'], *row[4:])
+        self.user.edit_volunteer(self.change_user)
 
     def display_volunteer(self):
         ManagementView.display_admin_vol()
@@ -345,10 +342,9 @@ class Controller:
             return
         else:
             # read the event csv file and extract all available events
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eventID")
+            df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eid")
             print("\n*The following shows the info of all available events*\n")
-            #Event.display_events(df1)
-            print(df1)
+            print(df1[0])
 
             # validate input for user select index
             while True:

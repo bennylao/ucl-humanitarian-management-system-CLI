@@ -154,7 +154,6 @@ class ManagementView:
               "            Refugee CREATION\n"
               "========================================\n"
               "Please fill in all the following information below.\n"
-              "Or to change your current camp to that instead.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod
