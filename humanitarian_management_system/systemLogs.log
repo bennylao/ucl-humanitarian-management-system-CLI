@@ -60,3 +60,10 @@
 2023-12-05 14:23:13,093 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-05 14:23:33,736 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-05 14:23:33,736 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:25:00,616 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:25:00,616 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:29:26,008 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:29:26,008 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:33:41,849 - CRITICAL - controller-login-Line120 - local variable 'alloc_ideal' referenced before assignment
+2023-12-05 18:23:28,328 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 18:23:28,328 - DEBUG - controller-initialise-Line22 - Controller is initialised.

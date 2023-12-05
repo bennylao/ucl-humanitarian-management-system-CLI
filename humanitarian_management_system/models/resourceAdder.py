@@ -30,9 +30,10 @@ class ResourceAdder():
         print(f"""==========================================================================\n
 ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ Hi Admin! Welcome to the Resource Shop ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
 ==========================================================================\n
-        Below is your current inventory:\n
+        Any purchased items will be in your unallocated inventory, pending your assignment to camps\n
+        Below is your current stock levels:\n
 {totalResources} \n"""
-        )
+        ) 
         basket = pd.DataFrame(columns=['resourceID','buyUnits'])
         basket_id_list = []
         basket_units_list = []

@@ -122,8 +122,8 @@ class ResourceReport():
         # resource stock total...
         # extract total refugee population
         camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-        df = pd.read_csv(camp_csv_path)
-        pop_arr = df['refugeePop'].tolist()
+        camp = pd.read_csv(camp_csv_path)
+        pop_arr = camp['refugeePop'].tolist()
         totalRefugees = sum(pop_arr)
 
         # this is the current allocation. not the gold standard one..
