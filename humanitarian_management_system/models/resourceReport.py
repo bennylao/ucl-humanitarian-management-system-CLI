@@ -1,6 +1,6 @@
 import pandas as pd
 from pathlib import Path
-
+from humanitarian_management_system.views import AdminView
 
 class ResourceReport():
     def __init__(self):
@@ -54,11 +54,14 @@ class ResourceReport():
         columns = valid_range12_df.columns
         valid_range12 = set(zip(valid_range12_df[columns[0]], valid_range12_df[columns[1]]))
         return valid_range12
-            
+
     def input_validator(self, prompt_msg, valid_range, error_msg = 'Invalid selection. Please try again.'):
         # for usage in resources - validates the form inputs
         while True:
             user_input = input(prompt_msg)
+
+            if user_input.lower() == 'return':
+                break
 
             # Check if the input is a digit and convert it to an integer if it is
             if user_input.isdigit():
@@ -67,9 +70,12 @@ class ResourceReport():
             # Check if the input (either integer or string) is in the valid range
             if user_input in valid_range:
                 return user_input  # Return if the input is in the valid range
+
             else:
                 print(error_msg)  # Print error message for input out of range
-    
+        AdminView.manage_resource_menu()
+
+
     # for campID and resource pairing - resource must be above zero and campID must be an open one with refugees
     def pairwise_input_validator(self, prompt_msg1, prompt_msg2, valid_range1, valid_range2, valid_range12, error_msg='Invalid combination. Please try again.'):
         while True:

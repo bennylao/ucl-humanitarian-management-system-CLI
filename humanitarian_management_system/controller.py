@@ -554,28 +554,37 @@ class Controller:
         while True:
             user_selection = input("\nAllocation mode: --> ")
             alloc_instance = ResourceAllocator()
-
-            if user_selection == '1':
+            if user_selection.lower() == 'return':
+                return
+            elif user_selection == '1':
                 alloc_instance.manual_alloc()
             elif user_selection == '2':
                 # here, if th4re is unallocated resources... ask if user wants to deal with unassigned resources or not
                 if unalloc_status:
-                    include_unassigned = input('Do you want to distribute the unassigned resources? y / n --> ')
-                    # user can choose if they want to do this manually or automatically, same as above actually
-                    # is there a way we can reuse the same code ?? <- if we merge it into the same files....
-                    if include_unassigned == 'y':
-                        print("\n ================ LOADING ==============\n")
-                        alloc_instance.add_unalloc_resource()  # ## add the unassigned resources to the
-                        # totalResources, ready for assignment by running auto_alloc immediately after
+                    while True:
+                        include_unassigned = input('Do you want to distribute the unassigned resources? y / n --> ')
+                        # user can choose if they want to do this manually or automatically, same as above actually
+                        # is there a way we can reuse the same code ?? <- if we merge it into the same files....
+                        if include_unassigned.lower() == 'return':
+                            return
+                        elif include_unassigned.lower() == 'n':
+                            break
+                        elif include_unassigned.lower() == 'y':
+                            print("\n ================ LOADING ==============\n")
+                            alloc_instance.add_unalloc_resource()  # ## add the unassigned resources to the
+                            # totalResources, ready for assignment by running auto_alloc immediately after
+                            break
+                        else:
+                            print("\nOops! Didn't catch that. Try again!\n")
                 alloc_instance.auto_alloc()
             else:
                 print("Invalid mode option entered!")
                 continue
 
-            if user_selection == 'RETURN':
-                return
-            else:
-                break
+            # if user_selection == 'RETURN':
+            #     return
+            # else:
+            #     break
 
     def man_resource(self):
         ManagementView.man_resource_message()
@@ -602,8 +611,9 @@ class Controller:
         resource_report = ResourceReport()
         while True:
             user_selection = input("--> \n: ")
-
-            if user_selection == '1':
+            if user_selection.lower() == 'return':
+                return
+            elif user_selection == '1':
                 # print(resource_report.resource_report_total())
                 pass
             elif user_selection == '2':
@@ -612,10 +622,10 @@ class Controller:
                 print("Invalid mode option entered!")
                 continue
 
-            if user_selection == 'RETURN':
-                return
-            else:
-                break
+            # if user_selection == 'RETURN':
+            #     return
+            # else:
+            #     break
 
         # df = helper.extract_active_event()[1]
         # select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]

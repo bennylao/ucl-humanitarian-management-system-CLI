@@ -50,7 +50,7 @@ class ResourceAllocator():
 
         try:
             alloc_ideal = resource_stats_instance.determine_above_below()
-            print("\n...successfully calculated equilibium allocation levels...\n")
+            print("\n...successfully calculated equilibrium allocation levels...\n")
         except Exception as e:
             print(f"An error occurred : {e}")
         alloc_ideal['updated'] = alloc_ideal['current']
@@ -152,7 +152,7 @@ class ResourceAllocator():
         print("Below is how each resource is currently unallocated vs. how many is distributed across the camps: \n")
         all_resource_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated()
         all_resource_camp_vs_unallocated.reset_index(inplace=True)
-        print(all_resource_camp_vs_unallocated)
+        print(all_resource_camp_vs_unallocated.to_string(index=False))
 
         status, unalloc_prompt = resource_stats_instance.unalloc_resource_checker()
 
@@ -172,7 +172,7 @@ class ResourceAllocator():
         while True: 
             ################ Begin with asking the user what type of manual allocation they want to make:
             action_string_list = ["[1] ASSIGN:    inventory ->  camp", "[2] UNASSIGN:  camp      ->  inventory", "[3] RE-ASSIGN: camp      <-> camp"]
-            print("\nWhat type of manual allocation would you like to make?")
+            print("\nWhat type of manual allocation would you like to make? Enter 1, 2, 3 or RETURN to exit.")
             for action_string in action_string_list:
                 print(action_string)
 
@@ -183,7 +183,8 @@ class ResourceAllocator():
             ###################################################################
             # Give user different form prompts depending on choice
             # select single resource
-
+            if action_select.lower() == 'return':
+                return
             ###### if user chooses 1 then... first check that there are unallocated resources. kick them out if not. 
             if action_select == 1:
                 if status == False: 
