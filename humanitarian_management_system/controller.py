@@ -237,8 +237,8 @@ class Controller:
     def admin_manage_resource(self):
         
         while True:
-            user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
-            # user_selection = helper.validate_user_selection(AdminView.display_resource_menu())
+            AdminView.display_resource_menu()
+            user_selection = helper.validate_user_selection(AdminView.get_resource_options())
             if user_selection == "1":
                 # ("1", "Allocate resources")
                 self.resource_alloc_main_menu()

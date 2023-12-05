@@ -48,3 +48,15 @@
 2023-12-05 11:32:43,908 - DEBUG - controller-initialise-Line21 - Controller is initialised.
 2023-12-05 11:56:04,038 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-05 11:56:04,039 - DEBUG - controller-initialise-Line21 - Controller is initialised.
+2023-12-05 14:18:44,203 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:18:44,203 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:19:23,095 - CRITICAL - controller-login-Line120 - argument of type 'NoneType' is not iterable
+2023-12-05 14:20:34,625 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:20:34,625 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:20:38,928 - CRITICAL - controller-login-Line120 - argument of type 'NoneType' is not iterable
+2023-12-05 14:21:34,064 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:21:34,064 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:23:13,093 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:23:13,093 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 14:23:33,736 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 14:23:33,736 - DEBUG - controller-initialise-Line22 - Controller is initialised.
