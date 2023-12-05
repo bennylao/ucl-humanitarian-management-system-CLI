@@ -333,18 +333,27 @@ class Controller:
         ManagementView.camp_creation_message()
         # active_event_df = Event.get_all_active_events()
         # Event.display_events(active_event_df)
+
         csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+        df = pd.read_csv(csv_path)
         active_index = helper.extract_active_event(csv_path)[0]
 
+        # if there is no active events, return
+        filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+
         # check if active event is 0
-        if len(active_index) == 0:
-            print("No relevant events to select from.")
+        #if len(active_index) == 0:
+        #    print("No relevant events to select from.")
+        #    return
+        #else:
+        if filtered_df.empty:
+            print("\nAll the events are closed and there's none to choose from.")
             return
         else:
             # read the event csv file and extract all available events
-            df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eid")
-            print("\n*The following shows the info of all available events*\n")
-            print(df1[0])
+            # df1 = helper.matched_rows_csv(csv_path, "ongoing", "False", "eventID")
+            print("\n*The following shows the info of all available events*")
+            Event.display_events(filtered_df)
 
             # validate input for user select index
             while True:
@@ -413,19 +422,54 @@ class Controller:
                 print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
 
         while True:
-            Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
+            csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
+            df2 = pd.read_csv(csv_path2)
+
+            # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
+            Event.display_events(df2[(df2['campID'] == modify_camp_id) & (df2['eventID'] == eventID)])
             for i, column_name in enumerate(filtered_df1.columns[3:], start=1):
                 print(f"[{i}] {column_name}")
             try:
-                target_column_index = int(input(f"Which column do you want to modify(1~5)?: "))
-                if target_column_index not in range(1, 7):
-                    print("Please enter a valid integer from 1 to 6")
+                print("[7] QUIT editing")
+                target_column_index = int(input(f"Which column do you want to modify(1~6)? Or quit editing(7): "))
+                if target_column_index not in range(1, 8):
+                    print("Please enter a valid integer from 1 to 7")
                     continue
-                else:
+                elif target_column_index in range(1, 7):
                     target_column_name = filtered_df1.columns[target_column_index + 2]
-                    break
+                    while True:
+                        new_value = input(f"Enter the new value for {target_column_name}: ")
+                        if target_column_index == 2:
+                            if new_value == "low" or new_value == "high":
+                                break
+                            else:
+                                print("Invalid input! Please enter 'low' or 'high'")
+                        elif target_column_index == 6:
+                            if new_value == "open" or new_value == "closed":
+                                break
+                            else:
+                                print("Invalid input! Please enter 'open' or 'closed'")
+                        elif target_column_index == 7:
+                            return
+
+                        else:
+                            try:
+                                new_value = int(new_value)
+                                if new_value >= 0:
+                                    break
+                                else:
+                                    print("Invalid input! Please enter a non-negative integer ")
+                            except ValueError:
+                                print("Invalid input! Please enter a non-negative integer ")
+
+                    index_in_csv = df0[df0["campID"] == modify_camp_id].index.tolist()[0]
+                    helper.modify_csv_value(csv_path0, index_in_csv, target_column_name, new_value)
+                    print(f"\u2714 Changes have been saved!")
+                    #break
+                else:
+                    return
             except ValueError:
-                print("Invalid input! Please enter an integer between 1 to 6")
+                print("Invalid input! Please enter an integer between 1 to 7")
 
         while True:
             new_value = input(f"Enter the new value for {target_column_name}: ")
@@ -495,7 +539,7 @@ class Controller:
                 print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
 
         filtered_campID = df1[df1['eventID'] == eventID]['campID'].tolist()
-        print('The following shows the info of all camps from the event')
+        print('\n*The following shows the info of all camps in the event*')
         Event.display_events(df1[df1['eventID'] == eventID])
         while True:
             try:
@@ -520,7 +564,7 @@ class Controller:
                 # keep track of existing camp num of a particular event
                 no_camp = df.loc[eventID, "no_camp"]
                 no_camp -= 1
-                index = df[df["eid"] == eventID].index.tolist()
+                index = df[df["eventID"] == eventID].index.tolist()
                 helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
                 print("\n\u2714 You have Successfully removed the camp!")
                 return

@@ -36,3 +36,37 @@
 2023-12-05 19:26:14,627 - CRITICAL - controller-login-Line120 - 'tuple' object is not callable
 2023-12-05 19:27:23,935 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-05 19:27:23,935 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 19:56:37,850 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 19:56:37,850 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:14:53,901 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:14:53,901 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:15:37,460 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:15:37,460 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:25:03,838 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:25:03,838 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:25:13,810 - CRITICAL - controller-login-Line120 - unsupported operand type(s) for &: 'float' and 'bool'
+2023-12-05 20:26:33,037 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:26:33,037 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:26:40,554 - CRITICAL - controller-login-Line120 - The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+2023-12-05 20:30:11,942 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:30:11,942 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:30:21,231 - CRITICAL - controller-login-Line120 - The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+2023-12-05 20:32:33,216 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:32:33,216 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:36:31,220 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:36:31,220 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:36:43,517 - CRITICAL - controller-login-Line120 - The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+2023-12-05 20:37:44,839 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:37:44,839 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:37:52,223 - CRITICAL - controller-login-Line120 - The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+2023-12-05 20:40:18,178 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:40:18,178 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:44:01,545 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:44:01,545 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:45:16,405 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:45:16,405 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:45:52,850 - CRITICAL - controller-login-Line120 - index 9 is out of bounds for axis 0 with size 9
+2023-12-05 20:56:54,211 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:56:54,211 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 20:59:07,191 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 20:59:07,191 - DEBUG - controller-initialise-Line22 - Controller is initialised.
