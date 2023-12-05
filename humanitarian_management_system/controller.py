@@ -730,7 +730,7 @@ class Controller:
         # check user type, for admin - can create new refugee for any camp, and for vol - camp dependent
         if user_type == 'admin':
             csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-            df1 = helper.matched_rows_csv(csv_path, "status", 'open', "campID")
+            df1 = helper.matched_rows_csv(csv_path, "status", 'closed', "campID")
             print("\n*The following shows the info of all available events*\n")
             print(df1[0])
 

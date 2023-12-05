@@ -7,6 +7,7 @@ import math
 
 
 
+
 def validate_user_selection(options):
     while True:
         selection = input("--> ")
@@ -368,7 +369,6 @@ def validate_man_resource(index):
 
 def validate_refugee(lvl):
     date_format = '%d/%m/%Y'
-
     while True:
         f_name = input("\nEnter first name: ")
         if not f_name.isalpha():
@@ -391,7 +391,7 @@ def validate_refugee(lvl):
 
     while True:
         try:
-            dob = input("\nEnter date of birth (format: dd/mm/yy): ")
+            dob = input("\nEnter date of birth (format: dd/mm/yyyy): ")
             if dob == 'RETURN':
                 return
             dob = datetime.datetime.strptime(dob, date_format)
