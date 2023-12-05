@@ -70,3 +70,58 @@
 2023-12-05 20:56:54,211 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-05 20:59:07,191 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-05 20:59:07,191 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 21:04:31,456 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 21:04:31,456 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 21:46:26,703 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 21:46:26,703 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 21:46:44,488 - CRITICAL - controller-login-Line120 - Can only compare identically-labeled Series objects
+2023-12-05 21:56:52,755 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 21:56:52,755 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 21:57:04,012 - CRITICAL - controller-login-Line120 - Can only compare identically-labeled Series objects
+2023-12-05 21:59:54,157 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 21:59:54,158 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:00:08,446 - CRITICAL - controller-login-Line120 - Can only compare identically-labeled Series objects
+2023-12-05 22:00:58,871 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:00:58,871 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:01:09,656 - CRITICAL - controller-login-Line120 - list index out of range
+2023-12-05 22:09:37,407 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:09:37,407 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:09:47,566 - CRITICAL - controller-login-Line120 - (0    False
+1    False
+2    False
+3    False
+4    False
+5    False
+6    False
+7    False
+8    False
+Name: userID, dtype: bool, 'campID')
+2023-12-05 22:12:51,014 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:12:51,014 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:12:58,633 - CRITICAL - controller-login-Line120 - Can only compare identically-labeled Series objects
+2023-12-05 22:13:20,244 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:13:20,244 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:13:30,650 - CRITICAL - controller-login-Line120 - index 0 is out of bounds for axis 0 with size 0
+2023-12-05 22:19:45,562 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:19:45,562 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:19:54,477 - CRITICAL - controller-login-Line120 - list index out of range
+2023-12-05 22:24:58,646 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:24:58,646 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:25:05,737 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-05 22:26:14,517 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:26:14,517 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:26:23,909 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-05 22:27:21,644 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:27:21,645 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:27:29,763 - CRITICAL - controller-login-Line120 - Location based indexing can only have [integer, integer slice (START point is INCLUDED, END point is EXCLUDED), listlike of integers, boolean array] types
+2023-12-05 22:28:51,413 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:28:51,413 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:28:58,007 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-05 22:31:41,464 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:31:41,464 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:34:07,273 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:34:07,273 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:34:55,487 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:34:55,487 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 22:37:33,070 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 22:37:33,070 - DEBUG - controller-initialise-Line22 - Controller is initialised.

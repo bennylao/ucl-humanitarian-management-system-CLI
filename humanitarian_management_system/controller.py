@@ -119,7 +119,6 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
-
     def admin_main(self):
         AdminView.display_login_message(self.user.username)
         while True:
@@ -360,7 +359,7 @@ class Controller:
                 try:
                     eventID = int(input("\nEnter Event ID: "))
                     if eventID not in active_index:
-                        print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+                        print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
                         continue
                     else:
                         camp_info = helper.validate_camp_input()
@@ -369,7 +368,7 @@ class Controller:
                         print("\n\u2714 New camp created!")
                         return
                 except ValueError:
-                    print(f"Invalid input! Please enter an integer from {df1[1]} for Event ID.")
+                    print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
 
     def admin_modify_camp(self):
         """This function is for admin modify camp info"""
@@ -465,38 +464,67 @@ class Controller:
                     index_in_csv = df0[df0["campID"] == modify_camp_id].index.tolist()[0]
                     helper.modify_csv_value(csv_path0, index_in_csv, target_column_name, new_value)
                     print(f"\u2714 Changes have been saved!")
-                    #break
                 else:
                     return
             except ValueError:
                 print("Invalid input! Please enter an integer between 1 to 7")
 
+    def volunteer_edit_camp(self):
+        # user_id = self.user.user_id
+        user_id = 1
+        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+        # active_index = helper.extract_active_event(camp_csv_path)[0]
+        df = pd.read_csv(user_csv_path)
+        dff = df[df['userID'] == user_id]
+        event_id = dff.at[1, 'eventID']
+        camp_id = dff.at[1, 'campID']
         while True:
-            new_value = input(f"Enter the new value for {target_column_name}: ")
-            if target_column_index == 2:
-                if new_value == "low" or new_value == "high":
-                    break
-                else:
-                    print("Invalid input! Please enter 'low' or 'high'")
-            elif target_column_index == 6:
-                if new_value == "open" or new_value == "closed":
-                    break
-                else:
-                    print("Invalid input! Please enter 'open' or 'closed'")
-            else:
-                try:
-                    new_value = int(new_value)
-                    if new_value >= 0:
-                        break
-                    else:
-                        print("Invalid input! Please enter a non-negative integer ")
-                except ValueError:
-                    print("Invalid input! Please enter a non-negative integer ")
+            csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
+            df2 = pd.read_csv(csv_path2)
+            # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
+            Event.display_events(df2[(df2['campID'] == camp_id) & (df2['eventID'] == event_id)])
+            for i, column_name in enumerate(df2.columns[3:], start=1):
+                print(f"[{i}] {column_name}")
+            try:
+                print("[7] QUIT editing")
+                target_column_index = int(input(f"Which column do you want to modify(1~6)? Or quit editing(7): "))
+                if target_column_index not in range(1, 8):
+                    print("Please enter a valid integer from 1 to 7")
+                    continue
+                elif target_column_index in range(1, 7):
+                    target_column_name = df2.columns[target_column_index + 2]
+                    while True:
+                        new_value = input(f"Enter the new value for {target_column_name}: ")
+                        if target_column_index == 2:
+                            if new_value == "low" or new_value == "high":
+                                break
+                            else:
+                                print("Invalid input! Please enter 'low' or 'high'")
+                        elif target_column_index == 6:
+                            if new_value == "open" or new_value == "closed":
+                                break
+                            else:
+                                print("Invalid input! Please enter 'open' or 'closed'")
+                        elif target_column_index == 7:
+                            return
 
-        index_in_csv = df0[df0["campID"] == modify_camp_id].index.tolist()[0]
-        helper.modify_csv_value(csv_path0, index_in_csv, target_column_name, new_value)
-        print(f"\u2714 Changes have been saved!")
-        return
+                        else:
+                            try:
+                                new_value = int(new_value)
+                                if new_value >= 0:
+                                    break
+                                else:
+                                    print("Invalid input! Please enter a non-negative integer ")
+                            except ValueError:
+                                print("Invalid input! Please enter a non-negative integer ")
+
+                    index_in_csv = df2[df2["campID"] == camp_id].index.tolist()[0]
+                    helper.modify_csv_value(csv_path2, index_in_csv, target_column_name, new_value)
+                    print(f"\u2714 Changes have been saved!")
+                else:
+                    return
+            except ValueError:
+                print("Invalid input! Please enter an integer between 1 to 7")
 
     def admin_remove_camp(self):
         """This part of the code is to delete the camp from the camp.csv"""
@@ -720,7 +748,7 @@ class Controller:
             if user_selection == "3":
                 self.move_refugee_volunteer()
             if user_selection == "4":
-                self.admin_modify_camp()
+                self.volunteer_edit_camp()
             if user_selection == "5":
                 self.vol_display_refugee(r)
             if user_selection == "6":
