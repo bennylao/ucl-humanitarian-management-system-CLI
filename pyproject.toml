@@ -16,9 +16,6 @@ dependencies = [
 [project.scripts]
 hmsGroup11 = "humanitarian_management_system.main:main"
 
-[project.gui-scripts]
-hmsGroup11 = "humanitarian_management_system.main:main"
-
 [tool.setuptools.packages.find]
 exclude = ["data_analysis"] # temporary configuration during development
 
