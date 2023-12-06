@@ -3,14 +3,12 @@
 # Can we have a CSV with all the countries of the world and then check
 # location input against this and get user to ONLY input valid COUNTRY
 from pathlib import Path
-
-import numpy as np
-
 from humanitarian_management_system import helper
 import datetime
 import pandas as pd
 import tkinter as tk
 import tkinter.messagebox
+import logging
 
 
 class Event:
@@ -121,8 +119,6 @@ class Event:
             Event.__change_location(row)
         elif what_to_edit == 'description':
             Event.__change_description(row)
-        # elif what_to_edit == 'no_camp':
-        #     Event.__change_no_camp(row)
         elif what_to_edit == 'startDate':
             Event.__change_start_date(row)
         else:
@@ -168,45 +164,15 @@ class Event:
             return
         helper.modify_csv_value(event_csv_path, row, 'description', description)
         print("\nDescription updated.")
-    #
-    # @staticmethod
-    # def __change_no_camp(row):
-    #     event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-    #     while True:
-    #         try:
-    #             no_camp = input("\n--> Camp Number (positive integers separated by commas): ")
-    #             if no_camp == 'RETURN':
-    #                 return
-    #             elif no_camp == 'NONE':
-    #                 helper.modify_csv_value(event_csv_path, row, 'no_camp', None)
-    #                 print("\nCamp number updated.")
-    #                 break
-    #             else:
-    #                 num_list = [int(num) for num in no_camp.split(',')]
-    #                 if all(num > 0 for num in num_list):
-    #                     ## Also no_camp cannot exceed the total number of camps
-    #                     ## Add it after camp.py finished.
-    #                     num_list = sorted(set(num_list))
-    #                     no_camp = ','.join(map(str, num_list))
-    #                     helper.modify_csv_value(event_csv_path, row, 'no_camp', no_camp)
-    #                     print("\nCamp number updated.")
-    #                     break
-    #                 else:
-    #                     print("\nInvalid camp number entered.")
-    #                     continue
-    #         except ValueError:
-    #             print("\nInvalid camp number entered.")
-    #             continue
 
     @staticmethod
     def __change_start_date(row):
         """Should this be an option? What would be the implications of this?"""
         #### maybe when the start date is a day in the future, and the user wants to adjust the schedule
         #### Can the start date of an event that has already been started be changed?
-        date_format = '%d/%m/%Y'
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         df = pd.read_csv(event_csv_path)
-
+        date_format = '%d/%m/%Y'
         while True:
             if bool(df.loc[row]['ongoing']) == True:
                 print("\nThis event has started, the start date cannot be changed.")
@@ -292,6 +258,8 @@ class Event:
     def update_ongoing():
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         df = pd.read_csv(event_csv_path)
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        df_camp = pd.read_csv(camp_csv_path)
         for index, series in df.iterrows():
             try:
                 startDate = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
@@ -303,12 +271,16 @@ class Event:
                 endDate = None
 
             if ((endDate == None and startDate.date() <= datetime.date.today()) or
-                (startDate.date() <= datetime.date.today() and endDate.date() >= datetime.date.today())):
+                (startDate.date() <= datetime.date.today() and endDate.date() > datetime.date.today())):
                 helper.modify_csv_value(event_csv_path, index, 'ongoing', True)
             elif startDate.date() > datetime.date.today():
                 helper.modify_csv_value(event_csv_path, index, 'ongoing', 'Yet')
             else:
                 helper.modify_csv_value(event_csv_path, index, 'ongoing', False)
+                row_camp_list = df_camp[(df_camp['eventID'] == df.loc[index, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
+                if row_camp_list:
+                    for row_camp in row_camp_list:
+                        helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
 
     @staticmethod
     def disable_ongoing_event():
@@ -374,11 +346,10 @@ class Event:
             except ValueError:
                 print("\nInvalid event ID entered.")
                 continue
-
         root = tk.Tk()
         result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
-                                                       "You'll also lose all the information about the refugees in that"
-                                                       " event.")
+                                                       "You'll also close the camps and lose all the information about "
+                                                       "the refugees in that event.")
         if result == "yes":
             df.drop(df[df['eventID'] == int(eid_to_delete)].index, inplace=True)
             df.to_csv(event_csv_path, index=False)
@@ -405,7 +376,10 @@ class Event:
                                          0)
                 helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'roleID',
                                          0)
-
+            row_camp_list = camp_df[(camp_df['eventID'] == int(eid_to_delete)) & (camp_df['status'] == 'open')].index.tolist()
+            if row_camp_list:
+                for row_camp in row_camp_list:
+                    helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
             tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
         else:
             tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")

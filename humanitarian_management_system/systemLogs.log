@@ -239,3 +239,22 @@ Name: userID, dtype: bool, 'campID')
 2023-12-06 14:18:21,107 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-06 14:18:21,107 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-06 14:18:33,673 - INFO - helper-admin_export_refugees_to_csv-Line1100 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 20:07:40,956 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 20:07:40,956 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 20:08:23,151 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 20:08:23,151 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 20:09:19,871 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 20:09:19,871 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 20:13:42,942 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 20:13:42,942 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 20:28:08,658 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 20:28:08,658 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 20:40:06,907 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 20:40:06,907 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 20:40:37,791 - CRITICAL - event-edit_event_info-Line158 - invalid literal for int() with base 10: 'qqq'
+2023-12-06 20:41:55,553 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 20:41:55,553 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 20:42:17,311 - CRITICAL - event-edit_event_info-Line157 - invalid literal for int() with base 10: 'asjklfjs'
+2023-12-06 20:43:31,712 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 20:43:31,712 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 20:43:46,688 - CRITICAL - event-edit_event_info-Line158 - invalid literal for int() with base 10: 'adsjhfk'
