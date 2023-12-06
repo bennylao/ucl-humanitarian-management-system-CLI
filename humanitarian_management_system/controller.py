@@ -425,7 +425,7 @@ class Controller:
                     except ValueError:
                         print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
         except Exception as e:
-            print(f"\nData file seems to be damaged."
+            print(f"\nCamp data file may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
@@ -610,7 +610,7 @@ class Controller:
             # print(f"\u2714 Changes have been saved!")
             # return
         except Exception as e:
-            print(f"\nData file seems to be damaged."
+            print(f"\nMultiple files may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
@@ -922,7 +922,7 @@ class Controller:
                 v.join_camp()
             return
         except Exception as e:
-            print(f"\nData file seems to be damaged."
+            print(f"\nVolunteer or camp data file may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
@@ -1093,7 +1093,7 @@ class Controller:
             print("Refugee created.")
             self.admin_manage_camp()
         except Exception as e:
-            print(f"\nData file seems to be damaged."
+            print(f"\nRefugee or camp data file may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
@@ -1371,7 +1371,7 @@ class Controller:
             ManagementView.refugee_edit_message()
             r.edit_refugee_info(user, cid)
         except Exception as e:
-            print(f"\nData file seems to be damaged."
+            print(f"\nMultiple data files may to be damaged or lost."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
