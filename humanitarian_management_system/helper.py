@@ -282,7 +282,7 @@ def extract_active_event(csv_path):
 def display_camp_list():
     index = []
 
-    csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+    csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
     active_id = extract_active_event(csv_path)[0]
     df_e = pd.read_csv(csv_path)
 

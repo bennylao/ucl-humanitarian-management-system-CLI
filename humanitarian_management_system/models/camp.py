@@ -26,7 +26,7 @@ class Camp:
 
         self.camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
         self.cty_csv_path = Path(__file__).parents[1].joinpath("data/country.csv")
-        self.event_csv_path = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+        self.event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         self.res_alloc_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
         self.res_type_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
 
@@ -41,7 +41,7 @@ class Camp:
         """if user choose to add a """
         df_e = pd.read_csv(self.event_csv_path)
         country = df_e['location']
-        # geo_data = extract_data("data/eventTesting.csv","")
+        # geo_data = extract_data("data/event.csv","")
         csv_path_c = Path(__file__).parents[1].joinpath("data/country.csv")
         df = pd.read_csv(csv_path_c)
         # find country id and event id by index
@@ -68,7 +68,7 @@ class Camp:
             camp_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
 
         # update camp num for a particular event
-        csv_path3 = Path(__file__).parents[1].joinpath("data/eventTesting.csv")
+        csv_path3 = Path(__file__).parents[1].joinpath("data/event.csv")
         modify_csv_pandas(csv_path3, 'eventID', select_index, 'no_camp', no_camp)
 
     def display_info(self, user, cid):
@@ -172,7 +172,7 @@ class Camp:
     #         return
     #     else:
     #         # print the events info for users to choose
-    #         csv_path = Path(__file__).parents[0].joinpath("data/eventTesting.csv")
+    #         csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
     #         df1 = matched_rows_csv(csv_path, "ongoing", True, "eid")
     #         print("\n*The following shows the info of all available events*\n")
     #         print(df1[0])

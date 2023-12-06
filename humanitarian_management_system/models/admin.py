@@ -25,6 +25,7 @@ class Admin(User):
     def remove_user(self):
         vol_id_arr = []
         vol_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"))
+        camp_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/camp.csv"))
 
         print("A list of all volunteers and their corresponding information.")
         self.vol_table_display()
@@ -40,6 +41,16 @@ class Admin(User):
                 continue
             if user_select == 'RETURN':
                 return
+
+            # update volunteer pop from the volunteer's assigned camp after this volunteer account is removed.
+            user_camp = vol_df.loc[vol_df['userID'] == int(user_select)]['campID'].tolist()[0]
+
+            if user_camp != 0:
+                vol_pop = camp_df.loc[camp_df['campID'] == int(user_camp)]['volunteerPop'].tolist()[0]
+                vol_pop -= 1
+
+                helper.modify_csv_pandas("data/camp.csv", 'campID', int(user_camp),
+                                         'volunteerPop', vol_pop)
 
             vol_df = vol_df[vol_df['userID'] != int(user_select)]
             vol_df.reset_index(drop=True, inplace=True)
@@ -103,7 +114,7 @@ class Admin(User):
         joined_df = self.vol_table_display()
 
         camp_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/camp.csv"))
-        event_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/eventTesting.csv"))
+        event_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/event.csv"))
         joined_camp = pd.merge(camp_df, event_df, on='eventID', how='inner')
 
         joined_camp.columns = ['Camp ID', 'Event ID', 'countryID', 'Refugee capacity', 'Health risk',

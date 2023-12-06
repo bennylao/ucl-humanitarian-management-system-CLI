@@ -125,3 +125,62 @@ Name: userID, dtype: bool, 'campID')
 2023-12-05 22:34:55,487 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-05 22:37:33,070 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-05 22:37:33,070 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:27:47,274 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:27:47,274 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:33:27,617 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:33:27,617 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:40:59,693 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:40:59,693 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:45:30,876 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:45:30,876 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:49:54,829 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:49:54,829 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:50:49,220 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:50:49,220 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:51:08,999 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:51:08,999 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:53:56,368 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:53:56,368 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:54:18,691 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:54:18,691 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:54:28,239 - CRITICAL - controller-admin_modify_camp-Line606 - Cannot save file into a non-existent directory: 'C:\Users\jason\PycharmProjects\COMP0066_Humanitarian_Management_System\data'
+2023-12-05 23:55:44,288 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:55:44,288 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:56:56,184 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:56:56,184 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:58:04,390 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:58:04,390 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-05 23:59:53,692 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-05 23:59:53,693 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:03:46,030 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:03:46,030 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:03:57,966 - CRITICAL - controller-admin_modify_camp-Line609 - [Errno 2] No such file or directory: 'C:\\Users\\jason\\PycharmProjects\\COMP0066_Humanitarian_Management_System\\data\\camp.csv'
+2023-12-06 00:04:34,427 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:04:34,427 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:06:34,048 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:06:34,048 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:12:25,086 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:12:25,086 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:16:30,477 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:16:30,477 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:25:11,048 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:25:11,048 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:26:33,484 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:26:33,484 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:31:53,400 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:31:53,400 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:32:05,169 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:32:05,169 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:33:03,541 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:33:03,541 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:42:55,413 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:42:55,413 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:45:47,559 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:45:47,559 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:47:44,316 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:47:44,316 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:47:56,153 - CRITICAL - controller-login-Line120 - 1
+2023-12-06 00:48:46,871 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:48:46,871 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 00:51:52,696 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 00:51:52,696 - DEBUG - controller-initialise-Line22 - Controller is initialised.

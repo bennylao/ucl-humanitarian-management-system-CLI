@@ -178,6 +178,13 @@ class Refugee:
                     return
             self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'refugeeID', new_value, user, cid)
 
+            # reorder refugee ID after ID changed
+            csv_path_r = Path(__file__).parents[1].joinpath("data/refugee.csv")
+            df_r = pd.read_csv(csv_path_r)
+
+            df_r.sort_values('refugeeID', inplace=True)
+            df_r.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
+
         if user_selection == '2':
             print(f"Current refugee first name is {df.loc[df['refugeeID'] == ref_id]['firstName'].tolist()[0]}")
             while True:
