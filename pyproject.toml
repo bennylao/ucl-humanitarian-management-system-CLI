@@ -7,7 +7,7 @@ name = "humanitarian_management_system"
 version = "1.0.0"
 dependencies = [
     "pandas",
-    "numpy",
+    "numpy~=1.22.0",
     "dash",
     "plotly",
     "tabulate"
