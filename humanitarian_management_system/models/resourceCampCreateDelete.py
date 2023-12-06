@@ -73,7 +73,7 @@ The below CLOSED camps still have resources allocated... \n
                 closed_camp_resource_AFTER = report_instance_AFTER.report_closed_camp_with_resources()
                 print(closed_camp_resource_AFTER)
         else:
-            print("Good news, there are no closed camps with assigned resources. ")
+            print("＼(^o^)／ GOOD NEWS ＼(^o^)／ There are no closed camps with assigned resources ")
 
 
     def new_camp_resources(self):
@@ -124,14 +124,20 @@ The below CLOSED camps still have resources allocated... \n
         report_instance = ResourceReport()
         new_camps_df = report_instance.valid_new_camps()
         if not new_camps_df.empty:
-            print(f"""✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖  \n
+            print(f"""
+    ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
     There are newly open camp(s) with refugees...
     but NO RESOURCES OF ANY TYPE! \n
-    =====================================================\n
+    ==============================================================\n
     {new_camps_df.to_string(index=False)} \n
     The starter resource pack new camps is 10 of each resource per refugeePop.\n
     Proceed to buy & assign this for all camps above? [ y / n ]\n
-            """)
+
+    Note: if 'n', you will still have the option of assigning resources to these newly opened & resourceless but populated camps,
+    via other channels: \n
+        >> these camps will be automatically be included in [1] Resource Allocation -> [2] Auto-Distribute
+        >> manually assign existing resources from inventory & other camps via [1] Resource Allocation -> [2] Manual
+            """)  ######### this should be slightly different for volunteer
 
             user_select = report_instance.input_validator('--> ', ['y', 'n'])
             before_camp_vs_unallocated = report_instance.resource_report_camp_vs_unallocated()
@@ -147,5 +153,6 @@ The below CLOSED camps still have resources allocated... \n
                 report_instance_AFTER = ResourceReport()
                 after_camp_vs_unallocated = report_instance_AFTER.resource_report_camp_vs_unallocated()
                 print(after_camp_vs_unallocated)
+                print("\n ======= ＼(^o^)／ Thanks for Shopping! Come Again Soon! ＼(^o^)／ ===== \n")
         else:
-            print("Good news, there are no open camps with refugees that are without any resource (of any type). ")
+            print("＼(^o^)／ GOOD NEWS ＼(^o^)／ There are no resource-less & open camps with refugees ")

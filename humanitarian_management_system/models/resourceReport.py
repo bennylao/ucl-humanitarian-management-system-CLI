@@ -14,13 +14,19 @@ class ResourceReport():
         self.unallocResources_df = pd.read_csv(self.resource__nallocated_stock_csv_path)
         self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
     
+    ############################################################################################################################
+
+    ### TOOLBOX - utility-type functions to check data & create valid selection ranges for resources
+
+    ############################################################################################################################
+    
     def unalloc_resource_checker(self):
         #### just a checker to see if we have any unallocated resources. Should return just binary outcome
         #### will be useful for other resource functions 
         unalloc = sum(self.unallocResources_df['unallocTotal'])
         if unalloc == 0:
             unalloc_status = False
-            unalloc_prompt = "\n ======= ＼(^o^)／ There are no unallocated resources ~ All good! ＼(^o^)／ ===== \n"
+            unalloc_prompt = "\n ＼(^o^)／ GOOD NEWS ＼(^o^)／ There are no unallocated resources (empty inventory) \n"
         else:
             unalloc_items = self.unallocResources_df[self.unallocResources_df['unallocTotal'] > 0]
             unalloc_status = True
@@ -95,17 +101,14 @@ class ResourceReport():
         valid_range = self.camp_df.loc[condition, ['campID', 'refugeePop']]
         return valid_range
     
+    def valid_all_camps_with_refugees(self): ####### come back to this!! 
+        condition = self.camp_df['status']=='open'
+        valid_range = self.camp_df.loc[condition, ['campID', 'refugeePop']]
+        return valid_range
 
     def valid_resources(self):
         valid_range = self.totalResources_df['resourceID'].tolist()
         return valid_range
-    
-    def valid_pairwise_camp_resources(self):
-        resourceMap = self.resourceAllocs_df
-        valid_range12_df = resourceMap.loc[resourceMap['qty']>0, ['campID', 'resourceID']]
-        columns = valid_range12_df.columns
-        valid_range12 = set(zip(valid_range12_df[columns[0]], valid_range12_df[columns[1]]))
-        return valid_range12
 
     def input_validator(self, prompt_msg, valid_range, error_msg = 'Invalid selection. Please try again.'):
         # for usage in resources - validates the form inputs
@@ -127,11 +130,13 @@ class ResourceReport():
                 print(error_msg)  # Print error message for input out of range
         AdminView.manage_resource_menu()
 
+    ############################################################################################################################
 
-    # for campID and resource pairing - resource must be above zero and campID must be an open one with refugees
-    def pairwise_input_validator(self, prompt_msg1, prompt_msg2, valid_range1, valid_range2, valid_range12, error_msg='Invalid combination. Please try again.'):
-        while True:
-            user_input1 = self.input_validator(prompt_msg1, valid_range1)
+    ### STATS - table generation, used to display within GUI & in combo with toolbox functions for involved manipulation of data
+
+    ### JESS NOTES - NEED TO TIDY THIS UP; MAKE BETTER LOOKING... ASK TEAM WHATS GOOD
+
+    ############################################################################################################################
 
     def resourceStock_generator(self, new_map):
         assigned = self.totalResources_df
@@ -197,6 +202,8 @@ class ResourceReport():
 
         ## is this helpful? maybe add in population as well ? 
         ## add something into allow view of selected resources only... ?? or not... idm 
+
+        #################### this includes closed camps too ! 
         return joined_df_unalloc_camp
     
     def report_closed_camp_with_resources(self):
@@ -205,7 +212,13 @@ class ResourceReport():
         camp_half_df = master_df[valid_range_df['campID'].to_list()]
         info_half_df = master_df.iloc[:, :4]
         return pd.concat([info_half_df, camp_half_df], axis=1)
-    ############## comparing our current resource levels to a caculated equilibirum level
+    
+
+    ############################################################################################################################
+
+    ### EQUILIBRIUM STATS - used in auto-allocation; but will be good for report generation too
+
+    ############################################################################################################################
 
     # Setting the gold standard for what should be the 'equilibrium' level
     def calculate_resource_jess(self):
@@ -216,8 +229,7 @@ class ResourceReport():
 
         # resource stock total...
         # extract total refugee population
-        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-        camp = pd.read_csv(camp_csv_path)
+        camp = self.camp_df
         pop_arr = camp['refugeePop'].tolist()
         totalRefugees = sum(pop_arr)
 
@@ -232,11 +244,12 @@ class ResourceReport():
         ### creating the base for the alloc_ideal dataframe
 
         # Define the range for the first column (numbers 1 to 11)
-        numbers = list(range(1, 12))
         resourceID = totalResources['resourceID'].tolist()
 
         # Find the non-zero camps... aka the camps with refugees
-        second_column = camp.loc[camp['refugeePop'] > 0, 'campID'].tolist()
+        # second_column = camp.loc[camp['refugeePop'] > 0, 'campID'].tolist()
+        valid_camps_df = self.valid_open_camps_with_refugees()
+        second_column = valid_camps_df['campID'].tolist()
         resourceID_repeated = resourceID * len(second_column)
 
         # Repeat each number 11 times to match the length of each block in the first column
