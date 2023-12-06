@@ -42,15 +42,14 @@ class Camp:
         df_e = pd.read_csv(self.event_csv_path)
         country = df_e['location']
         # geo_data = extract_data("data/event.csv","")
-        csv_path_c = Path(__file__).parents[1].joinpath("data/country.csv")
-        df = pd.read_csv(csv_path_c)
+        df = pd.read_csv(self.cty_csv_path)
         # find country id and event id by index
-        result = df.loc[df["name"] == capitalize(country.iloc[select_index - 1])]['countryID'].tolist()
-        event_id = int(df_e['eventID'].iloc[select_index - 1])
+
+        event_country = df_e.loc[df_e['eventID'] == 16]['location'].tolist()[0]
+        countryID = df.loc[df['name'] == event_country.capitalize()]['countryID'].tolist()[0]
 
         # keep track of existing camp num of a particular event
-        df_c = df_e
-        no_camp = int(df_c.loc[df_c["eventID"] == select_index]['no_camp'].tolist()[0])
+        no_camp = int(df_e.loc[df_e["eventID"] == int(select_index)]['no_camp'].tolist()[0])
         no_camp += 1
 
         if self.is_camp_available:
@@ -58,7 +57,7 @@ class Camp:
         else:
             status = 'closed'
 
-        Camp.camp_data = [[camp_id, event_id, result[0], self.capacity, self.health_risk, 0, 0, 1, status]]
+        Camp.camp_data = [[camp_id, int(select_index), countryID, self.capacity, self.health_risk, 0, 0, 1, status]]
         camp_df = pd.DataFrame(Camp.camp_data,
                                columns=['campID', 'eventID', 'countryID', 'refugeeCapacity', 'healthRisk',
                                         'volunteerPop', 'refugeePop', 'avgCriticalLvl', 'status'])
