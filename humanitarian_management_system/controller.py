@@ -694,7 +694,7 @@ class Controller:
                     # keep track of existing camp num of a particular event
                     no_camp = df.loc[eventID, "no_camp"]
                     no_camp -= 1
-                    index = df[df["eid"] == eventID].index.tolist()
+                    index = df[df["eventID"] == eventID].index.tolist()
                     helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
                     print("\n\u2714 You have Successfully removed the camp!")
                     return
