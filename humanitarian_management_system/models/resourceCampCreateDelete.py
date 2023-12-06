@@ -8,61 +8,80 @@ from .resourceReport import ResourceReport
 class ResourceCampCreateDelete():
     def __init__(self):
         
-        resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
-        resource_allocaation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+        self.resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        self.resource_allocaation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
         self.resource__nallocated_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceUnallocatedStock.csv")
-        self.totalResources_df = pd.read_csv(resource_stock_csv_path)
-        self.resourceAllocs_df = pd.read_csv(resource_allocaation_csv_path)
+        self.totalResources_df = pd.read_csv(self.resource_stock_csv_path)
+        self.resourceAllocs_df = pd.read_csv(self.resource_allocaation_csv_path)
         self.unallocResources_df = pd.read_csv(self.resource__nallocated_stock_csv_path)
         self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
 
-    def remove_camp_resources(self):
+    def remove_camp_resources(self, valid_range_list):
         ### we need to get the campid from somewhere, for now lets just set it ourselves,
 
         ### this should be able to be called on multiple camps at once, just run it several times :) 
-        c_id = 1 ### change to input
         report_instance = ResourceReport()
         resource_camp = report_instance.resource_report_camp()
         resource_camp.reset_index(inplace=True)
-
-        # we take vertical slice of the resource allocations per camp, and then add this to unalloc resource.
-        resource_c_id = resource_camp[['resourceID','name', c_id]]
-        print(f"\nHerer are the resources from the closed camp {c_id}, which will be unassgined back into inventory...\n")
-        print(resource_c_id(index=False))
+        sum_df = pd.DataFrame()
+        sum_df['resourceID'] = resource_camp['resourceID']
+        sum_df['sum'] = resource_camp[valid_range_list].sum(axis=1)
+        ##### and now we need to add them all together!!
 
         # need to recalculate all 3 sheets 
 
         # first calculate...
         # unallocated stock - add the above to each resource. do mapping to be on safe side 
         inventory = self.unallocResources_df ## will always have more or equal 
-        joined_df = pd.merge(inventory, resource_c_id, on='resourceID', how='outer').fillna(0) #join and then add... 
-        joined_df['unallocTotal'] = joined_df[c_id] + joined_df['unallocTotal']
-        new_unalloc = joined_df.drop(3, axis=1)
-
+        joined_df = pd.merge(inventory, sum_df, on='resourceID', how='outer').fillna(0) #join and then add... 
+        joined_df['unallocTotal'] = joined_df['sum'] + joined_df['unallocTotal']
+        new_unalloc = joined_df.drop('sum', axis=1)
+        new_unalloc.to_csv(self.resource__nallocated_stock_csv_path, index=False)
         # for allocations & totals = remove it from the map first, and then recalculate the sum 
         map = self.resourceAllocs_df
-        remove = map['campID'] == c_id
+        remove = remove = map['campID'].isin(valid_range_list)
         new_map = map[~remove]
-
+        new_map.to_csv(self.resource_allocaation_csv_path, index=False)
         # recalc the sum
-        assigned = self.totalResources_df
-        joined_df = pd.merge(assigned.drop(['total'], axis=1, inplace=False), new_map, on='resourceID', how='inner')
-        new_assigned = joined_df.groupby('resourceID').agg({
-                        'name': 'first',  # Keeps the first name for each group
-                        'qty': 'sum',  # Sums the qty for each camp >> we ignore the 'total' column in stockManualResources
-                        'priorityLvl': 'first',  
-                    }).reset_index()
-        new_assigned.rename(columns={'qty': 'total'}, inplace=True)
+        new_assigned = report_instance.resourceStock_generator(new_map)
+        new_assigned.to_csv(self.resource_stock_csv_path, index=False)
+
+        return new_unalloc
+
+ 
+    def closed_camp_resources_interface(self):
+        ### do the same but opposite basically of new_camp!
+        report_instance = ResourceReport()
+        closed_camps_df = report_instance.valid_closed_camps()
+        valid_range_list = closed_camps_df['campID'].to_list()
+        if not closed_camps_df.empty:
+            closed_camp_resource_stats = report_instance.report_closed_camp_with_resources()
+            print(f"""\n
+✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
+The below CLOSED camps still have resources allocated... \n
+==============================================================\n
+{closed_camp_resource_stats.to_string(index=False)} \n
+    Unassign / unallocate resources from all closed camps, and move to inventory? [ y / n ]\n
+            """)
+
+            user_select = report_instance.input_validator('--> ', ['y', 'n'])
+            if user_select == 'y':
+                self.remove_camp_resources(valid_range_list)
+                print(f"===== ＼(^o^)／ All resources from campIDs {valid_range_list} successfully unallocated & moved to inventory ＼(^o^)／ =====")
+                print(f"\nAFTER:\n")
+                report_instance_AFTER = ResourceReport()
+                closed_camp_resource_AFTER = report_instance_AFTER.report_closed_camp_with_resources()
+                print(closed_camp_resource_AFTER)
+        else:
+            print("Good news, there are no closed camps with assigned resources. ")
 
 
-        ### need to overwrite these ! for now just print is ok 
+    def new_camp_resources(self):
+        #### we will have a new_camps_list .. 
+        report_instance = ResourceReport()
+        new_camps_df = report_instance.valid_new_camps()
+        resource_range = report_instance.valid_resources()
 
-        print(pd.merge(new_unalloc, new_assigned, [['resourceID', 'unallocTotal']], on='resourceID', how='outer').fillna(0))
-
-        pass
-
-    def new_camp_resources(self, new_camp):
-        map = self.totalResources_df
         ### assume we get a df input like the below 
         """     +-------------+------------+
                 | new camp id | refugeepop |
@@ -73,13 +92,60 @@ class ResourceCampCreateDelete():
         """
 
         ### mechanism to calculate starting amounts >> discuss w team how this is done! >> families etc? 
-        # for now just do basics. 10 x refugeePop amount for each resource
-        resourceID_val = map['resourceID'].unique().tolist()
-        l = len(resourceID_val)
-        for index, row in new_camp.iterrow():
-            p = row['refugeePop']
-            campID_list =+ [row['campID']] * l
-            qty_list =+ [p*10] * l
-        pd.DataFrame(map['resourceID'].unique())
+        new_alloc_df = pd.DataFrame(columns=['resourceID','campID','qty'])
+
+        # Iterate over the base DataFrame
+        for index, row in new_camps_df.iterrows():
+            # Create a temporary DataFrame for each camp
+            temp_df = pd.DataFrame({
+                'resourceID': resource_range,
+                'campID': row['campID'],
+                'qty': row['refugeePop'] * 10
+            })
+
+            # Concatenate the temporary DataFrame to the final DataFrame
+            new_alloc_df = pd.concat([new_alloc_df, temp_df], ignore_index=True)
+
+        new_map = pd.concat([self.resourceAllocs_df, new_alloc_df], ignore_index=True)
+        new_map.to_csv(self.resource_allocaation_csv_path, index=False)
+        # use this to create the updated stock / assigned resources table
+        new_assigned = report_instance.resourceStock_generator(new_map)
+        new_assigned.to_csv(self.resource_stock_csv_path, index=False)
+
+        ## now need to overwrite the both of them into csv files
+
+        print("Success! New camps have assigned starter pack resources now. ")
         
-        pass
+        return new_map, new_assigned
+    
+
+    def new_camp_resources_interface(self):
+        #### this only needs ot run, if new_camps_df is not empty 
+        report_instance = ResourceReport()
+        new_camps_df = report_instance.valid_new_camps()
+        if not new_camps_df.empty:
+            print(f"""✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖  \n
+    There are newly open camp(s) with refugees...
+    but NO RESOURCES OF ANY TYPE! \n
+    =====================================================\n
+    {new_camps_df.to_string(index=False)} \n
+    The starter resource pack new camps is 10 of each resource per refugeePop.\n
+    Proceed to buy & assign this for all camps above? [ y / n ]\n
+            """)
+
+            user_select = report_instance.input_validator('--> ', ['y', 'n'])
+            before_camp_vs_unallocated = report_instance.resource_report_camp_vs_unallocated()
+
+            #### can add something more interactive here
+
+            if user_select == 'y':
+                self.new_camp_resources()
+                print("\n Done! All new camps have been assigned a starter resource pack.\n ")
+                print("\nBEFORE:")
+                print(before_camp_vs_unallocated)
+                print("\nAFTER:\n")
+                report_instance_AFTER = ResourceReport()
+                after_camp_vs_unallocated = report_instance_AFTER.resource_report_camp_vs_unallocated()
+                print(after_camp_vs_unallocated)
+        else:
+            print("Good news, there are no open camps with refugees that are without any resource (of any type). ")

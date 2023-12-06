@@ -12,3 +12,4 @@ from .resourceTesting import ResourceTest
 from .resourceReport import ResourceReport
 from .resourceAllocator import ResourceAllocator
 from .resourceAdder import ResourceAdder
+from .resourceCampCreateDelete import ResourceCampCreateDelete

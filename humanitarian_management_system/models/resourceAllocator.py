@@ -43,7 +43,38 @@ class ResourceAllocator():
 
     def auto_alloc(self):
         resource_stats_instance = ResourceReport()
-        all_resource_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated()
+        all_resource_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated() ### the adding is done before in a different function, so by the time it  makes it here, we have already added to the auto_alloc.... so need to get the unallocTotal elsewhere. 
+
+        """         BEFORE: 
+
+            resourceID                      name  priorityLvl  unallocTotal      3      5     6     9    11
+        0            1                  Blankets            2             0   2292   5500   917   917   458
+        1            2                  Clothing            1             0    648   1555   259   259   130
+        2            3                      Toys            3             0     16     38     6     6     3
+        3            4                  Medicine            1             0     23     56     9     9     5
+        4            5                  Vitamins            2             0     19     46     8     8     4
+        5            6                      Food            1             0     23     56     9     9     5
+        6            7                    Snacks            3             0     15     36     6     6     3
+        7            8                Toiletries            2             0     19     46     8     8     4
+        8            9                     Water            1             0     46    110    18    18     9
+        9           10             Baby Supplies            1             0     23     56     9     9     5
+        10          11  General Tools & Supplies            3             0  11385  27325  4554  4554  2277
+
+        AFTER: 
+
+            resourceID                      name  priorityLvl  unallocTotal      3      5     6     9    11
+        0            1                  Blankets            2             0   2292   5500   917   917   458
+        1            2                  Clothing            1             0    648   1555   259   259   130
+        2            3                      Toys            3             0    288    691   115   115    58
+        3            4                  Medicine            1             0     31     75    12    12     6
+        4            5                  Vitamins            2             0     19     46     8     8     4
+        5            6                      Food            1             0     23     56     9     9     5
+        6            7                    Snacks            3             0     15     36     6     6     3
+        7            8                Toiletries            2             0     19     46     8     8     4
+        8            9                     Water            1             0     46    110    18    18     9
+        9           10             Baby Supplies            1             0     23     56     9     9     5
+        10          11  General Tools & Supplies            3             0  11385  27325  4554  4554  2277 """
+
 
         # resource stock total... >> can probably remove the need for this later 
         totalResources = self.totalResources_df
@@ -157,7 +188,7 @@ class ResourceAllocator():
         status, unalloc_prompt = resource_stats_instance.unalloc_resource_checker()
 
         print("Below are the refugee populations of the camps that are currently open: \n")
-        print(resource_stats_instance.valid_open_camps())
+        print(resource_stats_instance.valid_open_camps_with_refugees())
 
         move = pd.DataFrame(columns=['resourceID', 'name', 'origin_campID', 'destination_campID', 'moveUnits', 'action', 'actionInfo'])
         move_id_list = []
@@ -192,17 +223,28 @@ class ResourceAllocator():
                     print('\nThere are no unallocated resources here for you to assign to camps, taking you back to resources menu... ')
                     do_not_calc = True
                     break 
-            
-            # r_id_select = int(input("\nPlease enter the resourceID of the item: --> "))
-            prompt = "\nPlease enter the resourceID of the item: --> "    
-            valid_range = resource_stats_instance.valid_resources()
-            r_id_select = resource_stats_instance.input_validator(prompt, valid_range)  ############# validation begins immediately... 
-            r_name_select = self.unallocResources_df.loc[self.unallocResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
-            # how much of this resource is allocated in each camp & uallocated currently 
-            
-            single_resource_stats = all_resource_camp_vs_unallocated[all_resource_camp_vs_unallocated['resourceID'] == r_id_select]
-            print(f"\n*** Resource ID {r_id_select}: {r_name_select} *** is currently distributed as below: \n")
-            print(single_resource_stats.to_string(index=False))
+
+
+            ### the resourceID valid range is different depending on origin
+            if action_select == 1: # should be only if there are unallocated resources... 
+                unalloc_items = resource_stats_instance.valid_unalloc_resources()
+                print(f"\nHere are the current unallocated resources: \n{unalloc_items.to_string(index=False)}\n")
+                prompt = "\nPlease enter the resourceID of the item: --> "    
+                valid_range = unalloc_items['resourceID'].tolist()
+                r_id_select = resource_stats_instance.input_validator(prompt, valid_range)
+                r_name_select = self.unallocResources_df.loc[self.unallocResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
+                pass
+            else: # where the origin is a camp (action 2 & 3) - the valid ranges & displays are different
+                # r_id_select = int(input("\nPlease enter the resourceID of the item: --> "))
+                prompt = "\nPlease enter the resourceID of the item: --> "    
+                valid_range = resource_stats_instance.valid_resources()
+                r_id_select = resource_stats_instance.input_validator(prompt, valid_range)  ############# validation begins immediately... 
+                r_name_select = self.unallocResources_df.loc[self.unallocResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
+                # how much of this resource is allocated in each camp & uallocated currently 
+                
+                single_resource_stats = all_resource_camp_vs_unallocated[all_resource_camp_vs_unallocated['resourceID'] == r_id_select]
+                print(f"\n*** Resource ID {r_id_select}: {r_name_select} *** is currently distributed as below: \n")
+                print(single_resource_stats.to_string(index=False))
 
             print("\nBelow are the refugee populations & the camps that are currently open: \n")
             print(resource_stats_instance.valid_open_camps_with_refugees()) ### there should not be any camps with zero refugees. 
@@ -249,14 +291,14 @@ class ResourceAllocator():
             prompt = f"\nPlease enter the amount of *** [ Resource ID #{r_id_select}: {r_name_select} ] *** to move: "
 
             if action_select == 1:
-                upper_limit = self.unallocResources_df.loc[self.unallocResources_df['resourceID']==r_id_select]
+                upper_limit = self.unallocResources_df.loc[self.unallocResources_df['resourceID']==r_id_select, 'unallocTotal'].iloc[0]
             else:
                 r_id_qty = single_resource_stats.iloc[:, 4:] # remove first 4 columns (not relevant)
                 upper_limit = r_id_qty[origin_c_id].iloc[0]
                 
             # building the valid range4 - which is... for that selected camp are moving FROM (origin), the moveUnits must not exceed the resource already there
             # do this by reusing the single_stats_instance
-            valid_range = range(1, int(upper_limit)+1)
+            valid_range = list(range(1, int(upper_limit)+1))
             error_msg = f"Please enter an amount betwen 0 and {upper_limit} for this resource."
             move_units = resource_stats_instance.input_validator(prompt, valid_range, error_msg)
 

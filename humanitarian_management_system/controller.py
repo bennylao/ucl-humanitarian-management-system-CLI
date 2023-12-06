@@ -6,7 +6,7 @@ import math
 import logging
 from humanitarian_management_system import helper
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
-                                                   ResourceReport, ResourceAllocator, ResourceAdder)
+                                                   ResourceReport, ResourceAllocator, ResourceAdder, ResourceCampCreateDelete)
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
 
 
@@ -725,9 +725,18 @@ class Controller:
     """" ###################### RESOURCE MENU LEVEL 2 ############################################### """
 
     def resource_alloc_main_menu(self):
+        ### check for unallocated resources
         resource_report = ResourceReport()
         unalloc_status, prompt = resource_report.unalloc_resource_checker()
         print(prompt)
+
+        ### check for new camps
+        resourceCamp_instance = ResourceCampCreateDelete()
+        resourceCamp_instance.new_camp_resources_interface()
+
+        ### check for closed camps
+        resourceCamp_instance.closed_camp_resources_interface()
+
         ManagementView.resource_alloc_main_message()
 
         while True:
@@ -739,7 +748,7 @@ class Controller:
             elif user_selection == '2':
                 # here, if th4re is unallocated resources... ask if user wants to deal with unassigned resources or not
                 if unalloc_status:
-                    include_unassigned = input('Do you want to distribute the unassigned resources? y / n --> ')
+                    include_unassigned = input('Do you want to include unallocated resources in the auto-distribution? y / n --> ')
                     # user can choose if they want to do this manually or automatically, same as above actually
                     # is there a way we can reuse the same code ?? <- if we merge it into the same files....
                     if include_unassigned == 'y':

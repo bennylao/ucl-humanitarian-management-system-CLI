@@ -24,9 +24,61 @@ class ResourceReport():
         else:
             unalloc_items = self.unallocResources_df[self.unallocResources_df['unallocTotal'] > 0]
             unalloc_status = True
-            unalloc_prompt = f"\n =======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items} \n"
+            unalloc_prompt = f"\n =======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items.to_string(index = False)} \n"
 
         return unalloc_status, unalloc_prompt
+    
+    def valid_new_camps(self):
+        #### we detect this by finding camps where: 
+        # status = open
+        # refugeePop > 0
+        # but no assigned resources
+
+        ## camps by status & refugeePop
+        condition = (self.camp_df['status'] == 'open') & (self.camp_df['refugeePop'] > 0)
+        filtered_df_A = self.camp_df[condition][['campID', 'status', 'refugeePop']].reset_index(drop=True)
+
+        # camps with 
+        df_B = self.resource_report_camp() 
+        ## note this uses joined_df which is based on the resource mapping -> resourceAllocation... 
+        # which should not include any camps that (1) have no resources across the board; (2) but are still open and have non zero refugeePop
+        ## hence, the valid camps without any resources ... should not feature here at all; so we need to find the inverse of the intersection
+        df_sum = df_B.sum().reset_index(name='resourceSum')
+        condition = df_sum['resourceSum'] > 0
+        filtered_df_B = df_sum[condition]['campID']
+
+        # Assuming df1 is your first DataFrame and df2 is your second DataFrame
+        # And assuming the column in df2 is also named 'campID'
+
+        # Filtering out the rows where campID in df1 is not in df2
+        new_camps_df = filtered_df_A[~filtered_df_A['campID'].isin(filtered_df_B)].reset_index(drop=True)
+
+        return new_camps_df  ## use this by finding if not empty list
+    
+    def valid_closed_camps(self):
+        ## only closed camps with resources still unassigned
+
+        ## camps by status
+        condition = (self.camp_df['status'] == 'closed')
+        filtered_df_A = self.camp_df[condition][['campID', 'status', 'refugeePop']].reset_index(drop=True)
+
+        # camps with resources still
+        df_B = self.resource_report_camp() 
+        df_sum = df_B.sum().reset_index(name='resourceSum')
+        condition = df_sum['resourceSum'] > 0
+        filtered_df_B = df_sum[condition]['campID']
+
+        # Find their intersection
+        closed_camps_df = filtered_df_A[filtered_df_A['campID'].isin(filtered_df_B)].reset_index(drop=True)
+
+        return closed_camps_df  ## use this by finding if not empty list
+
+
+    def valid_unalloc_resources(self):
+        unalloc_items = self.unallocResources_df[self.unallocResources_df['unallocTotal'] > 0]
+        # we only need the resourceID and amount > but do that when calling the function
+        return unalloc_items
+
     
     #### the resource Map in its oiginal state, only displays camps with allocated resources. So there may be camps that have refugees, but no resources...
     #### how likely is this? ony if we remove all resources... 
@@ -81,19 +133,37 @@ class ResourceReport():
         while True:
             user_input1 = self.input_validator(prompt_msg1, valid_range1)
 
-            # Get the second input using the existing input_validator
-            user_input2 = self.input_validator(prompt_msg2, valid_range2)
-
-            # Check if the combination of user_input_1 and user_input_2 is valid
-            ### note the column order must match / be identical !! 
-            if (user_input1, user_input2) in valid_range12:
-                return user_input1, user_input2
-            else:
-                print(error_msg)
-
+    def resourceStock_generator(self, new_map):
+        assigned = self.totalResources_df
+        joined_df = pd.merge(assigned.drop(['total'], axis=1, inplace=False), new_map, on='resourceID', how='inner')
+        new_stock = joined_df.groupby('resourceID').agg({
+                        'name': 'first',  # Keeps the first name for each group
+                        'qty': 'sum',  # Sums the qty for each camp >> we ignore the 'total' column in stockManualResources
+                        'priorityLvl': 'first',  
+                    }).reset_index()
+        new_stock.rename(columns={'qty': 'total'}, inplace=True)
+        return new_stock
 
     def resource_report_total(self):
         resource_sum = pd.merge(self.totalResources_df, self.unallocResources_df[['resourceID', 'unallocTotal']], on='resourceID', how='outer').fillna(0)
+        ### changing around the columns
+        temp = resource_sum['total'].copy()
+        resource_sum['total'],  resource_sum['priorityLvl'] = resource_sum['priorityLvl'], temp
+        resource_sum.rename(columns={'total': 'priorityLvl', 'priorityLvl': 'assignedTotal'}, inplace=True)
+        resource_sum['grandTotal'] = resource_sum['assignedTotal'] + resource_sum['unallocTotal']
+        #### sample output
+        """       resourceID                   name  priorityLvl  assignedTotal  unallocTotal  grandTotal
+        0            1                  Blankets            2          10084             0       10084
+        1            2                  Clothing            1           2850             0        2850
+        2            3                      Toys            3             65          1200        1265
+        3            4                  Medicine            1            102             0         102
+        4            5                  Vitamins            2             84             0          84
+        5            6                      Food            1            102             0         102
+        6            7                    Snacks            3             65             0          65
+        7            8                Toiletries            2             84             0          84
+        8            9                     Water            1            202             0         202
+        9           10             Baby Supplies            1            102             0         102
+        10          11  General Tools & Supplies            3          50096             0       50096 """
         return resource_sum
 
     def resource_report_camp(self):
@@ -101,6 +171,19 @@ class ResourceReport():
 
         ## is this helpful? maybe add in population as well ? 
         ## add something into allow view of selected resources only... ?? or not... idm 
+        """ campID                                          3      5     6     9     11
+        resourceID name                     priorityLvl                                
+        1          Blankets                 2             2292   5500   917   917   458
+        2          Clothing                 1              648   1555   259   259   130
+        3          Toys                     3              288    691   115   115    58
+        4          Medicine                 1               31     75    12    12     6
+        5          Vitamins                 2               19     46     8     8     4
+        6          Food                     1               23     56     9     9     5
+        7          Snacks                   3               15     36     6     6     3
+        8          Toiletries               2               19     46     8     8     4
+        9          Water                    1               46    110    18    18     9
+        10         Baby Supplies            1               23     56     9     9     5
+        11         General Tools & Supplies 3            11385  27325  4554  4554  2277 """
         return resource_camp
     
     def resource_report_camp_vs_unallocated(self):
@@ -116,6 +199,12 @@ class ResourceReport():
         ## add something into allow view of selected resources only... ?? or not... idm 
         return joined_df_unalloc_camp
     
+    def report_closed_camp_with_resources(self):
+        master_df = self.resource_report_camp_vs_unallocated()
+        valid_range_df = self.valid_closed_camps()
+        camp_half_df = master_df[valid_range_df['campID'].to_list()]
+        info_half_df = master_df.iloc[:, :4]
+        return pd.concat([info_half_df, camp_half_df], axis=1)
     ############## comparing our current resource levels to a caculated equilibirum level
 
     # Setting the gold standard for what should be the 'equilibrium' level
