@@ -259,8 +259,12 @@ class Event:
             helper.modify_csv_value(event_csv_path, row, 'endDate', formatted_end_date)
             print("\nEnd date updated.")
         else:
+            camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+            df_camp = pd.read_csv(camp_csv_path)
+            row_camp_list = df_camp[(df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
             root = tk.Tk()
-            result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
+            result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
+                                               "You'll also close the camps in that event.")
             if result == "yes":
                 ongoing = False
                 if df['ongoing'].loc[row] == 'Yet':
@@ -270,6 +274,9 @@ class Event:
                 formatted_end_date = end_date.strftime('%Y-%m-%d')
                 helper.modify_csv_value(event_csv_path, row, 'endDate', formatted_end_date)
                 helper.modify_csv_value(event_csv_path, row, 'ongoing', ongoing)
+                if row_camp_list:
+                    for row_camp in row_camp_list:
+                        helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
                 tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
             else:
                 tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
@@ -307,6 +314,8 @@ class Event:
     def disable_ongoing_event():
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         df = pd.read_csv(event_csv_path)
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        df_camp = pd.read_csv(camp_csv_path)
         filtered_df = df[(df['ongoing'] == 'True')]
 
         print("\n*The following shows the info of all available events*")
@@ -327,12 +336,17 @@ class Event:
                 print("\nInvalid event ID entered.")
                 continue
         row = df[df['eventID'] == int(eid_to_close)].index[0]
+        row_camp_list = df_camp[(df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
         root = tk.Tk()
-        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?")
+        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
+                                                       "You'll also close the camps in that event.")
         if result == "yes":
             ongoing = False
             helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
             helper.modify_csv_value(event_csv_path, row, 'ongoing', ongoing)
+            if row_camp_list:
+                for row_camp in row_camp_list:
+                    helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
             tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
         else:
             tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")

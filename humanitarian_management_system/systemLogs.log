@@ -239,3 +239,13 @@ Name: userID, dtype: bool, 'campID')
 2023-12-06 14:18:21,107 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-06 14:18:21,107 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-06 14:18:33,673 - INFO - helper-admin_export_refugees_to_csv-Line1100 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 17:24:34,331 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:24:34,331 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:12:53,620 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:12:53,620 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:15:17,321 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:15:17,322 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:28:37,515 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:28:37,515 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:30:39,386 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:30:39,386 - DEBUG - controller-initialise-Line22 - Controller is initialised.
