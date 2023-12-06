@@ -7,8 +7,6 @@ import math
 import logging
 
 
-
-
 def validate_user_selection(options):
     while True:
         selection = input("--> ")
@@ -101,7 +99,7 @@ def validate_registration(usernames):
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
 
-    return ["volunteer", "FALSE", "FALSE", username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
+    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
 
 
 def validate_event_input():
@@ -519,9 +517,10 @@ def move_refugee_helper_method():
                     if (new_potential_refugee_pop + 1) <= new_camp_capacity:
                         break
                     else:
-                        print("\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
-                              f"Camp {camp_id} has a current population of {new_potential_refugee_pop} and a capacity of "
-                              f"{new_camp_capacity}.\nLet's go again.\n")
+                        print(
+                            "\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
+                            f"Camp {camp_id} has a current population of {new_potential_refugee_pop} and a capacity of "
+                            f"{new_camp_capacity}.\nLet's go again.\n")
                 else:
                     print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
             except ValueError:
@@ -573,7 +572,8 @@ def move_refugee_helper_method():
                     new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
                     if new_refugee_pop > new_camp_capacity:
                         overflow_amount = (new_refugee_pop - new_camp_capacity)
-                        print(f"Uh oh! Capacity overflow. You need to remove {overflow_amount} refugee(s) from camp {camp_id}")
+                        print(
+                            f"Uh oh! Capacity overflow. You need to remove {overflow_amount} refugee(s) from camp {camp_id}")
                     else:
                         print("Great. No capacity overflow detected.")
                     return
@@ -626,7 +626,8 @@ def delete_refugee():
         print(ref_df.to_string(index=False))
         # checking input is valid according to refugee IDs in database
         while True:
-            rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
+            rid = input(
+                "\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
             if rid == "RETURN":
                 return
             elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
@@ -683,6 +684,7 @@ def delete_refugee():
         print(f"\nOne of the data files is not found or is damaged when deleting a refugee from the system."
               f"\nPlease contact admin for further assistance."
               f"\n{e}")
+
 
 def legal_advice_support():
     logging.debug("Legal Advice Page starts up.")
@@ -862,11 +864,13 @@ def delete_session():
         training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
         session_df = pd.read_csv(training_session_path)
         logging.info("Training session file to delete a session has loaded correctly.")
-        print("\nLooks like you want to cancel or delete a session. That's a shame! See current sessions in the system.")
+        print(
+            "\nLooks like you want to cancel or delete a session. That's a shame! See current sessions in the system.")
         print("\n", session_df.to_string(index=False))
         # session_df.set_index('sessionID', inplace=True)
         while True:
-            sessionID = input("Enter RETURN now if you have changed your mind, or enter the sessionID you want to cancel: ")
+            sessionID = input(
+                "Enter RETURN now if you have changed your mind, or enter the sessionID you want to cancel: ")
             if sessionID.lower() == 'return':
                 return
             elif sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
@@ -953,10 +957,11 @@ def add_refugee_to_session():
         participants = []
         while True:
             try:
-                print("\n",refugees_in_associated_camps.to_string(index=False))
-                rid = input(f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
-                            f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
-                            "\nEnter DONE when you are finished, or return to cancel and go back: ")
+                print("\n", refugees_in_associated_camps.to_string(index=False))
+                rid = input(
+                    f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
+                    f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
+                    "\nEnter DONE when you are finished, or return to cancel and go back: ")
                 if rid.lower() == "return":
                     return
                 if rid.lower() == "done":
@@ -1019,9 +1024,10 @@ def remove_refugee_from_session():
         participants = []
         while True:
             try:
-                print("\n",already_registered)
-                rid = input(f"\n\nFrom the above list, enter the Refugee ID for the person you want to remove from session "
-                            f"{sessionID}\nEnter DONE when you are finished, or return to cancel and go back: ")
+                print("\n", already_registered)
+                rid = input(
+                    f"\n\nFrom the above list, enter the Refugee ID for the person you want to remove from session "
+                    f"{sessionID}\nEnter DONE when you are finished, or return to cancel and go back: ")
                 if rid.lower() == "return":
                     return
                 if rid.lower() == "done":
