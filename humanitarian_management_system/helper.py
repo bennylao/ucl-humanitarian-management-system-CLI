@@ -7,8 +7,6 @@ import math
 import logging
 
 
-
-
 def validate_user_selection(options):
     while True:
         selection = input("--> ")
@@ -101,7 +99,7 @@ def validate_registration(usernames):
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
 
-    return ["volunteer", "FALSE", "FALSE", username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
+    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
 
 
 def validate_event_input():
@@ -519,9 +517,10 @@ def move_refugee_helper_method():
                     if (new_potential_refugee_pop + 1) <= new_camp_capacity:
                         break
                     else:
-                        print("\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
-                              f"Camp {camp_id} has a current population of {new_potential_refugee_pop} and a capacity of "
-                              f"{new_camp_capacity}.\nLet's go again.\n")
+                        print(
+                            "\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
+                            f"Camp {camp_id} has a current population of {new_potential_refugee_pop} and a capacity of "
+                            f"{new_camp_capacity}.\nLet's go again.\n")
                 else:
                     print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
             except ValueError:
@@ -573,7 +572,8 @@ def move_refugee_helper_method():
                     new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
                     if new_refugee_pop > new_camp_capacity:
                         overflow_amount = (new_refugee_pop - new_camp_capacity)
-                        print(f"Uh oh! Capacity overflow. You need to remove {overflow_amount} refugee(s) from camp {camp_id}")
+                        print(
+                            f"Uh oh! Capacity overflow. You need to remove {overflow_amount} refugee(s) from camp {camp_id}")
                     else:
                         print("Great. No capacity overflow detected.")
                     return
@@ -626,7 +626,8 @@ def delete_refugee():
         print(ref_df.to_string(index=False))
         # checking input is valid according to refugee IDs in database
         while True:
-            rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
+            rid = input(
+                "\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
             if rid == "RETURN":
                 return
             elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
@@ -683,6 +684,7 @@ def delete_refugee():
         print(f"\nOne of the data files is not found or is damaged when deleting a refugee from the system."
               f"\nPlease contact admin for further assistance."
               f"\n{e}")
+
 
 def legal_advice_support():
     logging.debug("Legal Advice Page starts up.")
@@ -800,8 +802,9 @@ def create_training_session():
                     break
                 else:
                     print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
-            except ValueError:
-                print("\nInvalid input. Please enter a valid integer for campID or type 'RETURN' to go back.")
+            except ValueError as e:
+                logging.debug("Invalid user input when creating a session")
+                print(f"\nInvalid input {e}. Please enter a valid integer for campID or type 'RETURN' to go back.")
         eventID = camp_df.loc[camp_df['campID'] == int(camp), 'eventID'].iloc[0]
         camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
         refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
@@ -862,11 +865,13 @@ def delete_session():
         training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
         session_df = pd.read_csv(training_session_path)
         logging.info("Training session file to delete a session has loaded correctly.")
-        print("\nLooks like you want to cancel or delete a session. That's a shame! See current sessions in the system.")
+        print(
+            "\nLooks like you want to cancel or delete a session. That's a shame! See current sessions in the system.")
         print("\n", session_df.to_string(index=False))
         # session_df.set_index('sessionID', inplace=True)
         while True:
-            sessionID = input("Enter RETURN now if you have changed your mind, or enter the sessionID you want to cancel: ")
+            sessionID = input(
+                "Enter RETURN now if you have changed your mind, or enter the sessionID you want to cancel: ")
             if sessionID.lower() == 'return':
                 return
             elif sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
@@ -953,10 +958,11 @@ def add_refugee_to_session():
         participants = []
         while True:
             try:
-                print("\n",refugees_in_associated_camps.to_string(index=False))
-                rid = input(f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
-                            f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
-                            "\nEnter DONE when you are finished, or return to cancel and go back: ")
+                print("\n", refugees_in_associated_camps.to_string(index=False))
+                rid = input(
+                    f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
+                    f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
+                    "\nEnter DONE when you are finished, or return to cancel and go back: ")
                 if rid.lower() == "return":
                     return
                 if rid.lower() == "done":
@@ -1019,9 +1025,10 @@ def remove_refugee_from_session():
         participants = []
         while True:
             try:
-                print("\n",already_registered)
-                rid = input(f"\n\nFrom the above list, enter the Refugee ID for the person you want to remove from session "
-                            f"{sessionID}\nEnter DONE when you are finished, or return to cancel and go back: ")
+                print("\n", already_registered)
+                rid = input(
+                    f"\n\nFrom the above list, enter the Refugee ID for the person you want to remove from session "
+                    f"{sessionID}\nEnter DONE when you are finished, or return to cancel and go back: ")
                 if rid.lower() == "return":
                     return
                 if rid.lower() == "done":
@@ -1082,7 +1089,7 @@ def get_export_file_path():
                     file_path = file_path.parent / f"{file_path.stem}_{index}{file_path.suffix}"
                 break
             else:
-                # Validate the user input as a valid file path if needed
+
                 file_path = Path(user_input)
                 break
         return file_path
@@ -1098,22 +1105,100 @@ def admin_export_refugees_to_csv():
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
         logging.info("Successfully loaded refugee csv for admin exporting refugee csv file.")
-        refugees = []
-        for index, row in ref_df.iterrows():
-            refugee_data = {
-                "refugeeID": row["refugeeID"],
-                "campID": row["campID"],
-                "firstName": row["firstName"],
-                "lastName": row["lastName"],
-                "dob": row["dob"],
-                "gender": row["gender"],
-                "familyID": row["familyID"],
-            }
-            refugees.append(refugee_data)
+        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+        camp_df = pd.read_csv(camp_csv_path)
+        logging.info("Successfully loaded camp csv file for reporting on refugees in event.")
+        event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
+        event_df = pd.read_csv(event_csv_path)
+        logging.info("Successfully loaded event csv file for reporting on refugees in event.")
+        print(ref_df.to_string(index=False))
+        print("\nWe can print out a report of refugees categorised by event, camp, or report on all refugees "
+              "in the system.\n")
+        while True:
+            ref_filter = input("Please enter EVENT,\nCAMP,\n*,\nor RETURN: ")
+            refugees = []
+            if ref_filter.lower() == 'return':
+                return
+            elif ref_filter.lower() == 'camp':
+                while True:
+                    campID = input("Enter the camp that you want a report of refugees on: ")
+                    if campID.lower() == 'return':
+                        return
+                    try:
+                        campID = int(campID)
+                        if camp_df['campID'].eq(campID).any():
+                            break
+                        else:
+                            print("\nSorry - that camp doesn't exist in our system!")
+                    except Exception as e:
+                        logging.critical(f"Unexpected error when filtering refugees by camp"
+                                         f"for reporting function, with error {e}.")
+                        print("\nInvalid input. Must enter an integer or one of the specified exit options.")
+                refugees_in_camp = ref_df[ref_df['campID'] == campID]
+                print(f"Okay! We're getting all the refugees which are in camps within camp {campID}.\n"
+                      f"----------------------------------------------------------------------------------\n")
+                for index, row in refugees_in_camp.iterrows():
+                    refugee_data = {
+                        "refugeeID": row["refugeeID"],
+                        "campID": row["campID"],
+                        "firstName": row["firstName"],
+                        "lastName": row["lastName"],
+                        "dob": row["dob"],
+                        "gender": row["gender"],
+                        "familyID": row["familyID"],
+                    }
+                    refugees.append(refugee_data)
+                break
+            elif ref_filter.lower() == 'event':
+                while True:
+                    eventID = input("Enter the event that you want a report of refugees on: ")
+                    if eventID.lower() == 'return':
+                        return
+                    try:
+                        eventID = int(eventID)
+                        if event_df['eventID'].eq(eventID).any():
+                            break
+                        else:
+                            print("\nSorry - that event doesn't exist in our system!")
+                    except Exception as e:
+                        logging.critical(f"Unexpected error when filtering refugees by event"
+                                         f"for reporting function, with error {e}.")
+                        print("\nInvalid input. Must enter an integer or one of the specified exit options.")
+                camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
+                refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
+                print(f"Okay! We're getting all the refugees which are in camps within eventID {eventID}.\n"
+                      f"----------------------------------------------------------------------------------\n")
+                for index, row in refugees_in_associated_camps.iterrows():
+                    refugee_data = {
+                        "refugeeID": row["refugeeID"],
+                        "campID": row["campID"],
+                        "firstName": row["firstName"],
+                        "lastName": row["lastName"],
+                        "dob": row["dob"],
+                        "gender": row["gender"],
+                        "familyID": row["familyID"],
+                    }
+                    refugees.append(refugee_data)
+                break
 
-        if len(refugees) == 0:
-            print("No data on refugees to export.")
-            return
+            elif ref_filter == '*':
+                for index, row in ref_df.iterrows():
+                    refugee_data = {
+                        "refugeeID": row["refugeeID"],
+                        "campID": row["campID"],
+                        "firstName": row["firstName"],
+                        "lastName": row["lastName"],
+                        "dob": row["dob"],
+                        "gender": row["gender"],
+                        "familyID": row["familyID"],
+                    }
+                    refugees.append(refugee_data)
+                break
+            else:
+                print("Sorry! Didn't quite catch that. Let's try again or enter RETURN to go back.")
+            if len(refugees) == 0:
+                print("No data on the specified refugees to report on.")
+                return
         with open(file_path, 'w', newline='') as csvfile:
             fieldnames = refugees[0].keys()
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

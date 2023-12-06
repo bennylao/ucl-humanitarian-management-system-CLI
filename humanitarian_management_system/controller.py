@@ -166,23 +166,25 @@ class Controller:
                 break
 
     def admin_manage_volunteer(self):
-        AdminView.display_volunteer_menu()
-        user_selection = helper.validate_user_selection(AdminView.get_volunteer_options())
-
-        if user_selection == "1":
-            self.edit_volunteer()
-        if user_selection == "2":
-            self.display_volunteer()
-        if user_selection == "3":
-            self.activate_account()
-        if user_selection == "4":
-            self.remove_account()
-        if user_selection == "R":
-            return
-        if user_selection == "L":
-            self.logout_request = True
-            self.user = None
-            return
+        while True:
+            AdminView.display_volunteer_menu()
+            user_selection = helper.validate_user_selection(AdminView.get_volunteer_options())
+            if user_selection == "1":
+                self.edit_volunteer()
+            if user_selection == "2":
+                self.display_volunteer()
+            if user_selection == "3":
+                self.verify_account()
+            if user_selection == "4":
+                self.activate_account()
+            if user_selection == "5":
+                self.remove_account()
+            if user_selection == "R":
+                return
+            if user_selection == "L":
+                self.logout_request = True
+                self.user = None
+                return
 
     def edit_volunteer(self):
         try:
@@ -232,6 +234,10 @@ class Controller:
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
+
+    @staticmethod
+    def verify_account():
+        Admin.verify_user()
 
     def activate_account(self):
         try:

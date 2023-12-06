@@ -184,15 +184,83 @@ Name: userID, dtype: bool, 'campID')
 2023-12-06 00:48:46,871 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-06 00:51:52,696 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-06 00:51:52,696 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 10:12:15,908 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 10:12:15,908 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 11:44:55,640 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 11:44:55,641 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 11:57:49,371 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 11:57:49,371 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 12:05:03,376 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 12:05:03,376 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 12:39:14,840 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 12:39:14,840 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 12:41:20,119 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 12:41:20,119 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:32:04,160 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:32:04,161 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:32:14,805 - CRITICAL - controller-login-Line120 - admin_export_refugees_to_csv() missing 1 required positional argument: 'file_path'
+2023-12-06 13:41:10,008 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:41:10,009 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:42:33,574 - INFO - helper-admin_export_refugees_to_csv-Line1086 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:42:36,036 - INFO - helper-admin_export_refugees_to_csv-Line1086 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:44:15,699 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:44:15,700 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:44:40,103 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:44:40,104 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:44:50,664 - INFO - helper-admin_export_refugees_to_csv-Line1089 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:45:46,259 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:45:46,260 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:47:01,911 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:47:01,911 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:47:28,657 - INFO - helper-admin_export_refugees_to_csv-Line1089 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:48:06,009 - INFO - helper-admin_export_refugees_to_csv-Line1089 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:48:24,684 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:48:24,684 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:48:45,366 - INFO - helper-admin_export_refugees_to_csv-Line1089 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:49:02,068 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:49:02,069 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:49:10,987 - INFO - helper-admin_export_refugees_to_csv-Line1089 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:50:25,943 - INFO - helper-admin_export_refugees_to_csv-Line1089 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:51:59,813 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:51:59,814 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:52:23,799 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:52:23,799 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:52:36,977 - INFO - helper-admin_export_refugees_to_csv-Line1090 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:57:02,230 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:57:02,231 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:57:09,880 - INFO - helper-admin_export_refugees_to_csv-Line1097 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 13:57:19,309 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:57:19,309 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:57:31,090 - DEBUG - helper-admin_export_refugees_to_csv-Line1091 - File path entered by user causing issue.
+2023-12-06 13:58:19,183 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 13:58:19,184 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 13:58:30,685 - DEBUG - helper-admin_export_refugees_to_csv-Line1091 - File path entered by user causing issue.
+2023-12-06 14:07:48,933 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 14:07:48,934 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 14:07:56,156 - DEBUG - helper-get_export_file_path-Line1089 - File path options entered by user causing issue.
+2023-12-06 14:07:56,158 - INFO - helper-admin_export_refugees_to_csv-Line1099 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 14:07:56,160 - CRITICAL - helper-admin_export_refugees_to_csv-Line1124 - Error with file when exporting refugee data to CSV on admin demand.
+2023-12-06 14:10:23,368 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 14:10:23,369 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 14:10:32,917 - DEBUG - helper-get_export_file_path-Line1090 - File path options entered by user causing issue.
+2023-12-06 14:10:32,920 - INFO - helper-admin_export_refugees_to_csv-Line1100 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 14:10:32,921 - CRITICAL - helper-admin_export_refugees_to_csv-Line1125 - Error with file when exporting refugee data to CSV on admin demand.
+2023-12-06 14:12:58,973 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 14:12:58,973 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 14:13:05,891 - INFO - helper-admin_export_refugees_to_csv-Line1100 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 14:18:21,107 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 14:18:21,107 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 14:18:33,673 - INFO - helper-admin_export_refugees_to_csv-Line1100 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 14:59:22,948 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 14:59:22,950 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 14:59:37,578 - INFO - helper-admin_export_refugees_to_csv-Line1101 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 14:59:37,580 - INFO - helper-admin_export_refugees_to_csv-Line1104 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-06 14:59:37,583 - INFO - helper-admin_export_refugees_to_csv-Line1107 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-06 15:05:01,195 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 15:05:01,195 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 15:05:09,709 - INFO - helper-admin_export_refugees_to_csv-Line1101 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 15:05:09,712 - INFO - helper-admin_export_refugees_to_csv-Line1104 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-06 15:05:09,713 - INFO - helper-admin_export_refugees_to_csv-Line1107 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-06 15:11:42,517 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 15:11:42,518 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 15:12:00,933 - INFO - helper-admin_export_refugees_to_csv-Line1101 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 15:12:00,936 - INFO - helper-admin_export_refugees_to_csv-Line1104 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-06 15:12:00,938 - INFO - helper-admin_export_refugees_to_csv-Line1107 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-06 15:12:46,266 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 15:12:46,266 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 15:12:57,856 - INFO - helper-admin_export_refugees_to_csv-Line1101 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 15:12:57,859 - INFO - helper-admin_export_refugees_to_csv-Line1104 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-06 15:12:57,861 - INFO - helper-admin_export_refugees_to_csv-Line1107 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-06 15:13:34,392 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 15:13:34,393 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 15:13:41,882 - INFO - helper-admin_export_refugees_to_csv-Line1101 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-06 15:13:41,885 - INFO - helper-admin_export_refugees_to_csv-Line1104 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-06 15:13:41,887 - INFO - helper-admin_export_refugees_to_csv-Line1107 - Successfully loaded event csv file for reporting on refugees in event.

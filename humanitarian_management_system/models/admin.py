@@ -60,6 +60,40 @@ class Admin(User):
             return
         return
 
+    @staticmethod
+    def verify_user():
+        print("\nHere is the list of all newly registered volunteers waiting to be verified.")
+        while True:
+            user_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"), converters={'userID': str})
+            unverified_user_df = user_df.loc[user_df['isVerified'] == False]
+            unverified_user_options = unverified_user_df['userID'].tolist()
+            print(unverified_user_df.to_markdown(index=False))
+            print("\nPlease select the user ID of the volunteer you would like to verify and activate.\n"
+                  "or enter 'RETURN' to return to the previous menu.")
+            while True:
+                user_select = input("User ID: ")
+                if user_select == 'RETURN':
+                    return
+                if user_select in unverified_user_options:
+                    user_df.loc[user_df['userID'] == user_select, 'isVerified'] = True
+                    user_df.loc[user_df['userID'] == user_select, 'isActive'] = True
+                    user_df.to_csv(Path(__file__).parents[1].joinpath("data/user.csv"), index=False)
+                    print(f"User with ID {user_select} has been verified.")
+                    while True:
+                        to_continue = input("\nDo you want to verify another user? (y/n): ")
+                        if to_continue.lower() == 'y':
+                            break
+                        elif to_continue.lower() == 'n':
+                            return
+                        else:
+                            print("Invalid input!")
+                            continue
+                    if to_continue.lower() == 'y':
+                        break
+                else:
+                    print("Invalid user ID entered!")
+                    continue
+
     def activate_user(self):
         vol_id_arr = []
         vol_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"))
