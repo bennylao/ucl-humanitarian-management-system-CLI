@@ -273,3 +273,49 @@ Name: userID, dtype: bool, 'campID')
 2023-12-06 17:22:45,777 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-06 17:23:39,563 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-06 17:23:39,563 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:48:04,272 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:48:04,272 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:48:23,737 - CRITICAL - controller-admin_create_camp-Line443 - single positional indexer is out-of-bounds
+2023-12-06 17:50:15,532 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:50:15,532 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:50:29,558 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 17:53:11,988 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:53:11,988 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:53:26,539 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 17:56:08,624 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:56:08,624 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:56:23,611 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:04:58,225 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:04:58,225 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:05:22,271 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:06:15,015 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:06:15,016 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:08:45,338 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:08:45,338 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:08:55,515 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:10:21,485 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:10:21,485 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:10:31,414 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:11:51,249 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:11:51,249 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:12:00,988 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:14:23,565 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:14:23,565 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:17:17,532 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:17:17,532 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:18:13,352 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:18:13,353 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:25:16,168 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:25:16,168 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:29:29,166 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:29:29,166 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:30:24,829 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:30:24,829 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 19:36:52,433 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 19:36:52,433 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 19:37:29,737 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 19:37:29,737 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 19:38:11,986 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 19:38:11,986 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 19:41:52,480 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 19:41:52,480 - DEBUG - controller-initialise-Line22 - Controller is initialised.
