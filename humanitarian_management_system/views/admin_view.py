@@ -41,8 +41,9 @@ class AdminView:
     manage_volunteer_menu = (
         ("1", "Edit volunteer profile"),
         ("2", "Display all volunteer information"),
-        ("3", "Deactivate/reactivate volunteer"),
-        ("4", "Remove volunteer"),
+        ("3", "Verify newly registered volunteer"),
+        ("4", "Deactivate/reactivate volunteer"),
+        ("5", "Remove volunteer"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )

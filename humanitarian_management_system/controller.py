@@ -8,7 +8,7 @@ from humanitarian_management_system import helper
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder, ResourceCampCreateDelete)
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
-
+from humanitarian_management_system.data_analysis.camp_data_visualization import Dashboard
 
 class Controller:
     def __init__(self):
@@ -166,23 +166,25 @@ class Controller:
                 break
 
     def admin_manage_volunteer(self):
-        AdminView.display_volunteer_menu()
-        user_selection = helper.validate_user_selection(AdminView.get_volunteer_options())
-
-        if user_selection == "1":
-            self.edit_volunteer()
-        if user_selection == "2":
-            self.display_volunteer()
-        if user_selection == "3":
-            self.activate_account()
-        if user_selection == "4":
-            self.remove_account()
-        if user_selection == "R":
-            return
-        if user_selection == "L":
-            self.logout_request = True
-            self.user = None
-            return
+        while True:
+            AdminView.display_volunteer_menu()
+            user_selection = helper.validate_user_selection(AdminView.get_volunteer_options())
+            if user_selection == "1":
+                self.edit_volunteer()
+            if user_selection == "2":
+                self.display_volunteer()
+            if user_selection == "3":
+                self.verify_account()
+            if user_selection == "4":
+                self.activate_account()
+            if user_selection == "5":
+                self.remove_account()
+            if user_selection == "R":
+                return
+            if user_selection == "L":
+                self.logout_request = True
+                self.user = None
+                return
 
     def edit_volunteer(self):
         try:
@@ -232,6 +234,10 @@ class Controller:
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
+
+    @staticmethod
+    def verify_account():
+        Admin.verify_user()
 
     def activate_account(self):
         try:
@@ -383,6 +389,10 @@ class Controller:
             logging.critical(f"{e}")
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
+
+    def admin_campDashboard(self):
+        dashboard = Dashboard()
+        dashboard.run()
 
     def admin_create_camp(self):
         try:
@@ -684,7 +694,7 @@ class Controller:
                     # keep track of existing camp num of a particular event
                     no_camp = df.loc[eventID, "no_camp"]
                     no_camp -= 1
-                    index = df[df["eid"] == eventID].index.tolist()
+                    index = df[df["eventID"] == eventID].index.tolist()
                     helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
                     print("\n\u2714 You have Successfully removed the camp!")
                     return
