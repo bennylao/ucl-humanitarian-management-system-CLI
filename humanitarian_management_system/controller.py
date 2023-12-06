@@ -725,10 +725,6 @@ class Controller:
     """" ###################### RESOURCE MENU LEVEL 2 ############################################### """
 
     def resource_alloc_main_menu(self):
-        ### check for unallocated resources
-        resource_report = ResourceReport()
-        unalloc_status, prompt = resource_report.unalloc_resource_checker()
-        print(prompt)
 
         ### check for new camps
         resourceCamp_instance = ResourceCampCreateDelete()
@@ -736,6 +732,11 @@ class Controller:
 
         ### check for closed camps
         resourceCamp_instance.closed_camp_resources_interface()
+
+        ### check for unallocated resources
+        resource_report = ResourceReport()
+        unalloc_status, prompt = resource_report.unalloc_resource_checker()
+        print(prompt)
 
         ManagementView.resource_alloc_main_message()
 
@@ -746,16 +747,7 @@ class Controller:
             if user_selection == '1':
                 alloc_instance.manual_alloc()
             elif user_selection == '2':
-                # here, if th4re is unallocated resources... ask if user wants to deal with unassigned resources or not
-                if unalloc_status:
-                    include_unassigned = input('Do you want to include unallocated resources in the auto-distribution? y / n --> ')
-                    # user can choose if they want to do this manually or automatically, same as above actually
-                    # is there a way we can reuse the same code ?? <- if we merge it into the same files....
-                    if include_unassigned == 'y':
-                        print("\n ================ LOADING ==============\n")
-                        alloc_instance.add_unalloc_resource()  # ## add the unassigned resources to the
-                        # totalResources, ready for assignment by running auto_alloc immediately after
-                alloc_instance.auto_alloc()
+                alloc_instance.auto_alloc_interface()
             else:
                 print("Invalid mode option entered!")
                 continue

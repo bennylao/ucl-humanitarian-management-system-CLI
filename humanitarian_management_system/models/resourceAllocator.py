@@ -15,6 +15,37 @@ class ResourceAllocator():
         self.unallocResources_df = pd.read_csv(self.resource__nallocated_stock_csv_path)
         self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
 
+    def auto_alloc_interface(self):
+        report_instance = ResourceReport()
+        before_auto_alloc = report_instance.resource_report_camp_vs_unallocated() 
+        ## run an instance of the table before modifying the source data to include unallocated soruces, if the user so wishes
+        ## this is so that our table will pick up the before of unallocated resource integration
+
+        unalloc_status, prompt = report_instance.unalloc_resource_checker()
+        if unalloc_status == True:
+            # user can choose if they want to do this manually or automatically, same as above actually
+            # is there a way we can reuse the same code ?? <- if we merge it into the same files....
+            include_unassigned = report_instance.input_validator('Do you want to include unallocated resources in the auto-distribution? y / n --> ', ['y', 'n'])
+            if include_unassigned == 'y':
+                print("\n ================ LOADING ==============\n")
+                self.add_unalloc_resource()  # ## add the unassigned resources to the
+                # totalResources, ready for assignment by running auto_alloc immediately after
+            else:
+                print("\nSkipping addition of unallocated resources.\n")
+        else:
+            print("\nCheck complete: No unallocated resources found, proceeding with auto-allocation...\n")
+
+        self.auto_alloc()  
+        ### print success msg
+        print("\n ======= ＼(^o^)／ AUTO-REDISTRIBUTION SUCCESSFUL! ＼(^o^)／ ===== \n Below are the before & after auto-allocation: \n")
+        ######## maybe redirect the menus
+        print("BEFORE: \n")
+        print(before_auto_alloc)
+        print("\nAFTER: \n")
+        report_instance_AFTER = ResourceReport()
+        after_auto_alloc = report_instance_AFTER.resource_report_camp_vs_unallocated()
+        print(after_auto_alloc)
+
     def add_unalloc_resource(self):
         # adding unallocated resources to the total resources dataframe, preparing it for the (auto) distribution... 
         # note that i think this is only relevant to automatic reallocation only... 
@@ -43,7 +74,7 @@ class ResourceAllocator():
 
     def auto_alloc(self):
         resource_stats_instance = ResourceReport()
-        all_resource_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated() ### the adding is done before in a different function, so by the time it  makes it here, we have already added to the auto_alloc.... so need to get the unallocTotal elsewhere. 
+        ### the adding is done before in a different function, so by the time it  makes it here, we have already added to the auto_alloc.... so need to get the unallocTotal elsewhere. 
 
         """         BEFORE: 
 
@@ -157,21 +188,6 @@ class ResourceAllocator():
         # print(alloc_updated)
         alloc_updated.to_csv(self.resource_allocaation_csv_path, index=False)
 
-        resource_stats_instance_AFTER = ResourceReport()
-        post_manual_alloc_camp_df = resource_stats_instance_AFTER.resource_report_camp_vs_unallocated()
-
-        ### print success msg
-        print("\n ======= ＼(^o^)／ AUTO-REDISTRIBUTION SUCCESSFUL! ＼(^o^)／ ===== \n Below are the before & after auto-allocation: \n")
-        ######## maybe redirect the menus
-
-
-        ###### note for jess is to do a before and after of the reallocation
-        print("BEFORE: \n")
-        print(all_resource_camp_vs_unallocated)
-        print("\nAFTER: \n")
-        print(post_manual_alloc_camp_df)
-
-
         return alloc_ideal, redistribute_sum_checker, comparison_result
     
     def manual_alloc(self):
@@ -183,12 +199,19 @@ class ResourceAllocator():
         print("Below is how each resource is currently unallocated vs. how many is distributed across the camps: \n")
         all_resource_camp_vs_unallocated = resource_stats_instance.resource_report_camp_vs_unallocated()
         all_resource_camp_vs_unallocated.reset_index(inplace=True)
-        print(all_resource_camp_vs_unallocated.to_string(index=False))
+        print(all_resource_camp_vs_unallocated.to_string(index=False))  
+        ### this should include any closed camps as well... ### but then in the input forms, we only allow dealing with open camps...
+        ### so we should only display the open ones; as we force 
+
+        ######### DISPLAY WARNING OF CLOSED CAMPS! 
 
         status, unalloc_prompt = resource_stats_instance.unalloc_resource_checker()
 
-        print("Below are the refugee populations of the camps that are currently open: \n")
-        print(resource_stats_instance.valid_open_camps_with_refugees())
+        print("\nOf the above, below are the refugee populations of the OPEN camps: \n")
+        valid_camps = resource_stats_instance.valid_open_camps_with_refugees()
+        print(valid_camps.transpose().reset_index(drop=True).to_string())
+
+        print("\nPlease note these camps are CLOSED but still have resources: [XXXXXXX COME BACK TO THIS]\n")
 
         move = pd.DataFrame(columns=['resourceID', 'name', 'origin_campID', 'destination_campID', 'moveUnits', 'action', 'actionInfo'])
         move_id_list = []
