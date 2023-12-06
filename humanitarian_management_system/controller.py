@@ -8,7 +8,7 @@ from humanitarian_management_system import helper
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder, ResourceCampCreateDelete)
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
-
+from humanitarian_management_system.data_analysis.camp_data_visualization import Dashboard
 
 class Controller:
     def __init__(self):
@@ -389,6 +389,10 @@ class Controller:
             logging.critical(f"{e}")
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
+
+    def admin_campDashboard(self):
+        dashboard = Dashboard()
+        dashboard.run()
 
     def admin_create_camp(self):
         try:
