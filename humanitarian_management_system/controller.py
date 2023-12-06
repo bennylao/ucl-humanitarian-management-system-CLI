@@ -356,6 +356,8 @@ class Controller:
             if user_selection == "8":
                 self.admin_display_camp()
                 pass
+            if user_selection == "9":
+                self.admin_refugee_export()
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -1134,6 +1136,13 @@ class Controller:
                 helper.delete_refugee()
             else:
                 print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
+
+    def admin_refugee_export(self):
+        print(
+            "----------------------------------------------------------------------------------------------------------\n"
+            "Looks like you want to print out a CSV record of all the refugees we have in the system across all camps.\n"
+            "---------------------------------------------------------------------------------------------------------")
+        helper.admin_export_refugees_to_csv()
 
     def legal_advice_support(self):
         while True:

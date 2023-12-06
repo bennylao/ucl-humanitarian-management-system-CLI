@@ -1062,6 +1062,71 @@ def remove_refugee_from_session():
               f"\n{e}")
 
 
+def get_export_file_path():
+    try:
+        while True:
+            user_input = input(
+                "Enter a specified path for where you want the file to go, or enter 'X' and it will be placed in "
+                "the data folder.\n\n***You will see this when you next log back in or after you "
+                "stop running the program***\n\n(Enter RETURN to go back).\n")
+
+            if user_input.lower() == 'return':
+                return None
+            elif user_input.lower() == 'x':
+                base_file_path = "data/refugees_exported_data_file.csv"
+                file_path = Path(base_file_path)
+                if file_path.is_file():
+                    index = 1
+                    while (file_path.parent / f"{file_path.stem}_{index}{file_path.suffix}").is_file():
+                        index += 1
+                    file_path = file_path.parent / f"{file_path.stem}_{index}{file_path.suffix}"
+                break
+            else:
+                # Validate the user input as a valid file path if needed
+                file_path = Path(user_input)
+                break
+        return file_path
+    except Exception as e:
+        logging.debug("File path options entered by user causing issue.")
+        print(f"Looks like that file path didn't work, causing error {e}. Don't worry - we're redirecting you back.")
+        return
+
+
+def admin_export_refugees_to_csv():
+    file_path = get_export_file_path()
+    try:
+        refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+        ref_df = pd.read_csv(refugee_csv_path)
+        logging.info("Successfully loaded refugee csv for admin exporting refugee csv file.")
+        refugees = []
+        for index, row in ref_df.iterrows():
+            refugee_data = {
+                "refugeeID": row["refugeeID"],
+                "campID": row["campID"],
+                "firstName": row["firstName"],
+                "lastName": row["lastName"],
+                "dob": row["dob"],
+                "gender": row["gender"],
+                "familyID": row["familyID"],
+            }
+            refugees.append(refugee_data)
+
+        if len(refugees) == 0:
+            print("No data on refugees to export.")
+            return
+        with open(file_path, 'w', newline='') as csvfile:
+            fieldnames = refugees[0].keys()
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(refugees)
+
+            print(f"Refugee data exported to {file_path} successfully.")
+    except Exception as e:
+        logging.critical("Error with file when exporting refugee data to CSV on admin demand.")
+        print(f"Error exporting data to CSV: {e}. Redirecting you back!")
+        return
+
+
 def check_vol_assigned_camp(username):
     csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
     df = pd.read_csv(csv_path)
