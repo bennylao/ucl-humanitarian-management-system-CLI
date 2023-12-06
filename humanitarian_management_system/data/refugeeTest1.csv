@@ -1,0 +1,15 @@
+refugeeID,campID,firstName,lastName,dob,gender,familyID
+1,3,ff,ll,12/08/1968,male,25
+2,3,fff,lll,22/04/1988,female,12
+3,3,tf,tl,16/07/2001,other,2
+4,2,ftf,flf,03/08/1997,male,2
+5,3,bbf,bbl,01/05/1994,female,5
+6,5,heyf,lone,12/05/1996,male,7
+7,5,fg,lg,18/09/2001,male,5
+20,5,cutieboy,bbl,09/09/1989,female,7
+9,5,vf,vl,05/08/1995,male,2
+10,3,hf,hl,02/05/2000,female,5
+11,4,vf,lheyl,07/08/1994,female,3
+12,4,newFirst,newLast,15/09/1997,male,5
+13,4,jtFive,jtLFive,12/09/1998,female,4
+14,4,firsterer,lasteer,15/08/1994,male,15
