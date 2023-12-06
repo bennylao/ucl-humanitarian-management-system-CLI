@@ -802,8 +802,9 @@ def create_training_session():
                     break
                 else:
                     print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
-            except ValueError:
-                print("\nInvalid input. Please enter a valid integer for campID or type 'RETURN' to go back.")
+            except ValueError as e:
+                logging.debug("Invalid user input when creating a session")
+                print(f"\nInvalid input {e}. Please enter a valid integer for campID or type 'RETURN' to go back.")
         eventID = camp_df.loc[camp_df['campID'] == int(camp), 'eventID'].iloc[0]
         camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
         refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
@@ -1088,7 +1089,7 @@ def get_export_file_path():
                     file_path = file_path.parent / f"{file_path.stem}_{index}{file_path.suffix}"
                 break
             else:
-                # Validate the user input as a valid file path if needed
+
                 file_path = Path(user_input)
                 break
         return file_path
@@ -1104,22 +1105,100 @@ def admin_export_refugees_to_csv():
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
         logging.info("Successfully loaded refugee csv for admin exporting refugee csv file.")
-        refugees = []
-        for index, row in ref_df.iterrows():
-            refugee_data = {
-                "refugeeID": row["refugeeID"],
-                "campID": row["campID"],
-                "firstName": row["firstName"],
-                "lastName": row["lastName"],
-                "dob": row["dob"],
-                "gender": row["gender"],
-                "familyID": row["familyID"],
-            }
-            refugees.append(refugee_data)
+        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+        camp_df = pd.read_csv(camp_csv_path)
+        logging.info("Successfully loaded camp csv file for reporting on refugees in event.")
+        event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
+        event_df = pd.read_csv(event_csv_path)
+        logging.info("Successfully loaded event csv file for reporting on refugees in event.")
+        print(ref_df.to_string(index=False))
+        print("\nWe can print out a report of refugees categorised by event, camp, or report on all refugees "
+              "in the system.\n")
+        while True:
+            ref_filter = input("Please enter EVENT,\nCAMP,\n*,\nor RETURN: ")
+            refugees = []
+            if ref_filter.lower() == 'return':
+                return
+            elif ref_filter.lower() == 'camp':
+                while True:
+                    campID = input("Enter the camp that you want a report of refugees on: ")
+                    if campID.lower() == 'return':
+                        return
+                    try:
+                        campID = int(campID)
+                        if camp_df['campID'].eq(campID).any():
+                            break
+                        else:
+                            print("\nSorry - that camp doesn't exist in our system!")
+                    except Exception as e:
+                        logging.critical(f"Unexpected error when filtering refugees by camp"
+                                         f"for reporting function, with error {e}.")
+                        print("\nInvalid input. Must enter an integer or one of the specified exit options.")
+                refugees_in_camp = ref_df[ref_df['campID'] == campID]
+                print(f"Okay! We're getting all the refugees which are in camps within camp {campID}.\n"
+                      f"----------------------------------------------------------------------------------\n")
+                for index, row in refugees_in_camp.iterrows():
+                    refugee_data = {
+                        "refugeeID": row["refugeeID"],
+                        "campID": row["campID"],
+                        "firstName": row["firstName"],
+                        "lastName": row["lastName"],
+                        "dob": row["dob"],
+                        "gender": row["gender"],
+                        "familyID": row["familyID"],
+                    }
+                    refugees.append(refugee_data)
+                break
+            elif ref_filter.lower() == 'event':
+                while True:
+                    eventID = input("Enter the event that you want a report of refugees on: ")
+                    if eventID.lower() == 'return':
+                        return
+                    try:
+                        eventID = int(eventID)
+                        if event_df['eventID'].eq(eventID).any():
+                            break
+                        else:
+                            print("\nSorry - that event doesn't exist in our system!")
+                    except Exception as e:
+                        logging.critical(f"Unexpected error when filtering refugees by event"
+                                         f"for reporting function, with error {e}.")
+                        print("\nInvalid input. Must enter an integer or one of the specified exit options.")
+                camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
+                refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
+                print(f"Okay! We're getting all the refugees which are in camps within eventID {eventID}.\n"
+                      f"----------------------------------------------------------------------------------\n")
+                for index, row in refugees_in_associated_camps.iterrows():
+                    refugee_data = {
+                        "refugeeID": row["refugeeID"],
+                        "campID": row["campID"],
+                        "firstName": row["firstName"],
+                        "lastName": row["lastName"],
+                        "dob": row["dob"],
+                        "gender": row["gender"],
+                        "familyID": row["familyID"],
+                    }
+                    refugees.append(refugee_data)
+                break
 
-        if len(refugees) == 0:
-            print("No data on refugees to export.")
-            return
+            elif ref_filter == '*':
+                for index, row in ref_df.iterrows():
+                    refugee_data = {
+                        "refugeeID": row["refugeeID"],
+                        "campID": row["campID"],
+                        "firstName": row["firstName"],
+                        "lastName": row["lastName"],
+                        "dob": row["dob"],
+                        "gender": row["gender"],
+                        "familyID": row["familyID"],
+                    }
+                    refugees.append(refugee_data)
+                break
+            else:
+                print("Sorry! Didn't quite catch that. Let's try again or enter RETURN to go back.")
+            if len(refugees) == 0:
+                print("No data on the specified refugees to report on.")
+                return
         with open(file_path, 'w', newline='') as csvfile:
             fieldnames = refugees[0].keys()
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
