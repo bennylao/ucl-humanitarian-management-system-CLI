@@ -33,7 +33,7 @@ class AdminView:
         ("6", "Move/remove refugee(s)"),
         ("7", "Display all refugees information"),
         ("8", "Display all camps information"),
-        ("9", "Export a CSV of refugees in system"),
+        ("9", "Export a CSV report for all refugees in system"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
