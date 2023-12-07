@@ -8,7 +8,7 @@ from humanitarian_management_system import helper
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder, ResourceCampCreateDelete)
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
-from humanitarian_management_system.data_analysis.camp_data_visualization import Dashboard
+
 
 class Controller:
     def __init__(self):
@@ -271,10 +271,10 @@ class Controller:
             if user_selection == "1":
                 # ("1", "Allocate resources")
                 self.resource_alloc_main_menu()
-            if user_selection == "3":
+            if user_selection == "2":
                 # ("2", "View resource statistics")
                 self.resource_reporting_menu()
-            if user_selection == "2":
+            if user_selection == "3":
                 # ("3", "Add resource / purchase from shop"xs)
                 resource_adder_instance = ResourceAdder()
                 resource_adder_instance.resource_adder()
@@ -389,10 +389,6 @@ class Controller:
             logging.critical(f"{e}")
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
-
-    def admin_campDashboard(self):
-        dashboard = Dashboard()
-        dashboard.run()
 
     def admin_create_camp(self):
         try:
@@ -694,7 +690,7 @@ class Controller:
                     # keep track of existing camp num of a particular event
                     no_camp = df.loc[eventID, "no_camp"]
                     no_camp -= 1
-                    index = df[df["eventID"] == eventID].index.tolist()
+                    index = df[df["eid"] == eventID].index.tolist()
                     helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
                     print("\n\u2714 You have Successfully removed the camp!")
                     return

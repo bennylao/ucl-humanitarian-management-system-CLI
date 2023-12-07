@@ -1,0 +1,4 @@
+name,country,city,latitude,longitude,population,male,female
+camp1,UK,London,51.52462681,-0.134060879,1000,500,500
+camp2,UK,London,51.51436828,-0.098460388,2000,400,600
+camp3,UK,London,51.50615434,-0.168930756,500,100,400

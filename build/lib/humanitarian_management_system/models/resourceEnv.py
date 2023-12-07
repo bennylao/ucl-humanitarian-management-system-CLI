@@ -9,6 +9,8 @@ import pandas as pd
 instance = ResourceCampCreateDelete()
 report_instance = ResourceReport()
 
-alloc_instance = ResourceAllocator()
+valid_range_df = report_instance.valid_closed_camps()
+valid_range_list = valid_range_df['campID'].to_list()
+df = instance.closed_camp_resources_interface()
 
-alloc_instance.manual_alloc()
+print(df)

@@ -108,8 +108,8 @@ class ManagementView:
         print("\n========================================\n"
               "         Resources ALLOCATION\n"
               "========================================\n"
-              "[ 1 ] Manual    - user select one by one \n"
-              "[ 2 ] Automatic - all camps rebalanced based on refugee count\n\n"
+              "Please select 1 for manual allocation.\n"
+              "Or 2 for auto allocation.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod

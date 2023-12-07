@@ -1,7 +1,6 @@
 import pandas as pd
 from pathlib import Path
 from humanitarian_management_system.views import AdminView
-import numpy as np
 
 class ResourceReport():
     def __init__(self):
@@ -111,22 +110,13 @@ class ResourceReport():
         valid_range = self.totalResources_df['resourceID'].tolist()
         return valid_range
 
-    def valid_origin_camp_single_resource(self, r_id_select):
-        # built for origin_camps to move a single resource from... basically, its the r in the master table where the total is above zero
-        master_table = self.master_resource_stats()
-        single_resource_stats = master_table[master_table['resourceID'] == r_id_select]
-        cols_above_zero = single_resource_stats.iloc[:, 4:].columns[(single_resource_stats.iloc[:, 4:] > 0).all()]
-
-        return single_resource_stats, cols_above_zero.tolist()  ## print the actual range
-    
-
     def input_validator(self, prompt_msg, valid_range, error_msg = 'Invalid selection. Please try again.'):
         # for usage in resources - validates the form inputs
         while True:
             user_input = input(prompt_msg)
 
-            #if user_input.lower() == 'return':
-                #break
+            if user_input.lower() == 'return':
+                break
 
             # Check if the input is a digit and convert it to an integer if it is
             if user_input.isdigit():
@@ -138,7 +128,7 @@ class ResourceReport():
 
             else:
                 print(error_msg)  # Print error message for input out of range
-        #AdminView.manage_resource_menu()
+        AdminView.manage_resource_menu()
 
     ############################################################################################################################
 
@@ -213,7 +203,7 @@ class ResourceReport():
         ## is this helpful? maybe add in population as well ? 
         ## add something into allow view of selected resources only... ?? or not... idm 
 
-        #################### this includes closed camps too ! includes anything with resources... 
+        #################### this includes closed camps too ! 
         return joined_df_unalloc_camp
     
     def report_closed_camp_with_resources(self):
@@ -223,70 +213,6 @@ class ResourceReport():
         info_half_df = master_df.iloc[:, :4]
         return pd.concat([info_half_df, camp_half_df], axis=1)
     
-
-    def PRETTY_PIVOT_CAMP(self, table: pd.DataFrame):
-        #### this works for tables of this format, split out by camps... 
-
-        """ resourceID                      name  priorityLvl  unallocTotal      3      5     6     9    11
-        0            1                  Blankets            2             0   2292   5500   917   917   458
-        1            2                  Clothing            1             0    648   1555   259   259   130
-        2            3                      Toys            3             0     16     38     6     6     3
-        3            4                  Medicine            1             0     23     56     9     9     5
-        4            5                  Vitamins            2             0     19     46     8     8     4
-        5            6                      Food            1             0     23     56     9     9     5
-        6            7                    Snacks            3             0     15     36     6     6     3
-        7            8                Toiletries            2             0     19     46     8     8     4
-        8            9                     Water            1             0     46    110    18    18     9
-        9           10             Baby Supplies            1             0     23     56     9     9     5
-        10          11  General Tools & Supplies            3             0  11385  27325  4554  4554  2277 """
-
-        table['resourceID'] == table['resourceID'].astype(int)
-        table['unallocTotal'] == table['unallocTotal'].astype(int)
-        table_camp_range = table[4:] # get the campIDs, which are from col 5 onwards due to labels
-
-        # 1) rename the camp columns from just their ID int to 'camp ID X'
-        for col in table.columns[4:]:
-            table = table.rename(columns = {col: 'campID ' + str(col)}) ## the col selects the right column
-
-        # 2) summing horizontally to create the vertical sum column
-        num_cols = table.columns[3:]
-        ### getting the horizontal sums
-        h_sum = table[num_cols].sum(axis=1)
-        table['resourceTotal'] = h_sum
-        table['resourceTotal'] == table['resourceTotal'].astype(int)
-        
-        # 3) building the extra horizontal rows 
-        v_sum = table[num_cols].sum().tolist() ## total resource per camp
-        sum_row_vector = [np.nan, np.nan, 'total per camp ->'] + v_sum
-
-        # rows for camp info
-        condition = self.camp_df['campID'].isin(table_camp_range)
-        status_vector = self.camp_df.loc[condition, 'status'].tolist()
-        status_vector = [np.nan, np.nan, 'camp status ->'] + [np.nan] + status_vector + [np.nan]
-
-        pop_vector = self.camp_df.loc[condition, 'refugeePop'].tolist()
-        pop_vector = [np.nan, np.nan, 'refugeePop ->'] + [np.nan] + pop_vector + [np.nan]
-
-        # 4) putting it all together
-        new_rows_df = pd.DataFrame([sum_row_vector, pop_vector, status_vector], columns=table.columns)
-        table = pd.concat([table, new_rows_df], ignore_index=True)
-
-        return table
-
-    
-    def PRETTY_RESOURCE(self, table: pd.DataFrame, valid_r: list):
-        all = self.PRETTY_PIVOT_CAMP(table)
-        # Assuming r_id_select is a list of resource IDs
-        # Filter rows where 'resourceID' is in the list of r_id_select
-        filtered_rows = all[all['resourceID'].isin(valid_r)]
-        last_two_rows = all.tail(2)
-
-        # Concatenate the filtered rows and the last two rows
-        combined_resources = pd.concat([filtered_rows, last_two_rows])
-
-        return combined_resources
-
-
 
     ############################################################################################################################
 
@@ -403,40 +329,3 @@ class ResourceReport():
         alloc_ideal['status'] = alloc_ideal.apply(condititon_resource, axis=1)
 
         return alloc_ideal
-    
-
-    def ALLOC_IDEAL_OUTPUT(self):
-        ideal = self.determine_above_below()
-        unbalanced = ideal[ideal['status'] != 'balanced'].copy()
-        unbalanced['delta'] = 0
-
-        for index, row in unbalanced.iterrows():
-            if row['status'] == 'above':
-                unbalanced.at[index, 'delta'] = row['current'] - row['ideal_qty']
-            elif row['status'] == 'below':
-                unbalanced.at[index, 'delta'] = row['ideal_qty'] - row['current']
-
-        unbalanced = unbalanced.drop(['upper', 'lower'], axis = 1)
-        unbalanced['current'] = unbalanced['current'].astype(int)
-
-        return unbalanced
-    
-
-    def resource_report_interface(self):
-        ### probably will need to move this somewhere... 
-        print(f"""\n==========================================================================\n
-✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ RESOURCE STATS VIEWER ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-==========================================================================\n
-              [1] View master resource stats \n
-              [2] View all unbalanced resources\n """)
-        user_select = self.input_validator("--> ", [1,2])
-        if user_select == 1:
-            print("Here is the current snapshot of: \n how resources are distributed across each camp; and the status and refugee population of each camp.")
-            table = self.PRETTY_PIVOT_CAMP()
-            print(table)
-        elif user_select == 2:
-            unbalanced = self.ALLOC_IDEAL_OUTPUT() ### if empty then other message 
-            if unbalanced.empty:
-                print("There are currently no unbalanced resources across any camps that deviate 10% out of the ideal amounts.")
-            else:
-                print(unbalanced)
