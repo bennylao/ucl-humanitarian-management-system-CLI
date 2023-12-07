@@ -368,6 +368,8 @@ class Controller:
                 pass
             if user_selection == "9":
                 self.admin_refugee_export()
+            if user_selection == "10":
+                self.admin_campDashboard()
             if user_selection == "R":
                 break
             if user_selection == "L":

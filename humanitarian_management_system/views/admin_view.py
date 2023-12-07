@@ -34,6 +34,7 @@ class AdminView:
         ("7", "Display all refugees information"),
         ("8", "Display all camps information"),
         ("9", "Export a CSV report for all refugees in system"),
+        ("10", "Camp data visualization"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
