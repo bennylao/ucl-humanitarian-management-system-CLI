@@ -16,38 +16,38 @@ class User:
     def update_username(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path, converters={'username': str, 'password': str})
-        df.loc[df['userID'] == str(self.user_id), 'username'] = self.username
+        df.loc[df['userID'] == self.user_id, 'username'] = self.username
         df.to_csv(user_csv_path, index=False)
 
     def update_password(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path, converters={'username': str, 'password': str})
-        df.loc[df['userID'] == str(self.user_id), 'password'] = self.password
+        df.loc[df['userID'] == self.user_id, 'password'] = self.password
         df.to_csv(user_csv_path, index=False)
 
     def update_name(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path, converters={'username': str, 'password': str})
-        df.loc[df['userID'] == str(self.user_id), 'firstName'] = self.first_name
-        df.loc[df['userID'] == str(self.user_id), 'lastName'] = self.last_name
+        df.loc[df['userID'] == self.user_id, 'firstName'] = self.first_name
+        df.loc[df['userID'] == self.user_id, 'lastName'] = self.last_name
         df.to_csv(user_csv_path, index=False)
 
     def update_email(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path, converters={'username': str, 'password': str})
-        df.loc[df['userID'] == str(self.user_id), 'email'] = self.email
+        df.loc[df['userID'] == self.user_id, 'email'] = self.email
         df.to_csv(user_csv_path, index=False)
 
     def update_phone(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path, converters={'username': str, 'password': str})
-        df.loc[df['userID'] == str(self.user_id), 'phone'] = self.phone
+        df.loc[df['userID'] == self.user_id, 'phone'] = self.phone
         df.to_csv(user_csv_path, index=False)
 
     def update_occupation(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path, converters={'username': str, 'password': str})
-        df.loc[df['userID'] == str(self.user_id), 'occupation'] = self.occupation
+        df.loc[df['userID'] == self.user_id, 'occupation'] = self.occupation
         df.to_csv(user_csv_path, index=False)
 
     @staticmethod
