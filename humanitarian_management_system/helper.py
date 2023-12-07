@@ -109,7 +109,7 @@ def validate_event_input():
     date_format = '%d/%m/%Y'  # Use for validating user entered date format
     while True:
         title = input("\nPlan title: ")
-        if title == 'RETURN':
+        if title.lower() == 'return':
             return
         else:
             break
@@ -126,14 +126,14 @@ def validate_event_input():
 
     while True:
         description = input("\nDescription: ")
-        if description == 'RETURN':
+        if description.upper() == 'RETURN':
             return
         else:
             break
 
     while True:
         start_date = input("\nStart date (format dd/mm/yyyy): ")
-        if start_date == 'RETURN':
+        if start_date.upper() == 'RETURN':
             return
         try:
             start_date = datetime.datetime.strptime(start_date, date_format)
@@ -144,7 +144,7 @@ def validate_event_input():
 
     while True:
         end_date = input("\nEstimated end date (format dd/mm/yyyy): ")
-        if end_date == 'RETURN':
+        if end_date.upper() == 'RETURN':
             return
         elif end_date == 'NONE':
             end_date = None
@@ -187,8 +187,8 @@ def validate_camp_input():
     while True:
         try:
             capacity = input("\nEnter capacity: ")
-            if capacity == "RETURN":
-                break
+            if capacity.upper() == "RETURN":
+                return
             elif int(capacity) > 0:
                 break
             else:
@@ -199,7 +199,7 @@ def validate_camp_input():
 
     while True:
         risk = input("\nEnter health risk level (low or high): ")
-        if risk == 'RETURN':
+        if risk.upper() == 'RETURN':
             return
         elif (risk != 'low') and (risk != 'high'):
             print("Must enter low or high")
@@ -223,7 +223,7 @@ def validate_join():  # volunteer joining a camp
         if int(user_input) not in index[1:]:
             print("Invalid index option entered!")
             continue
-        if user_input == "RETURN":
+        if user_input.upper() == "RETURN":
             return
         else:
             break

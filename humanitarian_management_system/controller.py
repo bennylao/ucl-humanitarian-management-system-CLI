@@ -923,21 +923,24 @@ class Controller:
         try:
             csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
             df = pd.read_csv(csv_path)
-
+            logging.info("successfully got info for camp csv file for volunteer joining a camp")
             ManagementView.join_camp_message()
             index = helper.display_camp_list()
 
             while True:
-                select_index = int(input("\nindex: "))
-
-                if select_index not in index:
-                    print("invalid index option entered!")
-                    continue
-                try:
-                    if select_index == 'RETURN':
-                        return
-                except:
+                select_index = input("\nindex: ")
+                if select_index.upper() == 'RETURN':
                     return
+                try:
+                    select_index = int(select_index)
+                    logging.info("successfully changed user input into innteger index")
+                    if select_index not in index:
+                        print("invalid index option entered!")
+                    continue
+                except Exception as e:
+                    logging.debug(f"Error {e}Not the right input for joining a camp!")
+                    print(f"Sorry - please select from a valid option! Error {e} caused.")
+
                 break
 
             event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
