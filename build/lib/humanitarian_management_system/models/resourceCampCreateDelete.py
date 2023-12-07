@@ -64,9 +64,7 @@ The below CLOSED camps still have resources allocated... \n
     Unassign / unallocate resources from all closed camps, and move to inventory? [ y ]\n
             """)
 
-            user_select = report_instance.input_validator('--> ', ['y'], "Sorry, you don't have a choice here... \nIt is not good to leave resources assigned to closed camps...Please enter y")
-            if user_select == 'RETURN':
-                return
+            user_select = report_instance.input_validator('--> ', ['y'], 'Sorry, you must enter 'y'... it is not good to leave resources in closed camps...')
             if user_select == 'y':
                 self.remove_camp_resources(valid_range_list)
                 print(f"===== ＼(^o^)／ All resources from campIDs {valid_range_list} successfully unallocated & moved to inventory ＼(^o^)／ =====")
@@ -142,8 +140,6 @@ The below CLOSED camps still have resources allocated... \n
             """)  ######### this should be slightly different for volunteer
 
             user_select = report_instance.input_validator('--> ', ['y', 'n'])
-            if user_select == 'RETURN':
-                return
             before_camp_vs_unallocated = report_instance.master_resource_stats()
 
             #### can add something more interactive here
@@ -159,4 +155,4 @@ The below CLOSED camps still have resources allocated... \n
                 print(after_camp_vs_unallocated)
                 print("\n ======= ＼(^o^)／ Thanks for Shopping! Come Again Soon! ＼(^o^)／ ===== \n")
         else:
-            print("＼(^o^)／ GOOD NEWS ＼(^o^)／ There are open camps with refugees, that have no resources")
+            print("＼(^o^)／ GOOD NEWS ＼(^o^)／ There are no resource-less & open camps with refugees ")

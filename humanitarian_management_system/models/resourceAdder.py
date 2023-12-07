@@ -47,18 +47,26 @@ class ResourceAdder():
             prompt = "\nPlease enter the resourceID of the item you would like to purchase: --> "    
             valid_range = report_instance.valid_resources()
             r_id_select = report_instance.input_validator(prompt, valid_range)  
+            if r_id_select == 'RETURN':
+                return
             r_name_select = totalResources.loc[totalResources['resourceID'] == r_id_select, 'name'].iloc[0]
 
             prompt = f"Please enter the number of units of *** Resource ID {r_id_select}: {r_name_select} *** which you would like to buy: --> "
             r_id_units = report_instance.input_validator(prompt, list(range(10000)), 'Invalid selection. Please enter an integer quantity between 0 to 9999.')  
+            if r_id_units == 'RETURN':
+                return
 
             basket_id_list.append(r_id_select)
             basket_units_list.append(r_id_units)
 
             # Ask if the user is done
-            done = input("\n Are you done shopping? y / n -->  ").strip()
+            done = report_instance.input_validator("\nAre you done shopping? y / n -->  ", ['y', 'n'])
             if done == 'y':
-                break
+                break # exit the loop
+            elif done == 'RETURN':
+                return # exit the function
+            else:
+                pass
             #### need to
 
         # insert the two lists into the basket dataframe
@@ -70,7 +78,10 @@ class ResourceAdder():
 ==========================================================================\n
 {basket.to_string(index = False)} \n"""
         )
-        confirm_shop = input("Proceed to checkout? \n [y] Yes; \n [x] Abandon cart \n --> ")
+        # confirm_shop = input("Proceed to checkout? \n [y] Yes; \n [x] Abandon cart \n --> ")
+        confirm_shop = report_instance.input_validator("Proceed to checkout? \n [y] Yes; \n [x] Abandon cart \n --> ", ['y', 'n'])
+        if confirm_shop == 'RETURN':
+            return
         if confirm_shop == 'y':
             ## logic to loop thru this and add to the unallocated dataframe
             ## actually esier to do join

@@ -132,12 +132,11 @@ class ManagementView:
 
     @staticmethod
     def resource_report_message():
-        print("\n========================================\n"
-              "       RESOURCE REPORTING \n"
-              "========================================\n"
-              "Please select the type of resource report: \n"
-              "[1] view total stock levels of all resources; \n"
-              "[2] view resource levels by assigned camp")
+        print("""\n==========================================================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ RESOURCE STATS VIEWER ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+==========================================================================\n
+              [1] View master resource stats \n
+              [2] View all unbalanced resources\n """)
 
     @staticmethod
     def join_camp_message():
