@@ -264,6 +264,147 @@ Name: userID, dtype: bool, 'campID')
 2023-12-06 15:13:41,882 - INFO - helper-admin_export_refugees_to_csv-Line1101 - Successfully loaded refugee csv for admin exporting refugee csv file.
 2023-12-06 15:13:41,885 - INFO - helper-admin_export_refugees_to_csv-Line1104 - Successfully loaded camp csv file for reporting on refugees in event.
 2023-12-06 15:13:41,887 - INFO - helper-admin_export_refugees_to_csv-Line1107 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-06 16:39:08,787 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 16:39:08,787 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 16:39:29,711 - CRITICAL - controller-login-Line115 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data_analysis\\data\\campTest.csv'
+2023-12-06 16:40:14,613 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 16:40:14,614 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 16:40:20,604 - CRITICAL - controller-login-Line115 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data\\refugeeTest.csv'
+2023-12-06 16:40:52,496 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 16:40:52,497 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 16:40:58,391 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
+
+2023-12-06 16:40:58,414 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8050
+2023-12-06 16:40:58,414 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
+2023-12-06 16:40:59,049 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "GET / HTTP/1.1" 200 -
+2023-12-06 16:40:59,193 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "GET /_dash-layout HTTP/1.1" 200 -
+2023-12-06 16:40:59,199 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "GET /_dash-dependencies HTTP/1.1" 200 -
+2023-12-06 16:40:59,236 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "[36mGET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1[0m" 304 -
+2023-12-06 16:40:59,242 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "[36mGET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1[0m" 304 -
+2023-12-06 16:40:59,251 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "[36mGET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1[0m" 304 -
+2023-12-06 16:40:59,502 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:01,333 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:01] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:20,731 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:20] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:21,109 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:21] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:25,675 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:25] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:33,984 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:33] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:41,740 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:41] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:46,065 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:46] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:46,722 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:46] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:47,364 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:47] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:47,852 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:47] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:48,602 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:48] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:51,603 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:51] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:41:52,319 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:52] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:42:50,220 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 16:42:50,220 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 16:43:00,821 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
+
+2023-12-06 16:43:00,852 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8050
+2023-12-06 16:43:00,852 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
+2023-12-06 16:43:01,444 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "GET / HTTP/1.1" 200 -
+2023-12-06 16:43:01,543 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "GET /_dash-layout HTTP/1.1" 200 -
+2023-12-06 16:43:01,543 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "GET /_dash-dependencies HTTP/1.1" 200 -
+2023-12-06 16:43:01,576 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "[36mGET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1[0m" 304 -
+2023-12-06 16:43:01,576 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "[36mGET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1[0m" 304 -
+2023-12-06 16:43:01,588 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "[36mGET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1[0m" 304 -
+2023-12-06 16:43:01,831 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:45:26,770 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:45:26] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 16:45:46,951 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 16:45:46,951 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 16:46:52,599 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 16:46:52,599 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 16:51:44,759 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 16:51:44,759 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 16:55:10,915 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 16:55:10,915 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:01:06,618 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
+
+2023-12-06 17:01:06,634 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8050
+2023-12-06 17:01:06,634 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
+2023-12-06 17:01:07,241 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "GET / HTTP/1.1" 200 -
+2023-12-06 17:01:07,337 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "GET /_dash-layout HTTP/1.1" 200 -
+2023-12-06 17:01:07,337 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "GET /_dash-dependencies HTTP/1.1" 200 -
+2023-12-06 17:01:07,372 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "[36mGET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1[0m" 304 -
+2023-12-06 17:01:07,380 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "[36mGET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1[0m" 304 -
+2023-12-06 17:01:07,389 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "[36mGET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1[0m" 304 -
+2023-12-06 17:01:07,635 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 17:01:10,798 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:10] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 17:01:16,752 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:16] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-06 17:09:49,723 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:09:49,723 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:19:24,357 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:19:24,357 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:21:16,025 - CRITICAL - controller-admin_create_camp-Line443 - single positional indexer is out-of-bounds
+2023-12-06 17:24:42,091 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:24:42,091 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:24:54,794 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 17:41:55,576 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 17:47:00,122 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 17:54:27,646 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:54:27,646 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:57:43,936 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:57:43,936 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:58:12,556 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:58:12,557 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 17:59:59,673 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 17:59:59,673 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:00:37,727 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:01:45,454 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:01:45,454 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:02:10,477 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:10:06,024 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:10:58,940 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:10:58,940 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-06 18:11:09,760 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
+2023-12-06 18:13:18,554 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-06 18:13:18,555 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 18:03:54,346 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 18:03:54,347 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 18:04:13,905 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
+
+2023-12-07 18:04:13,989 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8050
+2023-12-07 18:04:13,989 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
+2023-12-07 18:04:16,900 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:16] "GET / HTTP/1.1" 200 -
+2023-12-07 18:04:16,995 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:16] "GET /_dash-component-suites/dash/deps/polyfill@7.v2_14_2m1701872143.12.1.min.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,040 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/deps/react@16.v2_14_2m1701872143.14.0.min.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,044 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/deps/react-dom@16.v2_14_2m1701872143.14.0.min.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,045 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/deps/prop-types@15.v2_14_2m1701872143.8.1.min.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,047 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dcc/dash_core_components.v2_12_1m1701872143.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,049 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dash-renderer/build/dash_renderer.v2_14_2m1701872142.min.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,056 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dcc/dash_core_components-shared.v2_12_1m1701872143.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,077 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/html/dash_html_components.v2_0_15m1701872143.min.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,084 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dash_table/bundle.v5_2_8m1701872142.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,596 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-dependencies HTTP/1.1" 200 -
+2023-12-07 18:04:17,599 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-layout HTTP/1.1" 200 -
+2023-12-07 18:04:17,784 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,793 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1" 200 -
+2023-12-07 18:04:17,834 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1" 200 -
+2023-12-07 18:04:19,003 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:19] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:27,663 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:27] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:28,345 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:28] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:29,058 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:29] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:29,980 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:29] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:30,954 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:30] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:36,242 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:36] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:37,064 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:37] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:37,867 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:37] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:38,360 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:38] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:42,158 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:42] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:43,359 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:43] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:43,797 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:43] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:44,117 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:44] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:04:44,538 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:44] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:06:26,595 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:26] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:06:31,598 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:31] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:06:34,718 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:34] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:06:35,105 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:35] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:06:35,563 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:35] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:06:36,027 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:36] "POST /_dash-update-component HTTP/1.1" 200 -
 2023-12-06 17:13:13,703 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-06 17:13:13,703 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-06 17:20:49,196 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
@@ -496,3 +637,24 @@ Name: userID, dtype: bool, 'campID')
 2023-12-07 17:57:34,325 - DEBUG - controller-initialise-Line24 - Controller is initialised.
 2023-12-07 17:58:00,352 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-07 17:58:00,352 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 18:13:31,747 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 18:13:31,747 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 18:14:49,074 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 18:14:49,074 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 18:14:55,970 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
+
+2023-12-07 18:14:56,033 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8050
+2023-12-07 18:14:56,033 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
+2023-12-07 18:14:58,321 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:14:58] "GET / HTTP/1.1" 200 -
+2023-12-07 18:14:58,864 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:14:58] "GET /_dash-dependencies HTTP/1.1" 200 -
+2023-12-07 18:14:58,880 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:14:58] "GET /_dash-layout HTTP/1.1" 200 -
+2023-12-07 18:14:59,009 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:14:59] "[36mGET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1[0m" 304 -
+2023-12-07 18:14:59,024 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:14:59] "[36mGET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1[0m" 304 -
+2023-12-07 18:14:59,058 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:14:59] "[36mGET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1[0m" 304 -
+2023-12-07 18:15:00,026 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:15:00] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:15:04,823 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:15:04] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:15:05,138 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:15:05] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:15:06,076 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:15:06] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:15:06,591 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:15:06] "POST /_dash-update-component HTTP/1.1" 200 -
+2023-12-07 18:15:08,083 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:15:08] "POST /_dash-update-component HTTP/1.1" 200 -

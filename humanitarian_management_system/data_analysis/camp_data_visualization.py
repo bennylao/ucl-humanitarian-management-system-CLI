@@ -1,4 +1,4 @@
-# from dash import Dash, dcc, html, Input, Output
+from dash import Dash, dcc, html, Input, Output
 import plotly.express as px
 import pandas as pd
 import webbrowser
@@ -14,8 +14,8 @@ class Dashboard:
 
     def setup_layout(self):
 
-        camp_csv_path = Path(__file__).parents[0].joinpath("data/campTest.csv")
-        refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/campTest.csv")
+        refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugeeTest1.csv")
         camp_loc = pd.read_csv(camp_csv_path)
         refugee_data = pd.read_csv(refugee_csv_path)
 

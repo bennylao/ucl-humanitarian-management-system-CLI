@@ -1,6 +1,6 @@
 userID,userType,isVerified,isActive,username,password,firstName,lastName,email,phone,occupation,roleID,eventID,campID
 0,admin,True,True,admin,111,adminFirstName,adminLastName,adminEmail,2013356756,adminOccupation,0,0,0
-1,volunteer,True,True,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,7786471235,engineer,4,3,49
+1,volunteer,True,True,volunteer1,111,volunteer1FirstName,volunteer1LastName,volunteer1Email,7786471235,engineer,4,3,50
 2,volunteer,True,True,volunteer2,111,volunteer2FirstName,volunteer2LastName,volunteer2Email,7707654321,volunteer2Occupation,6,7,6
 3,volunteer,True,True,volunteer3,111,HeyFirst,TestLast,volunteer3Email,7786471235,babysitter,3,7,26
 4,volunteer,True,True,Volunteer4,111,firstfour,lastfour,example@testing.com,7786471235,jobfour,0,0,0
