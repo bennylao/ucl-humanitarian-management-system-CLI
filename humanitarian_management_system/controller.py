@@ -1121,7 +1121,7 @@ class Controller:
 
     def delete_refugee(self):
         print(
-            "YOU ARE REQUESTING TO DELETE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
+            "\nYOU ARE REQUESTING TO DELETE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
             " as instructed.")
         try:
             refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
@@ -1140,7 +1140,8 @@ class Controller:
                     print("Looks like you aren't assigned to a camp yet. Contact admin!")
                     return
                 while True:
-                    print(refugees_in_camp.to_string(index=False))
+                    Event.display_events(refugees_in_camp)
+                    # print(refugees_in_camp.to_string(index=False))
                     rid = input(
                         "\nFrom the list above enter the refugee ID for the refugee you wish to remove from "
                         "the system: ")
@@ -1158,7 +1159,8 @@ class Controller:
 
                 print("\nBelow is the information about this refugee.")
                 specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
-                print(specific_refugee_row.to_string(index=False))
+                # print("\n", specific_refugee_row.to_string(index=False))
+                Event.display_events(specific_refugee_row)
                 #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
                 #     root = tk.Tk()
                 while True:
@@ -1180,7 +1182,8 @@ class Controller:
                             f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated "
                             f"camp population has also been adjusted accordingly.")
                         print("\nRefugee table after deletion:")
-                        print(ref_df.to_string(index=False))
+                        #print(ref_df.to_string(index=False))
+                        Event.display_events(ref_df)
                         break
                     elif result == "no":
                         print("\nReturning back to previous menu.\n")
@@ -1188,7 +1191,8 @@ class Controller:
                     else:
                         print("\nInvalid input. Please enter 'yes' or 'no': ")
             else:
-                print(ref_df.to_string(index=False))
+                #print(ref_df.to_string(index=False))
+                Event.display_events(ref_df)
                 # checking input is valid according to refugee IDs in database
                 while True:
                     rid = input(
@@ -1223,7 +1227,8 @@ class Controller:
                             f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
                             f"has also been adjusted accordingly.")
                         print("\nRefugee table after deletion:")
-                        print(ref_df.to_string(index=False))
+                        #print(ref_df.to_string(index=False))
+                        Event.display_events(ref_df)
                         break
                     elif result == "no":
                         print("\nReturning back to previous menu.")
@@ -1253,31 +1258,44 @@ class Controller:
     def move_refugee_volunteer(self):
         while True:
             move_or_delete = input(
-                "Do you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
-                "\nor RETURN to exit back: ")
-            if move_or_delete.lower() == "return":
+                "\n------------------------------------------"
+                "\nVolunteer: Moving & Deleting Refugees"
+                "\n------------------------------------------"
+                "\n As a volunteer, you can move refugees around within the same event, but you can only"
+                " delete a refugee from the system if they are in the camp as that which you are assigned.\n"
+                "\nPlease Enter one of the below options: "
+                "\n[1] Move a refugee "
+                "\n[2] Delete a refugee " 
+                "\n[3] Return back ")
+            if move_or_delete == "3":
                 return
-            elif move_or_delete.lower() == "m":
+            elif move_or_delete == "1":
                 helper.move_refugee_helper_method()
-            elif move_or_delete.lower() == "d":
+            elif move_or_delete.lower() == "2":
                 self.delete_refugee()
             else:
-                print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
+                print("Sorry! Didn't catch that. Please try again or enter [3] to exit.\n")
 
 
     def move_refugee_admin(self):
         while True:
             move_or_delete = input(
-                "\n\nDo you want to MOVE or DELETE a refugee from the system? M for MOVE or D for DELETE "
-                "\nor RETURN to exit back: ")
-            if move_or_delete.lower() == "return":
+                "\n------------------------------------------"
+                "\nAdmin: Moving & Deleting Refugees"
+                "\n------------------------------------------"
+                "\nPlease Enter one of the below options: "
+                "\n[1] Move a refugee "
+                "\n[2] Delete a refugee "
+                "\n[3] Return back ")
+            if move_or_delete == "3":
                 return
-            elif move_or_delete.lower() == "m":
+            elif move_or_delete == "1":
                 helper.move_refugee_helper_method()
-            elif move_or_delete.lower() == "d":
-                helper.delete_refugee()
+            elif move_or_delete.lower() == "2":
+                self.delete_refugee()
             else:
-                print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
+                print("Sorry! Didn't catch that. Please try again or enter [3] to exit.\n")
+
 
     def admin_refugee_export(self):
         print(
@@ -1291,26 +1309,34 @@ class Controller:
             helper.legal_advice_support()
             self.volunteer_manage_camp()
 
+
     def refugee_training_sessions(self):
         while True:
-            create_add_delete = input("\nAre you looking to CREATE or DELETE a skills session, add, or \nremove "
-                                      "refugees to/from a session?"
-                                      "\nEnter CREATE,\nDELETE,\nADD,\nREMOVE,\nDISPLAY (to"
-                                      " view all sessions in the system),\nor RETURN (to exit): ")
-            if create_add_delete.lower() == 'return':
+            create_add_delete = input(
+                "\n------------------------------------------"
+                "\nSkills & Training Sessions"
+                "\n------------------------------------------"
+                "\nPlease Enter one of the below options: "
+                "\n[1] Create a session "
+                "\n[2] Delete a session "
+                "\n[3] Add a refugee to a session "
+                "\n[4] Remove a refugee from a session "
+                "\n[5] Display all sessions "
+                "\n[6] Return back ")
+            if create_add_delete == '6':
                 return
-            elif create_add_delete.lower() == 'create':
+            elif create_add_delete == '1':
                 helper.create_training_session()
-            elif create_add_delete.lower() == 'delete':
+            elif create_add_delete == '2':
                 helper.delete_session()
-            elif create_add_delete.lower() == 'add':
+            elif create_add_delete == '3':
                 helper.add_refugee_to_session()
-            elif create_add_delete.lower() == 'remove':
+            elif create_add_delete == '4':
                 helper.remove_refugee_from_session()
-            elif create_add_delete.lower() == 'display':
+            elif create_add_delete == '5':
                 helper.display_training_session()
             else:
-                print("\nSorry! Didn't catch that. Please try again or enter RETURN to exit.")
+                print("\nSorry! Didn't catch that. Please try again or enter [6] to exit. ")
 
     def user_edit_account(self):
         while True:

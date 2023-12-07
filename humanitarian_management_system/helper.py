@@ -478,16 +478,22 @@ def move_refugee_helper_method():
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
         logging.info("Refugee file loaded successfully for moving a refugee around camps.")
-        print(ref_df.to_string(index=False))
+        print(ref_df.to_markdown(index=False))
         # checking input is valid according to refugee IDs in database
         while True:
-            rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to move another camp: ")
-            if rid == "RETURN":
+            rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to move another camp"
+                        "\nREMEMBER: Enter RETURN to go back if no valid options: ")
+            if rid.lower() == "return":
                 return
-            elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
-                break
-            else:
-                print("\nSorry - that refugee ID doesn't exist. Pick again.")
+            try:
+                rid = int(rid)
+                if ref_df['refugeeID'].eq(rid).any():
+                    break
+                else:
+                    print("\nSorry - that refugee ID doesn't exist. Pick again.")
+            except Exception as e:
+                logging.debug(f"Error {e}with user input for moving a refugee from a camp.")
+                print(f"Invalid input with error {e}. Try again with a valid refugee ID.\n")
         camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
         camp_df = pd.read_csv(camp_csv_path)
         logging.info("Camp file loaded successfully for moving a refugee around camps.")
@@ -497,11 +503,14 @@ def move_refugee_helper_method():
         camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
         active_and_in_event = camp_df[(camp_df['status'] == 'open') & (camp_df['campID'].isin(camps_in_event))]
         # checking input is valid according to refugee IDs in database
+        if len(active_and_in_event) == 0:
+            print("Oh no. There are no other active camps in the same event as this refugee... Redirecting you back!")
+            return
         while True:
-            print("\n", active_and_in_event.to_string(index=False))
-            camp_id = input("\nFrom the above list, which is a list of ACTIVE camps\n"
-                            "which are part of the same event as this refugee's original camp,\n"
-                            "enter the campID of the camp you want to move this refugee to: ")
+            print("\n", active_and_in_event.to_markdown(index=False))
+            camp_id = input("\nFrom the above list (list of ACTIVE camps which are in the same event as "
+                            f"refugee number {rid}'s original camp) enter the campID of the camp "
+                            f"you want to move this refugee to: ")
             if camp_id.lower() == "return":
                 return
             try:
@@ -518,7 +527,8 @@ def move_refugee_helper_method():
                         break
                     else:
                         print(
-                            "\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
+                            "\n\nOh no! The new camp you've selected doesn't have the capacity to handle "
+                            "another refugee. "
                             f"Camp {camp_id} has a current population of {new_potential_refugee_pop} and a capacity of "
                             f"{new_camp_capacity}.\nLet's go again.\n")
                 else:
@@ -532,7 +542,7 @@ def move_refugee_helper_method():
         while True:
             if total_family_members != 0:
                 print("\n----HOLD ON!---- \nThis refugee is part of a family unit (see below).\n")
-                print(related_family_members.to_string(index=False))
+                print(related_family_members.to_markdown(index=False))
                 user_input = input("\nAre you sure you want to move this refugee alone? Enter YES (to move"
                                    " alone), NO (to move as a family unit), or RETURN (to exit): ")
                 if user_input.lower() == 'yes':
@@ -578,8 +588,8 @@ def move_refugee_helper_method():
                             f"\nTransfer for refugee {rid} complete. We have reassigned the refugee from camp {old_camp_id} "
                             f"to camp {camp_id}."
                             f"Additionally, the population of both camps has been adjusted accordingly. See below.")
-                        print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_string(index=False), "\n")
-                        print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_string(index=False), "\n")
+                        print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_markdown(index=False), "\n")
+                        print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_markdown(index=False), "\n")
                     print("\n Great. That's all that family transferred as a unit.")
                     row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
                     new_refugee_pop = (camp_df.at[row_index_new_camp[0], 'refugeePop'])
@@ -615,8 +625,8 @@ def move_refugee_helper_method():
         # modify_csv_value(camp_df, row, "refugeePop", camp_id)
         print(f"\nTransfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
               f"Additionally, the population of both camps has been adjusted accordingly. See below.")
-        print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_string(index=False), "\n")
-        print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_string(index=False), "\n")
+        print("\n", camp_df[camp_df['campID'] == int(old_camp_id)].to_markdown(index=False), "\n")
+        print("\n", camp_df[camp_df['campID'] == int(camp_id)].to_markdown(index=False), "\n")
     except FileNotFoundError as e:
         logging.critical(f"Error: {e}. One of the data files not found when moving a refugee around camps.")
         print(f"\nTraining session data file is not found or is damaged."
@@ -636,7 +646,7 @@ def delete_refugee():
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
         logging.info("Refugee data file to delete a refugee from system loaded successfully.")
-        print(ref_df.to_string(index=False))
+        print(ref_df.to_markdown(index=False))
         # checking input is valid according to refugee IDs in database
         while True:
             rid = input(
@@ -649,7 +659,7 @@ def delete_refugee():
                 print("\nSorry - that refugee ID doesn't exist. Pick again.")
         print("Below is the information about this refugee.")
         specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
-        print(specific_refugee_row.to_string(index=False))
+        print(specific_refugee_row.to_markdown(index=False))
         #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
         #     root = tk.Tk()
         while True:
@@ -671,7 +681,7 @@ def delete_refugee():
                     f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
                     f"has also been adjusted accordingly.")
                 print("\nRefugee DataFrame after deletion:")
-                print(ref_df.to_string(index=False))
+                print(ref_df.to_markdown(index=False))
                 break
             elif result == "no":
                 print("\nReturning back to previous menu.")
@@ -747,7 +757,7 @@ def display_training_session():
                 else:
                     print("\nSorry! Invalid input.")
             else:
-                print("\n", session_df.to_string(index=False))
+                print("\n", session_df.to_markdown(index=False))
                 input("\nEnter anything to go back when you're ready. ")
                 return
     except FileNotFoundError as e:
@@ -772,7 +782,7 @@ def create_training_session():
         camp_df = pd.read_csv(camp_csv_path)
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
-        print(role_df['name'].to_string(index=False))
+        print(role_df['name'].to_markdown(index=False))
         logging.info("All data files have loaded.")
         while True:
             occupation = input("\nFrom the list above enter the role which is closest to your own"
@@ -823,7 +833,7 @@ def create_training_session():
         refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
         participants = []
         while True:
-            print("\n", refugees_in_associated_camps.to_string(index=False))
+            print("\n", refugees_in_associated_camps.to_markdown(index=False))
             rid = input(
                 "\nFrom the list above of all refugees in the camps which are part of the same event as the camp you "
                 "will be holding the session,\none at a time enter a refugee ID for who shall be joining the skills "
@@ -859,7 +869,7 @@ def create_training_session():
         session_df.loc[len(session_df)] = training_session_data
         session_df.to_csv(training_session_path, index=False)
         added_session = session_df[session_df['sessionID'] == sessionID]
-        print(added_session.to_string(index=False))
+        print(added_session.to_markdown(index=False))
         print("\n---------------------------------------------------------------------------------")
     except FileNotFoundError as e:
         logging.critical(f"Error: {e}. One of the data files not found.")
@@ -880,7 +890,7 @@ def delete_session():
         logging.info("Training session file to delete a session has loaded correctly.")
         print(
             "\nLooks like you want to cancel or delete a session. That's a shame! See current sessions in the system.")
-        print("\n", session_df.to_string(index=False))
+        print("\n", session_df.to_markdown(index=False))
         # session_df.set_index('sessionID', inplace=True)
         while True:
             sessionID = input(
@@ -927,7 +937,7 @@ def delete_session():
         print(
             f"\n Okay! We've deleted session number {sessionID} from our system. See below for updated list of sessions.\n")
         if len(session_df) != 0:
-            print(session_df.to_string(index=False))
+            print(session_df.to_markdown(index=False))
         else:
             print("No sessions in the system!")
     except FileNotFoundError as e:
@@ -950,7 +960,7 @@ def add_refugee_to_session():
         session_df = pd.read_csv(training_session_path)
         logging.info("Refugee and training session data files loaded successfully to add a refugee to a session.")
         print("It's great another refugee wants to join a skills session!\n")
-        print(session_df.to_string(index=False))
+        print(session_df.to_markdown(index=False))
         while True:
             sessionID = input("\n\nFrom the list above, enter the session ID for the "
                               "skills session you want to add more participants to. Or enter RETURN to go back: ")
@@ -971,7 +981,7 @@ def add_refugee_to_session():
         participants = []
         while True:
             try:
-                print("\n", refugees_in_associated_camps.to_string(index=False))
+                print("\n", refugees_in_associated_camps.to_markdown(index=False))
                 rid = input(
                     f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
                     f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
@@ -1002,7 +1012,7 @@ def add_refugee_to_session():
         session_df.at[row_index_sessionID, 'participants'] = combined_attendees
         session_df.to_csv(training_session_path, index=False)
         print(f"\nExcellent! We have added refugee(s) {participants} to session {sessionID}. See below. ")
-        print(session_df.to_string(index=False))
+        print(session_df.to_markdown(index=False))
     except FileNotFoundError as e:
         logging.critical(f"Error: {e}. One of the data files not found when adding a refugee to a session.")
         print(f"\nTraining session data file is not found or is damaged."
@@ -1022,11 +1032,11 @@ def remove_refugee_from_session():
         training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
         session_df = pd.read_csv(training_session_path)
         logging.info("Refugee and session data files loaded successfully when removing a refugee from a session.")
-        print("Looks like you're looking to remove a refugee from one of the sessions!")
-        print(session_df.to_string(index=False))
+        print("\nLooks like you're looking to remove a refugee from one of the sessions!\n")
+        print(session_df.to_markdown(index=False))
         while True:
-            sessionID = input("\n\nFrom the list above, enter the session ID for the "
-                              "skills session you want remove a participant from. Or enter RETURN to go back: ")
+            sessionID = input("\n\nEnter the session ID for the skills session you want remove a participant from. "
+                              "Or enter RETURN to go back: ")
             if sessionID.lower() == 'return':
                 return
             elif sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
@@ -1069,7 +1079,7 @@ def remove_refugee_from_session():
         session_df.at[row_index_sessionID, 'participants'] = updated_attendees
         session_df.to_csv(training_session_path, index=False)
         print(f"\nExcellent! We have removed refugee(s) {participants} from session {sessionID}. See below. ")
-        print("\n", session_df.to_string(index=False))
+        print("\n", session_df.to_markdown(index=False))
     except FileNotFoundError as e:
         logging.critical(f"Error: {e}. One of the data files not found when removing a refugee from a session.")
         print(f"\nTraining session data file is not found or is damaged."
@@ -1123,7 +1133,7 @@ def admin_export_refugees_to_csv():
         event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
         event_df = pd.read_csv(event_csv_path)
         logging.info("Successfully loaded event csv file for reporting on refugees in event.")
-        print(ref_df.to_string(index=False))
+        print(ref_df.to_markdown(index=False))
         print("\nWe can print out a report of refugees categorised by event, camp, or report on all refugees "
               "in the system.\n")
         while True:
