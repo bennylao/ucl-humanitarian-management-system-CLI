@@ -1,7 +1,3 @@
-# We get the information about location / description from user input.
-# How do we then get this into an instance of the Event?
-# Can we have a CSV with all the countries of the world and then check
-# location input against this and get user to ONLY input valid COUNTRY
 from pathlib import Path
 from humanitarian_management_system import helper
 import datetime

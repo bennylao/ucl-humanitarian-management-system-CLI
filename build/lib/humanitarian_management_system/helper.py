@@ -658,7 +658,7 @@ def delete_refugee():
                     f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
                     f"has also been adjusted accordingly.")
                 print("\nRefugee DataFrame after deletion:")
-                print(ref_df)
+                Event.display_events(ref_df)
                 break
             elif result == "no":
                 print("\nReturning back to previous menu.")

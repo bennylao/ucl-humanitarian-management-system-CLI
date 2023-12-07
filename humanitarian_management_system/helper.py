@@ -6,7 +6,6 @@ import datetime
 import math
 import logging
 
-
 def validate_user_selection(options):
     while True:
         selection = input("--> ")
@@ -538,11 +537,22 @@ def move_refugee_helper_method():
                 if user_input.lower() == 'yes':
                     break
                 elif user_input.lower() == 'no':
-                    print("Okay. We're going to move the family as a unit."
-                          "\n****We're going to allow the whole family to move together, regardless of capacity. However,"
-                          "please remember to manually remove some refugees from\nthis camp to a less populated one "
-                          "if capacity is maxed out! We'll show you how many to remove if needed at the end.****\n")
+                    print("\nOkay. We're going to try to move the family as a unit. However, if capacity in the new camp"
+                          " is not enough for the entire family, then we shall abort.")
+
                     related_family_members_list = related_family_members['refugeeID'].tolist()
+                    size_of_family = len(related_family_members_list)
+                    row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
+                    new_potential_refugee_family_pop = (camp_df.at[row_index_new_camp[0], 'refugeePop'])
+                    new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
+                    if (new_potential_refugee_family_pop + size_of_family) >= new_camp_capacity:
+                        print(f"\n\nSorry. Moving this entire family unit would cause capacity overflow of camp {camp_id}."
+                              f"You'll have to move them alone or not at all. Camp {camp_id} has a current population "
+                              f"of {new_potential_refugee_family_pop},\n"
+                              f"a capacity of {new_camp_capacity}, whilst the family has {size_of_family} members."
+                              f"\n\n")
+                        return
+                    print("\nExcellent. No capacity overflow detected for the new camp!")
                     # print(related_family_members_list)
                     for index, row in related_family_members.iterrows():
                         rid = row['refugeeID']
@@ -555,6 +565,9 @@ def move_refugee_helper_method():
                         # Update the campID for the refugee in refugee CSV
                         row_index_ref = ref_df[ref_df['refugeeID'] == int(rid)].index[0]
                         modify_csv_value(refugee_csv_path, row_index_ref, "campID", camp_id)
+                        # Remove 1 from the population of the old camp
+                        row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
+                        camp_df.at[row_index_old_camp[0], 'refugeePop'] -= 1
                         # Add one to the population of the camp which the refugee is now in
                         camp_df.at[row_index_new_camp[0], 'refugeePop'] += 1
                         camp_df.to_csv(camp_csv_path, index=False)
@@ -574,8 +587,7 @@ def move_refugee_helper_method():
                         overflow_amount = (new_refugee_pop - new_camp_capacity)
                         print(
                             f"Uh oh! Capacity overflow. You need to remove {overflow_amount} refugee(s) from camp {camp_id}")
-                    else:
-                        print("Great. No capacity overflow detected.")
+
                     return
                 elif user_input.lower() == 'return':
                     return
@@ -636,7 +648,7 @@ def delete_refugee():
                 print("\nSorry - that refugee ID doesn't exist. Pick again.")
         print("Below is the information about this refugee.")
         specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
-        print(specific_refugee_row)
+        print(specific_refugee_row.to_string(index=False))
         #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
         #     root = tk.Tk()
         while True:
@@ -658,7 +670,7 @@ def delete_refugee():
                     f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
                     f"has also been adjusted accordingly.")
                 print("\nRefugee DataFrame after deletion:")
-                print(ref_df)
+                print(ref_df.to_string(index=False))
                 break
             elif result == "no":
                 print("\nReturning back to previous menu.")

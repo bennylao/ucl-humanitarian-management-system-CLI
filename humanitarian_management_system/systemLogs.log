@@ -294,3 +294,66 @@ Name: userID, dtype: bool, 'campID')
 2023-12-07 11:13:51,040 - CRITICAL - controller-admin_remove_camp-Line717 - [Errno 2] No such file or directory: '/Users/marthacjones/Library/CloudStorage/OneDrive-UniversityCollegeLondon/UCL_comp_sci/COMP0066_Humanitarian_Management_System/data/refugee.csv'
 2023-12-07 11:14:55,177 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-07 11:14:55,177 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:23:54,165 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:23:54,166 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:24:08,133 - CRITICAL - controller-admin_edit_event-Line317 - invalid literal for int() with base 10: 'return'
+2023-12-07 11:30:03,973 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:30:03,974 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:31:40,011 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:31:40,012 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:36:07,078 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:36:07,078 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:36:37,533 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:36:37,534 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:44:01,448 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:44:01,450 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:49:55,711 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:49:55,713 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:51:36,617 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:51:36,618 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:52:43,877 - INFO - helper-delete_refugee-Line624 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 12:00:35,934 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:00:35,935 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:01:30,554 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:02:17,879 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:10:04,682 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:10:04,685 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:10:44,650 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:10:53,049 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:11:08,781 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:11:17,523 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:12:52,698 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:12:52,699 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:13:02,687 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:13:06,683 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:13:19,624 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:13:25,544 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:17:53,691 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:17:53,691 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:18:09,577 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:18:20,319 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:23:13,133 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:23:13,134 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:23:22,446 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:23:29,918 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:24:22,248 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:24:22,249 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:24:30,776 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:24:34,448 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:25:51,711 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:25:51,711 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:26:03,636 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:26:26,436 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:28:33,351 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:28:33,351 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:28:45,191 - INFO - helper-delete_refugee-Line636 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 12:29:38,720 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:29:50,595 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 12:31:19,465 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:31:19,465 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:32:35,499 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:32:35,500 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:33:42,706 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 12:33:42,706 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 12:33:56,629 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 12:34:02,360 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
