@@ -41,6 +41,8 @@ class Controller:
                 # if registration is successful, direct user to login page. Otherwise, return to startup menu
                 if is_register_successful:
                     self.login()
+            if user_selection == 'H':
+                self.help_center()
             if user_selection == "x":
                 # exit the program
                 break
@@ -1118,6 +1120,9 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
+
+    def help_center(self):
+        helper.help_center_page()
 
     def delete_refugee(self):
         print(

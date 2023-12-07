@@ -6,7 +6,8 @@ class GeneralView:
     startup_menu = (
         ("1", "Login"),
         ("2", "Register as a volunteer"),
-        ("x", "Exit the system")
+        ("x", "Exit the system"),
+        ("H", "Help Center")
     )
 
     @classmethod

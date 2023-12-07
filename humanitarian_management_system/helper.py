@@ -1234,6 +1234,84 @@ def admin_export_refugees_to_csv():
         print(f"Error exporting data to CSV: {e}. Redirecting you back!")
         return
 
+def help_center_page():
+    while True:
+        print("This Humanitarian Management System has been divided into functions for 2 roles: Admin and Volunteer."
+              "Below you will find the relevant functions that each have access to & how they work.\n\n"
+              "--------------------------------------------------------------------------\n"
+              "ADMIN\n"
+              "---------------------------------------------------------------------------\n"
+              "\n\n1. Humanitarian Plan (Event) Management"
+              "\n   - Here is where admin can create new events a.k.a. 'Plans' in the system. Remember to add in the"
+              "camps associated with this event, otherwise you can't host any refugees!"
+              "\n   - You can also edit all details about the event"
+              "\n   - Note the difference between closing an event and deleting an event, where the former simply "
+              "closes it in our system, whereas the latter deletes all the data from the system, e.g.. refugees are "
+              "deleted 'on cascade'"
+              "\n   - You can display all events currently in the system"
+              "\n\n2. Camp Management"
+              "\n   - Camp management includes both camp and refugee management."
+              "\n   - Only a user with Admin privilege can add new camps to the system."
+              "\n   - A camp can be closed as a single entity, even if an event is still ongoing. This is in case of "
+              "a potential health outbreak in the camp or natural disaster."
+              "\n   - An admin can delete any refugee held in the system, and move any refugee from camp to camp, whilst "
+              "volunteers have restrictions."
+              "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
+              "to add more refugees to it. These restrictions have been implemented in the system."
+              "\n   - An admin is able to EXPORT a CSV file of the refugees in the system, either an entire overview"
+              "or filtered by a specific camp or event."
+              "\n\n3.Volunteer Account Management"
+              "\n   - Admin is able to edit volunteer accounts, display an overview of them, deactivate or remove"
+              "volunteer accounts."
+              "\n\n4.Resource Management"
+              "\n   - Our resource management section is very sophisticated. It includes:"
+              "\n   - A SHOP: where admin adds into the system the resources which they have acquired. This initial "
+              "'purchase' of items simply places them in the system, waiting to be allocated to camps by a specified"
+              "method."
+              "\n   - ALLOCATION: Resources can be allocated either manually or automatically."
+              "\n                 - Manual allocation is where admin can specify amounts they wish to allocate and to which camps"
+              "\n                 - Auto allocation is where the system's algorithms will calculate the average weighting of "
+              "resources in camps as it is, as well as the population of refugees to ensure resources\n                 "
+              "  are distributed in a balanced and 'equal' in proportion to population. Additionally, the algorithm takes"
+              "into account the 'health' levels of the camps."
+              "\n   - STATISTICS: Admin can see all current statistics on how resources are distributed."
+              "\n\n5. Account Edit & View"
+              "\n   - Admin can modify their own account details & view them"
+              "\n\n\n\n--------------------------------------------------------------------------\n"
+              "VOLUNTEER\n"
+              "---------------------------------------------------------------------------\n"
+              "\n\n1.Join/Change Camp"
+              "\n   - A volunteer MUST join a camp to be able to add/delete a refugee to/from a camp. We also need"
+              "to know which camp's resources to display to them. "
+              "\n\n2.Camp Management"
+              "\n   - Volunteer can add refugees ONLY to their own camp. "
+              "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
+              "to add more refugees to it. These restrictions have been implemented in the system."
+              "\n   - Refugees can only be moved to a camp within the same event as they are currently registred in"
+              "\n   - We also encourage refugees to be kept together as a family unit. You may choose to move a refugee alone if"
+              "       essential, however we will prompt you to keep family units together if the system detects a family unit and"
+              "       capacity allows for them to stay together."
+              "\n   - Volunteer can make amendments to the camp they are assigned to"
+              "\n   - Volunteer can display camp information & resources"
+              "\n   - Volunteer can ACCESS LEGAL ADVICE links for supporting refugees better "
+              "whilst the organisation is building its own legal support team."
+              "\n   - REFUGEE SKILLS SESSIONS:"
+              "\n                              - Volunteers can register refugee skills sessions where they select a topic and date"
+              "\n                                for an informative session to upskill refugees."
+              "\n                              - Refugees from any camps within the same event as the hosted session can attend"
+              "\n                              - Refugees can be added at time of event creation or afterwards. They can also be removed."
+              "\n                              - Sessions can be deleted from the system"
+              "\n\n3.Edit & View Account Information"
+              "\n   - Volunteer can edit and view their own perosnal account information"
+
+
+              )
+
+
+        input("\n\nEnter anything when you're ready to exit this page & return back to the start menu: ")
+        return
+
+
 
 def check_vol_assigned_camp(username):
     csv_path = Path(__file__).parents[0].joinpath("data/user.csv")

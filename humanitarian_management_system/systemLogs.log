@@ -375,3 +375,90 @@ Name: userID, dtype: bool, 'campID')
 2023-12-07 15:23:13,082 - DEBUG - controller-delete_refugee-Line1156 - Error invalid literal for int() with base 10: 'asdfdg' with volunteer user input when selection refugee to delete
 2023-12-07 15:24:25,176 - DEBUG - controller-delete_refugee-Line1156 - Error invalid literal for int() with base 10: 'sadfgh' with volunteer user input when selection refugee to delete
 2023-12-07 15:24:48,504 - INFO - controller-delete_refugee-Line1171 - Camp data file loaded successfully when deleting a refugee from the system.
+2023-12-07 15:28:07,955 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:28:07,955 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:28:29,259 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:28:29,259 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:39:51,615 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:39:51,616 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:40:11,633 - INFO - helper-remove_refugee_from_session-Line1025 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-07 15:42:00,243 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:42:00,243 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:46:05,368 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:46:05,369 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:46:22,029 - INFO - helper-move_refugee_helper_method-Line480 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 15:47:25,214 - INFO - helper-move_refugee_helper_method-Line498 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 15:49:26,199 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:49:26,200 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:49:55,625 - INFO - helper-move_refugee_helper_method-Line480 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 15:49:59,175 - INFO - helper-move_refugee_helper_method-Line499 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 15:52:24,794 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:52:24,795 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:52:47,263 - INFO - helper-move_refugee_helper_method-Line480 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 15:52:50,108 - INFO - helper-move_refugee_helper_method-Line499 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 15:54:38,373 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:54:38,373 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:56:21,816 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:56:21,816 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:58:13,597 - INFO - helper-move_refugee_helper_method-Line480 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 15:58:13,601 - DEBUG - helper-move_refugee_helper_method-Line495 - Error invalid literal for int() with base 10: ''with user input for moving a refugee from a camp.
+2023-12-07 15:58:38,296 - INFO - helper-move_refugee_helper_method-Line480 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 15:58:44,958 - INFO - helper-move_refugee_helper_method-Line480 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 15:58:45,915 - INFO - helper-move_refugee_helper_method-Line499 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 15:58:59,154 - INFO - helper-move_refugee_helper_method-Line480 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-07 15:59:04,754 - INFO - helper-move_refugee_helper_method-Line499 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 16:00:10,364 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:00:10,365 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:00:20,958 - CRITICAL - controller-volunteer_join_camp-Line948 - 'eid'
+2023-12-07 16:02:24,835 - CRITICAL - controller-volunteer_join_camp-Line948 - 'eid'
+2023-12-07 16:04:55,368 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:04:55,370 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:05:16,052 - INFO - controller-delete_refugee-Line1129 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 16:05:16,055 - INFO - controller-delete_refugee-Line1133 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-07 16:05:57,753 - INFO - controller-delete_refugee-Line1171 - Camp data file loaded successfully when deleting a refugee from the system.
+2023-12-07 16:07:44,353 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:07:44,354 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:07:59,731 - INFO - controller-delete_refugee-Line1129 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 16:07:59,734 - INFO - controller-delete_refugee-Line1133 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-07 16:09:50,344 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:09:50,345 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:10:04,158 - INFO - controller-delete_refugee-Line1129 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 16:10:04,160 - INFO - controller-delete_refugee-Line1133 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-07 16:11:30,489 - INFO - controller-delete_refugee-Line1217 - Camp data file loaded successfully when deleting a refugee from the system.
+2023-12-07 16:11:41,277 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:11:41,278 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:11:54,022 - INFO - controller-delete_refugee-Line1129 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 16:11:54,024 - INFO - controller-delete_refugee-Line1133 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-07 16:17:38,119 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:17:38,121 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:17:57,179 - INFO - helper-add_refugee_to_session-Line961 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-07 16:18:08,763 - INFO - helper-display_training_session-Line745 - Training session data successfully loaded.
+2023-12-07 16:19:10,056 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:19:10,058 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:19:21,572 - INFO - helper-display_training_session-Line745 - Training session data successfully loaded.
+2023-12-07 16:23:36,458 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:23:36,460 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:23:52,389 - INFO - helper-remove_refugee_from_session-Line1034 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-07 16:25:01,709 - CRITICAL - helper-remove_refugee_from_session-Line1069 - Unexpected error when removing refugee from training session from invalid userinput: invalid literal for int() with base 10: 'donee'
+2023-12-07 16:26:35,146 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:26:35,147 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:26:52,827 - INFO - helper-display_training_session-Line745 - Training session data successfully loaded.
+2023-12-07 16:27:30,813 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:27:30,813 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:28:44,563 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:28:44,563 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:32:59,962 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:32:59,963 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 16:34:55,257 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 16:34:55,257 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 17:06:52,379 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 17:06:52,380 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 17:08:03,821 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 17:08:03,821 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 17:15:30,438 - CRITICAL - controller-volunteer_join_camp-Line950 - 'eid'
+2023-12-07 17:25:04,330 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 17:25:04,330 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 17:25:28,152 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 17:25:28,152 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 17:27:00,489 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 17:27:00,489 - DEBUG - controller-initialise-Line22 - Controller is initialised.
