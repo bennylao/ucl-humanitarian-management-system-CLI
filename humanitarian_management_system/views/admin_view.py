@@ -4,7 +4,7 @@ class AdminView:
     """
 
     main_menu = (
-        ("1", "Humanitarian Plan Management"),
+        ("1", "Humanitarian Plan (Event) Management"),
         ("2", "Camp Management"),
         ("3", "Volunteer Account Management"),
         ("4", "Resource Management"),

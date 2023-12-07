@@ -1073,13 +1073,13 @@ def get_export_file_path():
     try:
         while True:
             user_input = input(
-                "Enter a specified path for where you want the file to go, or enter 'X' and it will be placed in "
-                "the data folder.\n\n***You will see this when you next log back in or after you "
-                "stop running the program***\n\n(Enter RETURN to go back).\n")
+                "Enter 'X' for us to place your report in our data folder."
+                "\n\n***You will see this when you next log back in or after you "
+                "stop running the program***\n\n(Or Enter RETURN to go back).\n")
 
             if user_input.lower() == 'return':
                 return None
-            elif user_input.lower() == 'x':
+            if user_input.lower() == 'x':
                 base_file_path = "data/refugees_exported_data_file.csv"
                 file_path = Path(base_file_path)
                 if file_path.is_file():
@@ -1089,8 +1089,7 @@ def get_export_file_path():
                     file_path = file_path.parent / f"{file_path.stem}_{index}{file_path.suffix}"
                 break
             else:
-
-                file_path = Path(user_input)
+                print("Sorry. Didn't catch that. Try again.")
                 break
         return file_path
     except Exception as e:
@@ -1115,13 +1114,14 @@ def admin_export_refugees_to_csv():
         print("\nWe can print out a report of refugees categorised by event, camp, or report on all refugees "
               "in the system.\n")
         while True:
-            ref_filter = input("Please enter EVENT,\nCAMP,\n*,\nor RETURN: ")
+            ref_filter = input("Please select your preferred filter by entering one of the below options:"
+                               "\nEVENT,\nCAMP,\n* (for all),\nor RETURN: ")
             refugees = []
             if ref_filter.lower() == 'return':
                 return
             elif ref_filter.lower() == 'camp':
                 while True:
-                    campID = input("Enter the camp that you want a report of refugees on: ")
+                    campID = input("\nEnter the camp that you want a report of refugees on: ")
                     if campID.lower() == 'return':
                         return
                     try:

@@ -273,3 +273,24 @@ Name: userID, dtype: bool, 'campID')
 2023-12-06 17:22:45,777 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-06 17:23:39,563 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-06 17:23:39,563 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:41:10,600 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:41:10,601 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:46:32,006 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:46:32,007 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:46:54,201 - INFO - helper-admin_export_refugees_to_csv-Line1106 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-07 10:46:54,219 - INFO - helper-admin_export_refugees_to_csv-Line1109 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-07 10:46:54,222 - INFO - helper-admin_export_refugees_to_csv-Line1112 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-07 10:47:39,622 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:47:39,623 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:47:56,694 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:47:56,694 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:48:08,474 - INFO - helper-admin_export_refugees_to_csv-Line1106 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-07 10:48:08,477 - INFO - helper-admin_export_refugees_to_csv-Line1109 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-07 10:48:08,481 - INFO - helper-admin_export_refugees_to_csv-Line1112 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-07 10:54:24,334 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:54:24,335 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:12:46,833 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:12:46,833 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:13:51,040 - CRITICAL - controller-admin_remove_camp-Line717 - [Errno 2] No such file or directory: '/Users/marthacjones/Library/CloudStorage/OneDrive-UniversityCollegeLondon/UCL_comp_sci/COMP0066_Humanitarian_Management_System/data/refugee.csv'
+2023-12-07 11:14:55,177 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:14:55,177 - DEBUG - controller-initialise-Line22 - Controller is initialised.

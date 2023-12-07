@@ -685,12 +685,19 @@ class Controller:
                     print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
 
             while True:
-                aa = input(f"\nAre you sure to remove the camp {delete_camp}? (yes/no): ")
+                aa = input(f"\nAre you sure to remove the camp {delete_camp}? (yes/no)\n"
+                           f"Note: you'll also be deleting all associated refugees from the system: ")
                 if aa == "yes":
                     # implement the deletion in csv file
                     df2 = df1[df1["campID"] != delete_camp]
                     df2.to_csv(camp_csv_path, index=False)
-
+                    # --------- added logic to delete refugees in this camp -----------------
+                    refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+                    ref_df = pd.read_csv(refugee_csv_path)
+                    refugees_in_camp = ref_df[ref_df['campID'] == delete_camp]
+                    ref_df.drop(refugees_in_camp.index, inplace=True)
+                    ref_df.reset_index(drop=True, inplace=True)
+                    ref_df.to_csv(refugee_csv_path, index=False)
                     # keep track of existing camp num of a particular event
                     no_camp = df.loc[eventID, "no_camp"]
                     no_camp -= 1
