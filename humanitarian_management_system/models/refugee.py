@@ -158,8 +158,11 @@ class Refugee:
                     continue
                 else:
                     break
-            except:
+            except ValueError:
                 print("Invalid refugee ID entered!")
+                continue
+            except Exception as e:
+                print(e)
                 continue
 
         VolunteerView.display_edit_refugee_menu()
@@ -179,8 +182,11 @@ class Refugee:
                         continue
                     else:
                         break
-                except:
+                except ValueError:
                     print("Can't use an existing refugee ID!")
+                    continue
+                except Exception as e:
+                    print(e)
                     continue
             self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'refugeeID', new_value, user, cid)
 
@@ -358,6 +364,3 @@ class Refugee:
                     self.display_info(cid, user)
                 return
             return
-
-
-

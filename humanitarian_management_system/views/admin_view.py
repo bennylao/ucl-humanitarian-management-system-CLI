@@ -8,7 +8,7 @@ class AdminView:
         ("2", "Camp Management"),
         ("3", "Volunteer Account Management"),
         ("4", "Resource Management"),
-        ("5", "Display Summary/Statistics"), # ben: idk what exactly this will be, it depends on what Yuan can do
+        ("5", "Display Summary/Statistics"),
         ("6", "Edit Account Information"),
         ("7", "View Account Information"),
         ("L", "Logout")
@@ -108,8 +108,7 @@ class AdminView:
         print("")
         print(f"""===============================================\n
 ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ RESOURCE MGMT MENU ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-===============================================\n"""
-        )
+===============================================\n""")
         for key, value in cls.manage_resource_menu:
             print(f"[ {key} ] {value}")
 

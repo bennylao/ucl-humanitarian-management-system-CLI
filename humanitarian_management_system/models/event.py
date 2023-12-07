@@ -37,8 +37,8 @@ class Event:
         else:
             last_event_id = pd.read_csv(event_csv_path)['eventID'].max()
 
-        maxEid_csv_path = Path(__file__).parents[1].joinpath("data/maxUsedEid.csv")
-        max_used_eid = pd.read_csv(maxEid_csv_path)['max_used_eid'].max()
+        max_eid_csv_path = Path(__file__).parents[1].joinpath("data/maxUsedEid.csv")
+        max_used_eid = pd.read_csv(max_eid_csv_path)['max_used_eid'].max()
         event_id = max(last_event_id, max_used_eid) + 1
         # insert user id into registration_info
         event_info.insert(0, event_id)
@@ -50,7 +50,7 @@ class Event:
         # To prevent confusion caused by directly modifying the eventTesting file
         # use event_id, instead of max_used_eid, add 1 to update max_used_eid
         max_used_eid = event_id
-        helper.modify_csv_value(maxEid_csv_path, 0, 'max_used_eid', max_used_eid)
+        helper.modify_csv_value(max_eid_csv_path, 0, 'max_used_eid', max_used_eid)
 
     @staticmethod
     def get_all_active_events():
@@ -68,7 +68,7 @@ class Event:
         Recognize which event and which column need to be edited,
         then edit by calling each corresponding private function.
         """
-        #### In this case, we can 'end an event' by edit this endDate
+        # In this case, we can 'end an event' by edit this endDate
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         df = pd.read_csv(event_csv_path)
         if df.empty:
@@ -87,7 +87,8 @@ class Event:
                 if eid_to_edit == 'RETURN':
                     return
                 elif int(eid_to_edit) not in filtered_df['eventID'].values:
-                    print(f"\nInvalid input! Please enter an integer from {filtered_df['eventID'].values} for Event ID.")
+                    print(
+                        f"\nInvalid input! Please enter an integer from {filtered_df['eventID'].values} for Event ID.")
                     continue
                 else:
                     row = df[df['eventID'] == int(eid_to_edit)].index[0]
@@ -98,7 +99,7 @@ class Event:
 
         while True:
             try:
-                #### Maybe this could be changed into a menu
+                # Maybe this could be changed into a menu
                 what_to_edit = input('\n--> Choose one to edit (title/ location/ description/ startDate/ endDate):')
                 if what_to_edit == 'RETURN':
                     return
@@ -223,10 +224,11 @@ class Event:
         else:
             camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
             df_camp = pd.read_csv(camp_csv_path)
-            row_camp_list = df_camp[(df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
+            row_camp_list = df_camp[
+                (df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
             root = tk.Tk()
             result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-                                               "You'll also close the camps in that event.")
+                                                           "You'll also close the camps in that event.")
             if result == "yes":
                 ongoing = False
                 if df['ongoing'].loc[row] == 'Yet':
@@ -244,7 +246,6 @@ class Event:
                 tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
             root.mainloop()
 
-
     @staticmethod
     def display_events(df):
         table_str = df.to_markdown(index=False)
@@ -258,22 +259,23 @@ class Event:
         df_camp = pd.read_csv(camp_csv_path)
         for index, series in df.iterrows():
             try:
-                startDate = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
-            except ValueError: # startDate may exist this error only when entering None in creating an event
-                startDate = None
+                start_date = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
+            except ValueError:  # startDate may exist this error only when entering None in creating an event
+                start_date = None
             try:
-                endDate = datetime.datetime.strptime(str(series['endDate']), '%Y-%m-%d')
+                end_date = datetime.datetime.strptime(str(series['endDate']), '%Y-%m-%d')
             except ValueError:
-                endDate = None
+                end_date = None
 
-            if ((endDate == None and startDate.date() <= datetime.date.today()) or
-                (startDate.date() <= datetime.date.today() and endDate.date() > datetime.date.today())):
+            if ((end_date == None and start_date.date() <= datetime.date.today()) or
+                    (start_date.date() <= datetime.date.today() and end_date.date() > datetime.date.today())):
                 helper.modify_csv_value(event_csv_path, index, 'ongoing', True)
-            elif startDate.date() > datetime.date.today():
+            elif start_date.date() > datetime.date.today():
                 helper.modify_csv_value(event_csv_path, index, 'ongoing', 'Yet')
             else:
                 helper.modify_csv_value(event_csv_path, index, 'ongoing', False)
-                row_camp_list = df_camp[(df_camp['eventID'] == df.loc[index, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
+                row_camp_list = df_camp[
+                    (df_camp['eventID'] == df.loc[index, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
                 if row_camp_list:
                     for row_camp in row_camp_list:
                         helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
@@ -304,7 +306,8 @@ class Event:
                 print("\nInvalid event ID entered.")
                 continue
         row = df[df['eventID'] == int(eid_to_close)].index[0]
-        row_camp_list = df_camp[(df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
+        row_camp_list = df_camp[
+            (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
         root = tk.Tk()
         result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
                                                        "You'll also close the camps in that event.")
@@ -372,7 +375,8 @@ class Event:
                                          0)
                 helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'roleID',
                                          0)
-            row_camp_list = camp_df[(camp_df['eventID'] == int(eid_to_delete)) & (camp_df['status'] == 'open')].index.tolist()
+            row_camp_list = camp_df[
+                (camp_df['eventID'] == int(eid_to_delete)) & (camp_df['status'] == 'open')].index.tolist()
             if row_camp_list:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')

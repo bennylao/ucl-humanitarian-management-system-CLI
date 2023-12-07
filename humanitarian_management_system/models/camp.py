@@ -1,5 +1,4 @@
-from numpy.core.defchararray import capitalize
-from humanitarian_management_system.helper import modify_csv_value, modify_csv_pandas
+from humanitarian_management_system.helper import modify_csv_pandas
 import pandas as pd
 from pathlib import Path
 
@@ -144,7 +143,7 @@ class Camp:
         joined_df = pd.merge(camp_df, res_alloc_df, on='campID', how='inner')
         joined_df = pd.merge(joined_df, res_type_df, on='resourceID', how='inner')
         resource_camp = joined_df.pivot_table(index=['campID'], columns='name',
-                                                   values='qty', aggfunc='sum').sort_index(level=0)
+                                              values='qty', aggfunc='sum').sort_index(level=0)
 
         table_str = resource_camp.to_markdown(index=False)
         print("\n" + table_str)
@@ -157,7 +156,7 @@ class Camp:
                 continue
             return
 
-    def display_end(self,user, cid):
+    def display_end(self, user, cid):
         while True:
             user_input = input("Would you like to exit (yes or no)? ")
 
