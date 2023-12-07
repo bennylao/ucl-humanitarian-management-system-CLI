@@ -259,7 +259,8 @@ class Admin(User):
             if user_selection == "L":
                 break
 
-    def user_change_username(self, change_user):
+    @staticmethod
+    def user_change_username(change_user):
         existing_usernames = User.get_all_usernames()
         print(f"\nCurrent Username: '{change_user.username}'")
         while True:
@@ -280,7 +281,8 @@ class Admin(User):
                 print("\nInvalid username entered. Only alphabet letter (Aa-Zz) and numbers (0-9) are allowed.")
                 continue
 
-    def user_change_password(self, change_user):
+    @staticmethod
+    def user_change_password(change_user):
         # specify allowed characters for passwords
         allowed_chars = r"[!@#$%^&*\w]"
         while True:
@@ -308,7 +310,8 @@ class Admin(User):
                       "Only alphabet, numbers and !@#$%^&* are allowed.")
                 continue
 
-    def user_change_name(self, change_user):
+    @staticmethod
+    def user_change_name(change_user):
         print(f"\nCurrent Name: {change_user.first_name} {change_user.last_name}")
         while True:
             while True:
@@ -342,7 +345,8 @@ class Admin(User):
                       f"\nYour new name is '{change_user.first_name} {change_user.last_name}'.")
                 break
 
-    def user_change_email(self, change_user):
+    @staticmethod
+    def user_change_email(change_user):
         # specify allowed characters for email
         email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
         all_emails = User.get_all_emails()
@@ -370,7 +374,8 @@ class Admin(User):
                       "Only alphabet, numbers and !@#$%^&* are allowed.")
                 continue
 
-    def user_change_phone(self, change_user):
+    @staticmethod
+    def user_change_phone(change_user):
         print(f"\nCurrent Phone Number: {change_user.phone}")
         while True:
             new_phone = input("\nPlease enter new phone number: ")
@@ -386,7 +391,8 @@ class Admin(User):
         print("\nPhone changed successfully."
               f"\nYour new phone is '{change_user.phone}")
 
-    def user_change_occupation(self, change_user):
+    @staticmethod
+    def user_change_occupation(change_user):
         print(f"\nCurrent Occupation: {change_user.occupation}")
         while True:
             new_occupation = input("\nPlease enter your new occupation: ")

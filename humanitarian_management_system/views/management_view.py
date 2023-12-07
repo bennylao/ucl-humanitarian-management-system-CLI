@@ -199,7 +199,6 @@ class ManagementView:
               "         All volunteer information \n"
               "==========================================")
 
-
     @staticmethod
     def display_activate():
         print("\n==========================================\n"
