@@ -148,35 +148,41 @@ class Refugee:
 
         while True:
             try:
-                ref_id = int(input("\nPlease select a refugee ID you would like to change: "))
-                if ref_id not in id_arr:
-                    print("Invalid refugee ID entered!")
-                    continue
+                ref_id = input("\nPlease select a refugee ID you would like to change: ")
+
                 if ref_id == 'RETURN':
                     return
+
+                if int(ref_id) not in id_arr:
+                    print("Invalid refugee ID entered!")
+                    continue
                 else:
                     break
             except:
-                return
+                print("Invalid refugee ID entered!")
+                continue
 
         VolunteerView.display_edit_refugee_menu()
         user_selection = validate_user_selection(VolunteerView.get_edit_refugee_options())
 
         if user_selection == '1':
-            print(f"Current refugee ID is {df.loc[df['refugeeID'] == ref_id]['refugeeID'].tolist()[0]}")
+            print(f"Current refugee ID is {df.loc[df['refugeeID'] == int(ref_id)]['refugeeID'].tolist()[0]}")
             while True:
                 try:
-                    new_value = int(input("\nEnter new refugee ID: "))
-                    if new_value in id_arr_temp:
-                        print("Can't use an existing refugee ID!")
-                        continue
+                    new_value = input("\nEnter new refugee ID: ")
+
                     if new_value == 'RETURN':
                         return
+
+                    if int(new_value) in id_arr_temp:
+                        print("Can't use an existing refugee ID!")
+                        continue
                     else:
                         break
                 except:
-                    return
-            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'refugeeID', new_value, user, cid)
+                    print("Can't use an existing refugee ID!")
+                    continue
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'refugeeID', new_value, user, cid)
 
             # reorder refugee ID after ID changed
             csv_path_r = Path(__file__).parents[1].joinpath("data/refugee.csv")
@@ -186,34 +192,37 @@ class Refugee:
             df_r.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
 
         if user_selection == '2':
-            print(f"Current refugee first name is {df.loc[df['refugeeID'] == ref_id]['firstName'].tolist()[0]}")
+            print(f"Current refugee first name is {df.loc[df['refugeeID'] == int(ref_id)]['firstName'].tolist()[0]}")
             while True:
                 new_value = input("\nEnter new first name: ")
+
+                if new_value == 'RETURN':
+                    return
+
                 if not new_value.isalpha():
                     print("Must be alphabetic values!")
                     continue
-                if new_value == 'RETURN':
-                    return
                 else:
                     break
-            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'firstName', new_value, user, cid)
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'firstName', new_value, user, cid)
 
         if user_selection == '3':
-            print(f"Current refugee last name is {df.loc[df['refugeeID'] == ref_id]['lastName'].tolist()[0]}")
+            print(f"Current refugee last name is {df.loc[df['refugeeID'] == int(ref_id)]['lastName'].tolist()[0]}")
             while True:
                 new_value = input("\nEnter new last name: ")
-                if not new_value.isalpha():
-                    print("Must be alphabetic values!")
-                    continue
 
                 if new_value == 'RETURN':
                     return
+
+                if not new_value.isalpha():
+                    print("Must be alphabetic values!")
+                    continue
                 else:
                     break
-            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'lastName', new_value, user, cid)
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'lastName', new_value, user, cid)
 
         if user_selection == '4':
-            print(f"Current refugee first DOB is {df.loc[df['refugeeID'] == ref_id]['dob'].tolist()[0]}")
+            print(f"Current refugee first DOB is {df.loc[df['refugeeID'] == int(ref_id)]['dob'].tolist()[0]}")
             while True:
                 try:
                     new_value = input("\nEnter date of birth (format: dd/mm/yy): ")
@@ -224,36 +233,41 @@ class Refugee:
                 except ValueError:
                     print("\nInvalid date format entered.")
                     continue
-            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'dob', new_value, user, cid)
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'dob', new_value, user, cid)
 
         if user_selection == '5':
-            print(f"Current refugee gender is {df.loc[df['refugeeID'] == ref_id]['gender'].tolist()[0]}")
+            print(f"Current refugee gender is {df.loc[df['refugeeID'] == int(ref_id)]['gender'].tolist()[0]}")
             while True:
                 new_value = input("\nEnter new gender (male, female or other): ")
+
+                if new_value == 'RETURN':
+                    return
+
                 if new_value != 'male' and new_value != 'female' and new_value != 'other':
                     print("Must enter male, female or other!")
                     continue
-                if new_value == 'RETURN':
-                    return
                 else:
                     break
-            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'gender', new_value, user, cid)
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'gender', new_value, user, cid)
 
         if user_selection == '6':
-            print(f"Current refugee family ID is {df.loc[df['refugeeID'] == ref_id]['familyID'].tolist()[0]}")
+            print(f"Current refugee family ID is {df.loc[df['refugeeID'] == int(ref_id)]['familyID'].tolist()[0]}")
             while True:
                 try:
                     new_value = input("\nEnter new family ID: ")
+
+                    if new_value == 'RETURN':
+                        return
+
                     if not new_value.isnumeric():
                         print("Must be a numerical value!")
                         continue
-                    if new_value == 'RETURN':
-                        return
                     else:
                         break
                 except:
-                    return
-            self.modify_csv("data/refugee.csv", 'refugeeID', ref_id, 'familyID', new_value, user, cid)
+                    print("Must be a numerical value!")
+                    continue
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'familyID', new_value, user, cid)
 
         if user_selection == 'R':
             return
