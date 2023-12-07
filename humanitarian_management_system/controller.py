@@ -6,9 +6,11 @@ import math
 import logging
 from humanitarian_management_system import helper
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
-                                                   ResourceReport, ResourceAllocator, ResourceAdder, ResourceCampCreateDelete)
+                                                   ResourceReport, ResourceAllocator, ResourceAdder,
+                                                   ResourceCampCreateDelete)
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
 from humanitarian_management_system.data_analysis.camp_data_visualization import Dashboard
+
 
 class Controller:
     def __init__(self):
@@ -542,11 +544,11 @@ class Controller:
 
                                     for j in ref_id_arr:
                                         helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
-                                        int(j), 'campID', int(new_value))
+                                                                 int(j), 'campID', int(new_value))
 
                                     for k in vol_id_arr:
                                         helper.modify_csv_pandas("data/user.csv", 'userID',
-                                        int(k), 'campID', int(new_value))
+                                                                 int(k), 'campID', int(new_value))
                                 except:
                                     break
                                 break
@@ -1280,7 +1282,6 @@ class Controller:
                 self.delete_refugee()
             else:
                 print("Sorry! Didn't catch that. Please try again or enter [3] to exit.\n")
-
 
     def move_refugee_admin(self):
         while True:
