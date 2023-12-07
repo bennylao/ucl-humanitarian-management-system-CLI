@@ -650,6 +650,7 @@ class Controller:
 
             event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
             camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+            resource_allocation_csv_path = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
             active_index = helper.extract_active_event(event_csv_path)[0]
 
             # if there is no active events, return
@@ -671,58 +672,65 @@ class Controller:
             df1 = pd.read_csv(camp_csv_path)
             while True:
                 try:
-                    eventID = int(input("\nEnter Event ID: "))
-                    if eventID not in active_index:
+                    event_id = input("\nEnter Event ID: ")
+                    if event_id == "RETURN":
+                        return
+                    event_id = int(event_id)
+                    if event_id not in active_index:
                         print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
                         continue
-                    elif df1[df1['eventID'] == eventID].empty:
+                    elif df1[df1['eventID'] == event_id].empty:
                         print("No relevant camps to select from")
                         return
-                    elif eventID == 'RETURN':
+                    elif event_id == 'RETURN':
                         return
                     break
                 except ValueError:
-                    if str(eventID) == "RETURN":
-                        return
-                    else:
-                        print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                    print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
 
-            filtered_campID = df1[df1['eventID'] == eventID]['campID'].tolist()
+            filtered_camp_id = df1[df1['eventID'] == event_id]['campID'].tolist()
+            df_resource = pd.read_csv(resource_allocation_csv_path)
+            resource_camp_id_list = df_resource['campID'].tolist()
             print('The following shows the info of all camps from the event')
-            Event.display_events(df1[df1['eventID'] == eventID])
+            Event.display_events(df1[df1['eventID'] == event_id])
             while True:
                 try:
-                    delete_camp = int(input("\nWhich camp do you want to remove? Please enter campID: "))
-                    if delete_camp not in filtered_campID:
-                        print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
+                    delete_camp_id = input("\nWhich camp do you want to remove? Please enter campID: ")
+                    if delete_camp_id == "RETURN":
+                        return
+                    delete_camp_id = int(delete_camp_id)
+                    if delete_camp_id not in filtered_camp_id:
+                        print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
+                        continue
+                    elif delete_camp_id in resource_camp_id_list:
+                        print(f"\nThere is allocated resource in camp {delete_camp_id}."
+                              f"\nPlease transfer them before removing the camp.")
                         continue
                     else:
                         print("\n*The following shows the info of the camp you have chosen*")
-                        Event.display_events(df1[df1['campID'] == delete_camp])
+                        Event.display_events(df1[df1['campID'] == delete_camp_id])
                         break
                 except ValueError:
-                    if str(delete_camp) == "RETURN":
-                        return
-                    print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
+                    print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
 
             while True:
-                aa = input(f"\nAre you sure to remove the camp {delete_camp}? (yes/no)\n"
+                aa = input(f"\nAre you sure to remove the camp {delete_camp_id}? (yes/no)\n"
                            f"Note: you'll also be deleting all associated refugees from the system: ")
                 if aa == "yes":
                     # implement the deletion in csv file
-                    df2 = df1[df1["campID"] != delete_camp]
+                    df2 = df1[df1["campID"] != delete_camp_id]
                     df2.to_csv(camp_csv_path, index=False)
                     # --------- added logic to delete refugees in this camp -----------------
                     refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
                     ref_df = pd.read_csv(refugee_csv_path)
-                    refugees_in_camp = ref_df[ref_df['campID'] == delete_camp]
+                    refugees_in_camp = ref_df[ref_df['campID'] == delete_camp_id]
                     ref_df.drop(refugees_in_camp.index, inplace=True)
                     ref_df.reset_index(drop=True, inplace=True)
                     ref_df.to_csv(refugee_csv_path, index=False)
                     # keep track of existing camp num of a particular event
-                    no_camp = df.loc[eventID, "no_camp"]
+                    no_camp = df.loc[event_id, "no_camp"]
                     no_camp -= 1
-                    index = df[df["eventID"] == eventID].index.tolist()
+                    index = df[df["eventID"] == event_id].index.tolist()
                     helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
                     print("\n\u2714 You have Successfully removed the camp!")
                     return
