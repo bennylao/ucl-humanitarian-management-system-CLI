@@ -1305,6 +1305,8 @@ def help_center_page():
               "\n                              - Sessions can be deleted from the system"
               "\n\n3.Edit & View Account Information"
               "\n   - Volunteer can edit and view their own personal account information"
+              "\n\n\n *** Look out for our return prompt instructions throughout the application if ever you change "
+              "your mind about a process! ***"
 
 
               )
