@@ -94,6 +94,9 @@ class Camp:
         while True:
             user_input = input("Would you like to access the event profile for a particular camp (yes or no)? ")
 
+            if user_input == 'RETURN':
+                return
+
             if user_input.lower() == 'yes':
                 self.display_eventinfo(user, cid, joined_df, cid_arr)
 
@@ -109,6 +112,9 @@ class Camp:
         if user == 'admin':
             while True:
                 id_input = input("Please enter the refugee id whose medical profile you would like to see: ")
+
+                if id_input == 'RETURN':
+                    return
                 if id_input not in cid_arr:
                     print("Invalid refugee ID entered!")
                     continue
@@ -144,6 +150,8 @@ class Camp:
         print("\n" + table_str)
         while True:
             user_input = input("Would you like to exit (yes)? ")
+            if user_input == 'RETURN':
+                return
             if user_input.lower() != 'yes':
                 print("Must enter yes or leave it alone!")
                 continue
@@ -152,6 +160,9 @@ class Camp:
     def display_end(self,user, cid):
         while True:
             user_input = input("Would you like to exit (yes or no)? ")
+
+            if user_input == 'RETURN':
+                return
             if user_input.lower() != 'yes' and user_input.lower() != 'no':
                 print("Must enter yes or no!")
                 continue

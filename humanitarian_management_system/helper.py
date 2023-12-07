@@ -185,17 +185,15 @@ def validate_camp_input():
 
     # capacity input
     while True:
-        try:
-            capacity = input("\nEnter capacity: ")
-            if capacity == "RETURN":
-                break
-            elif int(capacity) > 0:
-                break
-            else:
-                print("Must be a positive integer!")
-                continue
-        except ValueError:
-            print("Must be a positive integer!!")
+        capacity = input("\nEnter capacity: ")
+
+        if capacity == "RETURN":
+            return
+        if int(capacity) > 0:
+            break
+        else:
+            print("Must be a positive integer!")
+            continue
 
     while True:
         risk = input("\nEnter health risk level (low or high): ")
@@ -278,7 +276,6 @@ def extract_active_event(csv_path):
 
 
 def display_camp_list():
-    index = []
 
     csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
     active_id = extract_active_event(csv_path)[0]
@@ -291,21 +288,11 @@ def display_camp_list():
         print("No relevant camps to select from")
         return
 
-    for i in active_id:
-        camp_id = df_c.loc[df_c['eventID'] == i]['campID'].tolist()
-        for j in camp_id:
-            capacity = df_c.loc[df_c['campID'] == j]['refugeeCapacity'].tolist()[0]
-            r_pop = df_c.loc[df_c['campID'] == j]['refugeePop'].tolist()[0]
-            health_risk = df_c.loc[df_c['campID'] == j]['healthRisk'].tolist()[0]
-            plan_title = df_e.loc[df_e['eid'] == i]['title'].tolist()[0]
-            description = df_e.loc[df_e['eid'] == i]['description'].tolist()[0]
-            location = df_e.loc[df_e['eid'] == i]['location'].tolist()[0]
-            end_date = df_e.loc[df_e['eid'] == i]['endDate'].tolist()[0]
-            index.append(j)
+    camp_id_active = df_c.loc[df_c['status'] == 'open']['campID'].tolist()
+    index = [int(i) for i in camp_id_active]
 
-            print(f'''
-                * Index: {j}  | Health risk level: {health_risk} | Plan title: {plan_title} | description: {description} 
-                | location: {location} | Capacity: {capacity} | Refugee population: {r_pop} | End date: {end_date} * ''')
+    table_str = df_c.to_markdown(index=False)
+    print("\n" + table_str)
 
     return index
 

@@ -169,13 +169,16 @@ class Admin(User):
             user_input = input("Would you like to access the camp & event profile for a particular volunteer "
                                "(yes or no)? ")
 
+            if user_input == 'RETURN':
+                return
+
             if user_input.lower() == 'yes':
                 self.display_camp(joined_df_total)
 
             if user_input.lower() != 'yes' and user_input.lower() != 'no':
                 print("Must enter yes or no!")
                 continue
-            if user_input.lower() == 'no':
+            if user_input == 'no':
                 return
             break
 
@@ -188,6 +191,9 @@ class Admin(User):
 
         while True:
             id_input = input("Please enter the volunteer ID whose camp & event profile you would like to see: ")
+
+            if id_input == 'RETURN':
+                return
             if id_input not in vol_id_arr:
                 print("Invalid volunteer ID entered!")
                 continue
@@ -198,6 +204,8 @@ class Admin(User):
 
             while True:
                 user_input = input("Would you like to exit (yes or no)? ")
+                if user_input == 'RETURN':
+                    return
                 if user_input.lower() != 'yes' and user_input.lower() != 'no':
                     print("Must enter yes or no!")
                     continue

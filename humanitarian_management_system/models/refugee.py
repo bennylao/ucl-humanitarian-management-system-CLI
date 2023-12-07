@@ -305,6 +305,9 @@ class Refugee:
         while True:
             user_input = input("Would you like to access the medical profile for a particular refugee (yes or no)? ")
 
+            if user_input == 'RETURN':
+                return
+
             if user_input.lower() == 'yes':
                 self.display_medinfo(user, cid, joined_df_total, ref_id_arr)
 
@@ -318,9 +321,13 @@ class Refugee:
     def display_medinfo(self, user, cid, joined_df_total, ref_id_arr):
         while True:
             id_input = input("Please enter the refugee ID whose medical profile you would like to see: ")
+            if id_input == 'RETURN':
+                return
+
             if id_input not in ref_id_arr:
                 print("Invalid refugee ID entered!")
                 continue
+
             df_med = joined_df_total.loc[joined_df_total['Refugee ID'] == int(id_input)]
             Event.display_events(
                 df_med[['Refugee ID', 'First name', 'Last name', 'Description', 'Condition',
@@ -328,6 +335,8 @@ class Refugee:
 
             while True:
                 user_input = input("Would you like to exit (yes or no)? ")
+                if user_input == 'RETURN':
+                    return
                 if user_input.lower() != 'yes' and user_input.lower() != 'no':
                     print("Must enter yes or no!")
                     continue
