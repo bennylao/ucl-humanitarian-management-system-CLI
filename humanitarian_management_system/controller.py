@@ -1118,6 +1118,138 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
+
+    def delete_refugee(self):
+        print(
+            "YOU ARE REQUESTING TO DELETE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
+            " as instructed.")
+        try:
+            refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+            ref_df = pd.read_csv(refugee_csv_path)
+            logging.info("Refugee data file to delete a refugee from system loaded successfully.")
+            user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+            user_df = pd.read_csv(user_csv_path)
+            user_type = user_df.loc[user_df['username'] == self.user.username]['userType'].tolist()[0]
+            logging.info("Users data file successfully loaded when needing to delete refugee. ")
+            if user_type == 'volunteer':
+                cid = user_df.loc[user_df['username'] == self.user.username]['campID'].tolist()[0]
+                print(f"\nREMEMBER: As a volunteer, you can only delete refugees from your own camp, "
+                      f"which is {cid}...\n")
+                refugees_in_camp = ref_df[ref_df['campID'] == int(cid)]
+                if len(refugees_in_camp) == 0:
+                    print("Looks like you aren't assigned to a camp yet. Contact admin!")
+                    return
+                while True:
+                    print(refugees_in_camp.to_string(index=False))
+                    rid = input(
+                        "\nFrom the list above enter the refugee ID for the refugee you wish to remove from "
+                        "the system: ")
+                    if rid.lower() == "return":
+                        return
+                    try:
+                        rid = int(rid)
+                        if refugees_in_camp['refugeeID'].eq(rid).any():
+                            break
+                        else:
+                            print("\nSorry - that refugee ID doesn't exist in your camp. Pick again.\n")
+                    except Exception as e:
+                        logging.debug(f"Error {e} with volunteer user input when selecting refugee to delete.")
+                        print(f"Oh no! Error {e}from invalid input! Please try again, with an integer.\n")
+
+                print("\nBelow is the information about this refugee.")
+                specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
+                print(specific_refugee_row.to_string(index=False))
+                #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
+                #     root = tk.Tk()
+                while True:
+                    result = input("\nAre you sure you want to delete this refugee? Enter 'yes' or 'no': ")
+                    # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete this refugee?")
+                    if result == "yes":
+                        # Removing 1 from the population of the associated camp
+                        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+                        camp_df = pd.read_csv(camp_csv_path)
+                        logging.info("Camp data file loaded successfully when deleting a refugee from the system.")
+                        camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
+                        row_index_camp = camp_df[camp_df['campID'] == camp_id].index
+                        camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
+                        #     Deleting the refugee from the database
+                        ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
+                        ref_df.reset_index(drop=True, inplace=True)
+                        ref_df.to_csv(refugee_csv_path, index=False)
+                        print(
+                            f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated "
+                            f"camp population has also been adjusted accordingly.")
+                        print("\nRefugee table after deletion:")
+                        print(ref_df.to_string(index=False))
+                        break
+                    elif result == "no":
+                        print("\nReturning back to previous menu.\n")
+                        return
+                    else:
+                        print("\nInvalid input. Please enter 'yes' or 'no': ")
+            else:
+                print(ref_df.to_string(index=False))
+                # checking input is valid according to refugee IDs in database
+                while True:
+                    rid = input(
+                        "\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
+                    if rid == "RETURN":
+                        return
+                    elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+                        break
+                    else:
+                        print("\nSorry - that refugee ID doesn't exist. Pick again.")
+                print("Below is the information about this refugee.")
+                specific_refugee_row = ref_df[ref_df['refugeeID'] == int(rid)]
+                print(specific_refugee_row.to_string(index=False))
+                #     POP UP WINDOW TO CONFIRM USER WANTS TO DELETE REFUGEE (say it's irreversible?)
+                #     root = tk.Tk()
+                while True:
+                    result = input("Are you sure you want to delete this refugee? Enter 'yes' or 'no': ")
+                    # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete this refugee?")
+                    if result == "yes":
+                        # Removing 1 from the population of the associated camp
+                        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+                        camp_df = pd.read_csv(camp_csv_path)
+                        logging.info("Camp data file loaded successfully when deleting a refugee from the system.")
+                        camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
+                        row_index_camp = camp_df[camp_df['campID'] == camp_id].index
+                        camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
+                        #     Deleting the refugee from the database
+                        ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
+                        ref_df.reset_index(drop=True, inplace=True)
+                        ref_df.to_csv(refugee_csv_path, index=False)
+                        print(
+                            f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
+                            f"has also been adjusted accordingly.")
+                        print("\nRefugee table after deletion:")
+                        print(ref_df.to_string(index=False))
+                        break
+                    elif result == "no":
+                        print("\nReturning back to previous menu.")
+                        return
+                    else:
+                        print("\nInvalid input. Please enter 'yes' or 'no': ")
+                #     tk.messagebox.showinfo("Cancel", "The operation to delete the refugee was canceled.")
+                #     break
+            # root.mainloop()
+            # while True:
+            #     user_input = input("Enter RETURN to exit back.")
+            #     if user_input.lower() == "RETURN":
+            #         return
+            #     else:
+            #         print("Invalid user entry. Please enter RETURN.")
+        except FileNotFoundError as e:
+            logging.critical(f"Error: {e}. One of the data files not found when deleting a refugee from system.")
+            print(f"\nTraining session data file is not found or is damaged."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n{e}")
+        except Exception as e:
+            logging.critical(f"Unexpected error: {e}")
+            print(f"\nOne of the data files is not found or is damaged when deleting a refugee from the system."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n{e}")
+
     def move_refugee_volunteer(self):
         while True:
             move_or_delete = input(
@@ -1128,9 +1260,10 @@ class Controller:
             elif move_or_delete.lower() == "m":
                 helper.move_refugee_helper_method()
             elif move_or_delete.lower() == "d":
-                helper.delete_refugee()
+                self.delete_refugee()
             else:
                 print("Sorry! Didn't catch that. Please try again or enter RETURN to exit.")
+
 
     def move_refugee_admin(self):
         while True:

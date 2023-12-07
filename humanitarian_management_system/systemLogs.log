@@ -357,3 +357,21 @@ Name: userID, dtype: bool, 'campID')
 2023-12-07 12:33:42,706 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-07 12:33:56,629 - INFO - helper-move_refugee_helper_method-Line479 - Refugee file loaded successfully for moving a refugee around camps.
 2023-12-07 12:34:02,360 - INFO - helper-move_refugee_helper_method-Line492 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-07 14:43:09,923 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 14:43:09,928 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 14:43:26,233 - INFO - helper-delete_refugee-Line638 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 15:13:48,489 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:13:48,492 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:14:03,954 - INFO - controller-delete_refugee-Line1129 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 15:14:03,956 - INFO - controller-delete_refugee-Line1133 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-07 15:22:09,782 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 15:22:09,782 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 15:22:23,658 - INFO - controller-delete_refugee-Line1129 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 15:22:23,661 - INFO - controller-delete_refugee-Line1133 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-07 15:23:04,525 - INFO - controller-delete_refugee-Line1129 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 15:23:04,529 - INFO - controller-delete_refugee-Line1133 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-07 15:23:10,981 - INFO - controller-delete_refugee-Line1129 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-07 15:23:10,983 - INFO - controller-delete_refugee-Line1133 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-07 15:23:13,082 - DEBUG - controller-delete_refugee-Line1156 - Error invalid literal for int() with base 10: 'asdfdg' with volunteer user input when selection refugee to delete
+2023-12-07 15:24:25,176 - DEBUG - controller-delete_refugee-Line1156 - Error invalid literal for int() with base 10: 'sadfgh' with volunteer user input when selection refugee to delete
+2023-12-07 15:24:48,504 - INFO - controller-delete_refugee-Line1171 - Camp data file loaded successfully when deleting a refugee from the system.

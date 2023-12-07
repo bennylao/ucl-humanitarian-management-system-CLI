@@ -6,6 +6,7 @@ import datetime
 import math
 import logging
 
+
 def validate_user_selection(options):
     while True:
         selection = input("--> ")
