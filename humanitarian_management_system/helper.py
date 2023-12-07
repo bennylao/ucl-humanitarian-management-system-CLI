@@ -1300,6 +1300,7 @@ def help_center_page():
               "\n                              - Volunteers can register refugee skills sessions where they select a topic and date"
               "\n                                for an informative session to upskill refugees."
               "\n                              - Refugees from any camps within the same event as the hosted session can attend"
+              "\n                                However, you cannot add refugees from outside the event."
               "\n                              - Refugees can be added at time of event creation or afterwards. They can also be removed."
               "\n                              - Sessions can be deleted from the system"
               "\n\n3.Edit & View Account Information"
