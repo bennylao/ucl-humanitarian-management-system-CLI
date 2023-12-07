@@ -434,3 +434,61 @@ Name: userID, dtype: bool, 'campID')
 2023-12-07 20:51:32,203 - CRITICAL - controller-login-Line120 - Invalid value '' for dtype Int64
 2023-12-07 21:18:48,561 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-07 21:18:48,562 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 21:54:38,760 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 21:54:38,760 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 21:59:40,666 - CRITICAL - controller-admin_remove_camp-Line740 - cannot access local variable 'eventID' where it is not associated with a value
+2023-12-07 22:03:09,148 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:03:09,148 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:04:48,091 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:04:48,091 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:06:09,391 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:06:09,391 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:06:52,079 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:06:52,079 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:06:58,247 - CRITICAL - controller-create_refugee-Line1173 - 'list' object has no attribute 'to_markdown'
+2023-12-07 22:08:47,054 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:08:47,054 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:10:41,892 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:10:41,892 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:11:51,840 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:11:51,840 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:12:25,673 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:12:25,673 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:15:35,600 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:15:35,600 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:18:21,687 - CRITICAL - controller-vol_edit_refugee-Line1635 - list index out of range
+2023-12-07 22:18:36,652 - CRITICAL - controller-create_refugee-Line1173 - index 0 is out of bounds for axis 0 with size 0
+2023-12-07 22:18:58,739 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:18:58,739 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:19:08,016 - CRITICAL - controller-create_refugee-Line1173 - index 0 is out of bounds for axis 0 with size 0
+2023-12-07 22:19:23,203 - CRITICAL - controller-vol_edit_refugee-Line1635 - list index out of range
+2023-12-07 22:19:26,445 - CRITICAL - controller-create_refugee-Line1173 - index 0 is out of bounds for axis 0 with size 0
+2023-12-07 22:22:41,067 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:22:41,067 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:22:49,306 - CRITICAL - controller-login-Line124 - index 0 is out of bounds for axis 0 with size 0
+2023-12-07 22:23:05,703 - CRITICAL - controller-admin_create_camp-Line453 - cannot access local variable 'eventID' where it is not associated with a value
+2023-12-07 22:24:25,580 - CRITICAL - controller-admin_create_camp-Line453 - cannot access local variable 'eventID' where it is not associated with a value
+2023-12-07 22:25:18,781 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:25:18,781 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:27:56,148 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:27:56,148 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:29:57,170 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:29:57,170 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:30:13,691 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:30:13,691 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:32:13,818 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:32:13,818 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:35:51,289 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:35:51,289 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:39:22,439 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:39:22,440 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:39:42,416 - CRITICAL - controller-admin_edit_refugee-Line395 - list index out of range
+2023-12-07 22:40:45,290 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:40:45,290 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:41:11,808 - CRITICAL - controller-admin_edit_refugee-Line395 - list index out of range
+2023-12-07 22:42:56,075 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:42:56,075 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:44:07,595 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:44:07,595 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 22:46:00,084 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 22:46:00,084 - DEBUG - controller-initialise-Line24 - Controller is initialised.

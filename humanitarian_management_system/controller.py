@@ -1125,13 +1125,21 @@ class Controller:
             # check user type, for admin - can create new refugee for any camp, and for vol - camp dependent
             if user_type == 'admin':
                 csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-                df1 = helper.matched_rows_csv(csv_path, "status", 'closed', "campID")
+                df_c = pd.read_csv(csv_path)
+
                 print("\n*The following shows the info of all available events*\n")
-                print(df1[0])
+                t = df_c.to_markdown(index=False)
+                print("\n" + t)
 
                 while True:
                     try:
                         cid = int(input("Enter a camp ID: "))
+                        if cid not in active_camp:
+                            print("Invalid camp ID entered!")
+                            continue
+                        if cid == 'RETURN':
+                            return
+
                         row_index_new_camp = df_c[df_c['campID'] == int(cid)].index
                         new_potential_refugee_pop = (df_c.at[row_index_new_camp[0], 'refugeePop'])
                         new_camp_capacity = df_c.at[row_index_new_camp[0], 'refugeeCapacity']
@@ -1143,19 +1151,10 @@ class Controller:
                                 "to handle another refugee. "
                                 f"Camp {cid} has a current population of {new_potential_refugee_pop} and a capacity of "
                                 f"{new_camp_capacity}.\nLet's go again.\n")
-                        if cid not in active_camp:
-                            print("Invalid camp ID entered!")
-                            continue
-                        if cid == 'RETURN':
-                            return
-                        break
                     except:
                         return
             else:
                 # check if volunteer is already assigned to a camp, if no exit to menu
-                cid = helper.check_vol_assigned_camp(self.user.username)
-                print(f"You're currently assigned to camp {int(cid)}.")
-
                 cid = df.loc[df['username'] == self.user.username]['campID'].tolist()[0]
                 row_index_new_camp = df_c[df_c['campID'] == int(cid)].index
                 new_potential_refugee_pop = (df_c.at[row_index_new_camp[0], 'refugeePop'])

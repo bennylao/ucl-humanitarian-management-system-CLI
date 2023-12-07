@@ -6,9 +6,8 @@ refugeeID,campID,firstName,lastName,dob,gender,familyID
 5,48,bbf,bbl,1994-05-01,female,5
 6,49,heyf,lone,1996-05-12,male,7
 7,49,fg,lg,2001-09-18,male,5
-11,6,vf,lheyl,1994-08-07,female,3
 12,9,newFirst,newLast,1997-09-15,male,5
-13,11,jtFive,jtLFive,1998-09-12,female,4
-14,8,firsterer,lasteer,1994-08-15,male,15
-20,49,cutieboy,bbl,1989-09-09,female,7
-25,6,hf,hl,2000-05-02,female,5
+13,11,Jtfive,jtLFive,1998-09-12,female,4
+14,8,firsterer,lasteer,1994-09-17 00:00:00,other,15
+20,49,cutieboy,bbl,1989-09-09,male,7
+21,52,heyyo,heyll,1999-06-15,male,15
