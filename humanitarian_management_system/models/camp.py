@@ -84,7 +84,7 @@ class Camp:
                 cid_arr.append(str(i))
 
         joined_df = pd.merge(camp_df, event_df, on='eventID', how='inner')
-        joined_df.columns = ['Camp ID', 'Event ID', 'countryID', 'Refugee capacity', 'Health risk',
+        joined_df.columns = ['Camp ID', 'Event ID', 'countryID', 'latitude', 'longitude', 'Refugee capacity', 'Health risk',
                              'Volunteer population', 'Refugee population', 'Average critical level', 'Status',
                              'Ongoing', 'Title', 'Location', 'Description', 'no_camp', 'Start date', 'End date']
         if user == 'volunteer':
