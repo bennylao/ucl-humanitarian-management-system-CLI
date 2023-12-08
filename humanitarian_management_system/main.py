@@ -11,7 +11,7 @@ def main():
     logging.basicConfig(level=logging.DEBUG,
                         filename=log_path,
                         format='%(asctime)s - %(levelname)s - %(module)s-%(funcName)s-Line%(lineno)d - %(message)s')
-    logging.debug('Starting Humanitarian Management System')
+    logging.info('Starting Humanitarian Management System')
     c = Controller()
     c.initialise()
 

@@ -23,7 +23,7 @@ class Controller:
 
     def initialise(self):
         # show welcome messages when the program starts
-        logging.debug("Controller is initialised.")
+        logging.info("Controller is initialised.")
         GeneralView.display_startup_logo()
         GeneralView.display_welcome_message()
         self.startup()
@@ -1087,7 +1087,7 @@ class Controller:
                         continue
                     break
                 except Exception as e:
-                    logging.debug(f"Error {e}Not the right input for joining a camp!")
+                    logging.info(f"Error {e}Not the right input for joining a camp!")
                     print(f"Sorry - please select from a valid option! Error {e} caused.")
                 break
 
@@ -1327,7 +1327,7 @@ class Controller:
                         else:
                             print("\nSorry - that refugee ID doesn't exist in your camp. Pick again.\n")
                     except Exception as e:
-                        logging.debug(f"Error {e} with volunteer user input when selecting refugee to delete.")
+                        logging.info(f"Error {e} with volunteer user input when selecting refugee to delete.")
                         print(f"Oh no! Error {e}from invalid input! Please try again, with an integer.\n")
 
                 print("\nBelow is the information about this refugee.")
