@@ -689,6 +689,10 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 12:54:57,486 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 12:56:51,680 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 12:56:51,680 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 18:07:49,117 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:07:49,117 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:15:01,153 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:15:01,153 - INFO - controller-initialise-Line28 - Controller is initialised.
 2023-12-08 14:40:17,111 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 14:40:17,111 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 15:02:11,633 - INFO - main-main-Line14 - Starting Humanitarian Management System
@@ -735,3 +739,12 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 17:00:21,481 - CRITICAL - controller-admin_create_camp-Line529 - __init__() missing 2 required positional arguments: 'capacity' and 'health_risk'
 2023-12-08 17:01:26,634 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 17:01:26,634 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 17:06:30,714 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:06:30,714 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 17:21:07,328 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:21:07,328 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 17:21:34,735 - CRITICAL - controller-admin_create_camp-Line550 - name 'latitude' is not defined
+2023-12-08 17:22:24,438 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:22:24,438 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 18:27:07,384 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:27:07,384 - INFO - controller-initialise-Line28 - Controller is initialised.

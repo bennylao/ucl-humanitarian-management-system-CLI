@@ -48,10 +48,11 @@ class AdminView:
 
     data_visualization_menu = (
         ("1", "View camps on map"),
-        ("2", "View refugee gender distribution"),
-        ("3", "View resources stock"),
-        ("4", "View medical information"),
-        ("5", "Return to the previous page")
+        ("2", "Display refugee gender distribution"),
+        ("3", "Display refugee age distribution"),
+        ("4", "Display resources stock"),
+        ("5", "Display refugee medical information"),
+        ("6", "Return to the previous page")
 
     )
 

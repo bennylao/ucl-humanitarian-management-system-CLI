@@ -8,3 +8,5 @@ userID,userType,isVerified,isActive,username,password,firstName,lastName,email,p
 6,volunteer,True,True,Benny,$5$rounds=535000$fB6tPHX7jLAJJ3gR$5bZTwnzxp7sOdTDmA9uHS5cAyipKBPmWsYFhqV7GJL1,Benny,Lao,bennylao@gmail.com,7787571235,Teacher,1,55
 7,volunteer,True,True,bennylao,$5$rounds=535000$fB6tPHX7jLAJJ3gR$5bZTwnzxp7sOdTDmA9uHS5cAyipKBPmWsYFhqV7GJL1,chon benny,lao lao,bennylll@gmaill.com,12344333,sdkljf,0,57
 8,volunteer,True,True,yuan2,$5$rounds=535000$Uu9FLSmOsTWz2Gwj$RFXwQRg6OfslJZ9ZaonNR3lXC72NVsPacykn8CV4Sj4,Yuan,Hu,huyuanZ@163.com,123,student,0,0
+9,volunteer,False,False,bennny,$5$rounds=535000$aJaBbtm3.6O1iNYV$Z1j3TuN8q4k0RzayQyDpTkTvwWTYkET7P1oQTOkBKP7,lskdajf,sdklfjds,slkjdfh@gail.com,23423423,sjkdhf,0,0
+10,volunteer,True,False,abc123,$5$rounds=535000$9raxCTudqbQHCeu7$/UiXNVWHdwNIHEiG0z842yk/TnV574LzYL/AEVRtfoA,slkdafj,sdlkfjksd,slkdjhf@gm.com,234324,sdlkjaf,0,0

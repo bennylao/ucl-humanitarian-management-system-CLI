@@ -101,12 +101,19 @@ def validate_registration(usernames):
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
 
-    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
+    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0]
 
 
 def validate_event_input():
-    countries_csv_path = Path(__file__).parent.joinpath("data/country.csv")
-    all_countries = pd.read_csv(countries_csv_path)['name'].tolist()
+    try:
+        countries_csv_path = Path(__file__).parent.joinpath("data/country.csv")
+        all_countries = pd.read_csv(countries_csv_path)['name'].tolist()
+    except FileNotFoundError as e:
+        print(f"\nFile not found."
+              f"\nPlease contact admin for further assistance."
+              f"\n[Error] {e}")
+        logging.critical(f"{e}")
+        return
 
     date_format = '%d/%m/%Y'  # Use for validating user entered date format
     while True:
@@ -185,25 +192,27 @@ def validate_camp_input():
     else:
         campID = 1
 
-    while True:
-        try:
-            latitude = float(input("\n Enter the latitude of the camp: "))
-            if latitude == "RETURN":
-                return
-            else:
-                break
-        except ValueError:
-            print("Invalid input, Please enter a numerical value")
+    # while True:
+    #     try:
+    #         latitude = float(input("\n Enter the latitude of the camp: "))
+    #         if latitude == "RETURN":
+    #             return
+    #         else:
+    #             break
+    #     except ValueError:
+    #         print("Invalid input, Please enter a numerical value")
 
-    while True:
-        try:
-            longitude = float(input("\n Enter the longitude of the camp: "))
-            if longitude == "RETURN":
-                return
-            else:
-                break
-        except ValueError:
-            print("Invalid input, Please enter a numerical value")
+    # while True:
+    #     try:
+    #         longitude = float(input("\n Enter the longitude of the camp: "))
+    #         if longitude == "RETURN":
+    #             return
+    #         else:
+    #             break
+    #     except ValueError:
+    #         print("Invalid input, Please enter a numerical value")
+
+
 
     # capacity input
     while True:
@@ -227,26 +236,35 @@ def validate_camp_input():
         else:
             break
 
-    return campID, latitude, longitude, capacity, risk
+    return campID, capacity, risk
 
 
-def validate_join():  # volunteer joining a camp
+def validate_join(user):  # volunteer joining a camp
     csv_path = Path(__file__).parents[0].joinpath("data/roleType.csv")
+    csv_path_u = Path(__file__).parents[0].joinpath("data/user.csv")
+    df_u = pd.read_csv(csv_path_u)
+
     index = pd.read_csv(csv_path)["roleID"].tolist()
     role = pd.read_csv(csv_path)["name"]
 
-    print("Please select a camp role by its index.")
-    for i in index:
-        print(f''' index: {i} | {role.iloc[i - 1]} ''')
-    while True:
-        user_input = input("\nEnter index: ")
-        if int(user_input) not in index[1:]:
-            print("Invalid index option entered!")
-            continue
-        if user_input.upper() == "RETURN":
-            return
-        else:
-            break
+    df_u = df_u.loc[df_u['userID'] == user]['roleID'].tolist()[0]
+
+    if int(df_u) == 0:
+        print("Please select a camp role by its index.")
+        for i in index:
+            print(f''' index: {i} | {role.iloc[i - 1]} ''')
+        while True:
+            user_input = input("\nEnter index: ")
+            if int(user_input) not in index[1:]:
+                print("Invalid index option entered!")
+                continue
+            if user_input.upper() == "RETURN":
+                return
+            else:
+                break
+    else:
+        user_input = df_u
+
     return user_input
 
 
@@ -298,7 +316,6 @@ def extract_active_event(csv_path):
 
 
 def display_camp_list():
-
     csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
     active_id = extract_active_event(csv_path)[0]
     df_e = pd.read_csv(csv_path)
@@ -557,8 +574,9 @@ def move_refugee_helper_method():
                 if user_input.lower() == 'yes':
                     break
                 elif user_input.lower() == 'no':
-                    print("\nOkay. We're going to try to move the family as a unit. However, if capacity in the new camp"
-                          " is not enough for the entire family, then we shall abort.")
+                    print(
+                        "\nOkay. We're going to try to move the family as a unit. However, if capacity in the new camp"
+                        " is not enough for the entire family, then we shall abort.")
 
                     related_family_members_list = related_family_members['refugeeID'].tolist()
                     size_of_family = len(related_family_members_list)
@@ -566,11 +584,12 @@ def move_refugee_helper_method():
                     new_potential_refugee_family_pop = (camp_df.at[row_index_new_camp[0], 'refugeePop'])
                     new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
                     if (new_potential_refugee_family_pop + size_of_family) >= new_camp_capacity:
-                        print(f"\n\nSorry. Moving this entire family unit would cause capacity overflow of camp {camp_id}."
-                              f"You'll have to move them alone or not at all. Camp {camp_id} has a current population "
-                              f"of {new_potential_refugee_family_pop},\n"
-                              f"a capacity of {new_camp_capacity}, whilst the family has {size_of_family} members."
-                              f"\n\n")
+                        print(
+                            f"\n\nSorry. Moving this entire family unit would cause capacity overflow of camp {camp_id}."
+                            f"You'll have to move them alone or not at all. Camp {camp_id} has a current population "
+                            f"of {new_potential_refugee_family_pop},\n"
+                            f"a capacity of {new_camp_capacity}, whilst the family has {size_of_family} members."
+                            f"\n\n")
                         return
                     print("\nExcellent. No capacity overflow detected for the new camp!")
                     # print(related_family_members_list)
@@ -1243,6 +1262,7 @@ def admin_export_refugees_to_csv():
         print(f"Error exporting data to CSV: {e}. Redirecting you back!")
         return
 
+
 def help_center_page():
     while True:
         print("This Humanitarian Management System has been divided into functions for 2 roles: Admin and Volunteer."
@@ -1255,28 +1275,36 @@ def help_center_page():
               "--------------------------------------------------------------------------------------------------------"
               "--\n"
               "\n\n1. Humanitarian Plan (Event) Management"
-              "\n   - Here is where admin can create new events a.k.a. 'Plans' in the system. Remember to add in the"
-              "camps associated with this event, otherwise you can't host any refugees!"
+              "\n   - Here is where admin can create new events a.k.a. 'Plans' in the system. Remember to add in the "
+              " camps associated with this event, otherwise you can't host any refugees!"
               "\n   - You can also edit all details about the event"
               "\n   - Note the difference between closing an event and deleting an event, where the former simply "
               "closes it in our system, whereas the latter deletes all the data from the system, \n     e.g. refugees are "
               "deleted 'on cascade'"
               "\n   - You can display all events currently in the system"
               "\n\n2. Camp Management"
-              "\n   - Camp management includes both camp and refugee management."
               "\n   - Only a user with Admin privilege can add new camps to the system."
-              "\n   - A camp can be closed as a single entity, even if an event is still ongoing. This is in case of "
+              "\n   - A camp can be closed/deleted as a single entity, even if an event is still ongoing. This is in case of "
               "a potential health outbreak in the camp or natural disaster."
-              "\n   - An admin can delete any refugee held in the system, and move any refugee from camp to camp, whilst "
-              "volunteers have restrictions."
+              "\n   - Only an Admin can close and delete camps. A camp can ONLY BE DELETED if its status has already been "
+              "changed to 'CLOSED' to ensure that all resources have been unallocated from it."
+              "\n   - The main difference between closing and deleting a camp is that a closed camp offers you the option"
+              " of automatically assigning volunteers to another camp.\n     A deleted camp automatically unassigns "
+              "volunteers from any camp so that they are ready to be assigned to another camp."
+              "\n\n3. Refugee Management"
+              "\n   - An admin can add and delete any refugee held in the system (whilst refugees have restrictions)"
+              "\n   - An admin move any refugee from camp to camp"
+              "\n   - We also encourage refugees to be kept together as a family unit. You may choose to move a refugee alone if"
+              " essential, however we will prompt you to keep family units together\n      if the system detects a family unit "
+              "and capacity allows for them to stay together."
               "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
               "to add more refugees to it. These restrictions have been\n     implemented in the system."
               "\n   - An admin is able to EXPORT a CSV file of the refugees in the system, either an entire overview"
               "or filtered by a specific camp or event."
-              "\n\n3.Volunteer Account Management"
+              "\n\n4. Volunteer Account Management"
               "\n   - Admin is able to edit volunteer accounts, display an overview of them, deactivate or remove"
               "volunteer accounts."
-              "\n\n4.Resource Management"
+              "\n\n5. Resource Management"
               "\n   - Our resource management section is very sophisticated. It includes:"
               "\n   - A SHOP: where admin adds into the system the resources which they have acquired. This initial "
               "'purchase' of items simply places them in the system, waiting to be allocated to\n      camps by a specified "
@@ -1289,7 +1317,7 @@ def help_center_page():
               "into account the 'health' levels of the camps,"
               "\n which is the average health rating of its refugee population."
               "\n   - STATISTICS: Admin can see all current statistics on how resources are distributed."
-              "\n\n5. Account Edit & View"
+              "\n\n6. Account Edit & View"
               "\n   - Admin can modify their own account details & view them"
               "\n\n\n\n--------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------------------------"
@@ -1298,10 +1326,14 @@ def help_center_page():
               "---------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------------------------"
               "----\n"
-              "\n\n1.Join/Change Camp"
+              "\n\n1. Join/Change Camp"
               "\n   - A volunteer MUST join a camp to be able to add/delete a refugee to/from a camp. We also need"
               "to know which camp's resources to display to them. "
-              "\n\n2.Camp Management"
+              "\n   - If a volunteer is assigned to a camp which is closed, they will be automatically assigned to another"
+              "camp by admin or can stay assigned to that original camp if closure is deemed temporary."
+              "\n   - If a volunteer is assigned to a camp which is deleted, they will automatically be unassigned from "
+              "any camp so that they can join another camp of their choosing."
+              "\n\n2. Camp Management"
               "\n   - Volunteer can add refugees ONLY to their own camp. "
               "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
               "to add more refugees to it. These restrictions have been implemented\n     in the system."
@@ -1320,18 +1352,15 @@ def help_center_page():
               "\n                                However, you cannot add refugees from outside the event."
               "\n                              - Refugees can be added at time of event creation or afterwards. They can also be removed."
               "\n                              - Sessions can be deleted from the system"
-              "\n\n3.Edit & View Account Information"
+              "\n\n3. Edit & View Account Information"
               "\n   - Volunteer can edit and view their own personal account information"
               "\n\n\n *** Look out for our return prompt instructions throughout the application if ever you change "
               "your mind about a process! ***"
 
-
               )
-
 
         input("\n\nEnter anything when you're ready to exit this page & return back to the start menu: ")
         return
-
 
 
 def check_vol_assigned_camp(username):

@@ -171,6 +171,7 @@ class Refugee:
         user_selection = validate_user_selection(VolunteerView.get_edit_refugee_options())
 
         if user_selection == '1':
+
             old_id = df.loc[df['refugeeID'] == int(ref_id)]['refugeeID'].tolist()[0]
             print(f"Current refugee ID is {old_id}")
             while True:

@@ -2,6 +2,8 @@ from pathlib import Path
 from humanitarian_management_system import helper
 import datetime
 import pandas as pd
+import tkinter as tk
+import tkinter.messagebox
 import logging
 
 
@@ -126,7 +128,7 @@ class Event:
         if title == 'RETURN':
             return
         helper.modify_csv_value(event_csv_path, row, 'title', title)
-        print("\n***  Plan title updated.  ***")
+        print("\nPlan title updated.")
 
     @staticmethod
     def __change_location(row):
@@ -147,7 +149,7 @@ class Event:
                 location = ''
                 continue
         helper.modify_csv_value(event_csv_path, row, 'location', location)
-        print("\n***  Location updated.  ***")
+        print("\nLocation updated.")
 
     @staticmethod
     def __change_description(row):
@@ -158,7 +160,7 @@ class Event:
         if description == 'RETURN':
             return
         helper.modify_csv_value(event_csv_path, row, 'description', description)
-        print("\n***  Description updated.  ***")
+        print("\nDescription updated.")
 
     @staticmethod
     def __change_start_date(row):
@@ -181,7 +183,7 @@ class Event:
                     formatted_start_date = start_date.strftime('%Y-%m-%d')
                     helper.modify_csv_value(event_csv_path, row, 'startDate', formatted_start_date)
                     Event.update_ongoing()
-                    print("\n***  Start date updated.  ***")
+                    print("\nStart date updated.")
                     break
             except ValueError:
                 print("\nInvalid date format entered.")
@@ -203,7 +205,7 @@ class Event:
                     return
                 if end_date == 'NONE':
                     helper.modify_csv_value(event_csv_path, row, 'endDate', None)
-                    print("\n***  End date updated.  ***")
+                    print("\nEnd date updated.")
                     break
                 else:
                     end_date = datetime.datetime.strptime(end_date, date_format)
@@ -218,17 +220,16 @@ class Event:
         if end_date.date() > datetime.date.today():
             formatted_end_date = end_date.strftime('%Y-%m-%d')
             helper.modify_csv_value(event_csv_path, row, 'endDate', formatted_end_date)
-            print("\n***  End date updated.  ***")
+            print("\nEnd date updated.")
         else:
             camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
             df_camp = pd.read_csv(camp_csv_path)
             row_camp_list = df_camp[
                 (df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
-            result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
-            # root = tk.Tk()
-            # root.withdraw()
-            # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-            #                                                "You'll also close the camps in that event.")
+            root = tk.Tk()
+            root.withdraw()
+            result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
+                                                           "You'll also close the camps in that event.")
             if result == "yes":
                 ongoing = False
                 if df['ongoing'].loc[row] == 'Yet':
@@ -241,13 +242,11 @@ class Event:
                 if row_camp_list:
                     for row_camp in row_camp_list:
                         helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-                print("\n***  The event has been successfully closed.  ***")
-                # tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+                tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
             else:
-                print("\n***  The operation to close the event was canceled.  ***")
-                # tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-            # root.update()
-            # root.destroy()
+                tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+            root.update()
+            root.destroy()
 
     @staticmethod
     def display_events(df):
@@ -291,7 +290,7 @@ class Event:
         df_camp = pd.read_csv(camp_csv_path)
         filtered_df = df[(df['ongoing'] == 'True')]
 
-        print("\n***  The following shows the info of all available events.  ***")
+        print("\n*The following shows the info of all available events*")
         Event.display_events(filtered_df)
 
         eid_to_close = -1
@@ -311,11 +310,10 @@ class Event:
         row = df[df['eventID'] == int(eid_to_close)].index[0]
         row_camp_list = df_camp[
             (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
-        # root = tk.Tk()
-        # root.withdraw()
-        result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
-        # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-        #                                                "You'll also close the camps in that event.")
+        root = tk.Tk()
+        root.withdraw()
+        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
+                                                       "You'll also close the camps in that event.")
         if result == "yes":
             ongoing = False
             helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
@@ -323,20 +321,18 @@ class Event:
             if row_camp_list:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-            print("\n***  The event has been successfully closed.  ***")
-            # tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+            tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
         else:
-            print("\n***  The operation to close the event was canceled.  ***")
-            # tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-        # root.update()
-        # root.destroy()
+            tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+        root.update()
+        root.destroy()
 
     @staticmethod
     def delete_event():
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         df = pd.read_csv(event_csv_path)
 
-        print("\n***  The following shows the info of all available events.  ***")
+        print("\n*The following shows the info of all available events*")
         Event.display_events(df)
 
         eid_to_delete = -1
@@ -353,14 +349,11 @@ class Event:
             except ValueError:
                 print("\nInvalid event ID entered.")
                 continue
-        # root = tk.Tk()
-        # root.withdraw()
-        result = input("\nAre you sure you want to delete the event? "
-                       "You'll also close the camps and lose all the information about "
-                       "the refugees in that event. (yes/no)")
-        # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
-        #                                                "You'll also close the camps and lose all the information about "
-        #                                                "the refugees in that event.")
+        root = tk.Tk()
+        root.withdraw()
+        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
+                                                       "You'll also close the camps and lose all the information about "
+                                                       "the refugees in that event.")
         if result == "yes":
             df.drop(df[df['eventID'] == int(eid_to_delete)].index, inplace=True)
             df.to_csv(event_csv_path, index=False)
@@ -392,10 +385,8 @@ class Event:
             if row_camp_list:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-            print("\n***  The event has been successfully deleted.  ***")
-            # tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
+            tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
         else:
-            print("\n***  The operation to delete the event was canceled.  ***")
-            # tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
-        # root.update()
-        # root.destroy()
+            tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
+        root.update()
+        root.destroy()
