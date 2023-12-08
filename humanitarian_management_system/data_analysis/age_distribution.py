@@ -4,6 +4,7 @@ import pandas as pd
 from datetime import datetime
 import plotly.express as px
 
+
 def age_bar_chart(camp_id):
     refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
     rd = pd.read_csv(refugee_csv_path)

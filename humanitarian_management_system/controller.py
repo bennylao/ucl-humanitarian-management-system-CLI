@@ -8,7 +8,8 @@ import logging
 from passlib.handlers.sha2_crypt import sha256_crypt
 
 from humanitarian_management_system import helper
-from humanitarian_management_system.data_analysis import visualization_v,resources_distribution,medical_info,gender_distribution
+from humanitarian_management_system.data_analysis import (visualization_v,resources_distribution,medical_info,
+                                                          gender_distribution, age_distribution)
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder,
                                                    ResourceCampCreateDelete)
@@ -475,7 +476,19 @@ class Controller:
                                 gender = gender_distribution
                                 gender.gender_pie_chart(campId)
                                 break
+
                     elif userInput == 3:
+                        while True:
+                            campId = int(input('Please enter a camp ID: '))
+                            if campId not in campList:
+                                print("Camp id doesn't exist")
+                                continue
+                            else:
+                                age = age_distribution
+                                age.age_bar_chart(campId)
+                                break
+
+                    elif userInput == 4:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
@@ -485,7 +498,7 @@ class Controller:
                                 r = resources_distribution
                                 r.resources(campId)
                                 break
-                    elif userInput == 4:
+                    elif userInput == 5:
                         medical_info.medical_info()
 
                     else:
