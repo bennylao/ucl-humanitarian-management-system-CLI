@@ -657,7 +657,7 @@ class Controller:
             logging.critical(f"{e}")
 
     @staticmethod
-    def admin_remove_camp():
+    def admin_delete_camp():
         try:
             """This part of the code is to delete the camp from the camp.csv"""
             ManagementView.camp_deletion_message()

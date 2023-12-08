@@ -652,3 +652,19 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 01:48:19,050 - DEBUG - controller-initialise-Line24 - Controller is initialised.
 2023-12-08 01:51:08,770 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 01:51:08,770 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 02:04:09,710 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 02:04:09,710 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 02:04:57,757 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 02:04:57,757 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 02:05:20,524 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 02:05:20,524 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 02:14:25,409 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 02:14:25,409 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 09:28:36,962 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 09:28:36,963 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 09:30:15,245 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 09:30:15,245 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 09:32:20,480 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 09:32:20,480 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 09:33:57,171 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 09:33:57,171 - DEBUG - controller-initialise-Line26 - Controller is initialised.
