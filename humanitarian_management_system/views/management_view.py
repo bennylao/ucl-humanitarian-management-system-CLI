@@ -121,9 +121,9 @@ class ManagementView:
 
     @staticmethod
     def resource_alloc_main_message():
-        print("\n========================================\n"
-              "         Resources ALLOCATION\n"
-              "========================================\n"
+        print("\n==========================================================\n"
+              "\n✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4.1 ] RESOURCE ALLOCATION ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n"
+              "\n==========================================================\n"
               "[ 1 ] Manual    - user select one by one \n"
               "[ 2 ] Automatic - all camps rebalanced based on refugee count\n\n"
               "Or enter 'RETURN' to go back to admin menu page.")
@@ -149,10 +149,10 @@ class ManagementView:
     @staticmethod
     def resource_report_message():
         print("""\n==========================================================================\n
-✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ RESOURCE STATS VIEWER ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4.3 ] RESOURCE STATS VIEWER ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
 ==========================================================================\n
-              [1] View master resource stats \n
-              [2] View all unbalanced resources\n """)
+[1] View all resource stats \n
+[2] View only unbalanced resources\n """)
 
     @staticmethod
     def join_camp_message():

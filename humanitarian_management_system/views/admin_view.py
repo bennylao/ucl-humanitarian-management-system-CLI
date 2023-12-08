@@ -60,9 +60,9 @@ class AdminView:
     )
 
     manage_resource_menu = (
-        ("1", "Allocate resources"),
-        ("2", "Purchase from shop"),
-        ("3", "View resource statistics"),
+        ("1", "Allocate existing resources"),
+        ("2", "Purchase new resources from shop"),
+        ("3", "View statistics"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
@@ -123,9 +123,9 @@ class AdminView:
     @classmethod
     def display_resource_menu(cls):
         print("")
-        print(f"""===============================================\n
-✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ RESOURCE MGMT MENU ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-===============================================\n""")
+        print(f"""=======================================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4 ] RESOURCE MGMT MENU ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+=======================================================\n""")
         for key, value in cls.manage_resource_menu:
             print(f"[ {key} ] {value}")
 

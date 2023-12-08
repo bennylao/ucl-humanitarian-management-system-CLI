@@ -6,7 +6,7 @@ resourceID,name,unallocTotal,priorityLvl
 5,Vitamins,0,2
 6,Food,0,1
 7,Snacks,0,3
-8,Toiletries,0,2
-9,Water,0,1
-10,Baby Supplies,0,1
+8,Toiletries,8,2
+9,Water,999,1
+10,Baby Supplies,80,1
 11,General Tools,0,3
