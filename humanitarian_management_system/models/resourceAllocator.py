@@ -19,10 +19,10 @@ class ResourceAllocator():
     def jess_funky_timer(self, multiple):
         for i in range(multiple):
             print('... ┌(;･_･)┘ LOADING ... ')
-            time.sleep(0.2)
+            time.sleep(0.15)
             print('... └(･_･;)┐ LOADING ... ') 
             print("\n")
-            time.sleep(0.2)
+            time.sleep(0.15)
 
     def auto_alloc_interface(self):
         report_instance = ResourceReport()
@@ -38,22 +38,26 @@ class ResourceAllocator():
             if include_unassigned == 'y':
                 self.add_unalloc_resource()  # ## add the unassigned resources to the
                 # totalResources, ready for assignment by running auto_alloc immediately after
-                self.jess_funky_timer(3)
+                self.jess_funky_timer(2)
                 print("\nUnallocated resources from inventory will be included in auto-allocation to valid camps.\n")
-                self.jess_funky_timer(3)
+                self.jess_funky_timer(2)
             elif include_unassigned == 'RETURN':
                 return
             else:
-                self.jess_funky_timer(3)
+                self.jess_funky_timer(2)
                 print("\nSkipping addition of unallocated resources.\n")
-                self.jess_funky_timer(3)
+                self.jess_funky_timer(2)
         else:
             print("\nCheck complete: No unallocated resources found, proceeding with auto-allocation...\n")
-            self.jess_funky_timer(6)
+            self.jess_funky_timer(2)
 
+        print(f"""\n==========================================================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4.1.2 ] RESOURCE AUTO-ALLOCATION ACROSS ALL CAMPS ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+==========================================================================\n
+""")
         self.auto_alloc()  
         ### print success msg
-        self.jess_funky_timer(3)
+        self.jess_funky_timer(2)
         print("\n======= ＼(^o^)／ AUTO-REDISTRIBUTION SUCCESSFUL! ＼(^o^)／ ===== \n \nBelow are the before & after auto-allocation: \n")
         ######## maybe redirect the menus
         report_instance_AFTER = ResourceReport()
@@ -100,15 +104,17 @@ class ResourceAllocator():
 
         try:
             alloc_ideal = r_inst.determine_above_below()
-            self.jess_funky_timer(3)
+            self.jess_funky_timer(2)
             print("\n...STEP 1: successfully calculated ideal allocation levels for all open camps with refugees...\n")
+            time.sleep(0.5)
             print("\nideal resource per camp = camp refugee population / total refugees in all open camps X total amount of that resource\n")
-            self.jess_funky_timer(3)
+            time.sleep(0.5)
+            self.jess_funky_timer(2)
             print("\n...STEP 2: comparing current quantity to ideal quantity each resource per camp...\n")
             # print(alloc_ideal)
             for line in alloc_ideal.to_string(index = False).split('\n'):
                 print(line)
-                time.sleep(0.1)
+                time.sleep(0.05)
             print("\n...see allocation map above...\n")
         except Exception as e:
             print(f"An error occurred : {e}")
@@ -119,15 +125,15 @@ class ResourceAllocator():
                 alloc_ideal.at[index, 'updated'] = row['ideal_qty'] 
                 ### if the status is not balanced, then update the quantity column with the ideal amount 
 
-        self.jess_funky_timer(3)
+        self.jess_funky_timer(2)
         print("\n...STEP 3: for balanced resources within +/-10% threshold of ideal, leave them be...\n")
-        self.jess_funky_timer(3)
+        self.jess_funky_timer(2)
         print("\n...STEP 4: for unbalanced resources (any above / below), update the current quantity to match the ideal quantity...\n")
         # print(alloc_ideal) ###### intermediary checks 
         
-        self.jess_funky_timer(3)
+        self.jess_funky_timer(2)
         print("\n...STEP 5: check against total per resource included in this auto-allocation...\n")
-        self.jess_funky_timer(3)
+        self.jess_funky_timer(2)
         print("\n...due to the threshold range & rounding in calculations; we need to make small adjustments to ensure the totals are the same before & after auto-allocation...\n")
         # Now need to check, how the sum compares to the total amounts and make small tweaks... 
         redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
@@ -171,7 +177,7 @@ class ResourceAllocator():
                 # print(alloc_ideal.loc[row_index, 'updated'])
 
         # recheck the balanced...
-        self.jess_funky_timer(3)
+        self.jess_funky_timer(2)
         print("\n...successfully checked that totals match...\n")
 
         ###### need to write the redistributed amount into the actual CSV
@@ -195,7 +201,7 @@ class ResourceAllocator():
     def manual_alloc(self):
         # add stuff to deal with unallocated items later bc i think its a bit different. right now i think is just about getting a function that works 
         print(f"""\n==========================================================================\n
-✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ MANUAL RESOURCE ALLOCATOR ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4.1.1 ] MANUAL RESOURCE ALLOCATOR ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
 ==========================================================================\n""")
         r_inst = ResourceReport()
         print("Below is how each resource is currently unallocated vs. how many is distributed across the camps: \n")
@@ -237,7 +243,7 @@ class ResourceAllocator():
             if action_select == 1:
                 if status == False: 
                     ### if there are no unallocated resources, then no inventory to move from camp, tell the user this and ask them to select another option
-                    print('\nThere are no unallocated resources here for you to assign to camps, taking you back to resources menu... ')
+                    print('\nThere are no unallocated resources here for you to assign to camps, taking you back to resource mgmt menu... ')
                     do_not_calc = True
                     break 
 
@@ -265,11 +271,12 @@ class ResourceAllocator():
                 
                 print(f"\n*** Resource ID {r_id_select}: {r_name_select} *** is currently distributed as below: \n")
                 # Filter rows where 'resourceID' is 5
-                filtered_rows = master_table_pretty[master_table_pretty['resourceID'] == r_id_select]
+                # filtered_rows = master_table_pretty[master_table_pretty['resourceID'] == r_id_select]
                 # Get the last two rows
-                last_two_rows = master_table_pretty.tail(2)
+                # last_two_rows = master_table_pretty.tail(2)
                 # Concatenate the filtered rows and the last two rows
-                single_resource = pd.concat([filtered_rows, last_two_rows])
+                # single_resource = pd.concat([filtered_rows, last_two_rows])
+                single_resource = r_inst.PRETTY_RESOURCE(master_table, [r_id_select])
                 print(single_resource.to_string(index=False).replace('.0', '  '))
 
             if action_select == 3: 
@@ -376,10 +383,10 @@ class ResourceAllocator():
         ### how to run this conditionally, depending whats in the function in layer above ? 
         r_inst = ResourceReport()
 
-        print(f"""\n==========================================================================\n
+        print(f"""\n=============================================================================\n
 ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ Below are your selected manual re-allocations: ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-==========================================================================\n
-        {move[['resourceID', 'name', 'origin_campID', 'destination_campID', 'moveUnits', 'actionInfo']].to_string(index=False)} \n"""
+=============================================================================\n
+        {move[['resourceID', 'name', 'origin_campID', 'destination_campID', 'moveUnits', 'actionInfo']]} \n"""
         )
         confirm_move = r_inst.input_validator("Proceed to re-allocate? \n [y] Yes; \n [x] Abandon manual allocation \n --> ", ['y','x'])
         if confirm_move == 'RETURN':
@@ -395,8 +402,8 @@ class ResourceAllocator():
                 if row['action'] == 3: 
                     # [3] RE-ASSIGN: camp <-> camp
                     origin_condition = (resourceCampMap['resourceID'] == row['resourceID']) & (resourceCampMap['campID'] == row['origin_campID'])
-                    print(origin_condition.any())
-                    print(resourceCampMap.loc[origin_condition, 'qty'])
+                    # print(origin_condition.any())
+                    # print(resourceCampMap.loc[origin_condition, 'qty'])
                     resourceCampMap.loc[origin_condition, 'qty'] -= row['moveUnits'] ### substract / remove from the origin camp
                     ###### error handling ---> assumess there is only 1 unique pairwwise combo. does not consider if the pair is in the table twice 
 
@@ -467,7 +474,7 @@ class ResourceAllocator():
             
 
             print(f"""\n ======= ＼(^o^)／ Manual Re-allocation of Resources Successful! ＼(^o^)／ ===== \n
-Below are the before vs. current resource allocation: \n"""
+Below are the before vs. current allocations of the impacted resources: \n"""
         )
             print("BEFORE: \n")
             ### be cleaner & only print the rows that have been changed, 

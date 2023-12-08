@@ -28,11 +28,19 @@ class ResourceReport():
         unalloc = sum(self.unallocResources_df['unallocTotal'])
         if unalloc == 0:
             unalloc_status = False
-            unalloc_prompt = "\n ＼(^o^)／ GOOD NEWS ＼(^o^)／ There are no unallocated resources (empty inventory) \n"
+            unalloc_prompt = "\n＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 3: There are no unallocated resources ... aka all resources are currently assigned to camps \n"
         else:
             unalloc_items = self.unallocResources_df[self.unallocResources_df['unallocTotal'] > 0]
             unalloc_status = True
-            unalloc_prompt = f"\n =======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items.to_string(index=False)} \n"
+            #unalloc_prompt = f"\n =======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items.to_string(index=False)} \n"
+
+            unalloc_prompt = f"""\n
+✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
+CHECK 3:\n
+THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
+==============================================================\n
+{unalloc_items.to_string(index=False)} \n
+            """
 
         return unalloc_status, unalloc_prompt
 
@@ -285,9 +293,10 @@ class ResourceReport():
 
     def PRETTY_RESOURCE(self, table: pd.DataFrame, valid_r: list):
         all = self.PRETTY_PIVOT_CAMP(table)
+        valid_r_str = [str(integer) for integer in valid_r] # convert into a list of strings due to rendering ...
         # Assuming r_id_select is a list of resource IDs
         # Filter rows where 'resourceID' is in the list of r_id_select
-        filtered_rows = all[all['resourceID'].isin(valid_r)]
+        filtered_rows = all[all['resourceID'].isin(valid_r_str)]
         last_two_rows = all.tail(2)
 
         # Concatenate the filtered rows and the last two rows

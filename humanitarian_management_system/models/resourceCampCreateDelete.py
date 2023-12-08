@@ -58,6 +58,7 @@ class ResourceCampCreateDelete():
             closed_camp_resource_stats = report_instance.report_closed_camp_with_resources()
             print(f"""\n
 ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
+CHECK 2:\n
 The below CLOSED camps still have resources allocated... \n
 ==============================================================\n
 {closed_camp_resource_stats.to_string(index=False)} \n
@@ -75,7 +76,7 @@ The below CLOSED camps still have resources allocated... \n
                 closed_camp_resource_AFTER = report_instance_AFTER.report_closed_camp_with_resources()
                 print(closed_camp_resource_AFTER)
         else:
-            print("＼(^o^)／ GOOD NEWS ＼(^o^)／ There are no closed camps with assigned resources ")
+            print("\n＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 2: There are no closed camps with assigned resources ")
 
 
     def new_camp_resources(self):
@@ -103,9 +104,13 @@ The below CLOSED camps still have resources allocated... \n
                 'resourceID': resource_range,
                 'campID': row['campID'],
                 'qty': row['refugeePop'] * 10
-            })
+            }) ## this will have values... all non zero
 
             # Concatenate the temporary DataFrame to the final DataFrame
+            # FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+            # so we drop before concat to resolve this warning... 
+            new_alloc_df = new_alloc_df.dropna(axis=1, how='all')
+            temp_df = temp_df.dropna(axis=1, how='all')
             new_alloc_df = pd.concat([new_alloc_df, temp_df], ignore_index=True)
 
         new_map = pd.concat([self.resourceAllocs_df, new_alloc_df], ignore_index=True)
@@ -116,7 +121,7 @@ The below CLOSED camps still have resources allocated... \n
 
         ## now need to overwrite the both of them into csv files
 
-        print("Success! New camps have assigned starter pack resources now. ")
+        print("\nSuccess!")
         
         return new_map, new_assigned
     
@@ -128,11 +133,12 @@ The below CLOSED camps still have resources allocated... \n
         if not new_camps_df.empty:
             print(f"""
     ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
-    There are newly open camp(s) with refugees...
+    CHECK 1:\n
+    There are newly open camp(s) with refugees...\ns
     but NO RESOURCES OF ANY TYPE! \n
     ==============================================================\n
     {new_camps_df.to_string(index=False)} \n
-    The starter resource pack new camps is 10 of each resource per refugeePop.\n
+    The starter resource pack for new camps is 10 of each resource per refugee.\n
     Proceed to buy & assign this for all camps above? [ y / n ]\n
 
     Note: if 'n', you will still have the option of assigning resources to these newly opened & resourceless but populated camps,
@@ -147,16 +153,19 @@ The below CLOSED camps still have resources allocated... \n
             before_camp_vs_unallocated = report_instance.master_resource_stats()
 
             #### can add something more interactive here
+            report_instance_AFTER = ResourceReport()
 
             if user_select == 'y':
                 self.new_camp_resources()
-                print("\n Done! All new camps have been assigned a starter resource pack.\n ")
+                print("\nAll new camps have now been assigned a starter resource pack.\n ")
                 print("\nBEFORE:")
-                print(before_camp_vs_unallocated)
+                before_pretty = report_instance_AFTER.PRETTY_PIVOT_CAMP(before_camp_vs_unallocated)
+                print(before_pretty.to_string(index=False).replace('.0', '  '))
                 print("\nAFTER:\n")
-                report_instance_AFTER = ResourceReport()
+                
                 after_camp_vs_unallocated = report_instance_AFTER.master_resource_stats()
-                print(after_camp_vs_unallocated)
+                after_pretty = report_instance_AFTER.PRETTY_PIVOT_CAMP(after_camp_vs_unallocated)
+                print(after_pretty.to_string(index=False).replace('.0', '  '))
                 print("\n ======= ＼(^o^)／ Thanks for Shopping! Come Again Soon! ＼(^o^)／ ===== \n")
         else:
-            print("＼(^o^)／ GOOD NEWS ＼(^o^)／ There are open camps with refugees, that have no resources")
+            print("\n＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 1: There are open camps with refugees, that have no resources")
