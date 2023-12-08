@@ -13,13 +13,15 @@ class Camp:
     # Is  camp data the same as list of camp names? Need for resources
     # list_of_camp_names = []
 
-    def __init__(self, capacity, health_risk, is_camp_available=True):
+    def __init__(self, latitude, longitude, capacity, health_risk, is_camp_available=True):
         # location should be simply a country for simplicity
         self.is_camp_available = is_camp_available
         # option to make the camp unavailable for whatever reason (e.g. it's flooded or infected)
         # by disease and so other refugees shouldn't be added to that camp
         # Location should be a COUNTRY only - for simplicity ?
         # self.current_resource_amount = current_resource_amount
+        self.latitude = latitude
+        self.longitude = longitude
         self.capacity = capacity
         self.health_risk = health_risk
 
@@ -56,9 +58,9 @@ class Camp:
         else:
             status = 'closed'
 
-        Camp.camp_data = [[camp_id, int(select_index), countryID, self.capacity, self.health_risk, 0, 0, 1, status]]
+        Camp.camp_data = [[camp_id, int(select_index), countryID, self.latitude, self.longitude, self.capacity, self.health_risk, 0, 0, 1, status]]
         camp_df = pd.DataFrame(Camp.camp_data,
-                               columns=['campID', 'eventID', 'countryID', 'refugeeCapacity', 'healthRisk',
+                               columns=['campID', 'eventID', 'countryID', 'latitude', 'longitude', 'refugeeCapacity', 'healthRisk',
                                         'volunteerPop', 'refugeePop', 'avgCriticalLvl', 'status'])
 
         csv_path2 = Path(__file__).parents[1].joinpath("data/camp.csv")

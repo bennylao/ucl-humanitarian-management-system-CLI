@@ -20,7 +20,7 @@ class DataVisual:
             lat="latitude",
             lon="longitude",
             hover_name=self.camp_loc["campID"].apply(lambda x: f"Camp {x}"),
-            hover_data=["eventID", "countryID",  "status"],
+            hover_data=["eventID", "countryID", "refugeePop", "refugeeCapacity", "status"],
             color_discrete_sequence=["fuchsia"],
             zoom=0,
             height=800,

@@ -185,6 +185,26 @@ def validate_camp_input():
     else:
         campID = 1
 
+    while True:
+        try:
+            latitude = float(input("\n Enter the latitude of the camp: "))
+            if latitude == "RETURN":
+                return
+            else:
+                break
+        except ValueError:
+            print("Invalid input, Please enter a numerical value")
+
+    while True:
+        try:
+            longitude = float(input("\n Enter the longitude of the camp: "))
+            if longitude == "RETURN":
+                return
+            else:
+                break
+        except ValueError:
+            print("Invalid input, Please enter a numerical value")
+
     # capacity input
     while True:
         capacity = input("\nEnter capacity: ")
@@ -207,7 +227,7 @@ def validate_camp_input():
         else:
             break
 
-    return campID, capacity, risk
+    return campID, latitude, longitude, capacity, risk
 
 
 def validate_join():  # volunteer joining a camp
