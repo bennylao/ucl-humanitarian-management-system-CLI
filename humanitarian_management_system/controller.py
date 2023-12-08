@@ -576,7 +576,7 @@ class Controller:
 
     @staticmethod
     def admin_modify_camp():
-        try:
+        # try:
             """This function is for admin modify camp info"""
             ManagementView.camp_modification_message()
             csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
@@ -661,12 +661,15 @@ class Controller:
                     print("[R] QUIT editing")
                     target_column_index = input(f"Which column do you want to modify(1~9)? Or quit editing(R): ")
 
-                    if target_column_index == 'RETURN':
+                    if target_column_index == 'RETURN' or target_column_index.lower() == 'r':
                         return
-                    if int(target_column_index) not in range(1, 10):
+                    if int(target_column_index) not in range(1, 10) and str(target_column_index).lower() != 'r':
                         print("Please enter a valid integer from 1 to 8")
                         continue
                     elif int(target_column_index) in range(1, 10):
+
+                        temp_id = int(modify_camp_id)
+
                         target_column_name = filtered_df1.columns[int(target_column_index) - 1]
                         while True:
                             new_value = input(f"Enter the new value for {target_column_name}: ")
@@ -674,12 +677,10 @@ class Controller:
                             if str(new_value) == 'RETURN':
                                 return
                             # the ability to edit camp ID, but camp ID has to be unique
-                            if target_column_index == '1':
-                                camp_id_arr = []
-                                camp_id_list = df0['campID'].tolist()
 
-                                for i in camp_id_list:
-                                    camp_id_arr.append(str(i))
+                            if target_column_index == '1':
+
+                                camp_id_arr = [int(i) for i in df0['campID'].tolist()]
 
                                 if int(new_value) in camp_id_arr:
                                     print("Camp ID already exists! Please choose a new one.")
@@ -703,27 +704,29 @@ class Controller:
                                         helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
                                                                  int(m), 'campID', int(new_value))
 
+                                    modify_camp_id = int(new_value)
+
                                 except TypeError:
                                     break
                                 break
 
                             if target_column_index == '5':
+
                                 if new_value == "low" or new_value == "high":
                                     break
                                 else:
                                     print("Invalid input! Please enter 'low' or 'high'")
                                     continue
                             elif target_column_index == '9':
+
                                 if new_value == "open" or new_value == "closed":
                                     break
                                 else:
                                     print("Invalid input! Please enter 'open' or 'closed'")
                                     continue
-                            elif target_column_index.lower() == 'r':
-                                return
-
                             else:
                                 try:
+
                                     new_value = int(new_value)
                                     if new_value >= 0:
                                         break
@@ -734,10 +737,9 @@ class Controller:
                                     print("Invalid input! Please enter a non-negative integer ")
                                     continue
 
-                        index_in_csv = df0[df0["campID"] == int(modify_camp_id)].index.tolist()[0]
-                        helper.modify_csv_value(csv_path0, index_in_csv, target_column_name, int(new_value))
-
-                        # reorder camp ID after ID changed
+                        helper.modify_csv_pandas(csv_path0, 'campID', temp_id, target_column_name,
+                                                 new_value)
+                        temp_id = modify_camp_id
                         csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
                         df_c = pd.read_csv(csv_path_c)
 
@@ -748,11 +750,11 @@ class Controller:
                         return
                 except TypeError:
                     print("Invalid input! Please enter an integer between 1 to 9")
-        except Exception as e:
-            print(f"\nMultiple files may be damaged or lost."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
+        # except Exception as e:
+        #     print(f"\nMultiple files may be damaged or lost."
+        #           f"\nPlease contact admin for further assistance."
+        #           f"\n[Error] {e}")
+        #     logging.critical(f"{e}")
 
     @staticmethod
     def admin_delete_camp():
@@ -1274,13 +1276,13 @@ class Controller:
                 print(f"[{i}] {column_name}")
                 logging.debug("Successfully printed iteration in camp dataframe.")
             try:
-                print("[8] QUIT editing")
+                print("[R] QUIT editing")
                 target_column_index = input(f"Which column do you want to modify(1~9)? Or quit editing(R): ")
 
-                if target_column_index == "RETURN":
+                if target_column_index == 'RETURN' or target_column_index.lower() == 'r':
                     return
-                if int(target_column_index) not in range(1, 10):
-                    print("Please enter a valid integer from 1 to 8")
+                if int(target_column_index) not in range(1, 10) and str(target_column_index).lower() != 'r':
+                    print("Please enter a valid integer from 1 to 9")
                     continue
                 elif int(target_column_index) in range(1, 10):
                     target_column_name = df2.columns[int(target_column_index) - 1]
@@ -1309,9 +1311,9 @@ class Controller:
                                 for k in res_id_arr:
                                     helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
                                                              int(k), 'campID', int(new_value))
+                                new_value = int(new_value)
                             except:
                                 break
-
                         if target_column_index == '5':
                             if new_value == "low" or new_value == "high":
                                 break
@@ -1323,8 +1325,7 @@ class Controller:
                             else:
                                 print("Invalid input! Please enter 'open' or 'closed'")
                         elif target_column_index.lower() == 'r':
-                            return
-
+                            exit()
                         else:
                             try:
                                 new_value = int(new_value)
@@ -1336,7 +1337,7 @@ class Controller:
                                 print("Invalid input! Please enter a non-negative integer ")
 
                     index_in_csv = df2[df2["campID"] == int(camp_id)].index.tolist()[0]
-                    helper.modify_csv_value(csv_path2, index_in_csv, target_column_name, int(new_value))
+                    helper.modify_csv_value(csv_path2, index_in_csv, target_column_name, new_value)
 
                     # reorder camp ID after ID changed
                     csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")

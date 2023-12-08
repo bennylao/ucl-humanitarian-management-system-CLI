@@ -961,3 +961,385 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 21:49:29,618 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 22:27:35,516 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 22:27:35,516 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:28:44,779 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:28:44,779 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:29:09,703 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:29:09,705 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:09,705 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:09,705 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:09,706 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:09,706 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:09,706 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:09,706 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:09,706 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:09,706 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,707 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:29:27,709 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,709 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,709 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,709 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,710 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,710 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,710 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,710 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:27,710 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,831 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:32,833 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,153 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:29:39,155 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,156 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,156 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,156 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,156 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,156 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,156 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,156 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:39,156 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,403 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:41,406 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,979 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:29:42,981 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:34,131 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:31:34,131 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:31:42,819 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:31:42,826 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:42,826 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:42,826 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:42,826 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:42,827 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:42,827 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:42,827 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:42,827 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:42,827 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,559 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:45,562 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,621 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:31:50,624 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:33:09,615 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:33:09,615 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:33:46,473 - CRITICAL - controller-admin_modify_camp-Line744 - invalid literal for int() with base 10: 'r'
+2023-12-08 22:34:12,769 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:34:12,770 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:34:25,426 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:25,434 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,213 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:34:28,215 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,215 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,216 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,216 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,216 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,216 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,216 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,216 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:34:28,216 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:01,977 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:36:01,977 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:36:11,986 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:36:11,993 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:11,993 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:11,993 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:11,993 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:11,993 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:11,993 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:11,993 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:11,993 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:11,994 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,627 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:13,629 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,336 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:36:15,339 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:26,177 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:37:26,177 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:37:33,258 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:33,265 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,964 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:34,967 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,629 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:37:36,631 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:04,312 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:38:04,313 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:38:12,723 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:38:12,730 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:12,731 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:12,731 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:12,731 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:12,731 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:12,731 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:12,731 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:12,731 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:12,731 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,620 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:13,623 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,531 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:38:15,533 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:21,836 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:43:21,836 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:43:31,932 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:43:31,939 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:31,939 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:31,939 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:31,939 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:31,939 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:31,939 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:31,939 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:31,939 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:31,940 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,661 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:33,664 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,102 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:35,104 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,631 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:36,634 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,726 - INFO - controller-volunteer_edit_camp-Line1236 - Camp file opened successfully.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:43:40,728 - DEBUG - controller-volunteer_edit_camp-Line1254 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:45:10,127 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:45:10,128 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:45:31,809 - CRITICAL - controller-admin_modify_camp-Line744 - invalid literal for int() with base 10: 'closed'
+2023-12-08 22:46:36,506 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:46:36,506 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:48:18,889 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:48:18,890 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:53:03,908 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:53:03,908 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:57:46,390 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 22:57:46,390 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 22:59:29,831 - INFO - controller-volunteer_edit_camp-Line1234 - Camp file opened successfully.
+2023-12-08 22:59:29,838 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:29,838 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:29,839 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:29,839 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:29,839 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:29,839 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:29,839 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:29,839 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:29,839 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,177 - INFO - controller-volunteer_edit_camp-Line1234 - Camp file opened successfully.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:36,179 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,753 - INFO - controller-volunteer_edit_camp-Line1234 - Camp file opened successfully.
+2023-12-08 22:59:57,755 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,756 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,756 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,756 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,756 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,756 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,756 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,756 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 22:59:57,756 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,697 - INFO - controller-volunteer_edit_camp-Line1234 - Camp file opened successfully.
+2023-12-08 23:00:09,699 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,699 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,699 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,699 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,699 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,700 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,700 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,700 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:00:09,700 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:09,922 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:06:09,922 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:06:17,511 - INFO - controller-volunteer_edit_camp-Line1234 - Camp file opened successfully.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:17,512 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,114 - INFO - controller-volunteer_edit_camp-Line1234 - Camp file opened successfully.
+2023-12-08 23:06:41,116 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,116 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,116 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,116 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,117 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,117 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,117 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,117 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:06:41,117 - DEBUG - controller-volunteer_edit_camp-Line1252 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:11:55,557 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:11:55,557 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:13:09,101 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:13:09,102 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:14:58,600 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:14:58,600 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:17:51,510 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:17:51,510 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:23:21,864 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:23:21,864 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:25:17,512 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:25:17,512 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:26:25,247 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:26:25,247 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:27:56,981 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:27:56,981 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:31:47,813 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:31:47,813 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:34:03,725 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:34:03,725 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:35:07,020 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:35:07,020 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:36:39,082 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:36:39,082 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:38:13,107 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:38:13,107 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:39:49,095 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:39:49,095 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:43:05,430 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:43:05,430 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:44:15,338 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 23:44:15,338 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 23:44:27,665 - INFO - controller-volunteer_edit_camp-Line1238 - Camp file opened successfully.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
+2023-12-08 23:44:27,672 - DEBUG - controller-volunteer_edit_camp-Line1256 - Successfully printed iteration in camp dataframe.
