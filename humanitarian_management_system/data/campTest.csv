@@ -1,6 +1,0 @@
-campID,eventID,countryID,capacity,healthRisk,volunteerPop,refugeePop,lat,long,status
-2,7,CN,15,low,0,1000,51.62462681,-0.134060879,open
-3,7,CN,8,high,0,0,51.72462681,-0.234060879,open
-4,4,IN,20,high,0,10,51.42462681,-0.134060879,open
-5,3,IN,12,low,0,0,51.52462681,-0.234060879,open
-
