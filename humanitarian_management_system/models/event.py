@@ -87,6 +87,9 @@ class Event:
             except IndexError:
                 print("\nInvalid event ID entered.")
                 continue
+            except ValueError:
+                print("\nInvalid event ID entered.")
+                continue
 
         while True:
             try:
@@ -154,7 +157,6 @@ class Event:
 
     @staticmethod
     def __change_start_date(row):
-        """Should this be an option? What would be the implications of this?"""
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         df = pd.read_csv(event_csv_path)
         date_format = '%d/%m/%Y'
@@ -283,9 +285,13 @@ class Event:
                     continue
                 else:
                     break
+            except IndexError:
+                print("\nInvalid event ID entered.")
+                continue
             except ValueError:
                 print("\nInvalid event ID entered.")
                 continue
+
         row = df[df['eventID'] == int(eid_to_close)].index[0]
         row_camp_list = df_camp[
             (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
@@ -320,6 +326,9 @@ class Event:
                     continue
                 else:
                     break
+            except IndexError:
+                print("\nInvalid event ID entered.")
+                continue
             except ValueError:
                 print("\nInvalid event ID entered.")
                 continue

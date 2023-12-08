@@ -333,7 +333,7 @@ class Controller:
             event_info = helper.validate_event_input()
             if event_info is not None:
                 Event.create_new_record(event_info)
-                print("Event created.")
+                print("\nEvent created.")
             else:
                 return
         except Exception as e:
