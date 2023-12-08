@@ -12,6 +12,7 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 11,21,1,great,TRUE
 12,25,8,none atm,TRUE
 13,28,13,careful!,TRUE
-14,29,5,good girl,True
-15,30,1,none,True
-16,31,12,naughty,False
+14,29,5,good girl,TRUE
+15,30,1,none,TRUE
+16,31,12,naughty,FALSE
+17,35,1,sdfsdf,TRUE
