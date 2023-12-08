@@ -567,16 +567,17 @@ def move_refugee_helper_method():
                         rid = row['refugeeID']
                         old_camp_id = row['campID']
                         # old_camp_id = ref_df.loc[ref_df['campID'] == int(i), 'campID'].iloc[0]
-                        row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
-                        # print(row_index_camp)
-                        # print(row_index_old_camp)
-                        camp_df.at[row_index_old_camp[0], 'refugeePop'] -= 1
+                        # row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
+                        # # print(row_index_camp)
+                        # # print(row_index_old_camp)
+                        # camp_df.at[row_index_old_camp[0], 'refugeePop'] -= 1
                         # Update the campID for the refugee in refugee CSV
                         row_index_ref = ref_df[ref_df['refugeeID'] == int(rid)].index[0]
                         modify_csv_value(refugee_csv_path, row_index_ref, "campID", camp_id)
                         # Remove 1 from the population of the old camp
                         row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
                         camp_df.at[row_index_old_camp[0], 'refugeePop'] -= 1
+                        camp_df.to_csv(camp_csv_path, index=False)
                         # Add one to the population of the camp which the refugee is now in
                         camp_df.at[row_index_new_camp[0], 'refugeePop'] += 1
                         camp_df.to_csv(camp_csv_path, index=False)
@@ -671,6 +672,7 @@ def delete_refugee():
                 camp_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'campID'].iloc[0]
                 row_index_camp = camp_df[camp_df['campID'] == camp_id].index
                 camp_df.at[row_index_camp[0], 'refugeePop'] -= 1
+                camp_df.to_csv(camp_csv_path, index=False)
                 #     Deleting the refugee from the database
                 ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
                 ref_df.reset_index(drop=True, inplace=True)
@@ -709,10 +711,13 @@ def delete_refugee():
 
 def legal_advice_support():
     logging.info("Legal Advice Page starts up.")
-    print("Below are links to our partner legal charities to offer legal support to refugees whilst we work on "
+    print("------------------------------------------------------------------------------\n"
+          "                       Legal Advice Support Services\n"
+          "------------------------------------------------------------------------------")
+    print("\nBelow are links to our partner legal charities to offer legal support to refugees whilst we work on "
           "\nbuilding our own team."
           "\nClicking on these links will direct you to a web page. \nYou will have to return back "
-          "to the application manually.")
+          "to the application manually.\n")
 
     links = [
         ("Refugee Council Legal Advice Site", "https://www.refugeecouncil.org.uk/"),
@@ -722,8 +727,8 @@ def legal_advice_support():
     ]
     while True:
         for i, (name, url) in enumerate(links, 1):
-            print(f"{i}. {name}: {url}")
-        user_input = input("Click on one of the above links or enter RETURN to leave this menu: ")
+            print(f"{i}. {name}: {url}", '\n')
+        user_input = input("\nClick on one of the above links or enter RETURN to leave this menu: ")
         if user_input.lower() == "return":
             return
         # Just exit the page whatever they input.
@@ -750,6 +755,7 @@ def display_training_session():
                                    "\nEnter 1 to create a session or 2 to go back: ")
                 if user_input == '1':
                     create_training_session()
+                    return
                 elif user_input == '2':
                     return
                 else:
@@ -863,12 +869,13 @@ def create_training_session():
             sessionID = int(session_arr.pop())
         sessionID += 1
 
-        training_session_data = [int(sessionID), occupation, topic, date, camp, participants, eventID]
+        training_session_data = [int(sessionID), occupation, topic, date, int(camp),list(participants), eventID]
         session_df.loc[len(session_df)] = training_session_data
         session_df.to_csv(training_session_path, index=False)
         added_session = session_df[session_df['sessionID'] == sessionID]
         print(added_session.to_markdown(index=False))
         print("\n---------------------------------------------------------------------------------")
+        return
     except FileNotFoundError as e:
         logging.critical(f"Error: {e}. One of the data files not found.")
         print(f"\nTraining session data file is not found or is damaged."
@@ -970,6 +977,7 @@ def add_refugee_to_session():
                 print("\n\nSorry - that's not a valid session ID. Pick again. ")
         row_index_sessionID = session_df[session_df['sessionID'] == int(sessionID)].index[0]
         already_registered = session_df.at[row_index_sessionID, 'participants']
+        # print(already_registered)
         eventID = session_df.at[row_index_sessionID, 'eventID']
         camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
         camp_df = pd.read_csv(camp_csv_path)
@@ -984,6 +992,7 @@ def add_refugee_to_session():
                           "Taking you back")
                     return
                 print("\n", refugees_in_associated_camps.to_markdown(index=False))
+                # print(refugees_in_associated_camps['refugeeID'])
                 rid = input(
                     f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
                     f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
@@ -992,11 +1001,18 @@ def add_refugee_to_session():
                     return
                 if rid.lower() == "done":
                     break
+                # try:
+                #     rid = int(rid)
+                # except TypeError as e:
+                #     logging.debug("Wrong user input for refugee id when adding to training session/")
+                #     print(f"Sorry! Incorrect input - try again. Error: {e}")
+                #     return
                 elif rid in already_registered:
+                    # print(already_registered)
                     print(f"\nDon't worry. That refugee is already down to attend this session.")
                 elif int(rid) in participants:
                     print("\nYou've already just added that refugee.")
-                elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+                elif refugees_in_associated_camps['refugeeID'].eq(int(rid)).any():
                     print(f"\n\nAdding refugee with id {rid} to skills session {sessionID}. \n\n")
                     participants.append(int(rid))
                 else:
@@ -1010,6 +1026,8 @@ def add_refugee_to_session():
         # Combine the two lists using extend
         # combined_attendees = participants.copy()
         # combined_attendees.extend(already_registered_list)
+        # already_registered_list = list(already_registered)
+        # already_registered_list.extend(participants)
         combined_attendees = [already_registered] + participants
         session_df.at[row_index_sessionID, 'participants'] = combined_attendees
         session_df.to_csv(training_session_path, index=False)

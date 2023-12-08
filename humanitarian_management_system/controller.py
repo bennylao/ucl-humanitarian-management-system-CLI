@@ -1611,11 +1611,11 @@ class Controller:
                 "\n[3] Add a refugee to a session "
                 "\n[4] Remove a refugee from a session "
                 "\n[5] Display all sessions "
-                "\n[6] Return back ")
+                "\n[R] Return back ")
 
             print(f"You're currently assigned to camp {int(cid)}.")
 
-            if create_add_delete == '6':
+            if create_add_delete == 'R':
                 return
             elif create_add_delete == '1':
                 helper.create_training_session()
