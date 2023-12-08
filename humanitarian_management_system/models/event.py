@@ -227,6 +227,7 @@ class Event:
             row_camp_list = df_camp[
                 (df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
             root = tk.Tk()
+            root.withdraw()
             result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
                                                            "You'll also close the camps in that event.")
             if result == "yes":
@@ -244,7 +245,8 @@ class Event:
                 tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
             else:
                 tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-            root.mainloop()
+            root.update()
+            root.destroy()
 
     @staticmethod
     def display_events(df):
@@ -309,6 +311,7 @@ class Event:
         row_camp_list = df_camp[
             (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
         root = tk.Tk()
+        root.withdraw()
         result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
                                                        "You'll also close the camps in that event.")
         if result == "yes":
@@ -321,7 +324,8 @@ class Event:
             tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
         else:
             tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-        root.mainloop()
+        root.update()
+        root.destroy()
 
     @staticmethod
     def delete_event():
@@ -346,6 +350,7 @@ class Event:
                 print("\nInvalid event ID entered.")
                 continue
         root = tk.Tk()
+        root.withdraw()
         result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
                                                        "You'll also close the camps and lose all the information about "
                                                        "the refugees in that event.")
@@ -383,4 +388,5 @@ class Event:
             tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
         else:
             tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
-        root.mainloop()
+        root.update()
+        root.destroy()
