@@ -9,21 +9,20 @@ from pathlib import Path
 class DataVisual:
 
     def __init__(self):
-        camp_csv_path = Path(__file__).parents[0].joinpath("data/campTest.csv")
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
         camp_loc = pd.read_csv(camp_csv_path)
         self.camp_loc = camp_loc
+
     def map(self):
-        #camp_csv_path = Path(__file__).parents[1].joinpath("data/campTest.csv")
-        #camp_loc = pd.read_csv(camp_csv_path)
 
         fig = px.scatter_mapbox(
             self.camp_loc,
-            lat="lat",
-            lon="long",
+            lat="latitude",
+            lon="longitude",
             hover_name=self.camp_loc["campID"].apply(lambda x: f"Camp {x}"),
             hover_data=["eventID", "countryID",  "status"],
             color_discrete_sequence=["fuchsia"],
-            zoom=11,
+            zoom=0,
             height=800,
             width=None
         )
@@ -31,7 +30,8 @@ class DataVisual:
         fig.update_layout(mapbox_style="carto-positron")
         fig.update_layout(margin={"r": 0, "t": 30, "l": 0, "b": 0})
         fig.update_traces(marker={"size": 10, "symbol": "circle", "color": "green"})
-        fig.update_layout(mapbox_bounds={"west": -10, "east": 2, "south": 49, "north": 60})
+        # fig.update_layout(mapbox_bounds={"west": -10, "east": 2, "south": 49, "north": 60})
+        fig.update_layout(mapbox_bounds={"west": -180, "east": 180, "south": -90, "north": 90})
         fig.update_layout(title='Camp locations on map')
         fig.show()
 
@@ -64,7 +64,7 @@ class DataVisual:
 
 if __name__ == '__main__':
     datavisual = DataVisual()
-    datavisual.charts()
+    # datavisual.charts()
     datavisual.map()
 
 # ref:https://plotly.com/python/scatter-plots-on-maps/

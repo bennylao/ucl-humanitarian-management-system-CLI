@@ -213,3 +213,9 @@ class ManagementView:
               "   Activate/deactivate volunteer accounts \n"
               "==========================================")
 
+    @staticmethod
+    def data_visual_message():
+        print("\n==========================================\n"
+              "           Data Visualization \n"
+              "==========================================")
+

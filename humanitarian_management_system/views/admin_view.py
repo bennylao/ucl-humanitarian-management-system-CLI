@@ -40,6 +40,15 @@ class AdminView:
         ("L", "Logout")
     )
 
+    data_visualization_menu = (
+        ("1", "View camps on map"),
+        ("2", "View refugee gender distribution"),
+        ("3", "View resources stock"),
+        ("4", "View medical information"),
+        ("5", "Return to the previous page")
+
+    )
+
     manage_volunteer_menu = (
         ("1", "Edit volunteer profile"),
         ("2", "Display all volunteer information"),
@@ -89,6 +98,13 @@ class AdminView:
         print("")
         for key, value in cls.manage_camp_menu:
             print(f"[ {key} ] {value}")
+
+    @classmethod
+    def display_data_visual_menu(cls):
+        print("")
+        for key, value in cls.data_visualization_menu:
+            print(f"[ {key} ] {value}")
+
 
     @classmethod
     def get_camp_options(cls):

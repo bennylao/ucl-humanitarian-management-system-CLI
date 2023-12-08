@@ -668,3 +668,24 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 09:32:20,480 - DEBUG - controller-initialise-Line26 - Controller is initialised.
 2023-12-08 09:33:57,171 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 09:33:57,171 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 12:38:03,180 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:38:03,180 - DEBUG - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 12:38:03,783 - CRITICAL - controller-login-Line122 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
+2023-12-08 12:38:35,495 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:38:35,495 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 12:39:15,479 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:39:15,480 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 12:41:02,841 - CRITICAL - controller-login-Line122 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data_analysis\\data\\refugee.csv'
+2023-12-08 12:42:13,877 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:42:13,877 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 12:45:06,386 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:45:06,386 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 12:48:10,839 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:48:10,840 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 12:53:35,059 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:53:35,059 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 12:53:57,173 - CRITICAL - controller-login-Line122 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data_analysis\\data\\resourceStock.csv'
+2023-12-08 12:54:57,486 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:54:57,486 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 12:56:51,680 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 12:56:51,680 - INFO - controller-initialise-Line27 - Controller is initialised.

@@ -5,8 +5,8 @@ import pandas as pd
 
 
 def resources(camp_id):
-    resourceA_csv_path = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
-    resourceS_csv_path = Path(__file__).parents[0].joinpath("data/resourceStock.csv")
+    resourceA_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
+    resourceS_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
     rs = pd.read_csv(resourceS_csv_path)
     ra = pd.read_csv(resourceA_csv_path)
     labels = rs['name'].tolist()

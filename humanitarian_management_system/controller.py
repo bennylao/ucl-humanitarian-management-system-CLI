@@ -8,6 +8,7 @@ import logging
 from passlib.handlers.sha2_crypt import sha256_crypt
 
 from humanitarian_management_system import helper
+from humanitarian_management_system.data_analysis import visualization_v,resources_distribution,medical_info,gender_distribution
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder,
                                                    ResourceCampCreateDelete)
@@ -378,7 +379,7 @@ class Controller:
             elif user_selection == "10":
                 self.admin_refugee_export()
             elif user_selection == "11":
-                self.admin_camp_dashboard()
+                self.admin_data_visualization()
             elif user_selection == "R":
                 break
             elif user_selection == "L":
@@ -405,10 +406,59 @@ class Controller:
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
 
-    @staticmethod
-    def admin_camp_dashboard():
-        dashboard = Dashboard()
-        dashboard.run()
+    # @staticmethod
+    # def admin_camp_dashboard():
+    #     dashboard = Dashboard()
+    #     dashboard.run()
+
+    def admin_data_visualization(self):
+        ManagementView.data_visual_message()
+        AdminView.display_data_visual_menu()
+        csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
+        df0 = pd.read_csv(csv_path0)
+        campList = df0['campID'].tolist()
+
+        while True:
+            try:
+                userInput = int(input("Please choose one option: "))
+                if userInput not in range(1, 6):
+                    print('Invalid Input, please try again')
+                    continue
+                else:
+                    if userInput == 1:
+                        camp_map = visualization_v.DataVisual()
+                        camp_map.map()
+
+                    elif userInput == 2:
+                        while True:
+                            campId = int(input('Please enter a camp ID: '))
+                            if campId not in campList:
+                                print("Camp id doesn't exist")
+                                continue
+                            else:
+                                gender = gender_distribution
+                                gender.gender_pie_chart(campId)
+                                break
+                    elif userInput == 3:
+                        while True:
+                            campId = int(input('Please enter a camp ID: '))
+                            if campId not in campList:
+                                print("Camp id doesn't exist")
+                                continue
+                            else:
+                                r = resources_distribution
+                                r.resources(campId)
+                                break
+                    elif userInput == 4:
+                        medical_info.medical_info()
+
+                    else:
+                        return
+
+            except ValueError:
+                print("Invalid Input, please try again")
+
+
 
     @staticmethod
     def admin_create_camp():

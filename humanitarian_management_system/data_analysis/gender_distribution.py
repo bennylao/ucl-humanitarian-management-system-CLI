@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def gender_pie_chart(camp_id):
-    refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+    refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
     rd = pd.read_csv(refugee_csv_path)
     male = rd[(rd['campID'] == camp_id) & (rd['gender'] == 'male')].shape[0]
     female = rd[(rd['campID'] == camp_id) & (rd['gender'] == 'female')].shape[0]

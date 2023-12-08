@@ -5,8 +5,8 @@ from plotly.subplots import make_subplots
 
 
 def medical_info():
-    type_csv_path = Path(__file__).parents[0].joinpath("data/medicalInfoType.csv")
-    info_csv_path = Path(__file__).parents[0].joinpath("data/medicalInfo.csv")
+    type_csv_path = Path(__file__).parents[1].joinpath("data/medicalInfoType.csv")
+    info_csv_path = Path(__file__).parents[1].joinpath("data/medicalInfo.csv")
     info = pd.read_csv(info_csv_path)
     info_type = pd.read_csv(type_csv_path)
     labels = info_type['condition'].tolist()
