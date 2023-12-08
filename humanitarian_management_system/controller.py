@@ -351,28 +351,29 @@ class Controller:
             user_selection = helper.validate_user_selection(AdminView.get_camp_options())
             if user_selection == "1":
                 self.admin_create_camp()
-            if user_selection == "2":
+            elif user_selection == "2":
                 self.admin_modify_camp()
-            if user_selection == "3":
-                self.admin_remove_camp()
-            if user_selection == "4":
+            elif user_selection == "3":
+                self.admin_delete_camp()
+            elif user_selection == "4":
+                self.admin_close_camp()
+            elif user_selection == "5":
                 self.create_refugee()
-            if user_selection == "5":
+            elif user_selection == "6":
                 self.admin_edit_refugee()
-            if user_selection == "6":
+            elif user_selection == "7":
                 self.move_refugee_admin()
-            if user_selection == "7":
+            elif user_selection == "8":
                 self.admin_display_refugee()
-            if user_selection == "8":
+            elif user_selection == "9":
                 self.admin_display_camp()
-                pass
-            if user_selection == "9":
+            elif user_selection == "10":
                 self.admin_refugee_export()
-            if user_selection == "10":
+            elif user_selection == "11":
                 self.admin_camp_dashboard()
-            if user_selection == "R":
+            elif user_selection == "R":
                 break
-            if user_selection == "L":
+            elif user_selection == "L":
                 self.user = None
                 self.logout_request = True
                 break
@@ -645,7 +646,7 @@ class Controller:
             logging.critical(f"{e}")
 
     @staticmethod
-    def admin_remove_camp():
+    def admin_delete_camp():
         try:
             """This part of the code is to delete the camp from the camp.csv"""
             ManagementView.camp_deletion_message()
@@ -697,7 +698,7 @@ class Controller:
             Event.display_events(df1[df1['eventID'] == event_id])
             while True:
                 try:
-                    delete_camp_id = input("\nWhich camp do you want to remove? Please enter campID: ")
+                    delete_camp_id = input("\nWhich camp do you want to delete? Please enter campID: ")
                     if delete_camp_id == "RETURN":
                         return
                     delete_camp_id = int(delete_camp_id)
@@ -706,7 +707,7 @@ class Controller:
                         continue
                     elif delete_camp_id in resource_camp_id_list:
                         print(f"\nThere is allocated resource in camp {delete_camp_id}."
-                              f"\nPlease transfer them before removing the camp.")
+                              f"\nPlease transfer them before deleting the camp.")
                         continue
                     else:
                         print("\n*The following shows the info of the camp you have chosen*")
@@ -716,7 +717,7 @@ class Controller:
                     print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
 
             while True:
-                aa = input(f"\nAre you sure to remove the camp {delete_camp_id}? (yes/no)\n"
+                aa = input(f"\nAre you sure to delete the camp {delete_camp_id}? (yes/no)\n"
                            f"Note: you'll also be deleting all associated refugees from the system: ")
                 if aa == "yes":
                     # implement the deletion in csv file
@@ -734,7 +735,7 @@ class Controller:
                     no_camp -= 1
                     index = df[df["eventID"] == event_id].index.tolist()
                     helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
-                    print("\n\u2714 You have Successfully removed the camp!")
+                    print("\n\u2714 You have Successfully deleted the camp!")
                     return
                 elif aa == "no":
                     return
@@ -748,6 +749,91 @@ class Controller:
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
+
+    @staticmethod
+    def admin_close_camp():
+        # try:
+            """This part of the code is to close the camp from the camp.csv"""
+            ManagementView.camp_close_message()
+
+            event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
+            camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+            resource_allocation_csv_path = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
+            active_index = helper.extract_active_event(event_csv_path)[0]
+
+            # if there is no active events, return
+            if len(active_index) == 0:
+                print("\nNo relevant events to select from")
+                return
+            else:
+                # print the events info for users to choose
+                df = pd.read_csv(event_csv_path)
+                filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+                if filtered_df.empty:
+                    print("\nAll the events are closed and there's none to choose from.")
+                    return
+                else:
+                    print("\n*The following shows the info of all available events*")
+                    Event.display_events(filtered_df)
+
+            # read camp csv file
+            df1 = pd.read_csv(camp_csv_path)
+            while True:
+                try:
+                    event_id = input("\nEnter Event ID: ")
+                    if event_id == "RETURN":
+                        return
+                    event_id = int(event_id)
+                    if event_id in active_index:
+                        break
+                    elif df1[df1['eventID'] == event_id].empty:
+                        print("No relevant camps to select from")
+                        return
+                    else:
+                        print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                        continue
+                except ValueError:
+                    print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+
+            filtered_camp_id = df1[df1['eventID'] == event_id]['campID'].tolist()
+            print('The following shows the info of all camps from the event')
+            Event.display_events(df1[df1['eventID'] == event_id])
+            while True:
+                try:
+                    close_camp_id = input("\nWhich camp do you want to close? Please enter campID: ")
+                    if close_camp_id == "RETURN":
+                        return
+                    close_camp_id = int(close_camp_id)
+                    if close_camp_id not in filtered_camp_id:
+                        print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
+                        continue
+                    else:
+                        print("\n*The following shows the info of the camp you have chosen*")
+                        Event.display_events(df1[df1['campID'] == close_camp_id])
+                        break
+                except ValueError:
+                    print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
+
+            while True:
+                aa = input(f"\nAre you sure to close the camp {close_camp_id}? (yes/no)\n") ############## do we delete all refugee when camp is closed?
+                if aa == "yes":
+                    # close the camp
+                    df1.loc[df1['campID'] == int(close_camp_id), 'status'] = "closed"
+                    df1.to_csv(camp_csv_path, index=False)
+                    print("\n\u2714 You have Successfully closed the camp!")
+                    return
+                elif aa == "no":
+                    return
+                elif aa == "RETURN":
+                    return
+                else:
+                    print("Invalid input! Please enter 'yes' or 'no'")
+                    continue
+        # except Exception as e:
+        #     print(f"\nData file seems to be damaged."
+        #           f"\nPlease contact admin for further assistance."
+        #           f"\n[Error] {e}")
+        #     logging.critical(f"{e}")
 
     @staticmethod
     def admin_display_refugee():
