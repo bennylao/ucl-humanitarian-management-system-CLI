@@ -128,7 +128,7 @@ def validate_event_input():
         if location.upper() == 'RETURN':
             return
         elif location not in all_countries:
-            print("Invalid country name entered.")
+            print("\nInvalid country name entered.")
             continue
         else:
             break
@@ -173,11 +173,11 @@ def validate_event_input():
 
     if ((end_date == None and start_date.date() <= datetime.date.today())
             or (start_date.date() <= datetime.date.today() and end_date.date() >= datetime.date.today())):
-        ongoing = True
+        ongoing = 'True'
     elif start_date.date() > datetime.date.today():
         ongoing = 'Yet'
     else:
-        ongoing = False
+        ongoing = 'False'
 
     return [ongoing, title, location, description, 0, start_date, end_date]
 
