@@ -324,7 +324,7 @@ class Controller:
             event_info = helper.validate_event_input()
             if event_info is not None:
                 Event.create_new_record(event_info)
-                print("Event created.")
+                print("\n***  Event created.  ***")
             else:
                 return
         except Exception as e:
@@ -760,13 +760,18 @@ class Controller:
             else:
                 # print the events info for users to choose
                 df = pd.read_csv(event_csv_path)
+                df1 = pd.read_csv(camp_csv_path)
                 filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+                campID_df = df1[['campID', 'eventID']].copy()
+                campID_df['campID'] = campID_df['campID'].astype(str)
+                campID_df = campID_df.groupby('eventID')['campID'].apply(lambda x: ', '.join(x.dropna())).reset_index()
+                merged_df = pd.merge(filtered_df, campID_df, on='eventID', how='left')
                 if filtered_df.empty:
                     print("\nAll the events are closed and there's none to choose from.")
                     return
                 else:
                     print("\n*The following shows the info of all available events*")
-                    Event.display_events(filtered_df)
+                    Event.display_events(merged_df)
 
             # read camp csv file
             df1 = pd.read_csv(camp_csv_path)
