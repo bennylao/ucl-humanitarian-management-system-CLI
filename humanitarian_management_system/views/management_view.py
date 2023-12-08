@@ -35,7 +35,7 @@ class ManagementView:
     @staticmethod
     def event_creation_message():
         print("\n========================================\n"
-              "            Event CREATION\n"
+              "              Event CREATION\n"
               "========================================\n"
               "Please fill in all the following information below.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
@@ -43,7 +43,7 @@ class ManagementView:
     @staticmethod
     def event_edit_message():
         print("\n========================================\n"
-              "               Event EDIT\n"
+              "             Event MODIFICATION\n"
               "========================================\n"
               "Please fill in all the following information below.\n"
               "Or enter 'RETURN' to go back to admin menu page.")

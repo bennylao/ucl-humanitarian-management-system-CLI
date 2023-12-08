@@ -34,7 +34,6 @@ class Event:
             max_eid_csv_path = Path(__file__).parents[1].joinpath("data/maxUsedEid.csv")
             max_used_eid = pd.read_csv(max_eid_csv_path)['max_used_eid'].max()
             event_id = max(last_event_id, max_used_eid) + 1
-            # insert user id into registration_info
             event_info.insert(0, event_id)
             event_df = pd.DataFrame(data=[event_info],
                                     columns=['eventID', 'ongoing', 'title', 'location', 'description', 'no_camp',
@@ -55,7 +54,7 @@ class Event:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
             df = pd.read_csv(event_csv_path)
             print(df)
-            active_events_df = df[(df['ongoing'] == True) & ((pd.to_datetime(df['endDate']).dt.date >
+            active_events_df = df[(df['ongoing'] == 'True') & ((pd.to_datetime(df['endDate']).dt.date >
                                                               datetime.date.today()) | (pd.isna(df['endDate'])))]
             return active_events_df
         except FileNotFoundError as e:
@@ -108,8 +107,11 @@ class Event:
                     what_to_edit = input('\n--> Choose one to edit (title/ location/ description/ startDate/ endDate):')
                     if what_to_edit == 'RETURN':
                         return
+                    elif what_to_edit not in ['title', 'location', 'description', 'startDate', 'endDate']:
+                        print(
+                            f"\nInvalid input! Please choose one from ['title', 'location', 'description', 'startDate', 'endDate'].")
+                        continue
                     else:
-                        df[what_to_edit]
                         break
                 except KeyError:
                     print("\nInvalid option name entered.")
@@ -256,7 +258,8 @@ class Event:
                 row_camp_list = df_camp[
                     (df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
                 while True:
-                    result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
+                    result = input("\n*** Are you sure you want to close the event? You'll also close the camps in that event.\n"
+                                   "--> yes/no ")
                     if result == "yes":
                         ongoing = 'False'
                         if df['ongoing'].loc[row] == 'Yet':
@@ -274,8 +277,10 @@ class Event:
                     elif result == "no":
                         print("\n***  The operation to close the event was canceled.  ***")
                         break
+                    elif result == "RETURN":
+                        return
                     else:
-                        print("\nYou need to choose between 'yes/no'")
+                        print("\nYou need to choose between 'yes/no'.")
                         continue
         except FileNotFoundError as e:
             print(f"\nFile not found."
@@ -307,11 +312,11 @@ class Event:
 
                 if ((end_date == None and start_date.date() <= datetime.date.today()) or
                         (start_date.date() <= datetime.date.today() and end_date.date() > datetime.date.today())):
-                    helper.modify_csv_value(event_csv_path, index, 'ongoing', True)
+                    helper.modify_csv_value(event_csv_path, index, 'ongoing', 'True')
                 elif start_date.date() > datetime.date.today():
                     helper.modify_csv_value(event_csv_path, index, 'ongoing', 'Yet')
                 else:
-                    helper.modify_csv_value(event_csv_path, index, 'ongoing', False)
+                    helper.modify_csv_value(event_csv_path, index, 'ongoing', 'False')
                     row_camp_list = df_camp[
                         (df_camp['eventID'] == df.loc[index, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
                     if row_camp_list:
@@ -357,7 +362,8 @@ class Event:
             row_camp_list = df_camp[
                 (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
             while True:
-                result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
+                result = input("\n*** Are you sure you want to close the event? You'll also close the camps in that event.\n"
+                               "--> yes/no ")
                 if result == "yes":
                     ongoing = False
                     helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
@@ -370,8 +376,10 @@ class Event:
                 elif result == "no":
                     print("\n***  The operation to close the event was canceled.  ***")
                     break
+                elif result == "RETURN":
+                    return
                 else:
-                    print("\nYou need to choose between 'yes/no'")
+                    print("\nYou need to choose between 'yes/no'.")
                     continue
         except FileNotFoundError as e:
             print(f"\nFile not found."
@@ -406,8 +414,9 @@ class Event:
                     print("\nInvalid event ID entered.")
                     continue
             while True:
-                result = input("Are you sure you want to delete the event? "
-                               "You'll also close the camps and lose all the information about the refugees in that event. (yes/no)")
+                result = input("*** Are you sure you want to delete the event? "
+                               "You'll also close the camps and lose all the information about the refugees in that event.\n"
+                               "--> yes/no ")
                 if result == "yes":
                     df.drop(df[df['eventID'] == int(eid_to_delete)].index, inplace=True)
                     df.to_csv(event_csv_path, index=False)
@@ -444,8 +453,10 @@ class Event:
                 elif result == "no":
                     print("\n***  The operation to delete the event was canceled.  ***")
                     break
+                elif result == "RETURN":
+                    return
                 else:
-                    print("\nYou need to choose between 'yes/no'")
+                    print("\nYou need to choose between 'yes/no'.")
                     continue
         except FileNotFoundError as e:
             print(f"\nFile not found."
