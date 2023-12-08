@@ -1651,7 +1651,7 @@ class Controller:
             elif create_add_delete == '5':
                 helper.display_training_session()
             else:
-                print("\nSorry! Didn't catch that. Please try again or enter [6] to exit. ")
+                print("\nSorry! Didn't catch that. Please try again or enter [R] to exit. ")
 
     def user_edit_account(self):
         while True:
