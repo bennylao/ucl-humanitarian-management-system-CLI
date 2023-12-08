@@ -129,17 +129,19 @@ class Controller:
 
             if user_selection == "1":
                 self.admin_manage_event()
-            if user_selection == "2":
+            elif user_selection == "2":
                 self.admin_manage_camp()
-            if user_selection == "3":
-                self.admin_manage_volunteer()
-            if user_selection == "4":
+            elif user_selection == "3":
+                self.admin_manage_refugee()
+            elif user_selection == "4":
                 self.admin_manage_resource()
-            if user_selection == "5":
+            elif user_selection == "5":
+                self.admin_manage_volunteer()
+            elif user_selection == "6":
                 self.admin_display_summary()
-            if user_selection == "6":
+            elif user_selection == "7":
                 self.user_edit_account()
-            if user_selection == "7":
+            elif user_selection == "8":
                 self.user.show_account_info()
             if user_selection == "L" or self.logout_request:
                 self.user = None
@@ -391,18 +393,8 @@ class Controller:
             elif user_selection == "4":
                 self.admin_close_camp()
             elif user_selection == "5":
-                self.create_refugee()
-            elif user_selection == "6":
-                self.admin_edit_refugee()
-            elif user_selection == "7":
-                self.move_refugee_admin()
-            elif user_selection == "8":
-                self.admin_display_refugee()
-            elif user_selection == "9":
                 self.admin_display_camp()
-            elif user_selection == "10":
-                self.admin_refugee_export()
-            elif user_selection == "11":
+            elif user_selection == "6":
                 self.admin_data_visualization()
             elif user_selection == "R":
                 break
@@ -411,7 +403,27 @@ class Controller:
                 self.logout_request = True
                 break
 
-    """ ##### Edit Refugee for all camps ##### """
+    def admin_manage_refugee(self):
+        while True:
+            AdminView.display_refugee_welcome_message()
+            AdminView.display_refugee_menu()
+            user_selection = helper.validate_user_selection(AdminView.get_refugee_options())
+            if user_selection == "1":
+                self.create_refugee()
+            elif user_selection == "2":
+                self.admin_edit_refugee()
+            elif user_selection == "3":
+                self.move_refugee_admin()
+            elif user_selection == "4":
+                self.admin_display_refugee()
+            elif user_selection == "5":
+                self.admin_refugee_export()
+            elif user_selection == "R":
+                break
+            elif user_selection == "L":
+                self.user = None
+                self.logout_request = True
+                break
 
     @staticmethod
     def admin_edit_refugee():
