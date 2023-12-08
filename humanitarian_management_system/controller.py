@@ -447,12 +447,8 @@ class Controller:
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
 
-    # @staticmethod
-    # def admin_camp_dashboard():
-    #     dashboard = Dashboard()
-    #     dashboard.run()
-
-    def admin_data_visualization(self):
+    @staticmethod
+    def admin_data_visualization():
         ManagementView.data_visual_message()
         # AdminView.display_data_visual_menu()
         csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
@@ -1226,7 +1222,8 @@ class Controller:
                 self.legal_advice_support()
             if user_selection == '9':
                 self.refugee_training_sessions()
-
+            if user_selection == '10':
+                self.vol_data_visualization(self)
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -1994,3 +1991,45 @@ class Controller:
     #                       event_id, select_index)
     #         v.join_camp(event_id, select_index)
     #         self.volunteer_main()
+
+    @staticmethod
+    def vol_data_visualization(self):
+        user_id = self.user.user_id
+        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+        # active_index = helper.extract_active_event(camp_csv_path)[0]
+        df = pd.read_csv(user_csv_path)
+        dff = df[df['userID'] == int(user_id)]
+        # event_id = dff.at[1, 'eventID']
+        camp_id = dff.at[1, 'campID']
+
+        ManagementView.data_visual_message()
+        # AdminView.display_data_visual_menu()
+
+        while True:
+            AdminView.display_data_visual_menu()
+            try:
+                userInput = int(input("Please choose one option: "))
+                if userInput == 1:
+                    camp_map = visualization_v.DataVisual()
+                    camp_map.map()
+
+                elif userInput == 2:
+                    gender = gender_distribution
+                    gender.gender_pie_chart(camp_id)
+
+                elif userInput == 3:
+                    age1 = age_distribution
+                    age1.age_bar_chart(camp_id)
+
+                elif userInput == 4:
+                    r = resources_distribution
+                    r.resources(camp_id)
+
+                elif userInput == 5:
+                    medical_info.medical_info(camp_id)
+
+                else:
+                    return
+
+            except ValueError:
+                print("Invalid Input, please try again")

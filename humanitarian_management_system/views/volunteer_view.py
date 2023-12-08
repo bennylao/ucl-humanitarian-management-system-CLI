@@ -21,6 +21,7 @@ class VolunteerView:
         ("7", "Display camp resources"),
         ("8", "Legal Advice Services"),
         ("9", "Refugee Skills Sessions Management"),
+        ("10", "Camp/Refugee data visualization"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
