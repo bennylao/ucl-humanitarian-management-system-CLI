@@ -2,8 +2,6 @@ from pathlib import Path
 from humanitarian_management_system import helper
 import datetime
 import pandas as pd
-import tkinter as tk
-import tkinter.messagebox
 import logging
 
 
@@ -226,10 +224,11 @@ class Event:
             df_camp = pd.read_csv(camp_csv_path)
             row_camp_list = df_camp[
                 (df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
-            root = tk.Tk()
-            root.withdraw()
-            result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-                                                           "You'll also close the camps in that event.")
+            # root = tk.Tk()
+            # root.withdraw()
+            # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
+            #                                                "You'll also close the camps in that event.")
+            result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
             if result == "yes":
                 ongoing = False
                 if df['ongoing'].loc[row] == 'Yet':
@@ -242,11 +241,13 @@ class Event:
                 if row_camp_list:
                     for row_camp in row_camp_list:
                         helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-                tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+                print("\n***  The event has been successfully closed.  ***")
+                # tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
             else:
-                tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-            root.update()
-            root.destroy()
+                print("\n***  The operation to close the event was canceled.  ***")
+            #     tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+            # root.update()
+            # root.destroy()
 
     @staticmethod
     def display_events(df):
@@ -310,10 +311,11 @@ class Event:
         row = df[df['eventID'] == int(eid_to_close)].index[0]
         row_camp_list = df_camp[
             (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
-        root = tk.Tk()
-        root.withdraw()
-        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-                                                       "You'll also close the camps in that event.")
+        # root = tk.Tk()
+        # root.withdraw()
+        # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
+        #                                                "You'll also close the camps in that event.")
+        result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
         if result == "yes":
             ongoing = False
             helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
@@ -321,11 +323,13 @@ class Event:
             if row_camp_list:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-            tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+            print("\n***  The event has been successfully closed.  ***")
+            # tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
         else:
-            tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-        root.update()
-        root.destroy()
+            print("\n***  The operation to close the event was canceled.  ***")
+        #     tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
+        # root.update()
+        # root.destroy()
 
     @staticmethod
     def delete_event():
@@ -349,11 +353,14 @@ class Event:
             except ValueError:
                 print("\nInvalid event ID entered.")
                 continue
-        root = tk.Tk()
-        root.withdraw()
-        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
-                                                       "You'll also close the camps and lose all the information about "
-                                                       "the refugees in that event.")
+        # root = tk.Tk()
+        # root.withdraw()
+        # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
+        #                                                "You'll also close the camps and lose all the information about "
+        #                                                "the refugees in that event.")
+
+        result = input("Are you sure you want to delete the event? "
+                       "You'll also close the camps and lose all the information about the refugees in that event. (yes/no)")
         if result == "yes":
             df.drop(df[df['eventID'] == int(eid_to_delete)].index, inplace=True)
             df.to_csv(event_csv_path, index=False)
@@ -385,8 +392,10 @@ class Event:
             if row_camp_list:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-            tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
+            # tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
+            print("\n***  The event has been successfully deleted.  ***")
         else:
-            tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
-        root.update()
-        root.destroy()
+            print("\n***  The operation to delete the event was canceled.  ***")
+        #     tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
+        # root.update()
+        # root.destroy()
