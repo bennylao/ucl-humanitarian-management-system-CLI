@@ -1429,14 +1429,14 @@ class Controller:
                 print("\n" + t)
 
                 while True:
+                    cid = input("Enter a camp ID: ")
+                    if cid.upper() == 'RETURN':
+                        return
                     try:
-                        cid = int(input("Enter a camp ID: "))
+                        cid = int(cid)
                         if cid not in active_camp:
                             print("Invalid camp ID entered!")
                             continue
-                        if cid == 'RETURN':
-                            return
-
                         row_index_new_camp = df_c[df_c['campID'] == int(cid)].index
                         new_potential_refugee_pop = (df_c.at[row_index_new_camp[0], 'refugeePop'])
                         new_camp_capacity = df_c.at[row_index_new_camp[0], 'refugeeCapacity']
