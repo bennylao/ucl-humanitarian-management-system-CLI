@@ -1282,12 +1282,8 @@ class Controller:
             user_type = df.loc[df['username'] == self.user.username]['userType'].tolist()[0]
             df_c = pd.read_csv(csv_path_c)
             active_camp = df_c.loc[df_c['status'] == 'open']['campID'].tolist()
-
             # check user type, for admin - can create new refugee for any camp, and for vol - camp dependent
             if user_type == 'admin':
-                csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-                df_c = pd.read_csv(csv_path)
-
                 print("\n*The following shows the info of all available events*\n")
                 t = df_c.to_markdown(index=False)
                 print("\n" + t)
@@ -1311,7 +1307,7 @@ class Controller:
                                 "\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
                                 f"Camp {cid} has a current population of {new_potential_refugee_pop} and a capacity of "
                                 f"{new_camp_capacity}.\nLet's go again.\n")
-                    except TypeError:
+                    except ValueError:
                         print("Invalid camp ID entered!")
                         continue
             else:
