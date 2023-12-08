@@ -445,12 +445,6 @@ class Controller:
             logging.critical(f"{e}")
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
-
-    # @staticmethod
-    # def admin_camp_dashboard():
-    #     dashboard = Dashboard()
-    #     dashboard.run()
-
     def admin_data_visualization(self):
         ManagementView.data_visual_message()
         # AdminView.display_data_visual_menu()
@@ -739,37 +733,6 @@ class Controller:
                         return
                 except TypeError:
                     print("Invalid input! Please enter an integer between 1 to 8")
-
-            # while True:
-            #     new_value = input(f"Enter the new value for {target_column_name}: ")
-            #     if target_column_index == 2:
-            #         if new_value == "low" or new_value == "high":
-            #             break
-            #         else:
-            #             print("Invalid input! Please enter 'low' or 'high'")
-            #             continue
-            #     elif target_column_index == 6:
-            #         if new_value == "open" or new_value == "closed":
-            #             break
-            #         else:
-            #             print("Invalid input! Please enter 'open' or 'closed'")
-            #             continue
-            #     else:
-            #         try:
-            #             new_value = int(new_value)
-            #             if new_value >= 0:
-            #                 break
-            #             else:
-            #                 print("Invalid input! Please enter a non-negative integer ")
-            #                 continue
-            #         except ValueError:
-            #             print("Invalid input! Please enter a non-negative integer ")
-            #             continue
-            #
-            # index_in_csv = df0[df0["campID"] == modify_camp_id].index.tolist()[0]
-            # helper.modify_csv_value(csv_path0, index_in_csv, target_column_name, new_value)
-            # print(f"\u2714 Changes have been saved!")
-            # return
         except Exception as e:
             print(f"\nMultiple files may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
@@ -883,7 +846,6 @@ class Controller:
 
     @staticmethod
     def admin_close_camp():
-        # try:
         """This part of the code is to close the camp from the camp.csv"""
         ManagementView.camp_close_message()
 
@@ -1020,12 +982,6 @@ class Controller:
                 break
             else:
                 print("Not a valid camp to choose from. Try again: ")
-                # except Exception as e:
-
-    #     print(f"\nData file seems to be damaged."
-    #           f"\nPlease contact admin for further assistance."
-    #           f"\n[Error] {e}")
-    #     logging.critical(f"{e}")
 
     @staticmethod
     def admin_display_refugee():
@@ -1094,27 +1050,6 @@ class Controller:
                 break
 
     @staticmethod
-    def man_resource():
-        try:
-            ManagementView.man_resource_message()
-            index = helper.display_camp_list()
-            res_man_info = helper.validate_man_resource(index)
-
-            if res_man_info is not None:
-                # r = ResourceTest(res_man_info[0], '', '')
-                # r.manual_resource(res_man_info[2], res_man_info[1])
-                # print("Resource allocated as request.")
-                # self.admin_manage_camp()
-                pass
-            else:
-                return
-        except Exception as e:
-            print(f"\nData file seems to be damaged."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
-
-    @staticmethod
     def auto_resource():
         try:
             ManagementView.auto_resource_message()
@@ -1166,14 +1101,6 @@ class Controller:
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
-
-        # df = helper.extract_active_event()[1]
-        # select_pop = df.loc[df['campID'] == select_index]['refugeePop'].tolist()[0]
-        #
-        # r = ResourceTest(select_index, select_pop, 0)
-        # r.calculate_resource()
-        # print("Auto resource allocation completed")
-        # self.admin_manage_camp(username)
 
     """ ###################### RESOURCE MENU LEVEL 2 ############################################### """
 
