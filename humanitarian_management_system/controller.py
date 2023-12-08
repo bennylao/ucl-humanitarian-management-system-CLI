@@ -8,12 +8,13 @@ import logging
 from passlib.handlers.sha2_crypt import sha256_crypt
 
 from humanitarian_management_system import helper
-from humanitarian_management_system.data_analysis import (visualization_v, resources_distribution, medical_info,
+from humanitarian_management_system.data_analysis import (visualization_v, resources_distribution,medical_info,
                                                           gender_distribution, age_distribution)
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder,
                                                    ResourceCampCreateDelete)
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
+
 
 
 class Controller:
@@ -518,6 +519,8 @@ class Controller:
             except ValueError:
                 print("Invalid Input, please try again")
 
+
+
     @staticmethod
     def admin_create_camp():
         try:
@@ -883,7 +886,7 @@ class Controller:
 
     @staticmethod
     def admin_close_camp():
-        try:
+        # try:
             """This part of the code is to close the camp from the camp.csv"""
             ManagementView.camp_close_message()
 
@@ -961,13 +964,11 @@ class Controller:
                         user_df = pd.read_csv(user_csv_path)
                         logging.info("User file loaded successfully for admin closing a camp.")
                         camps_in_event = df1.loc[df1['eventID'] == event_id, 'campID'].tolist()
-                        volunteers_in_camp = user_df[
-                            (user_df['campID'] == close_camp_id) & (user_df['userType'] == 'volunteer')]
+                        volunteers_in_camp = user_df[(user_df['campID'] == close_camp_id) & (user_df['userType'] == 'volunteer')]
                         volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
                         # volunteers_in_camp = user_df.loc[user_df['campID'] == close_camp_id, 'campID'].tolist()
-                        print(
-                            f"\nYou've closed camp {close_camp_id}. But now you might want to allocate the current volunteers "
-                            f"to another camp in the same event. Or just leave them if preferred.")
+                        print(f"\nYou've closed camp {close_camp_id}. But now you might want to allocate the current volunteers "
+                              f"to another camp in the same event. Or just leave them if preferred.")
                         move_volunteers = input("\n\nDo you want to move volunteers to another camp?"
                                                 "\nEnter 'y' or 'n': ")
                         if move_volunteers.lower() == 'n':
@@ -1020,11 +1021,11 @@ class Controller:
                     break
                 else:
                     print("Not a valid camp to choose from. Try again: ")
-        except FileNotFoundError as e:
-            print(f"\nData file seems to be damaged."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
+                    # except Exception as e:
+        #     print(f"\nData file seems to be damaged."
+        #           f"\nPlease contact admin for further assistance."
+        #           f"\n[Error] {e}")
+        #     logging.critical(f"{e}")
 
     @staticmethod
     def admin_display_refugee():
@@ -1142,9 +1143,8 @@ class Controller:
                 elif user_selection == '2':
                     unbalanced = resource_report.ALLOC_IDEAL_OUTPUT()  # if empty then other message
                     if unbalanced.empty:
-                        print(
-                            "\n＼(^o^)／ GOOD NEWS ＼(^o^)／ There are currently no unbalanced resources across any camps (that "
-                            "deviate +/-10% of the ideal amounts).")
+                        print("\n＼(^o^)／ GOOD NEWS ＼(^o^)／ There are currently no unbalanced resources across any camps (that "
+                              "deviate +/-10% of the ideal amounts).")
                     else:
                         print("Below are all the resource x camp pairs where the resource is unbalanced.\n")
                         print("A resource is considered unbalanced if: \n"
@@ -1966,3 +1966,45 @@ class Controller:
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
+
+    @staticmethod
+    def vol_data_visualization(self):
+        user_id = self.user.user_id
+        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+        # active_index = helper.extract_active_event(camp_csv_path)[0]
+        df = pd.read_csv(user_csv_path)
+        dff = df[df['userID'] == int(user_id)]
+        # event_id = dff.at[1, 'eventID']
+        camp_id = dff.at[1, 'campID']
+
+        ManagementView.data_visual_message()
+        # AdminView.display_data_visual_menu()
+
+        while True:
+            AdminView.display_data_visual_menu()
+            try:
+                userInput = int(input("Please choose one option: "))
+                if userInput == 1:
+                    camp_map = visualization_v.DataVisual()
+                    camp_map.map()
+
+                elif userInput == 2:
+                    gender = gender_distribution
+                    gender.gender_pie_chart(camp_id)
+
+                elif userInput == 3:
+                    age1 = age_distribution
+                    age1.age_bar_chart(camp_id)
+
+                elif userInput == 4:
+                    r = resources_distribution
+                    r.resources(camp_id)
+
+                elif userInput == 5:
+                    medical_info.medical_info(camp_id)
+
+                else:
+                    return
+
+            except ValueError:
+                print("Invalid Input, please try again")
