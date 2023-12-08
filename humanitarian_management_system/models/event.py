@@ -2,8 +2,6 @@ from pathlib import Path
 from humanitarian_management_system import helper
 import datetime
 import pandas as pd
-import tkinter as tk
-import tkinter.messagebox
 import logging
 
 
@@ -26,11 +24,6 @@ class Event:
         """
         This is the function to create a new event and write new record into csv file.
         """
-        # When an event is created after deleting the last row of the event,
-        # the new eid will be the same as the eid of the deleted event.
-        # To ensure the uniqueness of the event ID, the largest eid ever used is stored.
-        # When creating an event, compare this max_used_eid with the eid in event file,
-        # take the larger one and add 1 to get the new eid.
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         if pd.read_csv(event_csv_path).empty:
             last_event_id = 0
@@ -47,26 +40,17 @@ class Event:
                                          'startDate', 'endDate'])
         event_df.to_csv(event_csv_path, mode='a', index=False, header=False)
 
-        # To prevent confusion caused by directly modifying the eventTesting file
-        # use event_id, instead of max_used_eid, add 1 to update max_used_eid
         max_used_eid = event_id
         helper.modify_csv_value(max_eid_csv_path, 0, 'max_used_eid', max_used_eid)
 
     @staticmethod
     def get_all_active_events():
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
-            print(df)
-            active_events_df = df[(df['ongoing'] == True) & ((pd.to_datetime(df['endDate']).dt.date >
-                                                              datetime.date.today()) | (pd.isna(df['endDate'])))]
-            return active_events_df
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
-            return
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        df = pd.read_csv(event_csv_path)
+        print(df)
+        active_events_df = df[(df['ongoing'] == True) & ((pd.to_datetime(df['endDate']).dt.date >
+                                                          datetime.date.today()) | (pd.isna(df['endDate'])))]
+        return active_events_df
 
     @staticmethod
     def edit_event_info():
@@ -76,16 +60,8 @@ class Event:
         then edit by calling each corresponding private function.
         """
         # In this case, we can 'end an event' by edit this endDate
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
-            return
-
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        df = pd.read_csv(event_csv_path)
         if df.empty:
             print("\nNo events to edit.")
             return
@@ -114,7 +90,6 @@ class Event:
 
         while True:
             try:
-                # Maybe this could be changed into a menu
                 what_to_edit = input('\n--> Choose one to edit (title/ location/ description/ startDate/ endDate):')
                 if what_to_edit == 'RETURN':
                     return
@@ -138,55 +113,33 @@ class Event:
 
     @staticmethod
     def __change_title(row):
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            title = input("\n--> Plan title: ")
-            if title == 'RETURN':
-                return
-            helper.modify_csv_value(event_csv_path, row, 'title', title)
-            print("\nPlan title updated.")
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
-        except ValueError as e:
-            print(f"\nInvalid user input."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        title = input("\n--> Plan title: ")
+        if title == 'RETURN':
+            return
+        helper.modify_csv_value(event_csv_path, row, 'title', title)
+        print("\nPlan title updated.")
 
     @staticmethod
     def __change_location(row):
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            country = []
-            country_data = pd.read_csv(event_csv_path)['location']
-            for ele in country_data:
-                country.append(ele.lower())
-            location = ''
-            for ele in country_data:
-                country.append(ele.lower())
-            while len(location) == 0 and location not in country:
-                location = input("\n--> Location(country): ").lower()
-                if location.upper() == 'RETURN':
-                    return
-                if location not in country:
-                    print("\nInvalid country name entered")
-                    location = ''
-                    continue
-            helper.modify_csv_value(event_csv_path, row, 'location', location)
-            print("\nLocation updated.")
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
-        except ValueError as e:
-            print(f"\nInvalid user input."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        country = []
+        country_data = pd.read_csv(event_csv_path)['location']
+        for ele in country_data:
+            country.append(ele.lower())
+        location = ''
+        for ele in country_data:
+            country.append(ele.lower())
+        while len(location) == 0 and location not in country:
+            location = input("\n--> Location(country): ").lower()
+            if location.upper() == 'RETURN':
+                return
+            if location not in country:
+                print("\nInvalid country name entered")
+                location = ''
+                continue
+        helper.modify_csv_value(event_csv_path, row, 'location', location)
+        print("\nLocation updated.")
 
     @staticmethod
     def __change_description(row):
@@ -202,17 +155,8 @@ class Event:
     @staticmethod
     def __change_start_date(row):
         """Should this be an option? What would be the implications of this?"""
-        #### maybe when the start date is a day in the future, and the user wants to adjust the schedule
-        #### Can the start date of an event that has already been started be changed?
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-              f"\nPlease contact admin for further assistance."
-              f"\n[Error] {e}")
-            logging.critical(f"{e}")
-
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        df = pd.read_csv(event_csv_path)
         date_format = '%d/%m/%Y'
         while True:
             if bool(df.loc[row]['ongoing']) == True:
@@ -235,20 +179,8 @@ class Event:
 
     @staticmethod
     def __change_end_date(row):
-        # when a user goes to 'end event', we have a pop up
-        # which asks 'are you sure' and says that they won't be able to reopen the event
-        # after they have ended it, as the requirement says "the
-        # humanitarian plan must be closed in the system."
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-              f"\nPlease contact admin for further assistance."
-              f"\n[Error] {e}")
-            logging.critical(f"{e}")
-        return
-
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        df = pd.read_csv(event_csv_path)
         date_format = '%d/%m/%Y'
         while True:
             try:
@@ -278,10 +210,7 @@ class Event:
             df_camp = pd.read_csv(camp_csv_path)
             row_camp_list = df_camp[
                 (df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
-            root = tk.Tk()
-            root.withdraw()
-            result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-                                                           "You'll also close the camps in that event.")
+            result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
             if result == "yes":
                 ongoing = False
                 if df['ongoing'].loc[row] == 'Yet':
@@ -294,11 +223,9 @@ class Event:
                 if row_camp_list:
                     for row_camp in row_camp_list:
                         helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-                tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+                print("\n***  The event has been successfully closed.  ***")
             else:
-                tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-            root.update()
-            root.destroy()
+                print("\n***  The operation to close the event was canceled.  ***")
 
     @staticmethod
     def display_events(df):
@@ -307,21 +234,14 @@ class Event:
 
     @staticmethod
     def update_ongoing():
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
-            camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-            df_camp = pd.read_csv(camp_csv_path)
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
-            return
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        df = pd.read_csv(event_csv_path)
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        df_camp = pd.read_csv(camp_csv_path)
         for index, series in df.iterrows():
             try:
                 start_date = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
-            except ValueError:  # startDate may exist this error only when entering None in creating an event
+            except ValueError:
                 start_date = None
             try:
                 end_date = datetime.datetime.strptime(str(series['endDate']), '%Y-%m-%d')
@@ -343,17 +263,10 @@ class Event:
 
     @staticmethod
     def disable_ongoing_event():
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
-            camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-            df_camp = pd.read_csv(camp_csv_path)
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
-            return
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        df = pd.read_csv(event_csv_path)
+        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+        df_camp = pd.read_csv(camp_csv_path)
         filtered_df = df[(df['ongoing'] == 'True')]
 
         print("\n*The following shows the info of all available events*")
@@ -376,10 +289,7 @@ class Event:
         row = df[df['eventID'] == int(eid_to_close)].index[0]
         row_camp_list = df_camp[
             (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
-        root = tk.Tk()
-        root.withdraw()
-        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-                                                       "You'll also close the camps in that event.")
+        result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
         if result == "yes":
             ongoing = False
             helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
@@ -387,23 +297,14 @@ class Event:
             if row_camp_list:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-            tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
+            print("\n***  The event has been successfully closed.  ***")
         else:
-            tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-        root.update()
-        root.destroy()
+            print("\n***  The operation to close the event was canceled.  ***")
 
     @staticmethod
     def delete_event():
-        try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
-        except FileNotFoundError as e:
-            print(f"\nFile not found."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
-            return
+        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+        df = pd.read_csv(event_csv_path)
 
         print("\n*The following shows the info of all available events*")
         Event.display_events(df)
@@ -422,11 +323,9 @@ class Event:
             except ValueError:
                 print("\nInvalid event ID entered.")
                 continue
-        root = tk.Tk()
-        root.withdraw()
-        result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
-                                                       "You'll also close the camps and lose all the information about "
-                                                       "the refugees in that event.")
+
+        result = input("Are you sure you want to delete the event? "
+                       "You'll also close the camps and lose all the information about the refugees in that event. (yes/no)")
         if result == "yes":
             df.drop(df[df['eventID'] == int(eid_to_delete)].index, inplace=True)
             df.to_csv(event_csv_path, index=False)
@@ -458,8 +357,6 @@ class Event:
             if row_camp_list:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-            tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
+            print("\n***  The event has been successfully deleted.  ***")
         else:
-            tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
-        root.update()
-        root.destroy()
+            print("\n***  The operation to delete the event was canceled.  ***")

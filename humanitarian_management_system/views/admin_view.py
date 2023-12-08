@@ -31,7 +31,7 @@ class AdminView:
         ("3", "Delete camp"),
         ("4", "Close camp"),
         ("5", "Display all camps information"),
-        ("6", "Camp data visualisation"),
+        ("6", "Camp/Refugee data visualisation"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )

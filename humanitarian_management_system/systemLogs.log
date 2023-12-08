@@ -746,5 +746,62 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 17:21:34,735 - CRITICAL - controller-admin_create_camp-Line550 - name 'latitude' is not defined
 2023-12-08 17:22:24,438 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 17:22:24,438 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 17:35:11,477 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:35:11,477 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:42:02,111 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:42:02,112 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:43:25,992 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:43:25,992 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:53:21,245 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:53:21,245 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:56:43,186 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:56:43,187 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:58:12,777 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:58:12,777 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:35:11,477 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:35:11,477 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:42:02,111 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:42:02,112 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:43:25,992 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:43:25,992 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:53:21,245 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:53:21,245 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:56:43,186 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:56:43,187 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 17:58:12,777 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:58:12,777 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:06:27,378 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:06:27,378 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:08:39,128 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:08:39,129 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:15:19,692 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:15:19,692 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:16:00,425 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:16:00,425 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:18:36,068 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:18:36,068 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:19:10,972 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:19:10,972 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:20:24,194 - CRITICAL - controller-vol_display_camp-Line1904 - Length mismatch: Expected axis has 18 elements, new values have 16 elements
 2023-12-08 18:27:07,384 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 18:27:07,384 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:45:33,625 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:45:33,625 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:51:00,065 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:51:00,065 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:52:30,873 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:52:30,873 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:53:52,580 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:53:52,580 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:45:33,625 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:45:33,625 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:51:00,065 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:51:00,065 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:52:30,873 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:52:30,873 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:53:52,580 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:53:52,580 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:57:30,604 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:57:30,604 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:09:42,495 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:09:42,495 - INFO - controller-initialise-Line27 - Controller is initialised.
