@@ -481,7 +481,7 @@ def move_refugee_helper_method():
                 else:
                     print("\nSorry - that refugee ID doesn't exist. Pick again.")
             except Exception as e:
-                logging.debug(f"Error {e}with user input for moving a refugee from a camp.")
+                logging.info(f"Error {e}with user input for moving a refugee from a camp.")
                 print(f"Invalid input with error {e}. Try again with a valid refugee ID.\n")
         camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
         camp_df = pd.read_csv(camp_csv_path)
@@ -699,7 +699,7 @@ def delete_refugee():
 
 
 def legal_advice_support():
-    logging.debug("Legal Advice Page starts up.")
+    logging.info("Legal Advice Page starts up.")
     print("Below are links to our partner legal charities to offer legal support to refugees whilst we work on "
           "\nbuilding our own team."
           "\nClicking on these links will direct you to a web page. \nYou will have to return back "
@@ -800,9 +800,9 @@ def create_training_session():
                         break
                     else:
                         print("Can't select a date in the past! Try again.")
-                        logging.debug("Date input for creating a session was in the past so invalid.")
+                        logging.info("Date input for creating a session was in the past so invalid.")
                 except ValueError:
-                    logging.debug("Input date for creating a training session was invalid form.")
+                    logging.info("Input date for creating a training session was invalid form.")
                     print("\nInvalid date format. Please use the format YYYY-MM-DD. Or enter RETURN to quit.")
         while True:
             camp = input("\nEnter the campID of the camp you will be holding the session at: ")
@@ -815,7 +815,7 @@ def create_training_session():
                 else:
                     print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
             except ValueError as e:
-                logging.debug("Invalid user input when creating a session")
+                logging.info("Invalid user input when creating a session")
                 print(f"\nInvalid input {e}. Please enter a valid integer for campID or type 'RETURN' to go back.")
         eventID = camp_df.loc[camp_df['campID'] == int(camp), 'eventID'].iloc[0]
         camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
@@ -1105,7 +1105,7 @@ def get_export_file_path():
                 break
         return file_path
     except Exception as e:
-        logging.debug("File path options entered by user causing issue.")
+        logging.info("File path options entered by user causing issue.")
         print(f"Looks like that file path didn't work, causing error {e}. Don't worry - we're redirecting you back.")
         return
 
