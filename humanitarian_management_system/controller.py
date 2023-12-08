@@ -9,7 +9,7 @@ from passlib.handlers.sha2_crypt import sha256_crypt
 
 from humanitarian_management_system import helper
 from humanitarian_management_system.data_analysis import (visualization_v, resources_distribution, medical_info,
-                                                          gender_distribution, age_distribution)
+                                                          gender_distribution, age_distribution, num_camp)
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder,
                                                    ResourceCampCreateDelete)
@@ -456,7 +456,7 @@ class Controller:
             AdminView.display_data_visual_menu()
             try:
                 userInput = int(input("Please choose one option: "))
-                if userInput not in range(1, 6):
+                if userInput not in range(1, 8):
                     print('Invalid Input, please try again')
                     continue
                 else:
@@ -465,6 +465,10 @@ class Controller:
                         camp_map.map()
 
                     elif userInput == 2:
+                        c = num_camp
+                        c.num_camp()
+
+                    elif userInput == 3:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
@@ -475,7 +479,7 @@ class Controller:
                                 gender.gender_pie_chart(campId)
                                 break
 
-                    elif userInput == 3:
+                    elif userInput == 4:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
@@ -487,7 +491,7 @@ class Controller:
                                 print(3)
                                 break
 
-                    elif userInput == 4:
+                    elif userInput == 5:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
@@ -497,7 +501,7 @@ class Controller:
                                 r = resources_distribution
                                 r.resources(campId)
                                 break
-                    elif userInput == 5:
+                    elif userInput == 6:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:

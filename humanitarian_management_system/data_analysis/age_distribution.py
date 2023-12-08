@@ -11,11 +11,11 @@ def age_bar_chart(camp_id):
     rd = rd[rd['campID'] == camp_id]
 
     ageList = rd['dob'].tolist()
-    newAgeList = []
     age10 = age20 = age30 = age40 = age50 = age60 = age70 = age80 = 0
-    if not ageList:
+
+    if ageList:
         for k in ageList:
-            year, month, day = k.split('-')
+            day, moth, year = k.split('/')
             current_year = datetime.now().year
             age = current_year - int(year)
             if age < 10:
