@@ -553,7 +553,7 @@ def move_refugee_helper_method():
                     row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
                     new_potential_refugee_family_pop = (camp_df.at[row_index_new_camp[0], 'refugeePop'])
                     new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
-                    if (new_potential_refugee_family_pop + size_of_family) >= new_camp_capacity:
+                    if (new_potential_refugee_family_pop + size_of_family) > new_camp_capacity:
                         print(
                             f"\n\nSorry. Moving this entire family unit would cause capacity overflow of camp {camp_id}."
                             f"You'll have to move them alone or not at all. Camp {camp_id} has a current population "
