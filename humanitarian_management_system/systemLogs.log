@@ -689,3 +689,56 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 12:54:57,486 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 12:56:51,680 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 12:56:51,680 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 14:40:17,111 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 14:40:17,111 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:02:11,633 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:02:11,634 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:02:21,300 - CRITICAL - controller-edit_volunteer-Line222 - Volunteer.__init__() takes 11 positional arguments but 15 were given
+2023-12-08 15:03:41,650 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:03:41,650 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:05:05,626 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:05:05,626 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 14:06:55,443 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 14:06:55,443 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:40:07,062 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:40:07,062 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:05:48,093 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:05:48,093 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 14:06:55,443 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 14:06:55,443 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:40:07,062 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:40:07,062 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:05:48,093 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:05:48,093 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:21:36,193 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:21:36,194 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:24:21,678 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:24:21,678 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:29:25,035 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:29:25,035 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:32:53,617 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:32:53,618 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:58:36,209 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:58:36,209 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:21:36,193 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:21:36,194 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:24:21,678 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:24:21,678 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:29:25,035 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:29:25,035 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:32:53,617 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:32:53,618 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:58:36,209 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:58:36,209 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 16:58:52,776 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 16:58:52,776 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 17:00:21,481 - CRITICAL - controller-admin_create_camp-Line529 - __init__() missing 2 required positional arguments: 'capacity' and 'health_risk'
+2023-12-08 17:01:26,634 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:01:26,634 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 17:06:30,714 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:06:30,714 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 17:21:07,328 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:21:07,328 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 17:21:34,735 - CRITICAL - controller-admin_create_camp-Line550 - name 'latitude' is not defined
+2023-12-08 17:22:24,438 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 17:22:24,438 - INFO - controller-initialise-Line27 - Controller is initialised.

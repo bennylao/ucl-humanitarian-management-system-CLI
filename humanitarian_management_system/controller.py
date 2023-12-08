@@ -8,13 +8,13 @@ import logging
 from passlib.handlers.sha2_crypt import sha256_crypt
 
 from humanitarian_management_system import helper
-from humanitarian_management_system.data_analysis import (visualization_v,resources_distribution,medical_info,
+from humanitarian_management_system.data_analysis import (visualization_v, resources_distribution,medical_info,
                                                           gender_distribution, age_distribution)
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder,
                                                    ResourceCampCreateDelete)
 from humanitarian_management_system.views import GeneralView, ManagementView, AdminView, VolunteerView
-from humanitarian_management_system.data_analysis.camp_data_visualization import Dashboard
+
 
 
 class Controller:
@@ -454,12 +454,13 @@ class Controller:
 
     def admin_data_visualization(self):
         ManagementView.data_visual_message()
-        AdminView.display_data_visual_menu()
+        # AdminView.display_data_visual_menu()
         csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
         df0 = pd.read_csv(csv_path0)
         campList = df0['campID'].tolist()
 
         while True:
+            AdminView.display_data_visual_menu()
             try:
                 userInput = int(input("Please choose one option: "))
                 if userInput not in range(1, 6):
@@ -488,8 +489,9 @@ class Controller:
                                 print("Camp id doesn't exist")
                                 continue
                             else:
-                                age = age_distribution
-                                age.age_bar_chart(campId)
+                                age1 = age_distribution
+                                age1.age_bar_chart(campId)
+                                print(3)
                                 break
 
                     elif userInput == 4:
@@ -503,8 +505,14 @@ class Controller:
                                 r.resources(campId)
                                 break
                     elif userInput == 5:
-                        medical_info.medical_info()
-
+                        while True:
+                            campId = int(input('Please enter a camp ID: '))
+                            if campId not in campList:
+                                print("Camp id doesn't exist")
+                                continue
+                            else:
+                                medical_info.medical_info(campId)
+                                break
                     else:
                         return
 
