@@ -979,6 +979,10 @@ def add_refugee_to_session():
         participants = []
         while True:
             try:
+                if len(refugees_in_associated_camps) == 0:
+                    print("\nOh no. There are no other refugees in the event which this session is held."
+                          "Taking you back")
+                    return
                 print("\n", refugees_in_associated_camps.to_markdown(index=False))
                 rid = input(
                     f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
@@ -1025,9 +1029,9 @@ def add_refugee_to_session():
 
 def remove_refugee_from_session():
     try:
-        refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+        refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
-        training_session_path = Path(__file__).parents[1].joinpath("data/trainingSessions.csv")
+        training_session_path = Path(__file__).parents[0].joinpath("data/trainingSessions.csv")
         session_df = pd.read_csv(training_session_path)
         logging.info("Refugee and session data files loaded successfully when removing a refugee from a session.")
         print("Looks like you're looking to remove a refugee from one of the sessions!")
