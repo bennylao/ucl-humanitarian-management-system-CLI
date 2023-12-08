@@ -2,7 +2,9 @@ import pandas as pd
 from humanitarian_management_system.helper import modify_csv_pandas, validate_user_selection
 from humanitarian_management_system.models import Event
 from humanitarian_management_system.views import VolunteerView
+from humanitarian_management_system import helper
 import datetime
+
 
 from pathlib import Path
 
@@ -169,7 +171,8 @@ class Refugee:
         user_selection = validate_user_selection(VolunteerView.get_edit_refugee_options())
 
         if user_selection == '1':
-            print(f"Current refugee ID is {df.loc[df['refugeeID'] == int(ref_id)]['refugeeID'].tolist()[0]}")
+            old_id = df.loc[df['refugeeID'] == int(ref_id)]['refugeeID'].tolist()[0]
+            print(f"Current refugee ID is {old_id}")
             while True:
                 try:
                     new_value = input("\nEnter new refugee ID: ")
@@ -188,7 +191,10 @@ class Refugee:
                 except Exception as e:
                     print(e)
                     continue
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'refugeeID', new_value, user, cid)
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'refugeeID',
+                            int(new_value), user, cid)
+            helper.modify_csv_pandas("data/medicalInfo.csv", 'refugeeID', int(old_id),
+                                     'refugeeID', int(new_value))
 
             # reorder refugee ID after ID changed
             csv_path_r = Path(__file__).parents[1].joinpath("data/refugee.csv")

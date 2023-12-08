@@ -204,3 +204,4 @@ class ManagementView:
         print("\n==========================================\n"
               "   Activate/deactivate volunteer accounts \n"
               "==========================================")
+

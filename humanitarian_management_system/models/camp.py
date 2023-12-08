@@ -44,7 +44,7 @@ class Camp:
         df = pd.read_csv(self.cty_csv_path)
         # find country id and event id by index
 
-        event_country = df_e.loc[df_e['eventID'] == 16]['location'].tolist()[0]
+        event_country = df_e.loc[df_e['eventID'] == select_index]['location'].tolist()[0]
         countryID = df.loc[df['name'] == event_country.capitalize()]['countryID'].tolist()[0]
 
         # keep track of existing camp num of a particular event

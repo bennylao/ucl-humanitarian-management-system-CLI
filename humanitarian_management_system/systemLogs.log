@@ -492,3 +492,163 @@ Name: userID, dtype: bool, 'campID')
 2023-12-07 22:44:07,595 - DEBUG - controller-initialise-Line24 - Controller is initialised.
 2023-12-07 22:46:00,084 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-07 22:46:00,084 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-07 23:49:57,087 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 23:49:57,087 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-07 23:55:29,200 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 23:55:29,200 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:01:44,450 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:01:44,450 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:14:56,150 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:14:56,150 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:15:51,867 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:15:51,867 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:17:47,976 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:17:47,976 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:19:20,907 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:19:20,907 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:20:50,481 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:20:50,481 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:20:56,511 - INFO - controller-volunteer_join_camp-Line974 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:21:03,081 - INFO - controller-volunteer_join_camp-Line987 - successfully changed user input into innteger index
+2023-12-08 00:21:12,373 - INFO - controller-volunteer_join_camp-Line987 - successfully changed user input into innteger index
+2023-12-08 00:21:13,902 - INFO - controller-volunteer_join_camp-Line987 - successfully changed user input into innteger index
+2023-12-08 00:21:50,320 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:21:50,320 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:22:12,763 - DEBUG - helper-legal_advice_support-Line700 - Legal Advice Page starts up.
+2023-12-08 00:23:01,782 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:23:01,783 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:23:09,441 - INFO - controller-volunteer_join_camp-Line955 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:23:13,086 - INFO - controller-volunteer_join_camp-Line968 - successfully changed user input into innteger index
+2023-12-08 00:23:14,368 - INFO - controller-volunteer_join_camp-Line968 - successfully changed user input into innteger index
+2023-12-08 00:23:19,858 - INFO - controller-volunteer_join_camp-Line968 - successfully changed user input into innteger index
+2023-12-08 00:23:21,029 - INFO - controller-volunteer_join_camp-Line968 - successfully changed user input into innteger index
+2023-12-08 00:24:13,814 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:24:13,815 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:25:52,457 - CRITICAL - controller-vol_edit_refugee-Line1644 - 'NoneType' object has no attribute 'username'
+2023-12-08 00:26:05,778 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:26:05,778 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:29:19,283 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:29:19,283 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:29:25,082 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:29:27,152 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into innteger index
+2023-12-08 00:29:29,131 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into innteger index
+2023-12-08 00:30:07,923 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:33:18,329 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:33:18,329 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:33:33,078 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:33:35,102 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into 55 index
+2023-12-08 00:33:37,329 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into 54 index
+2023-12-08 00:33:39,310 - DEBUG - controller-volunteer_join_camp-Line985 - Error invalid literal for int() with base 10: ''Not the right input for joining a camp!
+2023-12-08 00:33:42,978 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into 54 index
+2023-12-08 00:39:43,814 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:39:43,814 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:39:50,160 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:40:29,232 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:40:29,232 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:40:45,575 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:41:10,169 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:41:10,169 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:41:15,277 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:42:27,614 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:42:27,614 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:42:32,025 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:43:14,213 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:43:14,213 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:43:24,832 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:43:26,046 - CRITICAL - controller-volunteer_join_camp-Line1001 - list index out of range
+2023-12-08 00:44:05,218 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:44:05,218 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:44:14,491 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:44:16,875 - CRITICAL - controller-login-Line124 - list index out of range
+2023-12-08 00:44:55,709 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:44:55,709 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:45:01,066 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:45:19,876 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:45:19,876 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:45:32,678 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:45:40,958 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:45:40,958 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:45:46,763 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:45:53,549 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:45:53,549 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:45:58,283 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:47:09,047 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:47:09,047 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:47:15,998 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:47:17,280 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
+2023-12-08 00:47:18,788 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
+2023-12-08 00:49:26,813 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:49:26,813 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:49:31,652 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:50:04,112 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:50:04,112 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:50:13,885 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:50:15,008 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
+2023-12-08 00:50:16,650 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 55 index
+2023-12-08 00:50:36,321 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:50:36,321 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:50:41,245 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:50:43,718 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 55 index
+2023-12-08 00:50:45,001 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
+2023-12-08 00:50:46,876 - CRITICAL - controller-volunteer_join_camp-Line999 - list index out of range
+2023-12-08 00:51:48,376 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:51:48,376 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:52:00,625 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 00:52:02,199 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
+2023-12-08 00:54:59,950 - CRITICAL - controller-vol_display_camp-Line1674 - 'NoneType' object has no attribute 'username'
+2023-12-08 01:02:48,527 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:02:48,527 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:02:57,810 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 01:03:00,396 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 52 index
+2023-12-08 01:03:16,531 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 01:03:22,446 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 53 index
+2023-12-08 01:05:09,590 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:05:09,590 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:05:55,877 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:05:55,877 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:06:21,090 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:06:21,090 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:09:11,042 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:09:11,043 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:16:49,073 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:16:49,074 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:17:39,365 - CRITICAL - controller-admin_modify_camp-Line646 - invalid literal for int() with base 10: 'return'
+2023-12-08 01:18:57,708 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:18:57,708 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:20:09,284 - INFO - controller-volunteer_join_camp-Line970 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 01:20:36,132 - CRITICAL - controller-login-Line124 - list index out of range
+2023-12-08 01:21:52,656 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:21:52,656 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:22:04,873 - CRITICAL - controller-login-Line124 - list index out of range
+2023-12-08 01:22:41,803 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:22:41,803 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:22:53,853 - CRITICAL - controller-login-Line124 - list index out of range
+2023-12-08 01:23:15,669 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:23:15,669 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:23:24,026 - CRITICAL - controller-login-Line124 - list index out of range
+2023-12-08 01:23:50,267 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:23:50,267 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:27:11,238 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:27:11,238 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:28:24,418 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:28:24,419 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:28:45,598 - CRITICAL - controller-admin_modify_camp-Line644 - invalid literal for int() with base 10: ''
+2023-12-08 01:29:00,289 - INFO - controller-volunteer_join_camp-Line968 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 01:29:44,582 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:29:44,582 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:31:15,869 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:31:15,870 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:36:05,233 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:36:05,233 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:36:25,677 - CRITICAL - controller-admin_modify_camp-Line644 - list index out of range
+2023-12-08 01:37:32,638 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:37:32,638 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:37:56,578 - CRITICAL - controller-admin_modify_camp-Line644 - list index out of range
+2023-12-08 01:38:21,270 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:38:21,270 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:39:58,270 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:39:58,270 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:48:19,050 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:48:19,050 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 01:51:08,770 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 01:51:08,770 - DEBUG - controller-initialise-Line24 - Controller is initialised.

@@ -41,7 +41,7 @@ class User:
     def update_phone(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path, converters={'username': str, 'password': str})
-        df.loc[df['userID'] == self.user_id, 'phone'] = self.phone
+        df.loc[df['userID'] == self.user_id, 'phone'] = str(self.phone)
         df.to_csv(user_csv_path, index=False)
 
     def update_occupation(self):

@@ -16,6 +16,7 @@ class Controller:
     def __init__(self):
         # for saving user information
         self.user = None
+        self.change_user = None
         self.logout_request = False
 
     def initialise(self):
@@ -68,11 +69,11 @@ class Controller:
     def login(self):
         user_info = pd.Series()
         # get all existing usernames in a list
-        try:
-            all_usernames = User.get_all_usernames()
-            GeneralView.display_login_message()
+        # try:
+        all_usernames = User.get_all_usernames()
+        GeneralView.display_login_message()
 
-            while user_info.empty:
+        while user_info.empty:
                 username = input("\nUsername: ")
                 if username == 'RETURN':
                     break
@@ -98,7 +99,7 @@ class Controller:
                           "\n Or Enter 'RETURN' to get back to main menu.")
 
             # if user record is matched, print login successfully
-            if not user_info.empty:
+        if not user_info.empty:
                 if user_info['userType'] == "admin":
                     # self.user is now an object of admin
                     self.user = Admin(user_info['userID'], *user_info[4:11])
@@ -111,16 +112,16 @@ class Controller:
                     print("\n***   Login Successful!   ***")
                     print("You are now logged in as Volunteer.")
                     self.volunteer_main()
-        except FileNotFoundError as e:
-            print(f"\nData file is not found or is damaged."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n{e}")
-            logging.critical(f"{e}")
-        except Exception as e:
-            print(f"\nData file seems to be damaged."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
+        # except FileNotFoundError as e:
+        #     print(f"\nData file is not found or is damaged."
+        #           f"\nPlease contact admin for further assistance."
+        #           f"\n{e}")
+        #     logging.critical(f"{e}")
+        # except Exception as e:
+        #     print(f"\nData file seems to be damaged."
+        #           f"\nPlease contact admin for further assistance."
+        #           f"\n[Error] {e}")
+        #     logging.critical(f"{e}")
 
     def admin_main(self):
         AdminView.display_login_message(self.user.username)
@@ -159,8 +160,7 @@ class Controller:
             if user_selection == "4":
                 self.admin_delete_event()
             if user_selection == "5":
-                # display all events
-                pass
+                self.admin_display_event()
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -219,8 +219,8 @@ class Controller:
             df_password = df.loc[df['userID'] == int(select_id)]['password'].tolist()[0]
 
             row = User.validate_user(df_name, str(df_password))
-            change_user = Volunteer(row['userID'], *row[4:])
-            self.user.edit_volunteer(change_user)
+            self.change_user = Volunteer(row['userID'], *row[4:])
+            self.user.edit_volunteer(self.change_user)
         except Exception as e:
             print(f"\nData file seems to be damaged."
                   f"\nPlease contact admin for further assistance."
@@ -293,8 +293,7 @@ class Controller:
     def admin_display_summary(self):
         pass
 
-    @staticmethod
-    def admin_create_event():
+    def admin_create_event(self):
         try:
             ManagementView.event_creation_message()
             event_info = helper.validate_event_input()
@@ -342,6 +341,17 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
+    @staticmethod
+    def admin_display_event():
+        print("This page shows all the events.")
+        csv_event_path = Path(__file__).parents[0].joinpath("data/event.csv")
+        df_e = pd.read_csv(csv_event_path)
+        Event.display_events(df_e)
+
+        user_input = input("Enter any to exit...")
+        if not user_input:
+            return
+
     """###### main camp menu #####"""
 
     def admin_manage_camp(self):
@@ -369,7 +379,7 @@ class Controller:
             if user_selection == "9":
                 self.admin_refugee_export()
             if user_selection == "10":
-                self.admin_camp_dashboard()
+                self.admin_campDashboard()
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -396,13 +406,11 @@ class Controller:
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
 
-    @staticmethod
-    def admin_camp_dashboard():
+    def admin_campDashboard(self):
         dashboard = Dashboard()
         dashboard.run()
 
-    @staticmethod
-    def admin_create_camp():
+    def admin_create_camp(self):
         try:
             ManagementView.camp_creation_message()
             # active_event_df = Event.get_all_active_events()
@@ -432,17 +440,18 @@ class Controller:
                 # validate input for user select index
                 while True:
                     try:
-                        event_id = input("\nEnter Event ID: ")
-                        if event_id == 'RETURN':
+                        eventID = input("\nEnter Event ID: ")
+
+                        if eventID == 'RETURN':
                             return
-                        event_id = int(event_id)
-                        if event_id not in active_index:
+
+                        if int(eventID) not in active_index:
                             print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
                             continue
                         else:
                             camp_info = helper.validate_camp_input()
                             c = Camp(*camp_info[1:3])
-                            c.pass_camp_info(event_id, camp_info[0])
+                            c.pass_camp_info(int(eventID), camp_info[0])
                             print("\n\u2714 New camp created!")
                             return
                     except ValueError:
@@ -453,8 +462,7 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
-    @staticmethod
-    def admin_modify_camp():
+    def admin_modify_camp(self):
         try:
             """This function is for admin modify camp info"""
             ManagementView.camp_modification_message()
@@ -481,14 +489,15 @@ class Controller:
 
             while True:
                 try:
-                    event_id = input("\nEnter Event ID: ")
-                    if str(event_id) == 'RETURN':
+                    eventID = input("\nEnter Event ID: ")
+
+                    if eventID == 'RETURN':
                         return
-                    event_id = int(event_id)
-                    if event_id not in active_index:
+
+                    if int(eventID) not in active_index:
                         print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
                         continue
-                    elif df0[df0['eventID'] == event_id].empty:
+                    elif df0[df0['eventID'] == int(eventID)].empty:
                         print("No relevant camps to select from")
                         continue
                     break
@@ -498,8 +507,8 @@ class Controller:
             # print camps info for users to choose
             # df3 = helper.matched_rows_csv(csv_path0, "eventID", eventID, "campID")
             print("\n**The following shows the info of related camps*")
-            filtered_df1 = df0[df0['eventID'] == event_id]
-            filtered_camp_id = filtered_df1['campID'].tolist()
+            filtered_df1 = df0[df0['eventID'] == int(eventID)]
+            filtered_campID = filtered_df1['campID'].tolist()
             Event.display_events(filtered_df1)
 
             while True:
@@ -507,8 +516,8 @@ class Controller:
 
                 if modify_camp_id == 'RETURN':
                     return
-                elif int(modify_camp_id) not in filtered_camp_id:
-                    print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
+                elif int(modify_camp_id) not in filtered_campID:
+                    print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
                     continue
                 break
 
@@ -517,7 +526,7 @@ class Controller:
                 df2 = pd.read_csv(csv_path2)
 
                 # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
-                Event.display_events(df2[(df2['campID'] == modify_camp_id) & (df2['eventID'] == event_id)])
+                Event.display_events(df2[(df2['campID'] == modify_camp_id) & (df2['eventID'] == int(eventID))])
                 filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'eventID']
                 filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'countryID']
                 for i, column_name in enumerate(filtered_df1.columns[0:], start=1):
@@ -552,8 +561,8 @@ class Controller:
 
                                 try:
                                     # change corresponding refugee & volunteer camp ID
-                                    ref_id_arr = df_r.loc[df_r['campID'] == modify_camp_id]['refugeeID'].tolist()
-                                    vol_id_arr = df_v.loc[df_v['campID'] == modify_camp_id]['userID'].tolist()
+                                    ref_id_arr = df_r.loc[df_r['campID'] == int(modify_camp_id)]['refugeeID'].tolist()
+                                    vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
 
                                     for j in ref_id_arr:
                                         helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
@@ -562,9 +571,9 @@ class Controller:
                                     for k in vol_id_arr:
                                         helper.modify_csv_pandas("data/user.csv", 'userID',
                                                                  int(k), 'campID', int(new_value))
-                                except:
+
+                                except TypeError:
                                     break
-                                break
 
                             if target_column_index == '3':
                                 if new_value == "low" or new_value == "high":
@@ -593,7 +602,7 @@ class Controller:
                                     print("Invalid input! Please enter a non-negative integer ")
                                     continue
 
-                        index_in_csv = df0[df0["campID"] == modify_camp_id].index.tolist()[0]
+                        index_in_csv = df0[df0["campID"] == int(modify_camp_id)].index.tolist()[0]
                         helper.modify_csv_value(csv_path0, index_in_csv, target_column_name, new_value)
 
                         # reorder camp ID after ID changed
@@ -644,8 +653,7 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
-    @staticmethod
-    def admin_remove_camp():
+    def admin_remove_camp(self):
         try:
             """This part of the code is to delete the camp from the camp.csv"""
             ManagementView.camp_deletion_message()
@@ -749,8 +757,7 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
-    @staticmethod
-    def admin_display_refugee():
+    def admin_display_refugee(self):
         try:
             user = 'admin'
             ManagementView.display_admin_refugee()
@@ -763,8 +770,7 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
-    @staticmethod
-    def admin_display_camp():
+    def admin_display_camp(self):
         try:
             user = 'admin'
             ManagementView.display_admin_camp()
@@ -778,17 +784,16 @@ class Controller:
 
     """" ###################### RESOURCE MENU LEVEL 2 ############################################### """
 
-    @staticmethod
-    def resource_alloc_main_menu():
+    def resource_alloc_main_menu(self):
 
-        # check for new camps
-        resource_camp_instance = ResourceCampCreateDelete()
-        resource_camp_instance.new_camp_resources_interface()
+        ### check for new camps
+        resourceCamp_instance = ResourceCampCreateDelete()
+        resourceCamp_instance.new_camp_resources_interface()
 
-        # check for closed camps
-        resource_camp_instance.closed_camp_resources_interface()
+        ### check for closed camps
+        resourceCamp_instance.closed_camp_resources_interface()
 
-        # check for unallocated resources
+        ### check for unallocated resources
         resource_report = ResourceReport()
         unalloc_status, prompt = resource_report.unalloc_resource_checker()
         print(prompt)
@@ -815,8 +820,7 @@ class Controller:
             else:
                 break
 
-    @staticmethod
-    def man_resource():
+    def man_resource(self):
         try:
             ManagementView.man_resource_message()
             index = helper.display_camp_list()
@@ -848,8 +852,7 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
-    @staticmethod
-    def resource_reporting_menu():
+    def resource_reporting_menu(self):
         try:
             ManagementView.resource_report_message()
             resource_report = ResourceReport()
@@ -857,23 +860,23 @@ class Controller:
                 user_selection = input("--> \n: ")
 
                 if user_selection == '1':
-                    print("Here is the current snapshot of: \n how resources are distributed across each camp; "
-                          "and the status and refugee population of each camp.")
+                    print(
+                        "Here is the current snapshot of: \n how resources are distributed across each camp; and the status and refugee population of each camp.")
                     table = resource_report.master_resource_stats()
                     table_pretty = resource_report.PRETTY_PIVOT_CAMP(table)
                     print(table_pretty.to_string(index=False).replace('.0', '  '))
                 elif user_selection == '2':
-                    unbalanced = resource_report.ALLOC_IDEAL_OUTPUT()  # if empty then other message
+                    unbalanced = resource_report.ALLOC_IDEAL_OUTPUT()  ### if empty then other message
                     if unbalanced.empty:
-                        print("There are currently no unbalanced resources across any camps that "
-                              "deviate 10% out of the ideal amounts.")
+                        print(
+                            "There are currently no unbalanced resources across any camps that deviate 10% out of the ideal amounts.")
                     else:
                         print("Below are all the resource x camp pairs where the resource is unbalanced.\n")
-                        print("A resource is considered unbalanced "
-                              "if the current level falls outwith a 10% threshold of the ideal amount.\n")
-                        print("The ideal amount is proportional to the refugee population (camp refugees /  "
-                              "total refugees in open camps X total across all camps per resource)\n")
-                        print(unbalanced.to_markdown(index=False))
+                        print(
+                            "A resource is considered unbalanced if the current level falls outwith a 10% threshold of the ideal amount.\n")
+                        print(
+                            "The ideal amount is proportional to the refugee population (camp refugees /  total refugees in open camps X total across all camps per resource)\n")
+                        print(unbalanced).to_string(index=False)
                 else:
                     print("Invalid mode option entered!")
                     continue
@@ -955,6 +958,7 @@ class Controller:
                 self.user = None
                 self.logout_request = True
                 break
+        return
 
     def volunteer_show_account_info(self):
         try:
@@ -979,28 +983,26 @@ class Controller:
             print(f"You're currently assigned to camp {int(cid)}.")
 
             while True:
-                select_index = input("\nindex: ")
+                select_index = input("\nSelect a camp ID you would like to join: ")
                 if select_index.upper() == 'RETURN':
                     return
                 try:
-                    select_index = int(select_index)
-                    logging.info("successfully changed user input into innteger index")
-                    if select_index not in index:
+                    logging.info(f"successfully changed user input into {int(select_index)} index")
+                    if int(select_index) not in index:
                         print("invalid index option entered!")
-                    continue
+                        continue
+                    break
                 except Exception as e:
                     logging.debug(f"Error {e}Not the right input for joining a camp!")
                     print(f"Sorry - please select from a valid option! Error {e} caused.")
-
                 break
 
-            event_id = df.loc[df['campID'] == select_index]['eventID'].tolist()[0]
+            event_id = df.loc[df['campID'] == int(select_index)]['eventID'].tolist()[0]
             join_info = helper.validate_join()
             if join_info is not None:
                 v = Volunteer(0, self.user.username, '', '', '', '', '', '',
-                              join_info, event_id, select_index)
+                              join_info, event_id, int(select_index))
                 v.join_camp()
-            return
         except Exception as e:
             print(f"\nVolunteer or camp data file may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
@@ -1016,6 +1018,7 @@ class Controller:
         dff = df[df['userID'] == int(user_id)]
         event_id = dff.at[1, 'eventID']
         camp_id = dff.at[1, 'campID']
+        print(int(camp_id))
 
         csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
         df_r = pd.read_csv(csv_path_r)
@@ -1147,12 +1150,12 @@ class Controller:
                             break
                         else:
                             print(
-                                "\n\nOh no! The new camp you've selected doesn't have the capacity "
-                                "to handle another refugee. "
+                                "\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
                                 f"Camp {cid} has a current population of {new_potential_refugee_pop} and a capacity of "
                                 f"{new_camp_capacity}.\nLet's go again.\n")
-                    except:
-                        return
+                    except TypeError:
+                        print("Invalid camp ID entered!")
+                        continue
             else:
                 # check if volunteer is already assigned to a camp, if no exit to menu
                 cid = df.loc[df['username'] == self.user.username]['campID'].tolist()[0]
@@ -1182,21 +1185,20 @@ class Controller:
             else:
                 return
             print("Refugee created.")
-            self.admin_manage_camp()
+            self.volunteer_manage_camp()
         except Exception as e:
             print(f"\nRefugee or camp data file may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
-    @staticmethod
-    def help_center():
+    def help_center(self):
         helper.help_center_page()
 
     def delete_refugee(self):
         print(
-            "\nYOU ARE REQUESTING TO DELETE A REFUGEE. Enter RETURN if you didn't mean to select this. "
-            "Otherwise, proceed as instructed.")
+            "\nYOU ARE REQUESTING TO DELETE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
+            " as instructed.")
         try:
             refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
             ref_df = pd.read_csv(refugee_csv_path)
@@ -1256,8 +1258,8 @@ class Controller:
                         ref_df.reset_index(drop=True, inplace=True)
                         ref_df.to_csv(refugee_csv_path, index=False)
                         print(
-                            f"\nOkay. You have permanently deleted refugee #{rid} from the system. "
-                            f"Their old associated camp population has also been adjusted accordingly.")
+                            f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated "
+                            f"camp population has also been adjusted accordingly.")
                         print("\nRefugee table after deletion:")
                         # print(ref_df.to_string(index=False))
                         Event.display_events(ref_df)
@@ -1273,8 +1275,7 @@ class Controller:
                 # checking input is valid according to refugee IDs in database
                 while True:
                     rid = input(
-                        "\nFrom the list above enter the refugee ID for the refugee "
-                        "you wish to remove from the system: ")
+                        "\nFrom the list above enter the refugee ID for the refugee you wish to remove from the system: ")
                     if rid == "RETURN":
                         return
                     elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
@@ -1302,8 +1303,7 @@ class Controller:
                         ref_df.reset_index(drop=True, inplace=True)
                         ref_df.to_csv(refugee_csv_path, index=False)
                         print(
-                            f"\nOkay. You have permanently deleted refugee #{rid} from the system. "
-                            f"Their old associated camp population "
+                            f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
                             f"has also been adjusted accordingly.")
                         print("\nRefugee table after deletion:")
                         # print(ref_df.to_string(index=False))
@@ -1377,12 +1377,10 @@ class Controller:
             else:
                 print("Sorry! Didn't catch that. Please try again or enter [3] to exit.\n")
 
-    @staticmethod
-    def admin_refugee_export():
+    def admin_refugee_export(self):
         print(
-            "----------------------------------------------------------------------------------------------------------"
-            "\nLooks like you want to print out a CSV record of all the refugees we have in the system across all "
-            "camps.\n"
+            "----------------------------------------------------------------------------------------------------------\n"
+            "Looks like you want to print out a CSV record of all the refugees we have in the system across all camps.\n"
             "---------------------------------------------------------------------------------------------------------")
         helper.admin_export_refugees_to_csv()
 
