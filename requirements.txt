@@ -2,4 +2,5 @@ pandas
 numpy
 dash
 plotly
+passlib
 tabulate

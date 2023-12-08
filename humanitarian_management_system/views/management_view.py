@@ -96,6 +96,14 @@ class ManagementView:
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod
+    def camp_close_message():
+        print("\n========================================\n"
+              "             Camp CLOSURE\n"
+              "========================================\n"
+              "Please fill in all the following information below.\n"
+              "Or enter 'RETURN' to go back to admin menu page.")
+
+    @staticmethod
     def vol_main_message():
         print("\n========================================\n"
               "      Volunteer account MANAGEMENT\n"

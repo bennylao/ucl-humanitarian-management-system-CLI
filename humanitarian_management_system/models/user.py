@@ -1,5 +1,6 @@
 import pandas as pd
 from pathlib import Path
+from passlib.hash import sha256_crypt
 
 
 class User:
@@ -69,7 +70,7 @@ class User:
         # row will be empty series if no record is found
         row = df.loc[df['username'] == username]
         # if record is found and password is correct
-        if not row.empty and row.iloc[0]['password'] == password:
+        if not row.empty and sha256_crypt.verify(password, row.iloc[0]['password']):
             # return user information as pandas series
             return row.squeeze()
         else:
