@@ -19,6 +19,8 @@ class ResourceAdder():
     def resource_adder(self):
         report_instance = ResourceReport()
         grandTotal = report_instance.resource_report_total()
+        grandTotal['assignedTotal'] = grandTotal['assignedTotal'].astype(int)
+        grandTotal['grandTotal'] = grandTotal['grandTotal'].astype(int)
         ## admin only but deal with later
         ## adds to the total amount of resources available
 
@@ -31,7 +33,7 @@ class ResourceAdder():
 
         ### menu bit
         print(f"""==========================================================================\n
-✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ Hi Admin! Welcome to the Resource Shop ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4.2 ] Hi Admin! Welcome to the Resource Shop ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
 ==========================================================================\n
         Any purchased items will be in your unallocated inventory, pending your assignment to camps\n
         Below is your current stock levels:\n

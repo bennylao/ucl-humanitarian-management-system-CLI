@@ -7,17 +7,16 @@ from .user import User
 class Volunteer(User):
 
     def __init__(self, user_id, username, password, first_name, last_name, email, phone, occupation,
-                 role_id, event_id, camp_id):
+                 role_id, camp_id):
         super().__init__(user_id, username, password, first_name, last_name, email, phone, occupation)
         self.role_id = role_id
-        self.event_id = event_id
         self.camp_id = camp_id
 
     def show_account_info(self):
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path)
         sub_df = df.loc[df['userID'] == int(self.user_id), ['username', 'firstName', 'lastName', 'email',
-                                                            'phone', 'occupation', 'roleID', 'eventID', 'campID']]
+                                                            'phone', 'occupation', 'roleID', 'campID']]
         table_str = sub_df.to_markdown(index=False)
         print("\n" + table_str)
         print("\n" + table_str)
@@ -41,7 +40,6 @@ class Volunteer(User):
         df = pd.read_csv(csv_path)
 
         helper.modify_csv_pandas("data/user.csv", "username", self.username, "campID", self.camp_id)
-        helper.modify_csv_pandas("data/user.csv", "username", self.username, "eventID", self.event_id)
         helper.modify_csv_pandas("data/user.csv", "username", self.username, "roleID", self.role_id)
 
         # update volunteer population for camp

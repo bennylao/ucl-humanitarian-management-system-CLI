@@ -101,12 +101,19 @@ def validate_registration(usernames):
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
 
-    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
+    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0]
 
 
 def validate_event_input():
-    countries_csv_path = Path(__file__).parent.joinpath("data/country.csv")
-    all_countries = pd.read_csv(countries_csv_path)['name'].tolist()
+    try:
+        countries_csv_path = Path(__file__).parent.joinpath("data/country.csv")
+        all_countries = pd.read_csv(countries_csv_path)['name'].tolist()
+    except FileNotFoundError as e:
+        print(f"\nFile not found."
+              f"\nPlease contact admin for further assistance."
+              f"\n[Error] {e}")
+        logging.critical(f"{e}")
+        return
 
     date_format = '%d/%m/%Y'  # Use for validating user entered date format
     while True:
@@ -185,6 +192,28 @@ def validate_camp_input():
     else:
         campID = 1
 
+    # while True:
+    #     try:
+    #         latitude = float(input("\n Enter the latitude of the camp: "))
+    #         if latitude == "RETURN":
+    #             return
+    #         else:
+    #             break
+    #     except ValueError:
+    #         print("Invalid input, Please enter a numerical value")
+
+    # while True:
+    #     try:
+    #         longitude = float(input("\n Enter the longitude of the camp: "))
+    #         if longitude == "RETURN":
+    #             return
+    #         else:
+    #             break
+    #     except ValueError:
+    #         print("Invalid input, Please enter a numerical value")
+
+
+
     # capacity input
     while True:
         capacity = input("\nEnter capacity: ")
@@ -210,23 +239,32 @@ def validate_camp_input():
     return campID, capacity, risk
 
 
-def validate_join():  # volunteer joining a camp
+def validate_join(user):  # volunteer joining a camp
     csv_path = Path(__file__).parents[0].joinpath("data/roleType.csv")
+    csv_path_u = Path(__file__).parents[0].joinpath("data/user.csv")
+    df_u = pd.read_csv(csv_path_u)
+
     index = pd.read_csv(csv_path)["roleID"].tolist()
     role = pd.read_csv(csv_path)["name"]
 
-    print("Please select a camp role by its index.")
-    for i in index:
-        print(f''' index: {i} | {role.iloc[i - 1]} ''')
-    while True:
-        user_input = input("\nEnter index: ")
-        if int(user_input) not in index[1:]:
-            print("Invalid index option entered!")
-            continue
-        if user_input.upper() == "RETURN":
-            return
-        else:
-            break
+    df_u = df_u.loc[df_u['userID'] == user]['roleID'].tolist()[0]
+
+    if int(df_u) == 0:
+        print("Please select a camp role by its index.")
+        for i in index:
+            print(f''' index: {i} | {role.iloc[i - 1]} ''')
+        while True:
+            user_input = input("\nEnter index: ")
+            if int(user_input) not in index[1:]:
+                print("Invalid index option entered!")
+                continue
+            if user_input.upper() == "RETURN":
+                return
+            else:
+                break
+    else:
+        user_input = df_u
+
     return user_input
 
 
@@ -278,7 +316,6 @@ def extract_active_event(csv_path):
 
 
 def display_camp_list():
-
     csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
     active_id = extract_active_event(csv_path)[0]
     df_e = pd.read_csv(csv_path)
@@ -481,7 +518,7 @@ def move_refugee_helper_method():
                 else:
                     print("\nSorry - that refugee ID doesn't exist. Pick again.")
             except Exception as e:
-                logging.debug(f"Error {e}with user input for moving a refugee from a camp.")
+                logging.info(f"Error {e}with user input for moving a refugee from a camp.")
                 print(f"Invalid input with error {e}. Try again with a valid refugee ID.\n")
         camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
         camp_df = pd.read_csv(camp_csv_path)
@@ -537,8 +574,9 @@ def move_refugee_helper_method():
                 if user_input.lower() == 'yes':
                     break
                 elif user_input.lower() == 'no':
-                    print("\nOkay. We're going to try to move the family as a unit. However, if capacity in the new camp"
-                          " is not enough for the entire family, then we shall abort.")
+                    print(
+                        "\nOkay. We're going to try to move the family as a unit. However, if capacity in the new camp"
+                        " is not enough for the entire family, then we shall abort.")
 
                     related_family_members_list = related_family_members['refugeeID'].tolist()
                     size_of_family = len(related_family_members_list)
@@ -546,11 +584,12 @@ def move_refugee_helper_method():
                     new_potential_refugee_family_pop = (camp_df.at[row_index_new_camp[0], 'refugeePop'])
                     new_camp_capacity = camp_df.at[row_index_new_camp[0], 'refugeeCapacity']
                     if (new_potential_refugee_family_pop + size_of_family) >= new_camp_capacity:
-                        print(f"\n\nSorry. Moving this entire family unit would cause capacity overflow of camp {camp_id}."
-                              f"You'll have to move them alone or not at all. Camp {camp_id} has a current population "
-                              f"of {new_potential_refugee_family_pop},\n"
-                              f"a capacity of {new_camp_capacity}, whilst the family has {size_of_family} members."
-                              f"\n\n")
+                        print(
+                            f"\n\nSorry. Moving this entire family unit would cause capacity overflow of camp {camp_id}."
+                            f"You'll have to move them alone or not at all. Camp {camp_id} has a current population "
+                            f"of {new_potential_refugee_family_pop},\n"
+                            f"a capacity of {new_camp_capacity}, whilst the family has {size_of_family} members."
+                            f"\n\n")
                         return
                     print("\nExcellent. No capacity overflow detected for the new camp!")
                     # print(related_family_members_list)
@@ -699,7 +738,7 @@ def delete_refugee():
 
 
 def legal_advice_support():
-    logging.debug("Legal Advice Page starts up.")
+    logging.info("Legal Advice Page starts up.")
     print("Below are links to our partner legal charities to offer legal support to refugees whilst we work on "
           "\nbuilding our own team."
           "\nClicking on these links will direct you to a web page. \nYou will have to return back "
@@ -800,9 +839,9 @@ def create_training_session():
                         break
                     else:
                         print("Can't select a date in the past! Try again.")
-                        logging.debug("Date input for creating a session was in the past so invalid.")
+                        logging.info("Date input for creating a session was in the past so invalid.")
                 except ValueError:
-                    logging.debug("Input date for creating a training session was invalid form.")
+                    logging.info("Input date for creating a training session was invalid form.")
                     print("\nInvalid date format. Please use the format YYYY-MM-DD. Or enter RETURN to quit.")
         while True:
             camp = input("\nEnter the campID of the camp you will be holding the session at: ")
@@ -815,7 +854,7 @@ def create_training_session():
                 else:
                     print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
             except ValueError as e:
-                logging.debug("Invalid user input when creating a session")
+                logging.info("Invalid user input when creating a session")
                 print(f"\nInvalid input {e}. Please enter a valid integer for campID or type 'RETURN' to go back.")
         eventID = camp_df.loc[camp_df['campID'] == int(camp), 'eventID'].iloc[0]
         camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
@@ -1105,7 +1144,7 @@ def get_export_file_path():
                 break
         return file_path
     except Exception as e:
-        logging.debug("File path options entered by user causing issue.")
+        logging.info("File path options entered by user causing issue.")
         print(f"Looks like that file path didn't work, causing error {e}. Don't worry - we're redirecting you back.")
         return
 
@@ -1223,6 +1262,7 @@ def admin_export_refugees_to_csv():
         print(f"Error exporting data to CSV: {e}. Redirecting you back!")
         return
 
+
 def help_center_page():
     while True:
         print("This Humanitarian Management System has been divided into functions for 2 roles: Admin and Volunteer."
@@ -1314,13 +1354,10 @@ def help_center_page():
               "\n\n\n *** Look out for our return prompt instructions throughout the application if ever you change "
               "your mind about a process! ***"
 
-
               )
-
 
         input("\n\nEnter anything when you're ready to exit this page & return back to the start menu: ")
         return
-
 
 
 def check_vol_assigned_camp(username):

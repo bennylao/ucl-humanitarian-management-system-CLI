@@ -6,11 +6,12 @@ class AdminView:
     main_menu = (
         ("1", "Humanitarian Plan (Event) Management"),
         ("2", "Camp Management"),
-        ("3", "Volunteer Account Management"),
+        ("3", "Refugee Management"),
         ("4", "Resource Management"),
-        ("5", "Display Summary/Statistics"),
-        ("6", "Edit Account Information"),
-        ("7", "View Account Information"),
+        ("5", "Volunteer Account Management"),
+        ("6", "Display Summary/Statistics"),
+        ("7", "Edit Account Information"),
+        ("8", "View Account Information"),
         ("L", "Logout")
     )
 
@@ -29,13 +30,18 @@ class AdminView:
         ("2", "Edit camp"),
         ("3", "Delete camp"),
         ("4", "Close camp"),
-        ("5", "Add refugees"),
-        ("6", "Edit refugees"),
-        ("7", "Move/remove refugee(s)"),
-        ("8", "Display all refugees information"),
-        ("9", "Display all camps information"),
-        ("10", "Export a CSV report for all refugees in system"),
-        ("11", "Camp data visualisation"),
+        ("5", "Display all camps information"),
+        ("6", "Camp data visualisation"),
+        ("R", "Return to previous page"),
+        ("L", "Logout")
+    )
+
+    manage_refugee_menu = (
+        ("1", "Add refugees"),
+        ("2", "Edit refugees"),
+        ("3", "Move/remove refugee(s)"),
+        ("4", "Display all refugees information"),
+        ("5", "Export a CSV report for all refugees in system"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
@@ -60,9 +66,9 @@ class AdminView:
     )
 
     manage_resource_menu = (
-        ("1", "Allocate resources"),
-        ("2", "Purchase from shop"),
-        ("3", "View resource statistics"),
+        ("1", "Allocate existing resources"),
+        ("2", "Purchase new resources from shop"),
+        ("3", "View statistics"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
@@ -105,7 +111,6 @@ class AdminView:
         for key, value in cls.data_visualization_menu:
             print(f"[ {key} ] {value}")
 
-
     @classmethod
     def get_camp_options(cls):
         return [options[0] for options in cls.manage_camp_menu]
@@ -123,12 +128,28 @@ class AdminView:
     @classmethod
     def display_resource_menu(cls):
         print("")
-        print(f"""===============================================\n
-✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ RESOURCE MGMT MENU ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-===============================================\n""")
+        print(f"""=======================================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4 ] RESOURCE MGMT MENU ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+=======================================================\n""")
         for key, value in cls.manage_resource_menu:
             print(f"[ {key} ] {value}")
 
     @classmethod
     def get_resource_options(cls):
         return [options[0] for options in cls.manage_resource_menu]
+
+    @staticmethod
+    def display_refugee_welcome_message():
+        print("\n==============================================="
+              "\n     REFUGEE MANAGEMENT MENU     "
+              "\n===============================================\n")
+
+    @classmethod
+    def display_refugee_menu(cls):
+        print("")
+        for key, value in cls.manage_refugee_menu:
+            print(f"[ {key} ] {value}")
+
+    @classmethod
+    def get_refugee_options(cls):
+        return [options[0] for options in cls.manage_refugee_menu]
