@@ -5,7 +5,6 @@ import pandas as pd
 import tkinter as tk
 import tkinter.messagebox
 import logging
-from openpyxl import Workbook
 
 
 class Event:
