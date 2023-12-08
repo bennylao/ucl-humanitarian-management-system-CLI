@@ -372,7 +372,7 @@ class Admin(User):
                 # update csv file
                 change_user.update_email()
                 print("\nEmail changed successfully."
-                      f"\nYour new username is '{change_user.email}'.")
+                      f"\nYour new email is '{change_user.email}'.")
                 break
             elif new_email in all_emails:
                 print("\nSorry, email is already linked to other account.")
