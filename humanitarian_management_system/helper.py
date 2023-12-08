@@ -101,7 +101,7 @@ def validate_registration(usernames):
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
 
-    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0, 0]
+    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0]
 
 
 def validate_event_input():

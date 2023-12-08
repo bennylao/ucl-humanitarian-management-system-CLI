@@ -92,11 +92,11 @@ class Controller:
                 if user_info.empty:
                     print("\nUsername or password is incorrect. Please try again."
                           "\n Or Enter 'RETURN' to get back to main menu.")
-                elif user_info['isVerified'] == "FALSE":
+                elif user_info['isVerified'] == False:
                     user_info = pd.Series()
                     print("\nSince you are newly registered. Please contact the administrator to verify your account"
                           "\n Or Enter 'RETURN' to get back to main menu.")
-                elif user_info['isActive'] == "FALSE":
+                elif user_info['isActive'] == False:
                     user_info = pd.Series()
                     print("\nYour account has been deactivated, contact the administrator."
                           "\n Or Enter 'RETURN' to get back to main menu.")
