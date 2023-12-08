@@ -384,27 +384,3 @@ class Event:
         else:
             tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
         root.mainloop()
-
-    @staticmethod
-    def display_summary():
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        df_event = pd.read_csv(event_csv_path)
-        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-        df_camp = pd.read_csv(camp_csv_path)
-        resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
-        df_resource = pd.read_csv(resource_csv_path)
-        filtered_df_event = df_event[(df_event['ongoing'] == 'True')]
-
-        if filtered_df_event['no_camp'].empty:
-            print('There is no ongoing event.\n')
-        else:
-            filtered_df_camp = df_camp.loc[
-                df_camp['status'] == 'open', ['eventID', 'campID', 'volunteerPop', 'refugeePop']]
-            qty_sum_by_camp = df_resource.groupby('campID')['qty'].sum().reset_index()
-            qty_sum_by_camp.rename(columns={'qty': '# resource'}, inplace=True)
-            merge_resource = pd.merge(filtered_df_camp, qty_sum_by_camp, how='left', on='campID')
-            result_df = pd.merge(filtered_df_event, merge_resource, how='left', on='eventID')
-            result_df.rename(columns={'volunteerPop': '# volunteer'}, inplace=True)
-            result_df.rename(columns={'refugeePop': '# refugee'}, inplace=True)
-            result_df = result_df.drop(['ongoing', 'description', 'no_camp'], axis=1)
-            Event.display_events(result_df)
