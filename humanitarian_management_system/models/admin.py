@@ -26,8 +26,14 @@ class Admin(User):
 
     def remove_user(self):
         vol_id_arr = []
-        vol_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"))
-        camp_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/camp.csv"))
+        try:
+            vol_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"))
+            camp_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/camp.csv"))
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
 
         print("A list of all volunteers and their corresponding information.")
         self.vol_table_display()
@@ -153,17 +159,17 @@ class Admin(User):
         event_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/event.csv"))
         joined_camp = pd.merge(camp_df, event_df, on='eventID', how='inner')
 
-        joined_camp.columns = ['Camp ID', 'Event ID', 'countryID', 'Refugee capacity', 'Health risk',
-                               'Volunteer population',
+        joined_camp.columns = ['Camp ID', 'Event ID', 'countryID', 'latitude', 'longitude', 'Refugee capacity',
+                               'Health risk', 'Volunteer population',
                                'Refugee population', 'Average critical level', 'Camp status', 'ongoing', 'Event title',
                                'Location', 'Event description', 'no_camp', 'Start date', 'End date']
 
         joined_df_total = pd.merge(joined_df, joined_camp, on='Camp ID', how='inner')
         joined_df_total = joined_df_total.loc[:, ~joined_df_total.columns.isin(['Event ID_x', 'Event ID_y' 'countryID',
-                                                                                'ongoing', 'no_camp',
+                                                                                'ongoing', 'no_camp', 'latitude',
                                                                                 'Average critical level',
-                                                                                'Is active?', 'Username', 'Password',
-                                                                                'First name',
+                                                                                 'Username', 'Password',
+                                                                                'First name', 'longitude',
                                                                                 'Last name', 'Email', 'Phone no.',
                                                                                 'Occupation'])]
 
@@ -171,7 +177,7 @@ class Admin(User):
             user_input = input("Would you like to access the camp & event profile for a particular volunteer "
                                "(yes or no)? ")
 
-            if user_input == 'RETURN':
+            if user_input.lower() == 'RETURN':
                 return
 
             if user_input.lower() == 'yes':
@@ -224,10 +230,10 @@ class Admin(User):
         role_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/roleType.csv"))
 
         joined_df = pd.merge(vol_df, role_df, on='roleID', how='inner')
-        joined_df = joined_df.loc[:, ~joined_df.columns.isin(['userType', 'roleID'])]
-        joined_df.columns = ['User ID', 'Is verified?', 'Is active?', 'Username', 'Password', 'First name', 'Last name',
+        joined_df = joined_df.loc[:, ~joined_df.columns.isin(['userType', 'roleID', 'password'])]
+        joined_df.columns = ['User ID', 'Is verified?', 'Is active?', 'Username', 'First name', 'Last name',
                              'Email',
-                             'Phone no.', 'Occupation', 'Event ID', 'Camp ID', 'Camp role']
+                             'Phone no.', 'Occupation', 'Camp ID', 'Camp role']
 
         table_str = joined_df.to_markdown(index=False)
         print("\n" + table_str)

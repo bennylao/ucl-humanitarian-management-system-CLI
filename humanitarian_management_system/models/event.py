@@ -54,12 +54,19 @@ class Event:
 
     @staticmethod
     def get_all_active_events():
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        df = pd.read_csv(event_csv_path)
-        print(df)
-        active_events_df = df[(df['ongoing'] == True) & ((pd.to_datetime(df['endDate']).dt.date >
-                                                          datetime.date.today()) | (pd.isna(df['endDate'])))]
-        return active_events_df
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            df = pd.read_csv(event_csv_path)
+            print(df)
+            active_events_df = df[(df['ongoing'] == True) & ((pd.to_datetime(df['endDate']).dt.date >
+                                                              datetime.date.today()) | (pd.isna(df['endDate'])))]
+            return active_events_df
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
+            return
 
     @staticmethod
     def edit_event_info():
@@ -69,8 +76,16 @@ class Event:
         then edit by calling each corresponding private function.
         """
         # In this case, we can 'end an event' by edit this endDate
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        df = pd.read_csv(event_csv_path)
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            df = pd.read_csv(event_csv_path)
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
+            return
+
         if df.empty:
             print("\nNo events to edit.")
             return
@@ -123,33 +138,55 @@ class Event:
 
     @staticmethod
     def __change_title(row):
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        title = input("\n--> Plan title: ")
-        if title == 'RETURN':
-            return
-        helper.modify_csv_value(event_csv_path, row, 'title', title)
-        print("\nPlan title updated.")
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            title = input("\n--> Plan title: ")
+            if title == 'RETURN':
+                return
+            helper.modify_csv_value(event_csv_path, row, 'title', title)
+            print("\nPlan title updated.")
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
+        except ValueError as e:
+            print(f"\nInvalid user input."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
 
     @staticmethod
     def __change_location(row):
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        country = []
-        country_data = pd.read_csv(event_csv_path)['location']
-        for ele in country_data:
-            country.append(ele.lower())
-        location = ''
-        for ele in country_data:
-            country.append(ele.lower())
-        while len(location) == 0 and location not in country:
-            location = input("\n--> Location(country): ").lower()
-            if location.upper() == 'RETURN':
-                return
-            if location not in country:
-                print("\nInvalid country name entered")
-                location = ''
-                continue
-        helper.modify_csv_value(event_csv_path, row, 'location', location)
-        print("\nLocation updated.")
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            country = []
+            country_data = pd.read_csv(event_csv_path)['location']
+            for ele in country_data:
+                country.append(ele.lower())
+            location = ''
+            for ele in country_data:
+                country.append(ele.lower())
+            while len(location) == 0 and location not in country:
+                location = input("\n--> Location(country): ").lower()
+                if location.upper() == 'RETURN':
+                    return
+                if location not in country:
+                    print("\nInvalid country name entered")
+                    location = ''
+                    continue
+            helper.modify_csv_value(event_csv_path, row, 'location', location)
+            print("\nLocation updated.")
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
+        except ValueError as e:
+            print(f"\nInvalid user input."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
 
     @staticmethod
     def __change_description(row):
@@ -167,8 +204,15 @@ class Event:
         """Should this be an option? What would be the implications of this?"""
         #### maybe when the start date is a day in the future, and the user wants to adjust the schedule
         #### Can the start date of an event that has already been started be changed?
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        df = pd.read_csv(event_csv_path)
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            df = pd.read_csv(event_csv_path)
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+              f"\nPlease contact admin for further assistance."
+              f"\n[Error] {e}")
+            logging.critical(f"{e}")
+
         date_format = '%d/%m/%Y'
         while True:
             if bool(df.loc[row]['ongoing']) == True:
@@ -195,8 +239,16 @@ class Event:
         # which asks 'are you sure' and says that they won't be able to reopen the event
         # after they have ended it, as the requirement says "the
         # humanitarian plan must be closed in the system."
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        df = pd.read_csv(event_csv_path)
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            df = pd.read_csv(event_csv_path)
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+              f"\nPlease contact admin for further assistance."
+              f"\n[Error] {e}")
+            logging.critical(f"{e}")
+        return
+
         date_format = '%d/%m/%Y'
         while True:
             try:
@@ -255,10 +307,17 @@ class Event:
 
     @staticmethod
     def update_ongoing():
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        df = pd.read_csv(event_csv_path)
-        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-        df_camp = pd.read_csv(camp_csv_path)
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            df = pd.read_csv(event_csv_path)
+            camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+            df_camp = pd.read_csv(camp_csv_path)
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
+            return
         for index, series in df.iterrows():
             try:
                 start_date = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
@@ -284,10 +343,17 @@ class Event:
 
     @staticmethod
     def disable_ongoing_event():
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        df = pd.read_csv(event_csv_path)
-        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
-        df_camp = pd.read_csv(camp_csv_path)
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            df = pd.read_csv(event_csv_path)
+            camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+            df_camp = pd.read_csv(camp_csv_path)
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
+            return
         filtered_df = df[(df['ongoing'] == 'True')]
 
         print("\n*The following shows the info of all available events*")
@@ -329,8 +395,15 @@ class Event:
 
     @staticmethod
     def delete_event():
-        event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-        df = pd.read_csv(event_csv_path)
+        try:
+            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            df = pd.read_csv(event_csv_path)
+        except FileNotFoundError as e:
+            print(f"\nFile not found."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
+            return
 
         print("\n*The following shows the info of all available events*")
         Event.display_events(df)
