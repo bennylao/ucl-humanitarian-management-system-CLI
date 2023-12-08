@@ -785,6 +785,59 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 18:20:24,194 - CRITICAL - controller-vol_display_camp-Line1904 - Length mismatch: Expected axis has 18 elements, new values have 16 elements
 2023-12-08 18:27:07,384 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 18:27:07,384 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:52:34,886 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:52:34,887 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:53:40,864 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:53:40,864 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:54:07,199 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:54:07,199 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:54:45,049 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:54:45,049 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:58:17,530 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:58:17,530 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:59:30,305 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:59:30,305 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:59:45,248 - CRITICAL - controller-vol_display_refugee-Line1989 - list index out of range
+2023-12-08 19:00:50,224 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:00:50,224 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:01:03,736 - INFO - controller-volunteer_join_camp-Line1257 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 19:01:13,236 - INFO - controller-volunteer_join_camp-Line1279 - successfully changed user input into 56 index
+2023-12-08 19:04:21,296 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:04:21,296 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:04:32,884 - CRITICAL - controller-vol_display_refugee-Line1948 - int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+2023-12-08 19:05:09,362 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:05:09,362 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:06:39,481 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:06:39,481 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:08:10,657 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:08:10,657 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:08:46,704 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:08:46,704 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:09:27,004 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:09:27,004 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:10:48,009 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:10:48,010 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:10:58,512 - CRITICAL - controller-vol_display_refugee-Line1952 - int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
+2023-12-08 19:11:42,925 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:11:42,925 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:12:53,896 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:12:53,896 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:14:24,608 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:14:24,608 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:15:28,774 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:15:28,774 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:16:42,596 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:16:42,596 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:17:25,553 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:17:25,553 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:18:24,270 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:18:24,270 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:19:44,027 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:19:44,027 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:20:34,778 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:20:34,778 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 19:20:48,500 - INFO - controller-volunteer_join_camp-Line1257 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 19:20:57,540 - INFO - controller-volunteer_join_camp-Line1279 - successfully changed user input into 56 index
 2023-12-08 18:45:33,625 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 18:45:33,625 - INFO - controller-initialise-Line28 - Controller is initialised.
 2023-12-08 18:51:00,065 - INFO - main-main-Line14 - Starting Humanitarian Management System
@@ -805,3 +858,26 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 18:57:30,604 - INFO - controller-initialise-Line28 - Controller is initialised.
 2023-12-08 19:09:42,495 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 19:09:42,495 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 19:19:43,457 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:19:43,457 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 19:20:05,358 - CRITICAL - helper-remove_refugee_from_session-Line1089 - Error: [Errno 2] No such file or directory: '/Users/marthacjones/Library/CloudStorage/OneDrive-UniversityCollegeLondon/UCL_comp_sci/COMP0066_Humanitarian_Management_System/data/refugee.csv'. One of the data files not found when removing a refugee from a session.
+2023-12-08 19:20:22,294 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:20:22,295 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 19:20:33,790 - INFO - helper-remove_refugee_from_session-Line1032 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-08 19:20:46,141 - INFO - helper-remove_refugee_from_session-Line1071 - Successfully converted user input to int type.
+2023-12-08 19:20:48,106 - INFO - helper-remove_refugee_from_session-Line1071 - Successfully converted user input to int type.
+2023-12-08 19:20:50,107 - INFO - helper-remove_refugee_from_session-Line1071 - Successfully converted user input to int type.
+2023-12-08 19:20:52,051 - INFO - helper-remove_refugee_from_session-Line1071 - Successfully converted user input to int type.
+2023-12-08 19:20:55,197 - INFO - helper-remove_refugee_from_session-Line1071 - Successfully converted user input to int type.
+2023-12-08 19:20:56,638 - INFO - helper-remove_refugee_from_session-Line1071 - Successfully converted user input to int type.
+2023-12-08 19:21:00,961 - INFO - helper-remove_refugee_from_session-Line1071 - Successfully converted user input to int type.
+2023-12-08 19:21:18,034 - INFO - helper-remove_refugee_from_session-Line1032 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-08 19:21:20,673 - INFO - helper-remove_refugee_from_session-Line1071 - Successfully converted user input to int type.
+2023-12-08 19:21:25,321 - INFO - helper-add_refugee_to_session-Line959 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-08 19:23:41,932 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:23:41,932 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 19:23:53,833 - INFO - helper-add_refugee_to_session-Line959 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-08 19:24:02,328 - INFO - helper-add_refugee_to_session-Line959 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-08 19:24:32,875 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 19:24:32,876 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 19:24:42,325 - INFO - helper-add_refugee_to_session-Line959 - Refugee and training session data files loaded successfully to add a refugee to a session.
