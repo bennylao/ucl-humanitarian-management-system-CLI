@@ -742,3 +742,13 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 17:21:34,735 - CRITICAL - controller-admin_create_camp-Line550 - name 'latitude' is not defined
 2023-12-08 17:22:24,438 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 17:22:24,438 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 18:48:33,964 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:48:33,964 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 18:48:43,148 - INFO - controller-volunteer_join_camp-Line1186 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 18:48:47,256 - INFO - controller-volunteer_join_camp-Line1208 - successfully changed user input into 59 index
+2023-12-08 18:50:34,854 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:50:34,854 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 18:53:08,207 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:53:08,208 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 18:53:13,145 - INFO - controller-volunteer_join_camp-Line1186 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-08 18:53:24,186 - INFO - controller-volunteer_join_camp-Line1208 - successfully changed user input into 57 index

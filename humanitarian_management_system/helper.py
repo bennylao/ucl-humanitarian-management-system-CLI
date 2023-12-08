@@ -238,36 +238,6 @@ def validate_camp_input():
 
     return campID, capacity, risk
 
-
-def validate_join(user):  # volunteer joining a camp
-    csv_path = Path(__file__).parents[0].joinpath("data/roleType.csv")
-    csv_path_u = Path(__file__).parents[0].joinpath("data/user.csv")
-    df_u = pd.read_csv(csv_path_u)
-
-    index = pd.read_csv(csv_path)["roleID"].tolist()
-    role = pd.read_csv(csv_path)["name"]
-
-    df_u = df_u.loc[df_u['userID'] == user]['roleID'].tolist()[0]
-
-    if int(df_u) == 0:
-        print("Please select a camp role by its index.")
-        for i in index:
-            print(f''' index: {i} | {role.iloc[i - 1]} ''')
-        while True:
-            user_input = input("\nEnter index: ")
-            if int(user_input) not in index[1:]:
-                print("Invalid index option entered!")
-                continue
-            if user_input.upper() == "RETURN":
-                return
-            else:
-                break
-    else:
-        user_input = df_u
-
-    return user_input
-
-
 def modify_csv_pandas(file_path, select_col, row_value, final_col, new_value):
     csv_path = Path(__file__).parents[0].joinpath(file_path)
     df = pd.read_csv(csv_path)
@@ -315,7 +285,7 @@ def extract_active_event(csv_path):
     return active_id, df
 
 
-def display_camp_list():
+def display_open_camp_list():
     csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
     active_id = extract_active_event(csv_path)[0]
     df_e = pd.read_csv(csv_path)
@@ -330,7 +300,7 @@ def display_camp_list():
     camp_id_active = df_c.loc[df_c['status'] == 'open']['campID'].tolist()
     index = [int(i) for i in camp_id_active]
 
-    table_str = df_c.to_markdown(index=False)
+    table_str = df_c.loc[df_c['status'] == 'open'].to_markdown(index=False)
     print("\n" + table_str)
 
     return index
