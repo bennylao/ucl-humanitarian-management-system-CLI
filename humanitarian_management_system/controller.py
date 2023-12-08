@@ -285,7 +285,14 @@ class Controller:
     """ ####################### MAIN RESOURCE MENU ############################# """
 
     def admin_display_summary(self):
-        pass
+        try:
+            ManagementView.display_summary_message()
+            Event.display_summary()
+        except Exception as e:
+            print(f"\nData file seems to be damaged."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
 
     @staticmethod
     def admin_create_event():

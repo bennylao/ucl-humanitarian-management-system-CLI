@@ -264,147 +264,6 @@ Name: userID, dtype: bool, 'campID')
 2023-12-06 15:13:41,882 - INFO - helper-admin_export_refugees_to_csv-Line1101 - Successfully loaded refugee csv for admin exporting refugee csv file.
 2023-12-06 15:13:41,885 - INFO - helper-admin_export_refugees_to_csv-Line1104 - Successfully loaded camp csv file for reporting on refugees in event.
 2023-12-06 15:13:41,887 - INFO - helper-admin_export_refugees_to_csv-Line1107 - Successfully loaded event csv file for reporting on refugees in event.
-2023-12-06 16:39:08,787 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 16:39:08,787 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 16:39:29,711 - CRITICAL - controller-login-Line115 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data_analysis\\data\\campTest.csv'
-2023-12-06 16:40:14,613 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 16:40:14,614 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 16:40:20,604 - CRITICAL - controller-login-Line115 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data\\refugeeTest.csv'
-2023-12-06 16:40:52,496 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 16:40:52,497 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 16:40:58,391 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
-
-2023-12-06 16:40:58,414 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:8050
-2023-12-06 16:40:58,414 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
-2023-12-06 16:40:59,049 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "GET / HTTP/1.1" 200 -
-2023-12-06 16:40:59,193 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "GET /_dash-layout HTTP/1.1" 200 -
-2023-12-06 16:40:59,199 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "GET /_dash-dependencies HTTP/1.1" 200 -
-2023-12-06 16:40:59,236 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "[36mGET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1[0m" 304 -
-2023-12-06 16:40:59,242 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "[36mGET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1[0m" 304 -
-2023-12-06 16:40:59,251 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "[36mGET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1[0m" 304 -
-2023-12-06 16:40:59,502 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:40:59] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:01,333 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:01] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:20,731 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:20] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:21,109 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:21] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:25,675 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:25] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:33,984 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:33] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:41,740 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:41] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:46,065 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:46] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:46,722 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:46] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:47,364 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:47] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:47,852 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:47] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:48,602 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:48] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:51,603 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:51] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:41:52,319 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:41:52] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:42:50,220 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 16:42:50,220 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 16:43:00,821 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
-
-2023-12-06 16:43:00,852 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:8050
-2023-12-06 16:43:00,852 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
-2023-12-06 16:43:01,444 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "GET / HTTP/1.1" 200 -
-2023-12-06 16:43:01,543 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "GET /_dash-layout HTTP/1.1" 200 -
-2023-12-06 16:43:01,543 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "GET /_dash-dependencies HTTP/1.1" 200 -
-2023-12-06 16:43:01,576 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "[36mGET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1[0m" 304 -
-2023-12-06 16:43:01,576 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "[36mGET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1[0m" 304 -
-2023-12-06 16:43:01,588 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "[36mGET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1[0m" 304 -
-2023-12-06 16:43:01,831 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:43:01] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:45:26,770 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 16:45:26] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 16:45:46,951 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 16:45:46,951 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 16:46:52,599 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 16:46:52,599 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 16:51:44,759 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 16:51:44,759 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 16:55:10,915 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 16:55:10,915 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 17:01:06,618 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
-
-2023-12-06 17:01:06,634 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:8050
-2023-12-06 17:01:06,634 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
-2023-12-06 17:01:07,241 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "GET / HTTP/1.1" 200 -
-2023-12-06 17:01:07,337 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "GET /_dash-layout HTTP/1.1" 200 -
-2023-12-06 17:01:07,337 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "GET /_dash-dependencies HTTP/1.1" 200 -
-2023-12-06 17:01:07,372 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "[36mGET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1[0m" 304 -
-2023-12-06 17:01:07,380 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "[36mGET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1[0m" 304 -
-2023-12-06 17:01:07,389 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "[36mGET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1[0m" 304 -
-2023-12-06 17:01:07,635 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:07] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 17:01:10,798 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:10] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 17:01:16,752 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [06/Dec/2023 17:01:16] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-06 17:09:49,723 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 17:09:49,723 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 17:19:24,357 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 17:19:24,357 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 17:21:16,025 - CRITICAL - controller-admin_create_camp-Line443 - single positional indexer is out-of-bounds
-2023-12-06 17:24:42,091 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 17:24:42,091 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 17:24:54,794 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
-2023-12-06 17:41:55,576 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
-2023-12-06 17:47:00,122 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
-2023-12-06 17:54:27,646 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 17:54:27,646 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 17:57:43,936 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 17:57:43,936 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 17:58:12,556 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 17:58:12,557 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 17:59:59,673 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 17:59:59,673 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 18:00:37,727 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
-2023-12-06 18:01:45,454 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 18:01:45,454 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 18:02:10,477 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
-2023-12-06 18:10:06,024 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
-2023-12-06 18:10:58,940 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 18:10:58,940 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-06 18:11:09,760 - CRITICAL - controller-login-Line120 - single positional indexer is out-of-bounds
-2023-12-06 18:13:18,554 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-06 18:13:18,555 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 18:03:54,346 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 18:03:54,347 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 18:04:13,905 - INFO - dash-run-Line2053 - Dash is running on http://127.0.0.1:8050/
-
-2023-12-07 18:04:13,989 - INFO - _internal-_log-Line96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
- * Running on http://127.0.0.1:8050
-2023-12-07 18:04:13,989 - INFO - _internal-_log-Line96 - [33mPress CTRL+C to quit[0m
-2023-12-07 18:04:16,900 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:16] "GET / HTTP/1.1" 200 -
-2023-12-07 18:04:16,995 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:16] "GET /_dash-component-suites/dash/deps/polyfill@7.v2_14_2m1701872143.12.1.min.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,040 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/deps/react@16.v2_14_2m1701872143.14.0.min.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,044 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/deps/react-dom@16.v2_14_2m1701872143.14.0.min.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,045 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/deps/prop-types@15.v2_14_2m1701872143.8.1.min.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,047 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dcc/dash_core_components.v2_12_1m1701872143.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,049 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dash-renderer/build/dash_renderer.v2_14_2m1701872142.min.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,056 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dcc/dash_core_components-shared.v2_12_1m1701872143.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,077 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/html/dash_html_components.v2_0_15m1701872143.min.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,084 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dash_table/bundle.v5_2_8m1701872142.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,596 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-dependencies HTTP/1.1" 200 -
-2023-12-07 18:04:17,599 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-layout HTTP/1.1" 200 -
-2023-12-07 18:04:17,784 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dcc/async-graph.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,793 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/dash/dcc/async-dropdown.js HTTP/1.1" 200 -
-2023-12-07 18:04:17,834 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:17] "GET /_dash-component-suites/plotly/package_data/plotly.min.js HTTP/1.1" 200 -
-2023-12-07 18:04:19,003 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:19] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:27,663 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:27] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:28,345 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:28] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:29,058 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:29] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:29,980 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:29] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:30,954 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:30] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:36,242 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:36] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:37,064 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:37] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:37,867 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:37] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:38,360 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:38] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:42,158 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:42] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:43,359 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:43] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:43,797 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:43] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:44,117 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:44] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:04:44,538 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:04:44] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:06:26,595 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:26] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:06:31,598 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:31] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:06:34,718 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:34] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:06:35,105 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:35] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:06:35,563 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:35] "POST /_dash-update-component HTTP/1.1" 200 -
-2023-12-07 18:06:36,027 - INFO - _internal-_log-Line96 - 127.0.0.1 - - [07/Dec/2023 18:06:36] "POST /_dash-update-component HTTP/1.1" 200 -
 2023-12-06 17:13:13,703 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-06 17:13:13,703 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-06 17:20:49,196 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
@@ -414,260 +273,34 @@ Name: userID, dtype: bool, 'campID')
 2023-12-06 17:22:45,777 - DEBUG - controller-initialise-Line22 - Controller is initialised.
 2023-12-06 17:23:39,563 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-06 17:23:39,563 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 10:27:22,620 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 10:27:22,621 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 10:30:28,376 - CRITICAL - controller-display_camp_resource-Line1438 - Missing optional dependency 'tabulate'.  Use pip or conda to install tabulate.
-2023-12-07 17:41:30,246 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 17:41:30,246 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 17:47:10,724 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 17:47:10,724 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 17:47:51,598 - CRITICAL - controller-resource_reporting_menu-Line837 - 'NoneType' object has no attribute 'to_string'
-2023-12-07 17:50:33,080 - CRITICAL - controller-login-Line120 - unsupported operand type(s) for -: 'NoneType' and 'int'
-2023-12-07 19:44:03,438 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 19:44:03,438 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 20:22:50,098 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 20:22:50,098 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 20:29:33,456 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 20:29:33,456 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 20:50:24,944 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 20:50:24,945 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 20:51:32,203 - CRITICAL - controller-login-Line120 - Invalid value '' for dtype Int64
-2023-12-07 21:18:48,561 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 21:18:48,562 - DEBUG - controller-initialise-Line22 - Controller is initialised.
-2023-12-07 21:54:38,760 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 21:54:38,760 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 21:59:40,666 - CRITICAL - controller-admin_remove_camp-Line740 - cannot access local variable 'eventID' where it is not associated with a value
-2023-12-07 22:03:09,148 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:03:09,148 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:04:48,091 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:04:48,091 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:06:09,391 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:06:09,391 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:06:52,079 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:06:52,079 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:06:58,247 - CRITICAL - controller-create_refugee-Line1173 - 'list' object has no attribute 'to_markdown'
-2023-12-07 22:08:47,054 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:08:47,054 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:10:41,892 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:10:41,892 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:11:51,840 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:11:51,840 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:12:25,673 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:12:25,673 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:15:35,600 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:15:35,600 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:18:21,687 - CRITICAL - controller-vol_edit_refugee-Line1635 - list index out of range
-2023-12-07 22:18:36,652 - CRITICAL - controller-create_refugee-Line1173 - index 0 is out of bounds for axis 0 with size 0
-2023-12-07 22:18:58,739 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:18:58,739 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:19:08,016 - CRITICAL - controller-create_refugee-Line1173 - index 0 is out of bounds for axis 0 with size 0
-2023-12-07 22:19:23,203 - CRITICAL - controller-vol_edit_refugee-Line1635 - list index out of range
-2023-12-07 22:19:26,445 - CRITICAL - controller-create_refugee-Line1173 - index 0 is out of bounds for axis 0 with size 0
-2023-12-07 22:22:41,067 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:22:41,067 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:22:49,306 - CRITICAL - controller-login-Line124 - index 0 is out of bounds for axis 0 with size 0
-2023-12-07 22:23:05,703 - CRITICAL - controller-admin_create_camp-Line453 - cannot access local variable 'eventID' where it is not associated with a value
-2023-12-07 22:24:25,580 - CRITICAL - controller-admin_create_camp-Line453 - cannot access local variable 'eventID' where it is not associated with a value
-2023-12-07 22:25:18,781 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:25:18,781 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:27:56,148 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:27:56,148 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:29:57,170 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:29:57,170 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:30:13,691 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:30:13,691 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:32:13,818 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:32:13,818 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:35:51,289 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:35:51,289 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:39:22,439 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:39:22,440 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:39:42,416 - CRITICAL - controller-admin_edit_refugee-Line395 - list index out of range
-2023-12-07 22:40:45,290 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:40:45,290 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:41:11,808 - CRITICAL - controller-admin_edit_refugee-Line395 - list index out of range
-2023-12-07 22:42:56,075 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:42:56,075 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:44:07,595 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:44:07,595 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 22:46:00,084 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 22:46:00,084 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-07 23:49:57,087 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 23:49:57,087 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-07 23:55:29,200 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-07 23:55:29,200 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-08 00:01:44,450 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:01:44,450 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-08 00:14:56,150 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:14:56,150 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-08 00:15:51,867 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:15:51,867 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-08 00:17:47,976 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:17:47,976 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-08 00:19:20,907 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:19:20,907 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-08 00:20:50,481 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:20:50,481 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-08 00:20:56,511 - INFO - controller-volunteer_join_camp-Line974 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:21:03,081 - INFO - controller-volunteer_join_camp-Line987 - successfully changed user input into innteger index
-2023-12-08 00:21:12,373 - INFO - controller-volunteer_join_camp-Line987 - successfully changed user input into innteger index
-2023-12-08 00:21:13,902 - INFO - controller-volunteer_join_camp-Line987 - successfully changed user input into innteger index
-2023-12-08 00:21:50,320 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:21:50,320 - DEBUG - controller-initialise-Line23 - Controller is initialised.
-2023-12-08 00:22:12,763 - DEBUG - helper-legal_advice_support-Line700 - Legal Advice Page starts up.
-2023-12-08 00:23:01,782 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:23:01,783 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:23:09,441 - INFO - controller-volunteer_join_camp-Line955 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:23:13,086 - INFO - controller-volunteer_join_camp-Line968 - successfully changed user input into innteger index
-2023-12-08 00:23:14,368 - INFO - controller-volunteer_join_camp-Line968 - successfully changed user input into innteger index
-2023-12-08 00:23:19,858 - INFO - controller-volunteer_join_camp-Line968 - successfully changed user input into innteger index
-2023-12-08 00:23:21,029 - INFO - controller-volunteer_join_camp-Line968 - successfully changed user input into innteger index
-2023-12-08 00:24:13,814 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:24:13,815 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:25:52,457 - CRITICAL - controller-vol_edit_refugee-Line1644 - 'NoneType' object has no attribute 'username'
-2023-12-08 00:26:05,778 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:26:05,778 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:29:19,283 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:29:19,283 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:29:25,082 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:29:27,152 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into innteger index
-2023-12-08 00:29:29,131 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into innteger index
-2023-12-08 00:30:07,923 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:33:18,329 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:33:18,329 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:33:33,078 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:33:35,102 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into 55 index
-2023-12-08 00:33:37,329 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into 54 index
-2023-12-08 00:33:39,310 - DEBUG - controller-volunteer_join_camp-Line985 - Error invalid literal for int() with base 10: ''Not the right input for joining a camp!
-2023-12-08 00:33:42,978 - INFO - controller-volunteer_join_camp-Line980 - successfully changed user input into 54 index
-2023-12-08 00:39:43,814 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:39:43,814 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:39:50,160 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:40:29,232 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:40:29,232 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:40:45,575 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:41:10,169 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:41:10,169 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:41:15,277 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:42:27,614 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:42:27,614 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:42:32,025 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:43:14,213 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:43:14,213 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:43:24,832 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:43:26,046 - CRITICAL - controller-volunteer_join_camp-Line1001 - list index out of range
-2023-12-08 00:44:05,218 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:44:05,218 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:44:14,491 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:44:16,875 - CRITICAL - controller-login-Line124 - list index out of range
-2023-12-08 00:44:55,709 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:44:55,709 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:45:01,066 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:45:19,876 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:45:19,876 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:45:32,678 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:45:40,958 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:45:40,958 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:45:46,763 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:45:53,549 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:45:53,549 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:45:58,283 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:47:09,047 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:47:09,047 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:47:15,998 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:47:17,280 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
-2023-12-08 00:47:18,788 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
-2023-12-08 00:49:26,813 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:49:26,813 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:49:31,652 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:50:04,112 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:50:04,112 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:50:13,885 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:50:15,008 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
-2023-12-08 00:50:16,650 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 55 index
-2023-12-08 00:50:36,321 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:50:36,321 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:50:41,245 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:50:43,718 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 55 index
-2023-12-08 00:50:45,001 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
-2023-12-08 00:50:46,876 - CRITICAL - controller-volunteer_join_camp-Line999 - list index out of range
-2023-12-08 00:51:48,376 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 00:51:48,376 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 00:52:00,625 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 00:52:02,199 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 54 index
-2023-12-08 00:54:59,950 - CRITICAL - controller-vol_display_camp-Line1674 - 'NoneType' object has no attribute 'username'
-2023-12-08 01:02:48,527 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:02:48,527 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:02:57,810 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 01:03:00,396 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 52 index
-2023-12-08 01:03:16,531 - INFO - controller-volunteer_join_camp-Line967 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 01:03:22,446 - INFO - controller-volunteer_join_camp-Line979 - successfully changed user input into 53 index
-2023-12-08 01:05:09,590 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:05:09,590 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:05:55,877 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:05:55,877 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:06:21,090 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:06:21,090 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:09:11,042 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:09:11,043 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:16:49,073 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:16:49,074 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:17:39,365 - CRITICAL - controller-admin_modify_camp-Line646 - invalid literal for int() with base 10: 'return'
-2023-12-08 01:18:57,708 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:18:57,708 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:20:09,284 - INFO - controller-volunteer_join_camp-Line970 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 01:20:36,132 - CRITICAL - controller-login-Line124 - list index out of range
-2023-12-08 01:21:52,656 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:21:52,656 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:22:04,873 - CRITICAL - controller-login-Line124 - list index out of range
-2023-12-08 01:22:41,803 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:22:41,803 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:22:53,853 - CRITICAL - controller-login-Line124 - list index out of range
-2023-12-08 01:23:15,669 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:23:15,669 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:23:24,026 - CRITICAL - controller-login-Line124 - list index out of range
-2023-12-08 01:23:50,267 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:23:50,267 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:27:11,238 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:27:11,238 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:28:24,418 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:28:24,419 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:28:45,598 - CRITICAL - controller-admin_modify_camp-Line644 - invalid literal for int() with base 10: ''
-2023-12-08 01:29:00,289 - INFO - controller-volunteer_join_camp-Line968 - successfully got info for camp csv file for volunteer joining a camp
-2023-12-08 01:29:44,582 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:29:44,582 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:31:15,869 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:31:15,870 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:36:05,233 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:36:05,233 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:36:25,677 - CRITICAL - controller-admin_modify_camp-Line644 - list index out of range
-2023-12-08 01:37:32,638 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:37:32,638 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:37:56,578 - CRITICAL - controller-admin_modify_camp-Line644 - list index out of range
-2023-12-08 01:38:21,270 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:38:21,270 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:39:58,270 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:39:58,270 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:48:19,050 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:48:19,050 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 01:51:08,770 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 01:51:08,770 - DEBUG - controller-initialise-Line24 - Controller is initialised.
-2023-12-08 02:04:09,710 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 02:04:09,710 - DEBUG - controller-initialise-Line26 - Controller is initialised.
-2023-12-08 02:04:57,757 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 02:04:57,757 - DEBUG - controller-initialise-Line26 - Controller is initialised.
-2023-12-08 02:05:20,524 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 02:05:20,524 - DEBUG - controller-initialise-Line26 - Controller is initialised.
-2023-12-08 02:14:25,409 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 02:14:25,409 - DEBUG - controller-initialise-Line26 - Controller is initialised.
-2023-12-08 09:28:36,962 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 09:28:36,963 - DEBUG - controller-initialise-Line26 - Controller is initialised.
-2023-12-08 09:30:15,245 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 09:30:15,245 - DEBUG - controller-initialise-Line26 - Controller is initialised.
-2023-12-08 09:32:20,480 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 09:32:20,480 - DEBUG - controller-initialise-Line26 - Controller is initialised.
-2023-12-08 09:33:57,171 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
-2023-12-08 09:33:57,171 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-07 10:41:10,600 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:41:10,601 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:46:32,006 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:46:32,007 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:46:54,201 - INFO - helper-admin_export_refugees_to_csv-Line1106 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-07 10:46:54,219 - INFO - helper-admin_export_refugees_to_csv-Line1109 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-07 10:46:54,222 - INFO - helper-admin_export_refugees_to_csv-Line1112 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-07 10:47:39,622 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:47:39,623 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:47:56,694 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:47:56,694 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 10:48:08,474 - INFO - helper-admin_export_refugees_to_csv-Line1106 - Successfully loaded refugee csv for admin exporting refugee csv file.
+2023-12-07 10:48:08,477 - INFO - helper-admin_export_refugees_to_csv-Line1109 - Successfully loaded camp csv file for reporting on refugees in event.
+2023-12-07 10:48:08,481 - INFO - helper-admin_export_refugees_to_csv-Line1112 - Successfully loaded event csv file for reporting on refugees in event.
+2023-12-07 10:54:24,334 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 10:54:24,335 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:12:46,833 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:12:46,833 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-07 11:13:51,040 - CRITICAL - controller-admin_remove_camp-Line717 - [Errno 2] No such file or directory: '/Users/marthacjones/Library/CloudStorage/OneDrive-UniversityCollegeLondon/UCL_comp_sci/COMP0066_Humanitarian_Management_System/data/refugee.csv'
+2023-12-07 11:14:55,177 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-07 11:14:55,177 - DEBUG - controller-initialise-Line22 - Controller is initialised.
+2023-12-08 10:37:43,683 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 10:37:43,683 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 10:37:46,362 - CRITICAL - controller-login-Line121 - [Errno 2] No such file or directory: '/Users/linqingzhao/PycharmProjects/COMP0066/humanitarian_management_system/humanitarian_management_system/data/user.csv'
+2023-12-08 10:46:35,476 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 10:46:35,476 - DEBUG - controller-initialise-Line26 - Controller is initialised.
+2023-12-08 10:49:56,789 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 10:49:56,789 - DEBUG - controller-initialise-Line26 - Controller is initialised.
 2023-12-08 12:38:03,180 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 12:38:03,180 - DEBUG - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 12:38:03,783 - CRITICAL - controller-login-Line122 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data\\user.csv'
@@ -689,6 +322,39 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 12:54:57,486 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 12:56:51,680 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 12:56:51,680 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:24:09,280 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:24:09,280 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:26:34,774 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:26:34,775 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:29:29,641 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:29:29,641 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:30:00,093 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:30:00,093 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:39:22,851 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:39:22,851 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:39:30,711 - CRITICAL - controller-admin_display_summary-Line299 - 'no_camp'
+2023-12-08 15:41:51,608 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:41:51,608 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:41:55,768 - CRITICAL - controller-admin_display_summary-Line299 - ('no_camp', 'description', 'ongoing')
+2023-12-08 15:44:27,713 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:44:27,713 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:44:37,162 - CRITICAL - controller-admin_display_summary-Line299 - drop() takes from 1 to 2 positional arguments but 4 positional arguments (and 1 keyword-only argument) were given
+2023-12-08 15:45:09,064 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:45:09,065 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:46:13,798 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:46:13,798 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:48:05,723 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:48:05,723 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:48:38,570 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:48:38,570 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:51:06,147 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:51:06,147 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:51:56,754 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:51:56,755 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:52:25,149 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:52:25,149 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:52:53,248 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:52:53,248 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 14:40:17,111 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 14:40:17,111 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 15:02:11,633 - INFO - main-main-Line14 - Starting Humanitarian Management System
