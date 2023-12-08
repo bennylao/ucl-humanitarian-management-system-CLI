@@ -1896,7 +1896,6 @@ class Controller:
     def display_camp_resource(self, c):
         cid = helper.check_vol_assigned_camp(self.user.username)
         ManagementView.display_camp_resource(cid)
-        print(cid)
 
         try:
             csv_path = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
