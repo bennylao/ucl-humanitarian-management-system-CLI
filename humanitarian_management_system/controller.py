@@ -333,7 +333,7 @@ class Controller:
             event_info = helper.validate_event_input()
             if event_info is not None:
                 Event.create_new_record(event_info)
-                print("\n✔New event created.")
+                print("\n\u2714 New event created.")
             else:
                 return
         except Exception as e:
@@ -633,14 +633,19 @@ class Controller:
             Event.display_events(filtered_df1)
 
             while True:
-                modify_camp_id = input("\nWhich camp do you want to modify? Please enter campID: ")
-
-                if modify_camp_id == 'RETURN':
-                    return
-                elif int(modify_camp_id) not in filtered_campID:
-                    print(f"Invalid input! Please enter an integer from {filtered_campID} for Camp ID.")
+                try:
+                    modify_camp_id = input("\nWhich camp do you want to modify? Please enter campID: ")
+                    modify_camp_id = int(modify_camp_id)
+                    if modify_camp_id == 'RETURN':
+                        return
+                    elif int(modify_camp_id) not in filtered_campID:
+                        print(f"\nInvalid input! Please enter an integer from {filtered_campID} for Camp ID.")
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    print(f"\nInvalid input! Please enter an integer from {filtered_campID} for Camp ID.")
                     continue
-                break
 
             while True:
                 csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")

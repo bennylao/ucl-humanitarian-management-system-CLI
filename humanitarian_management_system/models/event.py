@@ -141,7 +141,7 @@ class Event:
             if title == 'RETURN':
                 return
             helper.modify_csv_value(event_csv_path, row, 'title', title)
-            print("\nPlan title updated.")
+            print("\n\u2714 Plan title updated.")
         except FileNotFoundError as e:
             print(f"\nFile not found."
                   f"\nPlease contact admin for further assistance."
@@ -168,7 +168,7 @@ class Event:
                     location = ''
                     continue
             helper.modify_csv_value(event_csv_path, row, 'location', location)
-            print("\nLocation updated.")
+            print("\n\u2714 Location updated.")
         except FileNotFoundError as e:
             print(f"\nFile not found."
                   f"\nPlease contact admin for further assistance."
@@ -185,7 +185,7 @@ class Event:
             if description == 'RETURN':
                 return
             helper.modify_csv_value(event_csv_path, row, 'description', description)
-            print("\nDescription updated.")
+            print("\n\u2714 Description updated.")
         except FileNotFoundError as e:
             print(f"\nFile not found."
                   f"\nPlease contact admin for further assistance."
@@ -211,7 +211,7 @@ class Event:
                         formatted_start_date = start_date.strftime('%Y-%m-%d')
                         helper.modify_csv_value(event_csv_path, row, 'startDate', formatted_start_date)
                         Event.update_ongoing()
-                        print("\nStart date updated.")
+                        print("\n\u2714 Start date updated.")
                         break
                 except ValueError:
                     print("\nInvalid date format entered.")
@@ -235,7 +235,7 @@ class Event:
                         return
                     if end_date == 'NONE':
                         helper.modify_csv_value(event_csv_path, row, 'endDate', None)
-                        print("\nEnd date updated.")
+                        print("\n\u2714 End date updated.")
                         break
                     else:
                         end_date = datetime.datetime.strptime(end_date, date_format)
@@ -251,7 +251,7 @@ class Event:
             elif end_date.date() > datetime.date.today():
                 formatted_end_date = end_date.strftime('%Y-%m-%d')
                 helper.modify_csv_value(event_csv_path, row, 'endDate', formatted_end_date)
-                print("\nEnd date updated.")
+                print("\n\u2714 End date updated.")
             else:
                 camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
                 df_camp = pd.read_csv(camp_csv_path)
@@ -272,7 +272,7 @@ class Event:
                         if row_camp_list:
                             for row_camp in row_camp_list:
                                 helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-                        print("\n***  The event has been successfully closed.  ***")
+                        print("\n\u2714 The event has been successfully closed.")
                         break
                     elif result == "no":
                         print("\n***  The operation to close the event was canceled.  ***")
@@ -371,7 +371,7 @@ class Event:
                     if row_camp_list:
                         for row_camp in row_camp_list:
                             helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-                    print("\n***  The event has been successfully closed.  ***")
+                    print("\n\u2714 The event has been successfully closed.")
                     break
                 elif result == "no":
                     print("\n***  The operation to close the event was canceled.  ***")
@@ -448,7 +448,7 @@ class Event:
                     if row_camp_list:
                         for row_camp in row_camp_list:
                             helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-                    print("\n***  The event has been successfully deleted.  ***")
+                    print("\n\u2714 The event has been successfully deleted.")
                     break
                 elif result == "no":
                     print("\n***  The operation to delete the event was canceled.  ***")
