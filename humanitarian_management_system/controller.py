@@ -193,7 +193,7 @@ class Controller:
             vol_id_arr = []
             df = pd.read_csv(csv_path)
             df = df.loc[df['userType'] == 'volunteer']
-            df = df.loc[:, ~df.columns.isin(['userType', 'isActive', 'roleID', 'eventID', 'campID'])]
+            df = df.loc[:, ~df.columns.isin(['userType', 'password'])]
             print("Here is a list of relevant information for all existing volunteers: ")
             Event.display_events(df)
 
@@ -202,23 +202,19 @@ class Controller:
 
             while True:
                 select_id = input("Please select a volunteer ID whose information you would like to change: ")
-                if select_id not in vol_id_arr:
+                if select_id in vol_id_arr:
+                    break
+                elif select_id == 'RETURN':
+                    return
+                else:
                     print("Invalid volunteer ID entered!")
                     continue
-                if select_id == 'RETURN':
-                    return
-                break
 
-            csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+            select_id = int(select_id)
             df = pd.read_csv(csv_path)
-
-            # # OOP concept - assign user info to Volunteer class attribute by user selected volunteer ID
-            df_name = df.loc[df['userID'] == int(select_id)]['username'].tolist()[0]
-            df_password = df.loc[df['userID'] == int(select_id)]['password'].tolist()[0]
-
-            row = User.validate_user(df_name, str(df_password))
-            change_user = Volunteer(row['userID'], *row[4:])
-            self.user.edit_volunteer(change_user)
+            row = df.loc[df['userID'] == select_id].squeeze()
+            target_user = Volunteer(row['userID'], *row[4:])
+            self.user.edit_volunteer_profile(target_user)
         except Exception as e:
             print(f"\nData file seems to be damaged."
                   f"\nPlease contact admin for further assistance."

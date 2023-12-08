@@ -689,3 +689,12 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 12:54:57,486 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 12:56:51,680 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 12:56:51,680 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 14:40:17,111 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 14:40:17,111 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:02:11,633 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:02:11,634 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:02:21,300 - CRITICAL - controller-edit_volunteer-Line222 - Volunteer.__init__() takes 11 positional arguments but 15 were given
+2023-12-08 15:03:41,650 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:03:41,650 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 15:05:05,626 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 15:05:05,626 - INFO - controller-initialise-Line27 - Controller is initialised.

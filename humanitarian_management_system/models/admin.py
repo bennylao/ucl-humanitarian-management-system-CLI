@@ -1,5 +1,7 @@
 from pathlib import Path
 import pandas as pd
+import passlib.hash
+
 from .user import User
 from humanitarian_management_system import helper
 from ..views import ManagementView
@@ -231,36 +233,35 @@ class Admin(User):
         print("\n" + table_str)
         return joined_df
 
-    def edit_volunteer(self, change_user):
-
+    def edit_volunteer_profile(self, change_user):
         while True:
             ManagementView.display_account_menu()
             user_selection = helper.validate_user_selection(ManagementView.get_account_options())
             if user_selection == "1":
                 # change username
-                self.user_change_username(change_user)
+                self.change_volunteer_username(change_user)
             if user_selection == "2":
                 # change password
-                self.user_change_password(change_user)
+                self.change_volunteer_password(change_user)
             if user_selection == "3":
                 # change name
-                self.user_change_name(change_user)
+                self.change_volunteer_name(change_user)
             if user_selection == "4":
                 # change email
-                self.user_change_email(change_user)
+                self.change_volunteer_email(change_user)
             if user_selection == "5":
                 # change phone
-                self.user_change_phone(change_user)
+                self.change_volunteer_phone(change_user)
             if user_selection == "6":
                 # change occupation
-                self.user_change_occupation(change_user)
+                self.change_volunteer_occupation(change_user)
             if user_selection == "R":
                 break
             if user_selection == "L":
                 break
 
     @staticmethod
-    def user_change_username(change_user):
+    def change_volunteer_username(change_user):
         existing_usernames = User.get_all_usernames()
         print(f"\nCurrent Username: '{change_user.username}'")
         while True:
@@ -282,7 +283,7 @@ class Admin(User):
                 continue
 
     @staticmethod
-    def user_change_password(change_user):
+    def change_volunteer_password(change_user):
         # specify allowed characters for passwords
         allowed_chars = r"[!@#$%^&*\w]"
         while True:
@@ -298,7 +299,7 @@ class Admin(User):
                 if confirm_password == "RETURN":
                     return
                 elif confirm_password == new_password:
-                    change_user.password = new_password
+                    change_user.password = passlib.hash.sha256_crypt.hash(new_password)
                     # update csv file
                     change_user.update_password()
                     print("\nPassword changed successfully.")
@@ -311,7 +312,7 @@ class Admin(User):
                 continue
 
     @staticmethod
-    def user_change_name(change_user):
+    def change_volunteer_name(change_user):
         print(f"\nCurrent Name: {change_user.first_name} {change_user.last_name}")
         while True:
             while True:
@@ -346,7 +347,7 @@ class Admin(User):
                 break
 
     @staticmethod
-    def user_change_email(change_user):
+    def change_volunteer_email(change_user):
         # specify allowed characters for email
         email_format = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
         all_emails = User.get_all_emails()
@@ -375,7 +376,7 @@ class Admin(User):
                 continue
 
     @staticmethod
-    def user_change_phone(change_user):
+    def change_volunteer_phone(change_user):
         print(f"\nCurrent Phone Number: {change_user.phone}")
         while True:
             new_phone = input("\nPlease enter new phone number: ")
@@ -392,7 +393,7 @@ class Admin(User):
               f"\nYour new phone is '{change_user.phone}")
 
     @staticmethod
-    def user_change_occupation(change_user):
+    def change_volunteer_occupation(change_user):
         print(f"\nCurrent Occupation: {change_user.occupation}")
         while True:
             new_occupation = input("\nPlease enter your new occupation: ")

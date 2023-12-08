@@ -7,10 +7,9 @@ from .user import User
 class Volunteer(User):
 
     def __init__(self, user_id, username, password, first_name, last_name, email, phone, occupation,
-                 role_id, event_id, camp_id):
+                 role_id, camp_id):
         super().__init__(user_id, username, password, first_name, last_name, email, phone, occupation)
         self.role_id = role_id
-        self.event_id = event_id
         self.camp_id = camp_id
 
     def show_account_info(self):
