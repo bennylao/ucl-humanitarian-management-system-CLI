@@ -492,3 +492,14 @@ Name: userID, dtype: bool, 'campID')
 2023-12-07 22:44:07,595 - DEBUG - controller-initialise-Line24 - Controller is initialised.
 2023-12-07 22:46:00,084 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
 2023-12-07 22:46:00,084 - DEBUG - controller-initialise-Line24 - Controller is initialised.
+2023-12-08 00:40:41,428 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:40:41,428 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:40:43,957 - CRITICAL - controller-login-Line123 - not a valid sha256_crypt hash
+2023-12-08 00:41:43,691 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:41:43,691 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:43:03,347 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:43:03,347 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:43:53,980 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:43:53,980 - DEBUG - controller-initialise-Line23 - Controller is initialised.
+2023-12-08 00:49:58,327 - DEBUG - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 00:49:58,327 - DEBUG - controller-initialise-Line26 - Controller is initialised.

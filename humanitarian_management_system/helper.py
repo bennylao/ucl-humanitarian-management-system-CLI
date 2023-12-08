@@ -5,6 +5,7 @@ import pandas as pd
 import datetime
 import math
 import logging
+from passlib.hash import sha256_crypt
 
 
 def validate_user_selection(options):
@@ -40,6 +41,7 @@ def validate_registration(usernames):
         if password == 'RETURN':
             return
         elif re.match(allowed_chars, password):
+            password = sha256_crypt.hash(password)
             break
         else:
             print("Invalid password entered.\n"

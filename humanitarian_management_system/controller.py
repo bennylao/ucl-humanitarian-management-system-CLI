@@ -4,6 +4,9 @@ import pandas as pd
 import re
 import math
 import logging
+
+from passlib.handlers.sha2_crypt import sha256_crypt
+
 from humanitarian_management_system import helper
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder,
@@ -115,11 +118,6 @@ class Controller:
             print(f"\nData file is not found or is damaged."
                   f"\nPlease contact admin for further assistance."
                   f"\n{e}")
-            logging.critical(f"{e}")
-        except Exception as e:
-            print(f"\nData file seems to be damaged."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
             logging.critical(f"{e}")
 
     def admin_main(self):
@@ -1583,7 +1581,7 @@ class Controller:
                     if confirm_password == "RETURN":
                         return
                     elif confirm_password == new_password:
-                        self.user.password = new_password
+                        self.user.password = sha256_crypt.hash(new_password)
                         # update csv file
                         self.user.update_password()
                         print("\nPassword changed successfully.")
@@ -1665,7 +1663,7 @@ class Controller:
                 elif new_email in all_emails:
                     print("\nSorry, email is already linked to other account.")
                 else:
-                    print("Invalid password entered.\n"
+                    print("Invalid email entered.\n"
                           "Only alphabet, numbers and !@#$%^&* are allowed.")
                     continue
         except Exception as e:
