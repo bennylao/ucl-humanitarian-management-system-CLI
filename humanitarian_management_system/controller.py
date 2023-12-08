@@ -768,7 +768,10 @@ class Controller:
                         continue
                     elif delete_camp_id in resource_camp_id_list:
                         print(f"\nThere is allocated resource in camp {delete_camp_id}."
-                              f"\nPlease transfer them before deleting the camp.")
+                              f"\nPlease transfer them before deleting the camp. Head to resource management"
+                              f" and remove these resources into the unallocated section. If this camp is already 'closed'"
+                              f"\nthen you will be automatically prompted to empty this camp then you can come back and "
+                              f"delete.")
                         continue
                     else:
                         print("\n*The following shows the info of the camp you have chosen*")
@@ -857,15 +860,19 @@ class Controller:
                     print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
 
             filtered_camp_id = df1[df1['eventID'] == event_id]['campID'].tolist()
+            filtered_camp_id_int = [int(i) for i in filtered_camp_id]
             print('The following shows the info of all camps from the event')
             Event.display_events(df1[df1['eventID'] == event_id])
             while True:
                 try:
                     close_camp_id = input("\nWhich camp do you want to close? Please enter campID: ")
-                    if close_camp_id == "RETURN":
+                    if close_camp_id.upper() == "RETURN":
                         return
                     close_camp_id = int(close_camp_id)
-                    if close_camp_id not in filtered_camp_id:
+                    if (df1.loc[df1['campID'] == close_camp_id, 'status'] == "closed").any():
+                        print("\nThat camp is already closed! Don't worry. Let's go back.")
+                        return
+                    elif close_camp_id not in filtered_camp_id:
                         print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
                         continue
                     else:
@@ -876,12 +883,48 @@ class Controller:
                     print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
 
             while True:
-                aa = input(f"\nAre you sure to close the camp {close_camp_id}? (yes/no)\n") ############## do we delete all refugee when camp is closed?
+                aa = input(f"\nAre you sure to close the camp {close_camp_id}? (yes/no)\n")
                 if aa == "yes":
                     # close the camp
                     df1.loc[df1['campID'] == int(close_camp_id), 'status'] = "closed"
                     df1.to_csv(camp_csv_path, index=False)
                     print("\n\u2714 You have Successfully closed the camp!")
+                    try:
+                        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+                        user_df = pd.read_csv(user_csv_path)
+                        logging.info("User file loaded successfully for admin closing a camp.")
+                        camps_in_event = df1.loc[df1['eventID'] == event_id, 'campID'].tolist()
+                        volunteers_in_camp = user_df.loc[user_df['campID'] == close_camp_id, 'campID'].tolist()
+                        print(f"\nYou've closed camp {close_camp_id}. But now you might want to allocate the current volunteers "
+                              f"to another camp in the same event. Or just leave them if preferred.")
+                        move_volunteers = input("\n\nDo you want to move volunteers to another camp?"
+                                                "\nEnter 'y' or 'n': ")
+                        if move_volunteers.lower() == 'n':
+                            break
+                        elif move_volunteers.lower() == 'y':
+                            if len(volunteers_in_camp) == 0:
+                                print("Just checked - looks like there are no volunteers left in that camp, anyway. "
+                                      "Redirecting you back now.")
+                                return
+                            print("Below are the volunteers in the camp: ")
+                            print('\n\n', volunteers_in_camp)
+
+                            new_camp = input("\nFrom the list below, which are the camps in the same event as the one"
+                                             "you have just closed, please enter which camp you want to move volunteers to: ")
+                            print(filtered_camp_id)
+                            if new_camp.lower() == 'return':
+                                return
+                            else:
+                                try:
+                                    new_camp = int(new_camp)
+                                    break
+                                except ValueError as e:
+                                    logging.info(f"Error when user is selecting new camp to move volunteers to.")
+                                    print("Oh no! R")
+                    except Exception as e:
+                        logging.critical(f"Error {e} when trying to display volunteers in camp when closing a camp.")
+                        print(f"\nOh no. Error {e} has occurred. We'll take you back. The camp has still been closed "
+                              f"but you'll have to manually remove volunteers.")
                     return
                 elif aa == "no":
                     return
@@ -890,7 +933,17 @@ class Controller:
                 else:
                     print("Invalid input! Please enter 'yes' or 'no'")
                     continue
-        # except Exception as e:
+            if new_camp in filtered_camp_id:
+                for index, row in volunteers_in_camp.iterrows():
+                    old_camp_id = row['campID']
+                    row_index_old_camp = user_df[user_df['campID'] == old_camp_id].index
+                    user_df.at[row_index_old_camp[0], 'campID'] = new_camp
+                    df1.loc[df1['campID'] == int(old_camp_id), 'volunteerPop'] -= 1
+                    df1.loc[df1['campID'] == int(new_camp), 'volunteerPop'] += 1
+            print(f"Successfully assigned these volunteers to the new camp {new_camp}! See below: ")
+            print(df1[df1['campId'] == close_camp_id].to_markdown)
+            print(df1[df1['campID'] == new_camp].to_markdown)
+                    # except Exception as e:
         #     print(f"\nData file seems to be damaged."
         #           f"\nPlease contact admin for further assistance."
         #           f"\n[Error] {e}")
@@ -1121,8 +1174,9 @@ class Controller:
             df = pd.read_csv(csv_path)
             logging.info("successfully got info for camp csv file for volunteer joining a camp")
             ManagementView.join_camp_message()
-            index = helper.display_camp_list()
-
+            # index = helper.display_camp_list()
+            index = (df[df['status'] == 'open'].set_index('campID', drop=False))
+            Event.display_events(index)
             cid = helper.check_vol_assigned_camp(self.user.username)
             print(f"You're currently assigned to camp {int(cid)}.")
 
@@ -1132,7 +1186,7 @@ class Controller:
                     return
                 try:
                     logging.info(f"successfully changed user input into {int(select_index)} index")
-                    if int(select_index) not in index:
+                    if int(select_index) not in int(index['campID']):
                         print("invalid index option entered!")
                         continue
                     break
@@ -1168,10 +1222,8 @@ class Controller:
         while True:
             csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
             df2 = pd.read_csv(csv_path2)
-
             # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
             Event.display_events(df2[(df2['campID'] == camp_id) & (df2['eventID'] == event_id)])
-
             cid = helper.check_vol_assigned_camp(self.user.username)
             print(f"You're currently assigned to camp {int(cid)}.")
 
