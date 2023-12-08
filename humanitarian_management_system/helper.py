@@ -1339,9 +1339,8 @@ def check_vol_assigned_camp(username):
     # check if volunteer is already assigned to a camp, if no exit to menu
     cid = df.loc[df['username'] == username]['campID'].tolist()[0]
     # check if volunteer user already join a camp
-    if math.isnan(cid):
+    if cid == 0:
         print("You must first join a camp!")
-        return
     return cid
 
 

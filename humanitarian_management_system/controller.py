@@ -1857,13 +1857,17 @@ class Controller:
             cid = helper.check_vol_assigned_camp(self.user.username)
             csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
             df = pd.read_csv(csv_path)
-            if df.loc[df['campID'] == int(cid)]['refugeePop'].tolist()[0] == 0:
-                print(f" No refugee(s) in camp {int(cid)}.")
+
+            if cid == 0:
                 return
+            else:
+                if df.loc[df['campID'] == cid]['refugeePop'].tolist()[0] == 0:
+                    print(f" No refugee(s) in camp {cid}.")
+                    return
 
             ManagementView.display_vol_refugee(cid)
             r.display_info(user, cid)
-            print(f"You're currently assigned to camp {int(cid)}.")
+            print(f"You're currently assigned to camp {cid}.")
         except Exception as e:
             print(f"\nRefugee or medical data file may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
