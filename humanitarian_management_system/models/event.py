@@ -24,11 +24,6 @@ class Event:
         """
         This is the function to create a new event and write new record into csv file.
         """
-        # When an event is created after deleting the last row of the event,
-        # the new eid will be the same as the eid of the deleted event.
-        # To ensure the uniqueness of the event ID, the largest eid ever used is stored.
-        # When creating an event, compare this max_used_eid with the eid in event file,
-        # take the larger one and add 1 to get the new eid.
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         if pd.read_csv(event_csv_path).empty:
             last_event_id = 0
@@ -45,8 +40,6 @@ class Event:
                                          'startDate', 'endDate'])
         event_df.to_csv(event_csv_path, mode='a', index=False, header=False)
 
-        # To prevent confusion caused by directly modifying the eventTesting file
-        # use event_id, instead of max_used_eid, add 1 to update max_used_eid
         max_used_eid = event_id
         helper.modify_csv_value(max_eid_csv_path, 0, 'max_used_eid', max_used_eid)
 
@@ -97,7 +90,6 @@ class Event:
 
         while True:
             try:
-                # Maybe this could be changed into a menu
                 what_to_edit = input('\n--> Choose one to edit (title/ location/ description/ startDate/ endDate):')
                 if what_to_edit == 'RETURN':
                     return
@@ -163,8 +155,6 @@ class Event:
     @staticmethod
     def __change_start_date(row):
         """Should this be an option? What would be the implications of this?"""
-        #### maybe when the start date is a day in the future, and the user wants to adjust the schedule
-        #### Can the start date of an event that has already been started be changed?
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         df = pd.read_csv(event_csv_path)
         date_format = '%d/%m/%Y'
@@ -189,10 +179,6 @@ class Event:
 
     @staticmethod
     def __change_end_date(row):
-        # when a user goes to 'end event', we have a pop up
-        # which asks 'are you sure' and says that they won't be able to reopen the event
-        # after they have ended it, as the requirement says "the
-        # humanitarian plan must be closed in the system."
         event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
         df = pd.read_csv(event_csv_path)
         date_format = '%d/%m/%Y'
@@ -224,10 +210,6 @@ class Event:
             df_camp = pd.read_csv(camp_csv_path)
             row_camp_list = df_camp[
                 (df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
-            # root = tk.Tk()
-            # root.withdraw()
-            # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-            #                                                "You'll also close the camps in that event.")
             result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
             if result == "yes":
                 ongoing = False
@@ -242,12 +224,8 @@ class Event:
                     for row_camp in row_camp_list:
                         helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
                 print("\n***  The event has been successfully closed.  ***")
-                # tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
             else:
                 print("\n***  The operation to close the event was canceled.  ***")
-            #     tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-            # root.update()
-            # root.destroy()
 
     @staticmethod
     def display_events(df):
@@ -263,7 +241,7 @@ class Event:
         for index, series in df.iterrows():
             try:
                 start_date = datetime.datetime.strptime(str(series['startDate']), '%Y-%m-%d')
-            except ValueError:  # startDate may exist this error only when entering None in creating an event
+            except ValueError:
                 start_date = None
             try:
                 end_date = datetime.datetime.strptime(str(series['endDate']), '%Y-%m-%d')
@@ -311,10 +289,6 @@ class Event:
         row = df[df['eventID'] == int(eid_to_close)].index[0]
         row_camp_list = df_camp[
             (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
-        # root = tk.Tk()
-        # root.withdraw()
-        # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to close the event?\n"
-        #                                                "You'll also close the camps in that event.")
         result = input("\nAre you sure you want to close the event? You'll also close the camps in that event. (yes/no)")
         if result == "yes":
             ongoing = False
@@ -324,12 +298,8 @@ class Event:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
             print("\n***  The event has been successfully closed.  ***")
-            # tk.messagebox.showinfo("Closed successfully", "The event has been successfully closed.")
         else:
             print("\n***  The operation to close the event was canceled.  ***")
-        #     tk.messagebox.showinfo("Cancel", "The operation to close the event was canceled.")
-        # root.update()
-        # root.destroy()
 
     @staticmethod
     def delete_event():
@@ -353,11 +323,6 @@ class Event:
             except ValueError:
                 print("\nInvalid event ID entered.")
                 continue
-        # root = tk.Tk()
-        # root.withdraw()
-        # result = tk.messagebox.askquestion("Reminder", "Are you sure you want to delete the event?"
-        #                                                "You'll also close the camps and lose all the information about "
-        #                                                "the refugees in that event.")
 
         result = input("Are you sure you want to delete the event? "
                        "You'll also close the camps and lose all the information about the refugees in that event. (yes/no)")
@@ -392,10 +357,6 @@ class Event:
             if row_camp_list:
                 for row_camp in row_camp_list:
                     helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
-            # tk.messagebox.showinfo("Closed successfully", "The event has been successfully deleted.")
             print("\n***  The event has been successfully deleted.  ***")
         else:
             print("\n***  The operation to delete the event was canceled.  ***")
-        #     tk.messagebox.showinfo("Cancel", "The operation to delete the event was canceled.")
-        # root.update()
-        # root.destroy()
