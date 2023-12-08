@@ -683,7 +683,7 @@ class Controller:
                                     # change corresponding refugee & volunteer & resource allocation camp ID
                                     ref_id_arr = df_r.loc[df_r['campID'] == int(modify_camp_id)]['refugeeID'].tolist()
                                     vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
-                                    res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['resourceID'].tolist()
+                                    res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['campID'].tolist()
 
                                     for j in ref_id_arr:
                                         helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
@@ -694,7 +694,7 @@ class Controller:
                                                                  int(k), 'campID', int(new_value))
 
                                     for m in res_id_arr:
-                                        helper.modify_csv_pandas("data/resourceAllocation.csv", 'resourceID',
+                                        helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
                                                                  int(m), 'campID', int(new_value))
 
                                 except TypeError:
@@ -1238,6 +1238,8 @@ class Controller:
 
         csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
         df_r = pd.read_csv(csv_path_r)
+        csv_path_a = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
+        df_a = pd.read_csv(csv_path_a)
         while True:
             csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
             df2 = pd.read_csv(csv_path2)
@@ -1284,12 +1286,18 @@ class Controller:
                             try:
                                 # change corresponding refugee & volunteer camp ID
                                 ref_id_arr = df_r.loc[df_r['campID'] == int(camp_id)]['refugeeID'].tolist()
+                                res_id_arr = df_r.loc[df_r['campID'] == int(camp_id)]['campID'].tolist()
 
                                 for j in ref_id_arr:
                                     helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
                                                              int(j), 'campID', int(new_value))
                                 helper.modify_csv_pandas("data/user.csv", 'userID',
                                                          user_id, 'campID', int(new_value))
+
+                                for m in res_id_arr:
+                                    helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
+                                                             int(m), 'campID', int(new_value))
+
                             except:
                                 break
 
@@ -1367,6 +1375,7 @@ class Controller:
                                     "\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
                                     f"Camp {cid} has a current population of {new_potential_refugee_pop} and a capacity of "
                                     f"{new_camp_capacity}.\nLet's go again.\n")
+                                continue
                             break
                     except ValueError:
                         print("Invalid camp ID entered!")

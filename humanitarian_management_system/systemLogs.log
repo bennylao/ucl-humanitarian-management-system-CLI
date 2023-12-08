@@ -768,3 +768,21 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 17:58:12,777 - INFO - controller-initialise-Line28 - Controller is initialised.
 2023-12-08 18:06:27,378 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 18:06:27,378 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:28:05,736 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:28:05,736 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:28:48,690 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:28:48,690 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:29:36,494 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:29:36,494 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:30:29,427 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:30:29,428 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:40:19,847 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:40:19,847 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:41:23,537 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:41:23,537 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:41:48,916 - CRITICAL - controller-admin_modify_camp-Line780 - 'DataFrame' object has no attribute 'tolist'
+2023-12-08 18:42:54,210 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:42:54,211 - INFO - controller-initialise-Line28 - Controller is initialised.
+2023-12-08 18:44:05,722 - CRITICAL - controller-admin_modify_camp-Line780 - False
+2023-12-08 18:44:52,124 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 18:44:52,124 - INFO - controller-initialise-Line28 - Controller is initialised.
