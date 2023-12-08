@@ -1007,21 +1007,21 @@ class Controller:
                 user_selection = input("--> \n: ")
 
                 if user_selection == '1':
-                    print("Here is the current snapshot of: \n how resources are distributed across each camp; "
-                          "and the status and refugee population of each camp.")
+                    print("\nHere is the current snapshot of: \n> how resources are distributed across each camp; and"
+                          "\n> the status and refugee population of each camp.\n")
                     table = resource_report.master_resource_stats()
                     table_pretty = resource_report.PRETTY_PIVOT_CAMP(table)
                     print(table_pretty.to_string(index=False).replace('.0', '  '))
                 elif user_selection == '2':
                     unbalanced = resource_report.ALLOC_IDEAL_OUTPUT()  # if empty then other message
                     if unbalanced.empty:
-                        print("There are currently no unbalanced resources across any camps that "
-                              "deviate 10% out of the ideal amounts.")
+                        print("\n＼(^o^)／ GOOD NEWS ＼(^o^)／ There are currently no unbalanced resources across any camps (that "
+                              "deviate +/-10% of the ideal amounts).")
                     else:
                         print("Below are all the resource x camp pairs where the resource is unbalanced.\n")
-                        print("A resource is considered unbalanced "
-                              "if the current level falls outwith a 10% threshold of the ideal amount.\n")
-                        print("The ideal amount is proportional to the refugee population (camp refugees /  "
+                        print("A resource is considered unbalanced if: \n"
+                              "...the current level falls outwith a +/-10% threshold of the ideal amount.\n")
+                        print("The ideal amount is proportional to the refugee population\n(camp refugees /  "
                               "total refugees in open camps X total across all camps per resource)\n")
                         print(unbalanced.to_markdown(index=False))
                 else:
