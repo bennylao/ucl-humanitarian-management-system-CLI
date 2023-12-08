@@ -881,3 +881,9 @@ Name: userID, dtype: bool, 'campID')
 2023-12-08 19:24:32,875 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-08 19:24:32,876 - INFO - controller-initialise-Line27 - Controller is initialised.
 2023-12-08 19:24:42,325 - INFO - helper-add_refugee_to_session-Line959 - Refugee and training session data files loaded successfully to add a refugee to a session.
+2023-12-08 21:36:41,078 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 21:36:41,078 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 21:46:37,072 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 21:46:37,072 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-08 21:49:29,618 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-08 21:49:29,618 - INFO - controller-initialise-Line27 - Controller is initialised.

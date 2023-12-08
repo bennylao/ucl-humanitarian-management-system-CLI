@@ -9,7 +9,7 @@ from passlib.handlers.sha2_crypt import sha256_crypt
 
 from humanitarian_management_system import helper
 from humanitarian_management_system.data_analysis import (visualization_v, resources_distribution, medical_info,
-                                                          gender_distribution, age_distribution)
+                                                          gender_distribution, age_distribution, num_camp)
 from humanitarian_management_system.models import (User, Admin, Volunteer, Event, Camp, Refugee,
                                                    ResourceReport, ResourceAllocator, ResourceAdder,
                                                    ResourceCampCreateDelete)
@@ -456,7 +456,7 @@ class Controller:
             AdminView.display_data_visual_menu()
             try:
                 userInput = int(input("Please choose one option: "))
-                if userInput not in range(1, 6):
+                if userInput not in range(1, 8):
                     print('Invalid Input, please try again')
                     continue
                 else:
@@ -465,6 +465,10 @@ class Controller:
                         camp_map.map()
 
                     elif userInput == 2:
+                        c = num_camp
+                        c.num_camp()
+
+                    elif userInput == 3:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
@@ -475,7 +479,7 @@ class Controller:
                                 gender.gender_pie_chart(campId)
                                 break
 
-                    elif userInput == 3:
+                    elif userInput == 4:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
@@ -487,7 +491,7 @@ class Controller:
                                 print(3)
                                 break
 
-                    elif userInput == 4:
+                    elif userInput == 5:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
@@ -497,7 +501,7 @@ class Controller:
                                 r = resources_distribution
                                 r.resources(campId)
                                 break
-                    elif userInput == 5:
+                    elif userInput == 6:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
@@ -1207,21 +1211,31 @@ class Controller:
                 continue
 
     def volunteer_edit_camp(self):
-
-        user_id = self.user.user_id
-        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
-        # active_index = helper.extract_active_event(camp_csv_path)[0]
-        df = pd.read_csv(user_csv_path)
-        dff = df[df['userID'] == int(user_id)]
-        event_id = dff.at[1, 'eventID']
-        camp_id = dff.at[1, 'campID']
-
-        csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
-        df_r = pd.read_csv(csv_path_r)
+        try:
+            user_id = self.user.user_id
+            user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+            # active_index = helper.extract_active_event(camp_csv_path)[0]
+            df = pd.read_csv(user_csv_path)
+            dff = df[df['userID'] == int(user_id)]
+            event_id = dff.at[1, 'eventID']
+            camp_id = dff.at[1, 'campID']
+            logging.info("User file opened successfully.")
+            csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
+            df_r = pd.read_csv(csv_path_r)
+            logging.info("Refugee file opened successfully.")
+        except FileNotFoundError as e:
+            logging.critical("Not able to open user and/or refugee files.")
+            print(f"Oh no. We haven't been able to locate the file for this. \nError: {e}")
+            return
         while True:
-            csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
-            df2 = pd.read_csv(csv_path2)
-
+            try:
+                csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
+                df2 = pd.read_csv(csv_path2)
+                logging.info("Camp file opened successfully.")
+            except FileNotFoundError as e:
+                logging.critical("Not able to open camp file.")
+                print(f"Oh no. We haven't been able to locate the file for this. \nError: {e}")
+                return
             # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
             Event.display_events(df2[(df2['campID'] == camp_id) & (df2['eventID'] == event_id)])
 
@@ -1233,6 +1247,7 @@ class Controller:
 
             for i, column_name in enumerate(df2.columns[0:], start=1):
                 print(f"[{i}] {column_name}")
+                logging.debug("Successfully printed iteration in camp dataframe.")
             try:
                 print("[8] QUIT editing")
                 target_column_index = input(f"Which column do you want to modify(1~7)? Or quit editing(8): ")
