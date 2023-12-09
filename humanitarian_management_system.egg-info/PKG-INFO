@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: humanitarian-management-system
+Version: 1.0.0
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: dash
+Requires-Dist: plotly
+Requires-Dist: passlib
+Requires-Dist: tabulate

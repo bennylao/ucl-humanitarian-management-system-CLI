@@ -5,13 +5,13 @@ import numpy as np
 
 class ResourceReport():
     def __init__(self):
-        resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
+        self.resource_stock_csv_path = Path(__file__).parents[1].joinpath("data/resourceStock.csv")
         resource_allocaation_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
         self.resource__nallocated_stock_csv_path = Path(__file__).parents[1].joinpath(
             "data/resourceUnallocatedStock.csv")
         self.camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
         self.camp_df = pd.read_csv(self.camp_csv_path)
-        self.totalResources_df = pd.read_csv(resource_stock_csv_path)
+        self.totalResources_df = pd.read_csv(self.resource_stock_csv_path)
         self.resourceAllocs_df = pd.read_csv(resource_allocaation_csv_path)
         self.unallocResources_df = pd.read_csv(self.resource__nallocated_stock_csv_path)
         self.joined_df = pd.merge(self.totalResources_df, self.resourceAllocs_df, on='resourceID', how='inner')
@@ -105,12 +105,13 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
         return valid_range
 
     def valid_open_camps_with_refugees(self):
+        # subset of all_camps_with_refugees
         condition = (self.camp_df['refugeePop'] > 0) & (self.camp_df['status'] == 'open')
         valid_range = self.camp_df.loc[condition, ['campID', 'refugeePop']]
         return valid_range
 
     def valid_all_camps_with_refugees(self):  ####### come back to this!!
-        condition = self.camp_df['status'] == 'open'
+        condition = self.camp_df['refugeePop'] > 0
         valid_range = self.camp_df.loc[condition, ['campID', 'refugeePop']]
         return valid_range
 
@@ -293,7 +294,7 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
 
     def PRETTY_RESOURCE(self, table: pd.DataFrame, valid_r: list):
         all = self.PRETTY_PIVOT_CAMP(table)
-        valid_r_str = [str(integer) for integer in valid_r] # convert into a list of strings due to rendering ...
+        valid_r_str = [str(integer)+'.0' for integer in valid_r] # convert into a list of strings due to rendering ...
         # Assuming r_id_select is a list of resource IDs
         # Filter rows where 'resourceID' is in the list of r_id_select
         filtered_rows = all[all['resourceID'].isin(valid_r_str)]
@@ -318,10 +319,11 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
         totalResources = self.totalResources_df
 
         # resource stock total...
-        # extract total refugee population
+        # extract total refugee population  ### right now... this is messing up because we will have 
         camp = self.camp_df
-        pop_arr = camp['refugeePop'].tolist()
-        totalRefugees = sum(pop_arr)
+        valid_camps_df = self.valid_open_camps_with_refugees()
+        valid_range_refugeePop = valid_camps_df['refugeePop'].tolist()
+        totalRefugees = sum(valid_range_refugeePop)
 
         # this is the current allocation. not the gold standard one..
         resource_csv_path = Path(__file__).parents[1].joinpath("data/resourceAllocation.csv")
@@ -338,7 +340,6 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
 
         # Find the non-zero camps... aka the camps with refugees
         # second_column = camp.loc[camp['refugeePop'] > 0, 'campID'].tolist()
-        valid_camps_df = self.valid_open_camps_with_refugees()
         second_column = valid_camps_df['campID'].tolist()
         resourceID_repeated = resourceID * len(second_column)
 

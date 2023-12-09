@@ -1,0 +1,2 @@
+[console_scripts]
+hmsGroup11 = humanitarian_management_system.main:main
