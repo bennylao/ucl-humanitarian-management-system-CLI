@@ -208,15 +208,21 @@ class Controller:
     def edit_volunteer(self):
         logging.info("admin edit volunteer")
         try:
-            csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
             vol_id_arr = []
-            df = pd.read_csv(csv_path)
-            df = df.loc[df['userType'] == 'volunteer']
-            df = df.loc[:, ~df.columns.isin(['userType', 'password'])]
-            print("Here is a list of relevant information for all existing volunteers: ")
-            Event.display_events(df)
+            vol_df = pd.read_csv(Path(__file__).parent.joinpath("data/user.csv"))
+            vol_df = vol_df.loc[vol_df['userType'] == 'volunteer']
+            role_df = pd.read_csv(Path(__file__).parent.joinpath("data/roleType.csv"))
 
-            for i in df['userID'].tolist():
+            joined_df = pd.merge(vol_df, role_df, on='roleID', sort=False)
+            joined_df = joined_df.loc[:, ~joined_df.columns.isin(['userType', 'roleID', 'password'])]
+            joined_df.columns = ['UserID', 'Is verified?', 'Is active?', 'Username', 'First name', 'Last name',
+                                 'Email',
+                                 'Phone no.', 'Occupation', 'Camp ID', 'Camp role']
+            joined_df = joined_df.sort_values(by=['UserID'])
+            print("Here is a list of relevant information for all existing volunteers: ")
+            print("\n", joined_df.to_markdown(index=False))
+
+            for i in joined_df['UserID'].tolist():
                 vol_id_arr.append(str(i))
 
             while True:
@@ -230,7 +236,7 @@ class Controller:
                     continue
 
             select_id = int(select_id)
-            df = pd.read_csv(csv_path)
+            df = pd.read_csv(Path(__file__).parent.joinpath("data/user.csv"))
             row = df.loc[df['userID'] == select_id].squeeze()
             target_user = Volunteer(row['userID'], *row[4:])
             self.user.edit_volunteer_profile(target_user)
@@ -1385,20 +1391,22 @@ class Controller:
 
             camp_id_arr = [int(i) for i in df2['campID'].tolist()]
 
-            for i, column_name in enumerate(df2.columns[0:], start=1):
+            selected_columns = ['campID', 'refugeeCapacity', 'healthRisk']
+            filtered_df1 = df2[selected_columns]
+            for i, column_name in enumerate(filtered_df1.columns[0:], start=1):
                 print(f"[{i}] {column_name}")
                 logging.info("Successfully printed iteration in camp dataframe.")
             try:
                 print("[R] QUIT editing")
-                target_column_index = input(f"Which column do you want to modify(1~9)? Or quit editing(R): ")
+                target_column_index = input(f"Which column do you want to modify(1~3)? Or quit editing(R): ")
 
                 if target_column_index == 'RETURN' or target_column_index.lower() == 'r':
                     return
-                if int(target_column_index) not in range(1, 10) and str(target_column_index).lower() != 'r':
-                    print("Please enter a valid integer from 1 to 9")
+                if int(target_column_index) not in range(1, 4) and str(target_column_index).lower() != 'r':
+                    print("Invalid input! Please enter a valid integer from 1 to 3")
                     continue
-                elif int(target_column_index) in range(1, 10):
-                    target_column_name = df2.columns[int(target_column_index) - 1]
+                elif int(target_column_index) in range(1, 4):
+                    target_column_name = selected_columns[int(target_column_index) - 1]
                     while True:
                         new_value = input(f"Enter the new value for {target_column_name}: ")
 
@@ -1425,16 +1433,12 @@ class Controller:
                                                          int(k), 'campID', int(new_value))
                             new_value = int(new_value)
 
-                        if target_column_index == '5':
+                        if target_column_index == '3':
                             if new_value == "low" or new_value == "high":
                                 break
                             else:
                                 print("Invalid input! Please enter 'low' or 'high'")
-                        elif target_column_index == '9':
-                            if new_value == "open" or new_value == "closed":
-                                break
-                            else:
-                                print("Invalid input! Please enter 'open' or 'closed'")
+
                         elif target_column_index.lower() == 'r':
                             exit()
                         else:
@@ -1460,7 +1464,7 @@ class Controller:
                 else:
                     return
             except ValueError as e:
-                print("Invalid input! Please enter an integer between 1 to 9")
+                print("Invalid input! Please enter an integer between 1 to 3")
                 logging.critical(f"{e}")
 
     def create_refugee(self):

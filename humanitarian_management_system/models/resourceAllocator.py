@@ -438,7 +438,9 @@ class ResourceAllocator():
                     else:
                         # create the row in resourceAllocator if it does not exist
                         new_row = {'resourceID': row['resourceID'], 'campID': row['destination_campID'], 'qty': row['moveUnits']}
-                        resourceCampMap = resourceCampMap.append(new_row, ignore_index=True)
+                        #print(type(resourceCampMap))
+                        #resourceCampMap = resourceCampMap.append(new_row, ignore_index=True)
+                        resourceCampMap = pd.concat([resourceCampMap, pd.DataFrame([new_row])], ignore_index=True)
                     
                 else:
                     ##################### [1] & [2] movement between inventory
@@ -457,7 +459,9 @@ class ResourceAllocator():
                         else:
                             ###
                             new_row = {'resourceID': row['resourceID'], 'campID': row['destination_campID'], 'qty': row['moveUnits']}
-                            resourceCampMap = resourceCampMap.append(new_row, ignore_index=True)
+                            print(type(resourceCampMap))
+                            # resourceCampMap = resourceCampMap.append(new_row, ignore_index=True)
+                            resourceCampMap = pd.concat([resourceCampMap, pd.DataFrame([new_row])], ignore_index=True)
                         # 2) subtract qty from resourceUballocatedStock
                         unallocManualResources.loc[unallocManualResources['resourceID'] == row['resourceID'], 'unallocTotal'] -= row['moveUnits']
                         ############ ERROR HANDLING: CHECK FOR LEGAL VALUES TO TAKE AWAY AND SUBTRACT

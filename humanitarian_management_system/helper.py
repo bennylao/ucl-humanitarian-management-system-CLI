@@ -105,7 +105,32 @@ def validate_registration(usernames):
             print("Invalid occupation entered.\n"
                   "Only alphabet are allowed.")
 
-    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, 0, 0]
+    # ask user to select their role in camp
+    try:
+        role_type_csv_path = Path(__file__).parent.joinpath("data/roleType.csv")
+        df_role = pd.read_csv(role_type_csv_path)
+    except FileNotFoundError as e:
+        print("\n Data file seems to be damaged. Please contact admin for further assistance")
+        logging.critical(e)
+        return
+    role_id_list = df_role['roleID'].tolist()
+    print("\n" + df_role.to_markdown(index=False))
+    while True:
+        print("Please select a role you want to change to (Enter its index)")
+        new_role_id = input("---> ")
+        if new_role_id.upper() == "RETURN":
+            return
+        else:
+            try:
+                new_role_id = int(new_role_id)
+                if new_role_id not in role_id_list:
+                    print("You must choose one of the roleID from the list!")
+                else:
+                    break
+            except ValueError:
+                print("Only Integer is allowed!")
+
+    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, new_role_id, 0]
 
 
 def validate_event_input():
@@ -426,8 +451,9 @@ def validate_refugee(lvl):
         else:
             try:
                 family_id = int(family_id)
+                break
             except ValueError:
-                print("Must be a numerical value!")
+                print("Must be an integer value!")
                 continue
 
     while True:
