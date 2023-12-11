@@ -282,7 +282,7 @@ def matched_rows_csv(file, desired_column, except_value, index):
 
 def extract_active_event(csv_path):
     '''used to extract event id for active/yet ongoing events'''
-    df = pd.read_csv(csv_path)
+    df = pd.read_csv(csv_path, converters={'ongoing': str})
     # ensure we only display camp(s) that are part of an active plan
     data = df[['ongoing', 'eventID']]
     active_id = []
