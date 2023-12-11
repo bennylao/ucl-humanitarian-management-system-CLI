@@ -478,12 +478,11 @@ def validate_refugee(lvl):
 
     med_id = pd.read_csv(csv_path)["medicalInfoTypeID"].tolist()
     df = pd.read_csv(csv_path)
+    df.rename(columns={'medicalInfoTypeID': 'Index'}, inplace=True)
+    df.rename(columns={'criticalLvl': 'Critical level'}, inplace=True)
     # display medical condition option list
-    for i in med_id:
-        cond = df.loc[df['medicalInfoTypeID'] == i]['condition'].tolist()[0]
-        lvl = df.loc[df['medicalInfoTypeID'] == i]['criticalLvl'].tolist()[0]
-        print("\n"f''' Index: {i} | Condition: {cond} | Critical level: {lvl} ''')
-
+    table_str = df.to_markdown(index=False)
+    print("\n" + table_str)
     while True:
         try:
             med = input("\nEnter medical condition (optional): ")
