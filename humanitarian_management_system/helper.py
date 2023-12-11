@@ -1184,7 +1184,7 @@ def get_export_file_path():
 
             if user_input.lower() == 'return':
                 return None
-            if user_input.lower() == 'x':
+            elif user_input.lower() == 'x':
                 base_file_path = "data/refugees_exported_data_file.csv"
                 file_path = Path(base_file_path)
                 if file_path.is_file():
@@ -1197,6 +1197,7 @@ def get_export_file_path():
                 print("Sorry. Didn't catch that. Try again.")
                 break
         return file_path
+
     except Exception as e:
         logging.info("File path options entered by user causing issue.")
         print(f"Looks like that file path didn't work, causing error {e}. Don't worry - we're redirecting you back.")
@@ -1204,8 +1205,10 @@ def get_export_file_path():
 
 
 def admin_export_refugees_to_csv():
-    file_path = get_export_file_path()
     try:
+        file_path = get_export_file_path()
+        if file_path == None:
+            return
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
         logging.info("Successfully loaded refugee csv for admin exporting refugee csv file.")
