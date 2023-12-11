@@ -249,3 +249,9 @@ class ManagementView:
               "           Data Visualization \n"
               "==========================================")
 
+    @staticmethod
+    def messageBox():
+        print("\n==========================================\n"
+              "          Welcome to Message Box \n"
+              "==========================================")
+

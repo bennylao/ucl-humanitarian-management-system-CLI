@@ -154,6 +154,8 @@ class Controller:
                 self.user_edit_account()
             elif user_selection == "8":
                 self.user.show_account_info()
+            elif user_selection == "9":
+                self.messageBox()
             if user_selection == "L" or self.logout_request:
                 logging.info("logging out from admin main menu")
                 self.user = None
@@ -1302,6 +1304,10 @@ class Controller:
             if user_selection == "4":
                 # show personal information
                 self.user.show_account_info()
+            if user_selection == "5":
+                self.messageBox()
+            if user_selection == '6':
+                self.messageBox()
             # log out if user has selected "L" or self.logout_request is True
             if user_selection == "L" or self.logout_request is True:
                 logging.info("logging out from volunteer main menu")
@@ -1336,6 +1342,8 @@ class Controller:
                 self.legal_advice_support()
             if user_selection == '9':
                 self.refugee_training_sessions()
+            if user_selection == '10':
+                self.vol_data_visualization(self)
 
             if user_selection == "R":
                 break
@@ -2193,3 +2201,52 @@ class Controller:
             except ValueError as e:
                 print("Invalid Input, please try again")
                 logging.critical(f"{e}")
+
+    def messageBox(self):
+        ManagementView.messageBox()
+        while True:
+            try:
+                print('')
+                print('[ 1 ] Read messages')
+                print('[ 2 ] Send messages')
+                print('[ 3 ] Return to the previous page')
+                a = int(input('Choose one option: '))
+                if a not in range(1, 4):
+                    print('Invalid input! Please try again')
+                elif a == 1:
+                    self.read_message()
+                elif a == 2:
+                    self.write_message()
+                elif a == 3:
+                    return
+            except ValueError:
+                print('Invalid input! Please try again.')
+
+    def read_message(self):
+        m_csv_path = Path(__file__).parents[0].joinpath("data/messageBox.csv")
+        df = pd.read_csv(m_csv_path)
+        dff = df[df['to'] == self.user.username][['from', 'message', 'datetime']]
+        if dff.empty:
+            print('You have got 0 messages\n')
+        else:
+            dff1 = dff.sort_values('datetime', inplace=False, ascending=False)
+            Event.display_events(dff1)
+            print('')
+
+    def write_message(self):
+        m_csv_path = Path(__file__).parents[0].joinpath("data/messageBox.csv")
+        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path)
+        usernames = df['username'].tolist()
+
+        to = input('\nWho do you want to sent message to? Enter the username: ')
+        if to == self.user.username:
+            print("You can't send message to yourself")
+        elif to not in usernames:
+            print("Username doesn't exist")
+        else:
+            content = input('Enter your message: ')
+            with open(m_csv_path, mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([self.user.username, to, content, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")])
+            print('Message sent successfully!')

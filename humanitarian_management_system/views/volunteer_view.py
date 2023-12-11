@@ -8,6 +8,7 @@ class VolunteerView:
         ("2", "Camp Management"),
         ("3", "Edit Account Information"),
         ("4", "View Account Information"),
+        ("5", "Open MessageBox"),
         ("L", "Logout")
     )
 
