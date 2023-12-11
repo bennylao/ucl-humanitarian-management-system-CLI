@@ -9,7 +9,7 @@ class Event:
     """Essentially creating a humanitarian plan. An 'event' is where
     we add a description etc of where the disaster has happened."""
 
-    def __init__(self, title, location, description, no_camp, start_date, end_date, ongoing=True):
+    def __init__(self, title, location, description, no_camp, start_date, end_date, ongoing):
         self.title = title
         self.location = location
         self.description = description
@@ -76,7 +76,7 @@ class Event:
             if df.empty:
                 print("\nNo events to edit.")
                 return
-            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+            filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
             if filtered_df.empty:
                 print("\nAll the events are closed and cannot be edited.")
                 return
@@ -152,23 +152,27 @@ class Event:
     def __change_location(row):
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            country = []
+            df = pd.read_csv(event_csv_path)
             country_data = pd.read_csv(event_csv_path)['location']
-            for ele in country_data:
-                country.append(ele.lower())
-            location = ''
-            for ele in country_data:
-                country.append(ele.lower())
-            while len(location) == 0 and location not in country:
-                location = input("\n--> Location(country): ").lower()
-                if location.upper() == 'RETURN':
-                    return
-                if location not in country:
-                    print("\nInvalid country name entered")
-                    location = ''
-                    continue
-            helper.modify_csv_value(event_csv_path, row, 'location', location)
-            print("\n\u2714 Location updated.")
+            if df['no_camp'][row] == 0:
+                country = []
+                for ele in country_data:
+                    country.append(ele.lower())
+                location = ''
+                for ele in country_data:
+                    country.append(ele.lower())
+                while len(location) == 0 and location not in country:
+                    location = input("\n--> Location(country): ").lower()
+                    if location.upper() == 'RETURN':
+                        return
+                    elif location not in country:
+                        print("\nInvalid country name entered")
+                        location = ''
+                        continue
+                helper.modify_csv_value(event_csv_path, row, 'location', location)
+                print("\n\u2714 Location updated.")
+            else:
+                print("\nThere are camps created in this event. The location of event cannot be changed.")
         except FileNotFoundError as e:
             print(f"\nFile not found."
                   f"\nPlease contact admin for further assistance."
@@ -259,13 +263,13 @@ class Event:
                     (df_camp['eventID'] == df.loc[row, 'eventID']) & (df_camp['status'] == 'open')].index.tolist()
                 while True:
                     result = input("\n*** Are you sure you want to close the event? You'll also close the camps in that event.\n"
-                                   "--> yes/no ")
+                                   "--> yes/no ").lower()
                     if result == "yes":
                         ongoing = 'False'
                         if df['ongoing'].loc[row] == 'Yet':
                             ongoing = 'Yet'
                         elif df['ongoing'].loc[row] == 'True':
-                            ongoing = False
+                            ongoing = 'False'
                         formatted_end_date = end_date.strftime('%Y-%m-%d')
                         helper.modify_csv_value(event_csv_path, row, 'endDate', formatted_end_date)
                         helper.modify_csv_value(event_csv_path, row, 'ongoing', ongoing)
@@ -363,9 +367,9 @@ class Event:
                 (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
             while True:
                 result = input("\n*** Are you sure you want to close the event? You'll also close the camps in that event.\n"
-                               "--> yes/no ")
+                               "--> yes/no ").lower()
                 if result == "yes":
-                    ongoing = False
+                    ongoing = 'False'
                     helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
                     helper.modify_csv_value(event_csv_path, row, 'ongoing', ongoing)
                     if row_camp_list:
@@ -416,7 +420,7 @@ class Event:
             while True:
                 result = input("*** Are you sure you want to delete the event? "
                                "You'll also close the camps and lose all the information about the refugees in that event.\n"
-                               "--> yes/no ")
+                               "--> yes/no ").lower()
                 if result == "yes":
                     df.drop(df[df['eventID'] == int(eid_to_delete)].index, inplace=True)
                     df.to_csv(event_csv_path, index=False)
