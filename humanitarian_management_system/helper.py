@@ -451,8 +451,9 @@ def validate_refugee(lvl):
         else:
             try:
                 family_id = int(family_id)
+                break
             except ValueError:
-                print("Must be a numerical value!")
+                print("Must be an integer value!")
                 continue
 
     while True:

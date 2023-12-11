@@ -134,7 +134,7 @@ The below CLOSED camps still have resources allocated... \n
             print(f"""
     ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
     CHECK 1:\n
-    There are newly open camp(s) with refugees...\ns
+    There are newly open camp(s) with refugees...\n
     but NO RESOURCES OF ANY TYPE! \n
     ==============================================================\n
     {new_camps_df.to_string(index=False)} \n
@@ -143,8 +143,8 @@ The below CLOSED camps still have resources allocated... \n
 
     Note: if 'n', you will still have the option of assigning resources to these newly opened & resourceless but populated camps,
     via other channels: \n
-        >> these camps will be automatically be included in [1] Resource Allocation -> [2] Auto-Distribute
-        >> manually assign existing resources from inventory & other camps via [1] Resource Allocation -> [2] Manual
+        >> these camps will be automatically be included in [4.1] Resource Allocation -> [4.1.2] Auto-Distribute
+        >> manually assign existing resources from inventory & other camps via [4.1] Resource Allocation -> [4.1.1] Manual
             """)  ######### this should be slightly different for volunteer
 
             user_select = report_instance.input_validator('--> ', ['y', 'n'])
