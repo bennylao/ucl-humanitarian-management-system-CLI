@@ -1632,3 +1632,21 @@ invalid literal for int() with base 10: '/Users/jesswork/humanitarian_management
 2023-12-11 22:49:11,029 - INFO - controller-login-Line90 - login failed due to non-existent username
 2023-12-11 22:49:16,044 - INFO - controller-volunteer_main-Line1245 - login successfully as volunteer
 2023-12-11 22:49:16,044 - INFO - controller-volunteer_main-Line1291 - volunteer main menu is displayed
+2023-12-11 22:52:45,416 - INFO - controller-volunteer_main-Line1312 - logging out from volunteer main menu
+2023-12-11 22:52:45,416 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:52:49,346 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:52:49,346 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:52:49,347 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:52:49,347 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:52:51,041 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:52:54,053 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:52:54,053 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:52:58,017 - CRITICAL - controller-login-Line131 - [Errno 2] No such file or directory: 'C:\\Users\\YHU\\PycharmProjects\\group11-humanitarian-management-system\\humanitarian_management_system\\data\\messageBox.csv'
+2023-12-11 22:52:58,017 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:54:26,660 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:54:26,660 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:54:26,660 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:54:26,660 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:54:27,428 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:54:29,762 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:54:29,762 - INFO - controller-admin_main-Line138 - admin main menu is shown

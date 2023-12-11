@@ -4,6 +4,8 @@ import pandas as pd
 import re
 import math
 import logging
+import csv
+import datetime
 
 from passlib.handlers.sha2_crypt import sha256_crypt
 
@@ -2227,7 +2229,7 @@ class Controller:
         df = pd.read_csv(m_csv_path)
         dff = df[df['to'] == self.user.username][['from', 'message', 'datetime']]
         if dff.empty:
-            print('You have got 0 messages\n')
+            print('You have got 0 messages')
         else:
             dff1 = dff.sort_values('datetime', inplace=False, ascending=False)
             Event.display_events(dff1)
