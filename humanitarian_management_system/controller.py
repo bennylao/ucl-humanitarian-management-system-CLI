@@ -1963,7 +1963,7 @@ class Controller:
         df = pd.read_csv(csv_path)
 
         if cid == 0:
-            print("You're not assigned to a camp! Takinng you back.")
+            print("You're not assigned to a camp! Taking you back.")
             return
         else:
             if df.loc[df['campID'] == cid]['refugeePop'].tolist()[0] == 0:
