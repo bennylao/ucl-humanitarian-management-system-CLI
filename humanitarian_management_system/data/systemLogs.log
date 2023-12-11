@@ -1353,3 +1353,62 @@ invalid literal for int() with base 10: '/Users/jesswork/humanitarian_management
 2023-12-11 21:00:19,125 - INFO - controller-admin_main-Line138 - admin main menu is shown
 2023-12-11 21:00:20,883 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
 2023-12-11 21:00:22,131 - INFO - controller-edit_volunteer-Line209 - admin edit volunteer
+2023-12-11 21:03:27,389 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:03:27,389 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:03:27,389 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:03:27,389 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:03:28,865 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:03:30,975 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:03:30,975 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:03:32,539 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:04:28,903 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:04:28,903 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:04:28,903 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:04:28,903 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:04:31,226 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:04:33,591 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:04:33,591 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:04:35,924 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:04:41,911 - INFO - controller-admin_manage_volunteer-Line203 - logging out from admin volunteer management menu
+2023-12-11 21:04:41,911 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 21:04:41,911 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:04:46,693 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:04:55,913 - INFO - controller-volunteer_main-Line1207 - login successfully as volunteer
+2023-12-11 21:04:55,913 - INFO - controller-volunteer_main-Line1253 - volunteer main menu is displayed
+2023-12-11 21:04:57,082 - INFO - controller-volunteer_join_camp-Line1317 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 21:05:01,189 - INFO - controller-volunteer_join_camp-Line1345 - successfully changed user input into 3 index
+2023-12-11 21:05:01,189 - INFO - controller-volunteer_main-Line1253 - volunteer main menu is displayed
+2023-12-11 21:05:03,296 - INFO - controller-volunteer_main-Line1270 - logging out from volunteer main menu
+2023-12-11 21:05:03,296 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:05:04,421 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:05:07,027 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:05:07,027 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:05:08,650 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:05:56,263 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:05:56,263 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:05:56,263 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:05:56,263 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:05:57,434 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:06:00,430 - INFO - controller-volunteer_main-Line1207 - login successfully as volunteer
+2023-12-11 21:06:00,430 - INFO - controller-volunteer_main-Line1253 - volunteer main menu is displayed
+2023-12-11 21:06:03,150 - INFO - controller-volunteer_join_camp-Line1317 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 21:06:09,420 - INFO - controller-volunteer_join_camp-Line1345 - successfully changed user input into 7 index
+2023-12-11 21:06:09,420 - INFO - controller-volunteer_main-Line1253 - volunteer main menu is displayed
+2023-12-11 21:06:10,818 - INFO - controller-volunteer_main-Line1270 - logging out from volunteer main menu
+2023-12-11 21:06:10,818 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:06:11,410 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:06:13,410 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:06:13,410 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:06:16,172 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:06:41,880 - INFO - controller-display_volunteer-Line258 - all volunteer is displayed
+2023-12-11 21:06:41,880 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:06:45,114 - INFO - controller-admin_manage_volunteer-Line203 - logging out from admin volunteer management menu
+2023-12-11 21:06:45,114 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 21:06:45,114 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:06:53,797 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:06:53,797 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:06:53,797 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:06:53,797 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:06:55,102 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:06:57,063 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:06:57,063 - INFO - controller-admin_main-Line138 - admin main menu is shown

@@ -1,7 +1,7 @@
 campID,eventID,countryID,latitude,longitude,refugeeCapacity,healthRisk,volunteerPop,refugeePop,avgCriticalLvl,status
 3,17,BR,-9.505433177,-56.25042963,15,high,2,12,1.0,open
 4,4,IN,23.14856141,78.10984096,20,high,0,0,1.0,open
-7,4,IN,23.14856141,78.20984096,15,high,0,0,1.0,open
+7,4,IN,23.14856141,78.20984096,15,high,1,0,1.0,open
 8,8,EG,26.30354644,30.21567872,15,high,1,0,1.0,closed
 9,8,EG,26.30354644,30.31567872,2,high,1,2,3.0,closed
 12,3,IN,23.14856141,78.40984096,11,low,0,0,1.0,open
