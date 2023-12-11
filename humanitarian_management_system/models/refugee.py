@@ -264,12 +264,15 @@ class Refugee:
                 if new_value == 'RETURN':
                     return
 
-                if not new_value.isnumeric():
-                    print("Must be a numerical value!")
-                    continue
                 else:
-                    break
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'familyID', int(new_value), user, cid)
+                    try:
+                        new_value = int(new_value)
+                        break
+                    except ValueError:
+                        print("Must be a numerical value!")
+                        continue
+
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'familyID', new_value, user, cid)
 
         if user_selection == 'R':
             return
