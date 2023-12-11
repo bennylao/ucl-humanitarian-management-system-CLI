@@ -6,6 +6,7 @@ import datetime
 import math
 import logging
 from passlib.hash import sha256_crypt
+import tabulate
 
 
 def validate_user_selection(options):
@@ -405,7 +406,7 @@ def validate_man_resource(index):
     return select_index, select_item, select_amount
 
 
-def validate_refugee(lvl):
+def validate_refugee(lvl, cid):
     date_format = '%d/%m/%Y'
     while True:
         f_name = input("\nEnter first name: ")
@@ -450,12 +451,42 @@ def validate_refugee(lvl):
             break
 
     while True:
-        family_id = input("\nEnter family identification: ")
-        if family_id == 'RETURN':
+        id_arr = []
+        print("\nSelect 1 to create a new family identification, or 2 to join an existing one")
+        select = input("\nSelect your option: ")
+
+        csv_path_ref = Path(__file__).parents[0].joinpath("data/refugee.csv")
+        df_ref = pd.read_csv(csv_path_ref)
+
+        print("Select 1 to create a new family identification, or 2 to join an existing one")
+        if select != '1' and select != '2':
+            print("Select 1 or 2 only!")
+            continue
+
+        if select == 'RETURN':
             return
-        else:
+        if select == '1':
+            create_id = input("\nEnter family identification: ")
             try:
-                family_id = int(family_id)
+                create_id = int(create_id)
+                break
+            except ValueError:
+                print("Must be an integer value!")
+                continue
+        elif select == '2':
+            print(cid)
+            df_ref = df_ref.loc[df_ref['campID'] == cid]['familyID'].tolist()
+            df = pd.read_csv(csv_path_ref)
+            df = df.loc[df['campID'] == cid]
+            for i in df_ref:
+                id_arr.append(str(i))
+            table = df['familyID'].drop_duplicates().to_markdown(index=False)
+            print("\n" + table)
+            try:
+                create_id = input("\nEnter family identification: ")
+                if create_id not in id_arr:
+                    print("Invalid family ID entered!")
+                    continue
                 break
             except ValueError:
                 print("Must be an integer value!")
@@ -480,6 +511,7 @@ def validate_refugee(lvl):
     df = pd.read_csv(csv_path)
     df.rename(columns={'medicalInfoTypeID': 'Index'}, inplace=True)
     df.rename(columns={'criticalLvl': 'Critical level'}, inplace=True)
+    df = df.loc[:, df.columns != 'Critical level']
     # display medical condition option list
     table_str = df.to_markdown(index=False)
     print("\n" + table_str)
@@ -507,7 +539,7 @@ def validate_refugee(lvl):
         else:
             break
 
-    return family_id, f_name, l_name, dob, gender, int(med), med_des, vacc
+    return create_id, f_name, l_name, dob, gender, int(med), med_des, vacc
 
 
 def move_refugee_helper_method(cid):

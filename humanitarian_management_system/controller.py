@@ -718,7 +718,7 @@ class Controller:
                 df2 = pd.read_csv(csv_path2)
 
                 # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
-                Event.display_events(df2[(df2['campID'] == modify_camp_id) & (df2['eventID'] == eventID)])
+                Event.display_events(df2[(df2['campID'] == int(modify_camp_id)) & (df2['eventID'] == eventID)])
                 filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'eventID']
                 filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'countryID']
                 filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'latitude']
@@ -746,8 +746,6 @@ class Controller:
 
                         target_column_name = filtered_df1.columns[int(target_column_index) - 1]
                         while True:
-
-                            print(camp_id_arr)
 
                             new_value = input(f"Enter the new value for {target_column_name}: ")
 
@@ -1532,7 +1530,7 @@ class Controller:
             csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
             df = pd.read_csv(csv_path)
 
-            user_type = df.loc[df['use rname'] == self.user.username]['userType'].tolist()[0]
+            user_type = df.loc[df['username'] == self.user.username]['userType'].tolist()[0]
             df_c = pd.read_csv(csv_path_c)
             active_camp = df_c.loc[df_c['status'] == 'open']['campID'].tolist()
             # check user type, for admin - can create new refugee for any camp, and for vol - camp dependent
@@ -1585,7 +1583,7 @@ class Controller:
             # health risk level of volunteer's camp
             lvl = df_c.loc[df_c['campID'] == cid]['healthRisk'].tolist()[0]
 
-            refugee_info = helper.validate_refugee(lvl)
+            refugee_info = helper.validate_refugee(lvl, int(cid))
             if refugee_info is not None:
                 r = Refugee(refugee_info[0], refugee_info[1], refugee_info[2], refugee_info[3], refugee_info[4],
                             refugee_info[5], refugee_info[6], refugee_info[7])
