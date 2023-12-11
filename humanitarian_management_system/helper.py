@@ -212,8 +212,6 @@ def validate_camp_input():
     #     except ValueError:
     #         print("Invalid input, Please enter a numerical value")
 
-
-
     # capacity input
     while True:
         capacity = input("\nEnter capacity: ")
@@ -238,6 +236,7 @@ def validate_camp_input():
 
     return campID, capacity, risk
 
+
 def modify_csv_pandas(file_path, select_col, row_value, final_col, new_value):
     csv_path = Path(__file__).parents[0].joinpath(file_path)
     df = pd.read_csv(csv_path)
@@ -246,15 +245,21 @@ def modify_csv_pandas(file_path, select_col, row_value, final_col, new_value):
 
 
 def modify_csv_value(file_path, row_index, column_name, new_value):
-    with open(file_path, 'r', newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        rows = list(reader)
-    rows[row_index][column_name] = new_value
-    with open(file_path, 'w', newline='') as csvfile:
-        fieldnames = reader.fieldnames
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
+    try:
+        with open(file_path, 'r', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            rows = list(reader)
+        rows[row_index][column_name] = new_value
+        with open(file_path, 'w', newline='') as csvfile:
+            fieldnames = reader.fieldnames
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+    except FileNotFoundError as e:
+        print(f"\n File not found."
+              f"\nPlease contact admin for further assistance."
+              f"\n[Error] {e}")
+        logging.critical(f"{e}")
 
 
 def matched_rows_csv(file, desired_column, except_value, index):
@@ -311,17 +316,19 @@ def validate_man_resource(index):
     df = pd.read_csv(csv_path)
 
     while True:
-        select_index = int(input("\nEnter camp index: "))
-
-        if select_index not in index:
-            print("invalid index option entered!")
-            continue
         try:
+            select_index = int(input("\nEnter camp index: "))
+
+            if select_index not in index:
+                print("invalid index option entered!")
+                continue
             if select_index == 'RETURN':
                 return
-        except:
-            return
-        break
+            break
+        except ValueError:
+            print("invalid index option entered!")
+            logging.warning("Invalid index option entered!")
+            continue
 
     res_id = pd.read_csv(csv_path)['resourceID'].tolist()
 
@@ -332,17 +339,18 @@ def validate_man_resource(index):
         print("\n"f''' Index: {i} | Item name: {name} | Stock: {stock} ''')
 
     while True:
-        select_item = int(input("\nEnter item index: "))
-
-        if select_item not in res_id:
-            print("invalid index option entered!")
-            continue
         try:
+            select_item = int(input("\nEnter item index: "))
+
+            if select_item not in res_id:
+                print("invalid index option entered!")
+                continue
             if select_index == 'RETURN':
                 return
-        except:
-            return
-        break
+            break
+        except ValueError as e:
+            print("invalid index option entered!")
+            logging.warning("Invalid index option entered!")
 
     while True:
         select_amount = input("\nEnter amount: ")
@@ -449,8 +457,9 @@ def validate_refugee(lvl):
                 med = 1
             if med == "RETURN":
                 return
-        except:
-            return
+        except ValueError:
+            print("Invalid index option entered!")
+            logging.warning("Invalid index option")
         break
 
     while True:
@@ -487,7 +496,7 @@ def move_refugee_helper_method():
                     break
                 else:
                     print("\nSorry - that refugee ID doesn't exist. Pick again.")
-            except Exception as e:
+            except ValueError as e:
                 logging.info(f"Error {e}with user input for moving a refugee from a camp.")
                 print(f"Invalid input with error {e}. Try again with a valid refugee ID.\n")
         camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
@@ -869,7 +878,7 @@ def create_training_session():
             sessionID = int(session_arr.pop())
         sessionID += 1
 
-        training_session_data = [int(sessionID), occupation, topic, date, int(camp),list(participants), eventID]
+        training_session_data = [int(sessionID), occupation, topic, date, int(camp), list(participants), eventID]
         session_df.loc[len(session_df)] = training_session_data
         session_df.to_csv(training_session_path, index=False)
         added_session = session_df[session_df['sessionID'] == sessionID]
@@ -1004,7 +1013,7 @@ def add_refugee_to_session():
                 # try:
                 #     rid = int(rid)
                 # except TypeError as e:
-                #     logging.debug("Wrong user input for refugee id when adding to training session/")
+                #     logging.info("Wrong user input for refugee id when adding to training session/")
                 #     print(f"Sorry! Incorrect input - try again. Error: {e}")
                 #     return
                 elif rid in already_registered:
@@ -1060,20 +1069,21 @@ def remove_refugee_from_session():
             if sessionID.lower() == 'return':
                 return
             try:
-                if sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(int(sessionID)).any():
+                if sessionID.strip() and sessionID.strip().isdigit() and session_df['sessionID'].eq(
+                        int(sessionID)).any():
                     break
                 else:
                     print("\n\nSorry - that's not a valid session ID. Pick again. ")
                 logging.info("Successfully converted user input to int type.")
             except ValueError as e:
-                logging.debug("Invalid user input when selecting session ID")
+                logging.info("Invalid user input when selecting session ID")
                 print(f"Error: {e}"
                       "\nPlease enter an integer or one of the specified exit options.")
         row_index_sessionID = session_df[session_df['sessionID'] == int(sessionID)].index[0]
         already_registered = session_df.at[row_index_sessionID, 'participants']
         participants = []
         while True:
-            print("\n",already_registered)
+            print("\n", already_registered)
             rid = input(f"\n\nFrom the above list, enter the Refugee ID for the person you want to remove from session "
                         f"{sessionID}\nEnter DONE when you are finished, or return to cancel and go back: ")
             if rid.lower() == "return":
@@ -1092,7 +1102,7 @@ def remove_refugee_from_session():
                     print("\n\nSorry - that refugee ID doesn't exist. Pick again.")
                 logging.info("Successfully converted user input to int type.")
             except ValueError as e:
-                logging.debug("Invalid user input when selecting refugee ID to remove from session.")
+                logging.info("Invalid user input when selecting refugee ID to remove from session.")
                 print(f"Error: {e}"
                       "\nPlease enter an integer or one of the specified exit options.")
 

@@ -1,0 +1,20 @@
+2023-12-11 00:58:33,038 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 00:58:33,038 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-11 01:01:59,610 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 01:01:59,611 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-11 01:15:20,860 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 01:15:20,860 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-11 01:15:20,860 - INFO - controller-startup-Line34 - Startup page is shown
+2023-12-11 01:15:22,333 - INFO - controller-register-Line58 - Register page is shown
+2023-12-11 01:15:39,779 - INFO - controller-register-Line69 - New volunteer account is created
+2023-12-11 01:15:42,780 - INFO - controller-login-Line77 - login page is shown
+2023-12-11 01:15:44,773 - INFO - controller-login-Line104 - login failed as account has not been verified yet
+2023-12-11 01:15:51,112 - INFO - controller-login-Line99 - login failed due to invalid password
+2023-12-11 01:31:22,767 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 01:31:22,768 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 01:31:22,768 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 01:31:22,768 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 01:31:23,132 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 01:31:24,532 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 01:31:26,657 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 01:31:26,658 - INFO - controller-admin_main-Line138 - admin main menu is shown

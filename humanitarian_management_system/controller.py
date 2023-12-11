@@ -24,9 +24,10 @@ class Controller:
 
     def initialise(self):
         # show welcome messages when the program starts
-        logging.info("Controller is initialised.")
+        logging.info("Controller is initialised")
         GeneralView.display_startup_logo()
         GeneralView.display_welcome_message()
+        logging.info("welcome message is displayed")
         self.startup()
 
     def startup(self):
@@ -34,6 +35,7 @@ class Controller:
             self.logout_request = False
             # display startup menu
             GeneralView.display_startup_menu()
+            logging.info("Startup page is shown")
             # validate user selection based on startup menu
             user_selection = helper.validate_user_selection(GeneralView.get_startup_options())
             # direct user to different page based on user selection
@@ -55,6 +57,7 @@ class Controller:
     @staticmethod
     def register():
         GeneralView.display_registration_message()
+        logging.info("Register page is shown")
         usernames = User.get_all_usernames()
         # registration_info will contain all the required info for creating new volunteer
         # if registration_info is none, the registration is fail and user will be redirected back to startup page
@@ -64,9 +67,11 @@ class Controller:
             Volunteer.create_new_record(registration_info)
             print("\n***   Your volunteer account is created successfully!   ***"
                   "\n\nYou will be redirected to Login Page shortly.")
+            logging.info("New volunteer account is created")
             time.sleep(3)
             return True
         else:
+            logging.info("Registration is cancelled")
             return False
 
     def login(self):
@@ -75,12 +80,14 @@ class Controller:
         try:
             all_usernames = User.get_all_usernames()
             GeneralView.display_login_message()
+            logging.info("login page is shown")
 
             while user_info.empty:
                 username = input("\nUsername: ")
                 if username == 'RETURN':
                     break
                 if username not in all_usernames:
+                    logging.info("login failed due to non-existent username")
                     print("Account doesn't exist!")
                     continue
                 password = input("\nPassword: ")
@@ -90,13 +97,15 @@ class Controller:
                 user_info = User.validate_user(username, password)
                 # check if account is active
                 if user_info.empty:
+                    logging.info("login failed due to invalid password")
                     print("\nUsername or password is incorrect. Please try again."
                           "\n Or Enter 'RETURN' to get back to main menu.")
-                elif user_info['isVerified'] == False:
+                elif not user_info['isVerified']:
                     user_info = pd.Series()
+                    logging.info("login failed as account has not been verified yet")
                     print("\nSince you are newly registered. Please contact the administrator to verify your account"
                           "\n Or Enter 'RETURN' to get back to main menu.")
-                elif user_info['isActive'] == False:
+                elif not user_info['isActive']:
                     user_info = pd.Series()
                     print("\nYour account has been deactivated, contact the administrator."
                           "\n Or Enter 'RETURN' to get back to main menu.")
@@ -122,9 +131,11 @@ class Controller:
             logging.critical(f"{e}")
 
     def admin_main(self):
+        logging.info("login successfully as admin")
         AdminView.display_login_message(self.user.username)
         while True:
             AdminView.display_menu()
+            logging.info("admin main menu is shown")
             user_selection = helper.validate_user_selection(AdminView.get_main_options())
 
             if user_selection == "1":
@@ -144,12 +155,14 @@ class Controller:
             elif user_selection == "8":
                 self.user.show_account_info()
             if user_selection == "L" or self.logout_request:
+                logging.info("logging out from admin main menu")
                 self.user = None
                 break
 
     def admin_manage_event(self):
         while True:
             AdminView.display_event_menu()
+            logging.info("admin event management is shown")
             user_selection = helper.validate_user_selection(AdminView.get_event_options())
             if user_selection == "1":
                 self.admin_create_event()
@@ -164,6 +177,7 @@ class Controller:
             if user_selection == "R":
                 break
             if user_selection == "L":
+                logging.info("logging out from admin event management menu")
                 self.user = None
                 self.logout_request = True
                 break
@@ -171,6 +185,7 @@ class Controller:
     def admin_manage_volunteer(self):
         while True:
             AdminView.display_volunteer_menu()
+            logging.info("admin volunteer management menu is shown")
             user_selection = helper.validate_user_selection(AdminView.get_volunteer_options())
             if user_selection == "1":
                 self.edit_volunteer()
@@ -185,11 +200,13 @@ class Controller:
             if user_selection == "R":
                 return
             if user_selection == "L":
+                logging.info("logging out from admin volunteer management menu")
                 self.logout_request = True
                 self.user = None
                 return
 
     def edit_volunteer(self):
+        logging.info("admin edit volunteer")
         try:
             csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
             vol_id_arr = []
@@ -217,6 +234,7 @@ class Controller:
             row = df.loc[df['userID'] == select_id].squeeze()
             target_user = Volunteer(row['userID'], *row[4:])
             self.user.edit_volunteer_profile(target_user)
+            logging.info("admin edit volunteer successfully")
         except FileNotFoundError as e:
             print(f"\nFile not found."
                   f"\nPlease contact admin for further assistance."
@@ -231,16 +249,21 @@ class Controller:
     def display_volunteer(self):
         ManagementView.display_admin_vol()
         self.user.display_vol()
+        logging.info("all volunteer is displayed")
         return
 
     @staticmethod
     def verify_account():
+        logging.info("Start Verifying volunteer account")
         Admin.verify_user()
+        logging.info("Finish verifying volunteer account")
 
     def activate_account(self):
         try:
+            logging.info("Start activating account")
             ManagementView.display_activate()
             self.user.activate_user()
+            logging.info("Finish activating account")
             return
         except FileNotFoundError as e:
             print(f"\nFile not found."
@@ -255,8 +278,10 @@ class Controller:
 
     def remove_account(self):
         try:
+            logging.info("Start removing account")
             ManagementView.display_activate()
             self.user.remove_user()
+            logging.info("Finish removing account")
             return
         except FileNotFoundError as e:
             print(f"\nFile not found."
@@ -320,7 +345,7 @@ class Controller:
                 result_df.rename(columns={'refugeePop': '# refugee'}, inplace=True)
                 result_df = result_df.drop(['ongoing', 'description', 'no_camp'], axis=1)
                 Event.display_events(result_df)
-        except Exception as e:
+        except FileNotFoundError as e:
             print(f"\nData file seems to be damaged."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -328,19 +353,13 @@ class Controller:
 
     @staticmethod
     def admin_create_event():
-        try:
-            ManagementView.event_creation_message()
-            event_info = helper.validate_event_input()
-            if event_info is not None:
-                Event.create_new_record(event_info)
-                print("\n\u2714 New event created.")
-            else:
-                return
-        except Exception as e:
-            print(f"\nData file seems to be damaged."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
+        ManagementView.event_creation_message()
+        event_info = helper.validate_event_input()
+        if event_info is not None:
+            Event.create_new_record(event_info)
+            print("\n\u2714 New event created.")
+        else:
+            return
 
     @staticmethod
     def admin_edit_event():
@@ -438,14 +457,15 @@ class Controller:
             r = Refugee('', '', '', '', '', '', '',
                         '')
             r.edit_refugee_info(user, 0)
-        except Exception as e:
+        except FileNotFoundError as e:
             print(f"\nData file seems to be damaged."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
-    def admin_data_visualization(self):
+    @staticmethod
+    def admin_data_visualization():
         ManagementView.data_visual_message()
         # AdminView.display_data_visual_menu()
         csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
@@ -576,7 +596,7 @@ class Controller:
 
     @staticmethod
     def admin_modify_camp():
-        # try:
+        try:
             """This function is for admin modify camp info"""
             ManagementView.camp_modification_message()
             csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
@@ -686,28 +706,24 @@ class Controller:
                                     print("Camp ID already exists! Please choose a new one.")
                                     continue
 
-                                try:
-                                    # change corresponding refugee & volunteer & resource allocation camp ID
-                                    ref_id_arr = df_r.loc[df_r['campID'] == int(modify_camp_id)]['refugeeID'].tolist()
-                                    vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
-                                    res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['campID'].tolist()
+                                # change corresponding refugee & volunteer & resource allocation camp ID
+                                ref_id_arr = df_r.loc[df_r['campID'] == int(modify_camp_id)]['refugeeID'].tolist()
+                                vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
+                                res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['campID'].tolist()
 
-                                    for j in ref_id_arr:
-                                        helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
-                                                                 int(j), 'campID', int(new_value))
+                                for j in ref_id_arr:
+                                    helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
+                                                             int(j), 'campID', int(new_value))
 
-                                    for k in vol_id_arr:
-                                        helper.modify_csv_pandas("data/user.csv", 'userID',
-                                                                 int(k), 'campID', int(new_value))
+                                for k in vol_id_arr:
+                                    helper.modify_csv_pandas("data/user.csv", 'userID',
+                                                             int(k), 'campID', int(new_value))
 
-                                    for m in res_id_arr:
-                                        helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
-                                                                 int(m), 'campID', int(new_value))
+                                for m in res_id_arr:
+                                    helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
+                                                             int(m), 'campID', int(new_value))
 
-                                    modify_camp_id = int(new_value)
-
-                                except TypeError:
-                                    break
+                                modify_camp_id = int(new_value)
                                 break
 
                             if target_column_index == '5':
@@ -748,13 +764,13 @@ class Controller:
                         print(f"\u2714 Changes have been saved!")
                     else:
                         return
-                except TypeError:
+                except ValueError:
                     print("Invalid input! Please enter an integer between 1 to 9")
-        # except Exception as e:
-        #     print(f"\nMultiple files may be damaged or lost."
-        #           f"\nPlease contact admin for further assistance."
-        #           f"\n[Error] {e}")
-        #     logging.critical(f"{e}")
+        except FileNotFoundError as e:
+            print(f"\nMultiple files may be damaged or lost."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
 
     @staticmethod
     def admin_delete_camp():
@@ -1132,8 +1148,10 @@ class Controller:
     """ ###################### RESOURCE MENU LEVEL 2 ############################################### """
 
     def volunteer_main(self):
+        logging.info("login successfully as volunteer")
         VolunteerView.display_login_message(self.user.username)
         while True:
+            logging.info("volunteer main menu is displayed")
             VolunteerView.display_main_menu()
             user_selection = helper.validate_user_selection(VolunteerView.get_main_options())
             if user_selection == "1":
@@ -1147,9 +1165,10 @@ class Controller:
                 self.user_edit_account()
             if user_selection == "4":
                 # show personal information
-                self.volunteer_show_account_info()
+                self.user.show_account_info()
             # log out if user has selected "L" or self.logout_request is True
             if user_selection == "L" or self.logout_request is True:
+                logging.info("logging out from volunteer main menu")
                 self.user = None
                 break
 
@@ -1189,15 +1208,6 @@ class Controller:
                 self.logout_request = True
                 break
         return
-
-    def volunteer_show_account_info(self):
-        try:
-            self.user.show_account_info()
-        except Exception as e:
-            print(f"\nData file seems to be damaged."
-                  f"\nPlease contact admin for further assistance."
-                  f"\n[Error] {e}")
-            logging.critical(f"{e}")
 
     # join camp and change camp is the same thing, basically volunteer can change to a different camp after joining a
     # camp by selecting join/change camp in the menu
@@ -1274,7 +1284,7 @@ class Controller:
 
             for i, column_name in enumerate(df2.columns[0:], start=1):
                 print(f"[{i}] {column_name}")
-                logging.debug("Successfully printed iteration in camp dataframe.")
+                logging.info("Successfully printed iteration in camp dataframe.")
             try:
                 print("[R] QUIT editing")
                 target_column_index = input(f"Which column do you want to modify(1~9)? Or quit editing(R): ")
@@ -1298,22 +1308,20 @@ class Controller:
                                 print("Camp ID already exists! Please choose a new one.")
                                 continue
 
-                            try:
-                                # change corresponding refugee & volunteer camp ID
-                                ref_id_arr = df_r.loc[df_r['campID'] == int(camp_id)]['refugeeID'].tolist()
-                                res_id_arr = df_a.loc[df_a['campID'] == int(camp_id)]['campID'].tolist()
+                            # change corresponding refugee & volunteer camp ID
+                            ref_id_arr = df_r.loc[df_r['campID'] == int(camp_id)]['refugeeID'].tolist()
+                            res_id_arr = df_a.loc[df_a['campID'] == int(camp_id)]['campID'].tolist()
 
-                                for j in ref_id_arr:
-                                    helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
-                                                             int(j), 'campID', int(new_value))
-                                helper.modify_csv_pandas("data/user.csv", 'userID',
-                                                         user_id, 'campID', int(new_value))
-                                for k in res_id_arr:
-                                    helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
-                                                             int(k), 'campID', int(new_value))
-                                new_value = int(new_value)
-                            except:
-                                break
+                            for j in ref_id_arr:
+                                helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
+                                                         int(j), 'campID', int(new_value))
+                            helper.modify_csv_pandas("data/user.csv", 'userID',
+                                                     user_id, 'campID', int(new_value))
+                            for k in res_id_arr:
+                                helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
+                                                         int(k), 'campID', int(new_value))
+                            new_value = int(new_value)
+
                         if target_column_index == '5':
                             if new_value == "low" or new_value == "high":
                                 break
@@ -1925,7 +1933,12 @@ class Controller:
             df = df.loc[df['campID'] == int(cid)]['campID'].tolist()[0]
             print(f"You're currently assigned to camp {int(cid)}.")
             c.display_resinfo(cid)
-        except:
+        except FileNotFoundError as e:
+            print(f"\nData file is not found or is damaged."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n{e}")
+            logging.critical(f"{e}")
+        except Exception as e:
             print(f"No resources have been allocated to camp {int(cid)} yet.")
 
     @staticmethod

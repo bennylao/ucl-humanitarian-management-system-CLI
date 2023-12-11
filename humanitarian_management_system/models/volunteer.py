@@ -19,7 +19,6 @@ class Volunteer(User):
                                                             'phone', 'occupation', 'roleID', 'campID']]
         table_str = sub_df.to_markdown(index=False)
         print("\n" + table_str)
-        print("\n" + table_str)
         try:
             input("\nPress Enter to return...")
         except SyntaxError:

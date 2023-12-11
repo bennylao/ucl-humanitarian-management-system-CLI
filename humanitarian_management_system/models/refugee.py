@@ -5,7 +5,6 @@ from humanitarian_management_system.views import VolunteerView
 from humanitarian_management_system import helper
 import datetime
 
-
 from pathlib import Path
 
 
@@ -163,9 +162,6 @@ class Refugee:
             except ValueError:
                 print("Invalid refugee ID entered!")
                 continue
-            except Exception as e:
-                print(e)
-                continue
 
         VolunteerView.display_edit_refugee_menu()
         user_selection = validate_user_selection(VolunteerView.get_edit_refugee_options())
@@ -188,9 +184,6 @@ class Refugee:
                         break
                 except ValueError:
                     print("Can't use an existing refugee ID!")
-                    continue
-                except Exception as e:
-                    print(e)
                     continue
             self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'refugeeID',
                             int(new_value), user, cid)
@@ -266,21 +259,17 @@ class Refugee:
         if user_selection == '6':
             print(f"Current refugee family ID is {df.loc[df['refugeeID'] == int(ref_id)]['familyID'].tolist()[0]}")
             while True:
-                try:
-                    new_value = input("\nEnter new family ID: ")
+                new_value = input("\nEnter new family ID: ")
 
-                    if new_value == 'RETURN':
-                        return
+                if new_value == 'RETURN':
+                    return
 
-                    if not new_value.isnumeric():
-                        print("Must be a numerical value!")
-                        continue
-                    else:
-                        break
-                except:
+                if not new_value.isnumeric():
                     print("Must be a numerical value!")
                     continue
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'familyID', new_value, user, cid)
+                else:
+                    break
+            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'familyID', int(new_value), user, cid)
 
         if user_selection == 'R':
             return

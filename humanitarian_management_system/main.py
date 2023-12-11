@@ -19,4 +19,3 @@ def main():
 if __name__ == "__main__":
     # Initialise the creation of the default admin account upon starting the app
     main()
-

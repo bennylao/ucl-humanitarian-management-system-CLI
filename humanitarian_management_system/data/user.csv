@@ -10,3 +10,4 @@ userID,userType,isVerified,isActive,username,password,firstName,lastName,email,p
 8,volunteer,True,True,yuan2,$5$rounds=535000$Uu9FLSmOsTWz2Gwj$RFXwQRg6OfslJZ9ZaonNR3lXC72NVsPacykn8CV4Sj4,Yuan,Hu,huyuanZ@163.com,123,student,0,0
 9,volunteer,True,True,bennny,$5$rounds=535000$aJaBbtm3.6O1iNYV$Z1j3TuN8q4k0RzayQyDpTkTvwWTYkET7P1oQTOkBKP7,lskdajf,sdklfjds,slkjdfh@gail.com,23423423,sjkdhf,0,0
 10,volunteer,True,False,abc123,$5$rounds=535000$9raxCTudqbQHCeu7$/UiXNVWHdwNIHEiG0z842yk/TnV574LzYL/AEVRtfoA,slkdafj,sdlkfjksd,slkdjhf@gm.com,234324,sdlkjaf,0,0
+11,volunteer,False,False,vvv,$5$rounds=535000$Uk8RqcVDfN0B./CE$F0FtkWFDLgEjubQNgAn9oa16WrE5Nuh6VP0i5huu9Z8,benny,lao,lsadkjf@gmail.com,124124123,scientist,0,0
