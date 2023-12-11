@@ -263,8 +263,8 @@ class Admin(User):
                 # change occupation
                 self.change_volunteer_occupation(change_user)
             if user_selection == "7":
-                # change camp role
-                self.change_volunteer_camp_role(change_user)
+                # change occupation
+                self.change_volunteer_role(change_user)
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -422,40 +422,43 @@ class Admin(User):
                 print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
 
     @staticmethod
-    def change_volunteer_camp_role(change_user):
-        try:
-            role_type_csv_path = Path(__file__).parents[1].joinpath("data/roleType.csv")
-            df_role = pd.read_csv(role_type_csv_path)
-        except FileNotFoundError as e:
-            print("\n Data file seems to be damaged. Please contact admin for further assistance")
-            logging.critical(e)
-            return
-        role_id_list = df_role['roleID'].tolist()
-        current_role = df_role.loc[df_role['roleID'] == change_user.role_id, 'name'].iloc[0]
-        print("\n" + df_role.to_markdown(index=False))
-        print(f"\nYour current role in camp is: '{current_role}'")
+    def change_volunteer_role(change_user):
+        csv_path = Path(__file__).parents[1].joinpath("data/roleType.csv")
+        df = pd.read_csv(csv_path)
+        role_id_arr = [i for i in df['roleID'].tolist()]
+        role_name = df.loc[df['roleID'] == change_user.role_id]['name'].tolist()[0]
+        print(f"\nCurrent Occupation: {role_name}")
+
+        old_id = change_user.role_id
+
+        table_str = df.to_markdown(index=False)
+        print("\n" + table_str)
+
         while True:
-            print("Please select a role you want to change to (Enter its index)")
-            new_role_id = input("---> ")
-            if new_role_id.upper() == "RETURN":
+            user_select = input("Please select a camp role you would like to change to by ID: ")
+
+            if user_select == 'RETURN':
                 return
-            else:
-                try:
-                    new_role_id = int(new_role_id)
-                    if new_role_id not in role_id_list:
-                        print("You must choose one of the roleID from the list!")
-                    else:
-                        break
-                except ValueError:
-                    print("Only Integer is allowed!")
-        try:
-            change_user.role_id = new_role_id
-            change_user.update_role()
-            new_role = df_role.loc[df_role['roleID'] == change_user.role_id, 'name'].iloc[0]
-            print("Updated successfully"
-                  f"\nYou new role is '{new_role}'")
-        except FileNotFoundError as e:
-            logging.critical(e)
-            print("Data file seems to be damaged"
-                  f"[Error] {e}")
+            elif not user_select.isnumeric():
+                print("Integer values only!")
+                continue
+            user_select = int(user_select)
+
+            if user_select not in role_id_arr:
+                print("Invalid role ID entered!")
+                continue
+
+            change_user.role_id = user_select
+            # update the csv file
+            helper.modify_csv_pandas("data/user.csv", 'roleID', old_id, 'roleID',
+                                     change_user.role_id)
+            print("\nCamp role Id changed successfully."
+                  f"\nYour new occupation is '{role_name}'.")
+            break
+
+
+
+
+
+
 

@@ -622,7 +622,7 @@ class Controller:
 
             # if there is no active events, return
             # print the events info for users to choose
-            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+            filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
             campID_df = df0[['campID', 'eventID']].copy()
             campID_df['campID'] = campID_df['campID'].astype(str)
             campID_df = campID_df.groupby('eventID')['campID'].apply(lambda x: ', '.join(x.dropna())).reset_index()
@@ -678,9 +678,17 @@ class Controller:
                 df2 = pd.read_csv(csv_path2)
 
                 # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
-                Event.display_events(df2[(df2['campID'] == int(modify_camp_id)) & (df2['eventID'] == eventID)])
-                selected_columns = ['campID', 'refugeeCapacity', 'healthRisk', 'status']
-                filtered_df1 = filtered_df1[selected_columns]
+                Event.display_events(df2[(df2['campID'] == modify_camp_id) & (df2['eventID'] == eventID)])
+                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'eventID']
+                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'countryID']
+                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'latitude']
+                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'longitude']
+                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'volunteerPop']
+                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'refugeePop']
+                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'avgCriticalLvl']
+
+                camp_id_arr = [int(i) for i in df2['campID'].tolist()]
+
                 for i, column_name in enumerate(filtered_df1.columns[0:], start=1):
                     print(f"[{i}] {column_name}")
                 try:
@@ -698,6 +706,9 @@ class Controller:
 
                         target_column_name = filtered_df1.columns[int(target_column_index) - 1]
                         while True:
+
+                            print(camp_id_arr)
+
                             new_value = input(f"Enter the new value for {target_column_name}: ")
 
                             if str(new_value) == 'RETURN':
@@ -705,8 +716,6 @@ class Controller:
                             # the ability to edit camp ID, but camp ID has to be unique
 
                             if target_column_index == '1':
-
-                                camp_id_arr = [int(i) for i in df0['campID'].tolist()]
 
                                 if int(new_value) in camp_id_arr:
                                     print("Camp ID already exists! Please choose a new one.")
@@ -762,10 +771,8 @@ class Controller:
 
                         helper.modify_csv_pandas(csv_path0, 'campID', temp_id, target_column_name,
                                                  new_value)
-                        temp_id = modify_camp_id
                         csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
                         df_c = pd.read_csv(csv_path_c)
-
                         df_c.sort_values('campID', inplace=True)
                         df_c.to_csv(Path(__file__).parents[0].joinpath("data/camp.csv"), index=False)
                         print(f"\u2714 Changes have been saved!")
@@ -1292,8 +1299,6 @@ class Controller:
                 self.legal_advice_support()
             if user_selection == '9':
                 self.refugee_training_sessions()
-            if user_selection == '10':
-                self.vol_data_visualization(self)
 
             if user_selection == "R":
                 break
@@ -1370,8 +1375,11 @@ class Controller:
             logging.critical("Not able to open camp file.")
             print(f"Oh no. We haven't been able to locate the file for this. \nError: {e}")
             return
+        except IndexError as e:
+            logging.critical(f"{e}")
 
         while True:
+            temp_id = int(camp_id)
             try:
                 csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
                 df2 = pd.read_csv(csv_path2)
@@ -1388,12 +1396,16 @@ class Controller:
 
             df2 = df2.loc[:, df2.columns != 'eventID']
             df2 = df2.loc[:, df2.columns != 'countryID']
+            df2 = df2.loc[:, df2.columns != 'latitude']
+            df2 = df2.loc[:, df2.columns != 'longitude']
+            df2 = df2.loc[:, df2.columns != 'volunteerPop']
+            df2 = df2.loc[:, df2.columns != 'refugeePop']
+            df2 = df2.loc[:, df2.columns != 'avgCriticalLvl']
+            df2 = df2.loc[:, df2.columns != 'status']
 
             camp_id_arr = [int(i) for i in df2['campID'].tolist()]
 
-            selected_columns = ['campID', 'refugeeCapacity', 'healthRisk']
-            filtered_df1 = df2[selected_columns]
-            for i, column_name in enumerate(filtered_df1.columns[0:], start=1):
+            for i, column_name in enumerate(df2.columns[0:], start=1):
                 print(f"[{i}] {column_name}")
                 logging.info("Successfully printed iteration in camp dataframe.")
             try:
@@ -1403,10 +1415,10 @@ class Controller:
                 if target_column_index == 'RETURN' or target_column_index.lower() == 'r':
                     return
                 if int(target_column_index) not in range(1, 4) and str(target_column_index).lower() != 'r':
-                    print("Invalid input! Please enter a valid integer from 1 to 3")
+                    print("Please enter a valid integer from 1 to 3")
                     continue
                 elif int(target_column_index) in range(1, 4):
-                    target_column_name = selected_columns[int(target_column_index) - 1]
+                    target_column_name = df2.columns[int(target_column_index) - 1]
                     while True:
                         new_value = input(f"Enter the new value for {target_column_name}: ")
 
@@ -1432,13 +1444,14 @@ class Controller:
                                 helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
                                                          int(k), 'campID', int(new_value))
                             new_value = int(new_value)
+                            camp_id = new_value
+                            break
 
                         if target_column_index == '3':
                             if new_value == "low" or new_value == "high":
                                 break
                             else:
                                 print("Invalid input! Please enter 'low' or 'high'")
-
                         elif target_column_index.lower() == 'r':
                             exit()
                         else:
@@ -1451,9 +1464,8 @@ class Controller:
                             except ValueError:
                                 print("Invalid input! Please enter a non-negative integer ")
 
-                    index_in_csv = df2[df2["campID"] == int(camp_id)].index.tolist()[0]
-                    helper.modify_csv_value(csv_path2, index_in_csv, target_column_name, new_value)
-
+                    helper.modify_csv_pandas(csv_path2, 'campID', temp_id, target_column_name,
+                                             new_value)
                     # reorder camp ID after ID changed
                     csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
                     df_c = pd.read_csv(csv_path_c)
