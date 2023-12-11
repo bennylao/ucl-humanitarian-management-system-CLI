@@ -74,6 +74,7 @@ class Admin(User):
         while True:
             user_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"), converters={'userID': str})
             unverified_user_df = user_df.loc[user_df['isVerified'] == False]
+            unverified_user_df = unverified_user_df[unverified_user_df.columns.difference(['password'])]
             unverified_user_options = unverified_user_df['userID'].tolist()
             print(unverified_user_df.to_markdown(index=False))
             print("\nPlease select the user ID of the volunteer you would like to verify and activate.\n"
