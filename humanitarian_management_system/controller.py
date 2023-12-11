@@ -533,8 +533,10 @@ class Controller:
                     else:
                         return
 
-            except ValueError:
+            except ValueError as e:
                 print("Invalid Input, please try again")
+                logging.critical(f"{e}")
+
 
     @staticmethod
     def admin_create_camp():
@@ -634,21 +636,23 @@ class Controller:
 
                     if eventID == 'RETURN':
                         return
+                    eventID = int(eventID)
 
-                    if int(eventID) not in active_index:
+                    if eventID not in active_index:
                         print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
                         continue
-                    elif df0[df0['eventID'] == int(eventID)].empty:
+                    elif df0[df0['eventID'] == eventID].empty:
                         print("No relevant camps to select from")
                         continue
                     break
-                except ValueError:
+                except ValueError as e:
                     print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                    logging.critical(f"{e}")
 
             # print camps info for users to choose
             # df3 = helper.matched_rows_csv(csv_path0, "eventID", eventID, "campID")
             print("\n**The following shows the info of related camps*")
-            filtered_df1 = df0[df0['eventID'] == int(eventID)]
+            filtered_df1 = df0[df0['eventID'] == eventID]
             filtered_campID = filtered_df1['campID'].tolist()
             Event.display_events(filtered_df1)
 
@@ -658,13 +662,14 @@ class Controller:
                     modify_camp_id = int(modify_camp_id)
                     if modify_camp_id == 'RETURN':
                         return
-                    elif int(modify_camp_id) not in filtered_campID:
+                    elif modify_camp_id not in filtered_campID:
                         print(f"\nInvalid input! Please enter an integer from {filtered_campID} for Camp ID.")
                         continue
                     else:
                         break
-                except ValueError:
+                except ValueError as e:
                     print(f"\nInvalid input! Please enter an integer from {filtered_campID} for Camp ID.")
+                    logging.critical(f"{e}")
                     continue
 
             while True:
@@ -672,7 +677,7 @@ class Controller:
                 df2 = pd.read_csv(csv_path2)
 
                 # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
-                Event.display_events(df2[(df2['campID'] == modify_camp_id) & (df2['eventID'] == int(eventID))])
+                Event.display_events(df2[(df2['campID'] == modify_camp_id) & (df2['eventID'] == eventID)])
                 filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'eventID']
                 filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'countryID']
                 for i, column_name in enumerate(filtered_df1.columns[0:], start=1):
@@ -749,8 +754,9 @@ class Controller:
                                     else:
                                         print("Invalid input! Please enter a non-negative integer ")
                                         continue
-                                except ValueError:
+                                except ValueError as e:
                                     print("Invalid input! Please enter a non-negative integer ")
+                                    logging.critical(f"{e}")
                                     continue
 
                         helper.modify_csv_pandas(csv_path0, 'campID', temp_id, target_column_name,
@@ -764,8 +770,9 @@ class Controller:
                         print(f"\u2714 Changes have been saved!")
                     else:
                         return
-                except ValueError:
+                except ValueError as e:
                     print("Invalid input! Please enter an integer between 1 to 9")
+                    logging.critical(f"{e}")
         except FileNotFoundError as e:
             print(f"\nMultiple files may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
@@ -820,8 +827,9 @@ class Controller:
                     elif event_id == 'RETURN':
                         return
                     break
-                except ValueError:
+                except ValueError as e:
                     print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                    logging.critical(f"{e}")
 
             filtered_camp_id = df1[df1['eventID'] == event_id]['campID'].tolist()
             df_resource = pd.read_csv(resource_allocation_csv_path)
@@ -845,8 +853,9 @@ class Controller:
                         print("\n*The following shows the info of the camp you have chosen*")
                         Event.display_events(df1[df1['campID'] == delete_camp_id])
                         break
-                except ValueError:
+                except ValueError as e:
                     print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
+                    logging.critical(f"{e}")
 
             while True:
                 aa = input(f"\nAre you sure to delete the camp {delete_camp_id}? (yes/no)\n"
@@ -884,147 +893,155 @@ class Controller:
 
     @staticmethod
     def admin_close_camp():
-        """This part of the code is to close the camp from the camp.csv"""
-        ManagementView.camp_close_message()
+        try:
+            """This part of the code is to close the camp from the camp.csv"""
+            ManagementView.camp_close_message()
 
-        event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
-        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-        resource_allocation_csv_path = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
-        active_index = helper.extract_active_event(event_csv_path)[0]
+            event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
+            camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+            resource_allocation_csv_path = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
+            active_index = helper.extract_active_event(event_csv_path)[0]
 
-        # if there is no active events, return
-        if len(active_index) == 0:
-            print("\nNo relevant events to select from")
-            return
-        else:
-            # print the events info for users to choose
-            df = pd.read_csv(event_csv_path)
+            # if there is no active events, return
+            if len(active_index) == 0:
+                print("\nNo relevant events to select from")
+                return
+            else:
+                # print the events info for users to choose
+                df = pd.read_csv(event_csv_path)
+                df1 = pd.read_csv(camp_csv_path)
+                filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+                campID_df = df1[['campID', 'eventID']].copy()
+                campID_df['campID'] = campID_df['campID'].astype(str)
+                campID_df = campID_df.groupby('eventID')['campID'].apply(lambda x: ', '.join(x.dropna())).reset_index()
+                merged_df = pd.merge(filtered_df, campID_df, on='eventID', how='left')
+                if filtered_df.empty:
+                    print("\nAll the events are closed and there's none to choose from.")
+                    return
+                else:
+                    print("\n*The following shows the info of all available events*")
+                    Event.display_events(merged_df)
+
+            # read camp csv file
             df1 = pd.read_csv(camp_csv_path)
-            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
-            campID_df = df1[['campID', 'eventID']].copy()
-            campID_df['campID'] = campID_df['campID'].astype(str)
-            campID_df = campID_df.groupby('eventID')['campID'].apply(lambda x: ', '.join(x.dropna())).reset_index()
-            merged_df = pd.merge(filtered_df, campID_df, on='eventID', how='left')
-            if filtered_df.empty:
-                print("\nAll the events are closed and there's none to choose from.")
-                return
-            else:
-                print("\n*The following shows the info of all available events*")
-                Event.display_events(merged_df)
-
-        # read camp csv file
-        df1 = pd.read_csv(camp_csv_path)
-        while True:
-            try:
-                event_id = input("\nEnter Event ID: ")
-                if event_id == "RETURN":
-                    return
-                event_id = int(event_id)
-                if event_id in active_index:
-                    break
-                elif df1[df1['eventID'] == event_id].empty:
-                    print("No relevant camps to select from")
-                    return
-                else:
-                    print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
-                    continue
-            except ValueError:
-                print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
-
-        filtered_camp_id = df1[df1['eventID'] == event_id]['campID'].tolist()
-        filtered_camp_id_int = [int(i) for i in filtered_camp_id]
-        print('The following shows the info of all camps from the event')
-        Event.display_events(df1[df1['eventID'] == event_id])
-        while True:
-            try:
-                close_camp_id = input("\nWhich camp do you want to close? Please enter campID: ")
-                if close_camp_id.upper() == "RETURN":
-                    return
-                close_camp_id = int(close_camp_id)
-                if (df1.loc[df1['campID'] == close_camp_id, 'status'] == "closed").any():
-                    print("\nThat camp is already closed! Don't worry. Let's go back.")
-                    return
-                elif close_camp_id not in filtered_camp_id:
-                    print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
-                    continue
-                else:
-                    print("\n*The following shows the info of the camp you have chosen*")
-                    Event.display_events(df1[df1['campID'] == close_camp_id])
-                    break
-            except ValueError:
-                print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
-
-        while True:
-            aa = input(f"\nAre you sure to close the camp {close_camp_id}? (yes/no)\n")
-            if aa == "yes":
-                # close the camp
-                df1.loc[df1['campID'] == int(close_camp_id), 'status'] = "closed"
-                df1.to_csv(camp_csv_path, index=False)
-                print("\n\u2714 You have Successfully closed the camp!")
+            while True:
                 try:
-                    user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
-                    user_df = pd.read_csv(user_csv_path)
-                    logging.info("User file loaded successfully for admin closing a camp.")
-                    camps_in_event = df1.loc[df1['eventID'] == event_id, 'campID'].tolist()
-                    volunteers_in_camp = user_df[
-                        (user_df['campID'] == close_camp_id) & (user_df['userType'] == 'volunteer')]
-                    volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
-                    # volunteers_in_camp = user_df.loc[user_df['campID'] == close_camp_id, 'campID'].tolist()
-                    print(
-                        f"\nYou've closed camp {close_camp_id}. But now you might want to allocate the current volunteers "
-                        f"to another camp in the same event. Or just leave them if preferred.")
-                    move_volunteers = input("\n\nDo you want to move volunteers to another camp?"
-                                            "\nEnter 'y' or 'n': ")
-                    if move_volunteers.lower() == 'n':
+                    event_id = input("\nEnter Event ID: ")
+                    if event_id == "RETURN":
+                        return
+                    event_id = int(event_id)
+                    if event_id in active_index:
                         break
-                    elif move_volunteers.lower() == 'y':
-                        if len(volunteers_in_camp) == 0:
-                            print("Just checked - looks like there are no volunteers left in that camp, anyway. "
-                                  "Redirecting you back now.")
-                            return
-                        print("Below are the volunteers in the camp: ")
-                        print('\n\n', volunteers_df_filtered.to_markdown(index=False))
+                    elif df1[df1['eventID'] == event_id].empty:
+                        print("No relevant camps to select from")
+                        return
+                    else:
+                        print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                        continue
+                except ValueError as e:
+                    print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                    logging.critical(f"{e}")
 
-                        new_camp = input("\nFrom the list below, which are the camps in the same event as the one"
-                                         "you have just closed, please enter which camp you want to move volunteers to: ")
-                        print(filtered_camp_id)
-                        if new_camp.lower() == 'return':
-                            return
-                        else:
-                            try:
-                                new_camp = int(new_camp)
-                                break
-                            except ValueError as e:
-                                logging.info(f"Error when user is selecting new camp to move volunteers to.")
-                                print("Oh no! R")
-                except Exception as e:
-                    logging.critical(f"Error {e} when trying to display volunteers in camp when closing a camp.")
-                    print(f"\nOh no. Error {e} has occurred. We'll take you back. The camp has still been closed "
-                          f"but you'll have to manually remove volunteers.")
-                return
-            elif aa == "no":
-                return
-            elif aa == "RETURN":
-                return
-            else:
-                print("Invalid input! Please enter 'yes' or 'no'")
-                continue
-        while True:
-            if new_camp in filtered_camp_id:
-                for index, row in volunteers_in_camp.iterrows():
-                    old_camp_id = row['campID']
-                    row_index_old_camp = user_df[user_df['campID'] == old_camp_id].index
-                    user_df.at[row_index_old_camp[0], 'campID'] = new_camp
-                    df1.loc[df1['campID'] == int(old_camp_id), 'volunteerPop'] -= 1
-                    df1.loc[df1['campID'] == int(new_camp), 'volunteerPop'] += 1
-                df1.to_csv(camp_csv_path, index=False)
-                user_df.to_csv(user_csv_path, index=False)
-                print(f"Successfully assigned these volunteers to the new camp {new_camp}! See below: ")
-                print(df1[df1['campId'] == close_camp_id].to_markdown)
-                print(df1[df1['campID'] == new_camp].to_markdown)
-                break
-            else:
-                print("Not a valid camp to choose from. Try again: ")
+            filtered_camp_id = df1[df1['eventID'] == event_id]['campID'].tolist()
+            filtered_camp_id_int = [int(i) for i in filtered_camp_id]
+            print('The following shows the info of all camps from the event')
+            Event.display_events(df1[df1['eventID'] == event_id])
+            while True:
+                try:
+                    close_camp_id = input("\nWhich camp do you want to close? Please enter campID: ")
+                    if close_camp_id.upper() == "RETURN":
+                        return
+                    close_camp_id = int(close_camp_id)
+                    if (df1.loc[df1['campID'] == close_camp_id, 'status'] == "closed").any():
+                        print("\nThat camp is already closed! Don't worry. Let's go back.")
+                        return
+                    elif close_camp_id not in filtered_camp_id:
+                        print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
+                        continue
+                    else:
+                        print("\n*The following shows the info of the camp you have chosen*")
+                        Event.display_events(df1[df1['campID'] == close_camp_id])
+                        break
+                except ValueError as e:
+                    print(f"Invalid input! Please enter an integer from {filtered_camp_id} for Camp ID.")
+                    logging.critical(f"{e}")
+
+            while True:
+                aa = input(f"\nAre you sure to close the camp {close_camp_id}? (yes/no)\n")
+                if aa == "yes":
+                    # close the camp
+                    df1.loc[df1['campID'] == int(close_camp_id), 'status'] = "closed"
+                    df1.to_csv(camp_csv_path, index=False)
+                    print("\n\u2714 You have Successfully closed the camp!")
+                    try:
+                        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+                        user_df = pd.read_csv(user_csv_path)
+                        logging.info("User file loaded successfully for admin closing a camp.")
+                        camps_in_event = df1.loc[df1['eventID'] == event_id, 'campID'].tolist()
+                        volunteers_in_camp = user_df[
+                            (user_df['campID'] == close_camp_id) & (user_df['userType'] == 'volunteer')]
+                        volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
+                        # volunteers_in_camp = user_df.loc[user_df['campID'] == close_camp_id, 'campID'].tolist()
+                        print(
+                            f"\nYou've closed camp {close_camp_id}. But now you might want to allocate the current volunteers "
+                            f"to another camp in the same event. Or just leave them if preferred.")
+                        move_volunteers = input("\n\nDo you want to move volunteers to another camp?"
+                                                "\nEnter 'y' or 'n': ")
+                        if move_volunteers.lower() == 'n':
+                            break
+                        elif move_volunteers.lower() == 'y':
+                            if len(volunteers_in_camp) == 0:
+                                print("Just checked - looks like there are no volunteers left in that camp, anyway. "
+                                      "Redirecting you back now.")
+                                return
+                            print("Below are the volunteers in the camp: ")
+                            print('\n\n', volunteers_df_filtered.to_markdown(index=False))
+
+                            new_camp = input("\nFrom the list below, which are the camps in the same event as the one"
+                                             "you have just closed, please enter which camp you want to move volunteers to: ")
+                            print(filtered_camp_id)
+                            if new_camp.lower() == 'return':
+                                return
+                            else:
+                                try:
+                                    new_camp = int(new_camp)
+                                    break
+                                except ValueError as e:
+                                    logging.info(f"Error when user is selecting new camp to move volunteers to.")
+                                    print("Oh no! R")
+                    except Exception as e:
+                        logging.critical(f"Error {e} when trying to display volunteers in camp when closing a camp.")
+                        print(f"\nOh no. Error {e} has occurred. We'll take you back. The camp has still been closed "
+                              f"but you'll have to manually remove volunteers.")
+                    return
+                elif aa == "no":
+                    return
+                elif aa == "RETURN":
+                    return
+                else:
+                    print("Invalid input! Please enter 'yes' or 'no'")
+                    continue
+            while True:
+                if new_camp in filtered_camp_id:
+                    for index, row in volunteers_in_camp.iterrows():
+                        old_camp_id = row['campID']
+                        row_index_old_camp = user_df[user_df['campID'] == old_camp_id].index
+                        user_df.at[row_index_old_camp[0], 'campID'] = new_camp
+                        df1.loc[df1['campID'] == int(old_camp_id), 'volunteerPop'] -= 1
+                        df1.loc[df1['campID'] == int(new_camp), 'volunteerPop'] += 1
+                    df1.to_csv(camp_csv_path, index=False)
+                    user_df.to_csv(user_csv_path, index=False)
+                    print(f"Successfully assigned these volunteers to the new camp {new_camp}! See below: ")
+                    print(df1[df1['campId'] == close_camp_id].to_markdown)
+                    print(df1[df1['campID'] == new_camp].to_markdown)
+                    break
+                else:
+                    print("Not a valid camp to choose from. Try again: ")
+        except FileNotFoundError as e:
+            print(f"\nData file seems to be damaged."
+                  f"\nPlease contact admin for further assistance."
+                  f"\n[Error] {e}")
+            logging.critical(f"{e}")
 
     @staticmethod
     def admin_display_refugee():
@@ -1034,7 +1051,7 @@ class Controller:
             r = Refugee('', '', '', '', '', '', '',
                         '')
             r.display_info(user, 0)
-        except Exception as e:
+        except FileNotFoundError as e:
             print(f"\nData file seems to be damaged."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -1047,7 +1064,7 @@ class Controller:
             ManagementView.display_admin_camp()
             c = Camp('', '')
             c.display_info(user, 0)
-        except Exception as e:
+        except FileNotFoundError as e:
             print(f"\nData file seems to be damaged."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -1139,7 +1156,7 @@ class Controller:
                     return
                 else:
                     break
-        except Exception as e:
+        except FileNotFoundError as e:
             print(f"\nData file seems to be damaged."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -1222,45 +1239,52 @@ class Controller:
         print(f"You're currently assigned to camp {int(old_camp_id)}.")
 
         while True:
-            select_index = input("\nSelect a camp ID you would like to join: ")
-            if select_index.upper() == 'RETURN':
-                return
-            elif select_index.isnumeric() and int(select_index) in available_camp_index:
-                user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
-                df_user = pd.read_csv(user_csv_path)
-                select_index = int(select_index)
-                self.user.camp_id = select_index
-                # camp volunteer population minus 1
-                df_camp.loc[df_camp['campID'] == old_camp_id, 'volunteerPop'] -= 1
-                df_camp.loc[df_camp['campID'] == select_index, 'volunteerPop'] += 1
-                df_camp.to_csv(camp_csv_path, index=False)
-                df_user.loc[df_user['userID'] == self.user.user_id, 'campID'] = select_index
-                df_user.to_csv(user_csv_path, index=False)
-                logging.info(f"successfully changed user input into {select_index} index")
-                print(f"You are successfully changed from camp {old_camp_id} to camp {select_index}")
-                return
-            else:
-                print("invalid camp ID entered!")
-                continue
+            try:
+                select_index = input("\nSelect a camp ID you would like to join: ")
+                if select_index.upper() == 'RETURN':
+                    return
+                elif select_index.isnumeric() and int(select_index) in available_camp_index:
+                    user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+                    df_user = pd.read_csv(user_csv_path)
+                    select_index = int(select_index)
+                    self.user.camp_id = select_index
+                    # camp volunteer population minus 1
+                    df_camp.loc[df_camp['campID'] == old_camp_id, 'volunteerPop'] -= 1
+                    df_camp.loc[df_camp['campID'] == select_index, 'volunteerPop'] += 1
+                    df_camp.to_csv(camp_csv_path, index=False)
+                    df_user.loc[df_user['userID'] == self.user.user_id, 'campID'] = select_index
+                    df_user.to_csv(user_csv_path, index=False)
+                    logging.info(f"successfully changed user input into {select_index} index")
+                    print(f"You are successfully changed from camp {old_camp_id} to camp {select_index}")
+                    return
+                else:
+                    print("invalid camp ID entered!")
+                    continue
+            except ValueError as e:
+                logging.critical(f"{e}")
 
     def volunteer_edit_camp(self):
+        try:
+            user_id = self.user.user_id
+            user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+            camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+            # active_index = helper.extract_active_event(camp_csv_path)[0]
+            df = pd.read_csv(user_csv_path)
+            dff = df[df['userID'] == int(user_id)]
+            dfc = pd.read_csv(camp_csv_path)
 
-        user_id = self.user.user_id
-        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
-        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-        # active_index = helper.extract_active_event(camp_csv_path)[0]
-        df = pd.read_csv(user_csv_path)
-        dff = df[df['userID'] == int(user_id)]
-        dfc = pd.read_csv(camp_csv_path)
+            csv_path_a = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
+            df_a = pd.read_csv(csv_path_a)
 
-        csv_path_a = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
-        df_a = pd.read_csv(csv_path_a)
+            camp_id = dff.at[1, 'campID']
+            event_id = dfc.loc[dfc['campID'] == int(camp_id)]['eventID'].tolist()[0]
 
-        camp_id = dff.at[1, 'campID']
-        event_id = dfc.loc[dfc['campID'] == int(camp_id)]['eventID'].tolist()[0]
-
-        csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
-        df_r = pd.read_csv(csv_path_r)
+            csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
+            df_r = pd.read_csv(csv_path_r)
+        except FileNotFoundError as e:
+            logging.critical("Not able to open camp file.")
+            print(f"Oh no. We haven't been able to locate the file for this. \nError: {e}")
+            return
 
         while True:
             try:
@@ -1356,8 +1380,9 @@ class Controller:
                     print(f"\u2714 Changes have been saved!")
                 else:
                     return
-            except ValueError:
+            except ValueError as e:
                 print("Invalid input! Please enter an integer between 1 to 9")
+                logging.critical(f"{e}")
 
     def create_refugee(self):
         try:
@@ -1393,8 +1418,9 @@ class Controller:
                                 "\n\nOh no! The new camp you've selected doesn't have the capacity to handle another refugee. "
                                 f"Camp {cid} has a current population of {new_potential_refugee_pop} and a capacity of "
                                 f"{new_camp_capacity}.\nLet's go again.\n")
-                    except ValueError:
+                    except ValueError as e:
                         print("Invalid camp ID entered!")
+                        logging.critical(f"{e}")
                         continue
             else:
                 # check if volunteer is already assigned to a camp, if no exit to menu
@@ -1426,7 +1452,7 @@ class Controller:
                 return
             print("Refugee created.")
             self.volunteer_manage_camp()
-        except Exception as e:
+        except FileNotFoundError as e:
             print(f"\nRefugee or camp data file may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -1825,7 +1851,7 @@ class Controller:
                     print("Invalid email entered.\n"
                           "Only alphabet, numbers and !@#$%^&* are allowed.")
                     continue
-        except ValueError as e:
+        except Exception as e:
             print(f"\nInvalid user input."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -1869,7 +1895,7 @@ class Controller:
                     break
                 else:
                     print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
-        except ValueError as e:
+        except Exception as e:
             print(f"\nInvalid user input."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -1893,7 +1919,7 @@ class Controller:
             ManagementView.refugee_edit_message()
             r.edit_refugee_info(user, cid)
             print(f"You're currently assigned to camp {int(cid)}.")
-        except ValueError as e:
+        except FileNotFoundError as e:
             print(f"\nInvalid user input."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -1980,5 +2006,6 @@ class Controller:
                 else:
                     return
 
-            except ValueError:
+            except ValueError as e:
                 print("Invalid Input, please try again")
+                logging.critical(f"{e}")
