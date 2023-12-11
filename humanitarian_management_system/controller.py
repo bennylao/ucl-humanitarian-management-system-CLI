@@ -1392,12 +1392,12 @@ class Controller:
                 logging.info("Successfully printed iteration in camp dataframe.")
             try:
                 print("[R] QUIT editing")
-                target_column_index = input(f"Which column do you want to modify(1~9)? Or quit editing(R): ")
+                target_column_index = input(f"Which column do you want to modify(1~3)? Or quit editing(R): ")
 
                 if target_column_index == 'RETURN' or target_column_index.lower() == 'r':
                     return
                 if int(target_column_index) not in range(1, 4) and str(target_column_index).lower() != 'r':
-                    print("Please enter a valid integer from 1 to 3")
+                    print("Invalid input! Please enter a valid integer from 1 to 3")
                     continue
                 elif int(target_column_index) in range(1, 4):
                     target_column_name = selected_columns[int(target_column_index) - 1]
@@ -1427,7 +1427,7 @@ class Controller:
                                                          int(k), 'campID', int(new_value))
                             new_value = int(new_value)
 
-                        if target_column_index == '2':
+                        if target_column_index == '3':
                             if new_value == "low" or new_value == "high":
                                 break
                             else:
@@ -1458,7 +1458,7 @@ class Controller:
                 else:
                     return
             except ValueError as e:
-                print("Invalid input! Please enter an integer between 1 to 9")
+                print("Invalid input! Please enter an integer between 1 to 3")
                 logging.critical(f"{e}")
 
     def create_refugee(self):
