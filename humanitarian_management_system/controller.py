@@ -1774,29 +1774,36 @@ class Controller:
 
     def user_edit_account(self):
         while True:
-            ManagementView.display_account_menu()
-            user_selection = helper.validate_user_selection(ManagementView.get_account_options())
+            if isinstance(self.user, Admin):
+                ManagementView.admin_display_account_menu()
+                user_selection = helper.validate_user_selection(ManagementView.admin_get_account_options())
+            else:
+                ManagementView.volunteer_display_account_menu()
+                user_selection = helper.validate_user_selection(ManagementView.volunteer_get_account_options())
             if user_selection == "1":
                 # change username
                 self.user_change_username()
-            if user_selection == "2":
+            elif user_selection == "2":
                 # change password
                 self.user_change_password()
-            if user_selection == "3":
+            elif user_selection == "3":
                 # change name
                 self.user_change_name()
-            if user_selection == "4":
+            elif user_selection == "4":
                 # change email
                 self.user_change_email()
-            if user_selection == "5":
+            elif user_selection == "5":
                 # change phone
                 self.user_change_phone()
-            if user_selection == "6":
+            elif user_selection == "6":
                 # change occupation
                 self.user_change_occupation()
-            if user_selection == "R":
+            elif user_selection == "7" and isinstance(self.user, Volunteer):
+                # change role
+                self.volunteer_change_role_id()
+            elif user_selection == "R":
                 break
-            if user_selection == "L":
+            elif user_selection == "L":
                 self.user = None
                 self.logout_request = True
                 break
@@ -1984,8 +1991,44 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
 
-    """ #### edit refugee for volunteer, volunteer camp dependent #### """
+    def volunteer_change_role_id(self):
+        try:
+            role_type_csv_path = Path(__file__).parent.joinpath("data/roleType.csv")
+            df_role = pd.read_csv(role_type_csv_path)
+        except FileNotFoundError as e:
+            print("\n Data file seems to be damaged. Please contact admin for further assistance")
+            logging.critical(e)
+            return
+        role_id_list = df_role['roleID'].tolist()
+        current_role = df_role.loc[df_role['roleID'] == self.user.role_id, 'name'].iloc[0]
+        print("\n" + df_role.to_markdown(index=False))
+        print(f"\nYour current role in camp is: '{current_role}'")
+        while True:
+            print("Please select a role you want to change to (Enter its index)")
+            new_role_id = input("---> ")
+            if new_role_id.upper() == "RETURN":
+                return
+            else:
+                try:
+                    new_role_id = int(new_role_id)
+                    if new_role_id not in role_id_list:
+                        print("You must choose one of the roleID from the list!")
+                    else:
+                        break
+                except ValueError:
+                    print("Only Integer is allowed!")
+        try:
+            self.user.role_id = new_role_id
+            self.user.update_role()
+            new_role = df_role.loc[df_role['roleID'] == self.user.role_id, 'name'].iloc[0]
+            print("Updated successfully"
+                  f"\nYou new role is '{new_role}'")
+        except FileNotFoundError as e:
+            logging.critical(e)
+            print("Data file seems to be damaged"
+                  f"[Error] {e}")
 
+    """ #### edit refugee for volunteer, volunteer camp dependent #### """
     def vol_edit_refugee(self, r):
         try:
             camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")

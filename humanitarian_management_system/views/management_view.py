@@ -3,7 +3,7 @@ class ManagementView:
     This class contains all the messages that shared between volunteer and admin after login.
     """
 
-    manage_account_menu = (
+    admin_manage_account_menu = (
         ("1", "Change Username"),
         ("2", "Change Password"),
         ("3", "Change Name"),
@@ -14,15 +14,37 @@ class ManagementView:
         ("L", "Logout")
     )
 
+    volunteer_manage_account_menu = (
+        ("1", "Change Username"),
+        ("2", "Change Password"),
+        ("3", "Change Name"),
+        ("4", "Change Email"),
+        ("5", "Change Phone Number"),
+        ("6", "Change Occupation"),
+        ("7", "Change Role"),
+        ("R", "Return to previous page"),
+        ("L", "Logout")
+    )
+
     @classmethod
-    def display_account_menu(cls):
+    def admin_display_account_menu(cls):
         print("\n===== Account Edit Menu =====")
-        for key, value in cls.manage_account_menu:
+        for key, value in cls.admin_manage_account_menu:
             print(f"[ {key} ] {value}")
 
     @classmethod
-    def get_account_options(cls):
-        return [options[0] for options in cls.manage_account_menu]
+    def admin_get_account_options(cls):
+        return [options[0] for options in cls.admin_manage_account_menu]
+
+    @classmethod
+    def volunteer_display_account_menu(cls):
+        print("\n===== Account Edit Menu =====")
+        for key, value in cls.volunteer_manage_account_menu:
+            print(f"[ {key} ] {value}")
+
+    @classmethod
+    def volunteer_get_account_options(cls):
+        return [options[0] for options in cls.volunteer_manage_account_menu]
 
     @staticmethod
     def display_summary_message():

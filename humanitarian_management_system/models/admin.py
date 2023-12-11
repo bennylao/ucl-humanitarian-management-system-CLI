@@ -241,8 +241,8 @@ class Admin(User):
 
     def edit_volunteer_profile(self, change_user):
         while True:
-            ManagementView.display_account_menu()
-            user_selection = helper.validate_user_selection(ManagementView.get_account_options())
+            ManagementView.admin_display_account_menu()
+            user_selection = helper.validate_user_selection(ManagementView.admin_get_account_options())
             if user_selection == "1":
                 # change username
                 self.change_volunteer_username(change_user)
