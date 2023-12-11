@@ -526,7 +526,7 @@ def move_refugee_helper_method():
                 camp_id = int(camp_id)
                 if camp_id == old_camp_id:
                     print("\nLooks like that's the same camp this refugee is already in. Try again "
-                          "or if there are no other camps\navailable, enter RETURN to go back.")
+                          "or if there are no other camps available, enter RETURN to go back.")
                 elif (camp_id in active_camp_df['campID'].values) and (camp_id in camps_in_event):
                     # Need to do a final check to see if new camp's refugeePop + 1 is < new camp's refugeeCapacity
                     row_index_new_camp = camp_df[camp_df['campID'] == int(camp_id)].index
