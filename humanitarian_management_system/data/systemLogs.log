@@ -630,3 +630,16 @@ invalid literal for int() with base 10: '/Users/jesswork/humanitarian_management
 2023-12-11 20:22:26,380 - INFO - controller-volunteer_main-Line1246 - volunteer main menu is displayed
 2023-12-11 20:22:28,451 - INFO - controller-volunteer_main-Line1263 - logging out from volunteer main menu
 2023-12-11 20:22:28,451 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:54:38,571 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:54:38,573 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:54:38,573 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:54:38,574 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:54:54,757 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:54:58,221 - INFO - controller-volunteer_main-Line1200 - login successfully as volunteer
+2023-12-11 20:54:58,221 - INFO - controller-volunteer_main-Line1246 - volunteer main menu is displayed
+2023-12-11 20:55:10,263 - INFO - helper-create_training_session-Line831 - All data files have loaded.
+2023-12-11 20:55:18,193 - INFO - helper-display_training_session-Line789 - Training session data successfully loaded.
+2023-12-11 20:55:21,041 - INFO - helper-create_training_session-Line831 - All data files have loaded.
+2023-12-11 21:09:15,375 - INFO - helper-create_training_session-Line831 - All data files have loaded.
+2023-12-11 21:09:35,356 - INFO - helper-create_training_session-Line859 - Date input for creating a session was in the past so invalid.
+2023-12-11 21:09:40,368 - INFO - helper-create_training_session-Line855 - Date for creating a session has been set correctly.
