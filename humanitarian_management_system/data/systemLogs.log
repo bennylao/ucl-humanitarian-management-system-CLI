@@ -18,3 +18,39 @@
 2023-12-11 01:31:24,532 - INFO - controller-login-Line90 - login failed due to non-existent username
 2023-12-11 01:31:26,657 - INFO - controller-admin_main-Line134 - login successfully as admin
 2023-12-11 01:31:26,658 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 01:57:51,479 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 01:57:51,479 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 01:57:51,480 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 01:57:51,480 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 01:57:57,901 - INFO - controller-register-Line60 - Register page is shown
+2023-12-11 02:00:36,398 - INFO - controller-register-Line70 - New volunteer account is created
+2023-12-11 02:00:39,401 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 02:01:48,506 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:01:48,506 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:01:48,507 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:01:48,507 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:01:49,695 - INFO - controller-register-Line60 - Register page is shown
+2023-12-11 02:03:13,726 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:03:13,726 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:03:13,726 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:03:13,726 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:03:14,523 - INFO - controller-register-Line60 - Register page is shown
+2023-12-11 02:04:40,789 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:04:40,789 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:04:40,790 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:04:40,790 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:04:41,213 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 02:04:42,861 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:04:42,861 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:04:42,862 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:04:42,863 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:04:43,123 - INFO - controller-register-Line60 - Register page is shown
+2023-12-11 02:04:50,855 - WARNING - helper-validate_registration-Line92 - Invalid phone - phone is numeric but is not a number.
+2023-12-11 02:04:52,045 - WARNING - helper-validate_registration-Line92 - Invalid phone - phone is numeric but is not a number.
+2023-12-11 02:04:54,192 - WARNING - helper-validate_registration-Line92 - Invalid phone - phone is numeric but is not a number.
+2023-12-11 02:04:54,670 - WARNING - helper-validate_registration-Line92 - Invalid phone - phone is numeric but is not a number.
+2023-12-11 02:04:55,043 - WARNING - helper-validate_registration-Line92 - Invalid phone - phone is numeric but is not a number.
+2023-12-11 02:04:55,380 - WARNING - helper-validate_registration-Line92 - Invalid phone - phone is numeric but is not a number.
+2023-12-11 02:04:55,685 - WARNING - helper-validate_registration-Line92 - Invalid phone - phone is numeric but is not a number.
+2023-12-11 02:04:58,372 - INFO - controller-register-Line70 - New volunteer account is created
+2023-12-11 02:05:01,374 - INFO - controller-login-Line83 - login page is shown

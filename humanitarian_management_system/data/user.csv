@@ -11,3 +11,4 @@ userID,userType,isVerified,isActive,username,password,firstName,lastName,email,p
 9,volunteer,True,True,bennny,$5$rounds=535000$aJaBbtm3.6O1iNYV$Z1j3TuN8q4k0RzayQyDpTkTvwWTYkET7P1oQTOkBKP7,lskdajf,sdklfjds,slkjdfh@gail.com,23423423,sjkdhf,0,0
 10,volunteer,True,False,abc123,$5$rounds=535000$9raxCTudqbQHCeu7$/UiXNVWHdwNIHEiG0z842yk/TnV574LzYL/AEVRtfoA,slkdafj,sdlkfjksd,slkdjhf@gm.com,234324,sdlkjaf,0,0
 11,volunteer,False,False,vvv,$5$rounds=535000$Uk8RqcVDfN0B./CE$F0FtkWFDLgEjubQNgAn9oa16WrE5Nuh6VP0i5huu9Z8,benny,lao,lsadkjf@gmail.com,124124123,scientist,0,0
+12,volunteer,False,False,asdlkfsa,$5$rounds=535000$T4XnJSNqek.Ekda.$kGSpuOiA3I/gh3gqzHDt1CIjtpOft/S8T.TBI5ZCIx8,sladhksldf,skadfj,skjadh@gmail.com,2314234,sdfaasd,0,0
