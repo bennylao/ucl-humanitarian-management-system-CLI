@@ -336,21 +336,57 @@ class Controller:
             df_camp = pd.read_csv(camp_csv_path)
             resource_csv_path = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
             df_resource = pd.read_csv(resource_csv_path)
-            filtered_df_event = df_event[(df_event['ongoing'] == 'True') | (df_event['ongoing'] == 'Yet')]
 
-            if filtered_df_event.empty:
-                print('There is no ongoing event.\n')
+            if df_event.empty:
+                print('There is no event.\n')
             else:
-                filtered_df_camp = df_camp.loc[
-                    df_camp['status'] == 'open', ['eventID', 'campID', 'volunteerPop', 'refugeePop']]
+                filtered_df_camp = df_camp[['eventID', 'campID', 'status', 'volunteerPop', 'refugeePop']].copy()
                 qty_sum_by_camp = df_resource.groupby('campID')['qty'].sum().reset_index()
                 qty_sum_by_camp.rename(columns={'qty': '# resource'}, inplace=True)
+                filtered_df_camp.rename(columns={'volunteerPop': '#volunteer'}, inplace=True)
+                filtered_df_camp.rename(columns={'refugeePop': '#refugee'}, inplace=True)
+                filtered_df_camp.rename(columns={'status': 'camp status'}, inplace=True)
                 merge_resource = pd.merge(filtered_df_camp, qty_sum_by_camp, how='left', on='campID')
-                result_df = pd.merge(filtered_df_event, merge_resource, how='left', on='eventID')
-                result_df.rename(columns={'volunteerPop': '# volunteer'}, inplace=True)
-                result_df.rename(columns={'refugeePop': '# refugee'}, inplace=True)
-                result_df = result_df.drop(['ongoing', 'description', 'no_camp'], axis=1)
-                Event.display_events(result_df)
+
+                print("\n=================================================================\n"
+                      "                    Data for ongoing events\n"
+                      "=================================================================")
+                filtered_df_event1 = df_event[(df_event['ongoing'] == True)]
+                if filtered_df_event1.empty:
+                    print("\nThere is no ongoing event.")
+                else:
+                    filtered_df_event1 = filtered_df_event1.drop(['ongoing', 'description', 'no_camp'], axis=1)
+                    result_df_ongoing = pd.merge(filtered_df_event1, merge_resource, how='left', on='eventID')
+                    Event.display_events(result_df_ongoing)
+
+
+                print("\n\n=================================================================\n"
+                      "           Data for events that have not started yet\n"
+                      "=================================================================")
+                filtered_df_event2 = df_event[(df_event['ongoing'] == 'Yet')]
+                if filtered_df_event2.empty:
+                    print("\nThere is no event that has not started yet.")
+                else:
+                    filtered_df_event2 = filtered_df_event2.drop(['ongoing', 'description', 'no_camp'], axis=1)
+                    result_df_yet = pd.merge(filtered_df_event2, merge_resource, how='left', on='eventID')
+                    Event.display_events(result_df_yet)
+
+
+                print("\n\n=================================================================\n"
+                      "                     Data for closed events\n"
+                      "=================================================================")
+                filtered_df_event3 = df_event[(df_event['ongoing'] == False)]
+                if filtered_df_event3.empty:
+                    print("\nThere is no closed event.")
+                else:
+                    filtered_df_event3 = filtered_df_event3.drop(['ongoing', 'description', 'no_camp'], axis=1)
+                    result_df_closed = pd.merge(filtered_df_event3, merge_resource, how='left', on='eventID')
+                    Event.display_events(result_df_closed)
+
+                user_input = input("\nEnter any to exit...")
+                if not user_input:
+                    return
+
         except FileNotFoundError as e:
             print(f"\nData file seems to be damaged."
                   f"\nPlease contact admin for further assistance."
@@ -556,7 +592,7 @@ class Controller:
             active_index = helper.extract_active_event(csv_path)[0]
 
             # if there is no active events, return
-            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+            filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
 
             # check if active event is 0
             # if len(active_index) == 0:
