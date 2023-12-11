@@ -267,10 +267,15 @@ def validate_camp_input():
 
 
 def modify_csv_pandas(file_path, select_col, row_value, final_col, new_value):
-    csv_path = Path(__file__).parents[0].joinpath(file_path)
-    df = pd.read_csv(csv_path)
-    i = df.index[df[select_col] == row_value].tolist()[0]
-    modify_csv_value(csv_path, i, final_col, new_value)
+    try:
+        csv_path = Path(__file__).parents[0].joinpath(file_path)
+        df = pd.read_csv(csv_path)
+        i = df.index[df[select_col] == row_value].tolist()[0]
+        modify_csv_value(csv_path, i, final_col, new_value)
+    except FileNotFoundError as e:
+        logging.critical(f"{e}")
+    except IndexError as e:
+        logging.critical(f"{e}")
 
 
 def modify_csv_value(file_path, row_index, column_name, new_value):
