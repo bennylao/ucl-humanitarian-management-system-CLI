@@ -4,7 +4,7 @@ campID,eventID,countryID,latitude,longitude,refugeeCapacity,healthRisk,volunteer
 7,4,IN,23.14856141,78.20984096,15,high,0,0,1.0,open
 8,8,EG,26.30354644,30.21567872,15,high,1,0,1.0,closed
 9,8,EG,26.30354644,30.31567872,2,high,1,2,3.0,closed
-12,3,IN,23.14856141,78.40984096,11,low,0,0,1.0,open
+13,3,IN,231.14856141,78.40984096,11,low,0,0,1.0,open
 14,3,IN,23.14856141,78.50984096,10000,high,0,0,1.0,open
 15,10,CN,33.24640451,102.9003988,111,high,0,0,1.0,open
 16,3,IN,23.24856141,78.10984096,50,0,0,1,0.0,open
@@ -21,4 +21,5 @@ campID,eventID,countryID,latitude,longitude,refugeeCapacity,healthRisk,volunteer
 57,17,BR,-9.505433177,-56.25042963,18,low,1,2,3.0,open
 58,3,IN,21.84737193,79.76992567,99,high,0,0,1.0,open
 59,10,CN,35.39323041,104.4448893,1,low,0,1,1.0,open
-60,3,IN,23.74856141,78.20984096,13,high,2,12,2.0,open
+61,6,CN,35.99103235126671,104.04929365892244,99,low,0,0,1.0,open
+62,3,IN,23.74856141,78.20984096,13,high,2,12,2.0,open

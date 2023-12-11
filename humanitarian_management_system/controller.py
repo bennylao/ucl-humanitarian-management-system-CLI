@@ -1286,6 +1286,8 @@ class Controller:
                 self.legal_advice_support()
             if user_selection == '9':
                 self.refugee_training_sessions()
+            if user_selection == '10':
+                self.vol_data_visualization(self)
 
             if user_selection == "R":
                 break
@@ -2069,6 +2071,10 @@ class Controller:
                 if userInput == 1:
                     camp_map = visualization_v.DataVisual()
                     camp_map.map()
+
+                elif userInput == 2:
+                    c = num_camp
+                    c.num_camp()
 
                 elif userInput == 2:
                     gender = gender_distribution
