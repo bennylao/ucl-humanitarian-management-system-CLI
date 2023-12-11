@@ -986,7 +986,8 @@ class Controller:
                 # print the events info for users to choose
                 df = pd.read_csv(event_csv_path)
                 df1 = pd.read_csv(camp_csv_path)
-                filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+                filtered_df = df[(df['ongoing'] == True
+                                  ) | (df['ongoing'] == 'Yet')]
                 campID_df = df1[['campID', 'eventID']].copy()
                 campID_df['campID'] = campID_df['campID'].astype(str)
                 campID_df = campID_df.groupby('eventID')['campID'].apply(lambda x: ', '.join(x.dropna())).reset_index()
@@ -1063,7 +1064,7 @@ class Controller:
                         move_volunteers = input("\n\nDo you want to move volunteers to another camp?"
                                                 "\nEnter 'y' or 'n': ")
                         if move_volunteers.lower() == 'n':
-                            break
+                            return
                         elif move_volunteers.lower() == 'y':
                             if len(volunteers_in_camp) == 0:
                                 print("Just checked - looks like there are no volunteers left in that camp, anyway. "
