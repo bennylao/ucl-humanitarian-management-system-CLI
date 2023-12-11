@@ -863,7 +863,7 @@ class Controller:
                     ref_df.reset_index(drop=True, inplace=True)
                     ref_df.to_csv(refugee_csv_path, index=False)
                     # keep track of existing camp num of a particular event
-                    no_camp = df.loc[event_id, "no_camp"]
+                    no_camp = df.loc[df['eventID'] == event_id][ "no_camp"].tolist()[0]
                     no_camp -= 1
                     index = df[df["eventID"] == event_id].index.tolist()
                     helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
