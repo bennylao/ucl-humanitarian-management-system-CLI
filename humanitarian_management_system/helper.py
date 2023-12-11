@@ -85,11 +85,15 @@ def validate_registration(usernames):
         phone = input("\nEnter phone number: ")
         if phone == 'RETURN':
             return
-        elif phone.isnumeric():
-            break
-        else:
+        try:
+            phone = int(phone)
+        except ValueError:
+            logging.warning("Invalid phone - phone is numeric but is not a number.")
             print("Invalid phone number entered.\n"
                   "Only numbers are allowed.")
+            continue
+        break
+
     # check for occupation
     while True:
         occupation = input("\nEnter occupation: ")
