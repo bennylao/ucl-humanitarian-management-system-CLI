@@ -733,7 +733,7 @@ class Controller:
                                 else:
                                     print("Invalid input! Please enter 'low' or 'high'")
                                     continue
-                            elif target_column_index == '5':
+                            elif target_column_index == '4':
 
                                 if new_value == "open" or new_value == "closed":
                                     break
