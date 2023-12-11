@@ -1192,6 +1192,49 @@ class Controller:
 
     def volunteer_main(self):
         logging.info("login successfully as volunteer")
+        # if volunteer is not assigned to a camp
+        if self.user.camp_id == 0:
+            while True:
+                print("\n================================="
+                      f"\n       Welcome Back {self.user.username}       "
+                      "\n=================================")
+                print("\nYou has not been assigned to any camp yet"
+                      "\nPlease select a cmap below to join")
+                input("\nPlease press Enter to see the camp list...")
+                try:
+                    camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+                    df_camp = pd.read_csv(camp_csv_path)
+                    logging.info("successfully got info for camp csv file for volunteer joining a camp")
+                    available_camp_index = helper.display_open_camp_list()
+                except FileNotFoundError as e:
+                    logging.critical(e)
+                    print("Data file seems to be damaged"
+                          "\nPlease contact admin for help"
+                          "\n[Error]: {e}")
+                    return
+                # Force volunteer to join a camp
+                try:
+                    select_index = input("\nSelect a camp ID you would like to join: ")
+                    if int(select_index) in available_camp_index:
+                        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+                        df_user = pd.read_csv(user_csv_path)
+                        select_index = int(select_index)
+                        self.user.camp_id = select_index
+                        df_camp.loc[df_camp['campID'] == select_index, 'volunteerPop'] += 1
+                        df_camp.to_csv(camp_csv_path, index=False)
+                        df_user.loc[df_user['userID'] == self.user.user_id, 'campID'] = select_index
+                        df_user.to_csv(user_csv_path, index=False)
+                        logging.info(f"successfully add user into camp {select_index}")
+                        print(f"You are successfully getting into camp {select_index}")
+                        input("Please press Enter to continue...")
+                        break
+                    else:
+                        print("invalid camp ID entered!")
+                        continue
+                except ValueError as e:
+                    print("Camp ID must be an integer")
+                    logging.warning("user input an invalid camp id"
+                                    f"\n{e}")
         VolunteerView.display_login_message(self.user.username)
         while True:
             logging.info("volunteer main menu is displayed")
@@ -1255,12 +1298,18 @@ class Controller:
     # join camp and change camp is the same thing, basically volunteer can change to a different camp after joining a
     # camp by selecting join/change camp in the menu
     def volunteer_join_camp(self):
-        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
-        df_camp = pd.read_csv(camp_csv_path)
-        logging.info("successfully got info for camp csv file for volunteer joining a camp")
-        ManagementView.join_camp_message()
-        available_camp_index = helper.display_open_camp_list()
-
+        try:
+            camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+            df_camp = pd.read_csv(camp_csv_path)
+            logging.info("successfully got info for camp csv file for volunteer joining a camp")
+            ManagementView.join_camp_message()
+            available_camp_index = helper.display_open_camp_list()
+        except FileNotFoundError as e:
+            logging.critical(e)
+            print("Data file seems to be damaged"
+                  "\nPlease contact admin for help"
+                  "\n[Error]: {e}")
+            return
         old_camp_id = self.user.camp_id
         print(f"You're currently assigned to camp {int(old_camp_id)}.")
 
@@ -1269,7 +1318,7 @@ class Controller:
                 select_index = input("\nSelect a camp ID you would like to join: ")
                 if select_index.upper() == 'RETURN':
                     return
-                elif select_index.isnumeric() and int(select_index) in available_camp_index:
+                elif int(select_index) in available_camp_index:
                     user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
                     df_user = pd.read_csv(user_csv_path)
                     select_index = int(select_index)
@@ -1287,7 +1336,9 @@ class Controller:
                     print("invalid camp ID entered!")
                     continue
             except ValueError as e:
-                logging.critical(f"{e}")
+                print("Camp ID must be an integer")
+                logging.warning("user input an invalid camp id"
+                                f"\n{e}")
 
     def volunteer_edit_camp(self):
         try:
@@ -1890,10 +1941,14 @@ class Controller:
                 new_phone = input("\nPlease enter new phone number: ")
                 if new_phone == 'RETURN':
                     return
-                elif new_phone.isnumeric():
-                    break
                 else:
-                    print("Invalid phone number entered. Only numbers are allowed.")
+                    try:
+                        new_phone = int(new_phone)
+                        break
+                    except ValueError:
+                        print("Invalid phone number entered. Only numbers are allowed.")
+                        continue
+
             self.user.phone = new_phone
             # update the csv file
             self.user.update_phone()
