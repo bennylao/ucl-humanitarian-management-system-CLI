@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
 import passlib.hash
-
+import logging
 from .user import User
 from humanitarian_management_system import helper
 from ..views import ManagementView
@@ -241,8 +241,8 @@ class Admin(User):
 
     def edit_volunteer_profile(self, change_user):
         while True:
-            ManagementView.admin_display_account_menu()
-            user_selection = helper.validate_user_selection(ManagementView.admin_get_account_options())
+            ManagementView.volunteer_display_account_menu()
+            user_selection = helper.validate_user_selection(ManagementView.volunteer_get_account_options())
             if user_selection == "1":
                 # change username
                 self.change_volunteer_username(change_user)
@@ -261,6 +261,9 @@ class Admin(User):
             if user_selection == "6":
                 # change occupation
                 self.change_volunteer_occupation(change_user)
+            if user_selection == "7":
+                # change camp role
+                self.change_volunteer_camp_role(change_user)
             if user_selection == "R":
                 break
             if user_selection == "L":
@@ -416,3 +419,42 @@ class Admin(User):
                 break
             else:
                 print("\nInvalid first name entered. Only alphabet letter (a-z) are allowed.")
+
+    @staticmethod
+    def change_volunteer_camp_role(change_user):
+        try:
+            role_type_csv_path = Path(__file__).parents[1].joinpath("data/roleType.csv")
+            df_role = pd.read_csv(role_type_csv_path)
+        except FileNotFoundError as e:
+            print("\n Data file seems to be damaged. Please contact admin for further assistance")
+            logging.critical(e)
+            return
+        role_id_list = df_role['roleID'].tolist()
+        current_role = df_role.loc[df_role['roleID'] == change_user.role_id, 'name'].iloc[0]
+        print("\n" + df_role.to_markdown(index=False))
+        print(f"\nYour current role in camp is: '{current_role}'")
+        while True:
+            print("Please select a role you want to change to (Enter its index)")
+            new_role_id = input("---> ")
+            if new_role_id.upper() == "RETURN":
+                return
+            else:
+                try:
+                    new_role_id = int(new_role_id)
+                    if new_role_id not in role_id_list:
+                        print("You must choose one of the roleID from the list!")
+                    else:
+                        break
+                except ValueError:
+                    print("Only Integer is allowed!")
+        try:
+            change_user.role_id = new_role_id
+            change_user.update_role()
+            new_role = df_role.loc[df_role['roleID'] == change_user.role_id, 'name'].iloc[0]
+            print("Updated successfully"
+                  f"\nYou new role is '{new_role}'")
+        except FileNotFoundError as e:
+            logging.critical(e)
+            print("Data file seems to be damaged"
+                  f"[Error] {e}")
+

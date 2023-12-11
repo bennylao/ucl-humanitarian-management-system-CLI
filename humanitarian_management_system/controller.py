@@ -208,15 +208,21 @@ class Controller:
     def edit_volunteer(self):
         logging.info("admin edit volunteer")
         try:
-            csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
             vol_id_arr = []
-            df = pd.read_csv(csv_path)
-            df = df.loc[df['userType'] == 'volunteer']
-            df = df.loc[:, ~df.columns.isin(['userType', 'password'])]
-            print("Here is a list of relevant information for all existing volunteers: ")
-            Event.display_events(df)
+            vol_df = pd.read_csv(Path(__file__).parent.joinpath("data/user.csv"))
+            vol_df = vol_df.loc[vol_df['userType'] == 'volunteer']
+            role_df = pd.read_csv(Path(__file__).parent.joinpath("data/roleType.csv"))
 
-            for i in df['userID'].tolist():
+            joined_df = pd.merge(vol_df, role_df, on='roleID', sort=False)
+            joined_df = joined_df.loc[:, ~joined_df.columns.isin(['userType', 'roleID', 'password'])]
+            joined_df.columns = ['UserID', 'Is verified?', 'Is active?', 'Username', 'First name', 'Last name',
+                                 'Email',
+                                 'Phone no.', 'Occupation', 'Camp ID', 'Camp role']
+            joined_df = joined_df.sort_values(by=['UserID'])
+            print("Here is a list of relevant information for all existing volunteers: ")
+            print("\n", joined_df.to_markdown(index=False))
+
+            for i in joined_df['UserID'].tolist():
                 vol_id_arr.append(str(i))
 
             while True:
@@ -230,7 +236,7 @@ class Controller:
                     continue
 
             select_id = int(select_id)
-            df = pd.read_csv(csv_path)
+            df = pd.read_csv(Path(__file__).parent.joinpath("data/user.csv"))
             row = df.loc[df['userID'] == select_id].squeeze()
             target_user = Volunteer(row['userID'], *row[4:])
             self.user.edit_volunteer_profile(target_user)
