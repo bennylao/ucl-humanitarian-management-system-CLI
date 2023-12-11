@@ -936,7 +936,7 @@ class Controller:
                         logging.info("User file loaded successfully for admin closing a camp.")
                     except FileNotFoundError as e:
                         print("Oh no, the file didn't open. The camp has been deleted but you'll have to manually"
-                              f" unassign associated volunteers from camp {delete_camp_id}. Let's take you back.")
+                              f" unassigned associated volunteers from camp {delete_camp_id}. Let's take you back.")
                         logging.critical(f"File not found {e} when opening user file for deleting camp.\n\n")
                         return
                     volunteers_in_camp = user_df[
