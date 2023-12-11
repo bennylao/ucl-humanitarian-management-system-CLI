@@ -140,10 +140,8 @@ class Refugee:
                 print("\nNo refugees in this camp yet.")
                 return
 
-            df_i = df.loc[df['campID'] == cid]['refugeeID'].tolist()
-
-            for i in df_i:
-                id_arr.append(i)
+            df_i = df.loc[df['campID'] == cid]['refugeeID']
+            id_arr = df_i.tolist()
             print(f"Here it displays a list of info for all existing refugees in camp {cid}")
             Event.display_events(filtered_df)
 
