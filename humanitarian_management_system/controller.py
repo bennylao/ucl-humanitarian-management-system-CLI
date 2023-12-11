@@ -1274,7 +1274,7 @@ class Controller:
                 select_index = input("\nSelect a camp ID you would like to join: ")
                 if select_index.upper() == 'RETURN':
                     return
-                elif select_index.isnumeric() and int(select_index) in available_camp_index:
+                elif int(select_index) in available_camp_index:
                     user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
                     df_user = pd.read_csv(user_csv_path)
                     select_index = int(select_index)
@@ -1292,7 +1292,9 @@ class Controller:
                     print("invalid camp ID entered!")
                     continue
             except ValueError as e:
-                logging.critical(f"{e}")
+                print("Camp ID must be an integer")
+                logging.warning("user input an invalid camp id"
+                                f"\n{e}")
 
     def volunteer_edit_camp(self):
         try:
@@ -1895,10 +1897,14 @@ class Controller:
                 new_phone = input("\nPlease enter new phone number: ")
                 if new_phone == 'RETURN':
                     return
-                elif new_phone.isnumeric():
-                    break
                 else:
-                    print("Invalid phone number entered. Only numbers are allowed.")
+                    try:
+                        new_phone = int(new_phone)
+                        break
+                    except ValueError:
+                        print("Invalid phone number entered. Only numbers are allowed.")
+                        continue
+
             self.user.phone = new_phone
             # update the csv file
             self.user.update_phone()

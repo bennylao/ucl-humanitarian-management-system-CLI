@@ -352,24 +352,25 @@ def validate_man_resource(index):
             if select_index == 'RETURN':
                 return
             break
-        except ValueError as e:
+        except ValueError:
             print("invalid index option entered!")
             logging.warning("Invalid index option entered!")
 
     while True:
         select_amount = input("\nEnter amount: ")
 
-        if int(select_amount) > int(df.loc[df['resourceID'] == select_item]['total'].tolist()[0]):
-            print("Cannot exceed the stock amount!")
-            continue
-        if not select_amount.isnumeric():
-            print("Must be a numerical value!")
-            continue
-
         if select_index == 'RETURN':
             return
         else:
-            break
+            try:
+                select_amount = int(select_amount)
+                if select_amount > int(df.loc[df['resourceID'] == select_item]['total'].tolist()[0]):
+                    print("Cannot exceed the stock amount!")
+                    continue
+            except ValueError:
+                logging.info("user input is not numerical value")
+                print("Must be a numerical value!")
+                continue
 
     return select_index, select_item, select_amount
 
@@ -420,13 +421,14 @@ def validate_refugee(lvl):
 
     while True:
         family_id = input("\nEnter family identification: ")
-        if not family_id.isnumeric():
-            print("Must be a numerical value!")
-            continue
         if family_id == 'RETURN':
             return
         else:
-            break
+            try:
+                family_id = int(family_id)
+            except ValueError:
+                print("Must be a numerical value!")
+                continue
 
     while True:
         vacc = input("\nIs vaccinated? (True or False): ")

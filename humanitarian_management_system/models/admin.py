@@ -388,10 +388,12 @@ class Admin(User):
             new_phone = input("\nPlease enter new phone number: ")
             if new_phone == 'RETURN':
                 return
-            elif new_phone.isnumeric():
-                break
             else:
-                print("Invalid phone number entered. Only numbers are allowed.")
+                try:
+                    new_phone = int(new_phone)
+                    break
+                except ValueError:
+                    print("Invalid phone number entered. Only numbers are allowed.")
         change_user.phone = new_phone
         # update the csv file
         change_user.update_phone()
