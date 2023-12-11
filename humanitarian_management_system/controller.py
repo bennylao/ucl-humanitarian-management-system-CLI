@@ -614,8 +614,6 @@ class Controller:
             csv_path_a = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
             df_a = pd.read_csv(csv_path_a)
 
-            active_index = helper.extract_active_event(csv_path)[0]
-
             # if there is no active events, return
             # print the events info for users to choose
             filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
@@ -623,6 +621,7 @@ class Controller:
             campID_df['campID'] = campID_df['campID'].astype(str)
             campID_df = campID_df.groupby('eventID')['campID'].apply(lambda x: ', '.join(x.dropna())).reset_index()
             merged_df = pd.merge(filtered_df, campID_df, on='eventID', how='left')
+            merged_df = merged_df.dropna(subset=['campID'])
             if filtered_df.empty:
                 print("\nAll the events are closed and there's none to choose from.")
                 return
@@ -638,15 +637,12 @@ class Controller:
                         return
                     eventID = int(eventID)
 
-                    if eventID not in active_index:
-                        print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
-                        continue
-                    elif df0[df0['eventID'] == eventID].empty:
-                        print("No relevant camps to select from")
+                    if eventID not in merged_df['eventID'].values:
+                        print(f"Invalid input! Please enter an integer from {merged_df['eventID'].values} for Event ID.")
                         continue
                     break
                 except ValueError as e:
-                    print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
+                    print(f"Invalid input! Please enter an integer from {merged_df['eventID'].values} for Event ID.")
                     logging.critical(f"{e}")
 
             # print camps info for users to choose
@@ -659,10 +655,9 @@ class Controller:
             while True:
                 try:
                     modify_camp_id = input("\nWhich camp do you want to modify? Please enter campID: ")
-                    modify_camp_id = int(modify_camp_id)
                     if modify_camp_id == 'RETURN':
                         return
-                    elif modify_camp_id not in filtered_campID:
+                    elif int(modify_camp_id) not in filtered_campID:
                         print(f"\nInvalid input! Please enter an integer from {filtered_campID} for Camp ID.")
                         continue
                     else:
@@ -677,21 +672,21 @@ class Controller:
                 df2 = pd.read_csv(csv_path2)
 
                 # Event.display_events(filtered_df1[filtered_df1['campID'] == modify_camp_id])
-                Event.display_events(df2[(df2['campID'] == modify_camp_id) & (df2['eventID'] == eventID)])
-                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'eventID']
-                filtered_df1 = filtered_df1.loc[:, filtered_df1.columns != 'countryID']
+                Event.display_events(df2[(df2['campID'] == int(modify_camp_id)) & (df2['eventID'] == eventID)])
+                selected_columns = ['campID', 'refugeeCapacity', 'healthRisk', 'status']
+                filtered_df1 = filtered_df1[selected_columns]
                 for i, column_name in enumerate(filtered_df1.columns[0:], start=1):
                     print(f"[{i}] {column_name}")
                 try:
                     print("[R] QUIT editing")
-                    target_column_index = input(f"Which column do you want to modify(1~9)? Or quit editing(R): ")
+                    target_column_index = input(f"Which column do you want to modify(1~4)? Or quit editing(R): ")
 
                     if target_column_index == 'RETURN' or target_column_index.lower() == 'r':
                         return
-                    if int(target_column_index) not in range(1, 10) and str(target_column_index).lower() != 'r':
-                        print("Please enter a valid integer from 1 to 8")
+                    if int(target_column_index) not in range(1, 5) and str(target_column_index).lower() != 'r':
+                        print("Please enter a valid integer from 1 to 4")
                         continue
-                    elif int(target_column_index) in range(1, 10):
+                    elif int(target_column_index) in range(1, 5):
 
                         temp_id = int(modify_camp_id)
 
@@ -731,14 +726,14 @@ class Controller:
                                 modify_camp_id = int(new_value)
                                 break
 
-                            if target_column_index == '5':
+                            if target_column_index == '3':
 
                                 if new_value == "low" or new_value == "high":
                                     break
                                 else:
                                     print("Invalid input! Please enter 'low' or 'high'")
                                     continue
-                            elif target_column_index == '9':
+                            elif target_column_index == '4':
 
                                 if new_value == "open" or new_value == "closed":
                                     break
@@ -1291,6 +1286,8 @@ class Controller:
                 self.legal_advice_support()
             if user_selection == '9':
                 self.refugee_training_sessions()
+            if user_selection == '10':
+                self.vol_data_visualization(self)
 
             if user_selection == "R":
                 break
@@ -2061,7 +2058,7 @@ class Controller:
         df = pd.read_csv(csv_path)
 
         if cid == 0:
-            print("You're not assigned to a camp! Takinng you back.")
+            print("You're not assigned to a camp! Taking you back.")
             return
         else:
             if df.loc[df['campID'] == cid]['refugeePop'].tolist()[0] == 0:
@@ -2117,6 +2114,10 @@ class Controller:
                 if userInput == 1:
                     camp_map = visualization_v.DataVisual()
                     camp_map.map()
+
+                elif userInput == 2:
+                    c = num_camp
+                    c.num_camp()
 
                 elif userInput == 2:
                     gender = gender_distribution

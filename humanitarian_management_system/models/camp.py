@@ -114,12 +114,12 @@ class Camp:
 
         if user == 'admin':
             while True:
-                id_input = input("Please enter the refugee id whose medical profile you would like to see: ")
+                id_input = input("Please enter the camp id whose event profile you would like to see: ")
 
                 if id_input == 'RETURN':
                     return
                 if id_input not in cid_arr:
-                    print("Invalid refugee ID entered!")
+                    print("Invalid camp ID entered!")
                     continue
                 joined_df = joined_df.loc[joined_df['Camp ID'] == int(id_input)]
                 table_str = joined_df[['Camp ID', 'Event ID', 'Title', 'Description', 'Location', 'Ongoing',

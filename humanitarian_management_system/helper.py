@@ -1122,7 +1122,7 @@ def remove_refugee_from_session():
         session_df.at[row_index_sessionID, 'participants'] = updated_attendees
         session_df.to_csv(training_session_path, index=False)
         print(f"\nExcellent! We have removed refugee(s) {participants} from session {sessionID}. See below. ")
-        print("\n", session_df.to_string(index=False))
+        print("\n", session_df.to_markdown(index=False))
     except FileNotFoundError as e:
         logging.critical(f"Error: {e}. One of the data files not found when removing a refugee from a session.")
         print(f"\nTraining session data file is not found or is damaged."
