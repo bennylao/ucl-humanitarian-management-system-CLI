@@ -683,10 +683,10 @@ class Controller:
 
                     if target_column_index == 'RETURN' or target_column_index.lower() == 'r':
                         return
-                    if int(target_column_index) not in range(1, 6) and str(target_column_index).lower() != 'r':
+                    if int(target_column_index) not in range(1, 4) and str(target_column_index).lower() != 'r':
                         print("Please enter a valid integer from 1 to 4")
                         continue
-                    elif int(target_column_index) in range(1, 6):
+                    elif int(target_column_index) in range(1, 4):
 
                         temp_id = int(modify_camp_id)
 
