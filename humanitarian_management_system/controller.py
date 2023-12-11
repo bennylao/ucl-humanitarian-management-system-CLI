@@ -904,7 +904,7 @@ class Controller:
 
             while True:
                 aa = input(f"\nAre you sure to delete the camp {delete_camp_id}? (yes/no)\n"
-                            f"Note: you'll also be deleting all associated refugees from the system and unassigning"
+                            f"Note: you'll also be deleting all associated refugees from the system and unassigned"
                            f" all volunteers from camp {delete_camp_id}: ")
                 if aa == "yes":
                     # implement the deletion in csv file
@@ -942,7 +942,7 @@ class Controller:
                     volunteers_in_camp = user_df[
                         (user_df['campID'] == delete_camp_id) & (user_df['userType'] == 'volunteer')]
                     volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
-                    print("\nBelow are the volunteers you are going to be unassigning from any camp in the system: ")
+                    print("\nBelow are the volunteers you are going to be unassigned from any camp in the system: ")
                     print(volunteers_df_filtered.to_markup)
                     for index, row in volunteers_in_camp.iterrows():
                         old_camp_id = row['campID']
