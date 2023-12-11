@@ -13,16 +13,25 @@ class Volunteer(User):
         self.camp_id = camp_id
 
     def show_account_info(self):
+        role_type_csv_path = Path(__file__).parents[1].joinpath("data/roleType.csv")
+        df_role = pd.read_csv(role_type_csv_path)
+        current_role = df_role.loc[df_role['roleID'] == self.role_id, 'name'].iloc[0]
         user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
-        df = pd.read_csv(user_csv_path)
+        df = pd.read_csv(user_csv_path, converters={'roleID': str})
+        df.loc[df['userID'] == int(self.user_id), 'roleID'] = current_role
+        df = df.rename(columns={"roleID": "Role"}, errors="raise")
         sub_df = df.loc[df['userID'] == int(self.user_id), ['username', 'firstName', 'lastName', 'email',
-                                                            'phone', 'occupation', 'roleID', 'campID']]
+                                                            'phone', 'occupation', 'Role', 'campID']]
+
         table_str = sub_df.to_markdown(index=False)
         print("\n" + table_str)
-        try:
-            input("\nPress Enter to return...")
-        except SyntaxError:
-            pass
+        input("\nPress Enter to return...")
+
+    def update_role(self):
+        user_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path, converters={'username': str, 'password': str})
+        df.loc[df['userID'] == self.user_id, 'roleID'] = self.role_id
+        df.to_csv(user_csv_path, index=False)
 
     @staticmethod
     def create_new_record(registration_info):
