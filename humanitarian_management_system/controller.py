@@ -1522,7 +1522,7 @@ class Controller:
             csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
             df = pd.read_csv(csv_path)
 
-            user_type = df.loc[df['username'] == self.user.username]['userType'].tolist()[0]
+            user_type = df.loc[df['use rname'] == self.user.username]['userType'].tolist()[0]
             df_c = pd.read_csv(csv_path_c)
             active_camp = df_c.loc[df_c['status'] == 'open']['campID'].tolist()
             # check user type, for admin - can create new refugee for any camp, and for vol - camp dependent
@@ -1748,12 +1748,13 @@ class Controller:
                 "\nPlease Enter one of the below options: "
                 "\n[1] Move a refugee "
                 "\n[2] Delete a refugee "
-                "\n[3] Return back ")
+                "\n[3] Return back "
+                "\n-->")
 
             if move_or_delete == "3":
                 return
             elif move_or_delete == "1":
-                helper.move_refugee_helper_method()
+                helper.move_refugee_helper_method(cid)
             elif move_or_delete.lower() == "2":
                 self.delete_refugee()
             else:

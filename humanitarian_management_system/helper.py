@@ -511,7 +511,7 @@ def validate_refugee(lvl):
     return family_id, f_name, l_name, dob, gender, int(med), med_des, vacc
 
 
-def move_refugee_helper_method():
+def move_refugee_helper_method(cid):
     """Moves refugee from one camp to another"""
     # displaying list of all refugees to user
     print("\nYOU ARE REQUESTING TO MOVE A REFUGEE. Enter RETURN if you didn't mean to select this. Otherwise, proceed"
@@ -520,7 +520,15 @@ def move_refugee_helper_method():
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
         logging.info("Refugee file loaded successfully for moving a refugee around camps.")
-        print(ref_df.to_markdown(index=False))
+        camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
+        camp_df = pd.read_csv(camp_csv_path)
+        # print(ref_df.to_markdown(index=False))
+        # ---------------------------------------------------
+        eventID = camp_df.loc[camp_df['campID'] == int(cid), 'eventID'].iloc[0]
+        camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
+        refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
+        print(refugees_in_associated_camps.to_markdown(index=False))
+        # --------------------------------------------------
         # checking input is valid according to refugee IDs in database
         while True:
             rid = input("\nFrom the list above enter the refugee ID for the refugee you wish to move another camp"
@@ -529,10 +537,10 @@ def move_refugee_helper_method():
                 return
             try:
                 rid = int(rid)
-                if ref_df['refugeeID'].eq(rid).any():
+                if refugees_in_associated_camps['refugeeID'].eq(rid).any():
                     break
                 else:
-                    print("\nSorry - that refugee ID doesn't exist. Pick again.")
+                    print("\nSorry - that refugee ID isn't in your event. Pick again.")
             except ValueError as e:
                 logging.info(f"Error {e}with user input for moving a refugee from a camp.")
                 print(f"Invalid input with error {e}. Try again with a valid refugee ID.\n")

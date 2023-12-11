@@ -13,3 +13,7 @@ userID,userType,isVerified,isActive,username,password,firstName,lastName,email,p
 11,volunteer,True,True,vvv,$5$rounds=535000$Uk8RqcVDfN0B./CE$F0FtkWFDLgEjubQNgAn9oa16WrE5Nuh6VP0i5huu9Z8,benny,lao,lsadkjf@gmail.com,124124123,scientist,0,7
 12,volunteer,True,True,asdlkfsa,$5$rounds=535000$T4XnJSNqek.Ekda.$kGSpuOiA3I/gh3gqzHDt1CIjtpOft/S8T.TBI5ZCIx8,sladhksldf,skadfj,skjadh@gmail.com,2314234,sdfaasd,0,8
 13,volunteer,True,True,volunteer5,$5$rounds=535000$BAASdyBCklGYPYc3$/puKCJO6zncb.OMB0/wrx0ece0WiL3avvokRe8WCAA7,helen,helens,helens@gmail.com,12345678,doctor,0,9
+14,volunteer,True,True,volunteer6,$5$rounds=535000$zVXIGQDcCCtXPlSa$zGkfETl.yklYTL2YgPZ5hjN9fgtQzI3zfynBqIEqFeB,martha,test,test@test.com,123456,student,10,10
+15,volunteer,True,True,volunteer7,$5$rounds=535000$YHL.MRjU1ISUnt4e$hlf/FEVCJNLDFkk.9B1Rffi.B1COEIHnI2yqICkN538,martha,test,test@test.com,1234567,teacher,8,11
+16,volunteer,True,True,volunteer8,$5$rounds=535000$AxMBs.tslx6rUfx8$RKuWRJ6H9cVIbXWyEIpZeStCj65boB3kW6aGZQBGX24,test,test,test@gmail.com,12345,student,1,12
+17,volunteer,True,True,volunteer9,$5$rounds=535000$ywrBLAKxLYKwZ0k3$mJeYYAmTjTlR0f52Byo54LrdiRqfeeTvVynDGRgU/eD,test,test,test@gmail.com,1234567,cleaner,4,13
