@@ -23,4 +23,4 @@ exclude = ["data_analysis"] # temporary configuration during development
 include-package-data = true
 
 [tool.setuptools.package-data]
-"humanitarian_management_system.data" = ["*.csv"]
+"humanitarian_management_system.data" = ["*.csv", "*.log"]

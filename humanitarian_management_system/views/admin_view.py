@@ -12,6 +12,7 @@ class AdminView:
         ("6", "Display Summary/Statistics"),
         ("7", "Edit Account Information"),
         ("8", "View Account Information"),
+        ("9", "Open MessageBox"),
         ("L", "Logout")
     )
 

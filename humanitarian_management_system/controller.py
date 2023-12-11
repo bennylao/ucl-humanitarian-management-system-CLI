@@ -4,6 +4,8 @@ import pandas as pd
 import re
 import math
 import logging
+import csv
+import datetime
 
 from passlib.handlers.sha2_crypt import sha256_crypt
 
@@ -154,6 +156,8 @@ class Controller:
                 self.user_edit_account()
             elif user_selection == "8":
                 self.user.show_account_info()
+            elif user_selection == "9":
+                self.messageBox()
             if user_selection == "L" or self.logout_request:
                 logging.info("logging out from admin main menu")
                 self.user = None
@@ -904,7 +908,7 @@ class Controller:
 
             while True:
                 aa = input(f"\nAre you sure to delete the camp {delete_camp_id}? (yes/no)\n"
-                            f"Note: you'll also be deleting all associated refugees from the system and unassigning"
+                            f"Note: you'll also be deleting all associated refugees from the system and unassigned"
                            f" all volunteers from camp {delete_camp_id}: ")
                 if aa == "yes":
                     # implement the deletion in csv file
@@ -936,13 +940,13 @@ class Controller:
                         logging.info("User file loaded successfully for admin closing a camp.")
                     except FileNotFoundError as e:
                         print("Oh no, the file didn't open. The camp has been deleted but you'll have to manually"
-                              f" unassign associated volunteers from camp {delete_camp_id}. Let's take you back.")
+                              f" unassigned associated volunteers from camp {delete_camp_id}. Let's take you back.")
                         logging.critical(f"File not found {e} when opening user file for deleting camp.\n\n")
                         return
                     volunteers_in_camp = user_df[
                         (user_df['campID'] == delete_camp_id) & (user_df['userType'] == 'volunteer')]
                     volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
-                    print("\nBelow are the volunteers you are going to be unassigning from any camp in the system: ")
+                    print("\nBelow are the volunteers you are going to be unassigned from any camp in the system: ")
                     print(volunteers_df_filtered.to_markup)
                     for index, row in volunteers_in_camp.iterrows():
                         old_camp_id = row['campID']
@@ -1302,6 +1306,10 @@ class Controller:
             if user_selection == "4":
                 # show personal information
                 self.user.show_account_info()
+            if user_selection == "5":
+                self.messageBox()
+            if user_selection == '6':
+                self.messageBox()
             # log out if user has selected "L" or self.logout_request is True
             if user_selection == "L" or self.logout_request is True:
                 logging.info("logging out from volunteer main menu")
@@ -1336,6 +1344,8 @@ class Controller:
                 self.legal_advice_support()
             if user_selection == '9':
                 self.refugee_training_sessions()
+            if user_selection == '10':
+                self.vol_data_visualization(self)
 
             if user_selection == "R":
                 break
@@ -2194,3 +2204,52 @@ class Controller:
             except ValueError as e:
                 print("Invalid Input, please try again")
                 logging.critical(f"{e}")
+
+    def messageBox(self):
+        ManagementView.messageBox()
+        while True:
+            try:
+                print('')
+                print('[ 1 ] Read messages')
+                print('[ 2 ] Send messages')
+                print('[ 3 ] Return to the previous page')
+                a = int(input('Choose one option: '))
+                if a not in range(1, 4):
+                    print('Invalid input! Please try again')
+                elif a == 1:
+                    self.read_message()
+                elif a == 2:
+                    self.write_message()
+                elif a == 3:
+                    return
+            except ValueError:
+                print('Invalid input! Please try again.')
+
+    def read_message(self):
+        m_csv_path = Path(__file__).parents[0].joinpath("data/messageBox.csv")
+        df = pd.read_csv(m_csv_path)
+        dff = df[df['to'] == self.user.username][['from', 'message', 'datetime']]
+        if dff.empty:
+            print('You have got 0 messages')
+        else:
+            dff1 = dff.sort_values('datetime', inplace=False, ascending=False)
+            Event.display_events(dff1)
+            print('')
+
+    def write_message(self):
+        m_csv_path = Path(__file__).parents[0].joinpath("data/messageBox.csv")
+        user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
+        df = pd.read_csv(user_csv_path)
+        usernames = df['username'].tolist()
+
+        to = input('\nWho do you want to sent message to? Enter the username: ')
+        if to == self.user.username:
+            print("You can't send message to yourself")
+        elif to not in usernames:
+            print("Username doesn't exist")
+        else:
+            content = input('Enter your message: ')
+            with open(m_csv_path, mode='a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([self.user.username, to, content, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")])
+            print('Message sent successfully!')
