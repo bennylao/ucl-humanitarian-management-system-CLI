@@ -906,7 +906,7 @@ class Controller:
 
             while True:
                 aa = input(f"\nAre you sure to delete the camp {delete_camp_id}? (yes/no)\n"
-                            f"Note: you'll also be deleting all associated refugees from the system and unassigning"
+                            f"Note: you'll also be deleting all associated refugees from the system and unassigned"
                            f" all volunteers from camp {delete_camp_id}: ")
                 if aa == "yes":
                     # implement the deletion in csv file
@@ -938,13 +938,13 @@ class Controller:
                         logging.info("User file loaded successfully for admin closing a camp.")
                     except FileNotFoundError as e:
                         print("Oh no, the file didn't open. The camp has been deleted but you'll have to manually"
-                              f" unassign associated volunteers from camp {delete_camp_id}. Let's take you back.")
+                              f" unassigned associated volunteers from camp {delete_camp_id}. Let's take you back.")
                         logging.critical(f"File not found {e} when opening user file for deleting camp.\n\n")
                         return
                     volunteers_in_camp = user_df[
                         (user_df['campID'] == delete_camp_id) & (user_df['userType'] == 'volunteer')]
                     volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
-                    print("\nBelow are the volunteers you are going to be unassigning from any camp in the system: ")
+                    print("\nBelow are the volunteers you are going to be unassigned from any camp in the system: ")
                     print(volunteers_df_filtered.to_markup)
                     for index, row in volunteers_in_camp.iterrows():
                         old_camp_id = row['campID']
@@ -988,7 +988,8 @@ class Controller:
                 # print the events info for users to choose
                 df = pd.read_csv(event_csv_path)
                 df1 = pd.read_csv(camp_csv_path)
-                filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
+                filtered_df = df[(df['ongoing'] == True
+                                  ) | (df['ongoing'] == 'Yet')]
                 campID_df = df1[['campID', 'eventID']].copy()
                 campID_df['campID'] = campID_df['campID'].astype(str)
                 campID_df = campID_df.groupby('eventID')['campID'].apply(lambda x: ', '.join(x.dropna())).reset_index()
@@ -1065,7 +1066,7 @@ class Controller:
                         move_volunteers = input("\n\nDo you want to move volunteers to another camp?"
                                                 "\nEnter 'y' or 'n': ")
                         if move_volunteers.lower() == 'n':
-                            break
+                            return
                         elif move_volunteers.lower() == 'y':
                             if len(volunteers_in_camp) == 0:
                                 print("Just checked - looks like there are no volunteers left in that camp, anyway. "
