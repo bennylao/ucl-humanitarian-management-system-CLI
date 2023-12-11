@@ -46,32 +46,3 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 45,45,5,good,TRUE
 46,46,14,bad,TRUE
 47,47,13,okay,TRUE
-
-
-
-
-
-
-
-1,1,9,test,TRUE
-2,2,11,bbb,TRUE
-3,3,6,hhh,TRUE
-4,4,1,good,TRUE
-5,5,12,yo,TRUE
-6,6,13,bool,FALSE
-7,7,14,how,TRUE
-8,12,7,care,FALSE
-9,13,3,hale,TRUE
-10,14,14,low,FALSE
-11,21,1,great,TRUE
-12,25,8,none atm,TRUE
-13,28,13,careful!,TRUE
-14,29,5,good girl,TRUE
-15,30,1,none,TRUE
-16,31,12,naughty,FALSE
-17,35,1,sdfsdf,TRUE
-18,36,1,,True
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
