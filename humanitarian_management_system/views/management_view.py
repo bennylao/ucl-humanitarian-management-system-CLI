@@ -52,7 +52,6 @@ class ManagementView:
         print("\n========================================\n"
               "                 SUMMARY\n"
               "========================================\n"
-              "The following displays corresponding data for ongoing events and open camps.\n"
               "More detailed information, please refer to the corresponding menu.")
 
     @staticmethod
