@@ -2251,5 +2251,5 @@ class Controller:
             content = input('Enter your message: ')
             with open(m_csv_path, mode='a') as file:
                 writer = csv.writer(file)
-                writer.writerow([self.user.username, to, content, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")])
+                writer.writerow([self.user.username, to, content, datetime.datetime.now()])
             print('Message sent successfully!')
