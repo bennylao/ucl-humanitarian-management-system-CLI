@@ -2331,19 +2331,19 @@ class Controller:
                     c = num_camp
                     c.num_camp()
 
-                elif userInput == 2:
+                elif userInput == 3:
                     gender = gender_distribution
                     gender.gender_pie_chart(camp_id)
 
-                elif userInput == 3:
+                elif userInput == 4:
                     age1 = age_distribution
                     age1.age_bar_chart(camp_id)
 
-                elif userInput == 4:
+                elif userInput == 5:
                     r = resources_distribution
                     r.resources(camp_id)
 
-                elif userInput == 5:
+                elif userInput == 6:
                     medical_info.medical_info(camp_id)
 
                 else:
