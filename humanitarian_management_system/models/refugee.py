@@ -231,7 +231,11 @@ class Refugee:
                     new_value = input("\nEnter date of birth (format: dd/mm/yy): ")
                     if new_value == 'RETURN':
                         return
-                    new_value = datetime.datetime.strptime(new_value, date_format)
+                    datetime_object = datetime.datetime.strptime(new_value, date_format)
+                    if datetime_object > datetime.datetime.now():
+                        print("Birth date should be before current date and time")
+                        continue
+                    new_value = datetime_object.strftime(date_format)
                     break
                 except ValueError:
                     print("\nInvalid date format entered.")
@@ -288,7 +292,7 @@ class Refugee:
                 self.edit_refugee_info(user, cid)
             else:
                 return
-            break
+        return
 
     def display_info(self, user, cid):
 
