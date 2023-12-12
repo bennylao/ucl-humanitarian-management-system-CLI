@@ -131,8 +131,8 @@ class Event:
                                 Event.__change_start_date(row)
                             elif what_to_edit == '5':
                                 Event.__change_end_date(row)
-                            df = pd.read_csv(event_csv_path)
-                            Event.display_events(df.loc[df['eventID'] == int(eid_to_edit)])
+                            df1 = pd.read_csv(event_csv_path)
+                            Event.display_events(df1.loc[df['eventID'] == int(eid_to_edit)])
                             break
                     except KeyError:
                         print("\nInvalid index entered.")
