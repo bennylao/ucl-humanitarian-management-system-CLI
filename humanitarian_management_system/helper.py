@@ -30,10 +30,10 @@ def validate_registration(usernames):
             return
         elif username in usernames:
             print("Sorry, username already exists.")
-        elif username.isalnum():
+        elif re.match(r'\w', username, re.A):
             break
         else:
-            print("Invalid username entered. Only alphabet letter (a-z) and numbers (0-9) are allowed.")
+            print("Invalid username entered. Only alphabet letter (a-z), numbers (0-9) and underscore(_) are allowed.")
     # check for password
     while True:
         password = input("\nEnter password: ")
