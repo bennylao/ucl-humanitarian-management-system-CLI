@@ -53,3 +53,5 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 52,52,6,Need cooling ASAP!,FALSE
 53,53,12,Need quarantine at home.,TRUE
 54,54,1,okay,True
+55,49,9,Be careful!,True
+56,50,11,Eat less sugar1,False

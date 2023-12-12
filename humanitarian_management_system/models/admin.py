@@ -435,7 +435,7 @@ class Admin(User):
         df = pd.read_csv(csv_path)
         role_id_arr = [i for i in df['roleID'].tolist()]
         role_name = df.loc[df['roleID'] == change_user.role_id]['name'].tolist()[0]
-        print(f"\nCurrent Occupation: {role_name}")
+        print(f"\n Your current camp role is: {role_name}")
 
         old_id = change_user.role_id
 
@@ -460,8 +460,9 @@ class Admin(User):
             # update the csv file
             helper.modify_csv_pandas("data/user.csv", 'roleID', old_id, 'roleID',
                                      change_user.role_id)
+            role_name = df.loc[df['roleID'] == change_user.role_id]['name'].tolist()[0]
             print("\nCamp role Id changed successfully."
-                  f"\nYour new occupation is '{role_name}'.")
+                  f"\nYour new camp role is '{role_name}'.")
             break
 
 
