@@ -32,9 +32,9 @@ class ResourceAdder():
         unallocResources = self.unallocResources_df
 
         ### menu bit
-        print(f"""==========================================================================\n
+        print(f"""=============================================================================\n
 ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4.2 ] Hi Admin! Welcome to the Resource Shop ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-==========================================================================\n
+=============================================================================\n
         Any purchased items will be in your unallocated inventory, pending your assignment to camps\n
         Below is your current stock levels:\n
 {grandTotal.to_string(index = False)} \n"""
@@ -109,6 +109,8 @@ class ResourceAdder():
         if confirm_shop == 'y':
             ## logic to loop thru this and add to the unallocated dataframe
             ## actually esier to do join
+            # Dropping the 'name' column from basket, don't need it anymore after print! 
+            basket = basket.drop('name', axis=1)
             result_df = pd.merge(unallocResources, basket, on='resourceID', how='left').fillna(0)
             result_df['unallocTotal'] = result_df['unallocTotal'].astype(int) + result_df['buyUnits'].astype(int)
             result_df.drop('buyUnits', axis=1, inplace=True)
@@ -120,7 +122,7 @@ class ResourceAdder():
             print(grandTotal_AFTER.to_string(index = False))
             print("\n ======= ＼(^o^)／ Thanks for Shopping! Come Again Soon! ＼(^o^)／ ===== \n")
         ######## maybe redirect the menus
-        return result_df
+            return result_df
  ## what after this? new unallocated resources
 
  ## 

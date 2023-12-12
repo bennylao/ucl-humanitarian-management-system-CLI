@@ -19,60 +19,106 @@ class ResourceAllocator():
     def jess_funky_timer(self, multiple):
         for i in range(multiple):
             print('... ┌(;･_･)┘ LOADING ... ')
-            time.sleep(0.15)
+            time.sleep(0.1)
             print('... └(･_･;)┐ LOADING ... ') 
             print("\n")
-            time.sleep(0.15)
+            time.sleep(0.1)
 
     def auto_alloc_interface(self):
-        report_instance = ResourceReport()
+        print(f"""
+\n===================================================================================\n
+✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4.1.2 ] RESOURCE AUTO-ALLOCATION ACROSS ALL CAMPS ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
+===================================================================================\n
+""")
+        ### add here to chheck if any need at all 
+        r_inst = ResourceReport()
+        before_auto_alloc = r_inst.master_resource_stats() 
+        unbalanced = r_inst.ALLOC_IDEAL_OUTPUT()
+
         # POSSIBLY REMOVE BUT OVERWRITING THE TOTALS ! 
-        # updateTotals = report_instance.resourceStock_generator(self.resourceAllocs_df)
+        # updateTotals = r_inst.resourceStock_generator(self.resourceAllocs_df)
         # updateTotals.to_csv(self.resource_stock_csv_path, index=False)
         #
-        before_auto_alloc = report_instance.master_resource_stats() 
+        
         ## run an instance of the table before modifying the source data to include unallocated soruces, if the user so wishes
         ## this is so that our table will pick up the before of unallocated resource integration
 
-        unalloc_status, prompt = report_instance.unalloc_resource_checker()
+        unalloc_status, prompt = r_inst.unalloc_resource_checker()
         if unalloc_status == True:
             # user can choose if they want to do this manually or automatically, same as above actually
             # is there a way we can reuse the same code ?? <- if we merge it into the same files....
-            include_unassigned = report_instance.input_validator('Do you want to include unallocated resources in the auto-distribution? y / n --> ', ['y', 'n'])
+            include_unassigned = r_inst.input_validator('\nDo you want to include unallocated resources in the auto-distribution? y / n \n--> ', ['y', 'n'])
             if include_unassigned == 'y':
                 self.add_unalloc_resource()  # ## add the unassigned resources to the
                 # totalResources, ready for assignment by running auto_alloc immediately after
+                ######################## if we select yes, then the dealing with unallocated resources is done here and hence the file is already updated. we need to basically create the instance before this... and then pass it down for comparison
                 self.jess_funky_timer(2)
-                print("\nUnallocated resources from inventory will be included in auto-allocation to valid camps.\n")
-                self.jess_funky_timer(2)
+                print("\n\033[92mUnallocated resources from inventory will be included in auto-allocation to valid camps.\033[0m\n")
+                #### in this case we have to run... auto_alloc AFTER THIS POINT!
             elif include_unassigned == 'RETURN':
                 return
             else:
-                self.jess_funky_timer(2)
-                print("\nSkipping addition of unallocated resources.\n")
-                self.jess_funky_timer(2)
+                print("\n\033[91mSkipping addition of unallocated resources.\033[0m\n")
+                if unbalanced.empty == True: ## AKA if this is empty, so all resources are fine...
+                    print("\033[92mAll resources are balanced (within +/-10% of their ideal values) across all camps! No need for auto-allocation. \033[0m")
+                    print("\nTaking you back to resource mgmt menu...")
+                    return
         else:
-            print("\nCheck complete: No unallocated resources found, proceeding with auto-allocation...\n")
+            print("\n\033[92mCheck complete: No unallocated resources found, proceeding with auto-allocation...\033[0m\n")
             self.jess_funky_timer(2)
+            if unbalanced.empty == True: ## AKA if this is empty, so all resources are fine...
+                print("\033[92mAll resources are balanced (within +/-10% of their ideal values) across all camps! No need for auto-allocation. \033[0m")
+                print("\nTaking you back to resource mgmt menu...")
+                return
 
-        print(f"""\n================================================================================\n
-✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4.1.2 ] RESOURCE AUTO-ALLOCATION ACROSS ALL CAMPS ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-================================================================================\n
-""")
+        
         self.auto_alloc()  
         ### print success msg
-        self.jess_funky_timer(2)
-        print("\n======= ＼(^o^)／ AUTO-REDISTRIBUTION SUCCESSFUL! ＼(^o^)／ ===== \n \nBelow are the before & after auto-allocation: \n")
         ######## maybe redirect the menus
-        report_instance_AFTER = ResourceReport()
-        print("BEFORE: \n")
-        before_pretty = report_instance_AFTER.PRETTY_PIVOT_CAMP(before_auto_alloc)
-        print(before_pretty.to_string(index=False).replace('.0', '  '))
-        print("\nAFTER: \n")
+        r_inst_AFTER = ResourceReport()
+        after = r_inst_AFTER.master_resource_stats()
+        print("\n\033[92m======= ＼(^o^)／ AUTO-REDISTRIBUTION COMPLETE! ＼(^o^)／ =====\033[0m\n")
+        if before_auto_alloc.equals(after):
+            after_pretty = r_inst_AFTER.PRETTY_PIVOT_CAMP(after)
+            print(after_pretty.to_string(index=False).replace('.0', '  '))
+            print("\n\033[93mNOTE: NO CHANGES OCCURED! > PLEASE READ MORE: \n")
+            print("\nEven though we have unbalanced resources, no auto-changes have been made as we already have the most optimised solution according to the methodology.\033[0m\n")
+            print("This is because: if the current value =/= ideal; we do not update if it is still within the threshold 10% range.\n")
+            print("""\n
+                see in resourceAllocator.py > def auto_alloc(self):
+                  ...
+                for index, row in alloc_ideal.iterrows():
+                    if row['status'] != 'balanced':
+                        alloc_ideal.at[index, 'updated'] = row['ideal_qty'] 
+                  \n
+            """)
+            print("This results in a delta between:\n >> the 'true total' & \n >> the 'theoretical total' = (A) the updated ideal qty for unbalanced resources + (B) the current qty of resources within the balanced range (but not exactly ideal)\n")
+            print("We adjust for the delta by spreading evenly (+/- rounding) it across the camps with the max. qty, for each resource where the totals do not align. \n")
+            print("""\n
+                see in resourceAllocator.py > def adjust_auto_alloc(self):
+                  
+                    max_qty_r_id =  resource_id_match_df['updated'].max()
+                    row_indices = resource_id_match_df[resource_id_match_df['updated'] == max_qty_r_id].index
+                    num_rows = len(row_indices)
+                    delta_per_row, remainder = divmod(delta, num_rows)
+                    for i, row_index in enumerate(row_indices):
+                        if i == 0:
+                            adjusted_value = alloc_ideal.loc[row_index, 'updated'] - (delta_per_row + remainder)
+                        else:
+                            adjusted_value = alloc_ideal.loc[row_index, 'updated'] - delta_per_row
+            \n
+            """)
+            print("\033[93mThis means in some cases, the delta adjustment due to the +/-10% threshold will bring the resource level unbalanced once again. \n\nRunning the auto-allocation again will simply give the same result, as the same delta and treatment of delta is being applied to the same camps.\n\033[0m")
+        else:
+            print("\n \nBelow are the before & after auto-allocation: \n")
+            print("BEFORE: \n")
+            before_pretty = r_inst.PRETTY_PIVOT_CAMP(before_auto_alloc)
+            print(before_pretty.to_string(index=False).replace('.0', '  '))
+            print("\nAFTER: \n")
         
-        after = report_instance_AFTER.master_resource_stats()
-        after_pretty = report_instance_AFTER.PRETTY_PIVOT_CAMP(after)
-        print(after_pretty.to_string(index=False).replace('.0', '  '))
+
+            after_pretty = r_inst_AFTER.PRETTY_PIVOT_CAMP(after)
+            print(after_pretty.to_string(index=False).replace('.0', '  '))
 
     def add_unalloc_resource(self):
         # adding unallocated resources to the total resources dataframe, preparing it for the (auto) distribution... 
@@ -99,23 +145,38 @@ class ResourceAllocator():
             print("Error: adding unallocated resources unsuccessful...")
         return self.totalResources_df
 
-    def adjust_auto_alloc(self, alloc_ideal):
+    def adjust_auto_alloc(self, alloc_ideal:pd.DataFrame):
+        # sum the updated values... where the unbalanced was overwritten by the ideal amount 
         redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
+        # Compare if the summed 'updated' values for each 'resourceID' equals the total in assignment, per resource... 
+        # this will return a True / False mapping per resource 
         comparison_result = redistribute_sum_checker == self.totalResources_df['total']
+        for resource_id, is_equal in comparison_result.items(): ## True or False
+            if not is_equal: ## if not True aka if not equal...
+                # Calculate the difference... # e.g. 6.5
+                delta = redistribute_sum_checker[resource_id] - self.totalResources_df['total'][resource_id] 
 
-        for resource_id, is_equal in comparison_result.items():
-            if not is_equal:
-                delta = redistribute_sum_checker[resource_id] - self.totalResources_df['total'][resource_id]
+                # Filter 'alloc_ideal' DataFrame for rows where 'resourceID' matches the current one in iteration.
                 resource_id_match_df = alloc_ideal[alloc_ideal['resourceID'] == resource_id]
-                max_qty_r_id =  resource_id_match_df['updated'].max()
-                row_indices = resource_id_match_df[resource_id_match_df['updated'] == max_qty_r_id].index
 
-                delta_per_row = delta / len(row_indices)
-                for row_index in row_indices:
-                    adjusted_value = max(alloc_ideal.loc[row_index, 'updated'] - delta_per_row, 0)
+                # Find the maximum value in the 'updated' column for the filtered DataFrame.
+                max_qty_r_id =  resource_id_match_df['updated'].max()
+                # Find their row indices 
+                row_indices = resource_id_match_df[resource_id_match_df['updated'] == max_qty_r_id].index
+                # in case there are multiple rows of the same max value, need to distribute the delta evenly across them...
+                # but deal with decimals by taking the remainder (in case not fully divisible) off the first max value (arbitary)
+                num_rows = len(row_indices)
+                delta_per_row, remainder = divmod(delta, num_rows)
+                for i, row_index in enumerate(row_indices):
+                    if i == 0:
+                        adjusted_value = alloc_ideal.loc[row_index, 'updated'] - (delta_per_row + remainder)
+                    else:
+                        adjusted_value = alloc_ideal.loc[row_index, 'updated'] - delta_per_row
+                    
                     alloc_ideal.loc[row_index, 'updated'] = adjusted_value
 
         return alloc_ideal
+
 
     def auto_alloc(self):
         r_inst = ResourceReport()
@@ -126,17 +187,20 @@ class ResourceAllocator():
         try:
             alloc_ideal = r_inst.determine_above_below()
             self.jess_funky_timer(2)
-            print("\n...STEP 1: successfully calculated ideal allocation levels for all open camps with refugees...\n")
+            print("\n\033[93m...STEP 1: successfully calculated ideal allocation levels for all open camps with refugees...\n")
             time.sleep(0.5)
-            print("\nideal resource per camp = camp refugee population / total refugees in all open camps X total amount of that resource\n")
+            print("\nideal resource per camp = camp refugee population / total refugees in all open camps X total amount of that resource\033[0m\n")
             time.sleep(0.5)
             self.jess_funky_timer(2)
-            print("\n...STEP 2: comparing current quantity to ideal quantity each resource per camp...\n")
+            print("\n\033[93m...STEP 2: comparing current quantity to ideal quantity each resource per camp...\033[0m\n")
             # print(alloc_ideal)
-            for line in alloc_ideal.to_string(index = False).split('\n'):
-                print(line)
-                time.sleep(0.05)
-            print("\n...see allocation map above...\n")
+            ### instead of printing the whole thing, i will now just print only the unbalanced ones...
+                        
+            print(alloc_ideal)
+            print("\n...see allocation map above...\033[91m\n")
+            unbalanced = r_inst.ALLOC_IDEAL_OUTPUT()
+            print(unbalanced.to_markdown(index=False))
+            print("\n...of which, above are the unbalanced resources...\033[0m\n")
         except Exception as e:
             print(f"An error occurred : {e}")
         alloc_ideal['updated'] = alloc_ideal['current']
@@ -145,70 +209,40 @@ class ResourceAllocator():
             if row['status'] != 'balanced':
                 alloc_ideal.at[index, 'updated'] = row['ideal_qty'] 
                 ### if the status is not balanced, then update the quantity column with the ideal amount 
-        '''
+        
         self.jess_funky_timer(2)
-        print("\n...STEP 3: for balanced resources within +/-10% threshold of ideal, leave them be...\n")
+        print("\n\033[93m...STEP 3: for balanced resources within +/-10% threshold of ideal, leave them be...\033[0m\n")
         self.jess_funky_timer(2)
-        print("\n...STEP 4: for unbalanced resources (any above / below), update the current quantity to match the ideal quantity...\n")
+        print("\n\033[93m...STEP 4: for unbalanced resources (any above / below), update the current quantity to match the ideal quantity...\033[0m\n")
         # print(alloc_ideal) ###### intermediary checks 
         
         self.jess_funky_timer(2)
-        print("\n...STEP 5: check against total per resource included in this auto-allocation...\n")
-        self.jess_funky_timer(2)
-        print("\n...due to the threshold range & rounding in calculations; we need to make small adjustments to ensure the totals are the same before & after auto-allocation...\n")
+        print("\n\033[93m...STEP 5: check against total per resource included in this auto-allocation...\n")
+        
+        
         # Now need to check, how the sum compares to the total amounts and make small tweaks... 
-        '''
+        
         redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
-
-
-        '''
-        # print(totalResources)
-        comparison_result = redistribute_sum_checker == totalResources['total']
-        print(comparison_result)
-        # will output the resource_ids that are different 
-
-        for resource_id, is_equal in comparison_result.items():
-            if is_equal:
-                #print("Success! Writing auto-redistributed to csv...")
-                pass
-            else:
-                delta = redistribute_sum_checker[resource_id] - totalResources['total'][resource_id]
-                # delta is positive if the refdistributed amount is higher than total <- means we need to subtract it 
-                # delta is negative if the redistir5bute4d amount is lower than the true total, means we need to increase the amount. subtracting a negative number will do the trick. 
-                # so should always be subtract eetla. 
-                ########### need to add logic for what to do, basically just adjust it from the camps with the most of that item, but this is an edge case, don't need to worry about it for now
-
-
-                # get the ids whos totals do not match; and get the delta amount between the 2 tables; and then take this off the camp with the highest of that resource_id
-                
-                # Specified ID and adjustment value
-
-                # Filter the alloc_ideal by the specific resource_id that isn't matching
-                resource_id_match_df = alloc_ideal[alloc_ideal['resourceID'] == resource_id]
-                # print(resource_id_match_df)
-                # Find the maximum value in column 'c'
-                max_qty_r_id =  resource_id_match_df['updated'].max()
-                # print(max_qty_r_id)
-                # Find the row with this maximum value
-                row_index = alloc_ideal[(alloc_ideal['resourceID'] == resource_id) & (alloc_ideal['updated'] == max_qty_r_id)].index
-
-                # Adjust the value in the original DataFrame
-                alloc_ideal.loc[row_index, 'updated'] -= delta
-                # print(alloc_ideal.loc[row_index, 'updated'])
-        '''
-        '''
-        # recheck the balanced...
-        self.jess_funky_timer(2)
-        print("\n...successfully checked that totals match...\n")
-        '''
+        
 
         ###### validate the redistributed totals, against the actual totals.
         ###### this is just incase there is any discrepancies from rounding.
         if 'resourceID' in totalResources.columns:
             totalResources.set_index('resourceID', inplace=True)
         comparison_result = redistribute_sum_checker == totalResources['total']
+        ##### maybe put this in a wrapper??? idk yet ... 
         # print(alloc_ideal)
+        print("\n...due to the threshold range & rounding in calculations; we need to make small adjustments to ensure the totals are the same before & after auto-allocation...\033[0m\n")
         alloc_ideal = self.adjust_auto_alloc(alloc_ideal)
+
+        ### recomparing after we modify alloc_ideal
+        redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
+        if 'resourceID' in totalResources.columns:
+            totalResources.set_index('resourceID', inplace=True)
+        comparison_result = redistribute_sum_checker == totalResources['total']
+        if comparison_result.all():
+            print("\n\033[92m...Success! Totals before & after match...\033[0m\n")
+
         #### write to csv
         alloc_updated = alloc_ideal[['resourceID', 'campID', 'updated']]
         alloc_updated = alloc_updated.rename(columns={alloc_updated.columns[2]: 'qty'})
@@ -288,7 +322,7 @@ class ResourceAllocator():
                 # r_id_select = int(input("\nPlease enter the resourceID of the item: --> "))
                 print("\nPlease enter the resourceID:")
                 if already_selected: # if not empty 
-                    print(f"fNote you have already made selection(s) for Resource IDs: [{set(already_selected)}]. ")   
+                    print(f"Note you have already made selection(s) for Resource IDs: {set(already_selected)}. ")   
                 #print(move)
                 r_id_select = r_inst.input_validator_2range_resources("--> ", already_selected, move, 'manual_alloc')  ############# validation begins immediately... 
                 if r_id_select == 'RETURN':
@@ -328,19 +362,23 @@ class ResourceAllocator():
             else: 
                 ##################### [1] & [2] movement between inventory
                 # get corresponding camp:
-                prompt = f"\nPlease enter the relevant \033[95mcampID\033[0m for the Resource ID {r_id_select}: {r_name_select}: --> "
+                print(f"\nPlease enter the relevant \033[95mcampID\033[0m for the \033[93mResource ID {r_id_select}: {r_name_select}:\033[0m ")
+                
                 if action_select == 1:
                     # [1] ASSIGN: inventory -> camp
                     origin_c_id = np.nan
                     valid_range = r_inst.valid_open_camps_with_refugees()
                     valid_range = valid_range['campID'].tolist()
-                    destination_c_id = r_inst.input_validator(prompt, valid_range, 'Please select a valid camp that is open and has refugees.')
+                    print(f"\033[92mValid campIDs are open & has at least one refugee: {valid_range}\033[0m")
+                    destination_c_id = r_inst.input_validator("--> ", valid_range, 'Please select a valid camp that is open and has refugees.')
                     if destination_c_id == 'RETURN':
                         return  
                 elif action_select == 2:
                     # [2] UNASSIGN: camp -> inventory
                     valid_range = r_inst.valid_origin_camp_single_resource(r_id_select)[1] ######################
-                    origin_c_id = r_inst.input_validator(prompt, valid_range, 'Please select a camp that both: has at least 1 unit of the resource AND is open with refugees. ') 
+                    print(f"\033[92mValid campIDs are any (open & closed) with at least one of that resource: {valid_range}\033[0m")
+                    origin_c_id = r_inst.input_validator("--> ", valid_range, '\033[91mPlease select a camp that both: has at least 1 unit of the resource AND is open with refugees. \033[0m') 
+                    
                     if origin_c_id == 'RETURN':
                         return
                     destination_c_id = np.nan
@@ -361,9 +399,9 @@ class ResourceAllocator():
             # building the valid range4 - which is... for that selected camp are moving FROM (origin), the moveUnits must not exceed the resource already there
             # do this by reusing the single_stats_instance
             valid_range = list(range(0, int(upper_limit)+1))
-            error_msg = f"Please enter an amount between 0 and {int(upper_limit)} for this resource.\033[0m"
-            prompt = f"\n\033[91mPlease enter the \033[95mAMOUNT\033[0m of Resource ID {r_id_select}: {r_name_select} to move [between 0 and {int(upper_limit)}]: "
-            move_units = r_inst.input_validator(prompt, valid_range, error_msg)
+            error_msg = f"\033[91mPlease enter an amount between 0 and {int(upper_limit)} for this resource.\033[0m"
+            print(f"\nPlease enter the \033[95mAMOUNT\033[0m of \033[93mResource ID {r_id_select}: {r_name_select}\033[0m to move [between 0 and {int(upper_limit)}]: ")
+            move_units = r_inst.input_validator("--> ", valid_range, error_msg)
             if move_units == 'RETURN':
                 return
 
@@ -494,7 +532,7 @@ class ResourceAllocator():
             master_after = r_inst_AFTER.master_resource_stats()
             
 
-            print(f"""\n ======= ＼(^o^)／ Manual Re-allocation of Resources Successful! ＼(^o^)／ ===== \n
+            print(f"""\n\033[92m======= ＼(^o^)／ Manual Re-allocation of Resources Successful! ＼(^o^)／ =====\033[0m\n
 Below are the before vs. current allocations of the impacted resources: \n"""
         )
             print("BEFORE: \n")
@@ -510,3 +548,52 @@ Below are the before vs. current allocations of the impacted resources: \n"""
         ####
 
 
+    def auto_alloc_test(self):
+        r_inst = ResourceReport()
+        ### the adding is done before in a different function, so by the time it  makes it here, we have already added to the auto_alloc.... so need to get the unallocTotal elsewhere. 
+
+        totalResources = self.totalResources_df
+
+        try:
+            alloc_ideal = r_inst.determine_above_below()
+        except Exception as e:
+            print(f"An error occurred : {e}")
+        alloc_ideal['updated'] = alloc_ideal['current']
+
+        for index, row in alloc_ideal.iterrows():
+            if row['status'] != 'balanced':
+                alloc_ideal.at[index, 'updated'] = row['ideal_qty'] 
+                ### if the status is not balanced, then update the quantity column with the ideal amount 
+        print(alloc_ideal) ### at this point, the updated values should have the ideal_qty < DEBUG this is OK!
+        redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
+        print(redistribute_sum_checker)
+        ###### validate the redistributed totals, against the actual totals.
+        ###### this is just incase there is any discrepancies from rounding.
+        if 'resourceID' in totalResources.columns:
+            totalResources.set_index('resourceID', inplace=True)
+        comparison_result = redistribute_sum_checker == totalResources['total']
+        print(comparison_result)
+
+        # Finding resourceIDs where the comparison is False
+        resource_ids_with_false_comparison = comparison_result[comparison_result == False].index.tolist()
+        # Filtering alloc_ideal DataFrame for rows where resourceID's comparison is False
+        filtered_alloc_ideal = alloc_ideal[alloc_ideal['resourceID'].isin(resource_ids_with_false_comparison)]
+
+        print("\nRows in alloc_ideal where comparison is False:")
+        print(filtered_alloc_ideal)
+        sum(filtered_alloc_ideal['updated'])
+
+
+        # print(alloc_ideal)
+        alloc_ideal = self.adjust_auto_alloc(alloc_ideal)
+        #### write to csv
+        alloc_updated = alloc_ideal[['resourceID', 'campID', 'updated']]
+        alloc_updated = alloc_updated.rename(columns={alloc_updated.columns[2]: 'qty'})
+        # print(alloc_updated)
+        alloc_updated.to_csv(self.resource_allocaation_csv_path, index=False)
+
+        #print(alloc_updated)
+        #print(r_inst.resourceStock_generator(alloc_updated))
+
+
+        return alloc_ideal, redistribute_sum_checker, comparison_result
