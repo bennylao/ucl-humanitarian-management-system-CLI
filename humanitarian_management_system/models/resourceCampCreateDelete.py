@@ -54,14 +54,16 @@ class ResourceCampCreateDelete():
         report_instance = ResourceReport()
         closed_camps_df = report_instance.valid_closed_camps()
         valid_range_list = closed_camps_df['campID'].to_list()
+        # print(after_pretty.to_string(index=False).replace('.0', '  '))
         if not closed_camps_df.empty:
             closed_camp_resource_stats = report_instance.report_closed_camp_with_resources()
+            pretty_closed_stats = report_instance.PRETTY_PIVOT_CAMP(closed_camp_resource_stats)
             print(f"""\n
 ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
 CHECK 2:\n
 The below CLOSED camps still have resources allocated... \n
 ==============================================================\n
-{closed_camp_resource_stats.to_string(index=False)} \n
+{pretty_closed_stats.to_string(index=False).replace('.0', '  ')} \n
     Unassign / unallocate resources from all closed camps, and move to inventory? [ y ]\n
             """)
 
@@ -153,16 +155,16 @@ The below CLOSED camps still have resources allocated... \n
             before_camp_vs_unallocated = report_instance.master_resource_stats()
 
             #### can add something more interactive here
-            report_instance_AFTER = ResourceReport()
+            
 
             if user_select == 'y':
                 self.new_camp_resources()
                 print("\nAll new camps have now been assigned a starter resource pack.\n ")
                 print("\nBEFORE:")
-                before_pretty = report_instance_AFTER.PRETTY_PIVOT_CAMP(before_camp_vs_unallocated)
+                before_pretty = report_instance.PRETTY_PIVOT_CAMP(before_camp_vs_unallocated)
                 print(before_pretty.to_string(index=False).replace('.0', '  '))
                 print("\nAFTER:\n")
-                
+                report_instance_AFTER = ResourceReport()
                 after_camp_vs_unallocated = report_instance_AFTER.master_resource_stats()
                 after_pretty = report_instance_AFTER.PRETTY_PIVOT_CAMP(after_camp_vs_unallocated)
                 print(after_pretty.to_string(index=False).replace('.0', '  '))
