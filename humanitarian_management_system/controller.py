@@ -538,7 +538,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 gender = gender_distribution
@@ -549,7 +549,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 age1 = age_distribution
@@ -561,7 +561,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 r = resources_distribution
@@ -569,9 +569,9 @@ class Controller:
                                 break
                     elif userInput == 6:
                         while True:
-                            campId = int(input('Please enter a camp ID: '))
+                            campId = int(input(f'Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 medical_info.medical_info(campId)
@@ -582,7 +582,6 @@ class Controller:
             except ValueError as e:
                 print("Invalid Input, please try again")
                 logging.critical(f"{e}")
-
 
     @staticmethod
     def admin_create_camp():
