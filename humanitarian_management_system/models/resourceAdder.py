@@ -59,7 +59,7 @@ class ResourceAdder():
             
             print("\nPlease enter the resourceID:")
             if already_selected: # if not empty 
-                print(f"Note you have already made selection(s) for Resource IDs: {already_selected} ")   
+                print(f"Note you have already made selection(s) for Resource IDs: {set(already_selected)} ")   
             r_id_select = r_inst.input_validator_2range_resources("--> ", already_selected, basket, 'shop')
             if r_id_select == 'RETURN':
                 return

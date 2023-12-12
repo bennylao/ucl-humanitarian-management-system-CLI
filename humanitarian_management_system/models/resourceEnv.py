@@ -6,8 +6,8 @@ import pandas as pd
 import pathlib as Path
 
 
-r_inst = ResourceAllocator()
+r_inst = ResourceCampCreateDelete()
+#print(r_inst.joined_df)
 
-report_inst = ResourceReport()
-table = report_inst.master_resource_stats()
-print(table)
+print(r_inst.totalResources_df['resourceID'].dtype)
+print(r_inst.resourceAllocs_df['resourceID'].dtype) ### as an object, but shouldnt be! 

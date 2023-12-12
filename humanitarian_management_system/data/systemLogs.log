@@ -2173,3 +2173,26 @@ invalid literal for int() with base 10: '/Users/jesswork/humanitarian_management
 2023-12-12 21:40:42,251 - INFO - controller-admin_main-Line162 - logging out from admin main menu
 2023-12-12 21:40:42,251 - INFO - controller-startup-Line40 - Startup page is shown
 >>>>>>> jess-film
+2023-12-12 22:53:01,600 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 22:53:01,600 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-12 22:53:01,600 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-12 22:53:01,600 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-12 22:53:05,469 - INFO - controller-login-Line87 - login page is shown
+2023-12-12 22:53:07,846 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-12 22:53:07,846 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-12 22:53:22,362 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 22:53:22,362 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-12 22:53:22,362 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-12 22:53:22,362 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-12 22:53:23,224 - INFO - controller-login-Line87 - login page is shown
+2023-12-12 22:53:25,851 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-12 22:53:25,852 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-12 23:01:14,938 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 23:01:14,938 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-12 23:01:14,938 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-12 23:01:14,938 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-12 23:01:15,890 - INFO - controller-login-Line87 - login page is shown
+2023-12-12 23:01:18,252 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-12 23:01:18,252 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-12 23:01:37,563 - INFO - controller-admin_main-Line164 - logging out from admin main menu
+2023-12-12 23:01:37,564 - INFO - controller-startup-Line42 - Startup page is shown
