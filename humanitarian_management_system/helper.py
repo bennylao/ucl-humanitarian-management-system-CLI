@@ -466,7 +466,6 @@ def validate_refugee(lvl, cid):
         for i in df_ref:
             id_arr.append(str(i))
 
-        print("Select 1 to create a new family identification, or 2 to join an existing one")
         if select == 'RETURN':
             return
         elif select != '1' and select != '2':
@@ -476,6 +475,8 @@ def validate_refugee(lvl, cid):
         if select == '1':
             try:
                 create_id = input("\nEnter family identification: ")
+                if create_id == 'RETURN':
+                    return
                 if create_id in id_arr:
                     print("Family ID already exists!")
                     continue
@@ -494,6 +495,8 @@ def validate_refugee(lvl, cid):
             print("\n" + table)
             try:
                 create_id = input("\nEnter family identification: ")
+                if create_id == 'RETURN':
+                    return
                 if create_id not in id_arr:
                     print("Invalid family ID entered!")
                     continue

@@ -765,6 +765,9 @@ class Controller:
                                 vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
                                 res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['campID'].tolist()
 
+                                print(new_value)
+                                print(modify_camp_id)
+
                                 for j in ref_id_arr:
                                     helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
                                                              int(j), 'campID', int(new_value))
@@ -1543,11 +1546,11 @@ class Controller:
                 while True:
                     try:
                         cid = int(input("Enter a camp ID: "))
+                        if cid == 'RETURN':
+                            return
                         if cid not in active_camp:
                             print("Invalid camp ID entered!")
                             continue
-                        if cid == 'RETURN':
-                            return
 
                         row_index_new_camp = df_c[df_c['campID'] == int(cid)].index
                         new_potential_refugee_pop = (df_c.at[row_index_new_camp[0], 'refugeePop'])
