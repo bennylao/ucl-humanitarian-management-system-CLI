@@ -67,6 +67,7 @@ class ManagementView:
               "             Event MODIFICATION\n"
               "========================================\n"
               "Please fill in all the following information below.\n"
+              "The end date is optional. Enter 'NONE' to skip for now.\n"
               "Or enter 'RETURN' to go back to admin menu page.")
 
     @staticmethod
