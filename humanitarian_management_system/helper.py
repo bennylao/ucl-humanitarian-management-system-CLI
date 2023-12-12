@@ -1421,13 +1421,14 @@ def get_export_file_path():
             if user_input.lower() == 'return':
                 return None
             elif user_input.lower() == 'x':
-                base_file_path = "data/refugees_exported_data_file.csv"
-                file_path = Path(base_file_path)
-                if file_path.is_file():
-                    index = 1
-                    while (file_path.parent / f"{file_path.stem}_{index}{file_path.suffix}").is_file():
-                        index += 1
-                    file_path = file_path.parent / f"{file_path.stem}_{index}{file_path.suffix}"
+                file_path = Path(__file__).parent
+                print(file_path)
+                index = 1
+                file_path = file_path.parent.joinpath(f"refugee_data_export1.csv")
+                while file_path.is_file():
+                    index += 1
+                    file_path = file_path.parent.joinpath(f"refugee_data_export{index}.csv")
+                    print(file_path)
                 break
             else:
                 print("Sorry. Didn't catch that. Try again.")
@@ -1445,6 +1446,7 @@ def admin_export_refugees_to_csv():
         file_path = get_export_file_path()
         if file_path == None:
             return
+        print(file_path)
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
         logging.info("Successfully loaded refugee csv for admin exporting refugee csv file.")
