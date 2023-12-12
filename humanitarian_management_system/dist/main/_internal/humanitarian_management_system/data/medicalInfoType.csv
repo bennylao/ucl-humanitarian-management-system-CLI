@@ -1,0 +1,16 @@
+medicalInfoTypeID,condition,criticalLvl
+1,Healthy ,1
+2,Stroke,3
+3,Respiratory diseases ,3
+4,Cancer,4
+5,Common diseases,2
+6,Fever,3
+7,Chronic Diseases,4
+8,Disabilities,3
+9,Neurological disorders,4
+10,Dementia,3
+11,Diabetes,2
+12,Infections diseases,3
+13,Mental illness,2
+14,Physical injuries,2
+

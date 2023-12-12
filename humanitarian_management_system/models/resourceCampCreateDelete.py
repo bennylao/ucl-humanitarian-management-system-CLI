@@ -58,27 +58,27 @@ class ResourceCampCreateDelete():
         if not closed_camps_df.empty:
             closed_camp_resource_stats = report_instance.report_closed_camp_with_resources()
             pretty_closed_stats = report_instance.PRETTY_PIVOT_CAMP(closed_camp_resource_stats)
-            print(f"""\n
+            print(f"""\033[91m\n
 ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
 CHECK 2:\n
 The below CLOSED camps still have resources allocated... \n
-==============================================================\n
+==============================================================\033[0m\n
 {pretty_closed_stats.to_string(index=False).replace('.0', '  ')} \n
     Unassign / unallocate resources from all closed camps, and move to inventory? [ y ]\n
             """)
 
-            user_select = report_instance.input_validator('--> ', ['y'], "Sorry, you don't have a choice here... \nIt is not good to leave resources assigned to closed camps...Please enter y")
+            user_select = report_instance.input_validator('--> ', ['y'], "\033[91mSorry, you don't have a choice here... \nIt is not good to leave resources assigned to closed camps...Please enter y\033[0m")
             if user_select == 'RETURN':
                 return
             if user_select == 'y':
                 self.remove_camp_resources(valid_range_list)
-                print(f"===== ＼(^o^)／ All resources from campIDs {valid_range_list} successfully unallocated & moved to inventory ＼(^o^)／ =====")
+                print(f"\033[92m===== ＼(^o^)／ All resources from campIDs {valid_range_list} successfully unallocated & moved to inventory ＼(^o^)／ =====\033[0m")
                 print(f"\nAFTER:\n")
                 report_instance_AFTER = ResourceReport()
                 closed_camp_resource_AFTER = report_instance_AFTER.report_closed_camp_with_resources()
                 print(closed_camp_resource_AFTER)
         else:
-            print("\n＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 2: There are no closed camps with assigned resources ")
+            print("\n\033[92m＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 2: There are no closed camps with assigned resources \033[0m")
 
 
     def new_camp_resources(self):
@@ -108,14 +108,15 @@ The below CLOSED camps still have resources allocated... \n
                 'qty': row['refugeePop'] * 10
             }) ## this will have values... all non zero
 
-            # Concatenate the temporary DataFrame to the final DataFrame
-            # FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
-            # so we drop before concat to resolve this warning... 
             new_alloc_df = new_alloc_df.dropna(axis=1, how='all')
             temp_df = temp_df.dropna(axis=1, how='all')
             new_alloc_df = pd.concat([new_alloc_df, temp_df], ignore_index=True)
+        
+        map = self.resourceAllocs_df
+        map = map[map['qty'] != 0]
 
-        new_map = pd.concat([self.resourceAllocs_df, new_alloc_df], ignore_index=True)
+
+        new_map = pd.concat([map, new_alloc_df], ignore_index=True)
         new_map.to_csv(self.resource_allocaation_csv_path, index=False)
         # use this to create the updated stock / assigned resources table
         new_assigned = report_instance.resourceStock_generator(new_map)
@@ -133,12 +134,12 @@ The below CLOSED camps still have resources allocated... \n
         report_instance = ResourceReport()
         new_camps_df = report_instance.valid_new_camps()
         if not new_camps_df.empty:
-            print(f"""
+            print(f"""\033[91m
     ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
     CHECK 1:\n
     There are newly open camp(s) with refugees...\n
     but NO RESOURCES OF ANY TYPE! \n
-    ==============================================================\n
+    ==============================================================\033[0m\n
     {new_camps_df.to_string(index=False)} \n
     The starter resource pack for new camps is 10 of each resource per refugee.\n
     Proceed to buy & assign this for all camps above? [ y / n ]\n
@@ -170,4 +171,4 @@ The below CLOSED camps still have resources allocated... \n
                 print(after_pretty.to_string(index=False).replace('.0', '  '))
                 print("\n ======= ＼(^o^)／ Thanks for Shopping! Come Again Soon! ＼(^o^)／ ===== \n")
         else:
-            print("\n＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 1: There are open camps with refugees, that have no resources")
+            print("\n\033[92m＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 1: There are open camps with refugees, that have no resources\033[0m")
