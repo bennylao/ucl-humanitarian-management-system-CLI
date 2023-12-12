@@ -649,17 +649,17 @@ class Controller:
         try:
             """This function is for admin modify camp info"""
             ManagementView.camp_modification_message()
-            csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
+            csv_path = Path(__file__).parent.joinpath("data/event.csv")
             df = pd.read_csv(csv_path, converters={'ongoing': str})
 
-            csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
+            csv_path0 = Path(__file__).parent.joinpath("data/camp.csv")
             df0 = pd.read_csv(csv_path0)
 
-            csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
+            csv_path_r = Path(__file__).parent.joinpath("data/refugee.csv")
             df_r = pd.read_csv(csv_path_r)
-            csv_path_v = Path(__file__).parents[0].joinpath("data/user.csv")
+            csv_path_v = Path(__file__).parent.joinpath("data/user.csv")
             df_v = pd.read_csv(csv_path_v)
-            csv_path_a = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
+            csv_path_a = Path(__file__).parent.joinpath("data/resourceAllocation.csv")
             df_a = pd.read_csv(csv_path_a)
 
             # if there is no active events, return
@@ -766,21 +766,13 @@ class Controller:
 
                                     modify_camp_id = int(new_value)
                                     # change corresponding refugee & volunteer & resource allocation camp ID
-                                    ref_id_arr = df_r.loc[df_r['campID'] == int(old_camp_id)]['refugeeID'].tolist()
-                                    vol_id_arr = df_v.loc[df_v['campID'] == int(old_camp_id)]['userID'].tolist()
-                                    res_id_arr = df_a.loc[df_a['campID'] == int(old_camp_id)]['campID'].tolist()
+                                    df_r.loc[df_r['campID'] == old_camp_id, 'campID'] = modify_camp_id
+                                    df_v.loc[df_v['campID'] == old_camp_id, 'campID'] = modify_camp_id
+                                    df_a.loc[df_a['campID'] == old_camp_id, 'campID'] = modify_camp_id
 
-                                    for j in ref_id_arr:
-                                        helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
-                                                                 int(j), 'campID', int(new_value))
-
-                                    for k in vol_id_arr:
-                                        helper.modify_csv_pandas("data/user.csv", 'userID',
-                                                                 int(k), 'campID', int(new_value))
-
-                                    for l in res_id_arr:
-                                        helper.modify_csv_pandas("data/resourceAllocation.csv.csv", 'userID',
-                                                                 int(l), 'campID', int(new_value))
+                                    df_r.to_csv(csv_path_r, index=False)
+                                    df_v.to_csv(csv_path_v, index=False)
+                                    df_a.to_csv(csv_path_a, index=False)
 
                             if target_column_index == '3':
 
@@ -812,15 +804,15 @@ class Controller:
 
                         helper.modify_csv_pandas(csv_path0, 'campID', old_camp_id, target_column_name,
                                                  new_value)
-                        csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
+                        csv_path_c = Path(__file__).parent.joinpath("data/camp.csv")
                         df_c = pd.read_csv(csv_path_c)
                         df_c.sort_values('campID', inplace=True)
-                        df_c.to_csv(Path(__file__).parents[0].joinpath("data/camp.csv"), index=False)
+                        df_c.to_csv(Path(__file__).parent.joinpath("data/camp.csv"), index=False)
                         print(f"\u2714 Changes have been saved!")
                     else:
                         return
                 except ValueError as e:
-                    print("Invalid input! Please enter an integer between 1 to 9")
+                    print("Invalid input! Please enter a valid integer")
                     logging.critical(f"{e}")
         except FileNotFoundError as e:
             print(f"\nMultiple files may be damaged or lost."
