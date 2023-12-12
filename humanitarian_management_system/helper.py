@@ -1265,39 +1265,41 @@ def add_refugee_to_session():
                 print("\n\nSorry - that's not a valid session ID. Pick again. ")
         row_index_sessionID = session_df[session_df['sessionID'] == int(sessionID)].index[0]
         already_registered = session_df.at[row_index_sessionID, 'participants']
-        # print(already_registered)
+        already_registered = already_registered.strip("[]").split(", ")
+        already_registered = [int(i) for i in already_registered]
         eventID = session_df.at[row_index_sessionID, 'eventID']
         camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
         camp_df = pd.read_csv(camp_csv_path)
         camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
         refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
         # ----------  adding only refugees in this event! ---------
-        participants = []
+        # participants = []
         while True:
-            try:
-                if len(refugees_in_associated_camps) == 0:
-                    print("\nOh no. There are no other refugees in the event which this session is held."
-                          "Taking you back")
-                    return
-                print("\n", refugees_in_associated_camps.to_markdown(index=False))
-                # print(refugees_in_associated_camps['refugeeID'])
-                rid = input(
-                    f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
-                    f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
-                    "\nEnter DONE when you are finished, or return to cancel and go back: ")
-                if rid.lower() == "return":
-                    return
-                if rid.lower() == "done":
-                    break
 
-                elif rid in already_registered:
+            if len(refugees_in_associated_camps) == 0:
+                print("\nOh no. There are no other refugees in the event which this session is held."
+                      "Taking you back")
+                return
+            print("\n", refugees_in_associated_camps.to_markdown(index=False))
+            # print(refugees_in_associated_camps['refugeeID'])
+            rid = input(
+                f"\n\nFrom the above list, which are refugees in the same event as that which this session is "
+                f"being held,\nenter the Refugee ID for who you want to add to session {sessionID}"
+                "\nEnter DONE when you are finished, or return to cancel and go back: ")
+            if rid.lower() == "return":
+                return
+            if rid.lower() == "done":
+                break
+            try:
+                rid = int(rid)
+                if rid in already_registered:
                     # print(already_registered)
                     print(f"\nDon't worry. That refugee is already down to attend this session.")
-                elif int(rid) in participants:
-                    print("\nYou've already just added that refugee.")
+                # elif int(rid) in participants:
+                #     print("\nYou've already just added that refugee.")
                 elif refugees_in_associated_camps['refugeeID'].eq(int(rid)).any():
                     print(f"\n\nAdding refugee with id {rid} to skills session {sessionID}. \n\n")
-                    participants.append(int(rid))
+                    already_registered.append(rid)
                 else:
                     print("\n\nSorry - that refugee ID doesn't exist. Pick again.")
             except Exception as e:
@@ -1311,11 +1313,11 @@ def add_refugee_to_session():
         # combined_attendees.extend(already_registered_list)
         # already_registered_list = list(already_registered)
         # already_registered_list.extend(participants)
-        combined_attendees = [already_registered] + participants
-        print(combined_attendees)
-        session_df.at[row_index_sessionID, 'participants'] = combined_attendees
+        # combined_attendees = already_registered + participants
+        # print(combined_attendees)
+        session_df.at[row_index_sessionID, 'participants'] = already_registered
         session_df.to_csv(training_session_path, index=False)
-        print(f"\nExcellent! We have added refugee(s) {participants} to session {sessionID}. See below. ")
+        print(f"\nExcellent! We have added those refugees to session {sessionID}. See below. ")
         print(session_df.to_markdown(index=False))
     except FileNotFoundError as e:
         logging.critical(f"Error: {e}. One of the data files not found when adding a refugee to a session.")
