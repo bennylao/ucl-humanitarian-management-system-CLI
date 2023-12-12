@@ -467,12 +467,12 @@ def validate_refugee(lvl, cid):
             id_arr.append(str(i))
 
         print("Select 1 to create a new family identification, or 2 to join an existing one")
-        if select != '1' and select != '2':
+        if select == 'RETURN':
+            return
+        elif select != '1' and select != '2':
             print("Select 1 or 2 only!")
             continue
 
-        if select == 'RETURN':
-            return
         if select == '1':
             try:
                 create_id = input("\nEnter family identification: ")
