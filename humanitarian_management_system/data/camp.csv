@@ -17,4 +17,3 @@ campID,eventID,countryID,latitude,longitude,refugeeCapacity,healthRisk,volunteer
 16,4,BR,-9.505433177,-56.25042963,15,high,1,1,0.0,open
 17,5,ZA,-30.559482,22.937506,5,low,1,1,0.0,open
 18,5,ZA,-30.559482,22.937506,2,low,1,1,0.0,open
-
