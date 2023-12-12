@@ -1060,7 +1060,7 @@ class Controller:
                         user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
                         user_df = pd.read_csv(user_csv_path)
                         logging.info("User file loaded successfully for admin closing a camp.")
-                        camps_in_event = df1.loc[df1['eventID'] == event_id, 'campID'].tolist()
+                        camps_in_event = df1.loc[(df1['eventID'] == event_id) & (df1['status'] == 'open'), 'campID'].tolist()
                         volunteers_in_camp = user_df[(user_df['campID'] == close_camp_id) & (user_df['userType'] == 'volunteer')]
                         volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
                         # volunteers_in_camp = user_df.loc[user_df['campID'] == close_camp_id, 'campID'].tolist()
@@ -1073,29 +1073,39 @@ class Controller:
                             return
                         elif move_volunteers.lower() == 'y':
                             if len(volunteers_in_camp) == 0:
-                                print("Just checked - looks like there are no volunteers left in that camp, anyway. "
+                                print("\n\nJust checked - looks like there are no volunteers left in that camp, anyway. "
                                       "Redirecting you back now.")
                                 return
                             print("Below are the volunteers in the camp: ")
                             print('\n\n', volunteers_df_filtered.to_markdown(index=False))
-
-                            new_camp = input("\nFrom the list below, which are the camps in the same event as the one"
-                                             "you have just closed, please enter which camp you want to move volunteers to: ")
-                            print(filtered_camp_id)
-                            if new_camp.lower() == 'return':
+                            if len(camps_in_event) == 0:
+                                print("\nSorry - no other open camps to move to in this event! We'll take you back. The camp has still been closed "
+                              f"but you'll have to manually remove volunteers if necessary.")
                                 return
-                            else:
-                                try:
-                                    new_camp = int(new_camp)
-                                    break
-                                except ValueError as e:
-                                    logging.info(f"Error when user is selecting new camp to move volunteers to.")
-                                    print("Oh no! R")
+                            # print(filtered_camp_id)
+                            while True:
+                                new_camp = input(f"\nFrom this list: {camps_in_event}, which are the OPEN camps in the same event as the one"
+                                                 " you have just closed, please enter which camp you want to move volunteers to: ")
+                                if new_camp.lower() == 'return':
+                                    return
+                                else:
+                                    try:
+                                        new_camp = int(new_camp)
+                                        if new_camp == close_camp_id:
+                                            print("\n\nYou can't move volunteers to the same camp as the one you're closing..."
+                                                  "Select a different camp or, if there aren't any, enter RETURN.\n\n")
+                                        else:
+                                            break
+                                    except ValueError as e:
+                                        logging.info(f"Error when user is selecting new camp to move volunteers to.")
+                                        print(f"Oh no! {e}")
+                                        return
+                            break
                     except Exception as e:
                         logging.critical(f"Error {e} when trying to display volunteers in camp when closing a camp.")
                         print(f"\nOh no. Error {e} has occurred. We'll take you back. The camp has still been closed "
                               f"but you'll have to manually remove volunteers.")
-                    return
+                        return
                 elif aa == "no":
                     return
                 elif aa == "RETURN":
@@ -1113,9 +1123,9 @@ class Controller:
                         df1.loc[df1['campID'] == int(new_camp), 'volunteerPop'] += 1
                     df1.to_csv(camp_csv_path, index=False)
                     user_df.to_csv(user_csv_path, index=False)
-                    print(f"Successfully assigned these volunteers to the new camp {new_camp}! See below: ")
-                    print(df1[df1['campId'] == close_camp_id].to_markdown)
-                    print(df1[df1['campID'] == new_camp].to_markdown)
+                    print(f"\n\nSuccessfully assigned these volunteers to the new camp {new_camp}! See below: \n\n")
+                    print(df1[df1['campID'] == close_camp_id].to_markdown(index=False), "\n")
+                    print(df1[df1['campID'] == new_camp].to_markdown(index=False))
                     break
                 else:
                     print("Not a valid camp to choose from. Try again: ")
