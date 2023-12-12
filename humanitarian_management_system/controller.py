@@ -743,7 +743,7 @@ class Controller:
                         continue
                     elif int(target_column_index) in range(1, 5):
 
-                        temp_id = int(modify_camp_id)
+                        old_camp_id = int(modify_camp_id)
 
                         target_column_name = filtered_df1.columns[int(target_column_index) - 1]
                         while True:
@@ -760,28 +760,24 @@ class Controller:
                                     print("Camp ID already exists! Please choose a new one.")
                                     continue
 
-                                # change corresponding refugee & volunteer & resource allocation camp ID
-                                ref_id_arr = df_r.loc[df_r['campID'] == int(modify_camp_id)]['refugeeID'].tolist()
-                                vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
-                                res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['campID'].tolist()
+                                else:
 
-                                print(new_value)
-                                print(modify_camp_id)
+                                    modify_camp_id = int(new_value)
+                                    # change corresponding refugee & volunteer & resource allocation camp ID
+                                    ref_id_arr = df_r.loc[df_r['campID'] == int(old_camp_id)]['refugeeID'].tolist()
+                                    vol_id_arr = df_v.loc[df_v['campID'] == int(old_camp_id)]['userID'].tolist()
+                              #      res_id_arr = df_a.loc[df_a['campID'] == int(old_camp_id)]['campID'].tolist()
 
-                                for j in ref_id_arr:
-                                    helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
-                                                             int(j), 'campID', int(new_value))
+                                    print(new_value)
+                                    print(modify_camp_id)
 
-                                for k in vol_id_arr:
-                                    helper.modify_csv_pandas("data/user.csv", 'userID',
-                                                             int(k), 'campID', int(new_value))
+                                    for j in ref_id_arr:
+                                        helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
+                                                                 int(j), 'campID', int(new_value))
 
-                                for m in res_id_arr:
-                                    helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
-                                                             int(m), 'campID', int(new_value))
-
-                                modify_camp_id = int(new_value)
-                                break
+                                    for k in vol_id_arr:
+                                        helper.modify_csv_pandas("data/user.csv", 'userID',
+                                                                 int(k), 'campID', int(new_value))
 
                             if target_column_index == '3':
 
@@ -811,7 +807,7 @@ class Controller:
                                     logging.critical(f"{e}")
                                     continue
 
-                        helper.modify_csv_pandas(csv_path0, 'campID', temp_id, target_column_name,
+                        helper.modify_csv_pandas(csv_path0, 'campID', old_camp_id, target_column_name,
                                                  new_value)
                         csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
                         df_c = pd.read_csv(csv_path_c)
