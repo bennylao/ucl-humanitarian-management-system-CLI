@@ -1580,7 +1580,7 @@ def help_center_page():
               "from the system removes its record and closes all associated camps & you cannot edit them."
               "\n   - You can display all events currently in the system"
               "\n\n2. Camp Management"
-              "\n   - Only a user with Admin privilege can add new camps to the system."
+              "\n   - Only a user with Admin privilege can add new camps to the system. Adding an end date is optional."
               "\n   - A camp can be closed/deleted as a single entity, even if an event is still ongoing. This is in case of "
               "a potential health outbreak in the camp or natural disaster."
               "\n   - Only an Admin can close and delete camps. A camp can ONLY BE DELETED if its status has already been "
