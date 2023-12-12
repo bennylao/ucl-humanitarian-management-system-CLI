@@ -1851,7 +1851,7 @@ class Controller:
             if move_or_delete == "3":
                 return
             elif move_or_delete == "1":
-                helper.move_refugee_helper_method()
+                helper.move_refugee_admin()
             elif move_or_delete.lower() == "2":
                 self.delete_refugee()
             else:
