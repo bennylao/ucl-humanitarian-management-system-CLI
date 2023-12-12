@@ -1100,6 +1100,8 @@ class Controller:
                                             print(
                                                 "\n\nYou can't move volunteers to the same camp as the one you're closing..."
                                                 "Select a different camp or, if there aren't any, enter RETURN.\n\n")
+                                        elif new_camp not in camps_in_event:
+                                            print("\nInvalid option! Try again")
                                         else:
                                             break
                                     except ValueError as e:
