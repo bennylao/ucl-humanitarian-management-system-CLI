@@ -648,7 +648,7 @@ class Controller:
             """This function is for admin modify camp info"""
             ManagementView.camp_modification_message()
             csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
-            df = pd.read_csv(csv_path)
+            df = pd.read_csv(csv_path, converters={'ongoing': str})
 
             csv_path0 = Path(__file__).parents[0].joinpath("data/camp.csv")
             df0 = pd.read_csv(csv_path0)
@@ -662,7 +662,7 @@ class Controller:
 
             # if there is no active events, return
             # print the events info for users to choose
-            filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
+            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
             campID_df = df0[['campID', 'eventID']].copy()
             campID_df['campID'] = campID_df['campID'].astype(str)
             campID_df = campID_df.groupby('eventID')['campID'].apply(lambda x: ', '.join(x.dropna())).reset_index()
