@@ -1,0 +1,6 @@
+eventID,ongoing,title,location,description,no_camp,startDate,endDate
+1,True,IndiaCrisis,India,Earthquake!,4,2023-02-01,2025-03-01
+2,True,EgyptFires,Egypt,Fire!,4,2023-03-01,2025-01-01
+3,True,ChinaHurricane,China,Hurricane!,4,2023-03-02,2025-02-01
+4,True,BrazilDrought,Brazil,Drought!,4,2023-04-01,2024-01-01
+5,True,S.AfricaTsunami,South Africa,Tsunami!,2,2023-05-01,2024-01-02

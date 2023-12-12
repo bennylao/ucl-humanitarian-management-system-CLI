@@ -6,5 +6,8 @@ import pandas as pd
 import pathlib as Path
 
 
-r_inst = ResourceAdder()
-r_inst.resource_adder()
+r_inst = ResourceAllocator()
+
+report_inst = ResourceReport()
+table = report_inst.master_resource_stats()
+print(table)

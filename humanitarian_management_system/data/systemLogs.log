@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2023-12-12 18:58:44,785 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-12 18:58:44,785 - INFO - controller-initialise-Line31 - Controller is initialised
 2023-12-12 18:58:44,785 - INFO - controller-initialise-Line34 - welcome message is displayed
@@ -113,3 +114,2015 @@
 2023-12-12 21:14:38,349 - INFO - controller-initialise-Line31 - Controller is initialised
 2023-12-12 21:14:38,349 - INFO - controller-initialise-Line34 - welcome message is displayed
 2023-12-12 21:14:38,349 - INFO - controller-startup-Line42 - Startup page is shown
+=======
+2023-12-11 00:58:33,038 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 00:58:33,038 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-11 01:01:59,610 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 01:01:59,611 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-11 01:15:20,860 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 01:15:20,860 - INFO - controller-initialise-Line27 - Controller is initialised.
+2023-12-11 01:15:20,860 - INFO - controller-startup-Line34 - Startup page is shown
+2023-12-11 01:15:22,333 - INFO - controller-register-Line58 - Register page is shown
+2023-12-11 01:15:39,779 - INFO - controller-register-Line69 - New volunteer account is created
+2023-12-11 01:15:42,780 - INFO - controller-login-Line77 - login page is shown
+2023-12-11 01:15:44,773 - INFO - controller-login-Line104 - login failed as account has not been verified yet
+2023-12-11 01:15:51,112 - INFO - controller-login-Line99 - login failed due to invalid password
+2023-12-11 01:31:22,767 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 01:31:22,768 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 01:31:22,768 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 01:31:22,768 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 01:31:23,132 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 01:31:24,532 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 01:31:26,657 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 01:31:26,658 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 02:01:30,166 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:01:30,166 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:01:30,166 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:01:30,166 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:01:32,176 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 02:01:34,398 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 02:01:34,398 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 02:02:48,307 - CRITICAL - controller-admin_delete_camp-Line883 - 17
+2023-12-11 02:07:18,796 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:07:18,796 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:07:18,796 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:07:18,796 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:07:20,443 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 02:07:22,707 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 02:07:22,707 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 02:07:29,645 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 02:07:38,712 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 02:07:48,274 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 02:08:32,374 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 02:08:32,375 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:08:37,817 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:08:37,817 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:08:37,817 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:08:37,817 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:08:38,923 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 02:08:41,570 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 02:08:41,570 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 02:09:46,787 - CRITICAL - controller-admin_delete_camp-Line883 - 17
+2023-12-11 02:10:51,052 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:10:51,053 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:10:51,053 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:10:51,053 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:10:52,327 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 02:10:54,298 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 02:10:54,298 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 02:12:23,444 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:12:23,444 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:12:23,444 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:12:23,444 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:12:24,871 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 02:12:27,651 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 02:12:27,651 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 02:13:35,851 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 02:13:35,852 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 02:13:35,852 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 02:13:35,852 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 02:13:36,938 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 02:13:38,931 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 02:13:38,931 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 17:21:41,801 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 17:21:41,802 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 17:21:41,802 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 17:21:41,802 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:21:51,502 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:21:54,677 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 17:21:54,677 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 17:22:48,718 - INFO - controller-admin_delete_camp-Line873 - Refugee file successfully opened.
+2023-12-11 17:22:48,723 - INFO - controller-admin_delete_camp-Line892 - User file loaded successfully for admin closing a camp.
+2023-12-11 17:22:48,724 - CRITICAL - controller-admin_delete_camp-Line924 - 'DataFrame' object has no attribute 'to_markup'
+2023-12-11 17:24:15,012 - INFO - controller-admin_delete_camp-Line873 - Refugee file successfully opened.
+2023-12-11 17:24:15,016 - INFO - controller-admin_delete_camp-Line892 - User file loaded successfully for admin closing a camp.
+2023-12-11 17:24:15,017 - CRITICAL - controller-admin_delete_camp-Line924 - 'DataFrame' object has no attribute 'to_markup'
+2023-12-11 17:26:08,131 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 17:26:08,131 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 17:26:08,132 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 17:26:08,132 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:26:09,660 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:26:12,220 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 17:26:12,220 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 17:26:33,445 - INFO - controller-admin_delete_camp-Line873 - Refugee file successfully opened.
+2023-12-11 17:26:33,449 - INFO - controller-admin_delete_camp-Line892 - User file loaded successfully for admin closing a camp.
+2023-12-11 17:34:37,966 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 17:34:37,966 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 17:34:37,966 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 17:34:37,966 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:34:39,959 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:34:44,466 - INFO - controller-volunteer_main-Line1199 - login successfully as volunteer
+2023-12-11 17:34:44,466 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 17:35:38,672 - INFO - controller-volunteer_edit_camp-Line1324 - Camp file opened successfully.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:35:38,676 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,082 - INFO - controller-volunteer_edit_camp-Line1324 - Camp file opened successfully.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:13,086 - INFO - controller-volunteer_edit_camp-Line1342 - Successfully printed iteration in camp dataframe.
+2023-12-11 17:36:56,924 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 17:36:56,924 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 17:36:56,924 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 17:36:56,924 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:37:11,317 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:37:13,775 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:37:16,062 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 17:37:16,062 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 17:37:56,923 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 17:39:32,679 - CRITICAL - controller-admin_data_visualization-Line538 - invalid literal for int() with base 10: 'RETURN'
+2023-12-11 18:06:21,721 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:06:21,722 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:06:21,722 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:06:21,722 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:06:24,414 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:06:26,778 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:06:26,778 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:13:07,296 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:13:07,296 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:13:07,296 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:13:07,296 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:13:08,486 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:13:10,786 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:13:10,786 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:13:26,156 - CRITICAL - controller-admin_modify_camp-Line777 - list.remove(x): x not in list
+2023-12-11 18:16:18,150 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:16:18,150 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:16:18,150 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:16:18,150 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:16:19,202 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:16:21,522 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:16:21,522 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:20:50,789 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:20:50,789 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:20:50,789 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:20:50,789 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:20:54,140 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:20:56,379 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:20:56,379 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:22:00,687 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:22:00,687 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:22:00,688 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:22:00,688 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:22:01,691 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:22:04,156 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:22:04,156 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:22:33,058 - CRITICAL - controller-admin_modify_camp-Line777 - list.remove(x): x not in list
+2023-12-11 18:23:23,762 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:23:23,764 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:23:23,764 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:23:23,764 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:23:25,126 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:23:28,484 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:23:28,485 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:24:56,047 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:24:56,047 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:24:56,048 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:24:56,048 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:24:56,969 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:24:59,206 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:24:59,206 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:25:07,941 - CRITICAL - controller-admin_modify_camp-Line775 - list.remove(x): x not in list
+2023-12-11 18:27:18,236 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:27:18,237 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:27:18,237 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:27:18,237 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:27:18,977 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:27:21,123 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:27:21,123 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:28:33,171 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:28:33,171 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:28:33,172 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:28:33,172 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:28:34,060 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:28:36,526 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:28:36,526 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:29:45,092 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:30:08,378 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:32:48,584 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:32:48,585 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:32:48,585 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:32:48,585 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:32:49,855 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:32:52,675 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:32:52,675 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:33:27,301 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:33:49,238 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:33:51,795 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:33:57,349 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:34:02,528 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:34:24,663 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:34:24,663 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:34:24,663 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:34:24,664 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:34:27,515 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:34:29,876 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:34:29,876 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:36:31,940 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:36:31,940 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:36:31,941 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:36:31,941 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:36:33,237 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:36:35,512 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:36:35,512 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:36:55,506 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:37:47,848 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:38:03,396 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:38:08,569 - CRITICAL - controller-admin_modify_camp-Line776 - list.remove(x): x not in list
+2023-12-11 18:39:04,524 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:39:04,524 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:39:04,524 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:39:04,525 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:39:05,312 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:39:07,727 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:39:07,727 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:42:16,361 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:42:16,361 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:42:16,362 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:42:16,362 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:42:17,385 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:42:19,706 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:42:19,706 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:44:38,705 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:44:38,706 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:44:38,706 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:44:38,706 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:44:39,636 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:44:42,619 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:44:42,620 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:46:39,812 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:46:39,813 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:46:39,813 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:46:39,813 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:46:40,631 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:46:42,733 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:46:42,733 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:48:17,232 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:48:17,232 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:48:17,232 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:48:17,232 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:48:18,215 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:48:20,490 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:48:20,490 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:50:43,386 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:50:43,386 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:50:43,387 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:50:43,387 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:50:51,744 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:50:54,087 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:50:54,087 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:56:47,431 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:56:47,431 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:56:47,431 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:56:47,431 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:56:48,332 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:56:50,645 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:56:50,645 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:58:15,291 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:58:15,291 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:58:15,291 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:58:15,291 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:58:16,243 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:58:18,251 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:58:18,251 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:58:35,599 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:58:35,599 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:58:35,599 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:58:35,599 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:58:36,744 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:58:39,368 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:58:39,368 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:02:27,091 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:02:27,091 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:02:27,092 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:02:27,092 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:02:27,935 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:02:30,093 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:02:30,093 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:02:59,654 - CRITICAL - controller-admin_modify_camp-Line777 - invalid literal for int() with base 10: ''
+2023-12-11 19:04:03,210 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:04:03,210 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:04:03,210 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:04:03,210 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:04:05,933 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:04:08,764 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:04:08,765 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:07:26,078 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:07:26,078 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:07:26,078 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:07:26,079 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:07:27,058 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:07:29,391 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:07:29,391 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:08:43,280 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:08:43,280 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:08:43,280 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:08:43,280 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:08:45,268 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:08:51,005 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:08:51,006 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:09:54,570 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:09:54,570 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:09:54,570 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:09:54,570 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:09:55,461 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:09:57,932 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:09:57,932 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:10:40,690 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:10:40,690 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:10:40,690 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:10:40,690 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:10:41,509 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:10:43,665 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:10:43,666 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:11:14,938 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:11:14,938 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:11:14,938 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:11:14,938 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:11:16,838 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:11:20,572 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:11:20,572 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:13:10,615 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:13:10,616 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:13:10,616 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:13:10,616 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:16:15,734 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:16:19,190 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:16:19,190 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:16:28,499 - CRITICAL - controller-admin_modify_camp-Line777 - list.remove(x): x not in list
+2023-12-11 19:18:15,193 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:18:15,193 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:18:15,193 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:18:15,193 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:18:16,950 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:18:19,636 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:18:19,636 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:22:31,802 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:22:31,802 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:22:31,802 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:22:31,802 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:22:32,736 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:22:35,238 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:22:35,238 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:24:07,624 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:24:07,624 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:24:07,624 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:24:07,624 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:24:08,746 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:24:10,967 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:24:10,967 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:25:30,482 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:25:30,483 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:25:30,483 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:25:30,483 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:25:31,463 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:25:33,870 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:25:33,870 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:26:13,521 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:26:13,521 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:26:13,521 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:26:13,521 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:26:14,688 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:26:18,931 - INFO - controller-volunteer_main-Line1207 - login successfully as volunteer
+2023-12-11 19:26:18,932 - INFO - controller-volunteer_main-Line1210 - volunteer main menu is displayed
+2023-12-11 19:28:03,155 - INFO - controller-volunteer_edit_camp-Line1332 - Camp file opened successfully.
+2023-12-11 19:28:03,159 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:03,159 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:03,159 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:03,159 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:03,159 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:03,160 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:03,160 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:03,160 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:03,160 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,009 - INFO - controller-volunteer_edit_camp-Line1332 - Camp file opened successfully.
+2023-12-11 19:28:10,014 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,014 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,014 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,014 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,014 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,014 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,015 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,015 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:10,015 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:43,678 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:28:43,678 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:28:43,678 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:28:43,678 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:28:44,657 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:28:48,055 - INFO - controller-volunteer_main-Line1207 - login successfully as volunteer
+2023-12-11 19:28:48,055 - INFO - controller-volunteer_main-Line1210 - volunteer main menu is displayed
+2023-12-11 19:28:52,420 - INFO - controller-volunteer_edit_camp-Line1332 - Camp file opened successfully.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:28:52,436 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,686 - INFO - controller-volunteer_edit_camp-Line1332 - Camp file opened successfully.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:01,690 - INFO - controller-volunteer_edit_camp-Line1350 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:29:41,745 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:29:41,745 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:29:41,745 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:29:41,745 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:29:43,349 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:29:47,350 - INFO - controller-login-Line100 - login failed due to invalid password
+2023-12-11 19:31:33,029 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:31:33,029 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:31:33,029 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:31:33,029 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:31:33,859 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:31:38,143 - INFO - controller-volunteer_main-Line1201 - login successfully as volunteer
+2023-12-11 19:31:38,144 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:31:42,210 - INFO - controller-volunteer_edit_camp-Line1326 - Camp file opened successfully.
+2023-12-11 19:31:42,223 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:31:42,223 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:31:42,223 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:31:42,223 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:31:42,223 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:31:42,223 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:31:42,223 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:31:42,223 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:31:42,224 - INFO - controller-volunteer_edit_camp-Line1344 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:35:16,817 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:35:16,818 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:35:16,818 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:35:16,818 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:35:19,209 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:35:24,090 - INFO - controller-login-Line100 - login failed due to invalid password
+2023-12-11 19:37:08,022 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:37:08,022 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:37:08,022 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:37:08,022 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:37:09,285 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:37:14,117 - INFO - controller-volunteer_main-Line1201 - login successfully as volunteer
+2023-12-11 19:37:14,117 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:39:17,704 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:39:17,704 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:39:17,704 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:39:17,704 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:39:19,060 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:39:23,314 - INFO - controller-login-Line100 - login failed due to invalid password
+2023-12-11 19:39:26,817 - INFO - controller-volunteer_main-Line1201 - login successfully as volunteer
+2023-12-11 19:39:26,817 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:39:31,358 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:39:31,370 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:31,371 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:31,371 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:31,371 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:31,371 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:31,371 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:31,371 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:31,371 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:31,371 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,503 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:39:35,505 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,966 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:24,969 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,703 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:31,705 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:40:50,339 - INFO - controller-volunteer_main-Line1221 - logging out from volunteer main menu
+2023-12-11 19:40:50,339 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:40:56,737 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:40:56,737 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:40:56,737 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:40:56,738 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:40:58,821 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:41:11,174 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:41:11,174 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:41:11,174 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:41:11,174 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:41:12,445 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:41:15,924 - INFO - controller-volunteer_main-Line1201 - login successfully as volunteer
+2023-12-11 19:41:15,924 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:41:44,747 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:41:44,754 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:44,754 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:44,754 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:44,755 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:44,755 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:44,755 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:44,755 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:44,755 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:44,755 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,801 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:41:53,803 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,804 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,804 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,804 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,804 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,804 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,804 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,804 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:41:53,804 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,036 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:42:13,038 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:43:14,859 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:43:14,859 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:43:14,859 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:43:14,859 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:43:16,448 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:43:18,654 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:43:18,654 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:45:32,297 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:45:32,297 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:45:32,297 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:45:32,298 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:45:33,469 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:45:35,470 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:45:35,470 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:47:37,984 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:47:37,985 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:47:37,985 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:47:37,985 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:47:41,267 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:47:45,538 - INFO - controller-login-Line100 - login failed due to invalid password
+2023-12-11 19:47:49,059 - INFO - controller-volunteer_main-Line1201 - login successfully as volunteer
+2023-12-11 19:47:49,059 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:47:50,579 - INFO - controller-volunteer_join_camp-Line1267 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:47:53,953 - INFO - controller-volunteer_join_camp-Line1290 - successfully changed user input into 56 index
+2023-12-11 19:47:53,954 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:48:01,337 - INFO - controller-volunteer_join_camp-Line1267 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:48:04,038 - INFO - controller-volunteer_join_camp-Line1290 - successfully changed user input into 2 index
+2023-12-11 19:48:04,038 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:48:09,809 - INFO - controller-volunteer_main-Line1221 - logging out from volunteer main menu
+2023-12-11 19:48:09,809 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:49:09,433 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:49:13,702 - INFO - controller-volunteer_main-Line1201 - login successfully as volunteer
+2023-12-11 19:49:13,702 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:49:15,434 - INFO - controller-volunteer_join_camp-Line1267 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:49:28,933 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:49:31,139 - INFO - controller-volunteer_main-Line1221 - logging out from volunteer main menu
+2023-12-11 19:49:31,139 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:50:01,326 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:50:01,326 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:50:01,326 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:50:01,326 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:50:02,583 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:50:04,534 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:50:04,534 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:50:09,437 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:50:49,409 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:52:35,526 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:52:35,526 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:52:35,526 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:52:35,526 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:52:36,724 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:52:38,646 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:52:38,646 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:52:56,325 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,326 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,326 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,327 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,327 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,328 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,329 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,329 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,330 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,330 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:52:56,331 - CRITICAL - helper-modify_csv_pandas-Line253 - list index out of range
+2023-12-11 19:53:43,269 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:53:43,269 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:53:43,269 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:53:43,269 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:53:44,610 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:53:47,434 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:53:47,435 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:54:22,717 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 19:54:22,717 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:54:23,774 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:54:28,503 - INFO - controller-volunteer_main-Line1201 - login successfully as volunteer
+2023-12-11 19:54:28,503 - INFO - controller-volunteer_main-Line1204 - volunteer main menu is displayed
+2023-12-11 19:54:35,666 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:35,668 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,483 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:40,486 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,254 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:54:46,256 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,257 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,257 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,257 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,257 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,257 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,257 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,257 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:54:46,257 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,834 - INFO - controller-volunteer_edit_camp-Line1329 - Camp file opened successfully.
+2023-12-11 19:55:14,836 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,837 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,837 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,837 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,837 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,837 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,837 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,837 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:55:14,837 - INFO - controller-volunteer_edit_camp-Line1347 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:01,493 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:07:01,493 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:07:01,493 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:07:01,493 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:07:02,621 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:07:05,966 - INFO - controller-volunteer_main-Line1206 - login successfully as volunteer
+2023-12-11 20:07:05,966 - INFO - controller-volunteer_main-Line1209 - volunteer main menu is displayed
+2023-12-11 20:07:09,601 - INFO - controller-volunteer_edit_camp-Line1334 - Camp file opened successfully.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:09,608 - INFO - controller-volunteer_edit_camp-Line1352 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:07:30,839 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:07:30,839 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:07:30,839 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:07:30,839 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:07:32,187 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:07:34,033 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:07:34,033 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:11:28,952 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:11:28,952 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:11:28,953 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:11:28,953 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:11:30,374 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:11:33,933 - INFO - controller-login-Line100 - login failed due to invalid password
+2023-12-11 20:11:37,842 - INFO - controller-volunteer_main-Line1206 - login successfully as volunteer
+2023-12-11 20:11:37,842 - INFO - controller-volunteer_main-Line1209 - volunteer main menu is displayed
+2023-12-11 20:11:46,422 - INFO - controller-volunteer_edit_camp-Line1334 - Camp file opened successfully.
+2023-12-11 20:11:46,431 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:11:46,431 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:11:46,432 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:08,315 - INFO - controller-volunteer_edit_camp-Line1334 - Camp file opened successfully.
+2023-12-11 20:12:08,318 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:08,318 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:08,318 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:18,456 - INFO - controller-volunteer_main-Line1226 - logging out from volunteer main menu
+2023-12-11 20:12:18,456 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:12:32,375 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:12:36,787 - INFO - controller-volunteer_main-Line1206 - login successfully as volunteer
+2023-12-11 20:12:36,788 - INFO - controller-volunteer_main-Line1209 - volunteer main menu is displayed
+2023-12-11 20:12:40,654 - INFO - controller-volunteer_edit_camp-Line1334 - Camp file opened successfully.
+2023-12-11 20:12:40,657 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:40,657 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:40,657 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:48,042 - INFO - controller-volunteer_edit_camp-Line1334 - Camp file opened successfully.
+2023-12-11 20:12:48,046 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:48,046 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:48,046 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:51,526 - INFO - controller-volunteer_edit_camp-Line1334 - Camp file opened successfully.
+2023-12-11 20:12:51,529 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:51,529 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:12:51,529 - INFO - controller-volunteer_edit_camp-Line1358 - Successfully printed iteration in camp dataframe.
+2023-12-11 20:13:27,646 - INFO - controller-volunteer_main-Line1226 - logging out from volunteer main menu
+2023-12-11 20:13:27,646 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:35:27,180 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:35:27,180 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:35:27,180 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:35:27,180 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:35:29,464 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:35:30,388 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 20:35:32,739 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:35:32,739 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:35:36,716 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:35:40,283 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 20:35:42,951 - INFO - controller-edit_volunteer-Line209 - admin edit volunteer
+2023-12-11 20:36:02,036 - CRITICAL - controller-edit_volunteer-Line247 - dict contains fields not in fieldnames: 'role_id'
+2023-12-11 20:36:02,036 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 20:38:00,129 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:38:00,129 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:38:00,129 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:38:00,129 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:38:02,718 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:38:04,836 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:38:04,836 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:38:09,768 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 20:38:10,539 - INFO - controller-edit_volunteer-Line209 - admin edit volunteer
+2023-12-11 20:38:20,545 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 20:38:40,603 - INFO - controller-display_volunteer-Line252 - all volunteer is displayed
+2023-12-11 20:38:40,605 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 20:38:43,042 - INFO - controller-edit_volunteer-Line209 - admin edit volunteer
+2023-12-11 20:42:03,157 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:42:03,157 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:42:03,157 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:42:03,160 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:42:06,227 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:42:13,269 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 20:42:15,539 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:42:15,539 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:42:17,119 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 20:42:18,018 - INFO - controller-edit_volunteer-Line209 - admin edit volunteer
+<<<<<<< Updated upstream
+2023-12-11 17:29:40,963 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 17:29:40,963 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 17:29:40,964 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 17:29:40,965 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:29:41,870 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:29:44,285 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 17:29:47,882 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 17:29:47,882 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 17:45:57,001 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 17:45:57,001 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:45:58,549 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:46:04,997 - INFO - controller-volunteer_main-Line1151 - login successfully as volunteer
+2023-12-11 17:46:04,997 - INFO - controller-volunteer_main-Line1154 - volunteer main menu is displayed
+2023-12-11 18:05:09,889 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:05:09,889 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:05:09,890 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:05:09,890 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:05:10,872 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:05:13,703 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:05:13,719 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:15:48,394 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:15:48,394 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:15:48,395 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:15:48,396 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:15:49,517 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:15:52,028 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:15:52,028 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:15:54,807 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 18:15:54,823 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:15:56,475 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:16:00,808 - INFO - controller-volunteer_main-Line1199 - login successfully as volunteer
+2023-12-11 18:16:00,808 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 18:18:17,716 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:18:17,717 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:18:17,717 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:18:17,718 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:18:19,699 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:18:26,239 - INFO - controller-volunteer_main-Line1199 - login successfully as volunteer
+2023-12-11 18:18:26,239 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 17:29:40,963 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 17:29:40,963 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 17:29:40,964 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 17:29:40,965 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:29:41,870 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:29:44,285 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 17:29:47,882 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 17:29:47,882 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 17:45:57,001 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 17:45:57,001 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:45:58,549 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:46:04,997 - INFO - controller-volunteer_main-Line1151 - login successfully as volunteer
+2023-12-11 17:46:04,997 - INFO - controller-volunteer_main-Line1154 - volunteer main menu is displayed
+2023-12-11 18:05:09,889 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:05:09,889 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:05:09,890 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:05:09,890 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:05:10,872 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:05:13,703 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:05:13,719 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:15:48,394 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:15:48,394 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:15:48,395 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:15:48,396 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:15:49,517 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:15:52,028 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:15:52,028 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:15:54,807 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 18:15:54,823 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:15:56,475 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:16:00,808 - INFO - controller-volunteer_main-Line1199 - login successfully as volunteer
+2023-12-11 18:16:00,808 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 18:18:17,716 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:18:17,717 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:18:17,717 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:18:17,718 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:18:19,699 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:18:26,239 - INFO - controller-volunteer_main-Line1199 - login successfully as volunteer
+2023-12-11 18:18:26,239 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 18:18:47,386 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:18:47,387 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:18:47,387 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:18:47,388 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:18:48,124 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:18:53,036 - INFO - controller-volunteer_main-Line1199 - login successfully as volunteer
+2023-12-11 18:18:53,036 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 18:30:00,797 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:30:00,797 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:30:00,798 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:30:00,799 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:30:01,963 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:30:06,879 - INFO - controller-volunteer_main-Line1199 - login successfully as volunteer
+2023-12-11 18:30:06,879 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 18:40:28,710 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:40:28,710 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:40:28,710 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:40:28,710 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:40:30,546 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:40:34,212 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 18:40:34,212 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 18:40:43,358 - INFO - helper-move_refugee_helper_method-Line491 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-11 18:40:55,010 - INFO - helper-move_refugee_helper_method-Line510 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-11 18:41:31,329 - INFO - helper-move_refugee_helper_method-Line491 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-11 18:41:33,657 - INFO - helper-move_refugee_helper_method-Line510 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-11 18:41:49,480 - INFO - helper-move_refugee_helper_method-Line491 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-11 18:41:50,359 - INFO - helper-move_refugee_helper_method-Line510 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-11 18:43:40,442 - INFO - helper-move_refugee_helper_method-Line491 - Refugee file loaded successfully for moving a refugee around camps.
+2023-12-11 18:43:48,415 - INFO - helper-move_refugee_helper_method-Line510 - Camp file loaded successfully for moving a refugee around camps.
+2023-12-11 18:45:18,229 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:45:18,230 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:45:18,230 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:45:18,230 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:59:17,086 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:59:17,086 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:59:17,087 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:59:17,087 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:59:19,011 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:59:22,841 - INFO - controller-login-Line100 - login failed due to invalid password
+2023-12-11 18:59:26,612 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 18:59:26,612 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:02:29,254 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:02:29,254 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:02:29,254 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:02:29,254 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:02:33,348 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:02:35,909 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:02:35,909 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:02:39,255 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 19:02:45,124 - INFO - controller-admin_manage_volunteer-Line203 - logging out from admin volunteer management menu
+2023-12-11 19:02:45,124 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 19:02:45,125 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:02:48,112 - INFO - controller-register-Line60 - Register page is shown
+2023-12-11 19:03:24,666 - INFO - controller-register-Line70 - New volunteer account is created
+2023-12-11 19:03:27,674 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:03:32,586 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:03:32,587 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:03:36,730 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 19:03:39,114 - INFO - controller-verify_account-Line257 - Start Verifying volunteer account
+2023-12-11 19:03:56,357 - INFO - controller-verify_account-Line259 - Finish verifying volunteer account
+2023-12-11 19:03:56,357 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 19:06:50,415 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:06:50,416 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:06:50,416 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:06:50,416 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:06:52,511 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:06:56,973 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:06:56,973 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:07:32,898 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:07:40,898 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:07:48,236 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:13:36,309 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:13:36,309 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:13:36,309 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:13:36,310 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:13:43,690 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:19:14,341 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:19:14,341 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:19:16,741 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:19:51,442 - WARNING - controller-volunteer_join_camp-Line1342 - user input an invalid camp id
+invalid literal for int() with base 10: 'dfgh'
+2023-12-11 19:21:10,177 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:21:13,283 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:24:57,217 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:24:57,218 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:24:57,218 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:24:57,218 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:24:58,675 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:25:01,788 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:25:01,788 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:25:03,401 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:27:11,589 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:27:11,590 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:27:11,590 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:27:11,590 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:27:14,290 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:27:18,459 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:27:18,459 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:27:19,603 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:34:14,173 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:34:14,174 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:34:14,174 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:34:14,174 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:34:15,822 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:34:18,155 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:34:18,155 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:38:12,192 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:38:12,193 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:38:12,193 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:38:12,193 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:38:13,741 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:38:14,418 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 19:38:16,728 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:38:16,728 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:38:17,767 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:38:51,284 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:39:23,109 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:40:10,194 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:40:17,373 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:40:17,373 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:40:17,373 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:40:17,373 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:40:18,461 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:40:21,033 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 19:40:23,467 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:40:23,467 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:40:25,406 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:41:59,698 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:41:59,698 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:41:59,698 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:41:59,698 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:42:01,301 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:42:05,331 - INFO - controller-login-Line100 - login failed due to invalid password
+2023-12-11 19:42:08,317 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:42:08,317 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:42:18,831 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:42:20,755 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:42:30,524 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:47:46,707 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:47:46,708 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:47:46,708 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:47:46,708 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:47:48,685 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:47:53,966 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:47:53,966 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:47:59,506 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:49:56,989 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:49:56,990 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:49:56,990 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:49:56,990 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:49:58,769 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:50:03,695 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:50:03,696 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:50:09,229 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:50:16,163 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:50:16,163 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:50:16,164 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:50:16,164 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:50:19,125 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:50:24,425 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:50:24,425 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:50:27,010 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:55:47,106 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:55:47,107 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:55:47,107 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:55:47,108 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:55:52,488 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:55:57,348 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:55:57,349 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:56:08,686 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:56:52,163 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:56:52,164 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:56:52,164 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:56:52,164 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:56:54,315 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:56:58,961 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:56:58,962 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:57:06,272 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 20:02:15,889 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:02:15,890 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:02:15,890 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:02:15,890 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:02:18,737 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:02:23,349 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 20:02:23,349 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 20:02:24,197 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 20:03:20,901 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:03:20,902 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:03:20,902 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:03:20,902 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:03:28,278 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:03:33,527 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 20:03:33,528 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 20:03:34,320 - INFO - controller-volunteer_join_camp-Line1306 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 20:05:14,545 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:05:14,545 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:05:14,546 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:05:14,546 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:05:16,252 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:05:22,277 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 20:05:22,277 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 20:05:25,981 - INFO - controller-volunteer_main-Line1257 - logging out from volunteer main menu
+2023-12-11 20:05:25,981 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:05:28,449 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:05:31,576 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:05:31,576 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:05:33,350 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 20:05:40,549 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 20:05:45,169 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:05:46,985 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 20:05:57,652 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 18:39:05,315 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:39:05,315 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:39:05,316 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:39:05,317 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:39:06,130 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:39:11,732 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 18:39:11,732 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 18:39:20,748 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:39:20,763 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:20,763 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:20,763 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:53,212 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:39:53,217 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:53,217 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:53,217 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:18,442 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:49:18,442 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:49:18,443 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:49:18,444 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:49:19,093 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:49:27,356 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 18:49:27,357 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 18:49:34,171 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:49:34,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:34,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:34,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:41,708 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:49:41,714 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:41,714 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:41,714 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:53:43,952 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:53:43,953 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:53:43,953 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:53:43,954 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:53:45,356 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:54:03,559 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 18:54:03,559 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 18:54:18,172 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:54:18,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:54:18,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:54:18,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:02:16,062 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:02:16,062 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:02:16,063 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:02:16,063 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:02:17,024 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:02:19,770 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:02:19,770 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:02:57,093 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:02:57,094 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:02:57,094 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:02:57,095 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:03:41,329 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:03:50,105 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:03:50,105 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 18:39:05,315 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:39:05,315 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:39:05,316 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:39:05,317 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:39:06,130 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:39:11,732 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 18:39:11,732 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 18:39:20,748 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:39:20,763 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:20,763 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:20,763 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:53,212 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:39:53,217 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:53,217 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:39:53,217 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:18,442 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:49:18,442 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:49:18,443 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:49:18,444 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:49:19,093 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:49:27,356 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 18:49:27,357 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 18:49:34,171 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:49:34,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:34,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:34,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:41,708 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:49:41,714 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:41,714 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:49:41,714 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:53:43,952 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:53:43,953 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:53:43,953 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:53:43,954 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:53:45,356 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:54:03,559 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 18:54:03,559 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 18:54:18,172 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 18:54:18,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:54:18,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 18:54:18,187 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:02:16,062 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:02:16,062 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:02:16,063 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:02:16,063 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:02:17,024 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:02:19,770 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:02:19,770 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:02:57,093 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:02:57,094 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:02:57,094 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:02:57,095 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:03:41,329 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:03:50,105 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:03:50,105 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:11:39,229 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:11:39,229 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:11:39,230 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:11:39,231 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:11:40,433 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:11:45,043 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 19:11:52,045 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:11:52,045 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:17:49,419 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:17:49,419 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:17:49,420 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:17:49,420 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:17:51,451 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:17:57,731 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:17:57,731 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:18:00,287 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:18:00,319 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:18:00,319 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:18:00,319 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:19:24,730 - CRITICAL - controller-volunteer_edit_camp-Line1462 - invalid literal for int() with base 10: 'das'
+2023-12-11 19:19:24,746 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:19:24,746 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:19:24,746 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:19:24,746 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:20:17,731 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:20:17,736 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:20:17,736 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:20:17,736 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:14,927 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:22:14,927 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:22:14,927 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:22:14,928 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:22:15,845 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:22:21,093 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:22:21,093 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:22:41,953 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:22:41,969 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:41,969 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:41,969 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:53,972 - CRITICAL - controller-volunteer_edit_camp-Line1462 - invalid literal for int() with base 10: 'dasd'
+2023-12-11 19:22:53,988 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:22:54,003 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:54,003 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:54,003 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:55,468 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:22:55,484 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:55,484 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:22:55,484 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:23:14,218 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:23:14,237 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:23:14,238 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:23:14,239 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:23:29,935 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:23:29,941 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:23:29,942 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:23:29,942 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:25:01,440 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:25:01,440 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:25:01,441 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:25:01,442 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:25:02,877 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:25:10,465 - INFO - controller-volunteer_main-Line1194 - login successfully as volunteer
+2023-12-11 19:25:10,465 - INFO - controller-volunteer_main-Line1240 - volunteer main menu is displayed
+2023-12-11 19:25:24,160 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:25:24,176 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:25:24,176 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:25:24,176 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:25:40,563 - INFO - controller-volunteer_edit_camp-Line1372 - Camp file opened successfully.
+2023-12-11 19:25:40,568 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:25:40,568 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+2023-12-11 19:25:40,568 - INFO - controller-volunteer_edit_camp-Line1392 - Successfully printed iteration in camp dataframe.
+=======
+>>>>>>> Stashed changes
+2023-12-11 17:58:28,200 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 17:58:28,200 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 17:58:28,200 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 17:58:28,200 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 17:58:29,713 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 17:58:32,880 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 17:58:32,880 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:07:00,909 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:17:23,758 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:28:02,600 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 18:28:02,600 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:28:53,042 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 18:28:53,042 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 18:28:53,042 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 18:28:53,042 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 18:29:14,959 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 18:29:18,785 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 18:29:18,785 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 18:31:37,298 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:41:50,678 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 19:41:50,678 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 19:41:50,678 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 19:41:50,678 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:41:51,953 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:41:54,797 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 19:41:54,797 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:42:19,190 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:42:21,524 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:42:56,595 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 19:42:59,760 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 19:43:04,524 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 19:43:04,524 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 19:43:05,651 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 19:43:11,932 - INFO - controller-volunteer_main-Line1199 - login successfully as volunteer
+2023-12-11 19:43:11,932 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 19:43:16,660 - INFO - controller-volunteer_join_camp-Line1265 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 19:53:18,612 - WARNING - controller-volunteer_join_camp-Line1296 - user input an invalid camp id
+invalid literal for int() with base 10: '/Users/jesswork/humanitarian_management_system/.venv/bin/python /Users/jesswork/humanitarian_management_system/humanitarian_management_system/models/resourceEnv.py'
+2023-12-11 19:53:26,519 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
+2023-12-11 19:53:28,110 - INFO - controller-volunteer_main-Line1219 - logging out from volunteer main menu
+2023-12-11 19:53:28,111 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:48:22,260 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:48:22,260 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:48:22,260 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:48:22,260 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:49:05,945 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:49:09,874 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:49:09,874 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:57:07,131 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:57:07,132 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:57:07,132 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:57:07,132 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:57:08,389 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:57:10,707 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:57:10,708 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:59:03,365 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:59:03,365 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:59:03,365 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:59:03,365 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:59:04,517 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:59:06,476 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:59:06,476 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:00:17,743 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:00:17,743 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:00:17,743 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:00:17,744 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:00:20,122 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:00:22,416 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:00:22,417 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:02:45,600 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:02:45,600 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:02:45,600 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:02:45,600 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:02:46,691 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:02:49,255 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:02:49,255 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:13:28,786 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:17:06,326 - INFO - controller-admin_close_camp-Line1012 - User file loaded successfully for admin closing a camp.
+2023-12-11 22:18:50,477 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:18:50,477 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:18:50,477 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:18:50,477 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:18:53,067 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:18:57,426 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:18:57,426 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:20:32,228 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:24:30,408 - INFO - controller-admin_close_camp-Line1012 - User file loaded successfully for admin closing a camp.
+2023-12-11 22:28:19,462 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:28:19,462 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:28:19,462 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:28:19,462 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:28:21,732 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:28:25,066 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:28:25,066 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:28:54,872 - INFO - controller-admin_close_camp-Line1012 - User file loaded successfully for admin closing a camp.
+2023-12-11 22:30:37,075 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:41:02,538 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 23:41:02,540 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:11:06,091 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:11:06,092 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:11:06,092 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:11:06,092 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:11:09,643 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:11:09,643 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:11:09,643 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:11:09,644 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:11:13,076 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:11:18,254 - INFO - controller-volunteer_main-Line1200 - login successfully as volunteer
+2023-12-11 20:11:18,254 - INFO - controller-volunteer_main-Line1246 - volunteer main menu is displayed
+2023-12-11 20:11:19,258 - INFO - controller-volunteer_join_camp-Line1312 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 20:16:51,603 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:16:51,604 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:16:51,604 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:16:51,604 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:16:53,610 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:17:00,741 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:17:00,741 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:17:03,064 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 20:17:12,670 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 20:17:19,931 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 20:18:29,312 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 20:18:34,238 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:18:36,854 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:19:00,030 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 20:19:00,031 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:19:04,515 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:19:47,496 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:19:47,496 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:19:47,496 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:19:47,496 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:19:49,284 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:19:53,064 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:19:53,065 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:21:38,421 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:21:38,421 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:21:38,421 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:21:38,421 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:21:41,915 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:21:49,930 - INFO - controller-volunteer_main-Line1200 - login successfully as volunteer
+2023-12-11 20:21:49,930 - INFO - controller-volunteer_main-Line1246 - volunteer main menu is displayed
+2023-12-11 20:22:03,307 - INFO - controller-volunteer_main-Line1246 - volunteer main menu is displayed
+2023-12-11 20:22:05,573 - INFO - controller-volunteer_join_camp-Line1312 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 20:22:07,777 - INFO - controller-volunteer_join_camp-Line1340 - successfully changed user input into 61 index
+2023-12-11 20:22:07,777 - INFO - controller-volunteer_main-Line1246 - volunteer main menu is displayed
+2023-12-11 20:22:26,380 - INFO - controller-volunteer_main-Line1246 - volunteer main menu is displayed
+2023-12-11 20:22:28,451 - INFO - controller-volunteer_main-Line1263 - logging out from volunteer main menu
+2023-12-11 20:22:28,451 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:53:33,816 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:53:33,816 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:53:33,816 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:53:33,816 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:53:34,892 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:53:36,717 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:53:36,717 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 20:56:31,806 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 20:56:31,807 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 20:56:31,807 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 20:56:31,807 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 20:56:32,859 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 20:56:34,937 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 20:56:34,938 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:00:14,759 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:00:14,759 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:00:14,759 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:00:14,759 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:00:15,885 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:00:17,049 - INFO - controller-login-Line90 - login failed due to non-existent username
+2023-12-11 21:00:19,124 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:00:19,125 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:00:20,883 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:00:22,131 - INFO - controller-edit_volunteer-Line209 - admin edit volunteer
+2023-12-11 21:03:27,389 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:03:27,389 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:03:27,389 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:03:27,389 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:03:28,865 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:03:30,975 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:03:30,975 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:03:32,539 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:04:28,903 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:04:28,903 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:04:28,903 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:04:28,903 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:04:31,226 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:04:33,591 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:04:33,591 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:04:35,924 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:04:41,911 - INFO - controller-admin_manage_volunteer-Line203 - logging out from admin volunteer management menu
+2023-12-11 21:04:41,911 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 21:04:41,911 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:04:46,693 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:04:55,913 - INFO - controller-volunteer_main-Line1207 - login successfully as volunteer
+2023-12-11 21:04:55,913 - INFO - controller-volunteer_main-Line1253 - volunteer main menu is displayed
+2023-12-11 21:04:57,082 - INFO - controller-volunteer_join_camp-Line1317 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 21:05:01,189 - INFO - controller-volunteer_join_camp-Line1345 - successfully changed user input into 3 index
+2023-12-11 21:05:01,189 - INFO - controller-volunteer_main-Line1253 - volunteer main menu is displayed
+2023-12-11 21:05:03,296 - INFO - controller-volunteer_main-Line1270 - logging out from volunteer main menu
+2023-12-11 21:05:03,296 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:05:04,421 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:05:07,027 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:05:07,027 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:05:08,650 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:05:56,263 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:05:56,263 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:05:56,263 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:05:56,263 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:05:57,434 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:06:00,430 - INFO - controller-volunteer_main-Line1207 - login successfully as volunteer
+2023-12-11 21:06:00,430 - INFO - controller-volunteer_main-Line1253 - volunteer main menu is displayed
+2023-12-11 21:06:03,150 - INFO - controller-volunteer_join_camp-Line1317 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 21:06:09,420 - INFO - controller-volunteer_join_camp-Line1345 - successfully changed user input into 7 index
+2023-12-11 21:06:09,420 - INFO - controller-volunteer_main-Line1253 - volunteer main menu is displayed
+2023-12-11 21:06:10,818 - INFO - controller-volunteer_main-Line1270 - logging out from volunteer main menu
+2023-12-11 21:06:10,818 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:06:11,410 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:06:13,410 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:06:13,410 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:06:16,172 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:06:41,880 - INFO - controller-display_volunteer-Line258 - all volunteer is displayed
+2023-12-11 21:06:41,880 - INFO - controller-admin_manage_volunteer-Line188 - admin volunteer management menu is shown
+2023-12-11 21:06:45,114 - INFO - controller-admin_manage_volunteer-Line203 - logging out from admin volunteer management menu
+2023-12-11 21:06:45,114 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 21:06:45,114 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:06:53,797 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:06:53,797 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:06:53,797 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:06:53,797 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:06:55,102 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:06:57,063 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:06:57,063 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:56:32,528 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:56:32,528 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:56:32,528 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:56:32,528 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:56:37,176 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:56:42,718 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:56:42,718 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:56:46,474 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 21:56:57,578 - INFO - controller-admin_manage_event-Line165 - admin event management is shown
+2023-12-11 21:56:59,616 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:00:46,137 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:00:46,137 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:00:46,137 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:00:46,137 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:00:47,405 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:00:51,258 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:00:51,258 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:01:13,392 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 22:01:13,393 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:02:12,101 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:02:12,101 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:02:12,101 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:02:12,101 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:02:14,464 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:02:18,122 - INFO - controller-volunteer_main-Line1205 - login successfully as volunteer
+2023-12-11 22:02:18,122 - INFO - controller-volunteer_main-Line1251 - volunteer main menu is displayed
+2023-12-11 22:02:22,074 - INFO - controller-volunteer_edit_camp-Line1384 - Camp file opened successfully.
+2023-12-11 22:02:22,087 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:22,087 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:22,087 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:28,644 - INFO - controller-volunteer_edit_camp-Line1384 - Camp file opened successfully.
+2023-12-11 22:02:28,649 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:28,649 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:28,649 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:32,691 - INFO - controller-volunteer_edit_camp-Line1384 - Camp file opened successfully.
+2023-12-11 22:02:32,696 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:32,696 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:32,696 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:37,090 - INFO - controller-volunteer_edit_camp-Line1384 - Camp file opened successfully.
+2023-12-11 22:02:37,094 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:37,095 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:02:37,095 - INFO - controller-volunteer_edit_camp-Line1408 - Successfully printed iteration in camp dataframe.
+2023-12-11 22:03:14,008 - INFO - controller-volunteer_main-Line1251 - volunteer main menu is displayed
+2023-12-11 22:03:15,020 - INFO - controller-volunteer_join_camp-Line1315 - successfully got info for camp csv file for volunteer joining a camp
+2023-12-11 22:03:19,489 - INFO - controller-volunteer_join_camp-Line1343 - successfully changed user input into 4 index
+2023-12-11 22:03:19,489 - INFO - controller-volunteer_main-Line1251 - volunteer main menu is displayed
+2023-12-11 22:03:58,570 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:03:58,570 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:03:58,570 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:03:58,570 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:03:59,918 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:04:05,214 - INFO - controller-volunteer_main-Line1205 - login successfully as volunteer
+2023-12-11 22:04:05,215 - INFO - controller-volunteer_main-Line1251 - volunteer main menu is displayed
+2023-12-11 22:06:35,135 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:06:35,135 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:06:35,135 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:06:35,135 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:06:37,490 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:06:42,400 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:06:42,400 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:10:47,083 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:10:47,083 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:10:47,083 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:10:47,083 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:10:50,630 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:11:56,873 - INFO - controller-login-Line100 - login failed due to invalid password
+2023-12-11 22:11:59,526 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:11:59,526 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:20:14,869 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:20:14,869 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:20:14,869 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:20:14,869 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:20:16,027 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:20:18,022 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:20:18,022 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:22:45,680 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:22:45,680 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:22:45,681 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:22:45,681 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:22:55,548 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:22:58,207 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:22:58,208 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:42:25,866 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:42:25,866 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:42:25,866 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:42:25,866 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:42:27,129 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:42:29,240 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:42:29,241 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:45:58,577 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:45:58,577 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:45:58,577 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:45:58,577 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:45:59,840 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:46:02,204 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:46:02,204 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:13:44,670 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:13:44,670 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:13:44,670 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:13:44,670 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:13:46,196 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:13:49,001 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:13:49,001 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:15:20,189 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:15:20,189 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:15:20,189 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:15:20,189 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:15:21,080 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:15:23,269 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:15:23,269 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:15:33,992 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:17:42,239 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:17:42,239 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:17:42,240 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:17:42,240 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:17:43,203 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:17:45,254 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:17:45,254 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:18:39,945 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:18:39,945 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:18:39,945 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:18:39,945 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:18:41,176 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:18:44,031 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:18:44,031 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:23:12,882 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:23:12,882 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:23:12,882 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:23:12,882 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:23:13,901 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:23:16,258 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:23:16,258 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:24:12,287 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:24:12,287 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:24:12,287 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:24:12,287 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:24:14,810 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:24:17,017 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:24:17,018 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:25:46,205 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:25:46,205 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:25:46,205 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:25:46,205 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:25:47,630 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:25:50,351 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:25:50,351 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:26:44,350 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:26:44,350 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:26:44,350 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:26:44,350 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:26:45,536 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:26:48,240 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:26:48,240 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:28:50,175 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:28:50,175 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 23:28:50,175 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 23:28:50,175 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 23:28:51,290 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 23:28:53,313 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 23:28:53,313 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:33:29,753 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:33:29,753 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-11 23:33:29,753 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-11 23:33:29,753 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-11 23:33:31,146 - INFO - controller-login-Line85 - login page is shown
+2023-12-11 23:33:33,886 - INFO - controller-login-Line92 - login failed due to non-existent username
+2023-12-11 23:33:36,778 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-11 23:33:36,778 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-11 23:34:07,548 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:34:07,548 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-11 23:34:07,548 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-11 23:34:07,548 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-11 23:34:08,450 - INFO - controller-login-Line85 - login page is shown
+2023-12-11 23:34:11,275 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-11 23:34:11,275 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-11 23:35:19,171 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:35:19,171 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-11 23:35:19,171 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-11 23:35:19,171 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-11 23:35:20,589 - INFO - controller-login-Line85 - login page is shown
+2023-12-11 23:35:23,083 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-11 23:35:23,083 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-11 23:36:27,888 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:36:27,888 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-11 23:36:27,888 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-11 23:36:27,888 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-11 23:36:28,885 - INFO - controller-login-Line85 - login page is shown
+2023-12-11 23:36:31,076 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-11 23:36:31,076 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-11 23:39:16,629 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 23:39:16,629 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-11 23:39:16,629 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-11 23:39:16,629 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-11 23:39:17,671 - INFO - controller-login-Line85 - login page is shown
+2023-12-11 23:39:19,725 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-11 23:39:19,725 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:24:51,372 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 12:24:51,372 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 12:24:51,373 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 12:24:51,373 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:24:54,218 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:25:00,928 - INFO - controller-volunteer_main-Line1246 - login successfully as volunteer
+2023-12-12 12:25:00,928 - INFO - controller-volunteer_main-Line1292 - volunteer main menu is displayed
+2023-12-12 12:26:07,183 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 12:26:07,183 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 12:26:07,183 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 12:26:07,183 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:26:08,147 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:26:13,638 - INFO - controller-login-Line102 - login failed due to invalid password
+2023-12-12 12:26:22,172 - INFO - controller-login-Line102 - login failed due to invalid password
+2023-12-12 12:26:24,470 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:26:30,360 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:26:46,695 - INFO - controller-login-Line102 - login failed due to invalid password
+2023-12-12 12:26:51,366 - INFO - controller-login-Line92 - login failed due to non-existent username
+2023-12-12 12:26:58,353 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 12:26:58,353 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:27:15,374 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:27:17,436 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 12:27:17,436 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:27:18,464 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:27:21,824 - INFO - controller-volunteer_main-Line1246 - login successfully as volunteer
+2023-12-12 12:27:21,824 - INFO - controller-volunteer_main-Line1292 - volunteer main menu is displayed
+2023-12-12 12:27:29,499 - INFO - controller-volunteer_main-Line1292 - volunteer main menu is displayed
+2023-12-12 12:27:32,475 - INFO - controller-volunteer_main-Line1313 - logging out from volunteer main menu
+2023-12-12 12:27:32,475 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:27:33,647 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:27:35,852 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 12:27:35,852 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:28:05,201 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:35:49,774 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 12:35:49,774 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 12:35:49,774 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 12:35:49,774 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:35:55,513 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:35:58,722 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 12:35:58,722 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:36:00,320 - INFO - controller-admin_manage_volunteer-Line192 - admin volunteer management menu is shown
+2023-12-12 12:39:07,800 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 12:39:07,800 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 12:39:07,801 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 12:39:07,801 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:39:08,884 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:39:10,877 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 12:39:10,877 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:39:12,732 - INFO - controller-admin_manage_volunteer-Line192 - admin volunteer management menu is shown
+2023-12-12 12:44:59,469 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 12:44:59,469 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 12:44:59,469 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 12:44:59,470 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:45:00,425 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:45:02,501 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 12:45:02,501 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:45:03,427 - INFO - controller-admin_manage_volunteer-Line192 - admin volunteer management menu is shown
+2023-12-12 12:45:18,574 - INFO - controller-display_volunteer-Line262 - all volunteer is displayed
+2023-12-12 12:45:18,575 - INFO - controller-admin_manage_volunteer-Line192 - admin volunteer management menu is shown
+2023-12-12 12:45:37,060 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:46:36,536 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 12:46:36,537 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 12:46:36,537 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 12:46:36,537 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:46:37,481 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:46:40,041 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 12:46:40,041 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:50:40,540 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 12:50:40,540 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 12:50:40,540 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 12:50:40,540 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:50:42,383 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:50:46,119 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 12:50:46,119 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:55:42,312 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 12:55:42,312 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 12:55:42,312 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 12:55:42,312 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 12:55:43,584 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 12:55:46,255 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 12:55:46,255 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 12:56:12,429 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:00:43,241 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:00:43,242 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:00:43,242 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:00:43,242 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:00:52,709 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:00:55,025 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:00:55,026 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:02:30,903 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:02:30,903 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:02:30,903 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:02:30,903 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:02:32,079 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:02:35,269 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:02:35,269 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:08:48,651 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:08:48,651 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:08:48,652 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:08:48,652 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:08:54,297 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:08:59,041 - INFO - controller-volunteer_main-Line1246 - login successfully as volunteer
+2023-12-12 13:08:59,041 - INFO - controller-volunteer_main-Line1292 - volunteer main menu is displayed
+2023-12-12 13:10:03,880 - INFO - controller-volunteer_main-Line1313 - logging out from volunteer main menu
+2023-12-12 13:10:03,880 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:10:05,133 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:10:07,449 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:10:07,450 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:10:09,505 - INFO - controller-admin_manage_volunteer-Line192 - admin volunteer management menu is shown
+2023-12-12 13:13:09,860 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:13:09,860 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:13:09,860 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:13:09,861 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:13:11,062 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:13:13,749 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:13:13,749 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:13:15,204 - INFO - controller-admin_manage_volunteer-Line192 - admin volunteer management menu is shown
+2023-12-12 13:14:15,476 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:14:15,476 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:14:15,476 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:14:15,476 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:14:16,531 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:14:43,033 - INFO - controller-login-Line102 - login failed due to invalid password
+2023-12-12 13:14:46,662 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:14:46,662 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:14:51,697 - INFO - controller-admin_manage_volunteer-Line192 - admin volunteer management menu is shown
+2023-12-12 13:22:10,958 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:22:10,958 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:22:10,958 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:22:10,958 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:22:11,994 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:22:14,102 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:22:14,103 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:26:04,104 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:26:04,104 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:26:04,104 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:26:04,104 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:26:05,046 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:26:07,436 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:26:07,437 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:29:41,489 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:29:41,489 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:29:41,489 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:29:41,489 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:29:43,142 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:29:45,479 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:29:45,479 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:31:00,767 - WARNING - helper-validate_refugee-Line534 - Invalid index option
+2023-12-12 13:32:36,684 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:32:36,684 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:32:36,684 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:32:36,684 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:32:37,576 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:32:40,155 - INFO - controller-login-Line102 - login failed due to invalid password
+2023-12-12 13:32:43,330 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:32:43,330 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:33:09,517 - WARNING - helper-validate_refugee-Line534 - Invalid index option
+2023-12-12 13:36:26,246 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:36:26,247 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:36:26,247 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:36:26,247 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:36:27,368 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:36:29,562 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:36:29,562 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:38:07,143 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:38:07,144 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:38:07,144 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:38:07,144 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:38:08,039 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:38:11,031 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:38:11,031 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:39:52,020 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:39:52,020 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:39:52,020 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:39:52,021 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:39:52,924 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:39:55,329 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:39:55,329 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:41:34,910 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:41:34,910 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:41:34,910 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:41:34,911 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:41:35,659 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:41:38,626 - INFO - controller-login-Line92 - login failed due to non-existent username
+2023-12-12 13:41:41,707 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:41:41,707 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:42:11,164 - WARNING - helper-validate_refugee-Line533 - Invalid index option
+2023-12-12 13:44:00,894 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 13:44:00,894 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 13:44:00,894 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 13:44:00,894 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 13:44:01,842 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 13:44:04,426 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 13:44:04,426 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 13:44:13,153 - CRITICAL - controller-create_refugee-Line1563 - invalid literal for int() with base 10: 'Bunny'
+2023-12-12 13:46:30,867 - WARNING - helper-validate_refugee-Line534 - Invalid index option
+2023-12-12 14:15:07,157 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 14:15:07,157 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 14:15:07,157 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 14:15:07,157 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 14:15:11,446 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 14:15:22,142 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 14:15:22,142 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 14:48:14,044 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 14:48:18,444 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 14:48:18,444 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 14:48:22,818 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 14:48:22,818 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 14:48:22,818 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 14:48:22,818 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 14:48:23,795 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 14:48:26,172 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 14:48:26,172 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 14:57:06,507 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 14:57:06,507 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 15:03:10,711 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 15:03:10,711 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 15:03:10,711 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 15:03:10,711 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 15:03:13,342 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 15:03:16,230 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 15:03:16,230 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 15:06:59,577 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 15:06:59,577 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 15:07:53,867 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 15:07:53,867 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 15:07:53,867 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 15:07:53,867 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 15:07:56,303 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 15:07:58,660 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 15:07:58,660 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 16:05:42,148 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 16:05:42,154 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 16:05:46,734 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 16:05:49,382 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 16:05:49,382 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 16:09:10,350 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 16:09:10,352 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 16:09:14,126 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 16:09:14,127 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 16:09:14,127 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 16:09:14,127 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 16:09:15,138 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 16:09:17,452 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 16:09:17,452 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 16:10:21,920 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 16:10:21,920 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 16:10:21,920 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 16:10:21,920 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 16:10:22,937 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 16:10:25,423 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 16:10:25,424 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 16:12:18,953 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 16:12:18,953 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 16:12:18,953 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 16:12:18,953 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 16:12:20,489 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 16:12:23,198 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 16:12:23,198 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 16:41:46,978 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 16:41:46,980 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 17:17:39,058 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 17:17:39,059 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 17:17:39,059 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 17:17:39,059 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 17:17:41,202 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 17:17:43,577 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 17:17:43,577 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 17:33:32,291 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 17:33:32,292 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 17:33:57,277 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 17:33:57,277 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 17:33:57,277 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 17:33:57,277 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 17:34:45,224 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 17:34:48,930 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 17:34:48,930 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 17:38:54,329 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 17:38:54,330 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 18:00:14,330 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 18:00:14,330 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 18:00:14,330 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 18:00:14,330 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 18:00:16,150 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 18:00:19,788 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 18:00:19,788 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 18:58:14,109 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 18:58:14,110 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 18:58:17,730 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 18:58:17,730 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 18:58:17,730 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 18:58:17,730 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 18:58:20,287 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 18:58:22,239 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 18:58:22,239 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 19:03:36,418 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 19:03:36,419 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 19:03:36,419 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 19:03:36,419 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 19:03:37,453 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 19:03:39,897 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 19:03:39,897 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 19:14:01,844 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 19:14:01,845 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 19:14:01,845 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 19:14:01,845 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 19:14:02,965 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 19:14:05,235 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 19:14:05,235 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 19:15:08,528 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 19:15:08,528 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 19:15:08,528 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 19:15:08,528 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 19:15:09,964 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 19:15:12,709 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 19:15:12,709 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 19:51:55,671 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 19:51:55,671 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 19:51:55,671 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 19:51:55,671 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 19:52:32,205 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 19:52:37,123 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 19:52:37,123 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 21:27:22,788 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 21:27:22,789 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 21:27:25,974 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 21:27:25,974 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 21:27:25,974 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 21:27:25,974 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 21:28:03,899 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 21:28:08,134 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 21:28:08,134 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 21:36:05,077 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 21:36:05,078 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 21:36:42,726 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-12 21:36:42,726 - INFO - controller-initialise-Line29 - Controller is initialised
+2023-12-12 21:36:42,726 - INFO - controller-initialise-Line32 - welcome message is displayed
+2023-12-12 21:36:42,726 - INFO - controller-startup-Line40 - Startup page is shown
+2023-12-12 21:36:48,841 - INFO - controller-login-Line85 - login page is shown
+2023-12-12 21:36:51,861 - INFO - controller-admin_main-Line136 - login successfully as admin
+2023-12-12 21:36:51,861 - INFO - controller-admin_main-Line140 - admin main menu is shown
+2023-12-12 21:40:42,251 - INFO - controller-admin_main-Line162 - logging out from admin main menu
+2023-12-12 21:40:42,251 - INFO - controller-startup-Line40 - Startup page is shown
+>>>>>>> jess-film
