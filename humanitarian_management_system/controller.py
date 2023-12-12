@@ -945,7 +945,7 @@ class Controller:
                         (user_df['campID'] == delete_camp_id) & (user_df['userType'] == 'volunteer')]
                     volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
                     print("\nBelow are the volunteers you are going to be unassigned from any camp in the system: ")
-                    print(volunteers_df_filtered.to_markup)
+                    print(volunteers_df_filtered.to_markdown(index=False))
                     for index, row in volunteers_in_camp.iterrows():
                         old_camp_id = row['campID']
                         row_index_old_camp = user_df[user_df['campID'] == old_camp_id].index
@@ -1618,7 +1618,7 @@ class Controller:
                 is_data_types_all_correct = True
                 expected_column_names = ['campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID']
                 expected_data_types = (('campID', 'int64'), ('firstName', 'str'),
-                                       ('lastName', 'str'), ('dob', 'str'), ('gender', 'str'), ('familyID', 'int64'))
+                                       ('lastName', 'str'), ('gender', 'str'), ('familyID', 'int64'))
                 try:
                     df = pd.read_csv(Path(__file__).parent.joinpath("New_Refugees.csv"))
                 except FileNotFoundError:
@@ -1634,16 +1634,25 @@ class Controller:
 
                 # check for data type
                 # check dob is a valid date
-                if pd.to_datetime(df['dob'], format='%d-%b-%Y', errors='coerce').notnull().all():
+                if pd.to_datetime(df['dob'], format='%d/%m/%Y', errors='coerce').notnull().all():
                     print("\nYeah! Data type for column 'dob' is correct")
                 else:
                     print("\nNooo:( Data type for column 'dob' is INCORRECT")
                     is_data_types_all_correct = False
+
                 for column, datatype in expected_data_types:
+
                     if df[column].dtype != datatype:
-                        if df[column] != df[column].astype(datatype):
+                        try:
+                            df[column] = df[column].astype(datatype)
+                            print(f"\nYeah! Data type for column '{column}' is correct")
+                        except ValueError as e:
+                            print(f"{e}")
                             is_data_types_all_correct = False
                             print(f"\nNooo:( Data type for column '{column}' is INCORRECT")
+                            print(f"expected: {datatype}")
+                            print(df[column].dtype)
+                            continue
                     else:
                         print(f"\nYeah! Data type for column '{column}' is correct")
                 if not is_data_types_all_correct:
@@ -1653,6 +1662,7 @@ class Controller:
                 else:
                     print("\nAll the check has passed successfully!")
                     print("\nAdding refugees to database...")
+
 
     @staticmethod
     def help_center():
@@ -1837,7 +1847,7 @@ class Controller:
             if move_or_delete == "3":
                 return
             elif move_or_delete == "1":
-                helper.move_refugee_helper_method()
+                helper.move_refugee_admin()
             elif move_or_delete.lower() == "2":
                 self.delete_refugee()
             else:

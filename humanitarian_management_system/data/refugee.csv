@@ -16,7 +16,7 @@ refugeeID,campID,firstName,lastName,dob,gender,familyID
 15,2,beth,jones,10/05/1980,female,5
 16,3,ben,jones,10/07/1990,male,5
 17,3,harry,jones,10/07/1989,male,5
-18,3,mark,jones,08/06/1979,male,5
+18,3,mark,jones,12/09/1979,male,5
 19,3,sofia,harris,10/04/1968,female,4
 20,3,julia,jenkins,05/05/1998,female,25
 21,4,sofy,joss,06/09/2002,female,6
@@ -29,8 +29,7 @@ refugeeID,campID,firstName,lastName,dob,gender,familyID
 28,7,josh,coombes,02/05/1968,male,9
 29,7,jen,pont,07/05/1948,female,10
 30,7,ben,floss,03/05/1988,male,8
-31,7,jen,goss,03/05/1928,female,10
-32,7,harry,leach,07/05/1998,male,11
+32,5,harry,leach,07/05/1998,male,11
 33,9,jason,harris,03/10/1997,male,12
 34,9,beth,mars,03/10/1986,female,12
 35,10,keith,bosh,03/07/1998,male,13
@@ -43,7 +42,9 @@ refugeeID,campID,firstName,lastName,dob,gender,familyID
 42,14,belen,bones,08/07/1996,female,17
 43,15,tom,norris,03/08/1997,male,16
 44,15,harry,barnes,06/02/1995,male,16
-45,16,ben,larson,03/06/2001,male,18
+45,16,ben,larson,03/06/2001,other,18
 46,17,martin,horris,03/07/2000,male,18
 47,18,beth,barny,05/01/2000,female,18
 48,17,James,Francis,1997/08/25,male,15
+49,14,Benzamine,Juntone,16/09/1999,male,18
+50,13,Tim,Burton,25/09/1978,male,15
