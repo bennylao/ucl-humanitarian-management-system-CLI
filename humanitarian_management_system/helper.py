@@ -801,7 +801,7 @@ def legal_advice_support():
           "------------------------------------------------------------------------------")
     print("\nBelow are links to our partner legal charities to offer legal support to refugees whilst we work on "
           "\nbuilding our own team."
-          "\nClicking on these links will direct you to a web page. \nYou will have to return back "
+          "\nRight clicking on these links will direct you to a web page. \nYou will have to return back "
           "to the application manually.\n")
 
     links = [
