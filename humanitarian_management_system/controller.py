@@ -1,5 +1,7 @@
 import time
 from pathlib import Path
+
+import numpy as np
 import pandas as pd
 import re
 import math
@@ -1664,9 +1666,68 @@ class Controller:
                           "Please check the output message above to find the incorrect column(s)")
                     continue
                 else:
-                    print("\nAll the check has passed successfully!")
-                    print("\nAdding refugees to database...")
+                    print(df.to_markdown(index=False))
+                    print("\nAll the check has passed successfully!"
+                          "\n\nPlease double-check all the date listed above.")
+                    is_correct = input("\nAre they all correct? 'yes' to continue, "
+                                       "or anything else if they are incorrect."
+                                       "\n--> ")
+                    if is_correct == 'RETURN':
+                        return
+                    elif is_correct.lower() != 'yes':
+                        print("Please modify the csv file again and come back later")
+                        continue
+                    else:
+                        unique_camp_id = set(df['campID'].tolist())
+                        try:
+                            df_camp = pd.read_csv(Path(__file__).parent.joinpath("data/camp.csv"))
+                        except FileNotFoundError as e:
+                            print("Data file not found or is damaged")
+                            print(e)
+                            logging.critical(e)
+                            return
+                        is_space_available = True
+                        try:
+                            for camp_id in unique_camp_id:
+                                camp_row = df_camp.loc[df_camp['campID'] == camp_id, ['refugeeCapacity', 'refugeePop']]
+                                if camp_row.empty:
+                                    print(f"Camp {camp_id} does not exist! Please edit the csv file and try again")
+                                camp_capacity = camp_row.iloc[0]['refugeeCapacity']
+                                camp_pop = camp_row.iloc[0]['refugeePop']
+                                num_new_refugee = len(df[df['campID'] == camp_id])
+                                if camp_capacity < camp_pop + num_new_refugee:
+                                    is_space_available = False
+                                    print(f"Camp {camp_id} does not has sufficient space for "
+                                          f"the refugees you wanted to import")
+                        except IndexError as e:
+                            logging.warning(e)
+                            continue
 
+                        if not is_space_available:
+                            print("Please modify the csv file regarding camp capacity"
+                                  "\ni.e. move some new refugee to other camps")
+                            continue
+                        else:
+                            df_refugee = pd.read_csv(Path(__file__).parent.joinpath("data/refugee.csv"))
+                            new_starting_id = df_refugee['refugeeID'].max() + 1
+                            new_id_list = np.arange(new_starting_id, new_starting_id + len(df))
+                            df.insert(loc=0,
+                                      column='refugeeID',
+                                      value=new_id_list)
+                            print(df.to_markdown())
+                            df.to_csv(Path(__file__).parent.joinpath("data/refugee.csv"), mode='a', index=False, header=False)
+                            for camp_id in unique_camp_id:
+                                camp_row = df_camp.loc[df_camp['campID'] == camp_id, ['refugeeCapacity', 'refugeePop']]
+                                camp_pop = camp_row['refugeePop']
+                                num_new_refugee = len(df[df['campID'] == camp_id])
+                                camp_pop += num_new_refugee
+                                df_camp.loc[df_camp['campID'] == camp_id, 'refugeePop'] = camp_pop
+                                df_camp.to_csv(Path(__file__).parent.joinpath("data/camp.csv"), index=False)
+                                print('\n{:^75}'.format("*******************************************"))
+                                print('{:^75}'.format("*** Import refugee successfully ***"))
+                                print('{:^75}'.format("*******************************************"))
+                                input("\nPress Enter to continue...")
+                                return
 
     @staticmethod
     def help_center():
