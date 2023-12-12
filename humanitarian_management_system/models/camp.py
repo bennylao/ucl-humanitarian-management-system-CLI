@@ -90,8 +90,9 @@ class Camp:
         if user == 'volunteer':
             joined_df = joined_df.loc[joined_df['Camp ID'] == int(cid)]
 
-        table_str = joined_df[['Camp ID', 'Refugee capacity', 'Health risk', 'Volunteer population',
-                               'Refugee population', 'Average critical level', 'Status']].to_markdown(index=False)
+        table_str = (joined_df[['Camp ID', 'Refugee capacity', 'Health risk', 'Volunteer population',
+                               'Refugee population', 'Average critical level', 'Status']].sort_values('Camp ID').
+                     to_markdown(index=False))
         print("\n" + table_str)
 
         while True:
@@ -123,7 +124,7 @@ class Camp:
                     continue
                 joined_df = joined_df.loc[joined_df['Camp ID'] == int(id_input)]
                 table_str = joined_df[['Camp ID', 'Event ID', 'Title', 'Description', 'Location', 'Ongoing',
-                                       'Start date', 'End date']].to_markdown(
+                                       'Start date', 'End date']].sort_values('Camp ID').to_markdown(
                     index=False)
                 print("\n" + table_str)
                 self.display_end(user, cid)
@@ -132,7 +133,7 @@ class Camp:
         else:
             joined_df = joined_df.loc[joined_df['Camp ID'] == int(cid)]
             table_str = joined_df[['Camp ID', 'Event ID', 'Title', 'Description', 'Location', 'Ongoing',
-                                   'Start date', 'End date']].to_markdown(
+                                   'Start date', 'End date']].sort_values('Camp ID').to_markdown(
                 index=False)
             print("\n" + table_str)
             self.display_end(user, cid)

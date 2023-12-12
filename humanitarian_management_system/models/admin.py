@@ -208,7 +208,7 @@ class Admin(User):
                 continue
 
             joined_df_total = joined_df_total.loc[joined_df_total['User ID'] == int(id_input)]
-            table_str = joined_df_total.to_markdown(index=False)
+            table_str = joined_df_total.sort_values('Camp ID').to_markdown(index=False)
             print("\n" + table_str)
 
             while True:
@@ -236,7 +236,7 @@ class Admin(User):
                              'Email',
                              'Phone no.', 'Occupation', 'Camp ID', 'Camp role']
 
-        table_str = joined_df.to_markdown(index=False)
+        table_str = joined_df.sort_values('User ID').to_markdown(index=False)
         print("\n" + table_str)
         return joined_df
 
