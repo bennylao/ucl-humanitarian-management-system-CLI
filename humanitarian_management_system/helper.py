@@ -131,7 +131,8 @@ def validate_registration(usernames):
             except ValueError:
                 print("Only Integer is allowed!")
 
-    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, new_role_id, 0]
+    return ["volunteer", False, False, username, password, first_name, last_name, email, phone, occupation, new_role_id,
+            0]
 
 
 def validate_event_input():

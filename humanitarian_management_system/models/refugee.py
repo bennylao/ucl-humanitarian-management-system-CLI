@@ -317,7 +317,7 @@ class Refugee:
                                    'Condition', 'Critical level']
 
         Event.display_events(joined_df_total[['Refugee ID', 'Camp ID', 'First name', 'Last name', 'DOB', 'Gender',
-                                              'Family ID']])
+                                              'Family ID']].sort_values('Refugee ID'))
 
         while True:
             user_input = input("Would you like to access the medical profile for a particular refugee (yes or no)? ")
@@ -348,7 +348,7 @@ class Refugee:
             df_med = joined_df_total.loc[joined_df_total['Refugee ID'] == int(id_input)]
             Event.display_events(
                 df_med[['Refugee ID', 'First name', 'Last name', 'Description', 'Condition',
-                        'Is vaccinated?', 'Critical level']])
+                        'Is vaccinated?', 'Critical level']].sort_values('Refugee ID'))
 
             while True:
                 user_input = input("Would you like to exit (yes or no)? ")
