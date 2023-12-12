@@ -1602,7 +1602,6 @@ class Controller:
 
     @staticmethod
     def add_refugee_from_csv():
-        print("benny: i am working on it. just wanna make the option visible when filming")
         print("\nTo add refugee data from a csv file, please follow the instructions below:"
               "\n1. Rename the csv file name to 'New_Refugees.csv'"
               "\n2. Make sure the first row in the excel is column name"
