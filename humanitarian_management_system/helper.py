@@ -461,7 +461,7 @@ def validate_refugee(lvl, cid):
 
         csv_path_ref = Path(__file__).parents[0].joinpath("data/refugee.csv")
         df_ref = pd.read_csv(csv_path_ref)
-        df_ref = df_ref.loc[df_ref['campID'] == cid]['familyID'].tolist()
+        df_ref = (df_ref.loc[df_ref['campID'] == cid]['familyID']).drop_duplicates().sort_values().tolist()
         for i in df_ref:
             id_arr.append(str(i))
 
@@ -473,6 +473,7 @@ def validate_refugee(lvl, cid):
 
         if select == '1':
             try:
+                print("Create a new family identification except these existing ones: ", df_ref)
                 create_id = input("\nEnter family identification: ")
                 if create_id == 'RETURN':
                     return
@@ -485,7 +486,7 @@ def validate_refugee(lvl, cid):
                 continue
         elif select == '2':
             df = pd.read_csv(csv_path_ref)
-            df = df[df['campID'] == 1]
+            df = df[df['campID'] == cid]
             df1 = df[['familyID']].drop_duplicates().copy()
             df2 = df[['familyID', 'refugeeID', 'firstName', 'lastName']].copy()
             merged_df = pd.merge(df1, df2, on='familyID', how='left')
