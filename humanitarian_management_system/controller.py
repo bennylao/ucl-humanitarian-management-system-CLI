@@ -592,11 +592,11 @@ class Controller:
             # Event.display_events(active_event_df)
 
             csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
-            df = pd.read_csv(csv_path)
+            df = pd.read_csv(csv_path, converters={'ongoing': str})
             active_index = helper.extract_active_event(csv_path)[0]
 
             # if there is no active events, return
-            filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
+            filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
 
             # check if active event is 0
             # if len(active_index) == 0:

@@ -46,10 +46,10 @@ class Camp:
         # find country id and event id by index
 
         event_country = df_e.loc[df_e['eventID'] == select_index]['location'].tolist()[0]
-        countryID = df.loc[df['name'] == event_country.capitalize()]['countryID'].tolist()[0]
+        countryID = df.loc[df['name'] == event_country]['countryID'].tolist()[0]
 
-        latitude = df.loc[df['name'] == event_country.capitalize()]['latitude'].tolist()[0] + random.uniform(-0.5, 0.5)
-        longitude = df.loc[df['name'] == event_country.capitalize()]['longitude'].tolist()[0] + random.uniform(-0.5, 0.5)
+        latitude = df.loc[df['name'] == event_country]['latitude'].tolist()[0] + random.uniform(-0.5, 0.5)
+        longitude = df.loc[df['name'] == event_country]['longitude'].tolist()[0] + random.uniform(-0.5, 0.5)
 
         # keep track of existing camp num of a particular event
         no_camp = int(df_e.loc[df_e["eventID"] == int(select_index)]['no_camp'].tolist()[0])
