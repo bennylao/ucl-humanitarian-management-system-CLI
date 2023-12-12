@@ -3,10 +3,8 @@ import csv
 from pathlib import Path
 import pandas as pd
 import datetime
-import math
 import logging
 from passlib.hash import sha256_crypt
-import tabulate
 
 
 def validate_user_selection(options):
@@ -408,7 +406,7 @@ def validate_man_resource(index):
 
 
 def validate_refugee(lvl, cid):
-    date_format = '%d/%m/%Y'
+    date_format = "%d/%m/%Y"
     while True:
         f_name = input("\nEnter first name: ")
         if not f_name.isalpha():
@@ -434,7 +432,8 @@ def validate_refugee(lvl, cid):
             dob = input("\nEnter date of birth (format: dd/mm/yyyy): ")
             if dob == 'RETURN':
                 return
-            dob = datetime.datetime.strptime(dob, date_format)
+            datetime_object = datetime.datetime.strptime(dob, date_format)
+            dob = datetime_object.strftime(date_format)
             break
         except ValueError:
             print("\nInvalid date format entered.")

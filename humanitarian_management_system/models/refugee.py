@@ -52,8 +52,7 @@ class Refugee:
         ref_df = pd.DataFrame(Refugee.refugee_data,
                               columns=['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'])
 
-        with open(self.ref_csv_path, 'a') as f:
-            ref_df.to_csv(f, mode='a', header=f.tell() == 0, index=False)
+        ref_df.to_csv(self.ref_csv_path, mode='a', index=False, header=False)
 
         # update refugee population of a camp by 1
         ref_pop += 1

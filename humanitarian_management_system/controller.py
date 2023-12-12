@@ -1605,21 +1605,56 @@ class Controller:
         print("\nTo add refugee data from a csv file, please follow the instructions below:"
               "\n1. Rename the csv file name to 'New_Refugees.csv'"
               "\n2. Make sure the first row in the excel is column name"
-              "\n   'refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'"
+              "\n   'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'"
               "\n3. Make sure the data type matches the column, for example, refugeeID must be integer, "
               "\n   First name must be string and "
               "dob must be a string representing a valid date in the form (dd/mm/yyyy)"
               "\n4. Put the csv file next to main, i.e. inside the same directory where main locates")
         while True:
-            is_continue = input("\nPlease enter 'READY' when you have done all the instructions above. "
+            is_continue = input("\nPlease enter 'READY' when the csv file is ready! "
                                 "Or enter 'RETURN' to cancel"
                                 "\n -->")
             if is_continue == 'RETURN':
                 return
             elif is_continue == 'READY':
-                expected_column_names = ['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID']
-                expected_data_types = (('refugeeID', 'int'), ('campID', 'int'), ('firstName', 'str'),
-                                       ('lastName', 'str'), ('dob', 'str'), ('gender', 'str'), ('familyID', 'int'))
+                is_data_types_all_correct = True
+                expected_column_names = ['campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID']
+                expected_data_types = (('campID', 'int64'), ('firstName', 'str'),
+                                       ('lastName', 'str'), ('dob', 'str'), ('gender', 'str'), ('familyID', 'int64'))
+                try:
+                    df = pd.read_csv(Path(__file__).parent.joinpath("New_Refugees.csv"))
+                except FileNotFoundError:
+                    print("The csv file for importing refugee is not found!")
+                    continue
+                column_names = df.columns.values.tolist()
+                # ensure column names are all correct
+                if column_names == expected_column_names:
+                    print("Yeah! All the column names are correct")
+                else:
+                    print("No:( Some of the column names are incorrect. Please check again")
+                    continue
+
+                # check for data type
+                # check dob is a valid date
+                if pd.to_datetime(df['dob'], format='%d-%b-%Y', errors='coerce').notnull().all():
+                    print("\nYeah! Data type for column 'dob' is correct")
+                else:
+                    print("\nNooo:( Data type for column 'dob' is INCORRECT")
+                    is_data_types_all_correct = False
+                for column, datatype in expected_data_types:
+                    if df[column].dtype != datatype:
+                        if df[column] != df[column].astype(datatype):
+                            is_data_types_all_correct = False
+                            print(f"\nNooo:( Data type for column '{column}' is INCORRECT")
+                    else:
+                        print(f"\nYeah! Data type for column '{column}' is correct")
+                if not is_data_types_all_correct:
+                    print("Data type of some of the column is incorrect. "
+                          "Please check the output message above to find the incorrect column(s)")
+                    continue
+                else:
+                    print("\nAll the check has passed successfully!")
+                    print("\nAdding refugees to database...")
 
     @staticmethod
     def help_center():

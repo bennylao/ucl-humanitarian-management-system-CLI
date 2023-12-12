@@ -46,9 +46,4 @@ refugeeID,campID,firstName,lastName,dob,gender,familyID
 45,16,ben,larson,03/06/2001,male,18
 46,17,martin,horris,03/07/2000,male,18
 47,18,beth,barny,05/01/2000,female,18
-48,17,James,Francis,1997-08-25,male,15
-49,17,Sarah,Daisy,2001-09-17,female,15
-50,17,Lizzy,Sharon,1999-09-18,female,18
-51,17,Taylor,Tiger,2000-09-25,male,7
-52,18,Bunny,Boris,1987-09-17,male,17
-53,16,Bella,Taylor,1978-09-18,female,5
+48,17,James,Francis,1997/08/25,male,15
