@@ -50,5 +50,7 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 49,49,1,All good!,TRUE
 50,50,1,Fine :),TRUE
 51,51,1,Nothing :),TRUE
-52,52,6,Need cooling ASAP!,False
-53,53,12,Need quarantine at home.,True
+52,52,6,Need cooling ASAP!,FALSE
+53,53,12,Need quarantine at home.,TRUE
+54,54,1,okay,True
+55,49,9,Be careful!,True

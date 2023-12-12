@@ -235,14 +235,9 @@ class ResourceAllocator():
         status, unalloc_prompt = r_inst.unalloc_resource_checker()
 
         move = pd.DataFrame(columns=['resourceID', 'name', 'origin_campID', 'destination_campID', 'moveUnits', 'action', 'actionInfo'])
-        move_id_list = []
-        move_name_list = []
-        move_action_list = []
-        move_origin_camp_list = []
-        move_dest_camp_list = []
-        move_units_list = []
-        move_action_info_list = []
         do_not_calc = False
+
+        already_selected = []
 
         while True: 
             ################ Begin with asking the user what type of manual allocation they want to make:
@@ -255,7 +250,9 @@ class ResourceAllocator():
             action_select = r_inst.input_validator(prompt, [1,2,3])
             if action_select == 'RETURN':
                 return
-            print(f"\nYou have selected: {action_string_list[action_select-1]}\n")
+            action_string = [item for item in action_string_list[action_select-1].split(' ') if item.strip()]
+            action_string_pretty = (" ").join(action_string)
+            print(f"\n\033[95mYou have selected: {action_string_pretty}\033[0m\n")
 
             ###################################################################
             # Give user different form prompts depending on choice
@@ -275,30 +272,32 @@ class ResourceAllocator():
             if action_select == 1: # should be only if there are unallocated resources... 
                 unalloc_items = r_inst.valid_unalloc_resources()
                 print(f"\nHere are the current unallocated resources: \n{unalloc_items.to_string(index=False)}\n")
-                prompt = "\nPlease enter the resourceID of the item: --> "    
-                valid_range = unalloc_items['resourceID'].tolist()
-                r_id_select = r_inst.input_validator(prompt, valid_range)
+                print("\nPlease enter the resourceID:")
+                if already_selected: # if not empty 
+                    print(f"Note you have already made selection(s) for Resource IDs: {set(already_selected)} ")   
+                #r_id_select = r_inst.input_validator(prompt, valid_range)
+                #if r_id_select == 'RETURN':
+                    #return
+                r_id_select = r_inst.input_validator_2range_resources("--> ", already_selected, move, 'manual_alloc')
                 if r_id_select == 'RETURN':
                     return
                 r_name_select = self.unallocResources_df.loc[self.unallocResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
+                already_selected.append(r_id_select)
                 pass
             else: # where the origin is a camp (action 2 & 3) - the valid ranges & displays are different
                 # r_id_select = int(input("\nPlease enter the resourceID of the item: --> "))
-                prompt = "\nPlease enter the resourceID of the item: --> "    
-                valid_range = r_inst.valid_resources()
-                r_id_select = r_inst.input_validator(prompt, valid_range)  ############# validation begins immediately... 
+                print("\nPlease enter the resourceID:")
+                if already_selected: # if not empty 
+                    print(f"fNote you have already made selection(s) for Resource IDs: [{set(already_selected)}]. ")   
+                #print(move)
+                r_id_select = r_inst.input_validator_2range_resources("--> ", already_selected, move, 'manual_alloc')  ############# validation begins immediately... 
                 if r_id_select == 'RETURN':
                     return
                 r_name_select = self.unallocResources_df.loc[self.unallocResources_df['resourceID'] == r_id_select, 'name'].iloc[0]
                 # how much of this resource is allocated in each camp & uallocated currently 
+                already_selected.append(r_id_select)
                 
-                print(f"\n*** Resource ID {r_id_select}: {r_name_select} *** is currently distributed as below: \n")
-                # Filter rows where 'resourceID' is 5
-                # filtered_rows = master_table_pretty[master_table_pretty['resourceID'] == r_id_select]
-                # Get the last two rows
-                # last_two_rows = master_table_pretty.tail(2)
-                # Concatenate the filtered rows and the last two rows
-                # single_resource = pd.concat([filtered_rows, last_two_rows])
+                print(f"\n\033[93m*** Resource ID {r_id_select}: {r_name_select} *** is currently distributed as below: \033[0m\n")
                 single_resource = r_inst.PRETTY_RESOURCE(master_table, [r_id_select])
                 print(single_resource.to_string(index=False).replace('.0', '  '))
 
@@ -307,8 +306,10 @@ class ResourceAllocator():
                 # origin_c_id = int(input(f"\nPlease enter the ORIGIN campID (from the above) where you would like to REMOVE *** Resource ID {r_id_select}: {r_name_select} *** from: ")
                 
                 valid_range = r_inst.valid_origin_camp_single_resource(r_id_select)[1]
-                prompt = f"\nPlease enter the ORIGIN campID where you would like to REMOVE *** Resource ID {r_id_select}: {r_name_select} *** from: "
-                origin_c_id = r_inst.input_validator(prompt, valid_range, 'Please select a camp that both: has at least 1 unit of the resource AND is open with refugees.') 
+                print(f"\nPlease enter the \033[95mORIGIN campID to REMOVE \033[0mResource ID {r_id_select}: {r_name_select} from: ")
+                print(f"\033[92mValid campIDs are any currently with resources: {valid_range}\033[0m")
+
+                origin_c_id = r_inst.input_validator("--> ", valid_range, '\033[91mPlease select a camp that both: has at least 1 unit of the resource AND is open with refugees.\033[0m') 
                 if origin_c_id == 'RETURN':
                     return
 
@@ -316,17 +317,18 @@ class ResourceAllocator():
 
 
                 # destination_c_id = int(input(f"\nPlease enter the DESTINATION campID (from any open campID) where you would like to ADD *** Resource ID {r_id_select}: {r_name_select} *** to: "))
-                prompt = f"\nPlease enter the DESTINATION campID where you would like to ADD *** Resource ID {r_id_select}: {r_name_select} *** to: "
                 valid_range = r_inst.valid_open_camps_with_refugees()
                 valid_range = valid_range['campID'].tolist()
-                destination_c_id = r_inst.input_validator(prompt, valid_range, 'Please select a valid camp that is open and has refugees.') 
+                print(f"\nPlease enter the \033[95mDESTINATION campID to ADD \033[0mResource ID {r_id_select}: {r_name_select} to: ")
+                print(f"\033[92mValid campIDs are open & has at least one refugee: {valid_range}\033[0m")
+                destination_c_id = r_inst.input_validator("--> ", valid_range, '\033[91mPlease select a valid camp.\033[0m') 
                 if destination_c_id == 'RETURN':
                     return
             
             else: 
                 ##################### [1] & [2] movement between inventory
                 # get corresponding camp:
-                prompt = f"\nPlease enter the relevant campID for the *** [ Resource ID #{r_id_select}: {r_name_select} ] *** : --> "
+                prompt = f"\nPlease enter the relevant \033[95mcampID\033[0m for the Resource ID {r_id_select}: {r_name_select}: --> "
                 if action_select == 1:
                     # [1] ASSIGN: inventory -> camp
                     origin_c_id = np.nan
@@ -337,7 +339,7 @@ class ResourceAllocator():
                         return  
                 elif action_select == 2:
                     # [2] UNASSIGN: camp -> inventory
-                    valid_range = r_inst.valid_origin_camp_single_resource(r_id_select)[1]
+                    valid_range = r_inst.valid_origin_camp_single_resource(r_id_select)[1] ######################
                     origin_c_id = r_inst.input_validator(prompt, valid_range, 'Please select a camp that both: has at least 1 unit of the resource AND is open with refugees. ') 
                     if origin_c_id == 'RETURN':
                         return
@@ -348,7 +350,6 @@ class ResourceAllocator():
             ### seperate loop for validating entries. Action 2 & 3 are grouped together as they invole taking away a resource from a camp, so the amount must not exced that in stock for the camp
             ### Action 1's valid range is the unallocated resources levels 
             # get unit number. ######## RESOURCE FORM VALIDATION: PROBABLY NEED TO ADD VALIDATION LATER!!!! ######### - might need to move these into the loops
-            prompt = f"\nPlease enter the amount of *** [ Resource ID #{r_id_select}: {r_name_select} ] *** to move: "
 
             if action_select == 1:
                 upper_limit = self.unallocResources_df.loc[self.unallocResources_df['resourceID']==r_id_select, 'unallocTotal'].iloc[0]
@@ -360,21 +361,25 @@ class ResourceAllocator():
             # building the valid range4 - which is... for that selected camp are moving FROM (origin), the moveUnits must not exceed the resource already there
             # do this by reusing the single_stats_instance
             valid_range = list(range(0, int(upper_limit)+1))
-            error_msg = f"Please enter an amount betwen 0 and {upper_limit} for this resource."
+            error_msg = f"Please enter an amount between 0 and {int(upper_limit)} for this resource.\033[0m"
+            prompt = f"\n\033[91mPlease enter the \033[95mAMOUNT\033[0m of Resource ID {r_id_select}: {r_name_select} to move [between 0 and {int(upper_limit)}]: "
             move_units = r_inst.input_validator(prompt, valid_range, error_msg)
             if move_units == 'RETURN':
                 return
 
-            move_id_list.append(r_id_select)
-            move_name_list.append(r_name_select)
-            move_origin_camp_list.append(origin_c_id)
-            move_dest_camp_list.append(destination_c_id)
-            move_action_list.append(action_select)
-            move_units_list.append(move_units)
+            new_row = pd.DataFrame({'resourceID': [r_id_select], 
+                                    'name':[r_name_select], 
+                                    'origin_campID':[origin_c_id], 
+                                    'destination_campID':[destination_c_id], 
+                                    'moveUnits':[move_units], 
+                                    'action':[action_select], 
+                                    'actionInfo':[action_string_pretty]})
+            move = pd.concat([move, new_row], ignore_index=True)
 
             # Ask if the user is done
             # done = input("\n Are there any more resources you want to manually allocate? y / n -->  ").strip()
-            done = r_inst.input_validator("\nAre there any more resources you want to manually allocate? y / n -->  ", ['y', 'n'])
+
+            done = r_inst.input_validator("\nAre there any more resources you want to manually allocate? y / n \n-->  ", ['y', 'n'])
             if done == 'n':
                 break # exit the loop
             elif done == 'RETURN':
@@ -382,18 +387,6 @@ class ResourceAllocator():
             else:
                 pass
             
-        
-        move['resourceID'] = move_id_list
-        move['name'] = move_name_list
-        move['action'] = move_action_list
-        move['origin_campID'] = move_origin_camp_list
-        move['destination_campID'] = move_dest_camp_list
-        move['moveUnits'] = move_units_list
-
-        for action_num in move_action_list:
-            move_action_info_list.append(action_string_list[action_num-1])
-        move['actionInfo'] = move_action_info_list
-
         if do_not_calc == False:
             self.manual_alloc_calc(move, master_table)
 
@@ -517,54 +510,3 @@ Below are the before vs. current allocations of the impacted resources: \n"""
         ####
 
 
-    def auto_alloc_debug(self):
-        r_inst = ResourceReport()
-        ### the adding is done before in a different function, so by the time it  makes it here, we have already added to the auto_alloc.... so need to get the unallocTotal elsewhere. 
-
-        totalResources = self.totalResources_df
-
-        try:
-            alloc_ideal = r_inst.determine_above_below()
-        except Exception as e:
-            print(f"An error occurred : {e}")
-        print("DEBUG: checking sum after returning alloc_ideal, nothing should have changed at this point...; we just loaded it up")
-        print(alloc_ideal)
-        redistribute_sum_checker = alloc_ideal.groupby('resourceID')['current'].sum()
-        print("sanity chekcs....nothing changed yet; so should all be the same")
-        print(redistribute_sum_checker)
-        alloc_ideal['updated'] = alloc_ideal['current'] 
-        ## creating a new col 'updated'; based on copying over the current vals
-
-        for index, row in alloc_ideal.iterrows():
-            if row['status'] != 'balanced':
-                alloc_ideal.at[index, 'updated'] = row['ideal_qty'] 
-        print("DEBUG: updating unbalanced resources to match ideal... we do expect unbalanced now...")
-        print(alloc_ideal[alloc_ideal['status']!='balanced'])
-        redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum()
-        print(redistribute_sum_checker)
-
-        ###### validate the redistributed totals, against the actual totals.
-        ###### this is just incase there is any discrepancies from rounding.
-        if 'resourceID' in totalResources.columns:
-            totalResources.set_index('resourceID', inplace=True)
-        comparison_result = redistribute_sum_checker == totalResources['total']
-        # print(alloc_ideal)
-        print(comparison_result)
-
-        alloc_ideal = self.adjust_auto_alloc(alloc_ideal)
-        
-        #### write to csv
-        alloc_updated = alloc_ideal[['resourceID', 'campID', 'updated']] #... it needs to be the current, not everything to the ideal! <------ big warning though; is that it currently doesnt sum to zero! why is that.... <<< the totals!
-        print("alloc_updated summation")
-        print(alloc_updated)
-        redistribute_sum_checker = alloc_ideal.groupby('resourceID')['updated'].sum() ## should not be different from above... 
-        print(redistribute_sum_checker)
-        ### so right now we have just left the balanced amounts as is
-        alloc_updated = alloc_updated.rename(columns={alloc_updated.columns[2]: 'qty'})
-        # alloc_updated.to_csv(self.resource_allocaation_csv_path, index=False)
-
-        print("alloc_updated....")
-        print(alloc_updated)
-        print(r_inst.resourceStock_generator(alloc_updated))
-
-        return alloc_ideal, redistribute_sum_checker, comparison_result

@@ -478,12 +478,14 @@ class Controller:
             if user_selection == "1":
                 self.create_refugee()
             elif user_selection == "2":
-                self.admin_edit_refugee()
+                self.add_refugee_from_csv()
             elif user_selection == "3":
-                self.move_refugee_admin()
+                self.admin_edit_refugee()
             elif user_selection == "4":
-                self.admin_display_refugee()
+                self.move_refugee_admin()
             elif user_selection == "5":
+                self.admin_display_refugee()
+            elif user_selection == "6":
                 self.admin_refugee_export()
             elif user_selection == "R":
                 break
@@ -538,7 +540,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 gender = gender_distribution
@@ -549,7 +551,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 age1 = age_distribution
@@ -561,7 +563,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 r = resources_distribution
@@ -569,9 +571,9 @@ class Controller:
                                 break
                     elif userInput == 6:
                         while True:
-                            campId = int(input('Please enter a camp ID: '))
+                            campId = int(input(f'Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 medical_info.medical_info(campId)
@@ -582,7 +584,6 @@ class Controller:
             except ValueError as e:
                 print("Invalid Input, please try again")
                 logging.critical(f"{e}")
-
 
     @staticmethod
     def admin_create_camp():
@@ -763,6 +764,9 @@ class Controller:
                                 ref_id_arr = df_r.loc[df_r['campID'] == int(modify_camp_id)]['refugeeID'].tolist()
                                 vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
                                 res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['campID'].tolist()
+
+                                print(new_value)
+                                print(modify_camp_id)
 
                                 for j in ref_id_arr:
                                     helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
@@ -1542,11 +1546,11 @@ class Controller:
                 while True:
                     try:
                         cid = int(input("Enter a camp ID: "))
+                        if cid == 'RETURN':
+                            return
                         if cid not in active_camp:
                             print("Invalid camp ID entered!")
                             continue
-                        if cid == 'RETURN':
-                            return
 
                         row_index_new_camp = df_c[df_c['campID'] == int(cid)].index
                         new_potential_refugee_pop = (df_c.at[row_index_new_camp[0], 'refugeePop'])
@@ -1597,6 +1601,72 @@ class Controller:
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
+
+    @staticmethod
+    def add_refugee_from_csv():
+        print("\nTo add refugee data from a csv file, please follow the instructions below:"
+              "\n1. Rename the csv file name to 'New_Refugees.csv'"
+              "\n2. Make sure the first row in the excel is column name"
+              "\n   'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'"
+              "\n3. Make sure the data type matches the column, for example, refugeeID must be integer, "
+              "\n   First name must be string and "
+              "dob must be a string representing a valid date in the form (dd/mm/yyyy)"
+              "\n4. Put the csv file next to main, i.e. inside the same directory where main locates")
+        while True:
+            is_continue = input("\nPlease enter 'READY' when the csv file is ready! "
+                                "Or enter 'RETURN' to cancel"
+                                "\n -->")
+            if is_continue == 'RETURN':
+                return
+            elif is_continue == 'READY':
+                is_data_types_all_correct = True
+                expected_column_names = ['campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID']
+                expected_data_types = (('campID', 'int64'), ('firstName', 'str'),
+                                       ('lastName', 'str'), ('gender', 'str'), ('familyID', 'int64'))
+                try:
+                    df = pd.read_csv(Path(__file__).parent.joinpath("New_Refugees.csv"))
+                except FileNotFoundError:
+                    print("The csv file for importing refugee is not found!")
+                    continue
+                column_names = df.columns.values.tolist()
+                # ensure column names are all correct
+                if column_names == expected_column_names:
+                    print("Yeah! All the column names are correct")
+                else:
+                    print("No:( Some of the column names are incorrect. Please check again")
+                    continue
+
+                # check for data type
+                # check dob is a valid date
+                if pd.to_datetime(df['dob'], format='%d/%m/%Y', errors='coerce').notnull().all():
+                    print("\nYeah! Data type for column 'dob' is correct")
+                else:
+                    print("\nNooo:( Data type for column 'dob' is INCORRECT")
+                    is_data_types_all_correct = False
+
+                for column, datatype in expected_data_types:
+
+                    if df[column].dtype != datatype:
+                        try:
+                            df[column] = df[column].astype(datatype)
+                            print(f"\nYeah! Data type for column '{column}' is correct")
+                        except ValueError as e:
+                            print(f"{e}")
+                            is_data_types_all_correct = False
+                            print(f"\nNooo:( Data type for column '{column}' is INCORRECT")
+                            print(f"expected: {datatype}")
+                            print(df[column].dtype)
+                            continue
+                    else:
+                        print(f"\nYeah! Data type for column '{column}' is correct")
+                if not is_data_types_all_correct:
+                    print("Data type of some of the column is incorrect. "
+                          "Please check the output message above to find the incorrect column(s)")
+                    continue
+                else:
+                    print("\nAll the check has passed successfully!")
+                    print("\nAdding refugees to database...")
+
 
     @staticmethod
     def help_center():
@@ -2247,7 +2317,7 @@ class Controller:
             print("Username doesn't exist")
         else:
             content = input('Enter your message: ')
-            with open(m_csv_path, mode='a') as file:
+            with open(m_csv_path, mode='a', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow([self.user.username, to, content, datetime.datetime.now()])
             print('Message sent successfully!')

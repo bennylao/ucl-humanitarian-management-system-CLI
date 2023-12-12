@@ -3,10 +3,8 @@ import csv
 from pathlib import Path
 import pandas as pd
 import datetime
-import math
 import logging
 from passlib.hash import sha256_crypt
-import tabulate
 
 
 def validate_user_selection(options):
@@ -408,7 +406,7 @@ def validate_man_resource(index):
 
 
 def validate_refugee(lvl, cid):
-    date_format = '%d/%m/%Y'
+    date_format = "%d/%m/%Y"
     while True:
         f_name = input("\nEnter first name: ")
         if not f_name.isalpha():
@@ -434,8 +432,13 @@ def validate_refugee(lvl, cid):
             dob = input("\nEnter date of birth (format: dd/mm/yyyy): ")
             if dob == 'RETURN':
                 return
-            dob = datetime.datetime.strptime(dob, date_format)
-            break
+            datetime_object = datetime.datetime.strptime(dob, date_format)
+            if datetime_object > datetime.datetime.now():
+                print("Birth date should be before current date and time")
+                continue
+            else:
+                dob = datetime_object.strftime(date_format)
+                break
         except ValueError:
             print("\nInvalid date format entered.")
             continue
@@ -458,20 +461,22 @@ def validate_refugee(lvl, cid):
 
         csv_path_ref = Path(__file__).parents[0].joinpath("data/refugee.csv")
         df_ref = pd.read_csv(csv_path_ref)
-        df_ref = df_ref.loc[df_ref['campID'] == cid]['familyID'].tolist()
+        df_ref = (df_ref.loc[df_ref['campID'] == cid]['familyID']).drop_duplicates().sort_values().tolist()
         for i in df_ref:
             id_arr.append(str(i))
 
-        print("Select 1 to create a new family identification, or 2 to join an existing one")
-        if select != '1' and select != '2':
+        if select == 'RETURN':
+            return
+        elif select != '1' and select != '2':
             print("Select 1 or 2 only!")
             continue
 
-        if select == 'RETURN':
-            return
         if select == '1':
             try:
+                print("Create a new family identification except these existing ones: ", df_ref)
                 create_id = input("\nEnter family identification: ")
+                if create_id == 'RETURN':
+                    return
                 if create_id in id_arr:
                     print("Family ID already exists!")
                     continue
@@ -481,11 +486,17 @@ def validate_refugee(lvl, cid):
                 continue
         elif select == '2':
             df = pd.read_csv(csv_path_ref)
-            df = df.loc[df['campID'] == cid]
-            table = df['familyID'].drop_duplicates().to_markdown(index=False)
+            df = df[df['campID'] == cid]
+            df1 = df[['familyID']].drop_duplicates().copy()
+            df2 = df[['familyID', 'refugeeID', 'firstName', 'lastName']].copy()
+            merged_df = pd.merge(df1, df2, on='familyID', how='left')
+            merged_df = merged_df.sort_values(by=['familyID', 'refugeeID'])
+            table = merged_df.to_markdown(index=False)
             print("\n" + table)
             try:
                 create_id = input("\nEnter family identification: ")
+                if create_id == 'RETURN':
+                    return
                 if create_id not in id_arr:
                     print("Invalid family ID entered!")
                     continue

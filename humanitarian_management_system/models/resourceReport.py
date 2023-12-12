@@ -127,7 +127,7 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
 
         return single_resource_stats, cols_above_zero.tolist()  ## print the actual range
 
-    def input_validator(self, prompt_msg, valid_range, error_msg='Invalid selection. Please try again.'):
+    def input_validator(self, prompt_msg, valid_range, error_msg='\033[91mInvalid selection. Please try again.\033[0m'):
         # for usage in resources - validates the form inputs
         while True:
             user_input = input(prompt_msg)
@@ -148,6 +148,70 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
                 return user_input  # Return if the input is in the valid range
             else:
                 print(error_msg)  # Print error message for input out of range
+        # AdminView.manage_resource_menu()
+
+    def input_validator_2range_resources(self, prompt_msg: str, 
+                                         used_range: list, # this needs to be appended on the outside... 
+                                         move_basket: pd.DataFrame,
+                                         mode: str,
+                                         error_msg='\033[91mInvalid selection. Please try again.\033[0m'):
+        # for usage in resources - validates the form inputs
+        all_resources = self.valid_resources()
+        used_range = list(set(used_range)) # get unique only 
+        not_used = [item for item in all_resources if item not in used_range] ## the list of resources not in use 
+
+        while True:
+            user_input = input(prompt_msg)
+
+            if user_input == 'RETURN':
+                print('Returning user to resource mgmt menu...')
+                return user_input
+
+            # Check if the input is a digit and convert it to an integer if it is
+            if user_input.isdigit():
+                user_input = int(user_input)
+
+            if user_input in not_used:
+                return user_input  # Return if the input is in the valid range
+
+            # if we have some records already...
+            if len(used_range) > 0:
+                # Check if the input (either integer or string) is in the valid range
+                if user_input in not_used:
+                    return user_input
+                # Check if the input is in the second valid range... 
+                # in practice this will be mutually exclusive due to usage in resources... 
+                elif user_input in used_range:
+                    move_basket_row = move_basket.loc[move_basket['resourceID'] == user_input] ## this is the row of the previous selection...
+                    if mode == 'manual_alloc':
+                        move_basket_print = move_basket_row[['resourceID', 'name', 'origin_campID', 'destination_campID', 'moveUnits', 'actionInfo']]
+                        print("\033[91mYou can only specify one instruction per resource, per submission of the manual allocator form. \nCurrently you have already specified the below for this resource...\n")
+                        print(move_basket_print.transpose().to_string(header = False))
+                        print("\nDo you want to override your selection? \n(Note that you can make multiple manual changes to a resource, by submitting this form and going into the manual allocator again)\033[0m \n ")
+                    elif mode == 'shop':
+                        move_basket_print = move_basket_row
+                        print("\033[91mREMINDER: You can only specify one buy instruction per resource, per shopping basket. \nCurrently you have already specified the below for this resource...\n")
+                        print(move_basket_print.transpose().to_string(header = False))
+                        print("\nDo you want to update the quantity with your current selection? \033[0m \n ")
+                    else:
+                        print("Error with move_basket")
+                    
+                    ## replace with input validator later
+                    user_override = self.input_validator("y / n -->  \n", ['y', 'n'])
+                    if user_override == 'y':
+                        # remove row from move... 
+                        move_row_index = move_basket.loc[move_basket['resourceID'] == user_input].index
+                        move_basket.drop(move_row_index, inplace = True)
+                        print('\033[91mOverriding your previous selection...\033[0m')
+                        return user_input
+                    elif user_override == 'n':
+                        print('Please select another resourceID...')
+                    else:
+                        print("Override selection error...")
+                    # if yes -> need to overwrite it in move dataframe somehow.... 
+                    # if no, then need to ask to select another... aka. loop again... ... how to differentiate this? essentially... they just 
+                else:
+                    print(error_msg)  # Print error message for input out of range ... this essentially means they need to enter something else... 
         # AdminView.manage_resource_menu()
 
     ############################################################################################################################
@@ -215,8 +279,14 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
 
     def master_resource_stats(self):
         unallocResources_df = pd.read_csv(self.resource__nallocated_stock_csv_path)
+        ### this table is primarily create based on the joined_df that uses the resource alloc map
+        ### this means tho, if the resource is not on the map, then it wont come up on the table; so
+        ### currently new camps with nothing allocated to it wont be on the table....
+        ### so lets add it to the table :) - dont need to write this in; can just be an extra step done here
+        ### i think even just cosmetically is ok? 
         resource_camp = self.joined_df.pivot_table(index=['resourceID', 'name', 'priorityLvl'], columns='campID',
                                                    values='qty', aggfunc='sum').sort_index(level=0)
+        
         joined_df_unalloc_camp = pd.merge(unallocResources_df, resource_camp, on='resourceID', how='inner')
         temp = joined_df_unalloc_camp['unallocTotal'].copy()
 
@@ -224,12 +294,30 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
             'priorityLvl'], temp
         joined_df_unalloc_camp.rename(columns={'unallocTotal': 'priorityLvl', 'priorityLvl': 'unallocTotal'},
                                       inplace=True)
+        
+        master_table = joined_df_unalloc_camp ## renaming bc messy 
+
+        ### find extra columms aka. open camps with refugees, but no resources assigned to it....
+        captured_camps = list(master_table.columns[4:])
+        valid_open_camps_df = self.valid_open_camps_with_refugees() ## note any closed camps with resources will be captured already so no need to check for this 
+        valid_open_camps = valid_open_camps_df['campID'].tolist() 
+        uncaptured_camps = [item for item in valid_open_camps if item not in captured_camps]
+
+        for item in uncaptured_camps:
+            master_table[item] = np.nan
+            ## need to sort these in the pretty table...
+
+        if len(uncaptured_camps) != 0:
+            sort_cols = sorted(master_table.columns[4:], key=lambda x: pd.to_numeric(x))
+            first_4_cols = list(master_table.columns[:4])
+            new_order = first_4_cols + sort_cols
+            master_table = master_table[new_order]
 
         ## is this helpful? maybe add in population as well ? 
         ## add something into allow view of selected resources only... ?? or not... idm 
 
         #################### this includes closed camps too ! includes anything with resources... 
-        return joined_df_unalloc_camp
+        return master_table
 
     def report_closed_camp_with_resources(self):
         master_df = self.master_resource_stats()
@@ -436,23 +524,3 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
 
         return unbalanced
 
-    def resource_report_interface(self):
-        ### probably will need to move this somewhere... 
-        print(f"""\n==========================================================================\n
-✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ RESOURCE STATS VIEWER ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-==========================================================================\n
-              [1] View master resource stats \n
-              [2] View all unbalanced resources\n """)
-        user_select = self.input_validator("--> ", [1, 2])
-        if user_select == 1:
-            print(
-                "Here is the current snapshot of: \n how resources are distributed across each camp; and the status and refugee population of each camp.")
-            table = self.PRETTY_PIVOT_CAMP()
-            print(table)
-        elif user_select == 2:
-            unbalanced = self.ALLOC_IDEAL_OUTPUT()  ### if empty then other message
-            if unbalanced.empty:
-                print(
-                    "There are currently no unbalanced resources across any camps that deviate 10% out of the ideal amounts.")
-            else:
-                print(unbalanced)

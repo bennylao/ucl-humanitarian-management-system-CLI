@@ -10,7 +10,6 @@ class ManagementView:
         ("4", "Change Email"),
         ("5", "Change Phone Number"),
         ("6", "Change Occupation"),
-        ("7", "Change Camp Role"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )
