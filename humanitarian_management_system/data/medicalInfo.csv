@@ -26,7 +26,7 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 25,25,5,good,TRUE
 26,26,4,bad,TRUE
 27,27,13,okay,TRUE
-28,28,2,fine,TRUE
+28,28,2,fine,FALSE
 29,29,1,good,TRUE
 30,30,11,good,TRUE
 31,31,9,good,TRUE
@@ -52,6 +52,9 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 51,51,1,Nothing :),TRUE
 52,52,6,Need cooling ASAP!,FALSE
 53,53,12,Need quarantine at home.,TRUE
-54,54,1,okay,True
-55,49,9,Be careful!,True
-56,50,11,Eat less sugar1,False
+54,54,1,okay,True
+
+55,49,9,Be careful!,True
+
+56,50,11,Eat less sugar1,False
+
