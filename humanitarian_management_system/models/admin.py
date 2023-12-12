@@ -120,20 +120,21 @@ class Admin(User):
         while True:
             user_select = input("Please select a user ID whose active status you would like to change: ")
 
-            if user_select not in vol_id_arr:
+            if user_select == 'RETURN':
+                return
+            elif user_select not in vol_id_arr:
                 print("Invalid user ID entered!")
                 continue
             else:
                 status = vol_df.loc[vol_df['userID'] == int(user_select)]['isActive'].tolist()[0]
 
-            if user_select == 'RETURN':
-                return
-
             if status:
                 while True:
                     user_input = input(f"Are you sure you want to deactivate user with ID {int(user_select)} "
                                        f"(yes or no)? ")
-                    if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                    if user_input == 'RETURN':
+                        return
+                    elif user_input.lower() != 'yes' and user_input.lower() != 'no':
                         print("Must enter yes or no!")
                         continue
                     if user_input == 'yes':
@@ -145,8 +146,9 @@ class Admin(User):
             else:
                 user_input = input(f"Are you sure you want to re-activate user with ID {int(user_select)} "
                                    f"(yes or no)? ")
-
-                if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                if user_input == 'RETURN':
+                    return
+                elif user_input.lower() != 'yes' and user_input.lower() != 'no':
                     print("Must enter yes or no!")
                     continue
                 if user_input == 'yes':
