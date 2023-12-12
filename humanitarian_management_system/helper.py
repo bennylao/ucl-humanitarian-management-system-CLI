@@ -622,7 +622,7 @@ def move_refugee_helper_method(cid):
         related_family_members = ref_df[ref_df['familyID'] == int(refugee_family_id)]
         total_family_members = len(related_family_members)
         while True:
-            if total_family_members != 0:
+            if total_family_members > 1:
                 print("\n----HOLD ON!---- \nThis refugee is part of a family unit (see below).\n")
                 print(related_family_members.to_markdown(index=False))
                 user_input = input("\nAre you sure you want to move this refugee alone? Enter YES (to move"
@@ -802,7 +802,7 @@ def legal_advice_support():
           "------------------------------------------------------------------------------")
     print("\nBelow are links to our partner legal charities to offer legal support to refugees whilst we work on "
           "\nbuilding our own team."
-          "\nClicking on these links will direct you to a web page. \nYou will have to return back "
+          "\nRight clicking on these links will direct you to a web page. \nYou will have to return back "
           "to the application manually.\n")
 
     links = [
@@ -1394,7 +1394,7 @@ def help_center_page():
               "\n   - We also encourage refugees to be kept together as a family unit. You may choose to move a refugee alone if"
               " essential, however we will prompt you to keep family units together\n     if the system detects a family unit "
               "and capacity allows for them to stay together."
-              "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
+              "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp which is of high risk (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
               "to add more refugees to it. These restrictions have been\n     implemented in the system."
               "\n   - An admin is able to EXPORT a CSV file of the refugees in the system, either an entire overview"
               "or filtered by a specific camp or event."

@@ -70,38 +70,42 @@ class Admin(User):
 
     @staticmethod
     def verify_user():
-        print("\nHere is the list of all newly registered volunteers waiting to be verified.")
         while True:
             user_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"), converters={'userID': str})
             unverified_user_df = user_df.loc[user_df['isVerified'] == False]
             unverified_user_df = unverified_user_df[unverified_user_df.columns.difference(['password'])]
             unverified_user_options = unverified_user_df['userID'].tolist()
-            print(unverified_user_df.to_markdown(index=False))
-            print("\nPlease select the user ID of the volunteer you would like to verify and activate.\n"
-                  "or enter 'RETURN' to return to the previous menu.")
-            while True:
-                user_select = input("User ID: ")
-                if user_select == 'RETURN':
-                    return
-                if user_select in unverified_user_options:
-                    user_df.loc[user_df['userID'] == user_select, 'isVerified'] = True
-                    user_df.loc[user_df['userID'] == user_select, 'isActive'] = True
-                    user_df.to_csv(Path(__file__).parents[1].joinpath("data/user.csv"), index=False)
-                    print(f"User with ID {user_select} has been verified.")
-                    while True:
-                        to_continue = input("\nDo you want to verify another user? (y/n): ")
+            if len(unverified_user_options) == 0:
+                print("\nThere is no newly registered volunteer waiting to be verified.")
+                break
+            else:
+                print("\nHere is the list of all newly registered volunteers waiting to be verified.")
+                print(unverified_user_df.to_markdown(index=False))
+                print("\nPlease select the user ID of the volunteer you would like to verify and activate.\n"
+                      "or enter 'RETURN' to return to the previous menu.")
+                while True:
+                    user_select = input("User ID: ")
+                    if user_select == 'RETURN':
+                        return
+                    if user_select in unverified_user_options:
+                        user_df.loc[user_df['userID'] == user_select, 'isVerified'] = True
+                        user_df.loc[user_df['userID'] == user_select, 'isActive'] = True
+                        user_df.to_csv(Path(__file__).parents[1].joinpath("data/user.csv"), index=False)
+                        print(f"User with ID {user_select} has been verified.")
+                        while True:
+                            to_continue = input("\nDo you want to verify another user? (y/n): ")
+                            if to_continue.lower() == 'y':
+                                break
+                            elif to_continue.lower() == 'n':
+                                return
+                            else:
+                                print("Invalid input!")
+                                continue
                         if to_continue.lower() == 'y':
                             break
-                        elif to_continue.lower() == 'n':
-                            return
-                        else:
-                            print("Invalid input!")
-                            continue
-                    if to_continue.lower() == 'y':
-                        break
-                else:
-                    print("Invalid user ID entered!")
-                    continue
+                    else:
+                        print("Invalid user ID entered!")
+                        continue
 
     def activate_user(self):
         vol_id_arr = []
@@ -116,20 +120,21 @@ class Admin(User):
         while True:
             user_select = input("Please select a user ID whose active status you would like to change: ")
 
-            if user_select not in vol_id_arr:
+            if user_select == 'RETURN':
+                return
+            elif user_select not in vol_id_arr:
                 print("Invalid user ID entered!")
                 continue
             else:
                 status = vol_df.loc[vol_df['userID'] == int(user_select)]['isActive'].tolist()[0]
 
-            if user_select == 'RETURN':
-                return
-
             if status:
                 while True:
                     user_input = input(f"Are you sure you want to deactivate user with ID {int(user_select)} "
                                        f"(yes or no)? ")
-                    if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                    if user_input == 'RETURN':
+                        return
+                    elif user_input.lower() != 'yes' and user_input.lower() != 'no':
                         print("Must enter yes or no!")
                         continue
                     if user_input == 'yes':
@@ -141,8 +146,9 @@ class Admin(User):
             else:
                 user_input = input(f"Are you sure you want to re-activate user with ID {int(user_select)} "
                                    f"(yes or no)? ")
-
-                if user_input.lower() != 'yes' and user_input.lower() != 'no':
+                if user_input == 'RETURN':
+                    return
+                elif user_input.lower() != 'yes' and user_input.lower() != 'no':
                     print("Must enter yes or no!")
                     continue
                 if user_input == 'yes':
