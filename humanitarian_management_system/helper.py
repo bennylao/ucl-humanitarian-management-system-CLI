@@ -455,15 +455,15 @@ def validate_refugee(lvl, cid):
             break
 
     while True:
-        id_arr = []
         print("\nSelect 1 to create a new family identification, or 2 to join an existing one")
         select = input("\nSelect your option: ")
 
+        csv_path_camp = Path(__file__).parents[0].joinpath("data/camp.csv")
+        df_camp = pd.read_csv(csv_path_camp)
         csv_path_ref = Path(__file__).parents[0].joinpath("data/refugee.csv")
         df_ref = pd.read_csv(csv_path_ref)
-        df_ref = (df_ref.loc[df_ref['campID'] == cid]['familyID']).drop_duplicates().sort_values().tolist()
-        for i in df_ref:
-            id_arr.append(str(i))
+        all_familyID_list = df_ref['familyID'].drop_duplicates().sort_values().tolist()
+        camp_familyID_list = df_ref.loc[df_ref['campID'] == cid]['familyID'].drop_duplicates().sort_values().tolist()
 
         if select == 'RETURN':
             return
@@ -472,38 +472,46 @@ def validate_refugee(lvl, cid):
             continue
 
         if select == '1':
-            try:
-                print("Create a new family identification except these existing ones: ", df_ref)
-                create_id = input("\nEnter family identification: ")
-                if create_id == 'RETURN':
-                    return
-                if create_id in id_arr:
-                    print("Family ID already exists!")
+            print("\nCreate a new family identification except these existing ones: ", all_familyID_list)
+            while True:
+                try:
+                    create_id = input("\nEnter family identification: ")
+                    if create_id == 'RETURN':
+                        return
+                    if int(create_id) in all_familyID_list:
+                        print("Family ID already exists!")
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    print("Must be an integer value!")
                     continue
-                break
-            except ValueError:
-                print("Must be an integer value!")
-                continue
+            break
         elif select == '2':
-            df = pd.read_csv(csv_path_ref)
-            df = df[df['campID'] == cid]
+            eventID = (df_camp.loc[df_camp['campID'] == cid]['eventID']).drop_duplicates().values[0]
+            campID_list = (df_camp.loc[df_camp['eventID'] == eventID]['campID']).tolist()
+            df = df_ref[df_ref['campID'].isin(campID_list)]
             df1 = df[['familyID']].drop_duplicates().copy()
             df2 = df[['familyID', 'refugeeID', 'firstName', 'lastName']].copy()
             merged_df = pd.merge(df1, df2, on='familyID', how='left')
             merged_df = merged_df.sort_values(by=['familyID', 'refugeeID'])
             table = merged_df.to_markdown(index=False)
             print("\n" + table)
-            try:
-                create_id = input("\nEnter family identification: ")
-                if create_id == 'RETURN':
-                    return
-                if create_id not in id_arr:
-                    print("Invalid family ID entered!")
+            while True:
+                try:
+
+                    create_id = input("\nEnter family identification: ")
+                    if create_id == 'RETURN':
+                        return
+                    elif int(create_id) not in camp_familyID_list:
+                        print("Invalid family ID entered!")
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    print("Must be an integer value!")
                     continue
-                break
-            except ValueError:
-                print("Must be an integer value!")
-                continue
+            break
 
     while True:
         vacc = input("\nIs vaccinated? (True or False): ")
