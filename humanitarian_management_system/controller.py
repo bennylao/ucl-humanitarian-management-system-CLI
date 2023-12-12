@@ -1440,7 +1440,7 @@ class Controller:
             logging.critical(f"{e}")
 
         while True:
-            temp_id = int(camp_id)
+            old_camp_id = int(camp_id)
             try:
                 csv_path2 = Path(__file__).parents[0].joinpath("data/camp.csv")
                 df2 = pd.read_csv(csv_path2)
@@ -1491,22 +1491,16 @@ class Controller:
                             if int(new_value) in camp_id_arr:
                                 print("Camp ID already exists! Please choose a new one.")
                                 continue
+                            else:
+                                camp_id = int(new_value)
+                                # change corresponding refugee & volunteer camp ID
+                                df.loc[df['campID'] == old_camp_id, 'campID'] = camp_id
+                                df_a.loc[df_a['campID'] == old_camp_id, 'campID'] = camp_id
+                                df_r.loc[df_r['campID'] == old_camp_id, 'campID'] = camp_id
 
-                            # change corresponding refugee & volunteer camp ID
-                            ref_id_arr = df_r.loc[df_r['campID'] == int(camp_id)]['refugeeID'].tolist()
-                            res_id_arr = df_a.loc[df_a['campID'] == int(camp_id)]['campID'].tolist()
-
-                            for j in ref_id_arr:
-                                helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
-                                                         int(j), 'campID', int(new_value))
-                            helper.modify_csv_pandas("data/user.csv", 'userID',
-                                                     user_id, 'campID', int(new_value))
-                            for k in res_id_arr:
-                                helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
-                                                         int(k), 'campID', int(new_value))
-                            new_value = int(new_value)
-                            camp_id = new_value
-                            break
+                                df.to_csv(user_csv_path, index=False)
+                                df_a.to_csv(csv_path_a, index=False)
+                                df_r.to_csv(csv_path_r, index=False)
 
                         if target_column_index == '3':
                             if new_value == "low" or new_value == "high":
@@ -1525,7 +1519,7 @@ class Controller:
                             except ValueError:
                                 print("Invalid input! Please enter a non-negative integer ")
 
-                    helper.modify_csv_pandas(csv_path2, 'campID', temp_id, target_column_name,
+                    helper.modify_csv_pandas(csv_path2, 'campID', old_camp_id, target_column_name,
                                              new_value)
                     # reorder camp ID after ID changed
                     csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
