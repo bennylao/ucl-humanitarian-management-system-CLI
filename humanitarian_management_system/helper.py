@@ -1393,7 +1393,7 @@ def help_center_page():
               "\n   - We also encourage refugees to be kept together as a family unit. You may choose to move a refugee alone if"
               " essential, however we will prompt you to keep family units together\n     if the system detects a family unit "
               "and capacity allows for them to stay together."
-              "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
+              "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp which is of high risk (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
               "to add more refugees to it. These restrictions have been\n     implemented in the system."
               "\n   - An admin is able to EXPORT a CSV file of the refugees in the system, either an entire overview"
               "or filtered by a specific camp or event."
