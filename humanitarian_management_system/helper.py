@@ -1598,6 +1598,7 @@ def help_center_page():
               "arises. ***"
               "\n"
               "\n   - An admin can add and delete any refugee held in the system (whilst refugees have restrictions)"
+              "\n   - Admins are able to BULK IMPORT a list of refugees using CSV.""
               "\n   - An admin move any refugee from camp to camp"
               "\n   - We also encourage refugees to be kept together as a family unit. You may choose to move a refugee alone if"
               " essential, however we will prompt you to keep family units together\n     if the system detects a family unit "
