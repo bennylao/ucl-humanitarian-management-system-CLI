@@ -1053,6 +1053,10 @@ def add_refugee_to_session():
         session_df = pd.read_csv(training_session_path)
         logging.info("Refugee and training session data files loaded successfully to add a refugee to a session.")
         print("It's great another refugee wants to join a skills session!\n")
+        length_session_df = pd.read_csv(training_session_path)["sessionID"].tolist()
+        if len(length_session_df) == 0:
+            print("Oh no! No sessions created yet! Taking you back...")
+            return
         print(session_df.to_markdown(index=False))
         while True:
             sessionID = input("\n\nFrom the list above, enter the session ID for the "
@@ -1089,12 +1093,7 @@ def add_refugee_to_session():
                     return
                 if rid.lower() == "done":
                     break
-                # try:
-                #     rid = int(rid)
-                # except TypeError as e:
-                #     logging.info("Wrong user input for refugee id when adding to training session/")
-                #     print(f"Sorry! Incorrect input - try again. Error: {e}")
-                #     return
+
                 elif rid in already_registered:
                     # print(already_registered)
                     print(f"\nDon't worry. That refugee is already down to attend this session.")
@@ -1117,6 +1116,7 @@ def add_refugee_to_session():
         # already_registered_list = list(already_registered)
         # already_registered_list.extend(participants)
         combined_attendees = [already_registered] + participants
+        print(combined_attendees)
         session_df.at[row_index_sessionID, 'participants'] = combined_attendees
         session_df.to_csv(training_session_path, index=False)
         print(f"\nExcellent! We have added refugee(s) {participants} to session {sessionID}. See below. ")
@@ -1141,6 +1141,10 @@ def remove_refugee_from_session():
         session_df = pd.read_csv(training_session_path)
         logging.info("Refugee and session data files loaded successfully when removing a refugee from a session.")
         print("Looks like you're looking to remove a refugee from one of the sessions!")
+        length_session_df = pd.read_csv(training_session_path)["sessionID"].tolist()
+        if len(length_session_df) == 0:
+            print("Oh no! No sessions created yet! Taking you back...")
+            return
         print(session_df.to_markdown(index=False))
         while True:
             sessionID = input("\n\nFrom the list above, enter the session ID for the "
