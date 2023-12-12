@@ -6,6 +6,7 @@ import datetime
 import math
 import logging
 from passlib.hash import sha256_crypt
+import tabulate
 
 
 def validate_user_selection(options):
@@ -405,7 +406,7 @@ def validate_man_resource(index):
     return select_index, select_item, select_amount
 
 
-def validate_refugee(lvl):
+def validate_refugee(lvl, cid):
     date_format = '%d/%m/%Y'
     while True:
         f_name = input("\nEnter first name: ")
@@ -450,12 +451,42 @@ def validate_refugee(lvl):
             break
 
     while True:
-        family_id = input("\nEnter family identification: ")
-        if family_id == 'RETURN':
+        id_arr = []
+        print("\nSelect 1 to create a new family identification, or 2 to join an existing one")
+        select = input("\nSelect your option: ")
+
+        csv_path_ref = Path(__file__).parents[0].joinpath("data/refugee.csv")
+        df_ref = pd.read_csv(csv_path_ref)
+
+        print("Select 1 to create a new family identification, or 2 to join an existing one")
+        if select != '1' and select != '2':
+            print("Select 1 or 2 only!")
+            continue
+
+        if select == 'RETURN':
             return
-        else:
+        if select == '1':
+            create_id = input("\nEnter family identification: ")
             try:
-                family_id = int(family_id)
+                create_id = int(create_id)
+                break
+            except ValueError:
+                print("Must be an integer value!")
+                continue
+        elif select == '2':
+            print(cid)
+            df_ref = df_ref.loc[df_ref['campID'] == cid]['familyID'].tolist()
+            df = pd.read_csv(csv_path_ref)
+            df = df.loc[df['campID'] == cid]
+            for i in df_ref:
+                id_arr.append(str(i))
+            table = df['familyID'].drop_duplicates().to_markdown(index=False)
+            print("\n" + table)
+            try:
+                create_id = input("\nEnter family identification: ")
+                if create_id not in id_arr:
+                    print("Invalid family ID entered!")
+                    continue
                 break
             except ValueError:
                 print("Must be an integer value!")
@@ -480,6 +511,7 @@ def validate_refugee(lvl):
     df = pd.read_csv(csv_path)
     df.rename(columns={'medicalInfoTypeID': 'Index'}, inplace=True)
     df.rename(columns={'criticalLvl': 'Critical level'}, inplace=True)
+    df = df.loc[:, df.columns != 'Critical level']
     # display medical condition option list
     table_str = df.to_markdown(index=False)
     print("\n" + table_str)
@@ -507,7 +539,7 @@ def validate_refugee(lvl):
         else:
             break
 
-    return family_id, f_name, l_name, dob, gender, int(med), med_des, vacc
+    return create_id, f_name, l_name, dob, gender, int(med), med_des, vacc
 
 
 def move_refugee_helper_method(cid):
@@ -589,7 +621,7 @@ def move_refugee_helper_method(cid):
         related_family_members = ref_df[ref_df['familyID'] == int(refugee_family_id)]
         total_family_members = len(related_family_members)
         while True:
-            if total_family_members != 0:
+            if total_family_members > 1:
                 print("\n----HOLD ON!---- \nThis refugee is part of a family unit (see below).\n")
                 print(related_family_members.to_markdown(index=False))
                 user_input = input("\nAre you sure you want to move this refugee alone? Enter YES (to move"
@@ -769,7 +801,7 @@ def legal_advice_support():
           "------------------------------------------------------------------------------")
     print("\nBelow are links to our partner legal charities to offer legal support to refugees whilst we work on "
           "\nbuilding our own team."
-          "\nClicking on these links will direct you to a web page. \nYou will have to return back "
+          "\nRight clicking on these links will direct you to a web page. \nYou will have to return back "
           "to the application manually.\n")
 
     links = [
@@ -1183,7 +1215,7 @@ def get_export_file_path():
 
             if user_input.lower() == 'return':
                 return None
-            if user_input.lower() == 'x':
+            elif user_input.lower() == 'x':
                 base_file_path = "data/refugees_exported_data_file.csv"
                 file_path = Path(base_file_path)
                 if file_path.is_file():
@@ -1196,6 +1228,7 @@ def get_export_file_path():
                 print("Sorry. Didn't catch that. Try again.")
                 break
         return file_path
+
     except Exception as e:
         logging.info("File path options entered by user causing issue.")
         print(f"Looks like that file path didn't work, causing error {e}. Don't worry - we're redirecting you back.")
@@ -1203,8 +1236,10 @@ def get_export_file_path():
 
 
 def admin_export_refugees_to_csv():
-    file_path = get_export_file_path()
     try:
+        file_path = get_export_file_path()
+        if file_path == None:
+            return
         refugee_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
         ref_df = pd.read_csv(refugee_csv_path)
         logging.info("Successfully loaded refugee csv for admin exporting refugee csv file.")
@@ -1358,7 +1393,7 @@ def help_center_page():
               "\n   - We also encourage refugees to be kept together as a family unit. You may choose to move a refugee alone if"
               " essential, however we will prompt you to keep family units together\n     if the system detects a family unit "
               "and capacity allows for them to stay together."
-              "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
+              "\n   - Please note: Refugees MUST BE VACCINATED to be added to a camp which is of high risk (by policy) & a camp MUST HAVE ENOUGH CAPACITY "
               "to add more refugees to it. These restrictions have been\n     implemented in the system."
               "\n   - An admin is able to EXPORT a CSV file of the refugees in the system, either an entire overview"
               "or filtered by a specific camp or event."
