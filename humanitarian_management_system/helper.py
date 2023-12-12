@@ -485,8 +485,12 @@ def validate_refugee(lvl, cid):
                 continue
         elif select == '2':
             df = pd.read_csv(csv_path_ref)
-            df = df.loc[df['campID'] == cid]
-            table = df['familyID'].drop_duplicates().to_markdown(index=False)
+            df = df[df['campID'] == 1]
+            df1 = df[['familyID']].drop_duplicates().copy()
+            df2 = df[['familyID', 'refugeeID', 'firstName', 'lastName']].copy()
+            merged_df = pd.merge(df1, df2, on='familyID', how='left')
+            merged_df = merged_df.sort_values(by=['familyID', 'refugeeID'])
+            table = merged_df.to_markdown(index=False)
             print("\n" + table)
             try:
                 create_id = input("\nEnter family identification: ")
