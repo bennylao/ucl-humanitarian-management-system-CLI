@@ -132,6 +132,9 @@ class Event:
                                 Event.__change_start_date(row)
                             elif what_to_edit == '5':
                                 Event.__change_end_date(row)
+                            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+                            df = pd.read_csv(event_csv_path)
+                            filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
                             filtered_row = filtered_df[filtered_df['eventID'] == int(eid_to_edit)]
                             Event.display_events(filtered_row)
                             break
