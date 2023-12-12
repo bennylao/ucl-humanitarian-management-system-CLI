@@ -85,7 +85,6 @@ class Event:
                     print("\nAll the events are closed and cannot be edited.")
                     return
 
-                eid_to_edit = 0
                 while sign2 == 0:
                     try:
                         Event.display_events(filtered_df)
@@ -132,11 +131,8 @@ class Event:
                                 Event.__change_start_date(row)
                             elif what_to_edit == '5':
                                 Event.__change_end_date(row)
-                            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
                             df = pd.read_csv(event_csv_path)
-                            filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
-                            filtered_row = filtered_df[filtered_df['eventID'] == int(eid_to_edit)]
-                            Event.display_events(filtered_row)
+                            Event.display_events(df.loc[df['eventID'] == int(eid_to_edit)])
                             break
                     except KeyError:
                         print("\nInvalid index entered.")
