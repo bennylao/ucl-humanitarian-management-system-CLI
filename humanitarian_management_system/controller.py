@@ -478,12 +478,14 @@ class Controller:
             if user_selection == "1":
                 self.create_refugee()
             elif user_selection == "2":
-                self.admin_edit_refugee()
+                self.add_refugee_from_csv()
             elif user_selection == "3":
-                self.move_refugee_admin()
+                self.admin_edit_refugee()
             elif user_selection == "4":
-                self.admin_display_refugee()
+                self.move_refugee_admin()
             elif user_selection == "5":
+                self.admin_display_refugee()
+            elif user_selection == "6":
                 self.admin_refugee_export()
             elif user_selection == "R":
                 break
@@ -1597,6 +1599,28 @@ class Controller:
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
+
+    @staticmethod
+    def add_refugee_from_csv():
+        print("benny: i am working on it. just wanna make the option visible when filming")
+        print("\nTo add refugee data from a csv file, please follow the instructions below:"
+              "\n1. Rename the csv file name to 'New_Refugees.csv'"
+              "\n2. Make sure the first row in the excel is column name"
+              "\n   'refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'"
+              "\n3. Make sure the data type matches the column, for example, refugeeID must be integer, "
+              "\n   First name must be string and "
+              "dob must be a string representing a valid date in the form (dd/mm/yyyy)"
+              "\n4. Put the csv file next to main, i.e. inside the same directory where main locates")
+        while True:
+            is_continue = input("\nPlease enter 'READY' when you have done all the instructions above. "
+                                "Or enter 'RETURN' to cancel"
+                                "\n -->")
+            if is_continue == 'RETURN':
+                return
+            elif is_continue == 'READY':
+                expected_column_names = ['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID']
+                expected_data_types = (('refugeeID', 'int'), ('campID', 'int'), ('firstName', 'str'),
+                                       ('lastName', 'str'), ('dob', 'str'), ('gender', 'str'), ('familyID', 'int'))
 
     @staticmethod
     def help_center():
