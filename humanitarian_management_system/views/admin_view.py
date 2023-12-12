@@ -39,10 +39,11 @@ class AdminView:
 
     manage_refugee_menu = (
         ("1", "Add refugees"),
-        ("2", "Edit refugees"),
-        ("3", "Move/remove refugee(s)"),
-        ("4", "Display all refugees information"),
-        ("5", "Export a CSV report for all refugees in system"),
+        ("2", "Add multiple refugees from csv"),
+        ("3", "Edit refugees"),
+        ("4", "Move/remove refugee(s)"),
+        ("5", "Display all refugees information"),
+        ("6", "Export a CSV report for all refugees in system"),
         ("R", "Return to previous page"),
         ("L", "Logout")
     )

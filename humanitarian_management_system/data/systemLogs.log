@@ -1280,6 +1280,63 @@ invalid literal for int() with base 10: '/Users/jesswork/humanitarian_management
 2023-12-11 19:53:26,519 - INFO - controller-volunteer_main-Line1202 - volunteer main menu is displayed
 2023-12-11 19:53:28,110 - INFO - controller-volunteer_main-Line1219 - logging out from volunteer main menu
 2023-12-11 19:53:28,111 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:48:22,260 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:48:22,260 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:48:22,260 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:48:22,260 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:49:05,945 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:49:09,874 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:49:09,874 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:57:07,131 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:57:07,132 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:57:07,132 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:57:07,132 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:57:08,389 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:57:10,707 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:57:10,708 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 21:59:03,365 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 21:59:03,365 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 21:59:03,365 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 21:59:03,365 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 21:59:04,517 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 21:59:06,476 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 21:59:06,476 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:00:17,743 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:00:17,743 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:00:17,743 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:00:17,744 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:00:20,122 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:00:22,416 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:00:22,417 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:02:45,600 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:02:45,600 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:02:45,600 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:02:45,600 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:02:46,691 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:02:49,255 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:02:49,255 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:13:28,786 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:17:06,326 - INFO - controller-admin_close_camp-Line1012 - User file loaded successfully for admin closing a camp.
+2023-12-11 22:18:50,477 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:18:50,477 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:18:50,477 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:18:50,477 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:18:53,067 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:18:57,426 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:18:57,426 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:20:32,228 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:24:30,408 - INFO - controller-admin_close_camp-Line1012 - User file loaded successfully for admin closing a camp.
+2023-12-11 22:28:19,462 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-11 22:28:19,462 - INFO - controller-initialise-Line27 - Controller is initialised
+2023-12-11 22:28:19,462 - INFO - controller-initialise-Line30 - welcome message is displayed
+2023-12-11 22:28:19,462 - INFO - controller-startup-Line38 - Startup page is shown
+2023-12-11 22:28:21,732 - INFO - controller-login-Line83 - login page is shown
+2023-12-11 22:28:25,066 - INFO - controller-admin_main-Line134 - login successfully as admin
+2023-12-11 22:28:25,066 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 22:28:54,872 - INFO - controller-admin_close_camp-Line1012 - User file loaded successfully for admin closing a camp.
+2023-12-11 22:30:37,075 - INFO - controller-admin_main-Line138 - admin main menu is shown
+2023-12-11 23:41:02,538 - INFO - controller-admin_main-Line158 - logging out from admin main menu
+2023-12-11 23:41:02,540 - INFO - controller-startup-Line38 - Startup page is shown
 2023-12-11 20:11:06,091 - INFO - main-main-Line14 - Starting Humanitarian Management System
 2023-12-11 20:11:06,092 - INFO - controller-initialise-Line27 - Controller is initialised
 2023-12-11 20:11:06,092 - INFO - controller-initialise-Line30 - welcome message is displayed
