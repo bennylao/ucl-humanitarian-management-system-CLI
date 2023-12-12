@@ -28,17 +28,17 @@ class ResourceReport():
         unalloc = sum(self.unallocResources_df['unallocTotal'])
         if unalloc == 0:
             unalloc_status = False
-            unalloc_prompt = "\n＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 3: There are no unallocated resources ... aka all resources are currently assigned to camps \n"
+            unalloc_prompt = "\n\033[92m＼(^o^)／ GOOD NEWS ＼(^o^)／ CHECK 3: There are no unallocated resources ... aka all resources are currently assigned to camps \033[0m\n"
         else:
             unalloc_items = self.unallocResources_df[self.unallocResources_df['unallocTotal'] > 0]
             unalloc_status = True
             #unalloc_prompt = f"\n =======  ｡•́︿•̀｡  WARNING! THERE ARE THE FOLLOWING UNALLOCATED RESOURCES  ｡•́︿•̀｡  ===== \n \n {unalloc_items.to_string(index=False)} \n"
 
-            unalloc_prompt = f"""\n
+            unalloc_prompt = f"""\033[91m\n
 ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖ !!!  SOS   ｡•́︿•̀｡  SOS !!! ✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖✖  \n
 CHECK 3:\n
 THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
-==============================================================\n
+==============================================================\033[0m\n
 {unalloc_items.to_string(index=False)} \n
             """
 
@@ -327,6 +327,10 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
         return pd.concat([info_half_df, camp_half_df], axis=1)
 
     def PRETTY_PIVOT_CAMP(self, table: pd.DataFrame):
+        ## incase strings, force into numbers
+        for column in table.columns:
+            table[column] = pd.to_numeric(table[column], errors='ignore')
+
         #### this works for tables of this format, split out by camps... 
 
         """ resourceID                      name  priorityLvl  unallocTotal      3      5     6     9    11
@@ -451,14 +455,10 @@ THERE ARE THE FOLLOWING UNALLOCATED RESOURCES... \n
             c_refugee_amt = camp.loc[camp['campID'] == c_id, 'refugeePop'].iloc[0]
 
             # Calculate what the ideal amount should be...
+            #####################################################################
+            # THE ACTUAL ALGO !!!! 
             ideal_qty_value = round((c_refugee_amt / totalRefugees) * r_stock_amt)
-
-            """ # Printing out the details in a readable format
-            print(f"Row Index: {index}")
-            print(f"Resource ID: {r_id}, Stock Amount: {r_stock_amt}")
-            print(f"Camp ID: {c_id}, Refugee Amount: {c_refugee_amt}")
-            print(f"Ideal Quantity Value: {ideal_qty_value}")
-            print("-" * 50)  # Separator for readability """
+            #####################################################################
 
             # Assign the calculated value to the specific row in 'ideal_qty' column
             alloc_ideal.at[index, 'ideal_qty'] = ideal_qty_value
