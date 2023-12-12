@@ -214,6 +214,8 @@ class Admin(User):
                 continue
 
             joined_df_total = joined_df_total.loc[joined_df_total['User ID'] == int(id_input)]
+            joined_df_total = joined_df_total.loc[:, ~joined_df_total.columns.isin(['Is verified?', 'Is active?',
+                                                                                    'countryID'])]
             table_str = joined_df_total.sort_values('Camp ID').to_markdown(index=False)
             print("\n" + table_str)
 

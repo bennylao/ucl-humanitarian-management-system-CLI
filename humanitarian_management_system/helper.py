@@ -458,6 +458,9 @@ def validate_refugee(lvl, cid):
 
         csv_path_ref = Path(__file__).parents[0].joinpath("data/refugee.csv")
         df_ref = pd.read_csv(csv_path_ref)
+        df_ref = df_ref.loc[df_ref['campID'] == cid]['familyID'].tolist()
+        for i in df_ref:
+            id_arr.append(str(i))
 
         print("Select 1 to create a new family identification, or 2 to join an existing one")
         if select != '1' and select != '2':
@@ -467,20 +470,18 @@ def validate_refugee(lvl, cid):
         if select == 'RETURN':
             return
         if select == '1':
-            create_id = input("\nEnter family identification: ")
             try:
-                create_id = int(create_id)
+                create_id = input("\nEnter family identification: ")
+                if create_id in id_arr:
+                    print("Family ID already exists!")
+                    continue
                 break
             except ValueError:
                 print("Must be an integer value!")
                 continue
         elif select == '2':
-            print(cid)
-            df_ref = df_ref.loc[df_ref['campID'] == cid]['familyID'].tolist()
             df = pd.read_csv(csv_path_ref)
             df = df.loc[df['campID'] == cid]
-            for i in df_ref:
-                id_arr.append(str(i))
             table = df['familyID'].drop_duplicates().to_markdown(index=False)
             print("\n" + table)
             try:
@@ -495,14 +496,16 @@ def validate_refugee(lvl, cid):
 
     while True:
         vacc = input("\nIs vaccinated? (True or False): ")
+
+        if vacc == "RETURN":
+            return
+
         if (vacc != 'True') and (vacc != 'False'):
             print("Please enter True or False only!")
             continue
         if vacc == 'False' and lvl == 'high':
             print("This camp only accept vaccinated refugee due to health risk concerns!")
             continue
-        if vacc == "RETURN":
-            return
         else:
             break
 
@@ -518,18 +521,17 @@ def validate_refugee(lvl, cid):
     print("\n" + table_str)
     while True:
         try:
-            med = input("\nEnter medical condition (optional): ")
-            if int(med) not in med_id:
-                print("Invalid index option entered!")
-            # if user decided to enter nothing, we just assume the refugee is healthy aka index = 1
-            elif med == '':
-                med = 1
+            med = input("\nEnter medical condition: ")
             if med == "RETURN":
                 return
+            if int(med) not in med_id:
+                print("Invalid index option entered!")
+                continue
+            break
+            # if user decided to enter nothing, we just assume the refugee is healthy aka index = 1
         except ValueError:
             print("Invalid index option entered!")
             logging.warning("Invalid index option")
-        break
 
     while True:
         med_des = input("\nEnter medical description (optional): ")
@@ -540,7 +542,7 @@ def validate_refugee(lvl, cid):
         else:
             break
 
-    return create_id, f_name, l_name, dob, gender, int(med), med_des, vacc
+    return create_id, f_name, l_name, dob, gender, med, med_des, vacc
 
 
 def move_refugee_helper_method(cid):
