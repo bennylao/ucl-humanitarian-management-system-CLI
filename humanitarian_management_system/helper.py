@@ -57,7 +57,8 @@ def validate_registration(usernames):
             break
         else:
             print("Invalid first name entered.\n"
-                  "Only alphabet are allowed.")
+                  "Only alphabetic characters are allowed."
+                  '(Those characters defined in the Unicode character database as "Letter")')
     # check for last name
     while True:
         last_name = input("\nEnter last name: ")
@@ -68,8 +69,9 @@ def validate_registration(usernames):
             last_name = ' '.join(last_name.split())
             break
         else:
-            print("Invalid last name entered.\n"
-                  "Only alphabet are allowed.")
+            print("Invalid first name entered.\n"
+                  "Only alphabetic characters are allowed."
+                  '(Those characters defined in the Unicode character database as "Letter")')
     # check for email
     while True:
         email = input("\nEnter email: ")
