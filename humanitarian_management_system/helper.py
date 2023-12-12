@@ -458,6 +458,9 @@ def validate_refugee(lvl, cid):
 
         csv_path_ref = Path(__file__).parents[0].joinpath("data/refugee.csv")
         df_ref = pd.read_csv(csv_path_ref)
+        df_ref = df_ref.loc[df_ref['campID'] == cid]['familyID'].tolist()
+        for i in df_ref:
+            id_arr.append(str(i))
 
         print("Select 1 to create a new family identification, or 2 to join an existing one")
         if select != '1' and select != '2':
@@ -467,20 +470,18 @@ def validate_refugee(lvl, cid):
         if select == 'RETURN':
             return
         if select == '1':
-            create_id = input("\nEnter family identification: ")
             try:
-                create_id = int(create_id)
+                create_id = input("\nEnter family identification: ")
+                if create_id in id_arr:
+                    print("Family ID already exists!")
+                    continue
                 break
             except ValueError:
                 print("Must be an integer value!")
                 continue
         elif select == '2':
-            print(cid)
-            df_ref = df_ref.loc[df_ref['campID'] == cid]['familyID'].tolist()
             df = pd.read_csv(csv_path_ref)
             df = df.loc[df['campID'] == cid]
-            for i in df_ref:
-                id_arr.append(str(i))
             table = df['familyID'].drop_duplicates().to_markdown(index=False)
             print("\n" + table)
             try:
@@ -495,14 +496,16 @@ def validate_refugee(lvl, cid):
 
     while True:
         vacc = input("\nIs vaccinated? (True or False): ")
+
+        if vacc == "RETURN":
+            return
+
         if (vacc != 'True') and (vacc != 'False'):
             print("Please enter True or False only!")
             continue
         if vacc == 'False' and lvl == 'high':
             print("This camp only accept vaccinated refugee due to health risk concerns!")
             continue
-        if vacc == "RETURN":
-            return
         else:
             break
 
@@ -518,18 +521,17 @@ def validate_refugee(lvl, cid):
     print("\n" + table_str)
     while True:
         try:
-            med = input("\nEnter medical condition (optional): ")
-            if int(med) not in med_id:
-                print("Invalid index option entered!")
-            # if user decided to enter nothing, we just assume the refugee is healthy aka index = 1
-            elif med == '':
-                med = 1
+            med = input("\nEnter medical condition: ")
             if med == "RETURN":
                 return
+            if int(med) not in med_id:
+                print("Invalid index option entered!")
+                continue
+            break
+            # if user decided to enter nothing, we just assume the refugee is healthy aka index = 1
         except ValueError:
             print("Invalid index option entered!")
             logging.warning("Invalid index option")
-        break
 
     while True:
         med_des = input("\nEnter medical description (optional): ")
@@ -540,7 +542,7 @@ def validate_refugee(lvl, cid):
         else:
             break
 
-    return create_id, f_name, l_name, dob, gender, int(med), med_des, vacc
+    return create_id, f_name, l_name, dob, gender, med, med_des, vacc
 
 
 def move_refugee_helper_method(cid):
@@ -1384,6 +1386,8 @@ def help_center_page():
               "\n   - The main difference between closing and deleting a camp is that a closed camp offers you the option"
               " of automatically assigning volunteers to another camp.\n     A deleted camp automatically unassigns "
               "volunteers from any camp so that they are ready to be assigned to another camp."
+              "\n   - Don't forget to check out the sophisticated data visualisation feature in camp management to get a graphical "
+              "overview of all the camps, refugees, and resources in the system."
               "\n\n3. Refugee Management"
               "\n"
               "\n   - *** Our organisation believes it is essential to track the information of individual family members"
@@ -1402,10 +1406,7 @@ def help_center_page():
               "to add more refugees to it. These restrictions have been\n     implemented in the system."
               "\n   - An admin is able to EXPORT a CSV file of the refugees in the system, either an entire overview"
               "or filtered by a specific camp or event."
-              "\n\n4. Volunteer Account Management"
-              "\n   - Admin is able to edit volunteer accounts, display an overview of them, deactivate or remove"
-              "volunteer accounts."
-              "\n\n5. Resource Management"
+              "\n\n4. Resource Management"
               "\n   - Our resource management section is very sophisticated. It includes:"
               "\n   - A SHOP: where admin adds into the system the resources which they have acquired. This initial "
               "'purchase' of items simply places them in the system, waiting to be allocated to\n            "
@@ -1418,8 +1419,15 @@ def help_center_page():
               "into account the 'health' levels of the camps,"
               "\n                   which is the average health rating of its refugee population."
               "\n   - STATISTICS: Admin can see all current statistics on how resources are distributed."
-              "\n\n6. Account Edit & View"
+              "\n\n5. Volunteer Account Management"
+              "\n   - Admin is able to edit volunteer accounts, display an overview of them, deactivate or remove"
+              "volunteer accounts."
+              "\n\n6. Display Summary/Statistics"
+              "\n   - Here admins can get a tabular overview of all events categorised by current, future and closed."
+              "\n\n7/8.Account Edit & View"
               "\n   - Admin can modify their own account details & view them"
+              "\n\n9. Open MessageBox"
+              "\n   - Users can send and read messages to/from one another using our MessageBox system."
               "\n\n\n\n--------------------------------------------------------------------------"
               "-------------------------------------------------------------------------------------------------------"
               "----\n"
@@ -1453,8 +1461,12 @@ def help_center_page():
               "\n                                However, you cannot add refugees from outside the event."
               "\n                              - Refugees can be added at time of event creation or afterwards. They can also be removed."
               "\n                              - Sessions can be deleted from the system"
-              "\n\n3. Edit & View Account Information"
+              "\n   - Don't forget to check out the sophisticated data visualisation feature in camp management to get a graphical "
+              "overview of all the camps, refugees, and resources in the system."
+              "\n\n3/4.Edit & View Account Information"
               "\n   - Volunteer can edit and view their own personal account information"
+              "\n\n5. Open MessageBox"
+              "\n   - Users can send and read messages to/from one another using our MessageBox system."
               "\n\n\n *** Look out for our return prompt instructions throughout the application if ever you change "
               "your mind about a process! ***"
 
