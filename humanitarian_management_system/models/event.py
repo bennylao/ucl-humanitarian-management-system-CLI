@@ -243,7 +243,7 @@ class Event:
                     print("\nThis event has started, the start date cannot be changed.")
                     break
                 try:
-                    start_date = input("\n--> Start date (format dd/mm/yy): ")
+                    start_date = input("\n--> Start date (format dd/mm/yyyy): ")
                     if start_date == 'RETURN':
                         return
                     else:
@@ -270,7 +270,7 @@ class Event:
             date_format = '%d/%m/%Y'
             while True:
                 try:
-                    end_date = input("\n--> End date (format dd/mm/yy): ")
+                    end_date = input("\n--> End date (format dd/mm/yyyy): ")
                     if end_date == 'RETURN':
                         return
                     if end_date == 'NONE':
