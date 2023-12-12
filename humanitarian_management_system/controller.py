@@ -365,7 +365,6 @@ class Controller:
                     result_df_ongoing = pd.merge(filtered_df_event1, merge_resource, how='left', on='eventID')
                     Event.display_events(result_df_ongoing)
 
-
                 print("\n\n=================================================================\n"
                       "           Data for events that have not started yet\n"
                       "=================================================================")
@@ -376,7 +375,6 @@ class Controller:
                     filtered_df_event2 = filtered_df_event2.drop(['ongoing', 'description', 'no_camp'], axis=1)
                     result_df_yet = pd.merge(filtered_df_event2, merge_resource, how='left', on='eventID')
                     Event.display_events(result_df_yet)
-
 
                 print("\n\n=================================================================\n"
                       "                     Data for closed events\n"
@@ -514,6 +512,7 @@ class Controller:
             logging.critical(f"{e}")
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
+
     @staticmethod
     def admin_data_visualization():
         ManagementView.data_visual_message()
@@ -687,7 +686,8 @@ class Controller:
                     eventID = int(eventID)
 
                     if eventID not in merged_df['eventID'].values:
-                        print(f"Invalid input! Please enter an integer from {merged_df['eventID'].values} for Event ID.")
+                        print(
+                            f"Invalid input! Please enter an integer from {merged_df['eventID'].values} for Event ID.")
                         continue
                     break
                 except ValueError as e:
@@ -745,7 +745,7 @@ class Controller:
                         continue
                     elif int(target_column_index) in range(1, 5):
 
-                        temp_id = int(modify_camp_id)
+                        old_camp_id = int(modify_camp_id)
 
                         target_column_name = filtered_df1.columns[int(target_column_index) - 1]
                         while True:
@@ -762,28 +762,25 @@ class Controller:
                                     print("Camp ID already exists! Please choose a new one.")
                                     continue
 
-                                # change corresponding refugee & volunteer & resource allocation camp ID
-                                ref_id_arr = df_r.loc[df_r['campID'] == int(modify_camp_id)]['refugeeID'].tolist()
-                                vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
-                                res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['campID'].tolist()
+                                else:
 
-                                print(new_value)
-                                print(modify_camp_id)
+                                    modify_camp_id = int(new_value)
+                                    # change corresponding refugee & volunteer & resource allocation camp ID
+                                    ref_id_arr = df_r.loc[df_r['campID'] == int(old_camp_id)]['refugeeID'].tolist()
+                                    vol_id_arr = df_v.loc[df_v['campID'] == int(old_camp_id)]['userID'].tolist()
+                                    res_id_arr = df_a.loc[df_a['campID'] == int(old_camp_id)]['campID'].tolist()
 
-                                for j in ref_id_arr:
-                                    helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
-                                                             int(j), 'campID', int(new_value))
+                                    for j in ref_id_arr:
+                                        helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
+                                                                 int(j), 'campID', int(new_value))
 
-                                for k in vol_id_arr:
-                                    helper.modify_csv_pandas("data/user.csv", 'userID',
-                                                             int(k), 'campID', int(new_value))
+                                    for k in vol_id_arr:
+                                        helper.modify_csv_pandas("data/user.csv", 'userID',
+                                                                 int(k), 'campID', int(new_value))
 
-                                for m in res_id_arr:
-                                    helper.modify_csv_pandas("data/resourceAllocation.csv", 'campID',
-                                                             int(m), 'campID', int(new_value))
-
-                                modify_camp_id = int(new_value)
-                                break
+                                    for l in res_id_arr:
+                                        helper.modify_csv_pandas("data/resourceAllocation.csv.csv", 'userID',
+                                                                 int(l), 'campID', int(new_value))
 
                             if target_column_index == '3':
 
@@ -813,7 +810,7 @@ class Controller:
                                     logging.critical(f"{e}")
                                     continue
 
-                        helper.modify_csv_pandas(csv_path0, 'campID', temp_id, target_column_name,
+                        helper.modify_csv_pandas(csv_path0, 'campID', old_camp_id, target_column_name,
                                                  new_value)
                         csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
                         df_c = pd.read_csv(csv_path_c)
@@ -912,7 +909,7 @@ class Controller:
 
             while True:
                 aa = input(f"\nAre you sure to delete the camp {delete_camp_id}? (yes/no)\n"
-                            f"Note: you'll also be deleting all associated refugees from the system and unassigned"
+                           f"Note: you'll also be deleting all associated refugees from the system and unassigned"
                            f" all volunteers from camp {delete_camp_id}: ")
                 if aa == "yes":
                     # implement the deletion in csv file
@@ -933,7 +930,7 @@ class Controller:
                     ref_df.reset_index(drop=True, inplace=True)
                     ref_df.to_csv(refugee_csv_path, index=False)
                     # keep track of existing camp num of a particular event
-                    no_camp = df.loc[df['eventID'] == event_id][ "no_camp"].tolist()[0]
+                    no_camp = df.loc[df['eventID'] == event_id]["no_camp"].tolist()[0]
                     no_camp -= 1
                     index = df[df["eventID"] == event_id].index.tolist()
                     helper.modify_csv_value(event_csv_path, index[0], "no_camp", no_camp)
@@ -950,16 +947,19 @@ class Controller:
                     volunteers_in_camp = user_df[
                         (user_df['campID'] == delete_camp_id) & (user_df['userType'] == 'volunteer')]
                     volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
-                    print("\nBelow are the volunteers you are going to be unassigned from any camp in the system: ")
-                    print(volunteers_df_filtered.to_markup)
-                    for index, row in volunteers_in_camp.iterrows():
-                        old_camp_id = row['campID']
-                        row_index_old_camp = user_df[user_df['campID'] == old_camp_id].index
-                        user_df.at[row_index_old_camp[0], 'campID'] = 0
+                    if len(volunteers_df_filtered) == 0:
+                        print("Not to worry, no volunteers in this camp anyway.")
+                    else:
+                        print("\nBelow are the volunteers you are going to be unassigned from any camp in the system: ")
+                        print(volunteers_df_filtered.to_markdown(index=False))
+                        for index, row in volunteers_in_camp.iterrows():
+                            old_camp_id = row['campID']
+                            row_index_old_camp = user_df[user_df['campID'] == old_camp_id].index
+                            user_df.at[row_index_old_camp[0], 'campID'] = 0
 
-                    user_df.to_csv(user_csv_path, index=False)
-                    print("\n\u2714 You have Successfully deleted the camp, deleted its associated refugees "
-                          f"and unassigned all volunteers from camp {delete_camp_id}!\n\n")
+                        user_df.to_csv(user_csv_path, index=False)
+                        print("\n\u2714 You have Successfully deleted the camp, deleted its associated refugees "
+                              f"and unassigned all volunteers from camp {delete_camp_id}!\n\n")
                     print("\n\u2714 You have Successfully deleted the camp!")
                     return
                 elif aa == "no":
@@ -1062,8 +1062,10 @@ class Controller:
                         user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
                         user_df = pd.read_csv(user_csv_path)
                         logging.info("User file loaded successfully for admin closing a camp.")
-                        camps_in_event = df1.loc[df1['eventID'] == event_id, 'campID'].tolist()
-                        volunteers_in_camp = user_df[(user_df['campID'] == close_camp_id) & (user_df['userType'] == 'volunteer')]
+                        camps_in_event = df1.loc[
+                            (df1['eventID'] == event_id) & (df1['status'] == 'open'), 'campID'].tolist()
+                        volunteers_in_camp = user_df[
+                            (user_df['campID'] == close_camp_id) & (user_df['userType'] == 'volunteer')]
                         volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
                         # volunteers_in_camp = user_df.loc[user_df['campID'] == close_camp_id, 'campID'].tolist()
                         print(
@@ -1075,29 +1077,43 @@ class Controller:
                             return
                         elif move_volunteers.lower() == 'y':
                             if len(volunteers_in_camp) == 0:
-                                print("Just checked - looks like there are no volunteers left in that camp, anyway. "
-                                      "Redirecting you back now.")
+                                print(
+                                    "\n\nJust checked - looks like there are no volunteers left in that camp, anyway. "
+                                    "Redirecting you back now.")
                                 return
                             print("Below are the volunteers in the camp: ")
                             print('\n\n', volunteers_df_filtered.to_markdown(index=False))
-
-                            new_camp = input("\nFrom the list below, which are the camps in the same event as the one"
-                                             "you have just closed, please enter which camp you want to move volunteers to: ")
-                            print(filtered_camp_id)
-                            if new_camp.lower() == 'return':
+                            if len(camps_in_event) == 0:
+                                print(
+                                    "\nSorry - no other open camps to move to in this event! We'll take you back. The camp has still been closed "
+                                    f"but you'll have to manually remove volunteers if necessary.")
                                 return
-                            else:
-                                try:
-                                    new_camp = int(new_camp)
-                                    break
-                                except ValueError as e:
-                                    logging.info(f"Error when user is selecting new camp to move volunteers to.")
-                                    print("Oh no! R")
+                            # print(filtered_camp_id)
+                            while True:
+                                new_camp = input(
+                                    f"\nFrom this list: {camps_in_event}, which are the OPEN camps in the same event as the one"
+                                    " you have just closed, please enter which camp you want to move volunteers to: ")
+                                if new_camp.lower() == 'return':
+                                    return
+                                else:
+                                    try:
+                                        new_camp = int(new_camp)
+                                        if new_camp == close_camp_id:
+                                            print(
+                                                "\n\nYou can't move volunteers to the same camp as the one you're closing..."
+                                                "Select a different camp or, if there aren't any, enter RETURN.\n\n")
+                                        else:
+                                            break
+                                    except ValueError as e:
+                                        logging.info(f"Error when user is selecting new camp to move volunteers to.")
+                                        print(f"Oh no! {e}")
+                                        return
+                            break
                     except Exception as e:
                         logging.critical(f"Error {e} when trying to display volunteers in camp when closing a camp.")
                         print(f"\nOh no. Error {e} has occurred. We'll take you back. The camp has still been closed "
                               f"but you'll have to manually remove volunteers.")
-                    return
+                        return
                 elif aa == "no":
                     return
                 elif aa == "RETURN":
@@ -1115,9 +1131,9 @@ class Controller:
                         df1.loc[df1['campID'] == int(new_camp), 'volunteerPop'] += 1
                     df1.to_csv(camp_csv_path, index=False)
                     user_df.to_csv(user_csv_path, index=False)
-                    print(f"Successfully assigned these volunteers to the new camp {new_camp}! See below: ")
-                    print(df1[df1['campId'] == close_camp_id].to_markdown)
-                    print(df1[df1['campID'] == new_camp].to_markdown)
+                    print(f"\n\nSuccessfully assigned these volunteers to the new camp {new_camp}! See below: \n\n")
+                    print(df1[df1['campID'] == close_camp_id].to_markdown(index=False), "\n")
+                    print(df1[df1['campID'] == new_camp].to_markdown(index=False))
                     break
                 else:
                     print("Not a valid camp to choose from. Try again: ")
@@ -1417,7 +1433,7 @@ class Controller:
             csv_path_a = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
             df_a = pd.read_csv(csv_path_a)
 
-            camp_id = dff.at[1, 'campID']
+            camp_id = dff.at[int(user_id), 'campID']
             event_id = dfc.loc[dfc['campID'] == int(camp_id)]['eventID'].tolist()[0]
 
             csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
@@ -1912,7 +1928,7 @@ class Controller:
             if move_or_delete == "3":
                 return
             elif move_or_delete == "1":
-                helper.move_refugee_helper_method()
+                helper.move_refugee_admin()
             elif move_or_delete.lower() == "2":
                 self.delete_refugee()
             else:
@@ -2222,6 +2238,7 @@ class Controller:
                   f"[Error] {e}")
 
     """ #### edit refugee for volunteer, volunteer camp dependent #### """
+
     def vol_edit_refugee(self, r):
         try:
             camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
@@ -2295,7 +2312,7 @@ class Controller:
         df = pd.read_csv(user_csv_path)
         dff = df[df['userID'] == int(user_id)]
         # event_id = dff.at[1, 'eventID']
-        camp_id = dff.at[1, 'campID']
+        camp_id = dff.at[int(user_id), 'campID']
 
         ManagementView.data_visual_message()
         # AdminView.display_data_visual_menu()
@@ -2329,7 +2346,9 @@ class Controller:
 
                 else:
                     return
-
+            except FileNotFoundError as e:
+                print("File damaged or lost! Please contact admin.")
+                logging.critical(f"{3}")
             except ValueError as e:
                 print("Invalid Input, please try again")
                 logging.critical(f"{e}")

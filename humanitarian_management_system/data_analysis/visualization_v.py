@@ -21,7 +21,7 @@ class DataVisual:
             lon="longitude",
             hover_name=self.camp_loc["campID"].apply(lambda x: f"Camp {x}"),
             hover_data=["eventID", "countryID", "refugeePop", "refugeeCapacity", "status"],
-            color_discrete_sequence=["fuchsia"],
+            color='status',
             zoom=0,
             height=800,
             width=None
@@ -29,7 +29,7 @@ class DataVisual:
 
         fig.update_layout(mapbox_style="carto-positron")
         fig.update_layout(margin={"r": 0, "t": 30, "l": 0, "b": 0})
-        fig.update_traces(marker={"size": 10, "symbol": "circle", "color": "green"})
+        fig.update_traces(marker={"size": 10, "symbol": "circle"})
         # fig.update_layout(mapbox_bounds={"west": -10, "east": 2, "south": 49, "north": 60})
         fig.update_layout(mapbox_bounds={"west": -180, "east": 180, "south": -90, "north": 90})
         fig.update_layout(title='Camp locations on map')
