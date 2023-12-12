@@ -70,63 +70,100 @@ class Event:
         Recognize which event and which column need to be edited,
         then edit by calling each corresponding private function.
         """
+        sign = 0
+        sign2 = 0
+        sign3 = 0
         try:
-            event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
-            if df.empty:
-                print("\nNo events to edit.")
-                return
-            filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
-            if filtered_df.empty:
-                print("\nAll the events are closed and cannot be edited.")
-                return
+            while sign3 == 0:
+                event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+                df = pd.read_csv(event_csv_path)
+                if df.empty:
+                    print("\nNo events to edit.")
+                    return
+                filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
+                if filtered_df.empty:
+                    print("\nAll the events are closed and cannot be edited.")
+                    return
 
-            row = -1
-            while True:
-                try:
-                    Event.display_events(filtered_df)
-                    eid_to_edit = input('\n--> Enter the event ID to update:')
-                    if eid_to_edit == 'RETURN':
-                        return
-                    elif int(eid_to_edit) not in filtered_df['eventID'].values:
-                        print(
-                            f"\nInvalid input! Please enter an integer from {filtered_df['eventID'].values} for Event ID.")
+                eid_to_edit = 0
+                while sign2 == 0:
+                    try:
+                        Event.display_events(filtered_df)
+                        eid_to_edit = input('\n--> Enter the event ID to update:')
+                        if eid_to_edit == 'RETURN':
+                            return
+                        elif int(eid_to_edit) not in filtered_df['eventID'].values:
+                            print(
+                                f"\nInvalid input! Please enter an integer from {filtered_df['eventID'].values} for Event ID.")
+                            continue
+                        else:
+                            row = df[df['eventID'] == int(eid_to_edit)].index[0]
+                            break
+                    except IndexError:
+                        print("\nInvalid event ID entered.")
                         continue
-                    else:
-                        row = df[df['eventID'] == int(eid_to_edit)].index[0]
-                        break
-                except IndexError:
-                    print("\nInvalid event ID entered.")
-                    continue
-                except ValueError:
-                    print("\nInvalid event ID entered.")
-                    continue
-
-            while True:
-                try:
-                    what_to_edit = input('\n--> Choose one to edit (title/ location/ description/ startDate/ endDate):')
-                    if what_to_edit == 'RETURN':
-                        return
-                    elif what_to_edit not in ['title', 'location', 'description', 'startDate', 'endDate']:
-                        print(
-                            f"\nInvalid input! Please choose one from ['title', 'location', 'description', 'startDate', 'endDate'].")
+                    except ValueError:
+                        print("\nInvalid event ID entered.")
                         continue
-                    else:
-                        break
-                except KeyError:
-                    print("\nInvalid option name entered.")
-                    continue
 
-            if what_to_edit == 'title':
-                Event.__change_title(row)
-            elif what_to_edit == 'location':
-                Event.__change_location(row)
-            elif what_to_edit == 'description':
-                Event.__change_description(row)
-            elif what_to_edit == 'startDate':
-                Event.__change_start_date(row)
-            else:
-                Event.__change_end_date(row)
+                while sign == 0:
+                    try:
+                        what_to_edit = input("\nChoose one to edit\n"
+                                             "[ 1 ] title\n"
+                                             "[ 2 ] location\n"
+                                             "[ 3 ] description\n"
+                                             "[ 4 ] start date\n"
+                                             "[ 5 ] end date\n"
+                                             "[ R ] Return to the previous page\n"
+                                             "--> ")
+                        if what_to_edit == 'RETURN' or what_to_edit == 'R':
+                            return
+                        elif int(what_to_edit) not in [1,2,3,4,5]:
+                            print("\nInvalid input! Please choose one from 1 to 5.")
+                            continue
+                        else:
+                            if what_to_edit == '1':
+                                Event.__change_title(row)
+                            elif what_to_edit == '2':
+                                Event.__change_location(row)
+                            elif what_to_edit == '3':
+                                Event.__change_description(row)
+                            elif what_to_edit == '4':
+                                Event.__change_start_date(row)
+                            elif what_to_edit == '5':
+                                Event.__change_end_date(row)
+                            filtered_row = filtered_df[filtered_df['eventID'] == int(eid_to_edit)]
+                            Event.display_events(filtered_row)
+                            break
+                    except KeyError:
+                        print("\nInvalid index entered.")
+                        continue
+
+                while True:
+                    whether_continue = input("\nDo you want to continue editing this event? (yes/no) ").lower()
+                    if whether_continue == 'return':
+                        return
+                    elif whether_continue == 'yes':
+                        sign = 0
+                        sign2 = 1
+                        break
+                    elif whether_continue == 'no':
+                        whether_another = input("\nDo you want to continue editing another event? (yes/no) ").lower()
+                        if whether_another == 'yes':
+                            sign2 = 0
+                            sign = 0
+                            break
+                        elif whether_another == 'no':
+                            sign2 = 1
+                            sign = 1
+                            sign3 = 1
+                            break
+                        else:
+                            print("\nPlease enter yes or no.")
+                            continue
+                    else:
+                        print("\nPlease enter yes or no.")
+                        continue
         except FileNotFoundError as e:
             print(f"\nFile not found."
                   f"\nPlease contact admin for further assistance."
