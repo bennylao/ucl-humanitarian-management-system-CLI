@@ -363,7 +363,6 @@ class Controller:
                     result_df_ongoing = pd.merge(filtered_df_event1, merge_resource, how='left', on='eventID')
                     Event.display_events(result_df_ongoing)
 
-
                 print("\n\n=================================================================\n"
                       "           Data for events that have not started yet\n"
                       "=================================================================")
@@ -374,7 +373,6 @@ class Controller:
                     filtered_df_event2 = filtered_df_event2.drop(['ongoing', 'description', 'no_camp'], axis=1)
                     result_df_yet = pd.merge(filtered_df_event2, merge_resource, how='left', on='eventID')
                     Event.display_events(result_df_yet)
-
 
                 print("\n\n=================================================================\n"
                       "                     Data for closed events\n"
@@ -512,6 +510,7 @@ class Controller:
             logging.critical(f"{e}")
 
     """ #################  CREATE / MODIFY / REMOVE CAMPS############### """
+
     @staticmethod
     def admin_data_visualization():
         ManagementView.data_visual_message()
@@ -1411,7 +1410,7 @@ class Controller:
             csv_path_a = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
             df_a = pd.read_csv(csv_path_a)
 
-            camp_id = dff.at[1, 'campID']
+            camp_id = dff.at[int(user_id), 'campID']
             event_id = dfc.loc[dfc['campID'] == int(camp_id)]['eventID'].tolist()[0]
 
             csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
@@ -1662,7 +1661,6 @@ class Controller:
                 else:
                     print("\nAll the check has passed successfully!")
                     print("\nAdding refugees to database...")
-
 
     @staticmethod
     def help_center():
