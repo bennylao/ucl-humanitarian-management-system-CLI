@@ -1622,7 +1622,7 @@ class Controller:
                 is_data_types_all_correct = True
                 expected_column_names = ['campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID']
                 expected_data_types = (('campID', 'int64'), ('firstName', 'str'),
-                                       ('lastName', 'str'), ('dob', 'str'), ('gender', 'str'), ('familyID', 'int64'))
+                                       ('lastName', 'str'), ('gender', 'str'), ('familyID', 'int64'))
                 try:
                     df = pd.read_csv(Path(__file__).parent.joinpath("New_Refugees.csv"))
                 except FileNotFoundError:
@@ -1638,16 +1638,25 @@ class Controller:
 
                 # check for data type
                 # check dob is a valid date
-                if pd.to_datetime(df['dob'], format='%d-%b-%Y', errors='coerce').notnull().all():
+                if pd.to_datetime(df['dob'], format='%d/%m/%Y', errors='coerce').notnull().all():
                     print("\nYeah! Data type for column 'dob' is correct")
                 else:
                     print("\nNooo:( Data type for column 'dob' is INCORRECT")
                     is_data_types_all_correct = False
+
                 for column, datatype in expected_data_types:
+
                     if df[column].dtype != datatype:
-                        if df[column] != df[column].astype(datatype):
+                        try:
+                            df[column] = df[column].astype(datatype)
+                            print(f"\nYeah! Data type for column '{column}' is correct")
+                        except ValueError as e:
+                            print(f"{e}")
                             is_data_types_all_correct = False
                             print(f"\nNooo:( Data type for column '{column}' is INCORRECT")
+                            print(f"expected: {datatype}")
+                            print(df[column].dtype)
+                            continue
                     else:
                         print(f"\nYeah! Data type for column '{column}' is correct")
                 if not is_data_types_all_correct:
@@ -1657,6 +1666,7 @@ class Controller:
                 else:
                     print("\nAll the check has passed successfully!")
                     print("\nAdding refugees to database...")
+
 
     @staticmethod
     def help_center():
