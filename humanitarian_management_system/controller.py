@@ -842,7 +842,7 @@ class Controller:
                 return
             else:
                 # print the events info for users to choose
-                df = pd.read_csv(event_csv_path)
+                df = pd.read_csv(event_csv_path, converters={'ongoing': str})
                 df1 = pd.read_csv(camp_csv_path)
                 filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
                 campID_df = df1[['campID', 'eventID']].copy()
