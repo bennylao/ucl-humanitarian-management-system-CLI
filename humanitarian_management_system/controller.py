@@ -943,16 +943,19 @@ class Controller:
                     volunteers_in_camp = user_df[
                         (user_df['campID'] == delete_camp_id) & (user_df['userType'] == 'volunteer')]
                     volunteers_df_filtered = volunteers_in_camp.drop(columns=['password'])
-                    print("\nBelow are the volunteers you are going to be unassigned from any camp in the system: ")
-                    print(volunteers_df_filtered.to_markdown(index=False))
-                    for index, row in volunteers_in_camp.iterrows():
-                        old_camp_id = row['campID']
-                        row_index_old_camp = user_df[user_df['campID'] == old_camp_id].index
-                        user_df.at[row_index_old_camp[0], 'campID'] = 0
+                    if len(volunteers_df_filtered) == 0:
+                        print("Not to worry, no volunteers in this camp anyway.")
+                    else:
+                        print("\nBelow are the volunteers you are going to be unassigned from any camp in the system: ")
+                        print(volunteers_df_filtered.to_markdown(index=False))
+                        for index, row in volunteers_in_camp.iterrows():
+                            old_camp_id = row['campID']
+                            row_index_old_camp = user_df[user_df['campID'] == old_camp_id].index
+                            user_df.at[row_index_old_camp[0], 'campID'] = 0
 
-                    user_df.to_csv(user_csv_path, index=False)
-                    print("\n\u2714 You have Successfully deleted the camp, deleted its associated refugees "
-                          f"and unassigned all volunteers from camp {delete_camp_id}!\n\n")
+                        user_df.to_csv(user_csv_path, index=False)
+                        print("\n\u2714 You have Successfully deleted the camp, deleted its associated refugees "
+                              f"and unassigned all volunteers from camp {delete_camp_id}!\n\n")
                     print("\n\u2714 You have Successfully deleted the camp!")
                     return
                 elif aa == "no":
