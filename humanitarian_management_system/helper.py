@@ -435,7 +435,11 @@ def validate_refugee(lvl, cid):
             if dob == 'RETURN':
                 return
             dob = datetime.datetime.strptime(dob, date_format)
-            break
+            if dob > datetime.datetime.now():
+                print("Birth date should be before current date and time")
+                continue
+            else:
+                break
         except ValueError:
             print("\nInvalid date format entered.")
             continue

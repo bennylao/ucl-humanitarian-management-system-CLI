@@ -2269,7 +2269,7 @@ class Controller:
             print("Username doesn't exist")
         else:
             content = input('Enter your message: ')
-            with open(m_csv_path, mode='a') as file:
+            with open(m_csv_path, mode='a', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow([self.user.username, to, content, datetime.datetime.now()])
             print('Message sent successfully!')
