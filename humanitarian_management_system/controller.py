@@ -540,7 +540,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 gender = gender_distribution
@@ -551,7 +551,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 age1 = age_distribution
@@ -563,7 +563,7 @@ class Controller:
                         while True:
                             campId = int(input('Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 r = resources_distribution
@@ -571,9 +571,9 @@ class Controller:
                                 break
                     elif userInput == 6:
                         while True:
-                            campId = int(input('Please enter a camp ID: '))
+                            campId = int(input(f'Please enter a camp ID: '))
                             if campId not in campList:
-                                print("Camp id doesn't exist")
+                                print(f"Camp id doesn't exist,please choose from {campList}")
                                 continue
                             else:
                                 medical_info.medical_info(campId)
@@ -584,7 +584,6 @@ class Controller:
             except ValueError as e:
                 print("Invalid Input, please try again")
                 logging.critical(f"{e}")
-
 
     @staticmethod
     def admin_create_camp():
@@ -765,6 +764,9 @@ class Controller:
                                 ref_id_arr = df_r.loc[df_r['campID'] == int(modify_camp_id)]['refugeeID'].tolist()
                                 vol_id_arr = df_v.loc[df_v['campID'] == int(modify_camp_id)]['userID'].tolist()
                                 res_id_arr = df_a.loc[df_a['campID'] == int(modify_camp_id)]['campID'].tolist()
+
+                                print(new_value)
+                                print(modify_camp_id)
 
                                 for j in ref_id_arr:
                                     helper.modify_csv_pandas("data/refugee.csv", 'refugeeID',
@@ -1544,11 +1546,11 @@ class Controller:
                 while True:
                     try:
                         cid = int(input("Enter a camp ID: "))
+                        if cid == 'RETURN':
+                            return
                         if cid not in active_camp:
                             print("Invalid camp ID entered!")
                             continue
-                        if cid == 'RETURN':
-                            return
 
                         row_index_new_camp = df_c[df_c['campID'] == int(cid)].index
                         new_potential_refugee_pop = (df_c.at[row_index_new_camp[0], 'refugeePop'])
@@ -2305,7 +2307,7 @@ class Controller:
             print("Username doesn't exist")
         else:
             content = input('Enter your message: ')
-            with open(m_csv_path, mode='a') as file:
+            with open(m_csv_path, mode='a', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow([self.user.username, to, content, datetime.datetime.now()])
             print('Message sent successfully!')
