@@ -621,7 +621,7 @@ def move_refugee_helper_method(cid):
         related_family_members = ref_df[ref_df['familyID'] == int(refugee_family_id)]
         total_family_members = len(related_family_members)
         while True:
-            if total_family_members != 0:
+            if total_family_members > 1:
                 print("\n----HOLD ON!---- \nThis refugee is part of a family unit (see below).\n")
                 print(related_family_members.to_markdown(index=False))
                 user_input = input("\nAre you sure you want to move this refugee alone? Enter YES (to move"
