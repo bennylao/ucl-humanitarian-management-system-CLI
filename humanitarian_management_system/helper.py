@@ -1577,7 +1577,7 @@ def help_center_page():
               "\n   - You can also edit all details about the event"
               "\n   - Note the difference between closing an event and deleting an event: Closing an event automatically"
               " closes all camps in that event but you can still see the event in\n     our records. Deleting an event"
-              "from the system removes its record and closes all associated camps."
+              "from the system removes its record and closes all associated camps & you cannot edit them."
               "\n   - You can display all events currently in the system"
               "\n\n2. Camp Management"
               "\n   - Only a user with Admin privilege can add new camps to the system."
