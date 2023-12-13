@@ -97,6 +97,7 @@ class Event:
                             continue
                         else:
                             row = df[df['eventID'] == int(eid_to_edit)].index[0]
+                            event_id = int(eid_to_edit)
                             break
                     except IndexError:
                         print("\nInvalid event ID entered.")
@@ -130,7 +131,7 @@ class Event:
                             elif what_to_edit == '4':
                                 Event.__change_start_date(row)
                             elif what_to_edit == '5':
-                                Event.__change_end_date(row)
+                                Event.__change_end_date(row, event_id)
                             df1 = pd.read_csv(event_csv_path)
                             Event.display_events(df1.loc[df['eventID'] == int(eid_to_edit)])
                             break
@@ -267,7 +268,7 @@ class Event:
             logging.critical(f"{e}")
 
     @staticmethod
-    def __change_end_date(row):
+    def __change_end_date(row, eid):
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
             df = pd.read_csv(event_csv_path, converters={'ongoing': str})
@@ -316,6 +317,15 @@ class Event:
                         if row_camp_list:
                             for row_camp in row_camp_list:
                                 helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
+                        refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+                        ref_df = pd.read_csv(refugee_csv_path)
+                        camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+                        camp_df = pd.read_csv(camp_csv_path)
+                        camps_in_event = camp_df.loc[camp_df['eventID'] == eid, 'campID'].tolist()
+                        for i in camps_in_event:
+                            ref_df.drop(ref_df[ref_df['campID'] == i].index, inplace=True)
+                        ref_df.reset_index(drop=True, inplace=True)
+                        ref_df.to_csv(refugee_csv_path, index=False)
                         print("\n\u2714 The event has been successfully closed.")
                         break
                     elif result == "no":
