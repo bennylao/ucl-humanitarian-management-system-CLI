@@ -45,16 +45,14 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 44,44,6,fine,TRUE
 45,45,5,good,TRUE
 46,46,14,bad,TRUE
-47,47,13,okay,TRUE
+47,50,13,okay,TRUE
 48,48,3,Some breathing difficulty.,FALSE
 49,49,1,All good!,TRUE
 50,50,1,Fine :),TRUE
-51,51,1,Nothing :),TRUE
+51,56,1,Nothing :),TRUE
 52,52,6,Need cooling ASAP!,FALSE
 53,53,12,Need quarantine at home.,TRUE
 54,54,1,okay,True
-
 55,49,9,Be careful!,True
-
 56,50,11,Eat less sugar1,False
-
+57,51,10,hey,True

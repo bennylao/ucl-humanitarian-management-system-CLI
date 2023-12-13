@@ -205,7 +205,7 @@ class Controller:
                 self.remove_account()
             if user_selection == "R":
                 return
-            if user_selection == "L":
+            if user_selection == "L" or self.logout_request:
                 logging.info("logging out from admin volunteer management menu")
                 self.logout_request = True
                 self.user = None
@@ -245,7 +245,7 @@ class Controller:
             df = pd.read_csv(Path(__file__).parent.joinpath("data/user.csv"))
             row = df.loc[df['userID'] == select_id].squeeze()
             target_user = Volunteer(row['userID'], *row[4:])
-            self.user.edit_volunteer_profile(target_user)
+            self.logout_request = self.user.edit_volunteer_profile(target_user)
             logging.info("admin edit volunteer successfully")
         except FileNotFoundError as e:
             print(f"\nFile not found."

@@ -1374,16 +1374,19 @@ def remove_refugee_from_session():
             if rid.lower() == "done":
                 break
             try:
-                if rid not in already_registered and ref_df['refugeeID'].eq(int(rid)).any():
+                if rid not in already_registered:
                     print(f"\nThat refugee isn't registered to attend this session, anyway.")
+                    continue
                 elif rid in participants:
                     print("\nYou've already just removed that refugee from this session.")
-                elif (rid in already_registered) or (rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any()):
+                    continue
+                logging.info("Successfully converted user input to int type.")
+                if rid in already_registered:
                     print(f"\nRemoving refugee with id {rid} from skills session {sessionID}. \n\n")
                     participants.append(rid)
                 else:
                     print("\n\nSorry - that refugee ID doesn't exist. Pick again.")
-                logging.info("Successfully converted user input to int type.")
+                    continue
             except ValueError as e:
                 logging.info("Invalid user input when selecting refugee ID to remove from session.")
                 print(f"Error: {e}"
