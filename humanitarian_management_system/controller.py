@@ -1642,7 +1642,8 @@ class Controller:
         print("\nTo add refugee data from a csv file, please follow the instructions below:"
               "\n1. Rename the csv file name to 'New_Refugees.csv'"
               "\n2. Make sure the first row in the excel is column name"
-              "\n   'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID'"
+              "\n   'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID', 'medicalInfoTypeID', "
+              "'description', 'isVaccinated'"
               "\n3. Make sure the data type matches the column, for example, refugeeID must be integer, "
               "\n   First name must be string and "
               "dob must be a string representing a valid date in the form (dd/mm/yyyy)"
@@ -1655,9 +1656,12 @@ class Controller:
                 return
             elif is_continue == 'READY':
                 is_data_types_all_correct = True
-                expected_column_names = ['campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID']
+                expected_column_names = ['campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID',
+                                         'medicalInfoTypeID', 'description', 'isVaccinated']
                 expected_data_types = (('campID', 'int64'), ('firstName', 'str'),
-                                       ('lastName', 'str'), ('gender', 'str'), ('familyID', 'int64'))
+                                       ('lastName', 'str'), ('gender', 'str'), ('familyID', 'int64'),
+                                       ('medicalInfoTypeID', 'int64'), ('description', 'str'),
+                                       ('isVaccinated', 'boolean'))
                 try:
                     df = pd.read_csv(Path(__file__).parent.joinpath("New_Refugees.csv"))
                 except FileNotFoundError:
@@ -1741,6 +1745,13 @@ class Controller:
                                   "\ni.e. move some new refugee to other camps")
                             continue
                         else:
+                            medicalInfoTypeID_list = df['medicalInfoTypeID'].tolist()
+                            med_type_df = pd.read_csv(Path(__file__).parent.joinpath("data/medicalInfoType.csv"))
+                            med_type_id_list = med_type_df['medicalInfoTypeID'].tolist()
+                            for i in medicalInfoTypeID_list:
+                                if i not in med_type_id_list:
+                                    print("\nSome of the Medical info type id is invalid")
+                                    continue
                             df_refugee = pd.read_csv(Path(__file__).parent.joinpath("data/refugee.csv"))
                             new_starting_id = df_refugee['refugeeID'].max() + 1
                             new_id_list = np.arange(new_starting_id, new_starting_id + len(df))
@@ -1748,7 +1759,13 @@ class Controller:
                                       column='refugeeID',
                                       value=new_id_list)
                             print(df.to_markdown())
-                            df.to_csv(Path(__file__).parent.joinpath("data/refugee.csv"), mode='a', index=False, header=False)
+                            df_user = df[['refugeeID', 'campID', 'firstName', 'lastName', 'dob', 'gender', 'familyID']]
+                            df_medical_info = df[['refugeeID', 'medicalInfoTypeID','description','isVaccinated']]
+                            df_medical_info.insert(loc=0,
+                                                   column='medicalInfoID',
+                                                   value=new_id_list)
+                            df_user.to_csv(Path(__file__).parent.joinpath("data/refugee.csv"), mode='a', index=False, header=False)
+                            df_medical_info.to_csv(Path(__file__).parent.joinpath("data/medicalInfo.csv"), mode='a', index=False, header=False)
                             for camp_id in unique_camp_id:
                                 camp_row = df_camp.loc[df_camp['campID'] == camp_id, ['refugeeCapacity', 'refugeePop']]
                                 camp_pop = camp_row['refugeePop']
