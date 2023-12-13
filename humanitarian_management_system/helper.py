@@ -1516,6 +1516,7 @@ def admin_export_refugees_to_csv():
                     refugees.append(refugee_data)
                 break
             elif ref_filter.lower() == 'event':
+                print(event_df.to_markdown(index=False))
                 while True:
                     eventID = input("Enter the event that you want a report of refugees on: ")
                     if eventID.lower() == 'return':
@@ -1532,7 +1533,8 @@ def admin_export_refugees_to_csv():
                         print("\nInvalid input. Must enter an integer or one of the specified exit options.")
                 camps_in_event = camp_df.loc[camp_df['eventID'] == eventID, 'campID'].tolist()
                 refugees_in_associated_camps = ref_df[ref_df['campID'].isin(camps_in_event)]
-                print(f"Okay! We're getting all the refugees which are in camps within eventID {eventID}.\n"
+                print(f"Okay! We're getting all the refugees which are in camps within eventID {eventID}. If none"
+                      f"exist, you'll get an empty file.\n"
                       f"----------------------------------------------------------------------------------\n")
                 for index, row in refugees_in_associated_camps.iterrows():
                     refugee_data = {
