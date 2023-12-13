@@ -465,7 +465,7 @@ class Event:
                     ref_df = pd.read_csv(refugee_csv_path)
                     camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
                     camp_df = pd.read_csv(camp_csv_path)
-                    camps_in_event = camp_df.loc[camp_df['eventID'] == eid_to_delete, 'campID'].tolist()
+                    camps_in_event = camp_df.loc[camp_df['eventID'] == int(eid_to_delete), 'campID'].tolist()
                     refugees_in_camps_in_event = ref_df[(ref_df['campID'].isin(camps_in_event))]
                     ref_df.drop(refugees_in_camps_in_event.index, inplace=True)
                     ref_df.reset_index(drop=True, inplace=True)
@@ -474,12 +474,14 @@ class Event:
                     # reset volunteer camp, role and event info after event is deleted
                     vol_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
                     vol_df = pd.read_csv(vol_csv_path)
-                    vol_id_arr = vol_df.loc[vol_df['campID'] == int(eid_to_delete)]['userID'].tolist()
+                    vol_id_arr = []
+                    for i in camps_in_event:
+                        vol_id_arr = vol_df.loc[vol_df['campID'] == i]['userID'].tolist()
 
-                    for i in vol_id_arr:
-                        helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'campID',
+                    for j in vol_id_arr:
+                        helper.modify_csv_pandas("data/user.csv", 'userID', j, 'campID',
                                                  0)
-                        helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'roleID',
+                        helper.modify_csv_pandas("data/user.csv", 'userID', j, 'roleID',
                                                  0)
                     row_camp_list = camp_df[
                         (camp_df['eventID'] == int(eid_to_delete)) & (camp_df['status'] == 'open')].index.tolist()
