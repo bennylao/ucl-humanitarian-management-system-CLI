@@ -925,9 +925,15 @@ class Controller:
                         logging.critical(f"File not found {e} when opening refugee file for deleting camp.")
                         return
                     refugees_in_camp = ref_df[ref_df['campID'] == delete_camp_id]
+                    rid_list = refugees_in_camp['refugeeID'].tolist()
                     ref_df.drop(refugees_in_camp.index, inplace=True)
                     ref_df.reset_index(drop=True, inplace=True)
                     ref_df.to_csv(refugee_csv_path, index=False)
+                    for rid in rid_list:
+                        medical_info_df = pd.read_csv(Path(__file__).parent.joinpath("data/medicalInfo.csv"))
+                        medical_info_df.drop(medical_info_df[medical_info_df['refugeeID'] == int(rid)].index, inplace=True)
+                        medical_info_df.reset_index(drop=True, inplace=True)
+                        medical_info_df.to_csv(Path(__file__).parent.joinpath("data/medicalInfo.csv"), index=False)
                     # keep track of existing camp num of a particular event
                     no_camp = df.loc[df['eventID'] == event_id]["no_camp"].tolist()[0]
                     no_camp -= 1
