@@ -477,8 +477,6 @@ class Event:
                     vol_id_arr = vol_df.loc[vol_df['campID'] == int(eid_to_delete)]['userID'].tolist()
 
                     for i in vol_id_arr:
-                        helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'eventID',
-                                                 0)
                         helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'campID',
                                                  0)
                         helper.modify_csv_pandas("data/user.csv", 'userID', int(i), 'roleID',
