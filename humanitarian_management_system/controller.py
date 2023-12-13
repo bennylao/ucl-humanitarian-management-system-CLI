@@ -1862,6 +1862,7 @@ class Controller:
                         print("\nRefugee table after deletion:")
                         # print(ref_df.to_string(index=False))
                         Event.display_events(ref_df)
+                        helper.recalculate_criticalvl(camp_id)
                         break
                     elif result == "no":
                         print("\nReturning back to previous menu.")
