@@ -437,8 +437,7 @@ class Event:
                     helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
                     helper.modify_csv_value(event_csv_path, row, 'ongoing', ongoing)
                     if row_camp_list:
-                        for row_camp in row_camp_list:
-                            helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
+                        df_camp.loc[df_camp['eventID'] == int(eid_to_close), 'status'] = 'closed'
                         df_camp.loc[df_camp['eventID'] == int(eid_to_close), 'refugeePop'] = 0
                         df_camp.to_csv(camp_csv_path, index=False)
                     refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
