@@ -1297,7 +1297,8 @@ class Controller:
                         input("Please press Enter to continue...")
                         break
                     else:
-                        print("invalid camp ID entered!")
+                        print("\ninvalid camp ID entered!")
+                        input("Press Enter to continue...")
                         continue
                 except ValueError as e:
                     print("Camp ID must be an integer")

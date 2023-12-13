@@ -73,7 +73,7 @@ class Admin(User):
         while True:
             user_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/user.csv"), converters={'userID': str})
             unverified_user_df = user_df.loc[user_df['isVerified'] == False]
-            unverified_user_df = unverified_user_df[unverified_user_df.columns.difference(['password'])]
+            unverified_user_df = unverified_user_df[['userID', 'isVerified', 'isActive', 'username', 'firstName', 'lastName', 'email', 'phone', 'occupation', 'roleID']]
             unverified_user_options = unverified_user_df['userID'].tolist()
             if len(unverified_user_options) == 0:
                 print("\nThere is no newly registered volunteer waiting to be verified.")
