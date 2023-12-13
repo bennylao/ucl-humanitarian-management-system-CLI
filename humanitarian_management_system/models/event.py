@@ -468,8 +468,8 @@ class Event:
                     camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
                     camp_df = pd.read_csv(camp_csv_path)
                     camps_in_event = camp_df.loc[camp_df['eventID'] == int(eid_to_delete), 'campID'].tolist()
-                    refugees_in_camps_in_event = ref_df[(ref_df['campID'].isin(camps_in_event))]
-                    ref_df.drop(refugees_in_camps_in_event.index, inplace=True)
+                    for i in camps_in_event:
+                        ref_df.drop(ref_df[ref_df['campID'] == i].index, inplace=True)
                     ref_df.reset_index(drop=True, inplace=True)
                     ref_df.to_csv(refugee_csv_path, index=False)
 
