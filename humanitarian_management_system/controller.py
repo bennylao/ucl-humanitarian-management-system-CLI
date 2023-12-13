@@ -2377,6 +2377,8 @@ class Controller:
         m_csv_path = Path(__file__).parents[0].joinpath("data/messageBox.csv")
         user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
         df = pd.read_csv(user_csv_path)
+        print('')
+        print(df[['userID', 'userType', 'username', 'firstName', 'lastName']].to_markdown(index=False))
         usernames = df['username'].tolist()
 
         to = input('\nWho do you want to sent message to? Enter the username: ')
