@@ -337,7 +337,7 @@ class Controller:
         try:
             ManagementView.display_summary_message()
             event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
-            df_event = pd.read_csv(event_csv_path)
+            df_event = pd.read_csv(event_csv_path, converters={'ongoing': str})
             camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
             df_camp = pd.read_csv(camp_csv_path)
             resource_csv_path = Path(__file__).parents[0].joinpath("data/resourceAllocation.csv")
