@@ -164,35 +164,36 @@ class Refugee:
         user_selection = validate_user_selection(VolunteerView.get_edit_refugee_options())
 
         if user_selection == '1':
-
-            old_id = df.loc[df['refugeeID'] == int(ref_id)]['refugeeID'].tolist()[0]
-            print(f"Current refugee ID is {old_id}")
-            while True:
-                try:
-                    new_value = input("\nEnter new refugee ID: ")
-
-                    if new_value == 'RETURN':
-                        return
-
-                    if int(new_value) in id_arr_temp:
-                        print("Can't use an existing refugee ID!")
-                        continue
-                    else:
-                        break
-                except ValueError:
-                    print("Can't use an existing refugee ID!")
-                    continue
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'refugeeID',
-                            int(new_value), user, cid)
-            helper.modify_csv_pandas("data/medicalInfo.csv", 'refugeeID', int(old_id),
-                                     'refugeeID', int(new_value))
-
-            # reorder refugee ID after ID changed
-            csv_path_r = Path(__file__).parents[1].joinpath("data/refugee.csv")
-            df_r = pd.read_csv(csv_path_r)
-
-            df_r.sort_values('refugeeID', inplace=True)
-            df_r.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
+            print("Sorry, you can't change the refugeeID - it's fixed! Taking you back...")
+            return
+            # old_id = df.loc[df['refugeeID'] == int(ref_id)]['refugeeID'].tolist()[0]
+            # print(f"Current refugee ID is {old_id}")
+            # while True:
+            #     try:
+            #         new_value = input("\nEnter new refugee ID: ")
+            #
+            #         if new_value == 'RETURN':
+            #             return
+            #
+            #         if int(new_value) in id_arr_temp:
+            #             print("Can't use an existing refugee ID!")
+            #             continue
+            #         else:
+            #             break
+            #     except ValueError:
+            #         print("Can't use an existing refugee ID!")
+            #         continue
+            # self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'refugeeID',
+            #                 int(new_value), user, cid)
+            # helper.modify_csv_pandas("data/medicalInfo.csv", 'refugeeID', int(old_id),
+            #                          'refugeeID', int(new_value))
+            #
+            # # reorder refugee ID after ID changed
+            # csv_path_r = Path(__file__).parents[1].joinpath("data/refugee.csv")
+            # df_r = pd.read_csv(csv_path_r)
+            #
+            # df_r.sort_values('refugeeID', inplace=True)
+            # df_r.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
 
         if user_selection == '2':
             print(f"Current refugee first name is {df.loc[df['refugeeID'] == int(ref_id)]['firstName'].tolist()[0]}")
