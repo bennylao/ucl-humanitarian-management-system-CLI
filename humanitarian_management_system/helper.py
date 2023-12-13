@@ -465,7 +465,6 @@ def validate_refugee(lvl, cid):
         csv_path_ref = Path(__file__).parents[0].joinpath("data/refugee.csv")
         df_ref = pd.read_csv(csv_path_ref)
         all_familyID_list = df_ref['familyID'].drop_duplicates().sort_values().tolist()
-        camp_familyID_list = df_ref.loc[df_ref['campID'] == cid]['familyID'].drop_duplicates().sort_values().tolist()
 
         if select == 'RETURN':
             return
@@ -490,14 +489,8 @@ def validate_refugee(lvl, cid):
                     continue
             break
         elif select == '2':
-            eventID = (df_camp.loc[df_camp['campID'] == cid]['eventID']).drop_duplicates().values[0]
-            campID_list = (df_camp.loc[df_camp['eventID'] == eventID]['campID']).tolist()
-            df = df_ref[df_ref['campID'].isin(campID_list)]
-            df1 = df[['familyID']].drop_duplicates().copy()
-            df2 = df[['familyID', 'refugeeID', 'firstName', 'lastName']].copy()
-            merged_df = pd.merge(df1, df2, on='familyID', how='left')
-            merged_df = merged_df.sort_values(by=['familyID', 'refugeeID'])
-            table = merged_df.to_markdown(index=False)
+            df_ref_display = df_ref[['familyID', 'refugeeID', 'firstName', 'lastName']].sort_values(by=['familyID', 'refugeeID'])
+            table = df_ref_display.to_markdown(index=False)
             print("\n" + table)
             while True:
                 try:
@@ -505,7 +498,7 @@ def validate_refugee(lvl, cid):
                     create_id = input("\nEnter family identification: ")
                     if create_id == 'RETURN':
                         return
-                    elif int(create_id) not in camp_familyID_list:
+                    elif int(create_id) not in all_familyID_list:
                         print("Invalid family ID entered!")
                         continue
                     else:
