@@ -80,7 +80,7 @@ class Event:
                 if df.empty:
                     print("\nNo events to edit.")
                     return
-                filtered_df = df[(df['ongoing'] == True) | (df['ongoing'] == 'Yet')]
+                filtered_df = df[(df['ongoing'] == 'True') | (df['ongoing'] == 'Yet')]
                 if filtered_df.empty:
                     print("\nAll the events are closed and cannot be edited.")
                     return
