@@ -1602,7 +1602,7 @@ class Controller:
             else:
                 return
             print("Refugee created.")
-            self.volunteer_manage_camp()
+            return
         except FileNotFoundError as e:
             print(f"\nRefugee or camp data file may be damaged or lost."
                   f"\nPlease contact admin for further assistance."
@@ -1899,7 +1899,7 @@ class Controller:
                 return
             elif move_or_delete == "1":
                 helper.move_refugee_helper_method(cid)
-            elif move_or_delete.lower() == "2":
+            elif move_or_delete == "2":
                 self.delete_refugee()
             else:
                 print("Sorry! Didn't catch that. Please try again or enter [3] to exit.\n")
