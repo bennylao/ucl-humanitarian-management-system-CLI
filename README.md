@@ -10,11 +10,11 @@ Please follow the instructions below in order to run our app:
 4. You should be able to see ```README.md```, ```requirements.txt``` and etc
 5. Enter the command:
 
-In Command Prompt on Windows:
+In ***Command Prompt*** on Windows:
 ```shell
 pip install -r requirements.txt && python -m humanitarian_management_system.main
 ```
-In PowerShell on Windows:
+In ***PowerShell*** on Windows:
 ```shell
 pip install -r requirements.txt ; python -m humanitarian_management_system.main
 ```
