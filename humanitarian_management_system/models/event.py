@@ -26,7 +26,7 @@ class Event:
         """
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            if pd.read_csv(event_csv_path).empty:
+            if pd.read_csv(event_csv_path, converters={'ongoing': str}).empty:
                 last_event_id = 0
             else:
                 last_event_id = pd.read_csv(event_csv_path)['eventID'].max()
@@ -52,7 +52,7 @@ class Event:
     def get_all_active_events():
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
+            df = pd.read_csv(event_csv_path, converters={'ongoing': str})
             print(df)
             active_events_df = df[(df['ongoing'] == 'True') & ((pd.to_datetime(df['endDate']).dt.date >
                                                               datetime.date.today()) | (pd.isna(df['endDate'])))]
@@ -76,7 +76,7 @@ class Event:
         try:
             while sign3 == 0:
                 event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-                df = pd.read_csv(event_csv_path)
+                df = pd.read_csv(event_csv_path, converters={'ongoing': str})
                 if df.empty:
                     print("\nNo events to edit.")
                     return
@@ -134,7 +134,7 @@ class Event:
                             df1 = pd.read_csv(event_csv_path)
                             Event.display_events(df1.loc[df['eventID'] == int(eid_to_edit)])
                             break
-                    except KeyError:
+                    except Exception:
                         print("\nInvalid index entered.")
                         continue
 
@@ -188,7 +188,7 @@ class Event:
     def __change_location(row):
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
+            df = pd.read_csv(event_csv_path, converters={'ongoing': str})
             country_data = pd.read_csv(event_csv_path)['location']
             if df['no_camp'][row] == 0:
                 country = []
@@ -236,7 +236,7 @@ class Event:
     def __change_start_date(row):
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
+            df = pd.read_csv(event_csv_path, converters={'ongoing': str})
             date_format = '%d/%m/%Y'
             while True:
                 if df.loc[row]['ongoing'] == 'True':
@@ -266,7 +266,7 @@ class Event:
     def __change_end_date(row):
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
+            df = pd.read_csv(event_csv_path, converters={'ongoing': str})
             date_format = '%d/%m/%Y'
             while True:
                 try:
@@ -337,7 +337,7 @@ class Event:
     def update_ongoing():
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
+            df = pd.read_csv(event_csv_path, converters={'ongoing': str})
             camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
             df_camp = pd.read_csv(camp_csv_path)
             for index, series in df.iterrows():
@@ -372,7 +372,7 @@ class Event:
     def disable_ongoing_event():
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
+            df = pd.read_csv(event_csv_path, converters={'ongoing': str})
             camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
             df_camp = pd.read_csv(camp_csv_path)
             filtered_df = df[(df['ongoing'] == 'True')]
@@ -431,7 +431,7 @@ class Event:
     def delete_event():
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
-            df = pd.read_csv(event_csv_path)
+            df = pd.read_csv(event_csv_path, converters={'ongoing': str})
 
             print("\n*The following shows the info of all available events*")
             Event.display_events(df)
