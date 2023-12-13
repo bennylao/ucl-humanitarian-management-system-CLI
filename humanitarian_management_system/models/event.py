@@ -389,7 +389,7 @@ class Event:
                     if eid_to_close == 'RETURN':
                         return
                     elif int(eid_to_close) not in filtered_df['eventID'].values:
-                        print(f"\nInvalid input! Please enter an integer from {filtered_df['eid'].values} for Event ID.")
+                        print(f"\nInvalid input! Please enter an integer from {filtered_df['eventID'].values} for Event ID.")
                         continue
                     else:
                         break

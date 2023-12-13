@@ -2391,12 +2391,16 @@ class Controller:
         usernames = df['username'].tolist()
 
         to = input('\nWho do you want to sent message to? Enter the username: ')
-        if to == self.user.username:
+        if to == 'RETURN':
+            return
+        elif to == self.user.username:
             print("You can't send message to yourself")
         elif to not in usernames:
             print("Username doesn't exist")
         else:
             content = input('Enter your message: ')
+            if content == 'RETURN':
+                return
             with open(m_csv_path, mode='a', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow([self.user.username, to, content, datetime.datetime.now()])
