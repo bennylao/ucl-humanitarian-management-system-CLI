@@ -743,7 +743,6 @@ def move_refugee_helper_method(cid):
               f"\n{e}")
 
 
-
 def move_refugee_admin():
     """Moves refugee from one camp to another"""
     # displaying list of all refugees to user
@@ -815,7 +814,7 @@ def move_refugee_admin():
                 print("\nInvalid input. Please enter a valid campID or type RETURN to go back: ")
         # Need to point out to user if this refugee is part of a family. Do they want to move the entire family?
         refugee_family_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'familyID'].iloc[0]
-        related_family_members = ref_df[ref_df['familyID'] == int(refugee_family_id)]
+        related_family_members = ref_df[(ref_df['familyID'] == int(refugee_family_id)) & (ref_df['campID'].isin(camps_in_event))]
         total_family_members = len(related_family_members)
         while True:
             if total_family_members > 1:
@@ -848,11 +847,6 @@ def move_refugee_admin():
                     for index, row in related_family_members.iterrows():
                         rid = row['refugeeID']
                         old_camp_id = row['campID']
-                        # old_camp_id = ref_df.loc[ref_df['campID'] == int(i), 'campID'].iloc[0]
-                        # row_index_old_camp = camp_df[camp_df['campID'] == old_camp_id].index
-                        # # print(row_index_camp)
-                        # # print(row_index_old_camp)
-                        # camp_df.at[row_index_old_camp[0], 'refugeePop'] -= 1
                         # Update the campID for the refugee in refugee CSV
                         row_index_ref = ref_df[ref_df['refugeeID'] == int(rid)].index[0]
                         modify_csv_value(refugee_csv_path, row_index_ref, "campID", camp_id)
