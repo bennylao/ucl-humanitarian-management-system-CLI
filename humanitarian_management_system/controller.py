@@ -760,7 +760,7 @@ class Controller:
 
                             if target_column_index == '1':
 
-                                if int(new_value) == 0:
+                                if int(new_value) <= 0:
                                     print("Camp ID has to be an integer of 1 or above.")
                                     continue
 
@@ -777,8 +777,8 @@ class Controller:
                                     df_r.to_csv(csv_path_r, index=False)
                                     df_v.to_csv(csv_path_v, index=False)
                                     df_a.to_csv(csv_path_a, index=False)
-
-                            if target_column_index == '3':
+                                    break
+                            elif target_column_index == '3':
 
                                 if new_value == "low" or new_value == "high":
                                     break
@@ -1502,7 +1502,7 @@ class Controller:
                         # the ability to edit camp ID, but camp ID has to be unique
                         if target_column_index == '1':
 
-                            if int(new_value) == 0:
+                            if int(new_value) <= 0:
                                 print("Camp ID has to be an integer of 1 or above.")
                                 continue
 
@@ -1519,6 +1519,7 @@ class Controller:
                                 df.to_csv(user_csv_path, index=False)
                                 df_a.to_csv(csv_path_a, index=False)
                                 df_r.to_csv(csv_path_r, index=False)
+                                break
 
                         if target_column_index == '3':
                             if new_value == "low" or new_value == "high":
