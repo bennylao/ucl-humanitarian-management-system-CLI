@@ -182,15 +182,16 @@ class Refugee:
                 except ValueError:
                     print("Can't use an existing refugee ID!")
                     continue
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'refugeeID',
-                            int(new_value), user, cid)
-            helper.modify_csv_pandas("data/medicalInfo.csv", 'refugeeID', int(old_id),
-                                     'refugeeID', int(new_value))
+            df_ref = pd.read_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"))
+            df_ref.loc[df_ref['refugeeID'] == int(ref_id), 'refugeeID'] = int(new_value)
+            df_ref.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
+            df_medical_info = pd.read_csv(Path(__file__).parents[1].joinpath("data/medicalInfo.csv"))
+            df_medical_info.loc[df_medical_info['refugeeID'] == int(old_id), 'refugeeID'] = int(new_value)
+            df_medical_info.to_csv(Path(__file__).parents[1].joinpath("data/medicalInfo.csv"), index=False)
 
             # reorder refugee ID after ID changed
             csv_path_r = Path(__file__).parents[1].joinpath("data/refugee.csv")
             df_r = pd.read_csv(csv_path_r)
-
             df_r.sort_values('refugeeID', inplace=True)
             df_r.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
 
@@ -207,7 +208,9 @@ class Refugee:
                     continue
                 else:
                     break
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'firstName', new_value, user, cid)
+            df_ref = pd.read_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"))
+            df_ref.loc[df_ref['refugeeID'] == int(ref_id), 'firstName'] = new_value
+            df_ref.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
 
         if user_selection == '3':
             print(f"Current refugee last name is {df.loc[df['refugeeID'] == int(ref_id)]['lastName'].tolist()[0]}")
@@ -222,7 +225,9 @@ class Refugee:
                     continue
                 else:
                     break
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'lastName', new_value, user, cid)
+            df_ref = pd.read_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"))
+            df_ref.loc[df_ref['refugeeID'] == int(ref_id), 'lastName'] = new_value
+            df_ref.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
 
         if user_selection == '4':
             print(f"Current refugee first DOB is {df.loc[df['refugeeID'] == int(ref_id)]['dob'].tolist()[0]}")
@@ -240,7 +245,9 @@ class Refugee:
                 except ValueError:
                     print("\nInvalid date format entered.")
                     continue
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'dob', new_value, user, cid)
+            df_ref = pd.read_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"))
+            df_ref.loc[df_ref['refugeeID'] == int(ref_id), 'dob'] = new_value
+            df_ref.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
 
         if user_selection == '5':
             print(f"Current refugee gender is {df.loc[df['refugeeID'] == int(ref_id)]['gender'].tolist()[0]}")
@@ -255,7 +262,9 @@ class Refugee:
                     continue
                 else:
                     break
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'gender', new_value, user, cid)
+            df_ref = pd.read_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"))
+            df_ref.loc[df_ref['refugeeID'] == int(ref_id), 'gender'] = new_value
+            df_ref.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
 
         if user_selection == '6':
             print(f"Current refugee family ID is {df.loc[df['refugeeID'] == int(ref_id)]['familyID'].tolist()[0]}")
@@ -272,8 +281,9 @@ class Refugee:
                     except ValueError:
                         print("Must be a numerical value!")
                         continue
-
-            self.modify_csv("data/refugee.csv", 'refugeeID', int(ref_id), 'familyID', new_value, user, cid)
+            df_ref = pd.read_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"))
+            df_ref.loc[df_ref['refugeeID'] == int(ref_id), 'familyID'] = new_value
+            df_ref.to_csv(Path(__file__).parents[1].joinpath("data/refugee.csv"), index=False)
 
         if user_selection == 'R':
             return
