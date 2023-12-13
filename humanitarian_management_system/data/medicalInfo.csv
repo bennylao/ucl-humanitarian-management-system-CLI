@@ -45,3 +45,4 @@ medicalInfoID,refugeeID,medicalInfoTypeID,description,isVaccinated
 44,44,6,fine,TRUE
 45,45,5,good,TRUE
 46,46,14,bad,TRUE
+47,47,13,okay,TRUE
