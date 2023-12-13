@@ -740,6 +740,8 @@ def move_refugee_helper_method(cid):
         # Add one to the population of the camp which the refugee is now in
         camp_df.at[row_index_new_camp[0], 'refugeePop'] += 1
         camp_df.to_csv(camp_csv_path, index=False)
+
+        recalculate_criticalvl(camp_id)
         # camp_df.to_csv(camp_csv_path, mode='a', index=False, header=False)
         # modify_csv_value(camp_df, row, "refugeePop", camp_id)
         print(f"\nTransfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
@@ -911,6 +913,8 @@ def move_refugee_admin():
         # Add one to the population of the camp which the refugee is now in
         camp_df.at[row_index_new_camp[0], 'refugeePop'] += 1
         camp_df.to_csv(camp_csv_path, index=False)
+
+        recalculate_criticalvl(camp_id)
         # camp_df.to_csv(camp_csv_path, mode='a', index=False, header=False)
         # modify_csv_value(camp_df, row, "refugeePop", camp_id)
         print(f"\nTransfer complete. We have reassigned the refugee from camp {old_camp_id} to camp {camp_id}."
@@ -968,6 +972,7 @@ def delete_refugee():
                 ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
                 ref_df.reset_index(drop=True, inplace=True)
                 ref_df.to_csv(refugee_csv_path, index=False)
+                recalculate_criticalvl(camp_id)
                 print(
                     f"\nOkay. You have permanently deleted refugee #{rid} from the system. Their old associated camp population "
                     f"has also been adjusted accordingly.")
@@ -1578,6 +1583,35 @@ def admin_export_refugees_to_csv():
         logging.critical("Error with file when exporting refugee data to CSV on admin demand.")
         print(f"Error exporting data to CSV: {e}. Redirecting you back!")
         return
+
+
+def recalculate_criticalvl(camp_id):
+    lvl_arr = []
+    mid_arr = []
+    avg_lvl = 0
+
+    ref_csv_path = Path(__file__).parents[0].joinpath("data/refugee.csv")
+    medinfo_csv_path = Path(__file__).parents[0].joinpath("data/medicalInfo.csv")
+    medtype_csv_path = Path(__file__).parents[0].joinpath("data/medicalInfoType.csv")
+
+    df_r = pd.read_csv(ref_csv_path)
+    df_m = pd.read_csv(medinfo_csv_path)
+    df_l = pd.read_csv(medtype_csv_path)
+
+    rid_arr = df_r.loc[df_r['campID'] == int(camp_id)]['refugeeID'].tolist()
+
+    for i in rid_arr:
+        mid = df_m.loc[df_m['refugeeID'] == i]['medicalInfoTypeID'].tolist()
+        mid_arr += mid
+    for j in mid_arr:
+        lvl = df_l.loc[df_l['medicalInfoTypeID'] == j]['criticalLvl'].tolist()
+        lvl_arr += lvl
+
+    for n in lvl_arr:
+        avg_lvl += n
+
+    avg_lvl = avg_lvl / len(lvl_arr)
+    modify_csv_pandas("data/camp.csv", 'campID', int(camp_id), 'avgCriticalLvl', avg_lvl)
 
 
 def help_center_page():
