@@ -30,6 +30,7 @@ class Refugee:
         self.camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
         self.medinfo_csv_path = Path(__file__).parents[1].joinpath("data/medicalInfo.csv")
         self.medtype_csv_path = Path(__file__).parents[1].joinpath("data/medicalInfoType.csv")
+    
 
     def add_refugee_from_user_input(self, cid):
         """Method to add the information of a newly added refugee in our system to the csv file"""
@@ -233,7 +234,9 @@ class Refugee:
             print(f"Current refugee first DOB is {df.loc[df['refugeeID'] == int(ref_id)]['dob'].tolist()[0]}")
             while True:
                 try:
-                    new_value = input("\nEnter date of birth (format: dd/mm/yy): ")
+                    # new_value = input("\nEnter date of birth (format: dd/mm/yyyy): ")
+                    print("\nEnter date of birth (format: dd/mm/yyyy): ")
+                    new_value = helper.not_too_old()
                     if new_value == 'RETURN':
                         return
                     datetime_object = datetime.datetime.strptime(new_value, date_format)

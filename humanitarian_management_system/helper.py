@@ -6,6 +6,17 @@ import datetime
 import logging
 from passlib.hash import sha256_crypt
 
+def not_too_old():
+    while True:
+        date_string = input("--> ")
+        try:
+            year = int(date_string[-4:])  # Extracts the year
+            if year >= 1900:
+                return date_string
+            else:
+                print("Please enter a year of 1900 and afterwards...")
+        except ValueError:
+            print("Invalid format. Please enter a valid date...")
 
 def validate_user_selection(options):
     while True:
@@ -177,7 +188,9 @@ def validate_event_input():
             break
 
     while True:
-        start_date = input("\nStart date (format dd/mm/yyyy): ")
+        #start_date = input("\nStart date (format dd/mm/yyyy): ")
+        print("\nStart date (format dd/mm/yyyy): ")
+        start_date = not_too_old()
         if start_date.upper() == 'RETURN':
             return
         try:
@@ -435,7 +448,9 @@ def validate_refugee(lvl, cid):
 
     while True:
         try:
-            dob = input("\nEnter date of birth (format: dd/mm/yyyy): ")
+            # dob = input("\nEnter date of birth (format: dd/mm/yyyy): ")
+            print("\nEnter date of birth (format: dd/mm/yyyy): ")
+            dob = not_too_old()
             if dob == 'RETURN':
                 return
             datetime_object = datetime.datetime.strptime(dob, date_format)
