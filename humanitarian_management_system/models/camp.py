@@ -39,7 +39,7 @@ class Camp:
 
     def pass_camp_info(self, select_index, camp_id):
         """if user choose to add a """
-        df_e = pd.read_csv(self.event_csv_path)
+        df_e = pd.read_csv(self.event_csv_path, converters={'ongoing': str})
         country = df_e['location']
         # geo_data = extract_data("data/event.csv","")
         df = pd.read_csv(self.cty_csv_path)
@@ -76,7 +76,7 @@ class Camp:
     def display_info(self, user, cid):
 
         camp_df = pd.read_csv(self.camp_csv_path)
-        event_df = pd.read_csv(self.event_csv_path)
+        event_df = pd.read_csv(self.event_csv_path, converters={'ongoing': str})
         cid_arr = []
 
         if user == 'admin':

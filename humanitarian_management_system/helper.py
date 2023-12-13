@@ -329,7 +329,7 @@ def extract_active_event(csv_path):
 def display_open_camp_list():
     csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
     active_id = extract_active_event(csv_path)[0]
-    df_e = pd.read_csv(csv_path)
+    df_e = pd.read_csv(csv_path, converters={'ongoing': str})
 
     csv_path_c = Path(__file__).parents[0].joinpath("data/camp.csv")
     df_c = pd.read_csv(csv_path_c)
@@ -1456,7 +1456,7 @@ def admin_export_refugees_to_csv():
         camp_df = pd.read_csv(camp_csv_path)
         logging.info("Successfully loaded camp csv file for reporting on refugees in event.")
         event_csv_path = Path(__file__).parents[0].joinpath("data/event.csv")
-        event_df = pd.read_csv(event_csv_path)
+        event_df = pd.read_csv(event_csv_path, converters={'ongoing': str})
         logging.info("Successfully loaded event csv file for reporting on refugees in event.")
         print(ref_df.to_markdown(index=False))
         print("\nWe can print out a report of refugees categorised by event, camp, or report on all refugees "

@@ -357,7 +357,7 @@ class Controller:
                 print("\n=================================================================\n"
                       "                    Data for ongoing events\n"
                       "=================================================================")
-                filtered_df_event1 = df_event[(df_event['ongoing'] == True)]
+                filtered_df_event1 = df_event[(df_event['ongoing'] == 'True')]
                 if filtered_df_event1.empty:
                     print("\nThere is no ongoing event.")
                 else:
@@ -379,7 +379,7 @@ class Controller:
                 print("\n\n=================================================================\n"
                       "                     Data for closed events\n"
                       "=================================================================")
-                filtered_df_event3 = df_event[(df_event['ongoing'] == False)]
+                filtered_df_event3 = df_event[(df_event['ongoing'] == 'False')]
                 if filtered_df_event3.empty:
                     print("\nThere is no closed event.")
                 else:
@@ -427,7 +427,7 @@ class Controller:
         print("This page shows all the events.")
         try:
             csv_event_path = Path(__file__).parents[0].joinpath("data/event.csv")
-            df_e = pd.read_csv(csv_event_path)
+            df_e = pd.read_csv(csv_event_path, converters={'ongoing': str})
             Event.display_events(df_e)
 
             user_input = input("Enter any to exit...")
@@ -984,9 +984,9 @@ class Controller:
                 return
             else:
                 # print the events info for users to choose
-                df = pd.read_csv(event_csv_path)
+                df = pd.read_csv(event_csv_path, converters={'ongoing': str})
                 df1 = pd.read_csv(camp_csv_path)
-                filtered_df = df[(df['ongoing'] == True
+                filtered_df = df[(df['ongoing'] == 'True'
                                   ) | (df['ongoing'] == 'Yet')]
                 campID_df = df1[['campID', 'eventID']].copy()
                 campID_df['campID'] = campID_df['campID'].astype(str)

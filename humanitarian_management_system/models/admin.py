@@ -163,7 +163,7 @@ class Admin(User):
         joined_df = self.vol_table_display()
 
         camp_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/camp.csv"))
-        event_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/event.csv"))
+        event_df = pd.read_csv(Path(__file__).parents[1].joinpath("data/event.csv"), converters={'ongoing': str})
         joined_camp = pd.merge(camp_df, event_df, on='eventID', how='inner')
 
         joined_camp.columns = ['Camp ID', 'Event ID', 'countryID', 'latitude', 'longitude', 'Refugee capacity',
