@@ -1822,6 +1822,10 @@ class Controller:
                         ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
                         ref_df.reset_index(drop=True, inplace=True)
                         ref_df.to_csv(refugee_csv_path, index=False)
+                        medical_info_df = pd.read_csv(Path(__file__).parent.joinpath("data/medicalInfo.csv"))
+                        medical_info_df.drop(medical_info_df[medical_info_df['refugeeID'] == int(rid)].index, inplace=True)
+                        medical_info_df.reset_index(drop=True, inplace=True)
+                        medical_info_df.to_csv(Path(__file__).parent.joinpath("data/medicalInfo.csv"), index=False)
                         camp_df.to_csv(camp_csv_path, index=False)
                         print(
                             f"\nOkay. You have permanently deleted refugee #{rid} from the system. "
@@ -1869,6 +1873,10 @@ class Controller:
                         ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
                         ref_df.reset_index(drop=True, inplace=True)
                         ref_df.to_csv(refugee_csv_path, index=False)
+                        medical_info_df = pd.read_csv(Path(__file__).parent.joinpath("data/medicalInfo.csv"))
+                        medical_info_df.drop(medical_info_df[medical_info_df['refugeeID'] == int(rid)].index, inplace=True)
+                        medical_info_df.reset_index(drop=True, inplace=True)
+                        medical_info_df.to_csv(Path(__file__).parent.joinpath("data/medicalInfo.csv"), index=False)
                         camp_df.to_csv(camp_csv_path, index=False)
                         print(
                             f"\nOkay. You have permanently deleted refugee #{rid} from the system. "
