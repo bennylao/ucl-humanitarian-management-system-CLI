@@ -1689,8 +1689,8 @@ class Controller:
                         try:
                             df[column] = df[column].astype(datatype)
                             print(f"\nYeah! Data type for column '{column}' is correct")
-                        except ValueError as e:
-                            print(f"{e}")
+                        except Exception as e:
+                            print(e)
                             is_data_types_all_correct = False
                             print(f"\nNooo:( Data type for column '{column}' is INCORRECT")
                             print(f"expected: {datatype}")
