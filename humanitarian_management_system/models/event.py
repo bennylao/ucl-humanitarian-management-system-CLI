@@ -406,15 +406,26 @@ class Event:
             row_camp_list = df_camp[
                 (df_camp['eventID'] == int(eid_to_close)) & (df_camp['status'] == 'open')].index.tolist()
             while True:
-                result = input("\n*** Are you sure you want to close the event? You'll also close the camps in that event.\n"
+                result = input("\n*** Are you sure you want to close the event? You'll also close the camps "
+                               "and delete the refugees in that event.\n"
                                "--> yes/no ").lower()
                 if result == "yes":
                     ongoing = 'False'
                     helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
                     helper.modify_csv_value(event_csv_path, row, 'ongoing', ongoing)
+
                     if row_camp_list:
                         for row_camp in row_camp_list:
                             helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
+                    refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
+                    ref_df = pd.read_csv(refugee_csv_path)
+                    camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
+                    camp_df = pd.read_csv(camp_csv_path)
+                    camps_in_event = camp_df.loc[camp_df['eventID'] == int(eid_to_close), 'campID'].tolist()
+                    for i in camps_in_event:
+                        ref_df.drop(ref_df[ref_df['campID'] == i].index, inplace=True)
+                    ref_df.reset_index(drop=True, inplace=True)
+                    ref_df.to_csv(refugee_csv_path, index=False)
                     print("\n\u2714 The event has been successfully closed.")
                     break
                 elif result == "no":
