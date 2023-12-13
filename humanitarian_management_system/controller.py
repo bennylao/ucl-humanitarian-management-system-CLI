@@ -1807,6 +1807,7 @@ class Controller:
                         ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
                         ref_df.reset_index(drop=True, inplace=True)
                         ref_df.to_csv(refugee_csv_path, index=False)
+                        camp_df.to_csv(camp_csv_path, index=False)
                         print(
                             f"\nOkay. You have permanently deleted refugee #{rid} from the system. "
                             f"Their old associated camp population has also been adjusted accordingly.")
@@ -1853,6 +1854,7 @@ class Controller:
                         ref_df.drop(ref_df[ref_df['refugeeID'] == int(rid)].index, inplace=True)
                         ref_df.reset_index(drop=True, inplace=True)
                         ref_df.to_csv(refugee_csv_path, index=False)
+                        camp_df.to_csv(camp_csv_path, index=False)
                         print(
                             f"\nOkay. You have permanently deleted refugee #{rid} from the system. "
                             f"Their old associated camp population "
