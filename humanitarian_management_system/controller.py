@@ -627,9 +627,10 @@ class Controller:
                             continue
                         else:
                             camp_info = helper.validate_camp_input()
-                            c = Camp(*camp_info[1:3])
-                            c.pass_camp_info(int(eventID), camp_info[0])
-                            print("\n\u2714 New camp created!")
+                            if len(camp_info) > 0:
+                                c = Camp(*camp_info[1:3])
+                                c.pass_camp_info(int(eventID), camp_info[0])
+                                print("\n\u2714 New camp created!")
                             return
                     except ValueError:
                         print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
