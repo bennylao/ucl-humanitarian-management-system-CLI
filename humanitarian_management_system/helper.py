@@ -1103,16 +1103,19 @@ def create_training_session():
                 except ValueError:
                     logging.info("Input date for creating a training session was invalid form.")
                     print("\nInvalid date format. Please use the format YYYY-MM-DD. Or enter RETURN to quit.")
+        df_c = camp_df.loc[camp_df['status'] == 'open']
+        print(df_c.to_markdown(index=False))
         while True:
             camp = input("\nEnter the campID of the camp you will be holding the session at: ")
             if camp.lower() == "return":
                 return
             try:
                 camp_id = int(camp)
-                if camp_df['campID'].eq(camp_id).any():
+                if camp_id in camp_df.loc[camp_df['status'] == 'open']['campID'].tolist():
                     break
                 else:
-                    print("\nSorry - that camp doesn't exist in our system. Pick again or enter RETURN.")
+                    print("\nSorry - that camp doesn't exist or already closed. Pick again or enter RETURN.")
+                    continue
             except ValueError as e:
                 logging.info("Invalid user input when creating a session")
                 print(f"\nInvalid input {e}. Please enter a valid integer for campID or type 'RETURN' to go back.")
@@ -1264,9 +1267,12 @@ def add_refugee_to_session():
             else:
                 print("\n\nSorry - that's not a valid session ID. Pick again. ")
         row_index_sessionID = session_df[session_df['sessionID'] == int(sessionID)].index[0]
-        already_registered = session_df.at[row_index_sessionID, 'participants']
-        already_registered = already_registered.strip("[]").split(", ")
-        already_registered = [int(i) for i in already_registered]
+        registered = session_df.at[row_index_sessionID, 'participants']
+        registered = registered.strip("[]").split(", ")
+        already_registered = []
+        for i in registered:
+            if i != '' and isinstance(i, int):
+                already_registered.append(int(i))
         eventID = session_df.at[row_index_sessionID, 'eventID']
         camp_csv_path = Path(__file__).parents[0].joinpath("data/camp.csv")
         camp_df = pd.read_csv(camp_csv_path)
@@ -1302,6 +1308,10 @@ def add_refugee_to_session():
                     already_registered.append(rid)
                 else:
                     print("\n\nSorry - that refugee ID doesn't exist. Pick again.")
+                    input("press Enter to continue...")
+            except ValueError as e:
+                print("Invalid integer entered!")
+                logging.critical(f"{e}")
             except Exception as e:
                 logging.critical(f"Unexpected error when adding a refugee to a training session from invalid user"
                                  f"input: {e}")
