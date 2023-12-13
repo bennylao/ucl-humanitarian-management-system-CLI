@@ -532,15 +532,9 @@ class Event:
                     # reset volunteer camp, role and event info after event is deleted
                     vol_csv_path = Path(__file__).parents[1].joinpath("data/user.csv")
                     vol_df = pd.read_csv(vol_csv_path)
-                    vol_id_arr = []
-                    for i in camps_in_event:
-                        vol_id_arr = vol_df.loc[vol_df['campID'] == i]['userID'].tolist()
+                    vol_df.loc[vol_df['campID'].isin(camps_in_event), 'campID'] = 0
+                    vol_df.to_csv(vol_csv_path)
 
-                    for j in vol_id_arr:
-                        helper.modify_csv_pandas("data/user.csv", 'userID', j, 'campID',
-                                                 0)
-                        helper.modify_csv_pandas("data/user.csv", 'userID', j, 'roleID',
-                                                 0)
                     row_camp_list = camp_df[
                         (camp_df['eventID'] == int(eid_to_delete)) & (camp_df['status'] == 'open')].index.tolist()
                     if row_camp_list:
