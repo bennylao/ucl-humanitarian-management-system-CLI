@@ -268,6 +268,9 @@ class Refugee:
 
         if user_selection == '5':
             print(f"Current refugee family ID is {df.loc[df['refugeeID'] == int(ref_id)]['familyID'].tolist()[0]}")
+            df_ref_display = df[['familyID', 'refugeeID', 'firstName', 'lastName']].sort_values(by=['familyID', 'refugeeID'])
+            table = df_ref_display.to_markdown(index=False)
+            print("\n" + table)
             while True:
                 new_value = input("\nEnter new family ID: ")
 
