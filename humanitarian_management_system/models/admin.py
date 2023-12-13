@@ -274,9 +274,9 @@ class Admin(User):
                 # change occupation
                 self.change_volunteer_role(change_user)
             if user_selection == "R":
-                break
+                return False
             if user_selection == "L":
-                break
+                return True
 
     @staticmethod
     def change_volunteer_username(change_user):
