@@ -134,7 +134,9 @@ class AdminView:
         print("")
         print(f"""=======================================================\n
 ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮ [ 4 ] RESOURCE MGMT MENU ✩°｡⋆⸜ ✮✩°｡⋆⸜ ✮\n
-=======================================================\n""")
+=======================================================\n
+Please remember you can enter 'RETURN' at anytime\n
+to return to this menu""")
         for key, value in cls.manage_resource_menu:
             print(f"[ {key} ] {value}")
 
