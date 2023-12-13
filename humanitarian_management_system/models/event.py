@@ -188,16 +188,13 @@ class Event:
     def __change_location(row):
         try:
             event_csv_path = Path(__file__).parents[1].joinpath("data/event.csv")
+            countries_csv_path = Path(__file__).parents[1].joinpath("data/country.csv")
+            df_countries = pd.read_csv(countries_csv_path)
+            df_countries['name'] = df_countries['name'].str.lower()
+            country = df_countries['name'].tolist()
             df = pd.read_csv(event_csv_path, converters={'ongoing': str})
-            country_data = pd.read_csv(event_csv_path)['location']
             if df['no_camp'][row] == 0:
-                country = []
-                for ele in country_data:
-                    country.append(ele.lower())
-                location = ''
-                for ele in country_data:
-                    country.append(ele.lower())
-                while len(location) == 0 and location not in country:
+                while True:
                     location = input("\n--> Location(country): ").lower()
                     if location.upper() == 'RETURN':
                         return
@@ -205,6 +202,11 @@ class Event:
                         print("\nInvalid country name entered")
                         location = ''
                         continue
+                    else:
+                        break
+                country_id = df_countries.loc[df_countries['name'] == location, 'countryID'].values[0]
+                df_countries = pd.read_csv(countries_csv_path)
+                location = df_countries.loc[df_countries['countryID'] == country_id, 'name'].values[0]
                 helper.modify_csv_value(event_csv_path, row, 'location', location)
                 print("\n\u2714 Location updated.")
             else:

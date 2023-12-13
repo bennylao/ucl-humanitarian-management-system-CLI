@@ -138,7 +138,9 @@ def validate_registration(usernames):
 def validate_event_input():
     try:
         countries_csv_path = Path(__file__).parent.joinpath("data/country.csv")
-        all_countries = pd.read_csv(countries_csv_path)['name'].tolist()
+        df_countries = pd.read_csv(countries_csv_path)
+        df_countries['name'] = df_countries['name'].str.lower()
+        all_countries = df_countries['name'].tolist()
     except FileNotFoundError as e:
         print(f"\nFile not found."
               f"\nPlease contact admin for further assistance."
@@ -155,13 +157,16 @@ def validate_event_input():
             break
 
     while True:
-        location = input("\nLocation(country): ").title()
+        location = input("\nLocation(country): ").lower()
         if location.upper() == 'RETURN':
             return
         elif location not in all_countries:
             print("\nInvalid country name entered.")
             continue
         else:
+            country_id = df_countries.loc[df_countries['name'] == location, 'countryID'].values[0]
+            df_countries = pd.read_csv(countries_csv_path)
+            location = df_countries.loc[df_countries['countryID'] == country_id, 'name'].values[0]
             break
 
     while True:
