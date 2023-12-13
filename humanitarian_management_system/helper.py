@@ -1610,7 +1610,10 @@ def recalculate_criticalvl(camp_id):
     for n in lvl_arr:
         avg_lvl += n
 
-    avg_lvl = avg_lvl / len(lvl_arr)
+    try:
+        avg_lvl = avg_lvl / len(lvl_arr)
+    except:
+        avg_lvl = 1
     modify_csv_pandas("data/camp.csv", 'campID', int(camp_id), 'avgCriticalLvl', avg_lvl)
 
 
