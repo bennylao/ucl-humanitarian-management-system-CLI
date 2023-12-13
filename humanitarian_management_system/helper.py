@@ -638,7 +638,7 @@ def move_refugee_helper_method(cid):
                 print("\nInvalid input. Please enter a valid campID or type RETURN to go back: ")
         # Need to point out to user if this refugee is part of a family. Do they want to move the entire family?
         refugee_family_id = ref_df.loc[ref_df['refugeeID'] == int(rid), 'familyID'].iloc[0]
-        related_family_members = ref_df[ref_df['familyID'] == int(refugee_family_id)]
+        related_family_members = ref_df[(ref_df['familyID'] == int(refugee_family_id)) & (ref_df['campID'].isin(camps_in_event))]
         total_family_members = len(related_family_members)
         while True:
             if total_family_members > 1:
