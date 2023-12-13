@@ -1667,6 +1667,9 @@ class Controller:
                 except FileNotFoundError:
                     print("The csv file for importing refugee is not found!")
                     continue
+                except Exception as e:
+                    print(e)
+                    continue
                 column_names = df.columns.values.tolist()
                 # ensure column names are all correct
                 if column_names == expected_column_names:
