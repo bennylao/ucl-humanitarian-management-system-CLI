@@ -1007,11 +1007,13 @@ class Controller:
                     if event_id == "RETURN":
                         return
                     event_id = int(event_id)
-                    if event_id in active_index:
-                        break
-                    elif df1[df1['eventID'] == event_id].empty:
+                    df_check = df1[df1['eventID'] == event_id]
+                    if df_check.empty:
                         print("No relevant camps to select from")
+                        input("Press Enter to continue...")
                         return
+                    elif event_id in active_index:
+                        break
                     else:
                         print(f"Invalid input! Please enter an integer from {active_index} for Event ID.")
                         continue
@@ -1552,9 +1554,10 @@ class Controller:
 
                 while True:
                     try:
-                        cid = int(input("Enter a camp ID: "))
+                        cid = input("Enter a camp ID: ")
                         if cid == 'RETURN':
                             return
+                        cid = int(cid)
                         if cid not in active_camp:
                             print("Invalid camp ID entered!")
                             continue
