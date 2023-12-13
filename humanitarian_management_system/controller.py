@@ -640,6 +640,7 @@ class Controller:
                   f"\n[Error] {e}")
             logging.critical(f"{e}")
         except ValueError as e:
+            print(f"\nInvalid user input..")
             print(f"\nInvalid user input.."
                   f"\nPlease contact admin for further assistance."
                   f"\n[Error] {e}")
@@ -759,12 +760,14 @@ class Controller:
 
                             if target_column_index == '1':
 
+                                if int(new_value) == 0:
+                                    print("Camp ID has to be an integer of 1 or above.")
+                                    continue
+
                                 if int(new_value) in camp_id_arr:
                                     print("Camp ID already exists! Please choose a new one.")
                                     continue
-
                                 else:
-
                                     modify_camp_id = int(new_value)
                                     # change corresponding refugee & volunteer & resource allocation camp ID
                                     df_r.loc[df_r['campID'] == old_camp_id, 'campID'] = modify_camp_id
@@ -791,12 +794,15 @@ class Controller:
                                     continue
                             else:
                                 try:
+                                    ref_pop = df0.loc[df0['campID'] == int(modify_camp_id), 'refugeePop'].values[0]
 
                                     new_value = int(new_value)
-                                    if new_value >= 0:
+
+                                    if new_value >= 0 and new_value >= ref_pop:
                                         break
                                     else:
-                                        print("Invalid input! Please enter a non-negative integer ")
+                                        print("Invalid input! Please enter a non-negative integer, also must not be less "
+                                              "than refugee population. ")
                                         continue
                                 except ValueError as e:
                                     print("Invalid input! Please enter a non-negative integer ")
@@ -1436,7 +1442,7 @@ class Controller:
             df_a = pd.read_csv(csv_path_a)
 
             camp_id = dff.at[int(user_id), 'campID']
-            event_id = dfc.loc[dfc['campID'] == int(camp_id)]['eventID'].tolist()[0]
+            event_id = dfc.loc[dfc['campID'] == int(camp_id), 'eventID'].values[0]
 
             csv_path_r = Path(__file__).parents[0].joinpath("data/refugee.csv")
             df_r = pd.read_csv(csv_path_r)
@@ -1496,6 +1502,10 @@ class Controller:
                         # the ability to edit camp ID, but camp ID has to be unique
                         if target_column_index == '1':
 
+                            if int(new_value) == 0:
+                                print("Camp ID has to be an integer of 1 or above.")
+                                continue
+
                             if int(new_value) in camp_id_arr:
                                 print("Camp ID already exists! Please choose a new one.")
                                 continue
@@ -1519,8 +1529,11 @@ class Controller:
                             exit()
                         else:
                             try:
+                                ref_pop = dfc.loc[dfc['campID'] == int(camp_id)]['refugeePop'].tolist()[0]
+
                                 new_value = int(new_value)
-                                if new_value >= 0:
+
+                                if new_value >= 0 and new_value >= ref_pop:
                                     break
                                 else:
                                     print("Invalid input! Please enter a non-negative integer ")
