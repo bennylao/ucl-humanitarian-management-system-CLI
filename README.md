@@ -12,7 +12,7 @@ Please follow the instructions below in order to run our app:
 
 In Command Prompt on Windows:
 ```shell
-pip install -r requirements.txt & python -m humanitarian_management_system.main
+pip install -r requirements.txt && python -m humanitarian_management_system.main
 ```
 In PowerShell on Windows:
 ```shell
