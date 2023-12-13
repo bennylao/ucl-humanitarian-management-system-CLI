@@ -321,6 +321,8 @@ class Event:
                         ref_df = pd.read_csv(refugee_csv_path)
                         camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
                         camp_df = pd.read_csv(camp_csv_path)
+                        camp_df.loc[df_camp['eventID'] == int(eid), 'refugeePop'] = 0
+                        camp_df.to_csv(camp_csv_path, index=False)
                         camps_in_event = camp_df.loc[camp_df['eventID'] == eid, 'campID'].tolist()
                         rid_list = []
                         for camp in camps_in_event:
@@ -434,10 +436,11 @@ class Event:
                     ongoing = 'False'
                     helper.modify_csv_value(event_csv_path, row, 'endDate', datetime.date.today())
                     helper.modify_csv_value(event_csv_path, row, 'ongoing', ongoing)
-
                     if row_camp_list:
                         for row_camp in row_camp_list:
                             helper.modify_csv_value(camp_csv_path, row_camp, 'status', 'closed')
+                        df_camp.loc[df_camp['eventID'] == int(eid_to_close), 'refugeePop'] = 0
+                        df_camp.to_csv(camp_csv_path, index=False)
                     refugee_csv_path = Path(__file__).parents[1].joinpath("data/refugee.csv")
                     ref_df = pd.read_csv(refugee_csv_path)
                     camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
@@ -510,6 +513,8 @@ class Event:
                     ref_df = pd.read_csv(refugee_csv_path)
                     camp_csv_path = Path(__file__).parents[1].joinpath("data/camp.csv")
                     camp_df = pd.read_csv(camp_csv_path)
+                    camp_df.loc[camp_df['eventID'] == int(eid_to_delete), 'refugeePop'] = 0
+                    camp_df.to_csv(camp_csv_path, index=False)
                     camps_in_event = camp_df.loc[camp_df['eventID'] == int(eid_to_delete), 'campID'].tolist()
                     rid_list = []
                     for camp in camps_in_event:
