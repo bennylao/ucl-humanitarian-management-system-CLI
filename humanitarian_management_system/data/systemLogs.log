@@ -102,3 +102,18 @@
 2023-12-13 02:49:42,014 - INFO - controller-login-Line87 - login page is shown
 2023-12-13 02:49:43,698 - INFO - controller-admin_main-Line138 - login successfully as admin
 2023-12-13 02:49:43,698 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-13 02:54:15,650 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 02:54:15,650 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 02:54:15,650 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 02:54:15,650 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 02:54:20,712 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 02:54:24,239 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-13 02:54:24,239 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-13 02:54:30,170 - CRITICAL - controller-create_refugee-Line1576 - invalid literal for int() with base 10: 'RETURN'
+2023-12-13 02:55:46,656 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 02:55:46,656 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 02:55:46,656 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 02:55:46,656 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 02:55:47,911 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 02:55:49,816 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-13 02:55:49,817 - INFO - controller-admin_main-Line142 - admin main menu is shown

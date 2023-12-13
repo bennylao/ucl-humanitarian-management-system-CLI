@@ -1554,9 +1554,10 @@ class Controller:
 
                 while True:
                     try:
-                        cid = int(input("Enter a camp ID: "))
+                        cid = input("Enter a camp ID: ")
                         if cid == 'RETURN':
                             return
+                        cid = int(cid)
                         if cid not in active_camp:
                             print("Invalid camp ID entered!")
                             continue
