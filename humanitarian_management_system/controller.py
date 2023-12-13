@@ -1395,6 +1395,10 @@ class Controller:
                 select_index = input("\nSelect a camp ID you would like to join: ")
                 if select_index.upper() == 'RETURN':
                     return
+                elif old_camp_id == int(select_index):
+                    print("\nLooks like that's the same camp this volunteer is already in. Try again "
+                          "or if there are no other camps available, enter RETURN to go back.")
+                    continue
                 elif int(select_index) in available_camp_index:
                     user_csv_path = Path(__file__).parents[0].joinpath("data/user.csv")
                     df_user = pd.read_csv(user_csv_path)

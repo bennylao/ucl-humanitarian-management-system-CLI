@@ -809,7 +809,7 @@ def move_refugee_admin():
                             f"Camp {camp_id} has a current population of {new_potential_refugee_pop} and a capacity of "
                             f"{new_camp_capacity}.\nLet's go again.\n")
                 else:
-                    print("\nSorry - that camp ID doesn't exist (anymore). Pick again.")
+                    print("\nSorry - that's not an option. Pick again.")
             except ValueError:
                 print("\nInvalid input. Please enter a valid campID or type RETURN to go back: ")
         # Need to point out to user if this refugee is part of a family. Do they want to move the entire family?
@@ -1378,7 +1378,7 @@ def remove_refugee_from_session():
                     print(f"\nThat refugee isn't registered to attend this session, anyway.")
                 elif rid in participants:
                     print("\nYou've already just removed that refugee from this session.")
-                elif rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any():
+                elif (rid in already_registered) or (rid.strip() and rid.strip().isdigit() and ref_df['refugeeID'].eq(int(rid)).any()):
                     print(f"\nRemoving refugee with id {rid} from skills session {sessionID}. \n\n")
                     participants.append(rid)
                 else:
