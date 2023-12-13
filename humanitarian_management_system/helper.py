@@ -382,12 +382,11 @@ def validate_man_resource(index):
     while True:
         try:
             select_item = int(input("\nEnter item index: "))
-
+            if select_index == 'RETURN':
+                return
             if select_item not in res_id:
                 print("invalid index option entered!")
                 continue
-            if select_index == 'RETURN':
-                return
             break
         except ValueError:
             print("invalid index option entered!")
@@ -416,21 +415,21 @@ def validate_refugee(lvl, cid):
     date_format = "%d/%m/%Y"
     while True:
         f_name = input("\nEnter first name: ")
+        if f_name == 'RETURN':
+            return
         if not f_name.isalpha():
             print("Must be alphabetic values!")
             continue
-        if f_name == 'RETURN':
-            return
         else:
             break
 
     while True:
         l_name = input("\nEnter last name: ")
+        if l_name == 'RETURN':
+            return
         if not l_name.isalpha():
             print("Must be alphabetic values!")
             continue
-        if l_name == 'RETURN':
-            return
         else:
             break
 
@@ -452,12 +451,11 @@ def validate_refugee(lvl, cid):
 
     while True:
         gender = input("\nEnter gender (male, female, other): ")
-
+        if gender.upper() == 'RETURN':
+            return
         if (gender != 'male') and (gender != 'female') and (gender != 'other'):
             print("Please enter only male, female or other!")
             continue
-        if gender == 'RETURN':
-            return
         else:
             break
 
