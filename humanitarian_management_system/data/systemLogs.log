@@ -117,3 +117,154 @@
 2023-12-13 02:55:47,911 - INFO - controller-login-Line87 - login page is shown
 2023-12-13 02:55:49,816 - INFO - controller-admin_main-Line138 - login successfully as admin
 2023-12-13 02:55:49,817 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-13 02:57:32,025 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 02:57:32,025 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 02:57:32,025 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 02:57:32,025 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 02:57:33,287 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 02:57:36,258 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-13 02:57:36,259 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-13 03:22:46,882 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 03:22:46,882 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 03:22:46,883 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 03:22:46,883 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 03:22:49,150 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 03:23:46,114 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-13 03:23:46,115 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-13 03:25:32,484 - CRITICAL - helper-modify_csv_pandas-Line285 - list index out of range
+2023-12-13 03:48:32,957 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 03:48:32,958 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 03:48:32,958 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 03:48:32,958 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 03:48:37,751 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 03:48:42,177 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-13 03:48:42,178 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-13 03:49:00,271 - INFO - controller-delete_refugee-Line1751 - Refugee data file to delete a refugee from system loaded successfully.
+2023-12-13 03:49:00,273 - INFO - controller-delete_refugee-Line1755 - Users data file successfully loaded when needing to delete refugee. 
+2023-12-13 03:49:16,611 - INFO - controller-delete_refugee-Line1844 - Camp data file loaded successfully when deleting a refugee from the system.
+2023-12-13 03:49:32,880 - INFO - controller-admin_main-Line164 - logging out from admin main menu
+2023-12-13 03:49:32,880 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 03:49:34,612 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 03:49:37,562 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 03:49:37,563 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 03:49:49,417 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 03:49:53,631 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 03:51:28,176 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 03:51:38,363 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 03:51:42,885 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 03:54:35,288 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 03:54:35,288 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 03:54:35,288 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 03:54:35,288 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 03:54:36,716 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 03:54:39,126 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-13 03:54:39,126 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-13 03:54:40,618 - INFO - controller-admin_main-Line164 - logging out from admin main menu
+2023-12-13 03:54:40,618 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 03:54:41,301 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 03:54:44,068 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 03:54:44,068 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 03:54:48,968 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 03:54:54,797 - CRITICAL - helper-remove_refugee_from_session-Line1414 - Unexpected error: 'in <string>' requires string as left operand, not int
+2023-12-13 04:09:46,941 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:09:46,941 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:09:46,943 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:09:46,943 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:09:49,053 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:10:23,967 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:10:23,967 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:10:23,967 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:10:23,967 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:10:25,465 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:10:30,290 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:10:30,290 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:10:44,689 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:10:48,809 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:10:51,868 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:10:54,083 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:19:11,654 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:19:11,654 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:19:11,654 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:19:11,654 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:19:12,612 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:19:17,200 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:19:17,200 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:19:31,256 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:19:33,741 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:19:35,883 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:19:40,610 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:20:29,124 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:20:29,124 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:20:29,124 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:20:29,125 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:20:30,352 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:20:33,145 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:20:33,145 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:20:38,960 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:20:41,279 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:20:43,703 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:20:52,330 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:21:49,031 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:21:49,031 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:21:49,031 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:21:49,031 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:21:50,505 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:21:54,614 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:21:54,614 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:21:59,331 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:22:01,828 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:22:03,730 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:22:05,872 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:22:09,237 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:22:48,786 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:22:48,786 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:22:48,786 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:22:48,786 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:22:49,656 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:22:55,580 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:22:55,580 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:22:59,891 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:23:05,288 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:23:06,996 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:24:52,748 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:24:52,748 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:24:52,748 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:24:52,748 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:24:54,155 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:24:56,529 - INFO - controller-admin_main-Line138 - login successfully as admin
+2023-12-13 04:24:56,529 - INFO - controller-admin_main-Line142 - admin main menu is shown
+2023-12-13 04:24:59,689 - INFO - controller-admin_main-Line164 - logging out from admin main menu
+2023-12-13 04:24:59,689 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:25:00,397 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:25:04,927 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:25:04,927 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:25:14,220 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:25:16,326 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:26:22,456 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:26:22,456 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:26:22,456 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:26:22,456 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:26:23,568 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:26:26,474 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:26:26,474 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:26:30,294 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:26:32,125 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:26:35,065 - INFO - helper-remove_refugee_from_session-Line1366 - Successfully converted user input to int type.
+2023-12-13 04:27:11,857 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:27:11,857 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:27:11,857 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:27:11,857 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:27:12,776 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:27:16,865 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:27:16,865 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:27:25,985 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:28:15,756 - INFO - main-main-Line14 - Starting Humanitarian Management System
+2023-12-13 04:28:15,756 - INFO - controller-initialise-Line31 - Controller is initialised
+2023-12-13 04:28:15,756 - INFO - controller-initialise-Line34 - welcome message is displayed
+2023-12-13 04:28:15,756 - INFO - controller-startup-Line42 - Startup page is shown
+2023-12-13 04:28:16,772 - INFO - controller-login-Line87 - login page is shown
+2023-12-13 04:28:22,275 - INFO - controller-volunteer_main-Line1264 - login successfully as volunteer
+2023-12-13 04:28:22,275 - INFO - controller-volunteer_main-Line1311 - volunteer main menu is displayed
+2023-12-13 04:28:25,956 - INFO - helper-remove_refugee_from_session-Line1348 - Refugee and session data files loaded successfully when removing a refugee from a session.
+2023-12-13 04:28:35,288 - INFO - helper-remove_refugee_from_session-Line1389 - Successfully converted user input to int type.
+2023-12-13 04:28:50,581 - INFO - helper-display_training_session-Line1030 - Training session data successfully loaded.
