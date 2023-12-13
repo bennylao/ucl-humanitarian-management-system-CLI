@@ -28,12 +28,11 @@ class VolunteerView:
     )
 
     change_refugee_menu = (
-        ("1", "Change refugee ID"),
-        ("2", "Change First name"),
-        ("3", "Change Last name"),
-        ("4", "Change DOB"),
-        ("5", "Change Gender"),
-        ("6", "Change Family ID"),
+        ("1", "Change First name"),
+        ("2", "Change Last name"),
+        ("3", "Change DOB"),
+        ("4", "Change Gender"),
+        ("5", "Change Family ID"),
         ("R", "Return to previous page"),
     )
 
