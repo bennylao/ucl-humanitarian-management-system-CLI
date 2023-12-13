@@ -245,7 +245,9 @@ class Event:
                     print("\nThis event has started, the start date cannot be changed.")
                     break
                 try:
-                    start_date = input("\n--> Start date (format dd/mm/yyyy): ")
+                    # start_date = input("\n--> Start date (format dd/mm/yyyy): ")
+                    print("\n--> Start date (format dd/mm/yyyy): ")
+                    start_date = helper.not_too_old()
                     if start_date == 'RETURN':
                         return
                     else:
